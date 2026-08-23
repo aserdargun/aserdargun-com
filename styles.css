@@ -473,6 +473,38 @@ ul {
   animation: status-pulse 2.6s ease-in-out infinite;
 }
 
+/* Horizon row in the application map — long-term, not yet live */
+.app-row-horizon code {
+  color: var(--lime);
+  font-weight: 600;
+}
+
+.app-row-horizon td {
+  border-top-color: rgba(200, 255, 54, 0.18);
+}
+
+.app-updated-horizon {
+  color: rgba(200, 255, 54, 0.75);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.app-updated-horizon time {
+  display: none;
+}
+
+.app-horizon-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 255, 54, 0.7);
+  background: transparent;
+  margin-right: 0.45em;
+  vertical-align: middle;
+}
+
 .app-map td > code {
   white-space: nowrap;
 }
@@ -2275,9 +2307,73 @@ footer a {
   line-height: 1.6;
 }
 
+/* Horizon callout inside the learning system */
+.learning-horizon {
+  margin: 36px auto 0;
+  max-width: 70ch;
+  padding: 20px 24px;
+  border: 1px dashed rgba(200, 255, 54, 0.32);
+  border-radius: 14px;
+  background: rgba(200, 255, 54, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.learning-horizon-kicker {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(200, 255, 54, 0.75);
+  margin: 0;
+}
+
+.learning-horizon h3 {
+  margin: 0;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+.learning-horizon p {
+  margin: 0;
+  line-height: 1.55;
+  color: rgba(255, 253, 247, 0.78);
+  font-size: 0.92rem;
+}
+
+.learning-horizon p strong {
+  color: var(--lime);
+  font-weight: 600;
+}
+
+.learning-horizon-link {
+  align-self: flex-start;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.78rem;
+  color: var(--lime);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(200, 255, 54, 0.4);
+  padding-bottom: 2px;
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+.learning-horizon-link:hover,
+.learning-horizon-link:focus-visible {
+  color: #e8ff8a;
+  border-bottom-color: rgba(200, 255, 54, 0.85);
+}
+
 @media (max-width: 900px) {
   .learning-system-inner {
     padding: 84px 20px;
+  }
+
+  .learning-horizon {
+    margin-top: 28px;
+    padding: 16px 18px;
   }
 
   .learning-tracks {

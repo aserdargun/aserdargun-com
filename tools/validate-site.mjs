@@ -57,7 +57,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "apps", "learning", "journey", "approach", "about"];
-const expectedAssetVersion = "20260820-single-arrow";
+const expectedAssetVersion = "20260823-horizon-eng";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -66,6 +66,7 @@ const expectedApplicationRows = [
   { code: "usl", repository: "usl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/usl-aserdargun-com", productUrl: "https://usl.aserdargun.com/", productLabel: "usl.aserdargun.com" },
   { code: "gpu", repository: "gpu-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/gpu-aserdargun-com", productUrl: "https://gpu.aserdargun.com/", productLabel: "gpu.aserdargun.com" },
   { code: "cld", repository: "cld-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/cld-aserdargun-com", productUrl: "https://cld.aserdargun.com/", productLabel: "cld.aserdargun.com" },
+  { code: "eng", repository: "eng-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/eng-aserdargun-com", productUrl: "https://eng.aserdargun.com/", productLabel: "eng.aserdargun.com" },
 ].map((row) => ({
   code: row.code,
   repository: row.repository,
@@ -157,7 +158,7 @@ function onlyAnchor(cell) {
 
 function parseApplicationMapRows(html) {
   const body = html.match(/<section class="app-map"[\s\S]*?<tbody>([\s\S]*?)<\/tbody>/)?.[1] ?? "";
-  return Array.from(body.matchAll(/<tr>([\s\S]*?)<\/tr>/g), (match) => {
+  return Array.from(body.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g), (match) => {
     const row = match[1];
     const cells = Array.from(row.matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi), (cell) => cell[1]);
     const repositoryAnchor = cells.length === 3 ? onlyAnchor(cells[1]) : null;
@@ -300,6 +301,23 @@ function validateLearningSystem(locale, html) {
     `${locale}: learning system topic chains differ`,
   );
   check((section.match(/class="learning-stage-label"/g) || []).length === 4, `${locale}: learning system must keep four stages`);
+}
+
+function validateLearningHorizon(locale, html) {
+  const isTurkish = locale === "tr";
+  const section = html.match(/<section class="learning-system"[\s\S]*?<\/section>/)?.[0] ?? "";
+  const aside = section.match(/<aside class="learning-horizon"[\s\S]*?<\/aside>/)?.[0] ?? "";
+  check(aside.length > 0, `${locale}: learning horizon callout is missing`);
+  if (aside.length === 0) return;
+  const expectedKicker = isTurkish
+    ? "Ufuk · bu döngünün hizmet ettiği şey"
+    : "The horizon · what this loop serves";
+  check(aside.includes(expectedKicker), `${locale}: learning horizon kicker is missing`);
+  check(aside.includes("Open Humanoid Engineering"), `${locale}: learning horizon title is missing`);
+  check(aside.includes('href="https://eng.aserdargun.com/"'), `${locale}: learning horizon product link is missing`);
+  check(aside.includes('aria-labelledby="learning-horizon-title"'), `${locale}: learning horizon heading relationship is missing`);
+  check(aside.includes('aria-describedby="learning-horizon-desc"'), `${locale}: learning horizon description relationship is missing`);
+  check(!aside.includes("learning-stage"), `${locale}: learning horizon must not be a learning-stage`);
 }
 
 function validateLearningInvest(locale, html) {
@@ -595,6 +613,7 @@ for (const [locale, html] of Object.entries(pages)) {
   check(html.includes('aria-describedby="app-map-description"'), `${locale}: application map description relationship is missing`);
   validateApplicationMapRows(locale, html);
   validateLearningSystem(locale, html);
+  validateLearningHorizon(locale, html);
   validateLearningInvest(locale, html);
   check(html.includes('<a href="#learning">'), `${locale}: learning navigation link is missing`);
 

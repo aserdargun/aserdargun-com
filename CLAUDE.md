@@ -46,6 +46,9 @@ There is no production build step. npm provides the shared development command s
 | `usl` | Unsloth Studio Learning | https://usl.aserdargun.com/ |
 | `gpu` | GPU Kernel Engineering — Kernel Atlas | https://gpu.aserdargun.com/ |
 | `cld` | Cloud Provider Cost Comparison | https://cld.aserdargun.com/ |
+| `eng` | Open Humanoid Engineering *(horizon — not yet realized)* | https://eng.aserdargun.com/ |
+
+The five live applications are the "evveliyat" (preamble); `eng` is the long-term horizon everything else serves. Listed in the application map with a horizon marker (not a peer row) and called out in the learning system as the destination the loop serves.
 
 Earlier portfolio projects (Stackfolio, PIPolars, PIWebAPI, SWAPP, SCADA Nerve, Industry-Learn, Scikit-Play, Aeon-Play, PyTorch-Play, DSML101) were retired from this site on purpose; `tools/validate-site.mjs` fails the build if any of their URLs reappear.
 
