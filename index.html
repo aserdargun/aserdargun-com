@@ -32,8 +32,8 @@
   <meta name="twitter:description" content="From mechanics and manufacturing to data, software, and AI engineering.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260825-horizon-nav">
-  <script src="/scripts.js?v=20260825-horizon-nav" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260825-private-nav">
+  <script src="/scripts.js?v=20260825-private-nav" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -66,16 +66,32 @@
       <span class="wordmark-mark" aria-hidden="true">SG</span>
       <span>Serdar Gündoğdu</span>
     </a>
-    <nav class="nav-links" aria-label="Primary navigation">
-      <a href="#journey">Journey</a>
-      <a href="#apps">Apps</a>
-      <a href="#learning">Learning</a>
-      <a href="#approach">Approach</a>
-      <a href="#about">About</a>
-      <span class="nav-links__section" aria-hidden="true">The horizon</span>
-      <a class="nav-links__external" href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer">eng <span aria-hidden="true">↗</span></a>
-      <a class="nav-links__external" href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer">itl <span aria-hidden="true">↗</span></a>
-    </nav>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+      <span class="nav-toggle__bars" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+    <div class="nav-panel" id="primary-nav" data-nav-panel>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#journey">Journey</a>
+        <a href="#apps">Apps</a>
+        <a href="#learning">Learning</a>
+        <a href="#approach">Approach</a>
+        <a href="#about">About</a>
+        <span class="nav-links__section" aria-hidden="true">The horizon</span>
+        <a class="nav-links__external" href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer">eng <span aria-hidden="true">↗</span></a>
+        <a class="nav-links__external" href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer">itl <span aria-hidden="true">↗</span></a>
+        <span class="nav-links__section" aria-hidden="true">Private</span>
+        <a class="nav-links__external" href="https://stk.aserdargun.com/" target="_blank" rel="noreferrer">stk <span aria-hidden="true">↗</span></a>
+        <a class="nav-links__external" href="https://inf.aserdargun.com/" target="_blank" rel="noreferrer">inf <span aria-hidden="true">↗</span></a>
+      </nav>
+      <div class="nav-panel__footer">
+        <nav class="language-switch" aria-label="Language selection">
+          <a href="/tr/" lang="tr" data-language-link="tr" aria-label="TR — Türkçe sürüme geç">TR</a>
+          <span aria-hidden="true">/</span>
+          <a href="/" lang="en" data-language-link="en" aria-label="EN — Current language" aria-current="page">EN</a>
+        </nav>
+        <a class="nav-cta nav-cta--panel" href="mailto:aserdargun@gmail.com">Let&apos;s talk <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
     <div class="header-actions">
       <nav class="language-switch" aria-label="Language selection">
         <a href="/tr/" lang="tr" data-language-link="tr" aria-label="TR — Türkçe sürüme geç">TR</a>
@@ -85,6 +101,7 @@
       <a class="nav-cta" href="mailto:aserdargun@gmail.com">Let&apos;s talk <span aria-hidden="true">↗</span></a>
     </div>
   </header>
+  <div class="nav-backdrop" data-nav-backdrop aria-hidden="true"></div>
 
   <main id="main">
     <section class="journey-shell" id="top" data-journey>

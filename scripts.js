@@ -23,6 +23,62 @@ function initializeLanguageSwitch() {
   });
 }
 
+function initializeMobileNav() {
+  const toggle = document.querySelector("[data-nav-toggle]");
+  const panel = document.querySelector("[data-nav-panel]");
+  const backdrop = document.querySelector("[data-nav-backdrop]");
+  if (!toggle || !panel) return;
+
+  const initialLabel = toggle.getAttribute("aria-label") || "Open menu";
+  let lastFocus = null;
+
+  const setOpen = (open) => {
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "Close menu" : initialLabel);
+    panel.classList.toggle("is-open", open);
+    if (backdrop) backdrop.classList.toggle("is-open", open);
+    document.body.classList.toggle("nav-open", open);
+    if (open) {
+      lastFocus = document.activeElement;
+      const firstLink = panel.querySelector("a");
+      if (firstLink && typeof firstLink.focus === "function") {
+        requestAnimationFrame(() => firstLink.focus({ preventScroll: true }));
+      }
+    } else if (lastFocus && typeof lastFocus.focus === "function") {
+      lastFocus.focus({ preventScroll: true });
+    }
+  };
+
+  toggle.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    setOpen(!isOpen);
+  });
+
+  if (backdrop) {
+    backdrop.addEventListener("click", () => setOpen(false));
+  }
+
+  panel.addEventListener("click", (event) => {
+    if (event.target.closest("a") && toggle.getAttribute("aria-expanded") === "true") {
+      setOpen(false);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  const mq = window.matchMedia("(min-width: 901px)");
+  const handleMq = (event) => {
+    if (event.matches) setOpen(false);
+  };
+  if (mq.addEventListener) mq.addEventListener("change", handleMq);
+  else if (mq.addListener) mq.addListener(handleMq);
+}
+
 function initializeTimeline() {
   const timeline = document.querySelector("[data-timeline]");
   const steps = Array.from(document.querySelectorAll("[data-timeline-step]"));
@@ -945,5 +1001,6 @@ function initializeCareerPortraitTransition() {
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeLanguageSwitch();
+  initializeMobileNav();
   initializeTimeline();
 });

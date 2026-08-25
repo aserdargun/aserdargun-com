@@ -57,7 +57,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "apps", "learning", "journey", "approach", "about"];
-const expectedAssetVersion = "20260825-horizon-nav";
+const expectedAssetVersion = "20260825-private-nav";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -652,11 +652,11 @@ for (const [locale, html] of Object.entries(pages)) {
   check(appMapIntro.includes(expectedHeading), `${locale}: number-neutral application map heading is missing`);
   check(!/\b(?:06|six|altı)\b/i.test(appMapIntro), `${locale}: numeric application count remains in the map introduction`);
 
-  check(!html.includes('<th scope="row"><code>stk</code></th>'), `${locale}: Stackfolio application code remains`);
   check(!html.includes("Stackfolio"), `${locale}: Stackfolio product content remains`);
   check(!html.includes("stk-aserdargun-com"), `${locale}: Stackfolio repository name remains`);
-  check(!html.includes("https://stk.aserdargun.com/"), `${locale}: Stackfolio product URL remains`);
   check(!html.includes("https://github.com/aserdargun/stk-aserdargun-com"), `${locale}: Stackfolio repository URL remains`);
+  check(html.includes('href="https://stk.aserdargun.com/"'), `${locale}: private system stk link is missing from primary navigation`);
+  check(html.includes('href="https://inf.aserdargun.com/"'), `${locale}: private system inf link is missing from primary navigation`);
   for (const retiredUrl of retiredProjectUrls) {
     check(!html.includes(`href="${retiredUrl}"`), `${locale}: retired project URL remains: ${retiredUrl}`);
   }
@@ -758,10 +758,11 @@ const rootAppMapIntro = rootPage.match(/<div class="app-map-intro">([\s\S]*?)<\/
 check(rootAppMapIntro.includes("Application map · live destinations"), "Root number-neutral application map kicker is missing");
 check(rootAppMapIntro.includes("One portfolio. Focused applications."), "Root number-neutral application map heading is missing");
 check(!/\b(?:06|six)\b/i.test(rootAppMapIntro), "Root numeric application count remains in the map introduction");
-check(!rootPage.includes('<th scope="row"><code>stk</code></th>'), "Root Stackfolio application code remains");
 check(!rootPage.includes("Stackfolio"), "Root Stackfolio product content remains");
 check(!rootPage.includes("stk-aserdargun-com"), "Root Stackfolio repository name remains");
-check(!rootPage.includes("https://stk.aserdargun.com/"), "Root Stackfolio product URL remains");
+check(!rootPage.includes("https://github.com/aserdargun/stk-aserdargun-com"), "Root Stackfolio repository URL remains");
+check(rootPage.includes('href="https://stk.aserdargun.com/"'), "Root private system stk link is missing from primary navigation");
+check(rootPage.includes('href="https://inf.aserdargun.com/"'), "Root private system inf link is missing from primary navigation");
 check(rootPage.includes("<h3>AI Engineer</h3>") && !rootPage.includes("<h3>GPU Kernel Engineer"), "Root AI Engineer career content is incorrect");
 check(!rootPage.includes("current-stage-link"), "Root current-stage Explore buttons must be removed");
 
