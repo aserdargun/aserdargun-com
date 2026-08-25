@@ -315,6 +315,7 @@ function validateLearningHorizon(locale, html) {
     : "The horizon · what this loop serves";
   check(aside.includes(expectedKicker), `${locale}: learning horizon kicker is missing`);
   check(aside.includes("Open Humanoid Engineering"), `${locale}: learning horizon title is missing`);
+  check(aside.includes('href="https://itl.aserdargun.com/"'), `${locale}: learning horizon itl link is missing`);
   check(aside.includes('href="https://eng.aserdargun.com/"'), `${locale}: learning horizon product link is missing`);
   check(aside.includes('aria-labelledby="learning-horizon-title"'), `${locale}: learning horizon heading relationship is missing`);
   check(aside.includes('aria-describedby="learning-horizon-desc"'), `${locale}: learning horizon description relationship is missing`);
