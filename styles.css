@@ -134,8 +134,32 @@ ul {
 .nav-links {
   display: flex;
   gap: 26px;
+  align-items: center;
   color: rgba(255, 253, 247, 0.72);
   font-size: 0.74rem;
+}
+
+.nav-links__section {
+  color: var(--lime);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding-left: 18px;
+  margin-left: 4px;
+  border-left: 1px solid rgba(255, 253, 247, 0.22);
+}
+
+.nav-links__external {
+  color: rgba(255, 253, 247, 0.92);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.nav-links__external:hover,
+.nav-links__external:focus-visible {
+  color: var(--lime);
 }
 
 .nav-links a,
@@ -1679,6 +1703,12 @@ footer a {
 
   .nav-links a {
     padding: 8px 0;
+  }
+
+  .nav-links__section {
+    padding-left: 14px;
+    margin-left: 0;
+    font-size: 0.56rem;
   }
 
   .story-content,

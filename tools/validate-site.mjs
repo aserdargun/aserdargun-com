@@ -57,7 +57,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "apps", "learning", "journey", "approach", "about"];
-const expectedAssetVersion = "20260823-horizon-eng";
+const expectedAssetVersion = "20260825-horizon-nav";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -319,6 +319,27 @@ function validateLearningHorizon(locale, html) {
   check(aside.includes('aria-labelledby="learning-horizon-title"'), `${locale}: learning horizon heading relationship is missing`);
   check(aside.includes('aria-describedby="learning-horizon-desc"'), `${locale}: learning horizon description relationship is missing`);
   check(!aside.includes("learning-stage"), `${locale}: learning horizon must not be a learning-stage`);
+}
+
+function validatePrimaryNavigationHorizon(locale, html) {
+  const isTurkish = locale === "tr";
+  const nav = html.match(/<nav class="nav-links"[\s\S]*?<\/nav>/)?.[0] ?? "";
+  check(nav.length > 0, `${locale}: primary navigation is missing`);
+  if (nav.length === 0) return;
+  const expectedLabel = isTurkish ? "Ufuk" : "The horizon";
+  check(nav.includes(`>${expectedLabel}<`), `${locale}: primary navigation horizon label is missing`);
+  check(
+    /<a class="nav-links__external" href="https:\/\/eng\.aserdargun\.com\/" target="_blank" rel="noreferrer">eng <span aria-hidden="true">↗<\/span><\/a>/.test(nav),
+    `${locale}: primary navigation eng.aserdargun.com link is missing or malformed`,
+  );
+  check(
+    /<a class="nav-links__external" href="https:\/\/itl\.aserdargun\.com\/" target="_blank" rel="noreferrer">itl <span aria-hidden="true">↗<\/span><\/a>/.test(nav),
+    `${locale}: primary navigation itl.aserdargun.com link is missing or malformed`,
+  );
+  check(
+    nav.indexOf('class="nav-links__external"') > nav.indexOf('aria-hidden="true">The horizon</span>') || nav.indexOf('aria-hidden="true">Ufuk</span>') > -1,
+    `${locale}: horizon external links must follow the horizon label`,
+  );
 }
 
 function validateLearningInvest(locale, html) {
@@ -615,6 +636,7 @@ for (const [locale, html] of Object.entries(pages)) {
   validateApplicationMapRows(locale, html);
   validateLearningSystem(locale, html);
   validateLearningHorizon(locale, html);
+  validatePrimaryNavigationHorizon(locale, html);
   validateLearningInvest(locale, html);
   check(html.includes('<a href="#learning">'), `${locale}: learning navigation link is missing`);
 
