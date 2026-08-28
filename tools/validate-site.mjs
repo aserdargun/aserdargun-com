@@ -343,6 +343,27 @@ function validatePrimaryNavigationHorizon(locale, html) {
   );
 }
 
+function validatePrimaryNavigationPrivateSystems(locale, html) {
+  const isTurkish = locale === "tr";
+  const nav = html.match(/<nav class="nav-links"[\s\S]*?<\/nav>/)?.[0] ?? "";
+  check(nav.length > 0, `${locale}: primary navigation is missing`);
+  if (nav.length === 0) return;
+  const expectedLabel = isTurkish ? "Özel" : "Private";
+  const privateLabel = `<span class="nav-links__section" aria-hidden="true">${expectedLabel}</span>`;
+  const privateLabelIndex = nav.indexOf(privateLabel);
+  check(privateLabelIndex >= 0, `${locale}: primary navigation private systems label is missing`);
+  if (privateLabelIndex < 0) return;
+  const privateSection = nav.slice(privateLabelIndex);
+  const privateCodes = matches(
+    privateSection,
+    /<a class="nav-links__external" href="https:\/\/([a-z]{3})\.aserdargun\.com\/" target="_blank" rel="noreferrer">\1 <span aria-hidden="true">↗<\/span><\/a>/g,
+  );
+  check(
+    JSON.stringify(privateCodes) === JSON.stringify(["stk", "inf", "nxt"]),
+    `${locale}: primary navigation private system links or order differ`,
+  );
+}
+
 function validateLearningInvest(locale, html) {
   const isTurkish = locale === "tr";
   const section = html.match(/<section class="learning-invest"[\s\S]*?<\/section>/)?.[0] ?? "";
@@ -638,6 +659,7 @@ for (const [locale, html] of Object.entries(pages)) {
   validateLearningSystem(locale, html);
   validateLearningHorizon(locale, html);
   validatePrimaryNavigationHorizon(locale, html);
+  validatePrimaryNavigationPrivateSystems(locale, html);
   validateLearningInvest(locale, html);
   check(html.includes('<a href="#learning">'), `${locale}: learning navigation link is missing`);
 
