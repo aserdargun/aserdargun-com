@@ -236,14 +236,16 @@ const expectedLearningStudyRoles = {
     "Foundation",
     "Main project",
     "From running to changing models",
-    "Production, last",
+    "Local deployment decision",
+    "Cloud deployment decision",
   ],
   tr: [
     "Yaşayan harita · hiç “bitmez”",
     "Temel katman",
     "Ana proje",
     "Çalıştırmadan değiştirmeye",
-    "Üretim · en son",
+    "Yerel dağıtım kararı",
+    "Bulut dağıtım kararı",
   ],
 };
 const expectedLearningTopics = {
@@ -355,7 +357,7 @@ function validateLearningSystem(locale, html) {
   );
   const studyCopies = matches(section, /<span class="learning-study-copy">([\s\S]*?)<\/span><a class="learning-study-link"/g);
   const studyCodes = studyCopies.map((copy) => copy.match(/<code>([a-z]{3})<\/code>/)?.[1] ?? "");
-  check(JSON.stringify(studyCodes) === JSON.stringify(["aia", "gpu", "llm", "usl", "cld"]), `${locale}: learning study order codes differ`);
+  check(JSON.stringify(studyCodes) === JSON.stringify(["aia", "gpu", "llm", "usl", "lcl", "cld"]), `${locale}: learning study order codes differ`);
   const studyRoles = studyCopies.map((copy) => copy.match(/<span class="learning-study-role">([^<]+)<\/span>/)?.[1] ?? "");
   check(
     JSON.stringify(studyRoles) === JSON.stringify(isTurkish ? expectedLearningStudyRoles.tr : expectedLearningStudyRoles.en),

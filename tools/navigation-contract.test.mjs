@@ -452,17 +452,17 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     }
   });
 
-  test(`${document.route} provides exactly five mobile learning targets without exposing the undersized SVG set`, async () => {
+  test(`${document.route} provides all six mobile learning targets without exposing the undersized SVG set`, async () => {
     const html = await readFile(path.join(rootDir, document.file), "utf8");
     const studyList = scopedElements(html, "ol").find((scope) => /class="learning-study-list"/.test(scope));
     const expectedText = document.locale === "tr" ? "yeni sekmede açılır" : "opens in a new tab";
-    const expectedDestinations = ["aia", "gpu", "llm", "usl", "cld"].map((code) => `https://${code}.aserdargun.com/`);
+    const expectedDestinations = ["aia", "gpu", "llm", "usl", "lcl", "cld"].map((code) => `https://${code}.aserdargun.com/`);
 
     assert.ok(studyList, "the existing study-order list must host the mobile alternate UI");
     const mobileTargets = anchors(studyList).filter(({ openingTag }) => (
       (attribute(openingTag, "class") ?? "").split(/\s+/).includes("learning-study-link")
     ));
-    assert.equal(mobileTargets.length, 5, "mobile must expose exactly one five-link alternate target set");
+    assert.equal(mobileTargets.length, 6, "mobile must expose exactly one six-link alternate target set");
     assert.deepEqual(mobileTargets.map(({ openingTag }) => attribute(openingTag, "href")), expectedDestinations);
     for (const target of mobileTargets) {
       assert.equal(attribute(target.openingTag, "target"), "_blank");
@@ -481,7 +481,7 @@ test("mobile learning alternate exposes one non-overlapping 44px focus set while
   assert.match(
     css,
     /@media\s*\(max-width:\s*900px\)[\s\S]*?\.learning-diagram-wrap\s*\{[\s\S]*?display:\s*none;[\s\S]*?\.learning-study-copy\s*\{[\s\S]*?display:\s*none;[\s\S]*?\.learning-study-link\s*\{[\s\S]*?display:\s*flex;[\s\S]*?width:\s*100%;[\s\S]*?min-height:\s*44px;/,
-    "mobile must hide the SVG from layout/AT/interaction and expose only five full-row 44px alternate links",
+    "mobile must hide the SVG from layout/AT/interaction and expose only six full-row 44px alternate links",
   );
   assert.ok(
     svgBaseIndex >= 0 && finalMobileOverrideIndex > svgBaseIndex,
