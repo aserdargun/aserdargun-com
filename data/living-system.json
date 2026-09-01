@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "contentPolicyVersion": 1,
+  "generatedCopyVersion": 1,
+  "applications": [
+    {
+      "code": "aia",
+      "kind": "atlas",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "AI Ecosystem Atlas", "tr": "AI Ecosystem Atlas" },
+      "summary": {
+        "en": "An evidence-backed research console for comparing AI products and developer ecosystems.",
+        "tr": "Yapay zekâ ürünlerini ve geliştirici ekosistemlerini kanıtlarıyla karşılaştıran araştırma konsolu."
+      },
+      "repository": "https://github.com/aserdargun/aia-aserdargun-com",
+      "address": "https://aia.aserdargun.com/",
+      "updatedAt": "2026-08-25",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "llm",
+      "kind": "atlas",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "LLM Runtime & Serving Atlas", "tr": "LLM Runtime & Serving Atlas" },
+      "summary": {
+        "en": "A source-backed field guide to LLM runtime and serving solutions across seven architectural layers.",
+        "tr": "LLM çalıştırma ve sunma çözümlerini yedi mimari katmanda sınıflandıran kaynaklı alan rehberi."
+      },
+      "repository": "https://github.com/aserdargun/llm-aserdargun-com",
+      "address": "https://llm.aserdargun.com/",
+      "updatedAt": "2026-08-25",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "usl",
+      "kind": "atlas",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "Unsloth Studio Learning", "tr": "Unsloth Studio Learning" },
+      "summary": {
+        "en": "A bilingual learning atlas for Unsloth, LoRA, QLoRA, dataset engineering, and evaluation.",
+        "tr": "Unsloth, LoRA, QLoRA, veri seti mühendisliği ve değerlendirme için iki dilli öğrenme atlası."
+      },
+      "repository": "https://github.com/aserdargun/usl-aserdargun-com",
+      "address": "https://usl.aserdargun.com/",
+      "updatedAt": "2026-08-25",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "gpu",
+      "kind": "atlas",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "GPU Kernel Engineering — Kernel Atlas", "tr": "GPU Kernel Engineering — Kernel Atlas" },
+      "summary": {
+        "en": "A bilingual 12-week atlas for CUDA, Triton, GPU memory, profiling, and kernel optimization.",
+        "tr": "CUDA, Triton, GPU belleği, profil çıkarma ve kernel optimizasyonu için iki dilli 12 haftalık öğrenme atlası."
+      },
+      "repository": "https://github.com/aserdargun/gpu-aserdargun-com",
+      "address": "https://gpu.aserdargun.com/",
+      "updatedAt": "2026-08-25",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "cld",
+      "kind": "tool",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "Cloud Provider Cost Comparison", "tr": "Bulut Sağlayıcı Maliyet Karşılaştırması" },
+      "summary": {
+        "en": "A source-backed decision tool comparing pre-tax USD costs for cloud services available from Türkiye.",
+        "tr": "Türkiye’den erişilebilen bulut servislerini kaynaklı, vergiler hariç USD maliyetleriyle karşılaştıran karar destek aracı."
+      },
+      "repository": "https://github.com/aserdargun/cld-aserdargun-com",
+      "address": "https://cld.aserdargun.com/",
+      "updatedAt": "2026-08-25",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "lcl",
+      "kind": "lab",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "Local Compute Lab", "tr": "Local Compute Lab" },
+      "summary": {
+        "en": "A source-backed decision workbench matching open-weight model requirements with NVIDIA, AMD, and Apple devices for a local AI lab.",
+        "tr": "Açık ağırlıklı model gereksinimlerini yerel bir AI laboratuvarı için NVIDIA, AMD ve Apple cihazlarıyla eşleştiren kaynaklı karar çalışma alanı."
+      },
+      "repository": "https://github.com/aserdargun/lcl-aserdargun-com",
+      "address": "https://lcl.aserdargun.com/",
+      "updatedAt": "2026-09-01",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "itl",
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "Industrial Twin Lab", "tr": "Industrial Twin Lab" },
+      "summary": {
+        "en": "An isolated experimentation environment for digital twins, industrial AI, simulation, and evidence-driven machine knowledge — where the AI stack meets the physical asset.",
+        "tr": "Dijital ikizler, endüstriyel yapay zekâ, simülasyon ve kanıta dayalı makine zekâsı için izole bir deney ortamı — AI yığınının fiziksel varlıkla buluştuğu yer."
+      },
+      "repository": "https://github.com/aserdargun/itl-aserdargun-com",
+      "address": "https://itl.aserdargun.com/",
+      "updatedAt": "2026-08-25",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "eng",
+      "kind": "horizon",
+      "systemRole": "horizon",
+      "visibility": "public",
+      "status": "design",
+      "title": { "en": "Open Humanoid Engineering", "tr": "Open Humanoid Engineering" },
+      "summary": {
+        "en": "The long-term horizon for embodied, open humanoid engineering — what the atlas, hardware, runtime, training, cloud, and industrial twin lab all serve.",
+        "tr": "Gömülü, açık humanoid mühendisliği için uzun vadeli ufuk — atlas, donanım, runtime, eğitim, bulut ve endüstriyel ikiz laboratuvarı yığınlarının tümünün hizmet ettiği hedef."
+      },
+      "repository": "https://github.com/aserdargun/eng-aserdargun-com",
+      "address": "https://eng.aserdargun.com/",
+      "updatedAt": null,
+      "relatedMemoryIds": []
+    }
+  ],
+  "now": {
+    "updatedAt": "2026-08-21",
+    "week": "2026-W34",
+    "items": [
+      {
+        "id": "week",
+        "timeframe": "week",
+        "title": { "en": "Closing the GPU + LLM pair", "tr": "GPU + LLM çiftini kapatmak" },
+        "summary": {
+          "en": "Where the kernel atlas meets the runtime atlas. I'm reading CUDA memory traffic patterns and pairing them with vLLM PagedAttention so the next GPU atlas chapter lands with the right model context, not in isolation.",
+          "tr": "Kernel atlasının runtime atlasıyla buluştuğu yer. CUDA bellek trafik örüntülerini okuyor ve bir sonraki GPU atlas bölümünü doğru model bağlamıyla, yalnız değil, vLLM PagedAttention ile eşleştirerek hazırlıyorum."
+        },
+        "tags": [
+          { "en": "GPU memory bandwidth", "tr": "GPU bellek bant genişliği" },
+          { "en": "PagedAttention", "tr": "PagedAttention" },
+          { "en": "KV cache", "tr": "KV cache" },
+          { "en": "Atlas cross-references", "tr": "Atlas çapraz referansları" }
+        ]
+      },
+      {
+        "id": "month",
+        "timeframe": "month",
+        "title": { "en": "Atlas as a learning loop", "tr": "Atlası bir öğrenme döngüsüne çevirmek" },
+        "summary": {
+          "en": "Converting the public atlas map from a flat directory into the learning system you now see on the homepage — a study order, three parallel tracks (hardware, serving, training), and a converge step. The /now page is the next piece of that loop.",
+          "tr": "Genel atlas haritasını düz bir dizinden, ana sayfada gördüğün öğrenme sistemine dönüştürüyorum: çalışma sırası, üç paralel rota (donanım, servis, eğitim) ve birleşim adımı. Bu /now sayfası o döngünün bir sonraki parçası."
+        },
+        "tags": [
+          { "en": "Learning system", "tr": "Öğrenme sistemi" },
+          { "en": "Guiding questions", "tr": "Yönlendirici sorular" },
+          { "en": "Investment bar", "tr": "Yatırım çubuğu" },
+          { "en": "Evidence flow", "tr": "Kanıt akışı" }
+        ]
+      },
+      {
+        "id": "long-term",
+        "timeframe": "long-term",
+        "title": { "en": "Industrial AI that operators trust", "tr": "Operatörün güvendiği endüstriyel yapay zekâ" },
+        "summary": {
+          "en": "The through-line from mechanical engineering to AI engineering is \"decisions a real person has to act on\". Every atlas and every notebook is an attempt to make industrial intelligence legible, reviewable, and operable — not just accurate.",
+          "tr": "Makine mühendisliğinden yapay zekâ mühendisliğine uzanan ortak şu: \"kararı gerçek bir kişinin uygulayacağı\". Her atlas ve her defter, endüstriyel zekâı okunabilir, denetlenebilir ve işletilebilir kılma denemesi — sadece doğru değil."
+        },
+        "tags": [
+          { "en": "Traceability", "tr": "İzlenebilirlik" },
+          { "en": "Human review", "tr": "İnsan incelemesi" },
+          { "en": "Deployment constraints", "tr": "Dağıtım kısıtları" },
+          { "en": "Operator-first", "tr": "Operatör-odaklı" }
+        ]
+      }
+    ]
+  },
+  "publicMemory": [],
+  "journeyEvidence": []
+}

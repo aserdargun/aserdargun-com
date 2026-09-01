@@ -23,60 +23,123 @@ function initializeLanguageSwitch() {
   });
 }
 
+function createMobileNavState({ applyOpen, restoreFocus }) {
+  let open = false;
+
+  const setOpen = (nextOpen, shouldRestoreFocus = false) => {
+    const wasOpen = open;
+    open = Boolean(nextOpen);
+    applyOpen(open);
+    if (wasOpen && !open && shouldRestoreFocus) restoreFocus();
+  };
+
+  const close = () => setOpen(false, true);
+  return {
+    isOpen: () => open,
+    toggle: () => setOpen(!open, open),
+    onEscape: close,
+    onBackdrop: close,
+    onLink: close,
+    onWideViewport: close,
+  };
+}
+
 function initializeMobileNav() {
   const toggle = document.querySelector("[data-nav-toggle]");
   const panel = document.querySelector("[data-nav-panel]");
   const backdrop = document.querySelector("[data-nav-backdrop]");
   if (!toggle || !panel) return;
 
-  const initialLabel = toggle.getAttribute("aria-label") || "Open menu";
-  let lastFocus = null;
-
-  const setOpen = (open) => {
+  const openLabel = toggle.getAttribute("data-open-label") || toggle.getAttribute("aria-label") || "Open menu";
+  const closeLabel = toggle.getAttribute("data-close-label") || "Close menu";
+  const applyOpen = (open) => {
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    toggle.setAttribute("aria-label", open ? "Close menu" : initialLabel);
+    toggle.setAttribute("aria-label", open ? closeLabel : openLabel);
     panel.classList.toggle("is-open", open);
     if (backdrop) backdrop.classList.toggle("is-open", open);
     document.body.classList.toggle("nav-open", open);
     if (open) {
-      lastFocus = document.activeElement;
       const firstLink = panel.querySelector("a");
       if (firstLink && typeof firstLink.focus === "function") {
         requestAnimationFrame(() => firstLink.focus({ preventScroll: true }));
       }
-    } else if (lastFocus && typeof lastFocus.focus === "function") {
-      lastFocus.focus({ preventScroll: true });
     }
   };
-
-  toggle.addEventListener("click", () => {
-    const isOpen = toggle.getAttribute("aria-expanded") === "true";
-    setOpen(!isOpen);
+  const state = createMobileNavState({
+    applyOpen,
+    restoreFocus: () => toggle.focus({ preventScroll: true }),
   });
 
+  toggle.addEventListener("click", state.toggle);
+
   if (backdrop) {
-    backdrop.addEventListener("click", () => setOpen(false));
+    backdrop.addEventListener("click", state.onBackdrop);
   }
 
   panel.addEventListener("click", (event) => {
-    if (event.target.closest("a") && toggle.getAttribute("aria-expanded") === "true") {
-      setOpen(false);
-    }
+    if (event.target.closest("a") && state.isOpen()) state.onLink();
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
-      setOpen(false);
-      toggle.focus();
-    }
+    if (event.key === "Escape" && state.isOpen()) state.onEscape();
   });
 
   const mq = window.matchMedia("(min-width: 901px)");
   const handleMq = (event) => {
-    if (event.matches) setOpen(false);
+    if (event.matches) state.onWideViewport();
   };
   if (mq.addEventListener) mq.addEventListener("change", handleMq);
   else if (mq.addListener) mq.addListener(handleMq);
+}
+
+function computeFreshnessPresentation(dateOnly, today = new Date(), locale = "en") {
+  if (!today || Number.isNaN(today.valueOf())) return null;
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateOnly);
+  if (!match) return null;
+  const dateUtc = Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+  if (new Date(dateUtc).toISOString().slice(0, 10) !== dateOnly) return null;
+  const todayUtc = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
+  const age = Math.floor((todayUtc - dateUtc) / 86400000);
+  if (!Number.isSafeInteger(age) || age < 0) return null;
+  const state = age <= 7 ? "current" : age <= 14 ? "aging" : "needs-refresh";
+  const labels = locale === "tr"
+    ? { current: "Güncel", aging: "Yakında gözden geçir", "needs-refresh": "Yenilenmeli" }
+    : { current: "Current", aging: "Review soon", "needs-refresh": "Needs refresh" };
+  const relative = age === 0
+    ? ""
+    : locale === "tr"
+      ? ` · ${age} gün önce`
+      : ` · ${age} ${age === 1 ? "day" : "days"} ago`;
+  return { state, label: labels[state], relative };
+}
+
+function initializeRelativeFreshness(today = new Date()) {
+  const locale = document.documentElement.lang === "tr" ? "tr" : "en";
+  document.querySelectorAll("[data-freshness-date]").forEach((freshness) => {
+    const presentation = computeFreshnessPresentation(
+      freshness.getAttribute("data-freshness-date") || "",
+      today,
+      locale,
+    );
+    if (!presentation) return;
+
+    freshness.classList.remove("freshness--current", "freshness--aging", "freshness--needs-refresh");
+    freshness.classList.add(`freshness--${presentation.state}`);
+    freshness.setAttribute("data-freshness-state", presentation.state);
+    const label = freshness.querySelector(".freshness-label");
+    if (label) label.textContent = presentation.label;
+    freshness.querySelector(".app-live-dot")?.classList.toggle("app-live-dot--pulsing", presentation.state === "current");
+
+    const existingRelative = freshness.querySelector(".freshness-relative");
+    if (presentation.relative === "") {
+      existingRelative?.remove();
+      return;
+    }
+    const relative = existingRelative ?? document.createElement("span");
+    relative.className = "freshness-relative";
+    relative.textContent = presentation.relative;
+    if (!existingRelative) freshness.append(relative);
+  });
 }
 
 function initializeTimeline() {
@@ -1002,5 +1065,6 @@ function initializeCareerPortraitTransition() {
 document.addEventListener("DOMContentLoaded", () => {
   initializeLanguageSwitch();
   initializeMobileNav();
+  initializeRelativeFreshness();
   initializeTimeline();
 });

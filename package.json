@@ -12,9 +12,18 @@
     "test:deployment": "node --test tools/deployment.test.mjs",
     "test:environment": "node --test tools/environment.test.mjs",
     "test:portrait": "node --test tools/validate-portrait-canvas.mjs",
+    "test:data": "node --test tools/living-system-data.test.mjs",
+    "generate:site": "node tools/render-living-system.mjs",
+    "check:generated": "node tools/render-living-system.mjs --check",
+    "archive:now": "node tools/archive-now.mjs",
+    "test:archive": "node --test tools/archive-now.test.mjs",
+    "test:archive-now": "node --test tools/archive-now.test.mjs",
+    "test:render": "node --test tools/render-living-system.test.mjs",
+    "test:navigation": "node --test tools/navigation-contract.test.mjs",
     "test:server": "node --test tools/serve.test.mjs",
     "test:stop": "node --test tools/preview-control.test.mjs tools/preview-stop.test.mjs",
     "validate:site": "node tools/validate-site.mjs",
-    "test": "npm run check:js && npm run test:deployment && npm run test:environment && npm run test:portrait && npm run test:stop && npm run validate:site"
+    "validate:codex": "npm test",
+    "test": "npm run check:js && npm run test:deployment && npm run test:environment && npm run test:portrait && npm run test:stop && npm run test:data && npm run test:archive && npm run test:render && npm run check:generated && npm run test:navigation && npm run validate:site"
   }
 }

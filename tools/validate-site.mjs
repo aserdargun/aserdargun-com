@@ -1,6 +1,17 @@
-import { readFile, stat } from "node:fs/promises";
+import { readFile, readdir, stat } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import {
+  assertValidLivingSystemData,
+  loadLivingSystemData,
+  summarizeApplications,
+} from "./living-system-data.mjs";
+import { scanPublicHtmlFiles } from "./render-living-system.mjs";
+import {
+  discoverPublicIndexDocuments,
+  validatePublicAccessibilityDocument,
+  validatePublicIndexCoverage,
+} from "./public-html-contract.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const expectedStageKeys = [
@@ -56,8 +67,8 @@ const expectedTurkishBridges = [
   "Sistemler ve akış",
   "Madde ve mekanik",
 ];
-const expectedAnchors = ["top", "apps", "learning", "journey", "approach", "about"];
-const expectedAssetVersion = "20260825-private-nav";
+const expectedAnchors = ["top", "apps", "learning", "journey", "horizon", "approach", "about"];
+const expectedAssetVersion = "20260828-living-system";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -66,6 +77,7 @@ const expectedApplicationRows = [
   { code: "usl", repository: "usl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/usl-aserdargun-com", productUrl: "https://usl.aserdargun.com/", productLabel: "usl.aserdargun.com" },
   { code: "gpu", repository: "gpu-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/gpu-aserdargun-com", productUrl: "https://gpu.aserdargun.com/", productLabel: "gpu.aserdargun.com" },
   { code: "cld", repository: "cld-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/cld-aserdargun-com", productUrl: "https://cld.aserdargun.com/", productLabel: "cld.aserdargun.com" },
+  { code: "lcl", repository: "lcl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/lcl-aserdargun-com", productUrl: "https://lcl.aserdargun.com/", productLabel: "lcl.aserdargun.com" },
   { code: "itl", repository: "itl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/itl-aserdargun-com", productUrl: "https://itl.aserdargun.com/", productLabel: "itl.aserdargun.com" },
   { code: "eng", repository: "eng-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/eng-aserdargun-com", productUrl: "https://eng.aserdargun.com/", productLabel: "eng.aserdargun.com" },
 ].map((row) => ({
@@ -128,7 +140,8 @@ function attribute(attributes, name) {
 }
 
 function parseMarkerContent(content) {
-  const match = content.match(/^\s*([\s\S]*?)\s*<span\b([^>]*)>([\s\S]*?)<\/span>\s*$/i);
+  const presentation = content.replace(/\s*<span\s+class=["']sr-only["']>[\s\S]*?<\/span>\s*$/i, "");
+  const match = presentation.match(/^\s*([\s\S]*?)\s*<span\b([^>]*)>([\s\S]*?)<\/span>\s*$/i);
   if (!match) return null;
   const [, label, markerAttributes, marker] = match;
   return {
@@ -269,18 +282,69 @@ function validateLearningSystem(locale, html) {
     : "The atlas is a learning system.";
   check(intro.includes(expectedKicker), `${locale}: learning system kicker is missing`);
   check(intro.includes(expectedHeading), `${locale}: learning system heading is missing`);
+  const expectedSystemCount = isTurkish
+    ? "Altı uygulama tek bir öğrenme döngüsü oluşturur"
+    : "The six applications form one learning loop";
+  check(intro.includes(expectedSystemCount), `${locale}: learning system application count is stale`);
   check(
     section.includes('<figure class="learning-diagram-wrap">')
       && section.includes('class="ld-svg"'),
     `${locale}: learning system diagram is missing`,
   );
-  check(section.includes("AIA") && section.includes("CLD"), `${locale}: learning system diagram endpoints are missing`);
+  const diagram = section.match(/<svg\b[^>]*class="ld-svg"[\s\S]*?<\/svg>/)?.[0] ?? "";
+  check(diagram.includes("AIA") && diagram.includes("CLD") && diagram.includes("LCL"), `${locale}: learning system diagram endpoints are missing`);
+  const deploymentNodes = Array.from(
+    diagram.matchAll(/<a href="https:\/\/(lcl|cld)\.aserdargun\.com\/"[^>]*data-learning-plane="deployment"[^>]*>[\s\S]*?<rect x="[0-9]+" y="([0-9]+)"/g),
+    (match) => ({ code: match[1], y: match[2] }),
+  );
+  check(
+    JSON.stringify(deploymentNodes.map(({ code }) => code)) === JSON.stringify(["lcl", "cld"]),
+    `${locale}: LCL and CLD must be the two deployment-plane diagram nodes`,
+  );
+  check(
+    deploymentNodes.length === 2 && new Set(deploymentNodes.map(({ y }) => y)).size === 1,
+    `${locale}: LCL must be parallel to CLD in the learning diagram`,
+  );
+  const nodeRoles = Array.from(
+    diagram.matchAll(/<a href="https:\/\/([a-z]{3})\.aserdargun\.com\/"[^>]*data-learning-role="([^"]+)"[^>]*>/g),
+    (match) => `${match[1]}:${match[2]}`,
+  );
+  check(
+    JSON.stringify(nodeRoles) === JSON.stringify([
+      "aia:map",
+      "gpu:foundation",
+      "llm:hub",
+      "usl:adapt",
+      "lcl:deployment",
+      "cld:deployment",
+    ]),
+    `${locale}: learning diagram node roles differ from the application content model`,
+  );
+  const learningEdges = matches(diagram, /<path data-learning-edge="([^"]+)"/g);
+  check(
+    JSON.stringify(learningEdges) === JSON.stringify([
+      "aia-to-gpu",
+      "aia-to-llm",
+      "aia-to-usl",
+      "gpu-to-llm",
+      "usl-to-llm",
+      "llm-to-gpu",
+      "gpu-to-lcl",
+      "llm-to-lcl",
+      "llm-to-cld",
+      "lcl-to-evidence",
+      "cld-to-evidence",
+      "evidence-to-aia",
+    ]),
+    `${locale}: learning diagram edges differ from the application content model`,
+  );
   const codes = matches(section, /<code class="learning-code">([a-z]{3})<\/code>/g);
   check(JSON.stringify(codes) === JSON.stringify(expectedLearningCodes), `${locale}: learning system node codes or order differ`);
   const urls = matches(section, /<a class="learning-node-link" href="(https:\/\/[a-z]{3}\.aserdargun\.com\/)" target="_blank" rel="noreferrer">/g);
   check(JSON.stringify(urls) === JSON.stringify(expectedLearningUrls), `${locale}: learning system node links or order differ`);
   for (const [index, code] of expectedLearningCodes.entries()) {
-    const link = `<a class="learning-node-link" href="${expectedLearningUrls[index]}" target="_blank" rel="noreferrer">${code}.aserdargun.com <span aria-hidden="true">↗</span></a>`;
+    const newTabText = isTurkish ? "yeni sekmede açılır" : "opens in a new tab";
+    const link = `<a class="learning-node-link" href="${expectedLearningUrls[index]}" target="_blank" rel="noreferrer">${code}.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">${newTabText}</span></a>`;
     check(section.includes(link), `${locale}: learning system node link is missing or malformed: ${code}`);
   }
   check(section.includes("gpu → llm") && section.includes("usl → llm") && section.includes("llm → gpu"), `${locale}: learning system feed markers are missing`);
@@ -289,9 +353,10 @@ function validateLearningSystem(locale, html) {
     JSON.stringify(questions) === JSON.stringify(isTurkish ? expectedLearningQuestions.tr : expectedLearningQuestions.en),
     `${locale}: learning system guiding questions or order differ`,
   );
-  const studyCodes = matches(section, /<li><span class="learning-order" aria-hidden="true">\d<\/span><code>([a-z]{3})<\/code>/g);
+  const studyCopies = matches(section, /<span class="learning-study-copy">([\s\S]*?)<\/span><a class="learning-study-link"/g);
+  const studyCodes = studyCopies.map((copy) => copy.match(/<code>([a-z]{3})<\/code>/)?.[1] ?? "");
   check(JSON.stringify(studyCodes) === JSON.stringify(["aia", "gpu", "llm", "usl", "cld"]), `${locale}: learning study order codes differ`);
-  const studyRoles = matches(section, /<span class="learning-study-role">([^<]+)<\/span>/g);
+  const studyRoles = studyCopies.map((copy) => copy.match(/<span class="learning-study-role">([^<]+)<\/span>/)?.[1] ?? "");
   check(
     JSON.stringify(studyRoles) === JSON.stringify(isTurkish ? expectedLearningStudyRoles.tr : expectedLearningStudyRoles.en),
     `${locale}: learning study order roles differ`,
@@ -322,46 +387,89 @@ function validateLearningHorizon(locale, html) {
   check(!aside.includes("learning-stage"), `${locale}: learning horizon must not be a learning-stage`);
 }
 
-function validatePrimaryNavigationHorizon(locale, html) {
-  const isTurkish = locale === "tr";
+const expectedPrimaryNavigation = {
+  en: [
+    ["Journey", "/#journey"],
+    ["Now", "/now/"],
+    ["Horizon", "/#horizon"],
+    ["Applications", "/#apps"],
+    ["Knowledge", "/memory/"],
+    ["About", "/#about"],
+  ],
+  tr: [
+    ["Yolculuk", "/tr/#journey"],
+    ["Şimdi", "/tr/now/"],
+    ["Ufuk", "/tr/#horizon"],
+    ["Uygulamalar", "/tr/#apps"],
+    ["Bilgi", "/tr/memory/"],
+    ["Hakkımda", "/tr/#about"],
+  ],
+};
+
+function validatePrimaryNavigation(locale, page, html) {
   const nav = html.match(/<nav class="nav-links"[\s\S]*?<\/nav>/)?.[0] ?? "";
-  check(nav.length > 0, `${locale}: primary navigation is missing`);
+  check(nav.length > 0, `${locale}/${page}: primary navigation is missing`);
   if (nav.length === 0) return;
-  const expectedLabel = isTurkish ? "Ufuk" : "The horizon";
-  check(nav.includes(`>${expectedLabel}<`), `${locale}: primary navigation horizon label is missing`);
-  check(
-    /<a class="nav-links__external" href="https:\/\/eng\.aserdargun\.com\/" target="_blank" rel="noreferrer">eng <span aria-hidden="true">↗<\/span><\/a>/.test(nav),
-    `${locale}: primary navigation eng.aserdargun.com link is missing or malformed`,
+  const primaryLinks = Array.from(
+    nav.matchAll(/<a class="nav-links__primary-link" href="([^"]+)"(?: aria-current="page")?>([^<]+)<\/a>/g),
+    (match) => [match[2], match[1]],
   );
   check(
-    /<a class="nav-links__external" href="https:\/\/itl\.aserdargun\.com\/" target="_blank" rel="noreferrer">itl <span aria-hidden="true">↗<\/span><\/a>/.test(nav),
-    `${locale}: primary navigation itl.aserdargun.com link is missing or malformed`,
+    JSON.stringify(primaryLinks) === JSON.stringify(expectedPrimaryNavigation[locale]),
+    `${locale}/${page}: primary concepts, destinations, count, or order differ`,
   );
-  check(
-    nav.indexOf('class="nav-links__external"') > nav.indexOf('aria-hidden="true">The horizon</span>') || nav.indexOf('aria-hidden="true">Ufuk</span>') > -1,
-    `${locale}: horizon external links must follow the horizon label`,
-  );
+  for (const [concept] of expectedPrimaryNavigation[locale]) {
+    check(primaryLinks.filter(([label]) => label === concept).length === 1, `${locale}/${page}: primary concept must appear exactly once: ${concept}`);
+  }
+  const currentLinks = Array.from(nav.matchAll(/<a class="nav-links__primary-link"[^>]*aria-current="page"[^>]*>([^<]+)<\/a>/g), (match) => match[1]);
+  const expectedCurrent = page === "memory"
+    ? [locale === "tr" ? "Bilgi" : "Knowledge"]
+    : ["now", "archive"].includes(page) ? [locale === "tr" ? "Şimdi" : "Now"] : [];
+  check(JSON.stringify(currentLinks) === JSON.stringify(expectedCurrent), `${locale}/${page}: routed primary current state differs`);
+  const learningLabel = locale === "tr" ? "Öğrenme" : "Learning";
+  const localeRoot = locale === "tr" ? "/tr/" : "/";
+  check(nav.includes(`<a class="nav-links__secondary-link" href="${localeRoot}#learning">${learningLabel}</a>`), `${locale}/${page}: secondary Learning link is missing`);
+  check(!primaryLinks.some(([concept]) => concept === learningLabel), `${locale}/${page}: Learning must not be a seventh primary concept`);
+  check(!primaryLinks.some(([concept]) => ["Approach", "Yaklaşım"].includes(concept)), `${locale}/${page}: Approach remains in top-level navigation`);
+
+  const groupExpectations = [
+    ["horizon", locale === "tr" ? "Ufuk" : "The horizon", ["eng", "itl"]],
+    ["private", locale === "tr" ? "Özel sistemler" : "Private systems", ["stk", "inf", "nxt"]],
+  ];
+  for (const [groupName, groupLabel, expectedCodes] of groupExpectations) {
+    const group = nav.match(new RegExp(`<div class="nav-links__group" data-nav-group="${groupName}"[\\s\\S]*?<\\/div>`))?.[0] ?? "";
+    check(group.length > 0, `${locale}/${page}: ${groupName} navigation group is missing`);
+    if (!group) continue;
+    const expectedLabelId = `nav-${groupName}-label-${locale}`;
+    const groupOpening = group.match(/^<div\b[^>]*>/)?.[0] ?? "";
+    check(groupOpening.includes('role="group"'), `${locale}/${page}: ${groupName} navigation container must expose a group role`);
+    check(groupOpening.includes(`aria-labelledby="${expectedLabelId}"`), `${locale}/${page}: ${groupName} navigation group is not named by its visible label`);
+    const labelElement = group.match(/<span class="nav-links__section"[^>]*>([^<]+)<\/span>/)?.[0] ?? "";
+    check(labelElement.includes(`>${groupLabel}<`), `${locale}/${page}: ${groupName} navigation label differs`);
+    check(labelElement.includes(`id="${expectedLabelId}"`), `${locale}/${page}: ${groupName} visible label id does not match its group name reference`);
+    check(!labelElement.includes('aria-hidden="true"'), `${locale}/${page}: ${groupName} navigation label is hidden from assistive technology`);
+    const codes = matches(group, /href="https:\/\/([a-z]{3})\.aserdargun\.com\/"/g);
+    check(JSON.stringify(codes) === JSON.stringify(expectedCodes), `${locale}/${page}: ${groupName} navigation destinations differ`);
+  }
 }
 
-function validatePrimaryNavigationPrivateSystems(locale, html) {
-  const isTurkish = locale === "tr";
-  const nav = html.match(/<nav class="nav-links"[\s\S]*?<\/nav>/)?.[0] ?? "";
-  check(nav.length > 0, `${locale}: primary navigation is missing`);
-  if (nav.length === 0) return;
-  const expectedLabel = isTurkish ? "Özel" : "Private";
-  const privateLabel = `<span class="nav-links__section" aria-hidden="true">${expectedLabel}</span>`;
-  const privateLabelIndex = nav.indexOf(privateLabel);
-  check(privateLabelIndex >= 0, `${locale}: primary navigation private systems label is missing`);
-  if (privateLabelIndex < 0) return;
-  const privateSection = nav.slice(privateLabelIndex);
-  const privateCodes = matches(
-    privateSection,
-    /<a class="nav-links__external" href="https:\/\/([a-z]{3})\.aserdargun\.com\/" target="_blank" rel="noreferrer">\1 <span aria-hidden="true">↗<\/span><\/a>/g,
+function validateLivingSystem(locale, html) {
+  const section = html.match(/<section class="living-system"[\s\S]*?<\/section>/)?.[0] ?? "";
+  check(section.length > 0, `${locale}: living-system section is missing`);
+  if (!section) return;
+  const cards = Array.from(
+    section.matchAll(/<a class="living-system-card" href="([^"]+)">[\s\S]*?<span class="living-system-card__eyebrow">([^<]+)<\/span>[\s\S]*?<h2>([^<]+)<\/h2>[\s\S]*?<p>([^<]+)<\/p>[\s\S]*?<\/a>/g),
+    (match) => ({ href: match[1], eyebrow: match[2], heading: match[3], description: match[4] }),
   );
-  check(
-    JSON.stringify(privateCodes) === JSON.stringify(["stk", "inf", "nxt"]),
-    `${locale}: primary navigation private system links or order differ`,
-  );
+  const expected = locale === "tr" ? [
+    ["Geçmiş", "/tr/#journey"], ["Şimdi", "/tr/now/"], ["Gelecek", "/tr/#horizon"], ["Bilgi", "/tr/memory/"], ["Uygulamalar", "/tr/#apps"],
+  ] : [
+    ["Past", "/#journey"], ["Now", "/now/"], ["Future", "/#horizon"], ["Knowledge", "/memory/"], ["Applications", "/#apps"],
+  ];
+  check(JSON.stringify(cards.map((card) => [card.heading, card.href])) === JSON.stringify(expected), `${locale}: living-system order or destinations differ`);
+  check(cards.length === 5 && cards.every((card) => card.eyebrow.length > 0 && card.description.length > 0), `${locale}: living-system cards require localized eyebrows and descriptions`);
+  check(section.indexOf("<a ") >= 0 && !section.includes("onclick="), `${locale}: living-system destinations must be normal anchors`);
+  check(html.indexOf(section) > html.indexOf('class="hero-copy"') && html.indexOf(section) < html.indexOf('class="story-content"'), `${locale}: living-system must follow the hero and precede the detailed journey`);
 }
 
 function validateLearningInvest(locale, html) {
@@ -593,7 +701,86 @@ const pages = {
   en: await readFile(path.join(root, "index.html"), "utf8"),
   tr: await readFile(path.join(root, "tr/index.html"), "utf8"),
 };
+async function readRoute(relativePath) {
+  try {
+    return await readFile(path.join(root, relativePath), "utf8");
+  } catch {
+    failures.push(`Required route is missing: ${relativePath}`);
+    return "";
+  }
+}
+const routePages = {
+  en: {
+    home: pages.en,
+    now: await readRoute("now/index.html"),
+    memory: await readRoute("memory/index.html"),
+  },
+  tr: {
+    home: pages.tr,
+    now: await readRoute("tr/now/index.html"),
+    memory: await readRoute("tr/memory/index.html"),
+  },
+};
+
+async function listArchiveWeeks(relativePath) {
+  try {
+    const entries = await readdir(path.join(root, relativePath), { withFileTypes: true });
+    return entries
+      .filter((entry) => entry.isDirectory() && /^\d{4}-W\d{2}$/.test(entry.name))
+      .map((entry) => entry.name)
+      .sort()
+      .reverse();
+  } catch (error) {
+    if (error.code === "ENOENT") return [];
+    throw error;
+  }
+}
+
+const archiveWeeksByLocale = {
+  en: await listArchiveWeeks("now/archive"),
+  tr: await listArchiveWeeks("tr/now/archive"),
+};
+check(
+  JSON.stringify(archiveWeeksByLocale.en) === JSON.stringify(archiveWeeksByLocale.tr),
+  "Now archives must exist as complete bilingual week pairs",
+);
+const archiveWeeks = [...new Set([...archiveWeeksByLocale.en, ...archiveWeeksByLocale.tr])].sort().reverse();
+const archiveRoutePages = { en: {}, tr: {} };
+for (const week of archiveWeeks) {
+  archiveRoutePages.en[week] = await readRoute(`now/archive/${week}/index.html`);
+  archiveRoutePages.tr[week] = await readRoute(`tr/now/archive/${week}/index.html`);
+}
 const styles = await readFile(path.join(root, "styles.css"), "utf8");
+check(
+  /a:focus-visible,\s*button:focus-visible\s*\{[\s\S]*?outline:\s*(?:solid\s+)?2px\s+[^;]+;[\s\S]*?outline-offset:\s*[1-9][0-9]*px;/.test(styles),
+  "Shared link/button focus-visible contract is missing",
+);
+check(
+  /\.app-map-table-wrap:focus-visible\s*\{[\s\S]*?outline:\s*(?:solid\s+)?2px\s+[^;]+;/.test(styles),
+  "Application table scroll region focus indicator is missing",
+);
+check(
+  /@media\s*\(max-width:\s*900px\)[\s\S]*?a,\s*button\s*\{[\s\S]*?min-width:\s*44px;[\s\S]*?min-height:\s*44px;/.test(styles),
+  "Mobile links/buttons need the shared 44px touch-target contract",
+);
+const livingSystem = await loadLivingSystemData(path.join(root, "data", "living-system.json"));
+assertValidLivingSystemData(livingSystem, { sourcePath: "data/living-system.json" });
+for (const diagnostic of await scanPublicHtmlFiles(root)) {
+  failures.push(`Public HTML privacy validation failed: ${diagnostic}`);
+}
+const publicIndexDocuments = await discoverPublicIndexDocuments(root);
+const validatedPublicIndexPaths = [];
+for (const document of publicIndexDocuments) {
+  const html = await readFile(document.absolutePath, "utf8");
+  validatedPublicIndexPaths.push(document.relativePath);
+  for (const diagnostic of validatePublicAccessibilityDocument({ html, relativePath: document.relativePath })) {
+    failures.push(`Public HTML accessibility validation failed: file=${diagnostic.relativePath} code=${diagnostic.code} ${diagnostic.message}`);
+  }
+}
+for (const diagnostic of validatePublicIndexCoverage(publicIndexDocuments, validatedPublicIndexPaths)) {
+  failures.push(`Public HTML accessibility coverage failed: file=${diagnostic.relativePath} code=${diagnostic.code} ${diagnostic.message}`);
+}
+const applicationSummaries = summarizeApplications(livingSystem.applications);
 
 for (const [locale, html] of Object.entries(pages)) {
   const expectedCanonical = locale === "tr" ? "https://aserdargun.com/tr/" : "https://aserdargun.com/";
@@ -658,10 +845,8 @@ for (const [locale, html] of Object.entries(pages)) {
   validateApplicationMapRows(locale, html);
   validateLearningSystem(locale, html);
   validateLearningHorizon(locale, html);
-  validatePrimaryNavigationHorizon(locale, html);
-  validatePrimaryNavigationPrivateSystems(locale, html);
+  validateLivingSystem(locale, html);
   validateLearningInvest(locale, html);
-  check(html.includes('<a href="#learning">'), `${locale}: learning navigation link is missing`);
 
   const appMapIntro = html.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
   const expectedKicker = locale === "tr"
@@ -672,7 +857,12 @@ for (const [locale, html] of Object.entries(pages)) {
     : "One portfolio. Focused applications.";
   check(appMapIntro.includes(expectedKicker), `${locale}: number-neutral application map kicker is missing`);
   check(appMapIntro.includes(expectedHeading), `${locale}: number-neutral application map heading is missing`);
-  check(!/\b(?:06|six|altı)\b/i.test(appMapIntro), `${locale}: numeric application count remains in the map introduction`);
+  check(appMapIntro.includes(applicationSummaries[locale]), `${locale}: application map count summary must come from semantic system roles`);
+  const introWithoutDerivedSummary = appMapIntro.replace(applicationSummaries[locale], "");
+  check(
+    !/\b(?:zero|one|two|three|four|five|six|seven|eight|nine|ten|sıfır|bir|iki|üç|dört|beş|altı|yedi|sekiz|dokuz|on|\d+)\s+(?:live|core|learning|applications?|lab|labs?|long-term|horizon|horizons?|canlı|çekirdek|öğrenme|uygulamalar?|laboratuvar|uzun|vadeli|ufuk)\b/i.test(introWithoutDerivedSummary),
+    `${locale}: hand-maintained application count phrase remains outside the manifest-derived summary`,
+  );
 
   check(!html.includes("Stackfolio"), `${locale}: Stackfolio product content remains`);
   check(!html.includes("stk-aserdargun-com"), `${locale}: Stackfolio repository name remains`);
@@ -700,6 +890,110 @@ for (const [locale, html] of Object.entries(pages)) {
   check(html.includes('class="contact-kicker"'), `${locale}: contact section heading is missing`);
 }
 
+for (const [locale, localizedPages] of Object.entries(routePages)) {
+  for (const [page, html] of Object.entries(localizedPages)) {
+    validatePrimaryNavigation(locale, page, html);
+    check(html.includes(`<link rel="stylesheet" href="${expectedStylesheetHref}">`), `${locale}/${page}: stylesheet cache version is stale`);
+    check(html.includes(`<script src="${expectedScriptSrc}" defer></script>`), `${locale}/${page}: script cache version is stale`);
+  }
+  const tableWrapper = localizedPages.home.match(/<div class="app-map-table-wrap"[^>]*>/)?.[0] ?? "";
+  check(tableWrapper.includes('role="region"'), `${locale}/home: application table scroll region role is missing`);
+  check(tableWrapper.includes('aria-labelledby="app-map-title"'), `${locale}/home: application table scroll region label is missing`);
+  check(tableWrapper.includes('tabindex="0"'), `${locale}/home: application table scroll region must be keyboard reachable`);
+  const memory = localizedPages.memory;
+  const memoryPath = locale === "tr" ? "/tr/memory/" : "/memory/";
+  const memoryCanonical = `https://aserdargun.com${memoryPath}`;
+  const emptyState = locale === "tr"
+    ? "Henüz onaylanmış kamusal hafıza kaydı yok."
+    : "No public memory snapshots have been approved yet.";
+  check(memory.includes(`<html lang="${locale}" data-locale="${locale}">`), `${locale}/memory: localized document marker is missing`);
+  check(/<title>[^<]+<\/title>/.test(memory), `${locale}/memory: localized title is missing`);
+  check(/<meta name="description" content="[^"]+">/.test(memory), `${locale}/memory: localized description is missing`);
+  check(memory.includes(`<link rel="canonical" href="${memoryCanonical}">`), `${locale}/memory: canonical URL differs`);
+  check(memory.includes('hreflang="en"') && memory.includes('hreflang="tr"') && memory.includes('hreflang="x-default"'), `${locale}/memory: reciprocal hreflang metadata is incomplete`);
+  check(memory.includes("<!-- GENERATED:public-memory:start -->") && memory.includes("<!-- GENERATED:public-memory:end -->"), `${locale}/memory: public-memory generated marker is missing`);
+  check(!/<(?:base|plaintext)\b/i.test(memory), `${locale}/memory: browser-active base or plaintext is forbidden`);
+  if (livingSystem.publicMemory.length === 0) {
+    check(memory.includes(emptyState), `${locale}/memory: honest empty state is missing`);
+    check((memory.match(/class="memory-card"/g) ?? []).length === 0, `${locale}/memory: empty allowlist rendered a memory card`);
+  } else {
+    check(!memory.includes(emptyState), `${locale}/memory: populated allowlist retained the empty state`);
+    check(
+      (memory.match(/class="memory-card"/g) ?? []).length === livingSystem.publicMemory.length,
+      `${locale}/memory: rendered card count differs from the canonical allowlist`,
+    );
+  }
+
+  const expectedArchiveLinks = archiveWeeks.map((week) => [
+    `${locale === "tr" ? "/tr" : ""}/now/archive/${week}/`,
+    week,
+  ]);
+  const renderedArchiveLinks = Array.from(
+    localizedPages.now.matchAll(/<a class="now-archive-link" href="([^"]+)">([^<]+)<\/a>/g),
+    (match) => [match[1], match[2]],
+  );
+  check(
+    JSON.stringify(renderedArchiveLinks) === JSON.stringify(expectedArchiveLinks),
+    `${locale}/now: weekly archive links must list every local pair newest-first`,
+  );
+}
+
+const archiveUpdatedDates = new Map();
+for (const [locale, localizedArchives] of Object.entries(archiveRoutePages)) {
+  for (const [week, html] of Object.entries(localizedArchives)) {
+    const localePrefix = locale === "tr" ? "/tr" : "";
+    const canonicalPath = `${localePrefix}/now/archive/${week}/`;
+    const englishUrl = `https://aserdargun.com/now/archive/${week}/`;
+    const turkishUrl = `https://aserdargun.com/tr/now/archive/${week}/`;
+    const updatedAt = html.match(/data-updated-at="(\d{4}-\d{2}-\d{2})"/)?.[1] ?? "";
+    const existingDate = archiveUpdatedDates.get(week);
+    if (existingDate) check(existingDate === updatedAt, `${week}: bilingual archive update dates differ`);
+    else archiveUpdatedDates.set(week, updatedAt);
+
+    validatePrimaryNavigation(locale, "archive", html);
+    check(html.includes(`<html lang="${locale}" data-locale="${locale}">`), `${locale}/${week}: archive language marker is missing`);
+    check(html.includes(`data-archive-week="${week}"`), `${locale}/${week}: canonical archive week is missing`);
+    check(/^\d{4}-\d{2}-\d{2}$/.test(updatedAt), `${locale}/${week}: absolute archive update date is missing`);
+    check(html.includes(`<time datetime="${updatedAt}">${updatedAt}</time>`), `${locale}/${week}: visible absolute archive update date differs`);
+    check(html.includes(`<link rel="canonical" href="https://aserdargun.com${canonicalPath}">`), `${locale}/${week}: archive canonical URL differs`);
+    check(html.includes(`<link rel="alternate" hreflang="en" href="${englishUrl}">`), `${locale}/${week}: English archive hreflang differs`);
+    check(html.includes(`<link rel="alternate" hreflang="tr" href="${turkishUrl}">`), `${locale}/${week}: Turkish archive hreflang differs`);
+    check(html.includes(`<link rel="alternate" hreflang="x-default" href="${englishUrl}">`), `${locale}/${week}: default archive hreflang differs`);
+    check(
+      html.includes(`<a class="now-archive-back" href="${locale === "tr" ? "/tr/now/" : "/now/"}">${locale === "tr" ? "Güncel Şimdi sayfasına dön" : "Back to current Now"}</a>`),
+      `${locale}/${week}: archive back-to-current link differs`,
+    );
+    check(
+      (html.match(/<article class="now-card now-card-this">/g) ?? []).length === livingSystem.now.items.length,
+      `${locale}/${week}: archive card count differs from canonical Now data`,
+    );
+    check(!/<(?:form|input|textarea|select)\b|contenteditable=|data-(?:edit|delete|publish)/i.test(html), `${locale}/${week}: archive exposes a mutation control`);
+    check(html.includes(`<link rel="stylesheet" href="${expectedStylesheetHref}">`), `${locale}/${week}: archive stylesheet cache version is stale`);
+    check(html.includes(`<script src="${expectedScriptSrc}" defer></script>`), `${locale}/${week}: archive script cache version is stale`);
+    const ids = matches(html, /\sid="([^"]+)"/g);
+    check(new Set(ids).size === ids.length, `${locale}/${week}: archive document IDs must be unique`);
+  }
+}
+
+const localDestinationSources = [
+  ...Object.values(routePages).flatMap((localizedPages) => Object.values(localizedPages)),
+  ...Object.values(archiveRoutePages).flatMap((localizedPages) => Object.values(localizedPages)),
+];
+const localDestinations = new Set(localDestinationSources.flatMap((html) => Array.from(
+  html.matchAll(/<a class="(?:nav-links__primary-link|nav-links__secondary-link|living-system-card)" href="(\/[^"]*)"/g),
+  (match) => match[1],
+)));
+for (const destination of localDestinations) {
+  const url = new URL(destination, "https://aserdargun.com");
+  const relativePath = url.pathname === "/" ? "index.html" : `${url.pathname.slice(1)}index.html`;
+  const target = await readRoute(relativePath);
+  check(target.length > 0, `Local navigation destination does not exist: ${destination}`);
+  if (url.hash) {
+    const id = url.hash.slice(1);
+    check(target.includes(`id="${id}"`), `Local navigation fragment does not exist: ${destination}`);
+  }
+}
+
 const externalAnchorPattern = /<a[^>]+href="(https:\/\/[^"#]+)"/g;
 const enExternalLinks = matches(pages.en, externalAnchorPattern).sort();
 const trExternalLinks = matches(pages.tr, externalAnchorPattern).sort();
@@ -720,6 +1014,10 @@ check(pages.tr.includes("Tek portföy. Odaklı uygulamalar."), "Turkish applicat
 check(!pages.en.includes("<h3>GPU Kernel Engineer") && !pages.tr.includes("<h3>GPU Kernel Engineer"), "Legacy GPU Kernel Engineer career title is still present");
 check(styles.includes(".career-transition"), "Career transition canvas styles are missing");
 check(styles.includes(".career-portrait-fallback"), "Career portrait fallback styles are missing");
+check(/\.living-system-grid\s*\{[^}]*grid-template-columns:\s*repeat\(5,\s*minmax\(0,\s*1fr\)\);/.test(styles), "Living-system grid must use five minmax-safe columns where space permits");
+check(styles.includes(".living-system-grid {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }"), "Living-system grid must collapse to two columns");
+check(styles.includes(".living-system-grid {\n    grid-template-columns: minmax(0, 1fr);\n  }"), "Living-system grid must collapse to one column");
+check(/\.living-system-card\s*\{[^}]*min-width:\s*0;[^}]*overflow-wrap:\s*anywhere;/.test(styles), "Living-system cards must prevent horizontal overflow");
 check(/\.has-js \.timeline-step\s*\{[^}]*opacity:\s*1;/.test(styles), "Inactive timeline steps must not reduce descendant contrast with parent opacity");
 check(/\.section-kicker\s*\{[^}]*color:\s*rgba\(18, 19, 16, 0\.65\);/.test(styles), "Section kicker contrast is below the required token");
 const cssRules = scanCssRules(styles);
@@ -775,11 +1073,10 @@ check(!/AI Practitioner/i.test(rootPage.replaceAll("AWS Certified AI Practitione
 validateApplicationMapRows("Root", rootPage);
 validateLearningSystem("Root", rootPage);
 validateLearningInvest("Root", rootPage);
-check(rootPage.includes('<a href="#learning">'), "Root learning navigation link is missing");
 const rootAppMapIntro = rootPage.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
 check(rootAppMapIntro.includes("Application map · live destinations"), "Root number-neutral application map kicker is missing");
 check(rootAppMapIntro.includes("One portfolio. Focused applications."), "Root number-neutral application map heading is missing");
-check(!/\b(?:06|six)\b/i.test(rootAppMapIntro), "Root numeric application count remains in the map introduction");
+check(!/\b(?:05|five)\b/i.test(rootAppMapIntro), "Root stale application count remains in the map introduction");
 check(!rootPage.includes("Stackfolio"), "Root Stackfolio product content remains");
 check(!rootPage.includes("stk-aserdargun-com"), "Root Stackfolio repository name remains");
 check(!rootPage.includes("https://github.com/aserdargun/stk-aserdargun-com"), "Root Stackfolio repository URL remains");
@@ -792,6 +1089,34 @@ const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
 check(sitemap.includes("<loc>https://aserdargun.com/</loc>"), "Sitemap is missing root URL");
 check(!sitemap.includes("https://aserdargun.com/en/"), "Sitemap must not list the redirected /en/ URL");
 check(sitemap.includes("<loc>https://aserdargun.com/tr/</loc>"), "Sitemap is missing /tr/");
+const publicMemoryUrls = {
+  en: "https://aserdargun.com/memory/",
+  tr: "https://aserdargun.com/tr/memory/",
+};
+const memoryLocations = matches(sitemap, /<loc>(https:\/\/aserdargun\.com\/(?:tr\/)?memory\/[^<]*)<\/loc>/g);
+check(
+  JSON.stringify(memoryLocations) === JSON.stringify([publicMemoryUrls.en, publicMemoryUrls.tr]),
+  "Sitemap must list only the English and Turkish public-memory index routes",
+);
+for (const url of Object.values(publicMemoryUrls)) {
+  const entry = sitemap.match(new RegExp(`<url>\\s*<loc>${url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}<\\/loc>[\\s\\S]*?<\\/url>`))?.[0] ?? "";
+  check(entry.includes(`hreflang="en" href="${publicMemoryUrls.en}"`), `Sitemap English memory alternate differs: ${url}`);
+  check(entry.includes(`hreflang="tr" href="${publicMemoryUrls.tr}"`), `Sitemap Turkish memory alternate differs: ${url}`);
+  check(entry.includes(`hreflang="x-default" href="${publicMemoryUrls.en}"`), `Sitemap default memory alternate differs: ${url}`);
+}
+check(!sitemap.includes("https://nxt.aserdargun.com/p/"), "Sitemap must never list an individual NXT public snapshot URL");
+for (const week of archiveWeeks) {
+  const englishUrl = `https://aserdargun.com/now/archive/${week}/`;
+  const turkishUrl = `https://aserdargun.com/tr/now/archive/${week}/`;
+  for (const url of [englishUrl, turkishUrl]) {
+    const entry = sitemap.match(new RegExp(`<url>\\s*<loc>${url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}<\\/loc>[\\s\\S]*?<\\/url>`))?.[0] ?? "";
+    check(entry.length > 0, `Sitemap is missing archive URL: ${url}`);
+    check(entry.includes(`<lastmod>${archiveUpdatedDates.get(week)}</lastmod>`), `Sitemap archive lastmod differs: ${url}`);
+    check(entry.includes(`hreflang="en" href="${englishUrl}"`), `Sitemap English archive alternate differs: ${url}`);
+    check(entry.includes(`hreflang="tr" href="${turkishUrl}"`), `Sitemap Turkish archive alternate differs: ${url}`);
+    check(entry.includes(`hreflang="x-default" href="${englishUrl}"`), `Sitemap default archive alternate differs: ${url}`);
+  }
+}
 
 for (const asset of [
   "images/og-ascii.jpg",

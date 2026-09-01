@@ -26,4 +26,30 @@
     <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/now/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/now/" />
   </url>
+  <url>
+    <loc>https://aserdargun.com/memory/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/memory/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/memory/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/memory/" />
+  </url>
+  <url>
+    <loc>https://aserdargun.com/tr/memory/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/memory/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/memory/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/memory/" />
+  </url>
+  <url>
+    <loc>https://aserdargun.com/now/archive/2026-W34/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/now/archive/2026-W34/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/now/archive/2026-W34/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/now/archive/2026-W34/" />
+  </url>
+  <url>
+    <loc>https://aserdargun.com/tr/now/archive/2026-W34/</loc>
+    <lastmod>2026-08-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/now/archive/2026-W34/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/now/archive/2026-W34/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/now/archive/2026-W34/" />
+  </url>
 </urlset>
