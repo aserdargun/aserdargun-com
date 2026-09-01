@@ -459,9 +459,16 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     const expectedDestinations = ["aia", "gpu", "llm", "usl", "lcl", "cld"].map((code) => `https://${code}.aserdargun.com/`);
 
     assert.ok(studyList, "the existing study-order list must host the mobile alternate UI");
+    const studySteps = scopedElements(studyList, "li");
     const mobileTargets = anchors(studyList).filter(({ openingTag }) => (
       (attribute(openingTag, "class") ?? "").split(/\s+/).includes("learning-study-link")
     ));
+    assert.equal(studySteps.length, 5, "LCL and CLD must share the fifth parallel decision step");
+    assert.deepEqual(
+      anchors(studySteps.at(-1)).map(({ openingTag }) => attribute(openingTag, "href")),
+      ["https://lcl.aserdargun.com/", "https://cld.aserdargun.com/"],
+      "the final mobile step must expose local and cloud deployment as parallel choices",
+    );
     assert.equal(mobileTargets.length, 6, "mobile must expose exactly one six-link alternate target set");
     assert.deepEqual(mobileTargets.map(({ openingTag }) => attribute(openingTag, "href")), expectedDestinations);
     for (const target of mobileTargets) {

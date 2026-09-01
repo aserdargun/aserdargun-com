@@ -2747,10 +2747,6 @@ footer a {
   color: var(--lime);
 }
 
-.learning-study-list li.learning-study-parallel-start:not(:last-child)::after {
-  content: "∥";
-}
-
 .learning-study-list code {
   color: var(--lime);
   font-family: var(--font-geist-mono), monospace;
@@ -3028,10 +3024,6 @@ footer a {
   }
 
   .learning-study-list li:not(:last-child)::after {
-    content: none;
-  }
-
-  .learning-study-list li.learning-study-parallel-start:not(:last-child)::after {
     content: none;
   }
 
