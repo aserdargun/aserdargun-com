@@ -432,6 +432,20 @@ test("accepts a live public core-learning observatory", () => {
   assert.deepEqual(validateLivingSystemData(observatoryData).errors, []);
 });
 
+test("accepts the SEC observatory as a canonical public core-learning application", () => {
+  const observatoryData = validData();
+  observatoryData.applications[0] = {
+    ...observatoryData.applications[0],
+    code: "sec",
+    kind: "observatory",
+    title: localized("AI Systems Security Observatory", "AI Sistemleri Güvenlik Gözlemevi"),
+    repository: "https://github.com/aserdargun/sec-aserdargun-com",
+    address: "https://sec.aserdargun.com/",
+  };
+
+  assert.deepEqual(validateLivingSystemData(observatoryData).errors, []);
+});
+
 test("summarizes semantic system roles rather than application array length", () => {
   const applications = [
     { systemRole: "core-learning" },
@@ -542,7 +556,7 @@ test("loads and validates the committed canonical manifest", async () => {
   const data = await loadLivingSystemData(filePath);
   const canonicalToday = new Date("2026-09-02T12:00:00+03:00");
 
-  assert.equal(data.applications.length, 10);
+  assert.equal(data.applications.length, 11);
   assert.deepEqual(
     data.applications.find((application) => application.code === "hns"),
     {
@@ -578,6 +592,25 @@ test("loads and validates the committed canonical manifest", async () => {
       repository: "https://github.com/aserdargun/wfm-aserdargun-com",
       address: "https://wfm.aserdargun.com/",
       updatedAt: "2026-09-01",
+      relatedMemoryIds: [],
+    },
+  );
+  assert.deepEqual(
+    data.applications.find((application) => application.code === "sec"),
+    {
+      code: "sec",
+      kind: "observatory",
+      systemRole: "core-learning",
+      visibility: "public",
+      status: "live",
+      title: localized("AI Systems Security Observatory", "AI Sistemleri Güvenlik Gözlemevi"),
+      summary: localized(
+        "A bilingual, evidence-aware observatory for tracing AI-agent trust from model intent through identity, authorization, constrained action, audit, and incident recovery.",
+        "AI agent güvenini model niyetinden kimlik, yetkilendirme, kısıtlı eylem, denetim ve olay kurtarmaya kadar izleyen iki dilli, kanıt duyarlı gözlemevi.",
+      ),
+      repository: "https://github.com/aserdargun/sec-aserdargun-com",
+      address: "https://sec.aserdargun.com/",
+      updatedAt: "2026-09-02",
       relatedMemoryIds: [],
     },
   );

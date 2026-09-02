@@ -463,7 +463,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     );
     assert.deepEqual(
       cards.map((card) => card.match(/<span class="learning-order" aria-hidden="true">([^<]+)<\/span>/)?.[1]),
-      ["6A", "6B"],
+      ["7A", "7B"],
     );
     assert.equal(cards[0].includes(expectedQuestion), true);
     assert.deepEqual(
@@ -496,6 +496,32 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     );
   });
 
+  test(`${document.route} places SEC between harness engineering and parallel deployment decisions`, async () => {
+    const html = await readFile(path.join(rootDir, document.file), "utf8");
+    const learning = scopedElements(html, "section").find((scope) => /class="learning-system"/.test(scope));
+    const securityCard = scopedElements(learning ?? "", "article").find((scope) => (
+      /<code class="learning-code">sec<\/code>/.test(scope)
+    ));
+    const expectedQuestion = document.locale === "tr"
+      ? "“Bu agent sistemine neden güvenmeliyim?”"
+      : "“Why should I trust this agent system?”";
+
+    assert.ok(securityCard, "the detailed learning flow must expose the SEC assurance card");
+    assert.equal(securityCard.includes(expectedQuestion), true);
+    assert.deepEqual(
+      anchors(securityCard).map(({ openingTag }) => attribute(openingTag, "href")),
+      ["https://sec.aserdargun.com/"],
+    );
+    assert.ok(
+      (learning ?? "").indexOf('<code class="learning-code">hns</code>') < (learning ?? "").indexOf(securityCard),
+      "HNS must feed SEC",
+    );
+    assert.ok(
+      (learning ?? "").indexOf(securityCard) < (learning ?? "").indexOf('class="learning-deployment-paths"'),
+      "SEC must gate the local and cloud deployment choices",
+    );
+  });
+
   test(`${document.route} labels and contains the application table scroll region`, async () => {
     const html = await readFile(path.join(rootDir, document.file), "utf8");
     const wrappers = openingTags(html, "class=\"app-map-table-wrap\"");
@@ -517,6 +543,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://llm.aserdargun.com/", "LLM"],
       ["https://usl.aserdargun.com/", "USL"],
       ["https://hns.aserdargun.com/", "HNS"],
+      ["https://sec.aserdargun.com/", "SEC"],
       ["https://lcl.aserdargun.com/", "LCL"],
       ["https://cld.aserdargun.com/", "CLD"],
     ];
@@ -525,7 +552,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.equal(extraSvgScopes.length, 0);
     assert.doesNotMatch(svg, /<(?:span|foreignObject)\b/i, "HTML must never be inserted into SVG");
     const svgBlankAnchors = anchors(svg).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
-    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all seven diagram nodes must remain inside SVG");
+    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all eight diagram nodes must remain inside SVG");
 
     assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")), expectedNodes.map(([href]) => href));
     for (const [index, anchor] of svgBlankAnchors.entries()) {
@@ -539,24 +566,24 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     }
   });
 
-  test(`${document.route} provides all seven mobile learning targets without exposing the undersized SVG set`, async () => {
+  test(`${document.route} provides all eight mobile learning targets without exposing the undersized SVG set`, async () => {
     const html = await readFile(path.join(rootDir, document.file), "utf8");
     const studyList = scopedElements(html, "ol").find((scope) => /class="learning-study-list"/.test(scope));
     const expectedText = document.locale === "tr" ? "yeni sekmede açılır" : "opens in a new tab";
-    const expectedDestinations = ["aia", "gpu", "llm", "usl", "hns", "lcl", "cld"].map((code) => `https://${code}.aserdargun.com/`);
+    const expectedDestinations = ["aia", "gpu", "llm", "usl", "hns", "sec", "lcl", "cld"].map((code) => `https://${code}.aserdargun.com/`);
 
     assert.ok(studyList, "the existing study-order list must host the mobile alternate UI");
     const studySteps = scopedElements(studyList, "li");
     const mobileTargets = anchors(studyList).filter(({ openingTag }) => (
       (attribute(openingTag, "class") ?? "").split(/\s+/).includes("learning-study-link")
     ));
-    assert.equal(studySteps.length, 6, "HNS must precede the shared local and cloud decision step");
+    assert.equal(studySteps.length, 7, "HNS and SEC must precede the shared local and cloud decision step");
     assert.deepEqual(
       anchors(studySteps.at(-1)).map(({ openingTag }) => attribute(openingTag, "href")),
       ["https://lcl.aserdargun.com/", "https://cld.aserdargun.com/"],
       "the final mobile step must expose local and cloud deployment as parallel choices",
     );
-    assert.equal(mobileTargets.length, 7, "mobile must expose exactly one seven-link alternate target set");
+    assert.equal(mobileTargets.length, 8, "mobile must expose exactly one eight-link alternate target set");
     assert.deepEqual(mobileTargets.map(({ openingTag }) => attribute(openingTag, "href")), expectedDestinations);
     for (const target of mobileTargets) {
       assert.equal(attribute(target.openingTag, "target"), "_blank");
@@ -575,7 +602,7 @@ test("mobile learning alternate exposes one non-overlapping 44px focus set while
   assert.match(
     css,
     /@media\s*\(max-width:\s*900px\)[\s\S]*?\.learning-diagram-wrap\s*\{[\s\S]*?display:\s*none;[\s\S]*?\.learning-study-copy\s*\{[\s\S]*?display:\s*none;[\s\S]*?\.learning-study-link\s*\{[\s\S]*?display:\s*flex;[\s\S]*?width:\s*100%;[\s\S]*?min-height:\s*44px;/,
-    "mobile must hide the SVG from layout/AT/interaction and expose only seven full-row 44px alternate links",
+    "mobile must hide the SVG from layout/AT/interaction and expose only eight full-row 44px alternate links",
   );
   assert.ok(
     svgBaseIndex >= 0 && finalMobileOverrideIndex > svgBaseIndex,

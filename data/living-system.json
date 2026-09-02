@@ -52,6 +52,22 @@
       "relatedMemoryIds": []
     },
     {
+      "code": "sec",
+      "kind": "observatory",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "AI Systems Security Observatory", "tr": "AI Sistemleri Güvenlik Gözlemevi" },
+      "summary": {
+        "en": "A bilingual, evidence-aware observatory for tracing AI-agent trust from model intent through identity, authorization, constrained action, audit, and incident recovery.",
+        "tr": "AI agent güvenini model niyetinden kimlik, yetkilendirme, kısıtlı eylem, denetim ve olay kurtarmaya kadar izleyen iki dilli, kanıt duyarlı gözlemevi."
+      },
+      "repository": "https://github.com/aserdargun/sec-aserdargun-com",
+      "address": "https://sec.aserdargun.com/",
+      "updatedAt": "2026-09-02",
+      "relatedMemoryIds": []
+    },
+    {
       "code": "usl",
       "kind": "atlas",
       "systemRole": "core-learning",

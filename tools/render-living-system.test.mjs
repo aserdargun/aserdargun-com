@@ -523,13 +523,15 @@ test("renders application codes and empty relationship blocks with locale parity
   }
 });
 
-test("renders the HNS product kind as an observatory in both locales", async () => {
+test("renders the HNS and SEC product kinds as observatories in both locales", async () => {
   const data = await readFixtureData();
   const english = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
   const turkish = renderDocument({ html: homeDocument(), page: "home", locale: "tr", data, today });
 
   assert.match(english, /<strong>Harness Engineering Observatory<\/strong>[\s\S]*?<dt>Kind<\/dt><dd>Observatory<\/dd>/);
   assert.match(turkish, /<strong>Harness Engineering Observatory<\/strong>[\s\S]*?<dt>Tür<\/dt><dd>Gözlemevi<\/dd>/);
+  assert.match(english, /<strong>AI Systems Security Observatory<\/strong>[\s\S]*?<dt>Kind<\/dt><dd>Observatory<\/dd>/);
+  assert.match(turkish, /<strong>AI Sistemleri Güvenlik Gözlemevi<\/strong>[\s\S]*?<dt>Tür<\/dt><dd>Gözlemevi<\/dd>/);
 });
 
 test("renders only approved localized application enrichment and reciprocal memory links", async () => {
@@ -810,6 +812,7 @@ test("renders Now freshness from its canonical date at current and needs-refresh
   data.applications.find((application) => application.code === "lcl").updatedAt = "2026-08-28";
   data.applications.find((application) => application.code === "wfm").updatedAt = "2026-08-28";
   data.applications.find((application) => application.code === "hns").updatedAt = "2026-08-28";
+  data.applications.find((application) => application.code === "sec").updatedAt = "2026-08-28";
   const current = renderDocument({
     html: nowDocument(),
     page: "now",
@@ -839,7 +842,7 @@ test("renders the application-map summary from semantic roles", async () => {
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /Seven core learning applications, one lab, one horizon bridge, and one long-term horizon\./);
+  assert.match(rendered, /Eight core learning applications, one lab, one horizon bridge, and one long-term horizon\./);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
 });
 
