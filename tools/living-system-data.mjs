@@ -13,7 +13,7 @@ const TOP_LEVEL_KEYS = [
 const APPLICATION_KINDS = new Set(["atlas", "tool", "lab", "horizon", "private-system"]);
 const APPLICATION_VISIBILITIES = new Set(["public", "unlisted", "owner-only"]);
 const APPLICATION_STATUSES = new Set(["idea", "design", "active", "live", "paused", "archived"]);
-const SYSTEM_ROLES = new Set(["core-learning", "lab", "horizon"]);
+const SYSTEM_ROLES = new Set(["core-learning", "lab", "horizon-bridge", "horizon"]);
 const MEMORY_TYPES = new Set(["event", "decision", "learning", "plan", "project", "publication"]);
 const TIMEFRAMES = new Set(["week", "month", "long-term"]);
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
@@ -594,7 +594,7 @@ export function getFreshnessState(dateOnly, now = new Date()) {
 }
 
 export function summarizeApplications(applications) {
-  const counts = { "core-learning": 0, lab: 0, horizon: 0 };
+  const counts = { "core-learning": 0, lab: 0, "horizon-bridge": 0, horizon: 0 };
   for (const application of applications) {
     if (counts[application.systemRole] !== undefined) counts[application.systemRole] += 1;
   }
@@ -607,9 +607,10 @@ export function summarizeApplications(applications) {
   };
   const applicationNoun = counts["core-learning"] === 1 ? "application" : "applications";
   const labNoun = counts.lab === 1 ? "lab" : "labs";
+  const bridgeNoun = counts["horizon-bridge"] === 1 ? "horizon bridge" : "horizon bridges";
   const horizonNoun = counts.horizon === 1 ? "horizon" : "horizons";
   return {
-    en: `${sentenceNumber(englishNumber, counts["core-learning"])} core learning ${applicationNoun}, ${number(englishNumber, counts.lab)} ${labNoun}, and ${number(englishNumber, counts.horizon)} long-term ${horizonNoun}.`,
-    tr: `${sentenceNumber(turkishNumber, counts["core-learning"])} çekirdek öğrenme uygulaması, ${number(turkishNumber, counts.lab)} laboratuvar ve ${number(turkishNumber, counts.horizon)} uzun vadeli ufuk.`,
+    en: `${sentenceNumber(englishNumber, counts["core-learning"])} core learning ${applicationNoun}, ${number(englishNumber, counts.lab)} ${labNoun}, ${number(englishNumber, counts["horizon-bridge"])} ${bridgeNoun}, and ${number(englishNumber, counts.horizon)} long-term ${horizonNoun}.`,
+    tr: `${sentenceNumber(turkishNumber, counts["core-learning"])} çekirdek öğrenme uygulaması, ${number(turkishNumber, counts.lab)} laboratuvar, ${number(turkishNumber, counts["horizon-bridge"])} ufuk köprüsü ve ${number(turkishNumber, counts.horizon)} uzun vadeli ufuk.`,
   };
 }

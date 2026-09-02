@@ -181,8 +181,9 @@ export function renderPrimaryNavigation({ locale, page }) {
     `  <a class="nav-links__secondary-link" href="${root}#learning">${label(locale, "Learning", "Öğrenme")}</a>`,
     `  <div class="nav-links__group" data-nav-group="horizon" role="group" aria-labelledby="nav-horizon-label-${locale}">`,
     `    <span class="nav-links__section" id="nav-horizon-label-${locale}">${label(locale, "The horizon", "Ufuk")}</span>`,
-    externalLink("eng"),
+    externalLink("wfm"),
     externalLink("itl"),
+    externalLink("eng"),
     "  </div>",
     `  <div class="nav-links__group" data-nav-group="private" role="group" aria-labelledby="nav-private-label-${locale}">`,
     `    <span class="nav-links__section" id="nav-private-label-${locale}">${label(locale, "Private systems", "Özel sistemler")}</span>`,
@@ -1237,7 +1238,7 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
   const groupElements = primaryNavigation[0].children
     .filter((node) => node.type === "element" && archiveHasAttribute(node, "data-nav-group"));
   const expectedGroups = [
-    { key: "horizon", text: label(locale, "The horizon", "Ufuk"), codes: ["eng", "itl"] },
+    { key: "horizon", text: label(locale, "The horizon", "Ufuk"), codes: ["wfm", "itl", "eng"] },
     { key: "private", text: label(locale, "Private systems", "Özel sistemler"), codes: ["stk", "inf", "nxt"] },
   ];
   const scopedGroupAnchors = [];
@@ -1310,7 +1311,7 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
     .filter((node) => archiveHasClass(node, "nav-links__external"));
   const primaryExternalAnchors = archiveElementsByTag(primaryNavigation[0], "a")
     .filter((node) => archiveHasClass(node, "nav-links__external"));
-  const expectedNewTabHrefs = ["eng", "itl", "stk", "inf", "nxt"]
+  const expectedNewTabHrefs = ["wfm", "itl", "eng", "stk", "inf", "nxt"]
     .map((code) => `https://${code}.aserdargun.com/`);
   const allActiveAnchors = archiveElementsByTag(documentTree, "a");
   const destinationMatches = expectedNewTabHrefs.map((href) => (

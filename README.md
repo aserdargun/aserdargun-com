@@ -7,8 +7,10 @@ duplicate permanently redirects to `/`.
 The opening experience combines an interactive ASCII/pixel portrait engine with a
 reverse-chronological eight-stage career timeline spanning mechanical engineering,
 manufacturing leadership, data science, full-stack AI, and AI engineering,
-followed by a learning-system loop that connects the application atlas
-(`aia` → `gpu` → `llm` → `usl` → `cld`), the application map itself, working
+followed by a learning-system loop that connects the application atlas to three
+parallel build tracks and local/cloud deployment decisions (`lcl` / `cld`). The
+World Models Atlas (`wfm`) then bridges that loop into the industrial-twin lab
+and the long-term open-humanoid horizon, alongside the application map, working
 principles, verified credentials, and contact.
 
 ## Development

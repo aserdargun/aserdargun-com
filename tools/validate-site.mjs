@@ -68,7 +68,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "apps", "learning", "journey", "horizon", "approach", "about"];
-const expectedAssetVersion = "20260828-living-system";
+const expectedAssetVersion = "20260902-wfm-lcl-horizon-a11y";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -78,6 +78,7 @@ const expectedApplicationRows = [
   { code: "gpu", repository: "gpu-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/gpu-aserdargun-com", productUrl: "https://gpu.aserdargun.com/", productLabel: "gpu.aserdargun.com" },
   { code: "cld", repository: "cld-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/cld-aserdargun-com", productUrl: "https://cld.aserdargun.com/", productLabel: "cld.aserdargun.com" },
   { code: "lcl", repository: "lcl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/lcl-aserdargun-com", productUrl: "https://lcl.aserdargun.com/", productLabel: "lcl.aserdargun.com" },
+  { code: "wfm", repository: "wfm-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/wfm-aserdargun-com", productUrl: "https://wfm.aserdargun.com/", productLabel: "wfm.aserdargun.com" },
   { code: "itl", repository: "itl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/itl-aserdargun-com", productUrl: "https://itl.aserdargun.com/", productLabel: "itl.aserdargun.com" },
   { code: "eng", repository: "eng-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/eng-aserdargun-com", productUrl: "https://eng.aserdargun.com/", productLabel: "eng.aserdargun.com" },
 ].map((row) => ({
@@ -210,7 +211,7 @@ function validateApplicationMapRows(locale, html) {
   );
 }
 
-const expectedLearningCodes = ["aia", "gpu", "llm", "usl", "cld", "aia"];
+const expectedLearningCodes = ["aia", "gpu", "llm", "usl", "lcl", "cld", "aia"];
 const expectedLearningUrls = expectedLearningCodes.map((code) => `https://${code}.aserdargun.com/`);
 const expectedLearningQuestions = {
   en: [
@@ -218,6 +219,7 @@ const expectedLearningQuestions = {
     "“How does compute work?”",
     "“How do models run?”",
     "“How do models learn/change?”",
+    "“Which local lab should I buy?”",
     "“How do I operate this at scale?”",
     "“Where does this technology fit?”",
   ],
@@ -226,6 +228,7 @@ const expectedLearningQuestions = {
     "“Hesaplama nasıl çalışır?”",
     "“Modeller nasıl çalıştırılır?”",
     "“Modeller nasıl öğrenir/değişir?”",
+    "“Hangi laboratuvarı almalıyım?”",
     "“Bunu ölçekte nasıl işletirim?”",
     "“Bu teknoloji nereye oturur?”",
   ],
@@ -255,6 +258,7 @@ const expectedLearningTopics = {
     "model → architecture → precision → memory calculator → runtime → inference engine → serving → API → benchmark",
     "Ollama · llama.cpp · vLLM · SGLang · TensorRT-LLM · Transformers · MLX",
     "pretrained model → dataset → tokenization → LoRA → QLoRA → SFT → DPO → GRPO → evaluation → merged model → LLM runtime",
+    "open-weight model → workload → memory → NVIDIA / AMD / Apple → privacy / power / noise → local lab",
     "model → vLLM → Docker → GPU instance → cloud GPU → load balancer → autoscaling → API",
   ],
   tr: [
@@ -263,6 +267,7 @@ const expectedLearningTopics = {
     "model → mimari → hassasiyet → bellek hesabı → runtime → inference motoru → sunum → API → benchmark",
     "Ollama · llama.cpp · vLLM · SGLang · TensorRT-LLM · Transformers · MLX",
     "eğitilmiş model → veri seti → tokenization → LoRA → QLoRA → SFT → DPO → GRPO → değerlendirme → birleştirilmiş model → LLM runtime",
+    "açık ağırlıklı model → iş yükü → bellek → NVIDIA / AMD / Apple → gizlilik / güç / gürültü → yerel laboratuvar",
     "model → vLLM → Docker → GPU instance → bulut GPU → load balancer → autoscaling → API",
   ],
 };
@@ -342,6 +347,17 @@ function validateLearningSystem(locale, html) {
   );
   const codes = matches(section, /<code class="learning-code">([a-z]{3})<\/code>/g);
   check(JSON.stringify(codes) === JSON.stringify(expectedLearningCodes), `${locale}: learning system node codes or order differ`);
+  const deploymentCards = section.match(/<ul class="learning-deployment-paths"[\s\S]*?<\/ul>/)?.[0] ?? "";
+  const deploymentCardCodes = matches(deploymentCards, /<code class="learning-code">([a-z]{3})<\/code>/g);
+  const deploymentCardOrders = matches(deploymentCards, /<span class="learning-order" aria-hidden="true">([^<]+)<\/span>/g);
+  check(
+    JSON.stringify(deploymentCardCodes) === JSON.stringify(["lcl", "cld"]),
+    `${locale}: detailed deployment cards must expose LCL and CLD in order`,
+  );
+  check(
+    JSON.stringify(deploymentCardOrders) === JSON.stringify(["5A", "5B"]),
+    `${locale}: detailed deployment cards must label LCL and CLD as 5A and 5B`,
+  );
   const urls = matches(section, /<a class="learning-node-link" href="(https:\/\/[a-z]{3}\.aserdargun\.com\/)" target="_blank" rel="noreferrer">/g);
   check(JSON.stringify(urls) === JSON.stringify(expectedLearningUrls), `${locale}: learning system node links or order differ`);
   for (const [index, code] of expectedLearningCodes.entries()) {
@@ -382,8 +398,12 @@ function validateLearningHorizon(locale, html) {
     : "The horizon · what this loop serves";
   check(aside.includes(expectedKicker), `${locale}: learning horizon kicker is missing`);
   check(aside.includes("Open Humanoid Engineering"), `${locale}: learning horizon title is missing`);
-  check(aside.includes('href="https://itl.aserdargun.com/"'), `${locale}: learning horizon itl link is missing`);
-  check(aside.includes('href="https://eng.aserdargun.com/"'), `${locale}: learning horizon product link is missing`);
+  const horizonCodes = matches(aside, /href="https:\/\/([a-z]{3})\.aserdargun\.com\/"/g);
+  check(JSON.stringify(horizonCodes) === JSON.stringify(["wfm", "itl", "eng"]), `${locale}: learning horizon bridge, lab, and destination order differ`);
+  const bridgeCopy = isTurkish
+    ? "algı, tahmin, planlama ve eylem"
+    : "perception, prediction, planning, and action";
+  check(aside.includes(bridgeCopy), `${locale}: learning horizon world-model bridge description is missing`);
   check(aside.includes('aria-labelledby="learning-horizon-title"'), `${locale}: learning horizon heading relationship is missing`);
   check(aside.includes('aria-describedby="learning-horizon-desc"'), `${locale}: learning horizon description relationship is missing`);
   check(!aside.includes("learning-stage"), `${locale}: learning horizon must not be a learning-stage`);
@@ -435,7 +455,7 @@ function validatePrimaryNavigation(locale, page, html) {
   check(!primaryLinks.some(([concept]) => ["Approach", "Yaklaşım"].includes(concept)), `${locale}/${page}: Approach remains in top-level navigation`);
 
   const groupExpectations = [
-    ["horizon", locale === "tr" ? "Ufuk" : "The horizon", ["eng", "itl"]],
+    ["horizon", locale === "tr" ? "Ufuk" : "The horizon", ["wfm", "itl", "eng"]],
     ["private", locale === "tr" ? "Özel sistemler" : "Private systems", ["stk", "inf", "nxt"]],
   ];
   for (const [groupName, groupLabel, expectedCodes] of groupExpectations) {

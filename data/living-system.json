@@ -100,6 +100,22 @@
       "relatedMemoryIds": []
     },
     {
+      "code": "wfm",
+      "kind": "atlas",
+      "systemRole": "horizon-bridge",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "World Models Atlas", "tr": "World Models Atlas" },
+      "summary": {
+        "en": "A living research atlas tracing how world models connect perception, prediction, planning, and action through primary sources.",
+        "tr": "Dünya modellerinin algı, tahmin, planlama ve eylem arasındaki rolünü birincil kaynaklar üzerinden izleyen yaşayan bir araştırma atlası."
+      },
+      "repository": "https://github.com/aserdargun/wfm-aserdargun-com",
+      "address": "https://wfm.aserdargun.com/",
+      "updatedAt": "2026-09-01",
+      "relatedMemoryIds": []
+    },
+    {
       "code": "itl",
       "kind": "lab",
       "systemRole": "lab",

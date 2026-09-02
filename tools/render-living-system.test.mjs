@@ -220,7 +220,7 @@ test("renders assistive-technology-visible horizon and private-system groups", (
   assert.equal(/nav-links__section[^>]*aria-hidden="true"/.test(english), false);
   assert.deepEqual(
     Array.from(english.matchAll(/data-nav-group="horizon"[\s\S]*?<\/div>/g), (group) => Array.from(group[0].matchAll(/https:\/\/([a-z]{3})\.aserdargun\.com\//g), (match) => match[1])).flat(),
-    ["eng", "itl"],
+    ["wfm", "itl", "eng"],
   );
   assert.deepEqual(
     Array.from(english.matchAll(/data-nav-group="private"[\s\S]*?<\/div>/g), (group) => Array.from(group[0].matchAll(/https:\/\/([a-z]{3})\.aserdargun\.com\//g), (match) => match[1])).flat(),
@@ -799,6 +799,7 @@ test("renders absolute application freshness with an accessible, derived current
 test("renders Now freshness from its canonical date at current and needs-refresh boundaries", async () => {
   const data = await readFixtureData();
   data.applications.find((application) => application.code === "lcl").updatedAt = "2026-08-28";
+  data.applications.find((application) => application.code === "wfm").updatedAt = "2026-08-28";
   const current = renderDocument({
     html: nowDocument(),
     page: "now",
@@ -828,7 +829,7 @@ test("renders the application-map summary from semantic roles", async () => {
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /Six core learning applications, one lab, and one long-term horizon\./);
+  assert.match(rendered, /Six core learning applications, one lab, one horizon bridge, and one long-term horizon\./);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
 });
 
@@ -1179,7 +1180,7 @@ test("filesystem archive discovery rejects external links laundered by valid gro
       html.matchAll(/      <a class="nav-links__external"[^\n]+<\/a>/g),
       (match) => match[0],
     );
-    assert.equal(externalAnchors.length, 5, "fixture must copy all five external navigation anchors");
+    assert.equal(externalAnchors.length, 6, "fixture must copy all six external navigation anchors");
     let mutated = html;
     for (const anchor of externalAnchors) {
       mutated = mutated.replace(anchor, anchor.replace('target="_blank"', 'target="_self"'));
@@ -1256,7 +1257,7 @@ test("filesystem archive discovery rejects assistive text laundered through temp
   const fixtureDir = await createArchiveFilesystemFixture(t);
   await mutateFixture(fixtureDir, "now/archive/2026-W34/index.html", (html) => {
     const literal = '<span class="sr-only">opens in a new tab</span>';
-    assert.equal(html.split(literal).length - 1, 5, "expected five localized assistive labels");
+    assert.equal(html.split(literal).length - 1, 6, "expected six localized assistive labels");
     return html.replaceAll(
       literal,
       '<span class="sr-only"><template>opens in a new tab</template></span>',

@@ -2900,6 +2900,19 @@ footer a {
   gap: 16px;
 }
 
+.learning-deployment-paths {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 980px;
+  padding: 0;
+  list-style: none;
+}
+
+.learning-node-deployment {
+  min-width: 0;
+}
+
 .learning-node-hub {
   border-color: rgba(200, 255, 54, 0.48);
   background: rgba(200, 255, 54, 0.05);
@@ -2957,7 +2970,7 @@ footer a {
 .learning-horizon h3 {
   margin: 0;
   font-size: clamp(1.1rem, 1.6vw, 1.35rem);
-  color: var(--ink);
+  color: var(--white);
   letter-spacing: 0.01em;
 }
 
@@ -3010,6 +3023,10 @@ footer a {
   }
 
   .learning-tracks {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-deployment-paths {
     grid-template-columns: 1fr;
   }
 

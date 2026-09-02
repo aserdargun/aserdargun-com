@@ -404,6 +404,20 @@ test("rejects future dates while accepting explicit undated design horizons", ()
   assert.deepEqual(validateLivingSystemData(designData).errors, []);
 });
 
+test("accepts a live public horizon-bridge atlas", () => {
+  const bridgeData = validData();
+  bridgeData.applications[0] = {
+    ...bridgeData.applications[0],
+    code: "wfm",
+    systemRole: "horizon-bridge",
+    title: localized("World Models Atlas", "World Models Atlas"),
+    repository: "https://github.com/aserdargun/wfm-aserdargun-com",
+    address: "https://wfm.aserdargun.com/",
+  };
+
+  assert.deepEqual(validateLivingSystemData(bridgeData).errors, []);
+});
+
 test("summarizes semantic system roles rather than application array length", () => {
   const applications = [
     { systemRole: "core-learning" },
@@ -412,12 +426,13 @@ test("summarizes semantic system roles rather than application array length", ()
     { systemRole: "core-learning" },
     { systemRole: "core-learning" },
     { systemRole: "lab" },
+    { systemRole: "horizon-bridge" },
     { systemRole: "horizon" },
   ];
 
   assert.deepEqual(summarizeApplications(applications), {
-    en: "Five core learning applications, one lab, and one long-term horizon.",
-    tr: "Beş çekirdek öğrenme uygulaması, bir laboratuvar ve bir uzun vadeli ufuk.",
+    en: "Five core learning applications, one lab, one horizon bridge, and one long-term horizon.",
+    tr: "Beş çekirdek öğrenme uygulaması, bir laboratuvar, bir ufuk köprüsü ve bir uzun vadeli ufuk.",
   });
 });
 
@@ -513,7 +528,26 @@ test("loads and validates the committed canonical manifest", async () => {
   const data = await loadLivingSystemData(filePath);
   const canonicalToday = new Date("2026-09-01T12:00:00+03:00");
 
-  assert.equal(data.applications.length, 8);
+  assert.equal(data.applications.length, 9);
+  assert.deepEqual(
+    data.applications.find((application) => application.code === "wfm"),
+    {
+      code: "wfm",
+      kind: "atlas",
+      systemRole: "horizon-bridge",
+      visibility: "public",
+      status: "live",
+      title: localized("World Models Atlas", "World Models Atlas"),
+      summary: localized(
+        "A living research atlas tracing how world models connect perception, prediction, planning, and action through primary sources.",
+        "Dünya modellerinin algı, tahmin, planlama ve eylem arasındaki rolünü birincil kaynaklar üzerinden izleyen yaşayan bir araştırma atlası.",
+      ),
+      repository: "https://github.com/aserdargun/wfm-aserdargun-com",
+      address: "https://wfm.aserdargun.com/",
+      updatedAt: "2026-09-01",
+      relatedMemoryIds: [],
+    },
+  );
   assert.deepEqual(validateLivingSystemData(data, { today: canonicalToday }).errors, []);
   assert.strictEqual(assertValidLivingSystemData(data, { today: canonicalToday }), data);
 });

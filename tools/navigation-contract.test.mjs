@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
@@ -49,6 +50,22 @@ test("the accessibility route set includes every deployable public index documen
       "tr/now/index.html",
     ],
     "recursive discovery must include every current public index document",
+  );
+});
+
+test("public index discovery skips local tooling directories", async (t) => {
+  const fixtureDir = await mkdtemp(path.join(tmpdir(), "public-index-discovery-"));
+  t.after(() => rm(fixtureDir, { recursive: true, force: true }));
+  await mkdir(path.join(fixtureDir, ".superpowers", "generated"), { recursive: true });
+  await writeFile(path.join(fixtureDir, "index.html"), "<main>public</main>");
+  await writeFile(
+    path.join(fixtureDir, ".superpowers", "generated", "index.html"),
+    "<main>local tooling only</main>",
+  );
+
+  assert.deepEqual(
+    (await discoverPublicIndexDocuments(fixtureDir)).map(({ relativePath }) => relativePath),
+    ["index.html"],
   );
 });
 
@@ -410,6 +427,53 @@ for (const document of routes) {
 }
 
 for (const document of routes.filter(({ route }) => route === "/" || route === "/tr/")) {
+  test(`${document.route} presents the horizon path from world models through the twin lab to humanoid engineering`, async () => {
+    const html = await readFile(path.join(rootDir, document.file), "utf8");
+    const horizon = scopedElements(html, "aside").find((scope) => /class="learning-horizon"/.test(scope));
+    const expectedBridgeCopy = document.locale === "tr"
+      ? "algı, tahmin, planlama ve eylem"
+      : "perception, prediction, planning, and action";
+
+    assert.ok(horizon, "learning horizon callout must remain visible");
+    assert.match(horizon, new RegExp(expectedBridgeCopy));
+    assert.deepEqual(
+      anchors(horizon).map(({ openingTag }) => attribute(openingTag, "href")),
+      [
+        "https://wfm.aserdargun.com/",
+        "https://itl.aserdargun.com/",
+        "https://eng.aserdargun.com/",
+      ],
+    );
+  });
+
+  test(`${document.route} exposes local and cloud deployment as two detailed learning cards`, async () => {
+    const html = await readFile(path.join(rootDir, document.file), "utf8");
+    const learning = scopedElements(html, "section").find((scope) => /class="learning-system"/.test(scope));
+    const deploymentPaths = scopedElements(learning ?? "", "ul").find((scope) => /class="learning-deployment-paths"/.test(scope));
+    const expectedQuestion = document.locale === "tr"
+      ? "“Hangi laboratuvarı almalıyım?”"
+      : "“Which local lab should I buy?”";
+
+    assert.ok(deploymentPaths, "the detailed learning flow must expose a deployment-card group");
+    const cards = scopedElements(deploymentPaths, "li");
+    assert.equal(cards.length, 2);
+    assert.deepEqual(
+      cards.map((card) => card.match(/<code class="learning-code">([a-z]{3})<\/code>/)?.[1]),
+      ["lcl", "cld"],
+    );
+    assert.deepEqual(
+      cards.map((card) => card.match(/<span class="learning-order" aria-hidden="true">([^<]+)<\/span>/)?.[1]),
+      ["5A", "5B"],
+    );
+    assert.equal(cards[0].includes(expectedQuestion), true);
+    assert.deepEqual(
+      cards.map((card) => anchors(card).find(({ openingTag }) => (
+        (attribute(openingTag, "class") ?? "").split(/\s+/).includes("learning-node-link")
+      ))?.openingTag).map((openingTag) => attribute(openingTag, "href")),
+      ["https://lcl.aserdargun.com/", "https://cld.aserdargun.com/"],
+    );
+  });
+
   test(`${document.route} labels and contains the application table scroll region`, async () => {
     const html = await readFile(path.join(rootDir, document.file), "utf8");
     const wrappers = openingTags(html, "class=\"app-map-table-wrap\"");
@@ -498,6 +562,28 @@ test("mobile learning alternate exposes one non-overlapping 44px focus set while
     css.slice(finalMobileOverrideIndex),
     /\.learning-diagram-wrap\s*\{[\s\S]*?display:\s*none;/,
     "the final mobile cascade must hide the SVG figure",
+  );
+});
+
+test("detailed deployment cards use a two-column desktop and one-column mobile grid", async () => {
+  const css = await readFile(path.join(rootDir, "styles.css"), "utf8");
+
+  assert.match(
+    css,
+    /\.learning-deployment-paths\s*\{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\);/s,
+  );
+  assert.match(
+    css,
+    /@media\s*\(max-width:\s*900px\)[\s\S]*?\.learning-deployment-paths\s*\{[^}]*grid-template-columns:\s*1fr;/,
+  );
+});
+
+test("the learning horizon heading stays legible on its dark surface", async () => {
+  const css = await readFile(path.join(rootDir, "styles.css"), "utf8");
+
+  assert.match(
+    css,
+    /\.learning-horizon h3\s*\{[^}]*color:\s*var\(--white\);/s,
   );
 });
 

@@ -11,6 +11,7 @@ import {
 
 export const PUBLIC_INDEX_EXCLUDED_DIRECTORIES = Object.freeze([
   ".git",
+  ".superpowers",
   ".worktrees",
   "node_modules",
 ]);
