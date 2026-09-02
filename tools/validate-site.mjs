@@ -74,6 +74,7 @@ const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
   { code: "aia", repository: "aia-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/aia-aserdargun-com", productUrl: "https://aia.aserdargun.com/", productLabel: "aia.aserdargun.com" },
   { code: "llm", repository: "llm-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/llm-aserdargun-com", productUrl: "https://llm.aserdargun.com/", productLabel: "llm.aserdargun.com" },
+  { code: "hns", repository: "hns-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/hns-aserdargun-com", productUrl: "https://hns.aserdargun.com/", productLabel: "hns.aserdargun.com" },
   { code: "usl", repository: "usl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/usl-aserdargun-com", productUrl: "https://usl.aserdargun.com/", productLabel: "usl.aserdargun.com" },
   { code: "gpu", repository: "gpu-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/gpu-aserdargun-com", productUrl: "https://gpu.aserdargun.com/", productLabel: "gpu.aserdargun.com" },
   { code: "cld", repository: "cld-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/cld-aserdargun-com", productUrl: "https://cld.aserdargun.com/", productLabel: "cld.aserdargun.com" },
@@ -211,7 +212,7 @@ function validateApplicationMapRows(locale, html) {
   );
 }
 
-const expectedLearningCodes = ["aia", "gpu", "llm", "usl", "lcl", "cld", "aia"];
+const expectedLearningCodes = ["aia", "gpu", "llm", "usl", "hns", "lcl", "cld", "aia"];
 const expectedLearningUrls = expectedLearningCodes.map((code) => `https://${code}.aserdargun.com/`);
 const expectedLearningQuestions = {
   en: [
@@ -219,6 +220,7 @@ const expectedLearningQuestions = {
     "“How does compute work?”",
     "“How do models run?”",
     "“How do models learn/change?”",
+    "“How do I turn model capability into a reliable agent system?”",
     "“Which local lab should I buy?”",
     "“How do I operate this at scale?”",
     "“Where does this technology fit?”",
@@ -228,6 +230,7 @@ const expectedLearningQuestions = {
     "“Hesaplama nasıl çalışır?”",
     "“Modeller nasıl çalıştırılır?”",
     "“Modeller nasıl öğrenir/değişir?”",
+    "“Model kabiliyetini nasıl güvenilir bir agent sistemine dönüştürürüm?”",
     "“Hangi laboratuvarı almalıyım?”",
     "“Bunu ölçekte nasıl işletirim?”",
     "“Bu teknoloji nereye oturur?”",
@@ -239,6 +242,7 @@ const expectedLearningStudyRoles = {
     "Foundation",
     "Main project",
     "From running to changing models",
+    "Reliable agent-system layer",
     "Local deployment decision",
     "Cloud deployment decision",
   ],
@@ -247,6 +251,7 @@ const expectedLearningStudyRoles = {
     "Temel katman",
     "Ana proje",
     "Çalıştırmadan değiştirmeye",
+    "Güvenilir agent sistemi katmanı",
     "Yerel dağıtım kararı",
     "Bulut dağıtım kararı",
   ],
@@ -258,6 +263,7 @@ const expectedLearningTopics = {
     "model → architecture → precision → memory calculator → runtime → inference engine → serving → API → benchmark",
     "Ollama · llama.cpp · vLLM · SGLang · TensorRT-LLM · Transformers · MLX",
     "pretrained model → dataset → tokenization → LoRA → QLoRA → SFT → DPO → GRPO → evaluation → merged model → LLM runtime",
+    "model capability → context → tools → orchestration → sandbox → memory → verification → observability → reliable agent system",
     "open-weight model → workload → memory → NVIDIA / AMD / Apple → privacy / power / noise → local lab",
     "model → vLLM → Docker → GPU instance → cloud GPU → load balancer → autoscaling → API",
   ],
@@ -267,6 +273,7 @@ const expectedLearningTopics = {
     "model → mimari → hassasiyet → bellek hesabı → runtime → inference motoru → sunum → API → benchmark",
     "Ollama · llama.cpp · vLLM · SGLang · TensorRT-LLM · Transformers · MLX",
     "eğitilmiş model → veri seti → tokenization → LoRA → QLoRA → SFT → DPO → GRPO → değerlendirme → birleştirilmiş model → LLM runtime",
+    "model kabiliyeti → bağlam → araçlar → orkestrasyon → sandbox → bellek → doğrulama → gözlemlenebilirlik → güvenilir agent sistemi",
     "açık ağırlıklı model → iş yükü → bellek → NVIDIA / AMD / Apple → gizlilik / güç / gürültü → yerel laboratuvar",
     "model → vLLM → Docker → GPU instance → bulut GPU → load balancer → autoscaling → API",
   ],
@@ -290,8 +297,8 @@ function validateLearningSystem(locale, html) {
   check(intro.includes(expectedKicker), `${locale}: learning system kicker is missing`);
   check(intro.includes(expectedHeading), `${locale}: learning system heading is missing`);
   const expectedSystemCount = isTurkish
-    ? "Altı uygulama tek bir öğrenme döngüsü oluşturur"
-    : "The six applications form one learning loop";
+    ? "Yedi uygulama tek bir öğrenme döngüsü oluşturur"
+    : "The seven applications form one learning loop";
   check(intro.includes(expectedSystemCount), `${locale}: learning system application count is stale`);
   check(
     section.includes('<figure class="learning-diagram-wrap">')
@@ -299,7 +306,7 @@ function validateLearningSystem(locale, html) {
     `${locale}: learning system diagram is missing`,
   );
   const diagram = section.match(/<svg\b[^>]*class="ld-svg"[\s\S]*?<\/svg>/)?.[0] ?? "";
-  check(diagram.includes("AIA") && diagram.includes("CLD") && diagram.includes("LCL"), `${locale}: learning system diagram endpoints are missing`);
+  check(diagram.includes("AIA") && diagram.includes("HNS") && diagram.includes("CLD") && diagram.includes("LCL"), `${locale}: learning system diagram endpoints are missing`);
   const deploymentNodes = Array.from(
     diagram.matchAll(/<a href="https:\/\/(lcl|cld)\.aserdargun\.com\/"[^>]*data-learning-plane="deployment"[^>]*>[\s\S]*?<rect x="[0-9]+" y="([0-9]+)"/g),
     (match) => ({ code: match[1], y: match[2] }),
@@ -322,6 +329,7 @@ function validateLearningSystem(locale, html) {
       "gpu:foundation",
       "llm:hub",
       "usl:adapt",
+      "hns:harness",
       "lcl:deployment",
       "cld:deployment",
     ]),
@@ -336,9 +344,10 @@ function validateLearningSystem(locale, html) {
       "gpu-to-llm",
       "usl-to-llm",
       "llm-to-gpu",
+      "llm-to-hns",
       "gpu-to-lcl",
-      "llm-to-lcl",
-      "llm-to-cld",
+      "hns-to-lcl",
+      "hns-to-cld",
       "lcl-to-evidence",
       "cld-to-evidence",
       "evidence-to-aia",
@@ -355,8 +364,8 @@ function validateLearningSystem(locale, html) {
     `${locale}: detailed deployment cards must expose LCL and CLD in order`,
   );
   check(
-    JSON.stringify(deploymentCardOrders) === JSON.stringify(["5A", "5B"]),
-    `${locale}: detailed deployment cards must label LCL and CLD as 5A and 5B`,
+    JSON.stringify(deploymentCardOrders) === JSON.stringify(["6A", "6B"]),
+    `${locale}: detailed deployment cards must label LCL and CLD as 6A and 6B`,
   );
   const urls = matches(section, /<a class="learning-node-link" href="(https:\/\/[a-z]{3}\.aserdargun\.com\/)" target="_blank" rel="noreferrer">/g);
   check(JSON.stringify(urls) === JSON.stringify(expectedLearningUrls), `${locale}: learning system node links or order differ`);
@@ -373,7 +382,7 @@ function validateLearningSystem(locale, html) {
   );
   const studyCopies = matches(section, /<span class="learning-study-copy">([\s\S]*?)<\/span><a class="learning-study-link"/g);
   const studyCodes = studyCopies.map((copy) => copy.match(/<code>([a-z]{3})<\/code>/)?.[1] ?? "");
-  check(JSON.stringify(studyCodes) === JSON.stringify(["aia", "gpu", "llm", "usl", "lcl", "cld"]), `${locale}: learning study order codes differ`);
+  check(JSON.stringify(studyCodes) === JSON.stringify(["aia", "gpu", "llm", "usl", "hns", "lcl", "cld"]), `${locale}: learning study order codes differ`);
   const studyRoles = studyCopies.map((copy) => copy.match(/<span class="learning-study-role">([^<]+)<\/span>/)?.[1] ?? "");
   check(
     JSON.stringify(studyRoles) === JSON.stringify(isTurkish ? expectedLearningStudyRoles.tr : expectedLearningStudyRoles.en),
@@ -384,7 +393,7 @@ function validateLearningSystem(locale, html) {
     JSON.stringify(topics) === JSON.stringify(isTurkish ? expectedLearningTopics.tr : expectedLearningTopics.en),
     `${locale}: learning system topic chains differ`,
   );
-  check((section.match(/class="learning-stage-label"/g) || []).length === 4, `${locale}: learning system must keep four stages`);
+  check((section.match(/class="learning-stage-label"/g) || []).length === 5, `${locale}: learning system must expose five stages`);
 }
 
 function validateLearningHorizon(locale, html) {

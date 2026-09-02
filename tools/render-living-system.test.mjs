@@ -21,7 +21,7 @@ import {
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rendererPath = path.join(rootDir, "tools", "render-living-system.mjs");
-const today = new Date("2026-09-01T12:00:00Z");
+const today = new Date("2026-09-02T12:00:00Z");
 
 async function readFixtureData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -523,6 +523,15 @@ test("renders application codes and empty relationship blocks with locale parity
   }
 });
 
+test("renders the HNS product kind as an observatory in both locales", async () => {
+  const data = await readFixtureData();
+  const english = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
+  const turkish = renderDocument({ html: homeDocument(), page: "home", locale: "tr", data, today });
+
+  assert.match(english, /<strong>Harness Engineering Observatory<\/strong>[\s\S]*?<dt>Kind<\/dt><dd>Observatory<\/dd>/);
+  assert.match(turkish, /<strong>Harness Engineering Observatory<\/strong>[\s\S]*?<dt>Tür<\/dt><dd>Gözlemevi<\/dd>/);
+});
+
 test("renders only approved localized application enrichment and reciprocal memory links", async () => {
   const data = await readFixtureData();
   const application = data.applications.find((candidate) => candidate.code === "aia");
@@ -789,7 +798,7 @@ test("renders absolute application freshness with an accessible, derived current
 
   assert.match(
     rendered,
-    /<span class="freshness freshness--current" data-freshness-date="2026-08-25" data-freshness-state="current">[\s\S]*?<time datetime="2026-08-25">2026-08-25<\/time>[\s\S]*?<\/span>/,
+    /<span class="freshness freshness--current" data-freshness-date="2026-09-02" data-freshness-state="current">[\s\S]*?<time datetime="2026-09-02">2026-09-02<\/time>[\s\S]*?<\/span>/,
   );
   assert.match(rendered, /<span class="freshness-label">Current<\/span>/);
   assert.equal(rendered.includes("today"), false);
@@ -800,6 +809,7 @@ test("renders Now freshness from its canonical date at current and needs-refresh
   const data = await readFixtureData();
   data.applications.find((application) => application.code === "lcl").updatedAt = "2026-08-28";
   data.applications.find((application) => application.code === "wfm").updatedAt = "2026-08-28";
+  data.applications.find((application) => application.code === "hns").updatedAt = "2026-08-28";
   const current = renderDocument({
     html: nowDocument(),
     page: "now",
@@ -829,7 +839,7 @@ test("renders the application-map summary from semantic roles", async () => {
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /Six core learning applications, one lab, one horizon bridge, and one long-term horizon\./);
+  assert.match(rendered, /Seven core learning applications, one lab, one horizon bridge, and one long-term horizon\./);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
 });
 
@@ -1592,7 +1602,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const generate = spawnSync(process.execPath, [rendererPath], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-01" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-02" },
   });
   assert.equal(generate.status, 0, generate.stderr);
 
@@ -1607,7 +1617,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const check = spawnSync(process.execPath, [rendererPath, "--check"], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-01" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-02" },
   });
   const after = Object.fromEntries(await Promise.all(paths.map(async (relativePath) => [
     relativePath,

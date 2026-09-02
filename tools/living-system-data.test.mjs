@@ -418,6 +418,20 @@ test("accepts a live public horizon-bridge atlas", () => {
   assert.deepEqual(validateLivingSystemData(bridgeData).errors, []);
 });
 
+test("accepts a live public core-learning observatory", () => {
+  const observatoryData = validData();
+  observatoryData.applications[0] = {
+    ...observatoryData.applications[0],
+    code: "hns",
+    kind: "observatory",
+    title: localized("Harness Engineering Observatory", "Harness Engineering Observatory"),
+    repository: "https://github.com/aserdargun/hns-aserdargun-com",
+    address: "https://hns.aserdargun.com/",
+  };
+
+  assert.deepEqual(validateLivingSystemData(observatoryData).errors, []);
+});
+
 test("summarizes semantic system roles rather than application array length", () => {
   const applications = [
     { systemRole: "core-learning" },
@@ -526,9 +540,28 @@ test("rejects private-system records and reserved private-navigation codes", () 
 test("loads and validates the committed canonical manifest", async () => {
   const filePath = fileURLToPath(new URL("../data/living-system.json", import.meta.url));
   const data = await loadLivingSystemData(filePath);
-  const canonicalToday = new Date("2026-09-01T12:00:00+03:00");
+  const canonicalToday = new Date("2026-09-02T12:00:00+03:00");
 
-  assert.equal(data.applications.length, 9);
+  assert.equal(data.applications.length, 10);
+  assert.deepEqual(
+    data.applications.find((application) => application.code === "hns"),
+    {
+      code: "hns",
+      kind: "observatory",
+      systemRole: "core-learning",
+      visibility: "public",
+      status: "live",
+      title: localized("Harness Engineering Observatory", "Harness Engineering Observatory"),
+      summary: localized(
+        "A bilingual, source-backed observatory for comparing the harnesses, runtimes, orchestration, execution, verification, and observability layers that turn model capability into reliable agent systems.",
+        "Model kabiliyetini güvenilir agent sistemlerine dönüştüren harness, runtime, orkestrasyon, yürütme, doğrulama ve gözlemlenebilirlik katmanlarını karşılaştıran iki dilli, kaynak-temelli gözlemevi.",
+      ),
+      repository: "https://github.com/aserdargun/hns-aserdargun-com",
+      address: "https://hns.aserdargun.com/",
+      updatedAt: "2026-09-02",
+      relatedMemoryIds: [],
+    },
+  );
   assert.deepEqual(
     data.applications.find((application) => application.code === "wfm"),
     {

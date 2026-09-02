@@ -10,7 +10,7 @@ const TOP_LEVEL_KEYS = [
   "journeyEvidence",
 ];
 
-const APPLICATION_KINDS = new Set(["atlas", "tool", "lab", "horizon", "private-system"]);
+const APPLICATION_KINDS = new Set(["atlas", "observatory", "tool", "lab", "horizon", "private-system"]);
 const APPLICATION_VISIBILITIES = new Set(["public", "unlisted", "owner-only"]);
 const APPLICATION_STATUSES = new Set(["idea", "design", "active", "live", "paused", "archived"]);
 const SYSTEM_ROLES = new Set(["core-learning", "lab", "horizon-bridge", "horizon"]);

@@ -36,6 +36,22 @@
       "relatedMemoryIds": []
     },
     {
+      "code": "hns",
+      "kind": "observatory",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "Harness Engineering Observatory", "tr": "Harness Engineering Observatory" },
+      "summary": {
+        "en": "A bilingual, source-backed observatory for comparing the harnesses, runtimes, orchestration, execution, verification, and observability layers that turn model capability into reliable agent systems.",
+        "tr": "Model kabiliyetini güvenilir agent sistemlerine dönüştüren harness, runtime, orkestrasyon, yürütme, doğrulama ve gözlemlenebilirlik katmanlarını karşılaştıran iki dilli, kaynak-temelli gözlemevi."
+      },
+      "repository": "https://github.com/aserdargun/hns-aserdargun-com",
+      "address": "https://hns.aserdargun.com/",
+      "updatedAt": "2026-09-02",
+      "relatedMemoryIds": []
+    },
+    {
       "code": "usl",
       "kind": "atlas",
       "systemRole": "core-learning",

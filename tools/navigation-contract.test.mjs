@@ -463,7 +463,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     );
     assert.deepEqual(
       cards.map((card) => card.match(/<span class="learning-order" aria-hidden="true">([^<]+)<\/span>/)?.[1]),
-      ["5A", "5B"],
+      ["6A", "6B"],
     );
     assert.equal(cards[0].includes(expectedQuestion), true);
     assert.deepEqual(
@@ -471,6 +471,28 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
         (attribute(openingTag, "class") ?? "").split(/\s+/).includes("learning-node-link")
       ))?.openingTag).map((openingTag) => attribute(openingTag, "href")),
       ["https://lcl.aserdargun.com/", "https://cld.aserdargun.com/"],
+    );
+  });
+
+  test(`${document.route} places the HNS harness card between model serving and deployment`, async () => {
+    const html = await readFile(path.join(rootDir, document.file), "utf8");
+    const learning = scopedElements(html, "section").find((scope) => /class="learning-system"/.test(scope));
+    const harnessCard = scopedElements(learning ?? "", "article").find((scope) => (
+      /<code class="learning-code">hns<\/code>/.test(scope)
+    ));
+    const expectedQuestion = document.locale === "tr"
+      ? "“Model kabiliyetini nasıl güvenilir bir agent sistemine dönüştürürüm?”"
+      : "“How do I turn model capability into a reliable agent system?”";
+
+    assert.ok(harnessCard, "the detailed learning flow must expose the HNS harness card");
+    assert.equal(harnessCard.includes(expectedQuestion), true);
+    assert.deepEqual(
+      anchors(harnessCard).map(({ openingTag }) => attribute(openingTag, "href")),
+      ["https://hns.aserdargun.com/"],
+    );
+    assert.ok(
+      (learning ?? "").indexOf(harnessCard) < (learning ?? "").indexOf('class="learning-deployment-paths"'),
+      "HNS must precede the local and cloud deployment choices",
     );
   });
 
@@ -494,6 +516,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://gpu.aserdargun.com/", "GPU"],
       ["https://llm.aserdargun.com/", "LLM"],
       ["https://usl.aserdargun.com/", "USL"],
+      ["https://hns.aserdargun.com/", "HNS"],
       ["https://lcl.aserdargun.com/", "LCL"],
       ["https://cld.aserdargun.com/", "CLD"],
     ];
@@ -502,7 +525,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.equal(extraSvgScopes.length, 0);
     assert.doesNotMatch(svg, /<(?:span|foreignObject)\b/i, "HTML must never be inserted into SVG");
     const svgBlankAnchors = anchors(svg).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
-    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all six diagram nodes must remain inside SVG");
+    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all seven diagram nodes must remain inside SVG");
 
     assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")), expectedNodes.map(([href]) => href));
     for (const [index, anchor] of svgBlankAnchors.entries()) {
@@ -516,24 +539,24 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     }
   });
 
-  test(`${document.route} provides all six mobile learning targets without exposing the undersized SVG set`, async () => {
+  test(`${document.route} provides all seven mobile learning targets without exposing the undersized SVG set`, async () => {
     const html = await readFile(path.join(rootDir, document.file), "utf8");
     const studyList = scopedElements(html, "ol").find((scope) => /class="learning-study-list"/.test(scope));
     const expectedText = document.locale === "tr" ? "yeni sekmede açılır" : "opens in a new tab";
-    const expectedDestinations = ["aia", "gpu", "llm", "usl", "lcl", "cld"].map((code) => `https://${code}.aserdargun.com/`);
+    const expectedDestinations = ["aia", "gpu", "llm", "usl", "hns", "lcl", "cld"].map((code) => `https://${code}.aserdargun.com/`);
 
     assert.ok(studyList, "the existing study-order list must host the mobile alternate UI");
     const studySteps = scopedElements(studyList, "li");
     const mobileTargets = anchors(studyList).filter(({ openingTag }) => (
       (attribute(openingTag, "class") ?? "").split(/\s+/).includes("learning-study-link")
     ));
-    assert.equal(studySteps.length, 5, "LCL and CLD must share the fifth parallel decision step");
+    assert.equal(studySteps.length, 6, "HNS must precede the shared local and cloud decision step");
     assert.deepEqual(
       anchors(studySteps.at(-1)).map(({ openingTag }) => attribute(openingTag, "href")),
       ["https://lcl.aserdargun.com/", "https://cld.aserdargun.com/"],
       "the final mobile step must expose local and cloud deployment as parallel choices",
     );
-    assert.equal(mobileTargets.length, 6, "mobile must expose exactly one six-link alternate target set");
+    assert.equal(mobileTargets.length, 7, "mobile must expose exactly one seven-link alternate target set");
     assert.deepEqual(mobileTargets.map(({ openingTag }) => attribute(openingTag, "href")), expectedDestinations);
     for (const target of mobileTargets) {
       assert.equal(attribute(target.openingTag, "target"), "_blank");
@@ -552,7 +575,7 @@ test("mobile learning alternate exposes one non-overlapping 44px focus set while
   assert.match(
     css,
     /@media\s*\(max-width:\s*900px\)[\s\S]*?\.learning-diagram-wrap\s*\{[\s\S]*?display:\s*none;[\s\S]*?\.learning-study-copy\s*\{[\s\S]*?display:\s*none;[\s\S]*?\.learning-study-link\s*\{[\s\S]*?display:\s*flex;[\s\S]*?width:\s*100%;[\s\S]*?min-height:\s*44px;/,
-    "mobile must hide the SVG from layout/AT/interaction and expose only six full-row 44px alternate links",
+    "mobile must hide the SVG from layout/AT/interaction and expose only seven full-row 44px alternate links",
   );
   assert.ok(
     svgBaseIndex >= 0 && finalMobileOverrideIndex > svgBaseIndex,

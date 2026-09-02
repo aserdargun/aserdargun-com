@@ -238,39 +238,41 @@
       <div class="learning-intro">
         <p class="learning-kicker">Öğrenme sistemi · AI Ekosistem Atlası</p>
         <h2 id="learning-title">Atlas bir öğrenme sistemidir.</h2>
-        <p id="learning-description">Altı uygulama tek bir öğrenme döngüsü oluşturur: AIA sisteme yön verir; GPU hesaplama temelini sağlar; USL modelleri uyarlar; LLM ise ikisini runtime ve servis katmanında buluşturur. GPU ile LLM, LCL&apos;deki yerel hesaplama yolunu; LLM de CLD&apos;deki bulut servisleri yolunu besler. Her iki karar yüzeyinden gelen kanıt atlasa geri akar.</p>
+        <p id="learning-description">Yedi uygulama tek bir öğrenme döngüsü oluşturur: AIA sisteme yön verir; GPU hesaplama temelini sağlar; USL modelleri uyarlar; LLM ise ikisini runtime ve servis katmanında buluşturur. HNS ardından sunulan model kabiliyetini güvenilir bir agent sistemine dönüştüren harness katmanını haritalar. GPU ile HNS, LCL&apos;deki yerel hesaplama yolunu; HNS de CLD&apos;deki bulut servisleri yolunu besler. Her iki karar yüzeyinden gelen kanıt atlasa geri akar.</p>
       </div>
       <figure class="learning-diagram-wrap">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 460" role="img" aria-labelledby="ld-title-tr ld-desc-tr" class="ld-svg">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 530" role="img" aria-labelledby="ld-title-tr ld-desc-tr" class="ld-svg">
           <title id="ld-title-tr">AI Ekosistem Atlası öğrenme döngüsü</title>
-          <desc id="ld-desc-tr">AIA sisteme yön verir. GPU hesaplama temelini sağlar ve USL modelleri uyarlar; ikisi LLM runtime ve servis merkezinde buluşur, LLM de uygulama bilgisini GPU&apos;ya geri besler. GPU ile LLM, LCL&apos;deki yerel hesaplama karar yüzeyini; LLM ise CLD&apos;deki bulut servisleri karar yüzeyini besler. LCL ve CLD&apos;den gelen kanıt AIA&apos;ya döner.</desc>
+          <desc id="ld-desc-tr">AIA sisteme yön verir. GPU hesaplama temelini sağlar ve USL modelleri uyarlar; ikisi LLM runtime ve servis merkezinde buluşur, LLM de uygulama bilgisini GPU&apos;ya geri besler. LLM, model kabiliyetini güvenilir bir agent sistemine dönüştüren harness mühendisliği katmanı HNS&apos;yi besler. GPU ile HNS, LCL&apos;deki yerel hesaplama karar yüzeyini; HNS ise CLD&apos;deki bulut servisleri karar yüzeyini besler. LCL ve CLD&apos;den gelen kanıt AIA&apos;ya döner.</desc>
           <defs>
             <marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 1 L 9 5 L 0 9 z" fill="rgba(200,255,54,0.55)"/>
             </marker>
           </defs>
           <g class="ld-links">
-            <path data-learning-edge="aia-to-gpu" d="M 292 96 L 147 190" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="aia-to-llm" d="M 320 96 L 320 190" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="aia-to-usl" d="M 348 96 L 493 190" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="gpu-to-llm" d="M 180 208 L 270 208" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="usl-to-llm" d="M 460 228 L 370 228" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="llm-to-gpu" class="ld-edge-feedback" d="M 290 246 C 270 282 190 282 150 246" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="gpu-to-lcl" class="ld-edge-decision" d="M 130 246 L 130 304 L 200 358" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="llm-to-lcl" class="ld-edge-decision" d="M 305 246 L 305 304 L 255 358" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="llm-to-cld" class="ld-edge-decision" d="M 335 246 L 335 304 L 385 358" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="lcl-to-evidence" d="M 235 414 L 235 430 L 320 440"/>
-            <path data-learning-edge="cld-to-evidence" d="M 405 414 L 405 430 L 320 440"/>
-            <path data-learning-edge="evidence-to-aia" class="ld-edge-feedback" d="M 320 440 C 600 440 600 68 390 68" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-gpu" d="M 292 96 L 147 170" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-llm" d="M 320 96 L 320 170" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-usl" d="M 348 96 L 493 170" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="gpu-to-llm" d="M 180 188 L 270 188" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="usl-to-llm" d="M 460 208 L 370 208" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="llm-to-gpu" class="ld-edge-feedback" d="M 290 226 C 270 262 190 262 150 226" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="llm-to-hns" d="M 320 226 L 320 294" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="gpu-to-lcl" class="ld-edge-decision" d="M 130 226 L 130 350 L 200 408" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-lcl" class="ld-edge-decision" d="M 292 350 L 250 408" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-cld" class="ld-edge-decision" d="M 348 350 L 390 408" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="lcl-to-evidence" d="M 235 464 L 235 486 L 320 506"/>
+            <path data-learning-edge="cld-to-evidence" d="M 405 464 L 405 486 L 320 506"/>
+            <path data-learning-edge="evidence-to-aia" class="ld-edge-feedback" d="M 320 506 C 600 506 600 68 390 68" marker-end="url(#ld-arrow)"/>
           </g>
           <g class="ld-pulse-dot">
             <circle cx="320" cy="90" r="4"/>
-            <circle cx="130" cy="190" r="3"/>
-            <circle cx="320" cy="190" r="3"/>
-            <circle cx="510" cy="190" r="3"/>
-            <circle cx="320" cy="440" r="3"/>
-            <circle cx="235" cy="414" r="3"/>
-            <circle cx="405" cy="414" r="3"/>
+            <circle cx="130" cy="170" r="3"/>
+            <circle cx="320" cy="170" r="3"/>
+            <circle cx="510" cy="170" r="3"/>
+            <circle cx="320" cy="294" r="3"/>
+            <circle cx="320" cy="506" r="3"/>
+            <circle cx="235" cy="464" r="3"/>
+            <circle cx="405" cy="464" r="3"/>
           </g>
           <g class="ld-nodes">
             <a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-aia" data-learning-role="map" aria-label="AIA AI Ekosistem Atlası" aria-describedby="ld-new-tab-aia-tr">
@@ -281,45 +283,52 @@
 </a>
             <a href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node" data-learning-role="foundation" aria-label="GPU Donanım" aria-describedby="ld-new-tab-gpu-tr">
               <title id="ld-new-tab-gpu-tr">Yeni sekmede açılır</title>
-<rect x="80" y="190" width="100" height="56" rx="10"/>
-              <text x="130" y="216" class="ld-code" text-anchor="middle">GPU</text>
-              <text x="130" y="232" class="ld-label" text-anchor="middle">Donanım</text>
+<rect x="80" y="170" width="100" height="56" rx="10"/>
+              <text x="130" y="196" class="ld-code" text-anchor="middle">GPU</text>
+              <text x="130" y="212" class="ld-label" text-anchor="middle">Donanım</text>
 </a>
             <a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="hub" aria-label="LLM Runtime · Servis" aria-describedby="ld-new-tab-llm-tr">
               <title id="ld-new-tab-llm-tr">Yeni sekmede açılır</title>
-<rect x="270" y="190" width="100" height="56" rx="10"/>
-              <text x="320" y="216" class="ld-code" text-anchor="middle">LLM</text>
-              <text x="320" y="232" class="ld-label" text-anchor="middle">Runtime · Servis</text>
+<rect x="270" y="170" width="100" height="56" rx="10"/>
+              <text x="320" y="196" class="ld-code" text-anchor="middle">LLM</text>
+              <text x="320" y="212" class="ld-label" text-anchor="middle">Runtime · Servis</text>
 </a>
             <a href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node" data-learning-role="adapt" aria-label="USL Eğitim" aria-describedby="ld-new-tab-usl-tr">
               <title id="ld-new-tab-usl-tr">Yeni sekmede açılır</title>
-<rect x="460" y="190" width="100" height="56" rx="10"/>
-              <text x="510" y="216" class="ld-code" text-anchor="middle">USL</text>
-              <text x="510" y="232" class="ld-label" text-anchor="middle">Eğitim</text>
+<rect x="460" y="170" width="100" height="56" rx="10"/>
+              <text x="510" y="196" class="ld-code" text-anchor="middle">USL</text>
+              <text x="510" y="212" class="ld-label" text-anchor="middle">Eğitim</text>
+</a>
+            <a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="harness" aria-label="HNS Harness Mühendisliği" aria-describedby="ld-new-tab-hns-tr">
+              <title id="ld-new-tab-hns-tr">Yeni sekmede açılır</title>
+<rect x="250" y="294" width="140" height="56" rx="10"/>
+              <text x="320" y="322" class="ld-code" text-anchor="middle">HNS</text>
+              <text x="320" y="338" class="ld-label" text-anchor="middle">Harness Mühendisliği</text>
 </a>
             <a href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-converge" data-learning-role="deployment" data-learning-plane="deployment" aria-label="LCL Yerel Hesaplama" aria-describedby="ld-new-tab-lcl-tr">
               <title id="ld-new-tab-lcl-tr">Yeni sekmede açılır</title>
-<rect x="165" y="358" width="140" height="56" rx="10"/>
-              <text x="235" y="386" class="ld-code" text-anchor="middle">LCL</text>
-              <text x="235" y="402" class="ld-label" text-anchor="middle">Yerel Hesaplama</text>
+<rect x="165" y="408" width="140" height="56" rx="10"/>
+              <text x="235" y="436" class="ld-code" text-anchor="middle">LCL</text>
+              <text x="235" y="452" class="ld-label" text-anchor="middle">Yerel Hesaplama</text>
 </a>
             <a href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-converge" data-learning-role="deployment" data-learning-plane="deployment" aria-label="CLD Bulut Altyapısı" aria-describedby="ld-new-tab-cld-tr">
               <title id="ld-new-tab-cld-tr">Yeni sekmede açılır</title>
-<rect x="335" y="358" width="140" height="56" rx="10"/>
-              <text x="405" y="386" class="ld-code" text-anchor="middle">CLD</text>
-              <text x="405" y="402" class="ld-label" text-anchor="middle">Bulut Altyapısı</text>
+<rect x="335" y="408" width="140" height="56" rx="10"/>
+              <text x="405" y="436" class="ld-code" text-anchor="middle">CLD</text>
+              <text x="405" y="452" class="ld-label" text-anchor="middle">Bulut Altyapısı</text>
 </a>
           </g>
         </svg>
       </figure>
       <div class="learning-study">
-        <p class="learning-study-label">Öğrenme yolu · önce temeller, sonra paralel dağıtım kararları</p>
+        <p class="learning-study-label">Öğrenme yolu · önce temeller, sonra agent sistemleri, dağıtım kararları paralel</p>
         <ol class="learning-study-list">
           <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">1</span><code>aia</code><span class="learning-study-role">Yaşayan harita · hiç “bitmez”</span></span><a class="learning-study-link" href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">1</span><code>aia</code><span class="learning-study-role">Yaşayan harita · hiç “bitmez”</span><span class="sr-only">yeni sekmede açılır</span></a></li>
           <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">2</span><code>gpu</code><span class="learning-study-role">Temel katman</span></span><a class="learning-study-link" href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">2</span><code>gpu</code><span class="learning-study-role">Temel katman</span><span class="sr-only">yeni sekmede açılır</span></a></li>
           <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">3</span><code>llm</code><span class="learning-study-role">Ana proje</span></span><a class="learning-study-link" href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">3</span><code>llm</code><span class="learning-study-role">Ana proje</span><span class="sr-only">yeni sekmede açılır</span></a></li>
           <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">4</span><code>usl</code><span class="learning-study-role">Çalıştırmadan değiştirmeye</span></span><a class="learning-study-link" href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">4</span><code>usl</code><span class="learning-study-role">Çalıştırmadan değiştirmeye</span><span class="sr-only">yeni sekmede açılır</span></a></li>
-          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">5A</span><code>lcl</code><span class="learning-study-role">Yerel dağıtım kararı</span></span><a class="learning-study-link" href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">5A</span><code>lcl</code><span class="learning-study-role">Yerel dağıtım kararı</span><span class="sr-only">yeni sekmede açılır</span></a><span class="learning-study-copy"><span aria-hidden="true">∥</span><span class="learning-order" aria-hidden="true">5B</span><code>cld</code><span class="learning-study-role">Bulut dağıtım kararı</span></span><a class="learning-study-link" href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">5B</span><code>cld</code><span class="learning-study-role">Bulut dağıtım kararı</span><span class="sr-only">yeni sekmede açılır</span></a></li>
+          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">5</span><code>hns</code><span class="learning-study-role">Güvenilir agent sistemi katmanı</span></span><a class="learning-study-link" href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">5</span><code>hns</code><span class="learning-study-role">Güvenilir agent sistemi katmanı</span><span class="sr-only">yeni sekmede açılır</span></a></li>
+          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">6A</span><code>lcl</code><span class="learning-study-role">Yerel dağıtım kararı</span></span><a class="learning-study-link" href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">6A</span><code>lcl</code><span class="learning-study-role">Yerel dağıtım kararı</span><span class="sr-only">yeni sekmede açılır</span></a><span class="learning-study-copy"><span aria-hidden="true">∥</span><span class="learning-order" aria-hidden="true">6B</span><code>cld</code><span class="learning-study-role">Bulut dağıtım kararı</span></span><a class="learning-study-link" href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">6B</span><code>cld</code><span class="learning-study-role">Bulut dağıtım kararı</span><span class="sr-only">yeni sekmede açılır</span></a></li>
         </ol>
       </div>
       <ol class="learning-flow">
@@ -365,10 +374,21 @@
           <p class="learning-feed"><code>gpu → llm</code> neyi servis edebileceğini donanım belirler <span aria-hidden="true">·</span> <code>usl → llm</code> eğittiğin modeller, servis ettiklerin olur <span aria-hidden="true">·</span> <code>llm → gpu</code> inference baskısı donanım sınırlarını görünür kılar</p>
         </li>
         <li class="learning-stage">
-          <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">03</span>Birleştir</p>
+          <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">03</span>Mühendislik · agent sistemi</p>
+          <article class="learning-node learning-node-harness learning-node-hub">
+            <div class="learning-node-head"><code class="learning-code">hns</code><span class="learning-order" aria-hidden="true">5</span><h3>Harness Mühendisliği</h3></div>
+            <p class="learning-question">“Model kabiliyetini nasıl güvenilir bir agent sistemine dönüştürürüm?”</p>
+            <p class="learning-track-app">Harness Engineering Observatory</p>
+            <p>Sunulan bir modeli güvenilir bir agent sistemine dönüştür. Çevresindeki sistemi seçmeden önce harness, framework, runtime, orkestrasyon, sandbox, doğrulama ve gözlemlenebilirlik çözümlerini açık kanıt, güncellik ve bedelleriyle karşılaştır.</p>
+            <p class="learning-topics">model kabiliyeti <span aria-hidden="true">→</span> bağlam <span aria-hidden="true">→</span> araçlar <span aria-hidden="true">→</span> orkestrasyon <span aria-hidden="true">→</span> sandbox <span aria-hidden="true">→</span> bellek <span aria-hidden="true">→</span> doğrulama <span aria-hidden="true">→</span> gözlemlenebilirlik <span aria-hidden="true">→</span> güvenilir agent sistemi</p>
+            <a class="learning-node-link" href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer">hns.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a>
+          </article>
+        </li>
+        <li class="learning-stage">
+          <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">04</span>Dağıt · yerel ve bulut paralel</p>
           <ul class="learning-deployment-paths" aria-label="Yerel ve bulut dağıtım kararları">
             <li class="learning-node learning-node-exit learning-node-deployment">
-              <div class="learning-node-head"><code class="learning-code">lcl</code><span class="learning-order" aria-hidden="true">5A</span><h3>Yerel AI Laboratuvarı</h3></div>
+              <div class="learning-node-head"><code class="learning-code">lcl</code><span class="learning-order" aria-hidden="true">6A</span><h3>Yerel AI Laboratuvarı</h3></div>
               <p class="learning-question">“Hangi laboratuvarı almalıyım?”</p>
               <p class="learning-track-app">Local Compute Lab</p>
               <p>Açık ağırlıklı model gereksinimlerini NVIDIA, AMD ve Apple cihazlarıyla eşleştir. Yerel laboratuvarını seçmeden önce iş yükünü, belleği, gizliliği, gücü, gürültüyü ve mevcut ekipmanı karşılaştır.</p>
@@ -376,7 +396,7 @@
               <a class="learning-node-link" href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer">lcl.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a>
             </li>
             <li class="learning-node learning-node-exit learning-node-deployment">
-              <div class="learning-node-head"><code class="learning-code">cld</code><span class="learning-order" aria-hidden="true">5B</span><h3>AI Altyapısı</h3></div>
+              <div class="learning-node-head"><code class="learning-code">cld</code><span class="learning-order" aria-hidden="true">6B</span><h3>AI Altyapısı</h3></div>
               <p class="learning-question">“Bunu ölçekte nasıl işletirim?”</p>
               <p class="learning-track-app">Bulut Sağlayıcı Maliyet Karşılaştırması</p>
               <p>Yığını karara dönüştür: Türkiye'den erişilebilen bulut servislerinin vergi öncesi USD maliyetlerini karşılaştır ve tüm sistemin nerede çalışacağını seç. Bulut bilerek en sonda — neyi deploy ettiğini bilince altyapı soyut olmaktan çıkar.</p>
@@ -386,7 +406,7 @@
           </ul>
         </li>
         <li class="learning-stage">
-          <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">04</span>Dönüş</p>
+          <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">05</span>Dönüş</p>
           <div class="learning-node learning-node-return">
             <div class="learning-node-head"><code class="learning-code">aia</code><h3>Atlasa dönüş</h3></div>
             <p class="learning-question">“Bu teknoloji nereye oturur?”</p>
@@ -420,7 +440,7 @@
           <div class="app-map-intro">
             <p class="app-map-kicker">Uygulama haritası · canlı adresler</p>
             <h2 id="app-map-title">Tek portföy. Odaklı uygulamalar.</h2>
-            <p id="app-map-description">Altı çekirdek öğrenme uygulaması, bir laboratuvar, bir ufuk köprüsü ve bir uzun vadeli ufuk. Üç harfli kod; her uygulama, repo ve <code>aserdargun.com</code> alt alan adı arasındaki kalıcı anahtardır.</p>
+            <p id="app-map-description">Yedi çekirdek öğrenme uygulaması, bir laboratuvar, bir ufuk köprüsü ve bir uzun vadeli ufuk. Üç harfli kod; her uygulama, repo ve <code>aserdargun.com</code> alt alan adı arasındaki kalıcı anahtardır.</p>
           </div>
           <div class="app-map-table-wrap" role="region" aria-labelledby="app-map-title" tabindex="0">
           <table>
@@ -436,6 +456,11 @@
                   <div><dt>Tür</dt><dd>Atlas</dd></div>
                   <div><dt>Durum</dt><dd>Yayında</dd></div>
                 </dl></td><td><a href="https://github.com/aserdargun/llm-aserdargun-com" target="_blank" rel="noreferrer"><code>llm-aserdargun-com</code> <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a></td><td><a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer">llm.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a></td></tr>
+              <tr><th scope="row"><code>hns</code></th><td><strong>Harness Engineering Observatory</strong><span>Model kabiliyetini güvenilir agent sistemlerine dönüştüren harness, runtime, orkestrasyon, yürütme, doğrulama ve gözlemlenebilirlik katmanlarını karşılaştıran iki dilli, kaynak-temelli gözlemevi.</span><span class="freshness freshness--current" data-freshness-date="2026-09-02" data-freshness-state="current"><span class="app-live-dot app-live-dot--pulsing" aria-hidden="true"></span><span class="freshness-label">Güncel</span><time datetime="2026-09-02">2026-09-02</time></span>
+                <dl class="app-record-meta">
+                  <div><dt>Tür</dt><dd>Gözlemevi</dd></div>
+                  <div><dt>Durum</dt><dd>Yayında</dd></div>
+                </dl></td><td><a href="https://github.com/aserdargun/hns-aserdargun-com" target="_blank" rel="noreferrer"><code>hns-aserdargun-com</code> <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a></td><td><a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer">hns.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a></td></tr>
               <tr><th scope="row"><code>usl</code></th><td><strong>Unsloth Studio Learning</strong><span>Unsloth, LoRA, QLoRA, veri seti mühendisliği ve değerlendirme için iki dilli öğrenme atlası.</span><span class="freshness freshness--aging" data-freshness-date="2026-08-25" data-freshness-state="aging"><span class="app-live-dot" aria-hidden="true"></span><span class="freshness-label">Yakında gözden geçir</span><time datetime="2026-08-25">2026-08-25</time></span>
                 <dl class="app-record-meta">
                   <div><dt>Tür</dt><dd>Atlas</dd></div>

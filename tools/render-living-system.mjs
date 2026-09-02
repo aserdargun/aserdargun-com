@@ -328,6 +328,7 @@ export function renderApplicationMap({ locale, data, today }) {
   const root = locale === "tr" ? "/tr/" : "/";
   const kindLabels = {
     atlas: label(locale, "Atlas", "Atlas"),
+    observatory: label(locale, "Observatory", "Gözlemevi"),
     tool: label(locale, "Tool", "Araç"),
     lab: label(locale, "Lab", "Laboratuvar"),
     horizon: label(locale, "Horizon", "Ufuk"),
