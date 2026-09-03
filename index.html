@@ -32,8 +32,8 @@
   <meta name="twitter:description" content="From mechanics and manufacturing to data, software, and AI engineering.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260902-wfm-lcl-horizon-a11y">
-  <script src="/scripts.js?v=20260902-wfm-lcl-horizon-a11y" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260903-ctx-evl-quality">
+  <script src="/scripts.js?v=20260903-ctx-evl-quality" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -238,12 +238,12 @@
       <div class="learning-intro">
         <p class="learning-kicker">Learning system · AI Ecosystem Atlas</p>
         <h2 id="learning-title">The atlas is a learning system.</h2>
-        <p id="learning-description">The eight applications form one learning loop: AIA orients the system; GPU provides the compute foundation; USL adapts models; and LLM connects both through runtime and serving. HNS maps the harness layer that turns served model capability into a reliable agent system; SEC then tests whether that system can be trusted from identity through audit and incident recovery. GPU and SEC inform the local-compute path in LCL, while SEC informs the cloud-services path in CLD. Evidence from both decision surfaces flows back into the atlas.</p>
+        <p id="learning-description">The ten applications form one learning loop: AIA orients the system; GPU provides the compute foundation; USL adapts models; and LLM connects both through runtime and serving. HNS maps the harness layer that turns served model capability into a reliable agent system; CTX designs what the model actually sees; SEC then tests whether that system can be trusted from identity through audit and incident recovery; EVL closes the loop with evidence rather than assumption. GPU, CTX, and SEC inform the local-compute path in LCL, while SEC and EVL inform the cloud-services path in CLD. Evidence from both decision surfaces flows back into the atlas.</p>
       </div>
       <figure class="learning-diagram-wrap">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 650" role="img" aria-labelledby="ld-title ld-desc" class="ld-svg">
           <title id="ld-title">AI Ecosystem Atlas learning loop</title>
-          <desc id="ld-desc">AIA orients the system. GPU provides the compute foundation and USL adapts models; both connect through the LLM runtime and serving hub, which also feeds implementation knowledge back to GPU. LLM feeds HNS, where harness engineering turns model capability into a reliable agent system. HNS feeds SEC, where identity, authorization, constrained action, audit, and recovery become a trust path. GPU and SEC inform LCL, while SEC informs CLD. Evidence from LCL and CLD returns to AIA.</desc>
+          <desc id="ld-desc">AIA orients the system. GPU provides the compute foundation and USL adapts models; both connect through the LLM runtime and serving hub, which also feeds implementation knowledge back to GPU. LLM feeds HNS, where harness engineering turns model capability into a reliable agent system. HNS branches into CTX, where context engineering designs what the model actually sees; SEC, where identity, authorization, constrained action, audit, and recovery become a trust path; and EVL, where evaluation turns releases into evidence. GPU, CTX, and SEC inform LCL, while SEC and EVL inform CLD. Evidence from LCL and CLD returns to AIA.</desc>
           <defs>
             <marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 1 L 9 5 L 0 9 z" fill="rgba(200,255,54,0.55)"/>
@@ -257,10 +257,14 @@
             <path data-learning-edge="usl-to-llm" d="M 460 208 L 370 208" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="llm-to-gpu" class="ld-edge-feedback" d="M 290 226 C 270 262 190 262 150 226" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="llm-to-hns" d="M 320 226 L 320 294" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-ctx" d="M 280 350 L 160 398" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-sec" d="M 320 350 L 320 398" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-evl" d="M 360 350 L 480 398" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="gpu-to-lcl" class="ld-edge-decision" d="M 130 226 L 130 448 L 200 506" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="ctx-to-lcl" class="ld-edge-decision" d="M 200 454 L 220 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="sec-to-lcl" class="ld-edge-decision" d="M 292 454 L 250 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="sec-to-cld" class="ld-edge-decision" d="M 348 454 L 390 506" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="evl-to-cld" class="ld-edge-decision" d="M 450 454 L 420 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="lcl-to-evidence" d="M 235 562 L 235 584 L 320 604"/>
             <path data-learning-edge="cld-to-evidence" d="M 405 562 L 405 584 L 320 604"/>
             <path data-learning-edge="evidence-to-aia" class="ld-edge-feedback" d="M 320 604 C 600 604 600 68 390 68" marker-end="url(#ld-arrow)"/>
@@ -271,7 +275,9 @@
             <circle cx="320" cy="170" r="3"/>
             <circle cx="510" cy="170" r="3"/>
             <circle cx="320" cy="294" r="3"/>
+            <circle cx="130" cy="398" r="3"/>
             <circle cx="320" cy="398" r="3"/>
+            <circle cx="510" cy="398" r="3"/>
             <circle cx="320" cy="604" r="3"/>
             <circle cx="235" cy="562" r="3"/>
             <circle cx="405" cy="562" r="3"/>
@@ -307,11 +313,23 @@
               <text x="320" y="322" class="ld-code" text-anchor="middle">HNS</text>
               <text x="320" y="338" class="ld-label" text-anchor="middle">Harness Engineering</text>
 </a>
+            <a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="context" aria-label="CTX Context Engineering" aria-describedby="ld-new-tab-ctx-en">
+              <title id="ld-new-tab-ctx-en">Opens in a new tab</title>
+<rect x="60" y="398" width="140" height="56" rx="10"/>
+              <text x="130" y="426" class="ld-code" text-anchor="middle">CTX</text>
+              <text x="130" y="442" class="ld-label" text-anchor="middle">Context</text>
+</a>
             <a href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="security" aria-label="SEC AI Systems Security" aria-describedby="ld-new-tab-sec-en">
               <title id="ld-new-tab-sec-en">Opens in a new tab</title>
 <rect x="250" y="398" width="140" height="56" rx="10"/>
               <text x="320" y="426" class="ld-code" text-anchor="middle">SEC</text>
               <text x="320" y="442" class="ld-label" text-anchor="middle">Trust · Security</text>
+</a>
+            <a href="https://evl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="evaluation" aria-label="EVL LLM Evaluation" aria-describedby="ld-new-tab-evl-en">
+              <title id="ld-new-tab-evl-en">Opens in a new tab</title>
+<rect x="440" y="398" width="140" height="56" rx="10"/>
+              <text x="510" y="426" class="ld-code" text-anchor="middle">EVL</text>
+              <text x="510" y="442" class="ld-label" text-anchor="middle">Evaluation</text>
 </a>
             <a href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-converge" data-learning-role="deployment" data-learning-plane="deployment" aria-label="LCL Local Compute" aria-describedby="ld-new-tab-lcl-en">
               <title id="ld-new-tab-lcl-en">Opens in a new tab</title>
@@ -336,8 +354,10 @@
           <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">3</span><code>llm</code><span class="learning-study-role">Main project</span></span><a class="learning-study-link" href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">3</span><code>llm</code><span class="learning-study-role">Main project</span><span class="sr-only">opens in a new tab</span></a></li>
           <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">4</span><code>usl</code><span class="learning-study-role">From running to changing models</span></span><a class="learning-study-link" href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">4</span><code>usl</code><span class="learning-study-role">From running to changing models</span><span class="sr-only">opens in a new tab</span></a></li>
           <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">5</span><code>hns</code><span class="learning-study-role">Reliable agent-system layer</span></span><a class="learning-study-link" href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">5</span><code>hns</code><span class="learning-study-role">Reliable agent-system layer</span><span class="sr-only">opens in a new tab</span></a></li>
-          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">6</span><code>sec</code><span class="learning-study-role">Trust and assurance layer</span></span><a class="learning-study-link" href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">6</span><code>sec</code><span class="learning-study-role">Trust and assurance layer</span><span class="sr-only">opens in a new tab</span></a></li>
-          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">7A</span><code>lcl</code><span class="learning-study-role">Local deployment decision</span></span><a class="learning-study-link" href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">7A</span><code>lcl</code><span class="learning-study-role">Local deployment decision</span><span class="sr-only">opens in a new tab</span></a><span class="learning-study-copy"><span aria-hidden="true">∥</span><span class="learning-order" aria-hidden="true">7B</span><code>cld</code><span class="learning-study-role">Cloud deployment decision</span></span><a class="learning-study-link" href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">7B</span><code>cld</code><span class="learning-study-role">Cloud deployment decision</span><span class="sr-only">opens in a new tab</span></a></li>
+          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">6</span><code>ctx</code><span class="learning-study-role">What the model actually sees</span></span><a class="learning-study-link" href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">6</span><code>ctx</code><span class="learning-study-role">What the model actually sees</span><span class="sr-only">opens in a new tab</span></a></li>
+          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">7</span><code>sec</code><span class="learning-study-role">Trust and assurance layer</span></span><a class="learning-study-link" href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">7</span><code>sec</code><span class="learning-study-role">Trust and assurance layer</span><span class="sr-only">opens in a new tab</span></a></li>
+          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">8</span><code>evl</code><span class="learning-study-role">Evidence over assumption</span></span><a class="learning-study-link" href="https://evl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">8</span><code>evl</code><span class="learning-study-role">Evidence over assumption</span><span class="sr-only">opens in a new tab</span></a></li>
+          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">9A</span><code>lcl</code><span class="learning-study-role">Local deployment decision</span></span><a class="learning-study-link" href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">9A</span><code>lcl</code><span class="learning-study-role">Local deployment decision</span><span class="sr-only">opens in a new tab</span></a><span class="learning-study-copy"><span aria-hidden="true">∥</span><span class="learning-order" aria-hidden="true">9B</span><code>cld</code><span class="learning-study-role">Cloud deployment decision</span></span><a class="learning-study-link" href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">9B</span><code>cld</code><span class="learning-study-role">Cloud deployment decision</span><span class="sr-only">opens in a new tab</span></a></li>
         </ol>
       </div>
       <ol class="learning-flow">
@@ -394,15 +414,34 @@
           </article>
         </li>
         <li class="learning-stage">
-          <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">04</span>Assure · trust before deployment</p>
-          <article class="learning-node learning-node-security learning-node-hub">
-            <div class="learning-node-head"><code class="learning-code">sec</code><span class="learning-order" aria-hidden="true">6</span><h3>AI Systems Security</h3></div>
-            <p class="learning-question">“Why should I trust this agent system?”</p>
-            <p class="learning-track-app">AI Systems Security Observatory</p>
-            <p>Trace delegated intent from model capability to auditable action. Examine identity, credentials, authorization, tool and sandbox boundaries, protected data, audit evidence, and incident recovery without collapsing assurance into a score.</p>
-            <p class="learning-topics">model <span aria-hidden="true">→</span> agent <span aria-hidden="true">→</span> identity <span aria-hidden="true">→</span> credential <span aria-hidden="true">→</span> authorization <span aria-hidden="true">→</span> tool <span aria-hidden="true">→</span> sandbox <span aria-hidden="true">→</span> data <span aria-hidden="true">→</span> action <span aria-hidden="true">→</span> audit <span aria-hidden="true">→</span> incident</p>
-            <a class="learning-node-link" href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer">sec.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a>
-          </article>
+          <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">04</span>Engineer · context and assurance</p>
+          <ul class="learning-tracks learning-tracks-quality">
+            <li class="learning-node learning-node-track learning-node-context">
+              <div class="learning-node-head"><code class="learning-code">ctx</code><span class="learning-order" aria-hidden="true">6</span><h3>Context Engineering</h3></div>
+              <p class="learning-question">“What does the model actually see?”</p>
+              <p class="learning-track-app">Context Engineering Observatory</p>
+              <p>Design the prompt and everything around it. Trace the system message, context window, chunking, embeddings, vector search, retrieval, memory, and tool use so the model is only as good as the context in front of it.</p>
+              <p class="learning-topics">system message <span aria-hidden="true">→</span> context window <span aria-hidden="true">→</span> chunking <span aria-hidden="true">→</span> embeddings <span aria-hidden="true">→</span> vector DB <span aria-hidden="true">→</span> retrieval <span aria-hidden="true">→</span> memory <span aria-hidden="true">→</span> tool use <span aria-hidden="true">→</span> token budget</p>
+              <a class="learning-node-link" href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer">ctx.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a>
+            </li>
+            <li class="learning-node learning-node-track learning-node-security learning-node-hub">
+              <div class="learning-node-head"><code class="learning-code">sec</code><span class="learning-order" aria-hidden="true">7</span><h3>AI Systems Security</h3></div>
+              <p class="learning-question">“Why should I trust this agent system?”</p>
+              <p class="learning-track-app">AI Systems Security Observatory</p>
+              <p>Trace delegated intent from model capability to auditable action. Examine identity, credentials, authorization, tool and sandbox boundaries, protected data, audit evidence, and incident recovery without collapsing assurance into a score.</p>
+              <p class="learning-topics">model <span aria-hidden="true">→</span> agent <span aria-hidden="true">→</span> identity <span aria-hidden="true">→</span> credential <span aria-hidden="true">→</span> authorization <span aria-hidden="true">→</span> tool <span aria-hidden="true">→</span> sandbox <span aria-hidden="true">→</span> data <span aria-hidden="true">→</span> action <span aria-hidden="true">→</span> audit <span aria-hidden="true">→</span> incident</p>
+              <a class="learning-node-link" href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer">sec.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a>
+            </li>
+            <li class="learning-node learning-node-track learning-node-evaluation">
+              <div class="learning-node-head"><code class="learning-code">evl</code><span class="learning-order" aria-hidden="true">8</span><h3>LLM Evaluation</h3></div>
+              <p class="learning-question">“How do I know it works?”</p>
+              <p class="learning-track-app">LLM Evaluation Observatory</p>
+              <p>Close the loop with evidence. Build golden sets, choose metrics, run LLM-as-judge, A/B tests, regression suites, and online monitoring so every release is a measured change, not an assumption.</p>
+              <p class="learning-topics">golden set <span aria-hidden="true">→</span> metrics <span aria-hidden="true">→</span> LLM-as-judge <span aria-hidden="true">→</span> A/B test <span aria-hidden="true">→</span> regression suite <span aria-hidden="true">→</span> human eval <span aria-hidden="true">→</span> benchmark <span aria-hidden="true">→</span> online monitoring</p>
+              <a class="learning-node-link" href="https://evl.aserdargun.com/" target="_blank" rel="noreferrer">evl.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a>
+            </li>
+          </ul>
+          <p class="learning-feed"><code>ctx → sec</code> context decides what is allowed in, security decides what is allowed out <span aria-hidden="true">·</span> <code>sec → evl</code> assurance surfaces the questions evaluation must answer <span aria-hidden="true">·</span> <code>evl → ctx</code> measurement feeds the next round of context design</p>
         </li>
         <li class="learning-stage">
           <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">05</span>Deploy · local and cloud in parallel</p>
@@ -460,7 +499,7 @@
           <div class="app-map-intro">
             <p class="app-map-kicker">Application map · live destinations</p>
             <h2 id="app-map-title">One portfolio. Focused applications.</h2>
-            <p id="app-map-description">Eight core learning applications, one lab, one horizon bridge, and one long-term horizon. The three-letter code is the permanent key between each application, repository, and <code>aserdargun.com</code> subdomain.</p>
+            <p id="app-map-description">Ten core learning applications, one lab, one horizon bridge, and one long-term horizon. The three-letter code is the permanent key between each application, repository, and <code>aserdargun.com</code> subdomain.</p>
           </div>
           <div class="app-map-table-wrap" role="region" aria-labelledby="app-map-title" tabindex="0">
           <table>
@@ -486,6 +525,16 @@
                   <div><dt>Kind</dt><dd>Observatory</dd></div>
                   <div><dt>Status</dt><dd>Live</dd></div>
                 </dl></td><td><a href="https://github.com/aserdargun/sec-aserdargun-com" target="_blank" rel="noreferrer"><code>sec-aserdargun-com</code> <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a></td><td><a href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer">sec.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a></td></tr>
+              <tr><th scope="row"><code>ctx</code></th><td><strong>Context Engineering Observatory</strong><span>A bilingual observatory for the prompt, retrieval, and memory decisions that decide what the model actually sees — system messages, chunking, embeddings, vector search, tool use, and token budgets tracked against evidence.</span><span class="freshness freshness--current" data-freshness-date="2026-09-02" data-freshness-state="current"><span class="app-live-dot app-live-dot--pulsing" aria-hidden="true"></span><span class="freshness-label">Current</span><time datetime="2026-09-02">2026-09-02</time></span>
+                <dl class="app-record-meta">
+                  <div><dt>Kind</dt><dd>Observatory</dd></div>
+                  <div><dt>Status</dt><dd>Live</dd></div>
+                </dl></td><td><a href="https://github.com/aserdargun/ctx-aserdargun-com" target="_blank" rel="noreferrer"><code>ctx-aserdargun-com</code> <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a></td><td><a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer">ctx.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a></td></tr>
+              <tr><th scope="row"><code>evl</code></th><td><strong>LLM Evaluation Observatory</strong><span>A bilingual observatory for LLM evaluation: golden sets, metrics, LLM-as-judge, A/B tests, regression suites, and online monitoring that turn releases into evidence rather than assumptions.</span><span class="freshness freshness--current" data-freshness-date="2026-09-02" data-freshness-state="current"><span class="app-live-dot app-live-dot--pulsing" aria-hidden="true"></span><span class="freshness-label">Current</span><time datetime="2026-09-02">2026-09-02</time></span>
+                <dl class="app-record-meta">
+                  <div><dt>Kind</dt><dd>Observatory</dd></div>
+                  <div><dt>Status</dt><dd>Live</dd></div>
+                </dl></td><td><a href="https://github.com/aserdargun/evl-aserdargun-com" target="_blank" rel="noreferrer"><code>evl-aserdargun-com</code> <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a></td><td><a href="https://evl.aserdargun.com/" target="_blank" rel="noreferrer">evl.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a></td></tr>
               <tr><th scope="row"><code>usl</code></th><td><strong>Unsloth Studio Learning</strong><span>A bilingual learning atlas for Unsloth, LoRA, QLoRA, dataset engineering, and evaluation.</span><span class="freshness freshness--aging" data-freshness-date="2026-08-25" data-freshness-state="aging"><span class="app-live-dot" aria-hidden="true"></span><span class="freshness-label">Review soon</span><time datetime="2026-08-25">2026-08-25</time></span>
                 <dl class="app-record-meta">
                   <div><dt>Kind</dt><dd>Atlas</dd></div>

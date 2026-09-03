@@ -68,6 +68,38 @@
       "relatedMemoryIds": []
     },
     {
+      "code": "ctx",
+      "kind": "observatory",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "Context Engineering Observatory", "tr": "Bağlam Mühendisliği Gözlemevi" },
+      "summary": {
+        "en": "A bilingual observatory for the prompt, retrieval, and memory decisions that decide what the model actually sees — system messages, chunking, embeddings, vector search, tool use, and token budgets tracked against evidence.",
+        "tr": "Prompt, retrieval ve bellek kararlarının modelin gerçekte ne gördüğünü nasıl belirlediğini izleyen iki dilli gözlemevi — sistem mesajları, chunking, embedding'ler, vektör arama, araç kullanımı ve token bütçeleri kanıtlarla takip edilir."
+      },
+      "repository": "https://github.com/aserdargun/ctx-aserdargun-com",
+      "address": "https://ctx.aserdargun.com/",
+      "updatedAt": "2026-09-02",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "evl",
+      "kind": "observatory",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "title": { "en": "LLM Evaluation Observatory", "tr": "LLM Değerlendirme Gözlemevi" },
+      "summary": {
+        "en": "A bilingual observatory for LLM evaluation: golden sets, metrics, LLM-as-judge, A/B tests, regression suites, and online monitoring that turn releases into evidence rather than assumptions.",
+        "tr": "Sürümleri varsayım değil kanıt yapan LLM değerlendirme gözlemevi: golden set, metrikler, LLM-as-judge, A/B testleri, regresyon paketleri ve online izleme — iki dilli."
+      },
+      "repository": "https://github.com/aserdargun/evl-aserdargun-com",
+      "address": "https://evl.aserdargun.com/",
+      "updatedAt": "2026-09-02",
+      "relatedMemoryIds": []
+    },
+    {
       "code": "usl",
       "kind": "atlas",
       "systemRole": "core-learning",

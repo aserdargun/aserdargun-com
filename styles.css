@@ -2900,6 +2900,20 @@ footer a {
   gap: 16px;
 }
 
+.learning-tracks-quality {
+  margin-top: 8px;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(200, 255, 54, 0.28);
+}
+
+.learning-node-context {
+  background: rgba(200, 255, 54, 0.03);
+}
+
+.learning-node-evaluation {
+  background: rgba(200, 255, 54, 0.03);
+}
+
 .learning-deployment-paths {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

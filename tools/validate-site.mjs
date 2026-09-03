@@ -68,7 +68,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "apps", "learning", "journey", "horizon", "approach", "about"];
-const expectedAssetVersion = "20260902-wfm-lcl-horizon-a11y";
+const expectedAssetVersion = "20260903-ctx-evl-quality";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -76,6 +76,8 @@ const expectedApplicationRows = [
   { code: "llm", repository: "llm-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/llm-aserdargun-com", productUrl: "https://llm.aserdargun.com/", productLabel: "llm.aserdargun.com" },
   { code: "hns", repository: "hns-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/hns-aserdargun-com", productUrl: "https://hns.aserdargun.com/", productLabel: "hns.aserdargun.com" },
   { code: "sec", repository: "sec-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/sec-aserdargun-com", productUrl: "https://sec.aserdargun.com/", productLabel: "sec.aserdargun.com" },
+  { code: "ctx", repository: "ctx-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/ctx-aserdargun-com", productUrl: "https://ctx.aserdargun.com/", productLabel: "ctx.aserdargun.com" },
+  { code: "evl", repository: "evl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/evl-aserdargun-com", productUrl: "https://evl.aserdargun.com/", productLabel: "evl.aserdargun.com" },
   { code: "usl", repository: "usl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/usl-aserdargun-com", productUrl: "https://usl.aserdargun.com/", productLabel: "usl.aserdargun.com" },
   { code: "gpu", repository: "gpu-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/gpu-aserdargun-com", productUrl: "https://gpu.aserdargun.com/", productLabel: "gpu.aserdargun.com" },
   { code: "cld", repository: "cld-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/cld-aserdargun-com", productUrl: "https://cld.aserdargun.com/", productLabel: "cld.aserdargun.com" },
@@ -213,7 +215,7 @@ function validateApplicationMapRows(locale, html) {
   );
 }
 
-const expectedLearningCodes = ["aia", "gpu", "llm", "usl", "hns", "sec", "lcl", "cld", "aia"];
+const expectedLearningCodes = ["aia", "gpu", "llm", "usl", "hns", "ctx", "sec", "evl", "lcl", "cld", "aia"];
 const expectedLearningUrls = expectedLearningCodes.map((code) => `https://${code}.aserdargun.com/`);
 const expectedLearningQuestions = {
   en: [
@@ -222,7 +224,9 @@ const expectedLearningQuestions = {
     "“How do models run?”",
     "“How do models learn/change?”",
     "“How do I turn model capability into a reliable agent system?”",
+    "“What does the model actually see?”",
     "“Why should I trust this agent system?”",
+    "“How do I know it works?”",
     "“Which local lab should I buy?”",
     "“How do I operate this at scale?”",
     "“Where does this technology fit?”",
@@ -233,7 +237,9 @@ const expectedLearningQuestions = {
     "“Modeller nasıl çalıştırılır?”",
     "“Modeller nasıl öğrenir/değişir?”",
     "“Model kabiliyetini nasıl güvenilir bir agent sistemine dönüştürürüm?”",
+    "“Model gerçekte ne görüyor?”",
     "“Bu agent sistemine neden güvenmeliyim?”",
+    "“Çalıştığını nereden biliyorum?”",
     "“Hangi laboratuvarı almalıyım?”",
     "“Bunu ölçekte nasıl işletirim?”",
     "“Bu teknoloji nereye oturur?”",
@@ -246,7 +252,9 @@ const expectedLearningStudyRoles = {
     "Main project",
     "From running to changing models",
     "Reliable agent-system layer",
+    "What the model actually sees",
     "Trust and assurance layer",
+    "Evidence over assumption",
     "Local deployment decision",
     "Cloud deployment decision",
   ],
@@ -256,7 +264,9 @@ const expectedLearningStudyRoles = {
     "Ana proje",
     "Çalıştırmadan değiştirmeye",
     "Güvenilir agent sistemi katmanı",
+    "Modelin gerçekte gördüğü",
     "Güven ve güvence katmanı",
+    "Varsayım yerine kanıt",
     "Yerel dağıtım kararı",
     "Bulut dağıtım kararı",
   ],
@@ -269,7 +279,9 @@ const expectedLearningTopics = {
     "Ollama · llama.cpp · vLLM · SGLang · TensorRT-LLM · Transformers · MLX",
     "pretrained model → dataset → tokenization → LoRA → QLoRA → SFT → DPO → GRPO → evaluation → merged model → LLM runtime",
     "model capability → context → tools → orchestration → sandbox → memory → verification → observability → reliable agent system",
+    "system message → context window → chunking → embeddings → vector DB → retrieval → memory → tool use → token budget",
     "model → agent → identity → credential → authorization → tool → sandbox → data → action → audit → incident",
+    "golden set → metrics → LLM-as-judge → A/B test → regression suite → human eval → benchmark → online monitoring",
     "open-weight model → workload → memory → NVIDIA / AMD / Apple → privacy / power / noise → local lab",
     "model → vLLM → Docker → GPU instance → cloud GPU → load balancer → autoscaling → API",
   ],
@@ -280,7 +292,9 @@ const expectedLearningTopics = {
     "Ollama · llama.cpp · vLLM · SGLang · TensorRT-LLM · Transformers · MLX",
     "eğitilmiş model → veri seti → tokenization → LoRA → QLoRA → SFT → DPO → GRPO → değerlendirme → birleştirilmiş model → LLM runtime",
     "model kabiliyeti → bağlam → araçlar → orkestrasyon → sandbox → bellek → doğrulama → gözlemlenebilirlik → güvenilir agent sistemi",
+    "sistem mesajı → bağlam penceresi → chunking → embedding → vektör veritabanı → retrieval → bellek → araç kullanımı → token bütçesi",
     "model → agent → kimlik → kimlik bilgisi → yetkilendirme → araç → sandbox → veri → eylem → denetim → olay",
+    "golden set → metrikler → LLM-as-judge → A/B testi → regresyon paketi → insan değerlendirmesi → benchmark → online izleme",
     "açık ağırlıklı model → iş yükü → bellek → NVIDIA / AMD / Apple → gizlilik / güç / gürültü → yerel laboratuvar",
     "model → vLLM → Docker → GPU instance → bulut GPU → load balancer → autoscaling → API",
   ],
@@ -304,8 +318,8 @@ function validateLearningSystem(locale, html) {
   check(intro.includes(expectedKicker), `${locale}: learning system kicker is missing`);
   check(intro.includes(expectedHeading), `${locale}: learning system heading is missing`);
   const expectedSystemCount = isTurkish
-    ? "Sekiz uygulama tek bir öğrenme döngüsü oluşturur"
-    : "The eight applications form one learning loop";
+    ? "On uygulama tek bir öğrenme döngüsü oluşturur"
+    : "The ten applications form one learning loop";
   check(intro.includes(expectedSystemCount), `${locale}: learning system application count is stale`);
   check(
     section.includes('<figure class="learning-diagram-wrap">')
@@ -337,7 +351,9 @@ function validateLearningSystem(locale, html) {
       "llm:hub",
       "usl:adapt",
       "hns:harness",
+      "ctx:context",
       "sec:security",
+      "evl:evaluation",
       "lcl:deployment",
       "cld:deployment",
     ]),
@@ -353,10 +369,14 @@ function validateLearningSystem(locale, html) {
       "usl-to-llm",
       "llm-to-gpu",
       "llm-to-hns",
+      "hns-to-ctx",
       "hns-to-sec",
+      "hns-to-evl",
       "gpu-to-lcl",
+      "ctx-to-lcl",
       "sec-to-lcl",
       "sec-to-cld",
+      "evl-to-cld",
       "lcl-to-evidence",
       "cld-to-evidence",
       "evidence-to-aia",
@@ -391,7 +411,7 @@ function validateLearningSystem(locale, html) {
   );
   const studyCopies = matches(section, /<span class="learning-study-copy">([\s\S]*?)<\/span><a class="learning-study-link"/g);
   const studyCodes = studyCopies.map((copy) => copy.match(/<code>([a-z]{3})<\/code>/)?.[1] ?? "");
-  check(JSON.stringify(studyCodes) === JSON.stringify(["aia", "gpu", "llm", "usl", "hns", "sec", "lcl", "cld"]), `${locale}: learning study order codes differ`);
+  check(JSON.stringify(studyCodes) === JSON.stringify(["aia", "gpu", "llm", "usl", "hns", "ctx", "sec", "evl", "lcl", "cld"]), `${locale}: learning study order codes differ`);
   const studyRoles = studyCopies.map((copy) => copy.match(/<span class="learning-study-role">([^<]+)<\/span>/)?.[1] ?? "");
   check(
     JSON.stringify(studyRoles) === JSON.stringify(isTurkish ? expectedLearningStudyRoles.tr : expectedLearningStudyRoles.en),

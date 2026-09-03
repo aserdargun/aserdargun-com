@@ -32,8 +32,8 @@
   <meta name="twitter:description" content="Mekanik ve üretimden veri, yazılım ve yapay zekâ mühendisliğine uzanan bir yolculuk.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii-tr.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260902-wfm-lcl-horizon-a11y">
-  <script src="/scripts.js?v=20260902-wfm-lcl-horizon-a11y" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260903-ctx-evl-quality">
+  <script src="/scripts.js?v=20260903-ctx-evl-quality" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -238,12 +238,12 @@
       <div class="learning-intro">
         <p class="learning-kicker">Öğrenme sistemi · AI Ekosistem Atlası</p>
         <h2 id="learning-title">Atlas bir öğrenme sistemidir.</h2>
-        <p id="learning-description">Sekiz uygulama tek bir öğrenme döngüsü oluşturur: AIA sisteme yön verir; GPU hesaplama temelini sağlar; USL modelleri uyarlar; LLM ise ikisini runtime ve servis katmanında buluşturur. HNS sunulan model kabiliyetini güvenilir bir agent sistemine dönüştüren harness katmanını haritalar; SEC ardından bu sistemin kimlikten denetim ve olay kurtarmaya kadar güvenilip güvenilemeyeceğini sınar. GPU ile SEC, LCL&apos;deki yerel hesaplama yolunu; SEC de CLD&apos;deki bulut servisleri yolunu besler. Her iki karar yüzeyinden gelen kanıt atlasa geri akar.</p>
+        <p id="learning-description">On uygulama tek bir öğrenme döngüsü oluşturur: AIA sisteme yön verir; GPU hesaplama temelini sağlar; USL modelleri uyarlar; LLM ise ikisini runtime ve servis katmanında buluşturur. HNS sunulan model kabiliyetini güvenilir bir agent sistemine dönüştüren harness katmanını haritalar; CTX modelin gerçekte ne gördüğünü tasarlar; SEC bu sistemin kimlikten denetim ve olay kurtarmaya kadar güvenilirliğini sınar; EVL ise sürümleri varsayım yerine kanıtla kapatır. GPU, CTX ve SEC LCL&apos;deki yerel hesaplama yolunu besler; SEC ve EVL CLD&apos;deki bulut yolunu besler. Her iki karar yüzeyinden gelen kanıt atlasa geri akar.</p>
       </div>
       <figure class="learning-diagram-wrap">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 650" role="img" aria-labelledby="ld-title-tr ld-desc-tr" class="ld-svg">
           <title id="ld-title-tr">AI Ekosistem Atlası öğrenme döngüsü</title>
-          <desc id="ld-desc-tr">AIA sisteme yön verir. GPU hesaplama temelini sağlar ve USL modelleri uyarlar; ikisi LLM runtime ve servis merkezinde buluşur, LLM de uygulama bilgisini GPU&apos;ya geri besler. LLM, model kabiliyetini güvenilir bir agent sistemine dönüştüren harness mühendisliği katmanı HNS&apos;yi besler. HNS, kimlik, yetkilendirme, kısıtlı eylem, denetim ve kurtarmayı bir güven zinciri olarak sınayan SEC&apos;i besler. GPU ile SEC LCL&apos;yi, SEC ise CLD&apos;yi besler. LCL ve CLD&apos;den gelen kanıt AIA&apos;ya döner.</desc>
+          <desc id="ld-desc-tr">AIA sisteme yön verir. GPU hesaplama temelini sağlar ve USL modelleri uyarlar; ikisi LLM runtime ve servis merkezinde buluşur, LLM de uygulama bilgisini GPU&apos;ya geri besler. LLM, model kabiliyetini güvenilir bir agent sistemine dönüştüren harness mühendisliği katmanı HNS&apos;yi besler. HNS, modelin gerçekte ne gördüğünü tasarlayan CTX&apos;i; kimlik, yetkilendirme, kısıtlı eylem, denetim ve kurtarmayı bir güven zinciri olarak sınayan SEC&apos;i; ve sürümleri kanıtla kapatan EVL&apos;i besler. GPU, CTX ve SEC LCL&apos;yi besler; SEC ve EVL CLD&apos;yi besler. LCL ve CLD&apos;den gelen kanıt AIA&apos;ya döner.</desc>
           <defs>
             <marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 1 L 9 5 L 0 9 z" fill="rgba(200,255,54,0.55)"/>
@@ -257,10 +257,14 @@
             <path data-learning-edge="usl-to-llm" d="M 460 208 L 370 208" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="llm-to-gpu" class="ld-edge-feedback" d="M 290 226 C 270 262 190 262 150 226" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="llm-to-hns" d="M 320 226 L 320 294" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-ctx" d="M 280 350 L 160 398" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-sec" d="M 320 350 L 320 398" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-evl" d="M 360 350 L 480 398" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="gpu-to-lcl" class="ld-edge-decision" d="M 130 226 L 130 448 L 200 506" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="ctx-to-lcl" class="ld-edge-decision" d="M 200 454 L 220 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="sec-to-lcl" class="ld-edge-decision" d="M 292 454 L 250 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="sec-to-cld" class="ld-edge-decision" d="M 348 454 L 390 506" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="evl-to-cld" class="ld-edge-decision" d="M 450 454 L 420 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="lcl-to-evidence" d="M 235 562 L 235 584 L 320 604"/>
             <path data-learning-edge="cld-to-evidence" d="M 405 562 L 405 584 L 320 604"/>
             <path data-learning-edge="evidence-to-aia" class="ld-edge-feedback" d="M 320 604 C 600 604 600 68 390 68" marker-end="url(#ld-arrow)"/>
@@ -271,7 +275,9 @@
             <circle cx="320" cy="170" r="3"/>
             <circle cx="510" cy="170" r="3"/>
             <circle cx="320" cy="294" r="3"/>
+            <circle cx="130" cy="398" r="3"/>
             <circle cx="320" cy="398" r="3"/>
+            <circle cx="510" cy="398" r="3"/>
             <circle cx="320" cy="604" r="3"/>
             <circle cx="235" cy="562" r="3"/>
             <circle cx="405" cy="562" r="3"/>
@@ -307,11 +313,23 @@
               <text x="320" y="322" class="ld-code" text-anchor="middle">HNS</text>
               <text x="320" y="338" class="ld-label" text-anchor="middle">Harness Mühendisliği</text>
 </a>
+            <a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="context" aria-label="CTX Bağlam Mühendisliği" aria-describedby="ld-new-tab-ctx-tr">
+              <title id="ld-new-tab-ctx-tr">Yeni sekmede açılır</title>
+<rect x="60" y="398" width="140" height="56" rx="10"/>
+              <text x="130" y="426" class="ld-code" text-anchor="middle">CTX</text>
+              <text x="130" y="442" class="ld-label" text-anchor="middle">Bağlam</text>
+</a>
             <a href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="security" aria-label="SEC AI Sistemleri Güvenliği" aria-describedby="ld-new-tab-sec-tr">
               <title id="ld-new-tab-sec-tr">Yeni sekmede açılır</title>
 <rect x="250" y="398" width="140" height="56" rx="10"/>
               <text x="320" y="426" class="ld-code" text-anchor="middle">SEC</text>
               <text x="320" y="442" class="ld-label" text-anchor="middle">Güven · Güvenlik</text>
+</a>
+            <a href="https://evl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="evaluation" aria-label="EVL LLM Değerlendirme" aria-describedby="ld-new-tab-evl-tr">
+              <title id="ld-new-tab-evl-tr">Yeni sekmede açılır</title>
+<rect x="440" y="398" width="140" height="56" rx="10"/>
+              <text x="510" y="426" class="ld-code" text-anchor="middle">EVL</text>
+              <text x="510" y="442" class="ld-label" text-anchor="middle">Değerlendirme</text>
 </a>
             <a href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-converge" data-learning-role="deployment" data-learning-plane="deployment" aria-label="LCL Yerel Hesaplama" aria-describedby="ld-new-tab-lcl-tr">
               <title id="ld-new-tab-lcl-tr">Yeni sekmede açılır</title>
@@ -336,8 +354,10 @@
           <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">3</span><code>llm</code><span class="learning-study-role">Ana proje</span></span><a class="learning-study-link" href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">3</span><code>llm</code><span class="learning-study-role">Ana proje</span><span class="sr-only">yeni sekmede açılır</span></a></li>
           <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">4</span><code>usl</code><span class="learning-study-role">Çalıştırmadan değiştirmeye</span></span><a class="learning-study-link" href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">4</span><code>usl</code><span class="learning-study-role">Çalıştırmadan değiştirmeye</span><span class="sr-only">yeni sekmede açılır</span></a></li>
           <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">5</span><code>hns</code><span class="learning-study-role">Güvenilir agent sistemi katmanı</span></span><a class="learning-study-link" href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">5</span><code>hns</code><span class="learning-study-role">Güvenilir agent sistemi katmanı</span><span class="sr-only">yeni sekmede açılır</span></a></li>
-          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">6</span><code>sec</code><span class="learning-study-role">Güven ve güvence katmanı</span></span><a class="learning-study-link" href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">6</span><code>sec</code><span class="learning-study-role">Güven ve güvence katmanı</span><span class="sr-only">yeni sekmede açılır</span></a></li>
-          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">7A</span><code>lcl</code><span class="learning-study-role">Yerel dağıtım kararı</span></span><a class="learning-study-link" href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">7A</span><code>lcl</code><span class="learning-study-role">Yerel dağıtım kararı</span><span class="sr-only">yeni sekmede açılır</span></a><span class="learning-study-copy"><span aria-hidden="true">∥</span><span class="learning-order" aria-hidden="true">7B</span><code>cld</code><span class="learning-study-role">Bulut dağıtım kararı</span></span><a class="learning-study-link" href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">7B</span><code>cld</code><span class="learning-study-role">Bulut dağıtım kararı</span><span class="sr-only">yeni sekmede açılır</span></a></li>
+          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">6</span><code>ctx</code><span class="learning-study-role">Modelin gerçekte gördüğü</span></span><a class="learning-study-link" href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">6</span><code>ctx</code><span class="learning-study-role">Modelin gerçekte gördüğü</span><span class="sr-only">yeni sekmede açılır</span></a></li>
+          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">7</span><code>sec</code><span class="learning-study-role">Güven ve güvence katmanı</span></span><a class="learning-study-link" href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">7</span><code>sec</code><span class="learning-study-role">Güven ve güvence katmanı</span><span class="sr-only">yeni sekmede açılır</span></a></li>
+          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">8</span><code>evl</code><span class="learning-study-role">Varsayım yerine kanıt</span></span><a class="learning-study-link" href="https://evl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">8</span><code>evl</code><span class="learning-study-role">Varsayım yerine kanıt</span><span class="sr-only">yeni sekmede açılır</span></a></li>
+          <li><span class="learning-study-copy"><span class="learning-order" aria-hidden="true">9A</span><code>lcl</code><span class="learning-study-role">Yerel dağıtım kararı</span></span><a class="learning-study-link" href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">9A</span><code>lcl</code><span class="learning-study-role">Yerel dağıtım kararı</span><span class="sr-only">yeni sekmede açılır</span></a><span class="learning-study-copy"><span aria-hidden="true">∥</span><span class="learning-order" aria-hidden="true">9B</span><code>cld</code><span class="learning-study-role">Bulut dağıtım kararı</span></span><a class="learning-study-link" href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer"><span class="learning-order" aria-hidden="true">9B</span><code>cld</code><span class="learning-study-role">Bulut dağıtım kararı</span><span class="sr-only">yeni sekmede açılır</span></a></li>
         </ol>
       </div>
       <ol class="learning-flow">
@@ -394,15 +414,34 @@
           </article>
         </li>
         <li class="learning-stage">
-          <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">04</span>Güvence · dağıtımdan önce güven</p>
-          <article class="learning-node learning-node-security learning-node-hub">
-            <div class="learning-node-head"><code class="learning-code">sec</code><span class="learning-order" aria-hidden="true">6</span><h3>AI Sistemleri Güvenliği</h3></div>
-            <p class="learning-question">“Bu agent sistemine neden güvenmeliyim?”</p>
-            <p class="learning-track-app">AI Sistemleri Güvenlik Gözlemevi</p>
-            <p>Devredilen niyeti model kabiliyetinden denetlenebilir eyleme kadar izle. Güvenceyi tek bir skora indirgemeden kimlik, kimlik bilgileri, yetkilendirme, araç ve sandbox sınırları, korunan veri, denetim kanıtı ve olay kurtarmayı incele.</p>
-            <p class="learning-topics">model <span aria-hidden="true">→</span> agent <span aria-hidden="true">→</span> kimlik <span aria-hidden="true">→</span> kimlik bilgisi <span aria-hidden="true">→</span> yetkilendirme <span aria-hidden="true">→</span> araç <span aria-hidden="true">→</span> sandbox <span aria-hidden="true">→</span> veri <span aria-hidden="true">→</span> eylem <span aria-hidden="true">→</span> denetim <span aria-hidden="true">→</span> olay</p>
-            <a class="learning-node-link" href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer">sec.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a>
-          </article>
+          <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">04</span>İnşa et · bağlam ve güvence</p>
+          <ul class="learning-tracks learning-tracks-quality">
+            <li class="learning-node learning-node-track learning-node-context">
+              <div class="learning-node-head"><code class="learning-code">ctx</code><span class="learning-order" aria-hidden="true">6</span><h3>Bağlam Mühendisliği</h3></div>
+              <p class="learning-question">“Model gerçekte ne görüyor?”</p>
+              <p class="learning-track-app">Bağlam Mühendisliği Gözlemevi</p>
+              <p>Prompt&apos;u ve etrafındaki her şeyi tasarla. Sistem mesajı, bağlam penceresi, chunking, embedding, vektör veritabanı, retrieval, bellek ve araç kullanımını izle ki model, önüne koyduğun bağlam kadar iyi olsun.</p>
+              <p class="learning-topics">sistem mesajı <span aria-hidden="true">→</span> bağlam penceresi <span aria-hidden="true">→</span> chunking <span aria-hidden="true">→</span> embedding <span aria-hidden="true">→</span> vektör veritabanı <span aria-hidden="true">→</span> retrieval <span aria-hidden="true">→</span> bellek <span aria-hidden="true">→</span> araç kullanımı <span aria-hidden="true">→</span> token bütçesi</p>
+              <a class="learning-node-link" href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer">ctx.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a>
+            </li>
+            <li class="learning-node learning-node-track learning-node-security learning-node-hub">
+              <div class="learning-node-head"><code class="learning-code">sec</code><span class="learning-order" aria-hidden="true">7</span><h3>AI Sistemleri Güvenliği</h3></div>
+              <p class="learning-question">“Bu agent sistemine neden güvenmeliyim?”</p>
+              <p class="learning-track-app">AI Sistemleri Güvenlik Gözlemevi</p>
+              <p>Devredilen niyeti model kabiliyetinden denetlenebilir eyleme kadar izle. Güvenceyi tek bir skora indirgemeden kimlik, kimlik bilgileri, yetkilendirme, araç ve sandbox sınırları, korunan veri, denetim kanıtı ve olay kurtarmayı incele.</p>
+              <p class="learning-topics">model <span aria-hidden="true">→</span> agent <span aria-hidden="true">→</span> kimlik <span aria-hidden="true">→</span> kimlik bilgisi <span aria-hidden="true">→</span> yetkilendirme <span aria-hidden="true">→</span> araç <span aria-hidden="true">→</span> sandbox <span aria-hidden="true">→</span> veri <span aria-hidden="true">→</span> eylem <span aria-hidden="true">→</span> denetim <span aria-hidden="true">→</span> olay</p>
+              <a class="learning-node-link" href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer">sec.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a>
+            </li>
+            <li class="learning-node learning-node-track learning-node-evaluation">
+              <div class="learning-node-head"><code class="learning-code">evl</code><span class="learning-order" aria-hidden="true">8</span><h3>LLM Değerlendirme</h3></div>
+              <p class="learning-question">“Çalıştığını nereden biliyorum?”</p>
+              <p class="learning-track-app">LLM Değerlendirme Gözlemevi</p>
+              <p>Döngüyü kanıtla kapat. Golden set, metrikler, LLM-as-judge, A/B testleri, regresyon paketleri ve online izleme kur ki her sürüm ölçülmüş bir değişiklik olsun, varsayım değil.</p>
+              <p class="learning-topics">golden set <span aria-hidden="true">→</span> metrikler <span aria-hidden="true">→</span> LLM-as-judge <span aria-hidden="true">→</span> A/B testi <span aria-hidden="true">→</span> regresyon paketi <span aria-hidden="true">→</span> insan değerlendirmesi <span aria-hidden="true">→</span> benchmark <span aria-hidden="true">→</span> online izleme</p>
+              <a class="learning-node-link" href="https://evl.aserdargun.com/" target="_blank" rel="noreferrer">evl.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a>
+            </li>
+          </ul>
+          <p class="learning-feed"><code>ctx → sec</code> bağlam neyin gireceğine, güvenlik neyin çıkacağına karar verir <span aria-hidden="true">·</span> <code>sec → evl</code> güvence, değerlendirmenin yanıtlaması gereken soruları yüzeye çıkarır <span aria-hidden="true">·</span> <code>evl → ctx</code> ölçüm, bir sonraki bağlam tasarımını besler</p>
         </li>
         <li class="learning-stage">
           <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">05</span>Dağıt · yerel ve bulut paralel</p>
@@ -460,7 +499,7 @@
           <div class="app-map-intro">
             <p class="app-map-kicker">Uygulama haritası · canlı adresler</p>
             <h2 id="app-map-title">Tek portföy. Odaklı uygulamalar.</h2>
-            <p id="app-map-description">Sekiz çekirdek öğrenme uygulaması, bir laboratuvar, bir ufuk köprüsü ve bir uzun vadeli ufuk. Üç harfli kod; her uygulama, repo ve <code>aserdargun.com</code> alt alan adı arasındaki kalıcı anahtardır.</p>
+            <p id="app-map-description">On çekirdek öğrenme uygulaması, bir laboratuvar, bir ufuk köprüsü ve bir uzun vadeli ufuk. Üç harfli kod; her uygulama, repo ve <code>aserdargun.com</code> alt alan adı arasındaki kalıcı anahtardır.</p>
           </div>
           <div class="app-map-table-wrap" role="region" aria-labelledby="app-map-title" tabindex="0">
           <table>
@@ -486,6 +525,16 @@
                   <div><dt>Tür</dt><dd>Gözlemevi</dd></div>
                   <div><dt>Durum</dt><dd>Yayında</dd></div>
                 </dl></td><td><a href="https://github.com/aserdargun/sec-aserdargun-com" target="_blank" rel="noreferrer"><code>sec-aserdargun-com</code> <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a></td><td><a href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer">sec.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a></td></tr>
+              <tr><th scope="row"><code>ctx</code></th><td><strong>Bağlam Mühendisliği Gözlemevi</strong><span>Prompt, retrieval ve bellek kararlarının modelin gerçekte ne gördüğünü nasıl belirlediğini izleyen iki dilli gözlemevi — sistem mesajları, chunking, embedding&apos;ler, vektör arama, araç kullanımı ve token bütçeleri kanıtlarla takip edilir.</span><span class="freshness freshness--current" data-freshness-date="2026-09-02" data-freshness-state="current"><span class="app-live-dot app-live-dot--pulsing" aria-hidden="true"></span><span class="freshness-label">Güncel</span><time datetime="2026-09-02">2026-09-02</time></span>
+                <dl class="app-record-meta">
+                  <div><dt>Tür</dt><dd>Gözlemevi</dd></div>
+                  <div><dt>Durum</dt><dd>Yayında</dd></div>
+                </dl></td><td><a href="https://github.com/aserdargun/ctx-aserdargun-com" target="_blank" rel="noreferrer"><code>ctx-aserdargun-com</code> <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a></td><td><a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer">ctx.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a></td></tr>
+              <tr><th scope="row"><code>evl</code></th><td><strong>LLM Değerlendirme Gözlemevi</strong><span>Sürümleri varsayım değil kanıt yapan LLM değerlendirme gözlemevi: golden set, metrikler, LLM-as-judge, A/B testleri, regresyon paketleri ve online izleme — iki dilli.</span><span class="freshness freshness--current" data-freshness-date="2026-09-02" data-freshness-state="current"><span class="app-live-dot app-live-dot--pulsing" aria-hidden="true"></span><span class="freshness-label">Güncel</span><time datetime="2026-09-02">2026-09-02</time></span>
+                <dl class="app-record-meta">
+                  <div><dt>Tür</dt><dd>Gözlemevi</dd></div>
+                  <div><dt>Durum</dt><dd>Yayında</dd></div>
+                </dl></td><td><a href="https://github.com/aserdargun/evl-aserdargun-com" target="_blank" rel="noreferrer"><code>evl-aserdargun-com</code> <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a></td><td><a href="https://evl.aserdargun.com/" target="_blank" rel="noreferrer">evl.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a></td></tr>
               <tr><th scope="row"><code>usl</code></th><td><strong>Unsloth Studio Learning</strong><span>Unsloth, LoRA, QLoRA, veri seti mühendisliği ve değerlendirme için iki dilli öğrenme atlası.</span><span class="freshness freshness--aging" data-freshness-date="2026-08-25" data-freshness-state="aging"><span class="app-live-dot" aria-hidden="true"></span><span class="freshness-label">Yakında gözden geçir</span><time datetime="2026-08-25">2026-08-25</time></span>
                 <dl class="app-record-meta">
                   <div><dt>Tür</dt><dd>Atlas</dd></div>

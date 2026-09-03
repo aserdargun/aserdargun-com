@@ -446,6 +446,34 @@ test("accepts the SEC observatory as a canonical public core-learning applicatio
   assert.deepEqual(validateLivingSystemData(observatoryData).errors, []);
 });
 
+test("accepts the CTX observatory as a canonical public core-learning application", () => {
+  const observatoryData = validData();
+  observatoryData.applications[0] = {
+    ...observatoryData.applications[0],
+    code: "ctx",
+    kind: "observatory",
+    title: localized("Context Engineering Observatory", "Bağlam Mühendisliği Gözlemevi"),
+    repository: "https://github.com/aserdargun/ctx-aserdargun-com",
+    address: "https://ctx.aserdargun.com/",
+  };
+
+  assert.deepEqual(validateLivingSystemData(observatoryData).errors, []);
+});
+
+test("accepts the EVL observatory as a canonical public core-learning application", () => {
+  const observatoryData = validData();
+  observatoryData.applications[0] = {
+    ...observatoryData.applications[0],
+    code: "evl",
+    kind: "observatory",
+    title: localized("LLM Evaluation Observatory", "LLM Değerlendirme Gözlemevi"),
+    repository: "https://github.com/aserdargun/evl-aserdargun-com",
+    address: "https://evl.aserdargun.com/",
+  };
+
+  assert.deepEqual(validateLivingSystemData(observatoryData).errors, []);
+});
+
 test("summarizes semantic system roles rather than application array length", () => {
   const applications = [
     { systemRole: "core-learning" },
@@ -556,7 +584,7 @@ test("loads and validates the committed canonical manifest", async () => {
   const data = await loadLivingSystemData(filePath);
   const canonicalToday = new Date("2026-09-02T12:00:00+03:00");
 
-  assert.equal(data.applications.length, 11);
+  assert.equal(data.applications.length, 13);
   assert.deepEqual(
     data.applications.find((application) => application.code === "hns"),
     {
@@ -572,6 +600,44 @@ test("loads and validates the committed canonical manifest", async () => {
       ),
       repository: "https://github.com/aserdargun/hns-aserdargun-com",
       address: "https://hns.aserdargun.com/",
+      updatedAt: "2026-09-02",
+      relatedMemoryIds: [],
+    },
+  );
+  assert.deepEqual(
+    data.applications.find((application) => application.code === "ctx"),
+    {
+      code: "ctx",
+      kind: "observatory",
+      systemRole: "core-learning",
+      visibility: "public",
+      status: "live",
+      title: localized("Context Engineering Observatory", "Bağlam Mühendisliği Gözlemevi"),
+      summary: localized(
+        "A bilingual observatory for the prompt, retrieval, and memory decisions that decide what the model actually sees — system messages, chunking, embeddings, vector search, tool use, and token budgets tracked against evidence.",
+        "Prompt, retrieval ve bellek kararlarının modelin gerçekte ne gördüğünü nasıl belirlediğini izleyen iki dilli gözlemevi — sistem mesajları, chunking, embedding'ler, vektör arama, araç kullanımı ve token bütçeleri kanıtlarla takip edilir.",
+      ),
+      repository: "https://github.com/aserdargun/ctx-aserdargun-com",
+      address: "https://ctx.aserdargun.com/",
+      updatedAt: "2026-09-02",
+      relatedMemoryIds: [],
+    },
+  );
+  assert.deepEqual(
+    data.applications.find((application) => application.code === "evl"),
+    {
+      code: "evl",
+      kind: "observatory",
+      systemRole: "core-learning",
+      visibility: "public",
+      status: "live",
+      title: localized("LLM Evaluation Observatory", "LLM Değerlendirme Gözlemevi"),
+      summary: localized(
+        "A bilingual observatory for LLM evaluation: golden sets, metrics, LLM-as-judge, A/B tests, regression suites, and online monitoring that turn releases into evidence rather than assumptions.",
+        "Sürümleri varsayım değil kanıt yapan LLM değerlendirme gözlemevi: golden set, metrikler, LLM-as-judge, A/B testleri, regresyon paketleri ve online izleme — iki dilli.",
+      ),
+      repository: "https://github.com/aserdargun/evl-aserdargun-com",
+      address: "https://evl.aserdargun.com/",
       updatedAt: "2026-09-02",
       relatedMemoryIds: [],
     },

@@ -496,17 +496,18 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     );
   });
 
-  test(`${document.route} places SEC between harness engineering and parallel deployment decisions`, async () => {
+  test(`${document.route} places SEC inside the context and assurance quality row, after HNS`, async () => {
     const html = await readFile(path.join(rootDir, document.file), "utf8");
     const learning = scopedElements(html, "section").find((scope) => /class="learning-system"/.test(scope));
-    const securityCard = scopedElements(learning ?? "", "article").find((scope) => (
+    const qualityRow = scopedElements(learning ?? "", "ul").find((scope) => /\bclass="[^"]*\blearning-tracks-quality\b/.test(scope));
+    const securityCard = scopedElements(qualityRow ?? "", "li").find((scope) => (
       /<code class="learning-code">sec<\/code>/.test(scope)
     ));
     const expectedQuestion = document.locale === "tr"
       ? "“Bu agent sistemine neden güvenmeliyim?”"
       : "“Why should I trust this agent system?”";
 
-    assert.ok(securityCard, "the detailed learning flow must expose the SEC assurance card");
+    assert.ok(securityCard, "the quality row must expose the SEC assurance card");
     assert.equal(securityCard.includes(expectedQuestion), true);
     assert.deepEqual(
       anchors(securityCard).map(({ openingTag }) => attribute(openingTag, "href")),
@@ -514,7 +515,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     );
     assert.ok(
       (learning ?? "").indexOf('<code class="learning-code">hns</code>') < (learning ?? "").indexOf(securityCard),
-      "HNS must feed SEC",
+      "HNS must feed the context and assurance row that holds SEC",
     );
     assert.ok(
       (learning ?? "").indexOf(securityCard) < (learning ?? "").indexOf('class="learning-deployment-paths"'),
@@ -543,7 +544,9 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://llm.aserdargun.com/", "LLM"],
       ["https://usl.aserdargun.com/", "USL"],
       ["https://hns.aserdargun.com/", "HNS"],
+      ["https://ctx.aserdargun.com/", "CTX"],
       ["https://sec.aserdargun.com/", "SEC"],
+      ["https://evl.aserdargun.com/", "EVL"],
       ["https://lcl.aserdargun.com/", "LCL"],
       ["https://cld.aserdargun.com/", "CLD"],
     ];
@@ -570,20 +573,20 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     const html = await readFile(path.join(rootDir, document.file), "utf8");
     const studyList = scopedElements(html, "ol").find((scope) => /class="learning-study-list"/.test(scope));
     const expectedText = document.locale === "tr" ? "yeni sekmede açılır" : "opens in a new tab";
-    const expectedDestinations = ["aia", "gpu", "llm", "usl", "hns", "sec", "lcl", "cld"].map((code) => `https://${code}.aserdargun.com/`);
+    const expectedDestinations = ["aia", "gpu", "llm", "usl", "hns", "ctx", "sec", "evl", "lcl", "cld"].map((code) => `https://${code}.aserdargun.com/`);
 
     assert.ok(studyList, "the existing study-order list must host the mobile alternate UI");
     const studySteps = scopedElements(studyList, "li");
     const mobileTargets = anchors(studyList).filter(({ openingTag }) => (
       (attribute(openingTag, "class") ?? "").split(/\s+/).includes("learning-study-link")
     ));
-    assert.equal(studySteps.length, 7, "HNS and SEC must precede the shared local and cloud decision step");
+    assert.equal(studySteps.length, 9, "HNS, CTX, SEC, and EVL must precede the shared local and cloud decision step");
     assert.deepEqual(
       anchors(studySteps.at(-1)).map(({ openingTag }) => attribute(openingTag, "href")),
       ["https://lcl.aserdargun.com/", "https://cld.aserdargun.com/"],
       "the final mobile step must expose local and cloud deployment as parallel choices",
     );
-    assert.equal(mobileTargets.length, 8, "mobile must expose exactly one eight-link alternate target set");
+    assert.equal(mobileTargets.length, 10, "mobile must expose exactly one ten-link alternate target set");
     assert.deepEqual(mobileTargets.map(({ openingTag }) => attribute(openingTag, "href")), expectedDestinations);
     for (const target of mobileTargets) {
       assert.equal(attribute(target.openingTag, "target"), "_blank");
