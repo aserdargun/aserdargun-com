@@ -68,7 +68,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "apps", "learning", "journey", "horizon", "approach", "about"];
-const expectedAssetVersion = "20260903-sec-lcl-edge";
+const expectedAssetVersion = "20260903-ctx-loop";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -374,9 +374,11 @@ function validateLearningSystem(locale, html) {
       "hns-to-ctx",
       "hns-to-sec",
       "hns-to-evl",
+      "ctx-to-llm",
       "sec-to-lcl",
       "sec-to-cld",
       "evl-to-cld",
+      "ctx-to-lcl",
       "lcl-to-wfm",
       "cld-to-wfm",
       "wfm-to-itl",

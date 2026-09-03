@@ -32,8 +32,8 @@
   <meta name="twitter:description" content="Mekanik ve üretimden veri, yazılım ve yapay zekâ mühendisliğine uzanan bir yolculuk.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii-tr.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260903-sec-lcl-edge">
-  <script src="/scripts.js?v=20260903-sec-lcl-edge" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260903-ctx-loop">
+  <script src="/scripts.js?v=20260903-ctx-loop" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -238,12 +238,12 @@
       <div class="learning-intro">
         <p class="learning-kicker">Öğrenme sistemi · AI Ekosistem Atlası</p>
         <h2 id="learning-title">Atlas bir öğrenme sistemidir.</h2>
-        <p id="learning-description">On uygulama tek bir öğrenme döngüsü oluşturur: AIA sisteme yön verir; GPU hesaplama temelini sağlar; USL modelleri uyarlar; LLM ise ikisini runtime ve servis katmanında buluşturur. HNS sunulan model kabiliyetini güvenilir bir agent sistemine dönüştüren harness katmanını haritalar; CTX modelin gerçekte ne gördüğünü tasarlar; SEC bu sistemin kimlikten denetim ve olay kurtarmaya kadar güvenilirliğini sınar; EVL ise sürümleri varsayım yerine kanıtla kapatır. SEC LCL&apos;deki yerel hesaplama yolunu besler; EVL ise CLD&apos;deki bulut yolunu besler. Döngünün altında, LCL ve CLD&apos;den inen ufuk omurgası WFM, ITL ve ENG&apos;den geçer — dünya modelleri, endüstriyel ikizler ve tüm öğrenme sisteminin hizmet ettiği uzun vadeli bedenlenmiş varış noktası.</p>
+        <p id="learning-description">On uygulama tek bir öğrenme döngüsü oluşturur: AIA sisteme yön verir; GPU hesaplama temelini sağlar; USL modelleri uyarlar; LLM ise ikisini runtime ve servis katmanında buluşturur. HNS sunulan model kabiliyetini güvenilir bir agent sistemine dönüştüren harness katmanını haritalar; CTX modelin gerçekte ne gördüğünü tasarlar, bu bağlamı LLM runtime&apos;ına geri besler ve aynı zamanda LCL&apos;deki yerel hesaplama yolunu da besler; SEC bu sistemin kimlikten denetim ve olay kurtarmaya kadar güvenilirliğini sınar; EVL ise sürümleri varsayım yerine kanıtla kapatır. SEC hem LCL hem CLD&apos;yi besler; EVL ise CLD&apos;deki bulut yolunu besler. Döngünün altında, LCL ve CLD&apos;den inen ufuk omurgası WFM, ITL ve ENG&apos;den geçer — dünya modelleri, endüstriyel ikizler ve tüm öğrenme sisteminin hizmet ettiği uzun vadeli bedenlenmiş varış noktası.</p>
       </div>
       <figure class="learning-diagram-wrap">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 880" role="img" aria-labelledby="ld-title-tr ld-desc-tr" class="ld-svg">
           <title id="ld-title-tr">AI Ekosistem Atlası öğrenme döngüsü ve ufuk omurgası</title>
-          <desc id="ld-desc-tr">AIA sisteme yön verir. GPU hesaplama temelini sağlar ve USL modelleri uyarlar; ikisi LLM runtime ve servis merkezinde buluşur. LLM, model kabiliyetini güvenilir bir agent sistemine dönüştüren harness mühendisliği katmanı HNS&apos;yi besler. HNS, modelin gerçekte ne gördüğünü tasarlayan CTX&apos;i; kimlik, yetkilendirme, kısıtlı eylem, denetim ve kurtarmayı bir güven zinciri olarak sınayan SEC&apos;i; ve sürümleri kanıtla kapatan EVL&apos;i besler. SEC LCL&apos;yi besler; EVL CLD&apos;yi besler. LCL ve CLD&apos;den ufuk omurgası aşağı iner: WFM dünya modellerini, ITL onları endüstriyel ikizlerde temellendirir ve ENG döngünün hizmet ettiği uzun vadeli bedenlenmiş varış noktasıdır.</desc>
+          <desc id="ld-desc-tr">AIA sisteme yön verir. GPU hesaplama temelini sağlar ve USL modelleri uyarlar; ikisi LLM runtime ve servis merkezinde buluşur. LLM, model kabiliyetini güvenilir bir agent sistemine dönüştüren harness mühendisliği katmanı HNS&apos;yi besler. HNS, modelin gerçekte ne gördüğünü tasarlayan CTX&apos;i; kimlik, yetkilendirme, kısıtlı eylem, denetim ve kurtarmayı bir güven zinciri olarak sınayan SEC&apos;i; ve sürümleri kanıtla kapatan EVL&apos;i besler. CTX, tasarladığı bağlamı LLM runtime&apos;ına geri besleyerek döngüyü kapatır ve aynı zamanda LCL&apos;deki yerel hesaplama yolunu da besler. SEC hem LCL&apos;yi hem CLD&apos;yi besler; EVL ise CLD&apos;deki bulut yolunu besler. LCL ve CLD&apos;den ufuk omurgası aşağı iner: WFM dünya modellerini, ITL onları endüstriyel ikizlerde temellendirir ve ENG döngünün hizmet ettiği uzun vadeli bedenlenmiş varış noktasıdır.</desc>
           <defs>
             <marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 1 L 9 5 L 0 9 z" fill="rgba(200,255,54,0.55)"/>
@@ -259,9 +259,11 @@
             <path data-learning-edge="hns-to-ctx" d="M 280 350 L 160 398" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-sec" d="M 320 350 L 320 398" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-evl" d="M 360 350 L 480 398" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="ctx-to-llm" d="M 200 410 C 260 360 260 250 270 198" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="sec-to-lcl" class="ld-edge-decision" d="M 292 454 L 250 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="sec-to-cld" class="ld-edge-decision" d="M 348 454 L 390 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="evl-to-cld" class="ld-edge-decision" d="M 450 454 L 420 506" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="ctx-to-lcl" class="ld-edge-decision" d="M 180 454 L 220 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="lcl-to-wfm" class="ld-edge-horizon" d="M 235 562 C 235 600 260 620 280 640" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="cld-to-wfm" class="ld-edge-horizon" d="M 405 562 C 405 600 380 620 360 640" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 320 696 L 320 720" marker-end="url(#ld-arrow)"/>
@@ -276,6 +278,8 @@
             <circle cx="130" cy="398" r="3"/>
             <circle cx="320" cy="398" r="3"/>
             <circle cx="510" cy="398" r="3"/>
+            <circle cx="254" cy="305" r="3"/>
+            <circle cx="200" cy="480" r="3"/>
             <circle cx="235" cy="562" r="3"/>
             <circle cx="405" cy="562" r="3"/>
             <circle cx="320" cy="668" r="3"/>

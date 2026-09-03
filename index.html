@@ -32,8 +32,8 @@
   <meta name="twitter:description" content="From mechanics and manufacturing to data, software, and AI engineering.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260903-sec-lcl-edge">
-  <script src="/scripts.js?v=20260903-sec-lcl-edge" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260903-ctx-loop">
+  <script src="/scripts.js?v=20260903-ctx-loop" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -238,12 +238,12 @@
       <div class="learning-intro">
         <p class="learning-kicker">Learning system · AI Ecosystem Atlas</p>
         <h2 id="learning-title">The atlas is a learning system.</h2>
-        <p id="learning-description">The ten applications form one learning loop: AIA orients the system; GPU provides the compute foundation; USL adapts models; and LLM connects both through runtime and serving. HNS maps the harness layer that turns served model capability into a reliable agent system; CTX designs what the model actually sees; SEC then tests whether that system can be trusted from identity through audit and incident recovery; EVL closes the loop with evidence rather than assumption. SEC informs the local-compute path in LCL, while EVL informs the cloud-services path in CLD. Below the loop, the horizon spine descends from LCL and CLD through WFM, ITL, and ENG — world models, industrial twins, and the long-term embodied destination the whole learning system serves.</p>
+        <p id="learning-description">The ten applications form one learning loop: AIA orients the system; GPU provides the compute foundation; USL adapts models; and LLM connects both through runtime and serving. HNS maps the harness layer that turns served model capability into a reliable agent system; CTX designs what the model actually sees and feeds that context back into the LLM runtime while also informing the local-compute path in LCL; SEC then tests whether that system can be trusted from identity through audit and incident recovery; EVL closes the loop with evidence rather than assumption. SEC informs both LCL and CLD, while EVL informs the cloud-services path in CLD. Below the loop, the horizon spine descends from LCL and CLD through WFM, ITL, and ENG — world models, industrial twins, and the long-term embodied destination the whole learning system serves.</p>
       </div>
       <figure class="learning-diagram-wrap">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 880" role="img" aria-labelledby="ld-title ld-desc" class="ld-svg">
           <title id="ld-title">AI Ecosystem Atlas learning loop with horizon spine</title>
-          <desc id="ld-desc">AIA orients the system. GPU provides the compute foundation and USL adapts models; both connect through the LLM runtime and serving hub. LLM feeds HNS, where harness engineering turns model capability into a reliable agent system. HNS branches into CTX, where context engineering designs what the model actually sees; SEC, where identity, authorization, constrained action, audit, and recovery become a trust path; and EVL, where evaluation turns releases into evidence. SEC informs LCL, while EVL informs CLD. From LCL and CLD the horizon spine descends: WFM traces world models, ITL grounds them in industrial twins, and ENG is the long-term embodied destination the loop serves.</desc>
+          <desc id="ld-desc">AIA orients the system. GPU provides the compute foundation and USL adapts models; both connect through the LLM runtime and serving hub. LLM feeds HNS, where harness engineering turns model capability into a reliable agent system. HNS branches into CTX, where context engineering designs what the model actually sees; SEC, where identity, authorization, constrained action, audit, and recovery become a trust path; and EVL, where evaluation turns releases into evidence. CTX closes the loop by feeding designed context back into the LLM runtime, and also informs the local-compute path in LCL. SEC informs both LCL and CLD, while EVL informs the cloud-services path in CLD. From LCL and CLD the horizon spine descends: WFM traces world models, ITL grounds them in industrial twins, and ENG is the long-term embodied destination the loop serves.</desc>
           <defs>
             <marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 1 L 9 5 L 0 9 z" fill="rgba(200,255,54,0.55)"/>
@@ -259,9 +259,11 @@
             <path data-learning-edge="hns-to-ctx" d="M 280 350 L 160 398" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-sec" d="M 320 350 L 320 398" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-evl" d="M 360 350 L 480 398" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="ctx-to-llm" d="M 200 410 C 260 360 260 250 270 198" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="sec-to-lcl" class="ld-edge-decision" d="M 292 454 L 250 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="sec-to-cld" class="ld-edge-decision" d="M 348 454 L 390 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="evl-to-cld" class="ld-edge-decision" d="M 450 454 L 420 506" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="ctx-to-lcl" class="ld-edge-decision" d="M 180 454 L 220 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="lcl-to-wfm" class="ld-edge-horizon" d="M 235 562 C 235 600 260 620 280 640" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="cld-to-wfm" class="ld-edge-horizon" d="M 405 562 C 405 600 380 620 360 640" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 320 696 L 320 720" marker-end="url(#ld-arrow)"/>
@@ -276,6 +278,8 @@
             <circle cx="130" cy="398" r="3"/>
             <circle cx="320" cy="398" r="3"/>
             <circle cx="510" cy="398" r="3"/>
+            <circle cx="254" cy="305" r="3"/>
+            <circle cx="200" cy="480" r="3"/>
             <circle cx="235" cy="562" r="3"/>
             <circle cx="405" cy="562" r="3"/>
             <circle cx="320" cy="668" r="3"/>
