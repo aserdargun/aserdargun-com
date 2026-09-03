@@ -32,8 +32,8 @@
   <meta name="twitter:description" content="Mekanik ve üretimden veri, yazılım ve yapay zekâ mühendisliğine uzanan bir yolculuk.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii-tr.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260903-ctx-evl-quality">
-  <script src="/scripts.js?v=20260903-ctx-evl-quality" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260903-orthogonal-evidence">
+  <script src="/scripts.js?v=20260903-orthogonal-evidence" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -238,12 +238,12 @@
       <div class="learning-intro">
         <p class="learning-kicker">Öğrenme sistemi · AI Ekosistem Atlası</p>
         <h2 id="learning-title">Atlas bir öğrenme sistemidir.</h2>
-        <p id="learning-description">On uygulama tek bir öğrenme döngüsü oluşturur: AIA sisteme yön verir; GPU hesaplama temelini sağlar; USL modelleri uyarlar; LLM ise ikisini runtime ve servis katmanında buluşturur. HNS sunulan model kabiliyetini güvenilir bir agent sistemine dönüştüren harness katmanını haritalar; CTX modelin gerçekte ne gördüğünü tasarlar; SEC bu sistemin kimlikten denetim ve olay kurtarmaya kadar güvenilirliğini sınar; EVL ise sürümleri varsayım yerine kanıtla kapatır. GPU, CTX ve SEC LCL&apos;deki yerel hesaplama yolunu besler; SEC ve EVL CLD&apos;deki bulut yolunu besler. Her iki karar yüzeyinden gelen kanıt atlasa geri akar.</p>
+        <p id="learning-description">On uygulama tek bir öğrenme döngüsü oluşturur: AIA sisteme yön verir; GPU hesaplama temelini sağlar; USL modelleri uyarlar; LLM ise ikisini runtime ve servis katmanında buluşturur. HNS sunulan model kabiliyetini güvenilir bir agent sistemine dönüştüren harness katmanını haritalar; CTX modelin gerçekte ne gördüğünü tasarlar; SEC bu sistemin kimlikten denetim ve olay kurtarmaya kadar güvenilirliğini sınar; EVL ise sürümleri varsayım yerine kanıtla kapatır. GPU ve CTX LCL&apos;deki yerel hesaplama yolunu besler; SEC ve EVL CLD&apos;deki bulut yolunu besler. Her iki karar yüzeyinden gelen kanıt atlasa geri akar.</p>
       </div>
       <figure class="learning-diagram-wrap">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 650" role="img" aria-labelledby="ld-title-tr ld-desc-tr" class="ld-svg">
           <title id="ld-title-tr">AI Ekosistem Atlası öğrenme döngüsü</title>
-          <desc id="ld-desc-tr">AIA sisteme yön verir. GPU hesaplama temelini sağlar ve USL modelleri uyarlar; ikisi LLM runtime ve servis merkezinde buluşur, LLM de uygulama bilgisini GPU&apos;ya geri besler. LLM, model kabiliyetini güvenilir bir agent sistemine dönüştüren harness mühendisliği katmanı HNS&apos;yi besler. HNS, modelin gerçekte ne gördüğünü tasarlayan CTX&apos;i; kimlik, yetkilendirme, kısıtlı eylem, denetim ve kurtarmayı bir güven zinciri olarak sınayan SEC&apos;i; ve sürümleri kanıtla kapatan EVL&apos;i besler. GPU, CTX ve SEC LCL&apos;yi besler; SEC ve EVL CLD&apos;yi besler. LCL ve CLD&apos;den gelen kanıt AIA&apos;ya döner.</desc>
+          <desc id="ld-desc-tr">AIA sisteme yön verir. GPU hesaplama temelini sağlar ve USL modelleri uyarlar; ikisi LLM runtime ve servis merkezinde buluşur, LLM de uygulama bilgisini GPU&apos;ya geri besler. LLM, model kabiliyetini güvenilir bir agent sistemine dönüştüren harness mühendisliği katmanı HNS&apos;yi besler. HNS, modelin gerçekte ne gördüğünü tasarlayan CTX&apos;i; kimlik, yetkilendirme, kısıtlı eylem, denetim ve kurtarmayı bir güven zinciri olarak sınayan SEC&apos;i; ve sürümleri kanıtla kapatan EVL&apos;i besler. GPU ve CTX LCL&apos;yi besler; SEC ve EVL CLD&apos;yi besler. LCL ve CLD&apos;den gelen kanıt AIA&apos;ya döner.</desc>
           <defs>
             <marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 1 L 9 5 L 0 9 z" fill="rgba(200,255,54,0.55)"/>
@@ -262,12 +262,11 @@
             <path data-learning-edge="hns-to-evl" d="M 360 350 L 480 398" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="gpu-to-lcl" class="ld-edge-decision" d="M 130 226 L 130 448 L 200 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="ctx-to-lcl" class="ld-edge-decision" d="M 200 454 L 220 506" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="sec-to-lcl" class="ld-edge-decision" d="M 292 454 L 250 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="sec-to-cld" class="ld-edge-decision" d="M 348 454 L 390 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="evl-to-cld" class="ld-edge-decision" d="M 450 454 L 420 506" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="lcl-to-evidence" d="M 235 562 L 235 584 L 320 604"/>
             <path data-learning-edge="cld-to-evidence" d="M 405 562 L 405 584 L 320 604"/>
-            <path data-learning-edge="evidence-to-aia" class="ld-edge-feedback" d="M 320 604 C 600 604 600 68 390 68" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="evidence-to-aia" class="ld-edge-feedback" d="M 320 604 L 615 604 L 615 68 L 390 68" marker-end="url(#ld-arrow)"/>
           </g>
           <g class="ld-pulse-dot">
             <circle cx="320" cy="90" r="4"/>
