@@ -68,7 +68,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "apps", "learning", "journey", "horizon", "approach", "about"];
-const expectedAssetVersion = "20260903-horizon-spine";
+const expectedAssetVersion = "20260903-sec-lcl-edge";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -370,12 +370,11 @@ function validateLearningSystem(locale, html) {
       "aia-to-usl",
       "gpu-to-llm",
       "usl-to-llm",
-      "llm-to-gpu",
       "llm-to-hns",
       "hns-to-ctx",
       "hns-to-sec",
       "hns-to-evl",
-      "gpu-to-lcl",
+      "sec-to-lcl",
       "sec-to-cld",
       "evl-to-cld",
       "lcl-to-wfm",

@@ -3147,11 +3147,6 @@ footer a {
   stroke-opacity: 0.58;
 }
 
-.ld-svg .ld-links .ld-edge-feedback {
-  stroke-dasharray: 5 7;
-  stroke-opacity: 0.3;
-}
-
 .ld-svg .ld-node {
   cursor: pointer;
   outline: none;
