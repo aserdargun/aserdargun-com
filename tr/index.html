@@ -32,8 +32,8 @@
   <meta name="twitter:description" content="Mekanik ve üretimden veri, yazılım ve yapay zekâ mühendisliğine uzanan bir yolculuk.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii-tr.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260903-ctx-loop">
-  <script src="/scripts.js?v=20260903-ctx-loop" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260903-holistic-system">
+  <script src="/scripts.js?v=20260903-holistic-system" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -241,130 +241,132 @@
         <p id="learning-description">On uygulama tek bir öğrenme döngüsü oluşturur: AIA sisteme yön verir; GPU hesaplama temelini sağlar; USL modelleri uyarlar; LLM ise ikisini runtime ve servis katmanında buluşturur. HNS sunulan model kabiliyetini güvenilir bir agent sistemine dönüştüren harness katmanını haritalar; CTX modelin gerçekte ne gördüğünü tasarlar, bu bağlamı LLM runtime&apos;ına geri besler ve aynı zamanda LCL&apos;deki yerel hesaplama yolunu da besler; SEC bu sistemin kimlikten denetim ve olay kurtarmaya kadar güvenilirliğini sınar; EVL ise sürümleri varsayım yerine kanıtla kapatır. SEC hem LCL hem CLD&apos;yi besler; EVL ise CLD&apos;deki bulut yolunu besler. Döngünün altında, LCL ve CLD&apos;den inen ufuk omurgası WFM, ITL ve ENG&apos;den geçer — dünya modelleri, endüstriyel ikizler ve tüm öğrenme sisteminin hizmet ettiği uzun vadeli bedenlenmiş varış noktası.</p>
       </div>
       <figure class="learning-diagram-wrap">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 880" role="img" aria-labelledby="ld-title-tr ld-desc-tr" class="ld-svg">
-          <title id="ld-title-tr">AI Ekosistem Atlası öğrenme döngüsü ve ufuk omurgası</title>
-          <desc id="ld-desc-tr">AIA sisteme yön verir. GPU hesaplama temelini sağlar ve USL modelleri uyarlar; ikisi LLM runtime ve servis merkezinde buluşur. LLM, model kabiliyetini güvenilir bir agent sistemine dönüştüren harness mühendisliği katmanı HNS&apos;yi besler. HNS, modelin gerçekte ne gördüğünü tasarlayan CTX&apos;i; kimlik, yetkilendirme, kısıtlı eylem, denetim ve kurtarmayı bir güven zinciri olarak sınayan SEC&apos;i; ve sürümleri kanıtla kapatan EVL&apos;i besler. CTX, tasarladığı bağlamı LLM runtime&apos;ına geri besleyerek döngüyü kapatır ve aynı zamanda LCL&apos;deki yerel hesaplama yolunu da besler. SEC hem LCL&apos;yi hem CLD&apos;yi besler; EVL ise CLD&apos;deki bulut yolunu besler. LCL ve CLD&apos;den ufuk omurgası aşağı iner: WFM dünya modellerini, ITL onları endüstriyel ikizlerde temellendirir ve ENG döngünün hizmet ettiği uzun vadeli bedenlenmiş varış noktasıdır.</desc>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 900" role="img" aria-labelledby="ld-title-tr ld-desc-tr" class="ld-svg">
+          <title id="ld-title-tr">AI Ekosistem Atlası bütünsel öğrenme sistemi ve ufuk omurgası</title>
+          <desc id="ld-desc-tr">AIA yön verir; GPU ve USL temelleri LLM runtime merkezinde birleşir. LLM, HNS agent sistemi katmanını besler. HNS; CTX bağlam, SEC güvence ve EVL değerlendirme yollarına açılır. CTX LLM&apos;ye geri besleme yapar; CTX ve SEC LCL&apos;yi, SEC ve EVL CLD&apos;yi besler. LCL ile CLD, WFM, ITL ve ENG ufuk omurgasında yeniden birleşir. Tüm ilişkiler kutuların dışındaki yatay ve dikey koridorlardan geçer.</desc>
           <defs>
             <marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 1 L 9 5 L 0 9 z" fill="rgba(200,255,54,0.55)"/>
             </marker>
           </defs>
-          <g class="ld-links">
-            <path data-learning-edge="aia-to-gpu" d="M 292 96 L 147 170" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="aia-to-llm" d="M 320 96 L 320 170" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="aia-to-usl" d="M 348 96 L 493 170" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="gpu-to-llm" d="M 180 208 L 270 208" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="usl-to-llm" d="M 460 208 L 370 208" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="llm-to-hns" d="M 320 226 L 320 294" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="hns-to-ctx" d="M 280 350 L 160 398" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="hns-to-sec" d="M 320 350 L 320 398" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="hns-to-evl" d="M 360 350 L 480 398" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="ctx-to-llm" d="M 200 410 C 260 360 260 250 270 198" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="sec-to-lcl" class="ld-edge-decision" d="M 292 454 L 250 506" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="sec-to-cld" class="ld-edge-decision" d="M 348 454 L 390 506" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="evl-to-cld" class="ld-edge-decision" d="M 450 454 L 420 506" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="ctx-to-lcl" class="ld-edge-decision" d="M 180 454 L 220 506" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="lcl-to-wfm" class="ld-edge-horizon" d="M 235 562 C 235 600 260 620 280 640" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="cld-to-wfm" class="ld-edge-horizon" d="M 405 562 C 405 600 380 620 360 640" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 320 696 L 320 720" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 320 776 L 320 800" marker-end="url(#ld-arrow)"/>
+          <g class="ld-stage-index" aria-hidden="true">
+            <text x="24" y="48">01 · YÖN</text>
+            <text x="24" y="133">02 · TEMELLER</text>
+            <text x="24" y="218">03 · RUNTIME</text>
+            <text x="24" y="303">04 · AGENT SİSTEMİ</text>
+            <text x="24" y="388">05 · KALİTE DÖNGÜSÜ</text>
+            <text x="24" y="488">06 · DAĞITIM</text>
+            <text x="24" y="618">07 · DÜNYA MODELLERİ</text>
+            <text x="24" y="708">08 · ENDÜSTRİYEL İKİZ</text>
+            <text x="24" y="798">09 · BEDENLENMİŞ UFUK</text>
           </g>
-          <g class="ld-pulse-dot">
-            <circle cx="320" cy="90" r="4"/>
-            <circle cx="130" cy="170" r="3"/>
-            <circle cx="320" cy="170" r="3"/>
-            <circle cx="510" cy="170" r="3"/>
-            <circle cx="320" cy="294" r="3"/>
-            <circle cx="130" cy="398" r="3"/>
-            <circle cx="320" cy="398" r="3"/>
-            <circle cx="510" cy="398" r="3"/>
-            <circle cx="254" cy="305" r="3"/>
-            <circle cx="200" cy="480" r="3"/>
-            <circle cx="235" cy="562" r="3"/>
-            <circle cx="405" cy="562" r="3"/>
-            <circle cx="320" cy="668" r="3"/>
-            <circle cx="320" cy="748" r="3"/>
-            <circle cx="320" cy="828" r="3"/>
+          <g class="ld-links">
+            <path data-learning-edge="aia-to-gpu" d="M 440 70 V 85 H 290 V 105" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-llm" d="M 480 70 V 190" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-usl" d="M 520 70 V 85 H 670 V 105" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="gpu-to-llm" d="M 290 155 V 172 H 455 V 190" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="usl-to-llm" d="M 670 155 V 172 H 505 V 190" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="llm-to-hns" d="M 480 240 V 275" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-ctx" d="M 440 325 V 342 H 270 V 360" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-sec" d="M 480 325 V 360" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-evl" d="M 520 325 V 342 H 690 V 360" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="ctx-to-llm" class="ld-edge-context" d="M 200 385 H 170 V 215 H 420" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="sec-to-lcl" class="ld-edge-decision" d="M 450 410 V 435 H 340 V 460" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="sec-to-cld" class="ld-edge-decision" d="M 510 410 V 435 H 620 V 460" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="evl-to-cld" class="ld-edge-context" d="M 690 410 V 445 H 660 V 460" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="ctx-to-lcl" class="ld-edge-context" d="M 270 410 V 445 H 300 V 460" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="lcl-to-wfm" class="ld-edge-horizon" d="M 340 510 V 550 H 440 V 590" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="cld-to-wfm" class="ld-edge-horizon" d="M 620 510 V 550 H 520 V 590" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 480 640 V 680" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 480 730 V 770" marker-end="url(#ld-arrow)"/>
           </g>
           <g class="ld-nodes">
             <a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-aia" data-learning-role="map" aria-label="AIA AI Ekosistem Atlası" aria-describedby="ld-new-tab-aia-tr">
               <title id="ld-new-tab-aia-tr">Yeni sekmede açılır</title>
-<rect x="252" y="40" width="136" height="56" rx="10"/>
-              <text x="320" y="68" class="ld-code" text-anchor="middle">AIA</text>
-              <text x="320" y="86" class="ld-label" text-anchor="middle">AI Ekosistem Atlası</text>
-</a>
+<rect x="412" y="20" width="136" height="50" rx="10"/>
+              <text x="480" y="44" class="ld-code" text-anchor="middle">AIA</text>
+              <text x="480" y="60" class="ld-label" text-anchor="middle">AI Ekosistem Atlası</text>
+            </a>
             <a href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node" data-learning-role="foundation" aria-label="GPU Donanım" aria-describedby="ld-new-tab-gpu-tr">
               <title id="ld-new-tab-gpu-tr">Yeni sekmede açılır</title>
-<rect x="80" y="170" width="100" height="56" rx="10"/>
-              <text x="130" y="196" class="ld-code" text-anchor="middle">GPU</text>
-              <text x="130" y="212" class="ld-label" text-anchor="middle">Donanım</text>
-</a>
+<rect x="220" y="105" width="140" height="50" rx="10"/>
+              <text x="290" y="129" class="ld-code" text-anchor="middle">GPU</text>
+              <text x="290" y="145" class="ld-label" text-anchor="middle">Donanım</text>
+            </a>
             <a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="hub" aria-label="LLM Runtime · Servis" aria-describedby="ld-new-tab-llm-tr">
               <title id="ld-new-tab-llm-tr">Yeni sekmede açılır</title>
-<rect x="270" y="170" width="100" height="56" rx="10"/>
-              <text x="320" y="196" class="ld-code" text-anchor="middle">LLM</text>
-              <text x="320" y="212" class="ld-label" text-anchor="middle">Runtime · Servis</text>
-</a>
+<rect x="420" y="190" width="120" height="50" rx="10"/>
+              <text x="480" y="214" class="ld-code" text-anchor="middle">LLM</text>
+              <text x="480" y="230" class="ld-label" text-anchor="middle">Runtime · Servis</text>
+            </a>
             <a href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node" data-learning-role="adapt" aria-label="USL Eğitim" aria-describedby="ld-new-tab-usl-tr">
               <title id="ld-new-tab-usl-tr">Yeni sekmede açılır</title>
-<rect x="460" y="170" width="100" height="56" rx="10"/>
-              <text x="510" y="196" class="ld-code" text-anchor="middle">USL</text>
-              <text x="510" y="212" class="ld-label" text-anchor="middle">Eğitim</text>
-</a>
+<rect x="600" y="105" width="140" height="50" rx="10"/>
+              <text x="670" y="129" class="ld-code" text-anchor="middle">USL</text>
+              <text x="670" y="145" class="ld-label" text-anchor="middle">Eğitim</text>
+            </a>
             <a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="harness" aria-label="HNS Harness Mühendisliği" aria-describedby="ld-new-tab-hns-tr">
               <title id="ld-new-tab-hns-tr">Yeni sekmede açılır</title>
-<rect x="250" y="294" width="140" height="56" rx="10"/>
-              <text x="320" y="322" class="ld-code" text-anchor="middle">HNS</text>
-              <text x="320" y="338" class="ld-label" text-anchor="middle">Harness Mühendisliği</text>
-</a>
+<rect x="400" y="275" width="160" height="50" rx="10"/>
+              <text x="480" y="299" class="ld-code" text-anchor="middle">HNS</text>
+              <text x="480" y="315" class="ld-label" text-anchor="middle">Harness Mühendisliği</text>
+            </a>
             <a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="context" aria-label="CTX Bağlam Mühendisliği" aria-describedby="ld-new-tab-ctx-tr">
               <title id="ld-new-tab-ctx-tr">Yeni sekmede açılır</title>
-<rect x="60" y="398" width="140" height="56" rx="10"/>
-              <text x="130" y="426" class="ld-code" text-anchor="middle">CTX</text>
-              <text x="130" y="442" class="ld-label" text-anchor="middle">Bağlam</text>
-</a>
+<rect x="200" y="360" width="140" height="50" rx="10"/>
+              <text x="270" y="384" class="ld-code" text-anchor="middle">CTX</text>
+              <text x="270" y="400" class="ld-label" text-anchor="middle">Bağlam</text>
+            </a>
             <a href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="security" aria-label="SEC AI Sistemleri Güvenliği" aria-describedby="ld-new-tab-sec-tr">
               <title id="ld-new-tab-sec-tr">Yeni sekmede açılır</title>
-<rect x="250" y="398" width="140" height="56" rx="10"/>
-              <text x="320" y="426" class="ld-code" text-anchor="middle">SEC</text>
-              <text x="320" y="442" class="ld-label" text-anchor="middle">Güven · Güvenlik</text>
-</a>
+<rect x="410" y="360" width="140" height="50" rx="10"/>
+              <text x="480" y="384" class="ld-code" text-anchor="middle">SEC</text>
+              <text x="480" y="400" class="ld-label" text-anchor="middle">Güven · Güvenlik</text>
+            </a>
             <a href="https://evl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-hub" data-learning-role="evaluation" aria-label="EVL LLM Değerlendirme" aria-describedby="ld-new-tab-evl-tr">
               <title id="ld-new-tab-evl-tr">Yeni sekmede açılır</title>
-<rect x="440" y="398" width="140" height="56" rx="10"/>
-              <text x="510" y="426" class="ld-code" text-anchor="middle">EVL</text>
-              <text x="510" y="442" class="ld-label" text-anchor="middle">Değerlendirme</text>
-</a>
+<rect x="620" y="360" width="140" height="50" rx="10"/>
+              <text x="690" y="384" class="ld-code" text-anchor="middle">EVL</text>
+              <text x="690" y="400" class="ld-label" text-anchor="middle">Değerlendirme</text>
+            </a>
             <a href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-converge" data-learning-role="deployment" data-learning-plane="deployment" aria-label="LCL Yerel Hesaplama" aria-describedby="ld-new-tab-lcl-tr">
               <title id="ld-new-tab-lcl-tr">Yeni sekmede açılır</title>
-<rect x="165" y="506" width="140" height="56" rx="10"/>
-              <text x="235" y="534" class="ld-code" text-anchor="middle">LCL</text>
-              <text x="235" y="550" class="ld-label" text-anchor="middle">Yerel Hesaplama</text>
-</a>
+<rect x="260" y="460" width="160" height="50" rx="10"/>
+              <text x="340" y="484" class="ld-code" text-anchor="middle">LCL</text>
+              <text x="340" y="500" class="ld-label" text-anchor="middle">Yerel Hesaplama</text>
+            </a>
             <a href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-converge" data-learning-role="deployment" data-learning-plane="deployment" aria-label="CLD Bulut Altyapısı" aria-describedby="ld-new-tab-cld-tr">
               <title id="ld-new-tab-cld-tr">Yeni sekmede açılır</title>
-<rect x="335" y="506" width="140" height="56" rx="10"/>
-              <text x="405" y="534" class="ld-code" text-anchor="middle">CLD</text>
-              <text x="405" y="550" class="ld-label" text-anchor="middle">Bulut Altyapısı</text>
-</a>
+<rect x="540" y="460" width="160" height="50" rx="10"/>
+              <text x="620" y="484" class="ld-code" text-anchor="middle">CLD</text>
+              <text x="620" y="500" class="ld-label" text-anchor="middle">Bulut Altyapısı</text>
+            </a>
             <a href="https://wfm.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-horizon" data-learning-role="world" aria-label="WFM Dünya Modelleri" aria-describedby="ld-new-tab-wfm-tr">
               <title id="ld-new-tab-wfm-tr">Yeni sekmede açılır</title>
-<rect x="180" y="640" width="280" height="56" rx="10"/>
-              <text x="320" y="666" class="ld-code" text-anchor="middle">WFM</text>
-              <text x="320" y="684" class="ld-label" text-anchor="middle">Dünya Modelleri</text>
-</a>
+<rect x="370" y="590" width="220" height="50" rx="10"/>
+              <text x="480" y="614" class="ld-code" text-anchor="middle">WFM</text>
+              <text x="480" y="630" class="ld-label" text-anchor="middle">Dünya Modelleri</text>
+            </a>
             <a href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-horizon" data-learning-role="twin" aria-label="ITL Endüstriyel İkiz" aria-describedby="ld-new-tab-itl-tr">
               <title id="ld-new-tab-itl-tr">Yeni sekmede açılır</title>
-<rect x="180" y="720" width="280" height="56" rx="10"/>
-              <text x="320" y="746" class="ld-code" text-anchor="middle">ITL</text>
-              <text x="320" y="764" class="ld-label" text-anchor="middle">Endüstriyel İkiz</text>
-</a>
+<rect x="370" y="680" width="220" height="50" rx="10"/>
+              <text x="480" y="704" class="ld-code" text-anchor="middle">ITL</text>
+              <text x="480" y="720" class="ld-label" text-anchor="middle">Endüstriyel İkiz</text>
+            </a>
             <a href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-horizon" data-learning-role="horizon" aria-label="ENG Humanoid Mühendisliği" aria-describedby="ld-new-tab-eng-tr">
               <title id="ld-new-tab-eng-tr">Yeni sekmede açılır</title>
-<rect x="180" y="800" width="280" height="56" rx="10"/>
-              <text x="320" y="826" class="ld-code" text-anchor="middle">ENG</text>
-              <text x="320" y="844" class="ld-label" text-anchor="middle">Humanoid Mühendisliği</text>
-</a>
+<rect x="370" y="770" width="220" height="50" rx="10"/>
+              <text x="480" y="794" class="ld-code" text-anchor="middle">ENG</text>
+              <text x="480" y="810" class="ld-label" text-anchor="middle">Humanoid Mühendisliği</text>
+            </a>
+          </g>
+          <g class="ld-legend" aria-hidden="true">
+            <path class="ld-legend-primary" d="M 220 865 H 260"/>
+            <text x="270" y="869">Ana öğrenme akışı</text>
+            <path class="ld-legend-context" d="M 470 865 H 510"/>
+            <text x="520" y="869">Bağlam ve karar girdisi</text>
+            <path class="ld-legend-horizon" d="M 735 865 H 775"/>
+            <text x="785" y="869">Ufuk omurgası</text>
           </g>
         </svg>
       </figure>

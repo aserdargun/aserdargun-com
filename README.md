@@ -7,12 +7,13 @@ duplicate permanently redirects to `/`.
 The opening experience combines an interactive ASCII/pixel portrait engine with a
 reverse-chronological eight-stage career timeline spanning mechanical engineering,
 manufacturing leadership, data science, full-stack AI, and AI engineering,
-followed by a learning-system loop that connects the application atlas to three
-parallel build tracks, the Harness Engineering Observatory (`hns`), and
-local/cloud deployment decisions (`lcl` / `cld`). The World Models Atlas (`wfm`)
-then bridges that loop into the industrial-twin lab and the long-term
-open-humanoid horizon, alongside the application map, working principles,
-verified credentials, and contact.
+followed by a learning-system map that connects parallel compute/model
+foundations to the LLM runtime, the Harness Engineering Observatory (`hns`),
+and a context/security/evaluation quality loop (`ctx` / `sec` / `evl`). Local
+and cloud deployment decisions (`lcl` / `cld`) then converge on the World Models
+Atlas (`wfm`), the industrial-twin lab, and the long-term open-humanoid horizon.
+The desktop diagram uses box-free orthogonal routing; mobile keeps the same core
+sequence through full-width accessible links.
 
 ## Development
 

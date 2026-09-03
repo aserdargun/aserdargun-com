@@ -572,7 +572,66 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     }
   });
 
-  test(`${document.route} provides all eight mobile learning targets without exposing the undersized SVG set`, async () => {
+  test(`${document.route} routes every diagram arrow through box-free orthogonal corridors`, async () => {
+    const html = await readFile(path.join(rootDir, document.file), "utf8");
+    const [svg] = scopedElements(html, "svg");
+    const nodeRects = new Map(
+      anchors(svg).map(({ openingTag, content }) => {
+        const code = attribute(openingTag, "href")?.match(/https:\/\/([a-z]{3})\./)?.[1];
+        const rect = content.match(/<rect x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)"/);
+        return [code, rect && { x: Number(rect[1]), y: Number(rect[2]), width: Number(rect[3]), height: Number(rect[4]) }];
+      }),
+    );
+
+    assert.match(svg, /class="ld-stage-index"/, "the complete system needs a visible stage rail");
+    assert.match(svg, /class="ld-legend"/, "primary, supporting, and horizon relationships need a legend");
+
+    const edges = Array.from(svg.matchAll(/<path data-learning-edge="([^"]+)"[^>]*d="([^"]+)"[^>]*marker-end="url\(#ld-arrow\)"\/>/g));
+    assert.equal(edges.length, 18, "every relationship must terminate with an arrow marker");
+
+    const segmentCrossesInterior = (start, end, rect) => {
+      const right = rect.x + rect.width;
+      const bottom = rect.y + rect.height;
+      if (start.x === end.x) {
+        return start.x > rect.x && start.x < right
+          && Math.max(start.y, end.y) > rect.y
+          && Math.min(start.y, end.y) < bottom;
+      }
+      if (start.y === end.y) {
+        return start.y > rect.y && start.y < bottom
+          && Math.max(start.x, end.x) > rect.x
+          && Math.min(start.x, end.x) < right;
+      }
+      return true;
+    };
+
+    for (const [, edgeName, route] of edges) {
+      assert.doesNotMatch(route, /[CLQAST]/, `${edgeName} must use an orthogonal route`);
+      const tokens = Array.from(route.matchAll(/([MHV])\s*([\d.]+)(?:\s+([\d.]+))?/g));
+      assert.ok(tokens.length >= 2, `${edgeName} needs a complete route`);
+      const points = [];
+      let current = null;
+      for (const [, command, first, second] of tokens) {
+        if (command === "M") current = { x: Number(first), y: Number(second) };
+        if (command === "H") current = { x: Number(first), y: current.y };
+        if (command === "V") current = { x: current.x, y: Number(first) };
+        points.push(current);
+      }
+      const [source, target] = edgeName.split("-to-");
+      for (const [node, rect] of nodeRects) {
+        if (node === source || node === target) continue;
+        for (let index = 1; index < points.length; index += 1) {
+          assert.equal(
+            segmentCrossesInterior(points[index - 1], points[index], rect),
+            false,
+            `${edgeName} crosses the ${node} box`,
+          );
+        }
+      }
+    }
+  });
+
+  test(`${document.route} provides all ten mobile learning targets without exposing the undersized SVG set`, async () => {
     const html = await readFile(path.join(rootDir, document.file), "utf8");
     const studyList = scopedElements(html, "ol").find((scope) => /class="learning-study-list"/.test(scope));
     const expectedText = document.locale === "tr" ? "yeni sekmede açılır" : "opens in a new tab";
@@ -608,7 +667,7 @@ test("mobile learning alternate exposes one non-overlapping 44px focus set while
   assert.match(
     css,
     /@media\s*\(max-width:\s*900px\)[\s\S]*?\.learning-diagram-wrap\s*\{[\s\S]*?display:\s*none;[\s\S]*?\.learning-study-copy\s*\{[\s\S]*?display:\s*none;[\s\S]*?\.learning-study-link\s*\{[\s\S]*?display:\s*flex;[\s\S]*?width:\s*100%;[\s\S]*?min-height:\s*44px;/,
-    "mobile must hide the SVG from layout/AT/interaction and expose only eight full-row 44px alternate links",
+    "mobile must hide the SVG from layout/AT/interaction and expose only ten full-row 44px alternate links",
   );
   assert.ok(
     svgBaseIndex >= 0 && finalMobileOverrideIndex > svgBaseIndex,

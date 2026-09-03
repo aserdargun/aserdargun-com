@@ -14,7 +14,7 @@ import {
 
 const WEEK_PATTERN = /^\d{4}-W\d{2}$/;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
-const ASSET_VERSION = "20260902-wfm-lcl-horizon-a11y";
+const ASSET_VERSION = "20260903-holistic-system";
 const USAGE = "Usage: node tools/archive-now.mjs --week YYYY-Www";
 const SITEMAP_NAMESPACE = "http://www.sitemaps.org/schemas/sitemap/0.9";
 const XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";

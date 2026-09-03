@@ -3128,9 +3128,17 @@ footer a {
 .ld-svg {
   display: block;
   width: 100%;
-  max-width: 640px;
+  max-width: 960px;
   height: auto;
   font-family: var(--font-geist-sans), sans-serif;
+}
+
+.ld-svg .ld-stage-index text {
+  fill: rgba(255, 253, 247, 0.42);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
 }
 
 .ld-svg .ld-links path {
@@ -3140,11 +3148,17 @@ footer a {
   stroke-width: 1.4;
   stroke-linecap: round;
   stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
   transition: stroke 200ms ease, stroke-width 200ms ease;
 }
 
 .ld-svg .ld-links .ld-edge-decision {
   stroke-opacity: 0.58;
+}
+
+.ld-svg .ld-links .ld-edge-context {
+  stroke-dasharray: 3 6;
+  stroke-opacity: 0.34;
 }
 
 .ld-svg .ld-node {
@@ -3216,6 +3230,31 @@ footer a {
 .ld-svg .ld-links .ld-edge-horizon {
   stroke-opacity: 0.34;
   stroke-dasharray: 3 5;
+}
+
+.ld-svg .ld-legend path {
+  fill: none;
+  stroke: var(--lime);
+  stroke-opacity: 0.52;
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+}
+
+.ld-svg .ld-legend text {
+  fill: rgba(255, 253, 247, 0.6);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.ld-svg .ld-legend .ld-legend-context {
+  stroke-dasharray: 3 6;
+  stroke-opacity: 0.34;
+}
+
+.ld-svg .ld-legend .ld-legend-horizon {
+  stroke-dasharray: 3 5;
+  stroke-opacity: 0.34;
 }
 
 .learning-invest-seg-horizon {
