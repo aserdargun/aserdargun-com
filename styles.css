@@ -3206,6 +3206,38 @@ footer a {
   stroke: rgba(200, 255, 54, 0.36);
 }
 
+.ld-svg .ld-node-horizon rect {
+  fill: rgba(200, 255, 54, 0.02);
+  stroke: rgba(200, 255, 54, 0.22);
+  stroke-dasharray: 4 5;
+}
+
+.ld-svg .ld-node-horizon:hover rect,
+.ld-svg .ld-node-horizon:focus-visible rect {
+  fill: rgba(200, 255, 54, 0.08);
+  stroke: rgba(200, 255, 54, 0.42);
+}
+
+.ld-svg .ld-links .ld-edge-horizon {
+  stroke-opacity: 0.34;
+  stroke-dasharray: 3 5;
+}
+
+.learning-invest-seg-horizon {
+  background: rgba(200, 255, 54, 0.04);
+  border-style: dashed;
+  border-color: rgba(200, 255, 54, 0.22);
+  color: rgba(255, 253, 247, 0.78);
+}
+
+.learning-invest-seg-horizon code {
+  color: rgba(200, 255, 54, 0.78);
+}
+
+.learning-invest-seg-horizon:hover {
+  background: rgba(200, 255, 54, 0.1);
+}
+
 .ld-svg .ld-pulse-dot circle {
   transform-origin: center;
   transform-box: fill-box;

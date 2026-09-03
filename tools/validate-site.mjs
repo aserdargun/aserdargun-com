@@ -68,7 +68,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "apps", "learning", "journey", "horizon", "approach", "about"];
-const expectedAssetVersion = "20260903-orthogonal-evidence";
+const expectedAssetVersion = "20260903-horizon-spine";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -327,7 +327,7 @@ function validateLearningSystem(locale, html) {
     `${locale}: learning system diagram is missing`,
   );
   const diagram = section.match(/<svg\b[^>]*class="ld-svg"[\s\S]*?<\/svg>/)?.[0] ?? "";
-  check(diagram.includes("AIA") && diagram.includes("HNS") && diagram.includes("SEC") && diagram.includes("CLD") && diagram.includes("LCL"), `${locale}: learning system diagram endpoints are missing`);
+  check(diagram.includes("AIA") && diagram.includes("HNS") && diagram.includes("SEC") && diagram.includes("CLD") && diagram.includes("LCL") && diagram.includes("WFM") && diagram.includes("ITL") && diagram.includes("ENG"), `${locale}: learning system diagram endpoints are missing`);
   const deploymentNodes = Array.from(
     diagram.matchAll(/<a href="https:\/\/(lcl|cld)\.aserdargun\.com\/"[^>]*data-learning-plane="deployment"[^>]*>[\s\S]*?<rect x="[0-9]+" y="([0-9]+)"/g),
     (match) => ({ code: match[1], y: match[2] }),
@@ -356,6 +356,9 @@ function validateLearningSystem(locale, html) {
       "evl:evaluation",
       "lcl:deployment",
       "cld:deployment",
+      "wfm:world",
+      "itl:twin",
+      "eng:horizon",
     ]),
     `${locale}: learning diagram node roles differ from the application content model`,
   );
@@ -379,6 +382,10 @@ function validateLearningSystem(locale, html) {
       "lcl-to-evidence",
       "cld-to-evidence",
       "evidence-to-aia",
+      "lcl-to-wfm",
+      "cld-to-wfm",
+      "wfm-to-itl",
+      "itl-to-eng",
     ]),
     `${locale}: learning diagram edges differ from the application content model`,
   );
@@ -536,16 +543,18 @@ function validateLearningInvest(locale, html) {
   const section = html.match(/<section class="learning-invest"[\s\S]*?<\/section>/)?.[0] ?? "";
   check(section.length > 0, `${locale}: learning investment section is missing`);
   if (section.length === 0) return;
-  const segments = matches(section, /<span class="learning-invest-seg" style="flex-basis: \d+%;"><code>([a-z]{3})<\/code> ([^<]+)<\/span>/g);
-  const expectedCodes = ["llm", "gpu", "usl", "cld", "aia"];
+  const segments = matches(section, /<span class="learning-invest-seg(?:\s+learning-invest-seg-horizon)?" style="flex-basis: \d+%;"><code>([a-z]{3})<\/code> ([^<]+)<\/span>/g);
+  const expectedCodes = ["llm", "gpu", "usl", "cld", "aia", "wfm", "itl", "eng"];
   check(JSON.stringify(segments) === JSON.stringify(expectedCodes), `${locale}: learning investment segment codes or order differ`);
   const labels = Array.from(
-    section.matchAll(/<span class="learning-invest-seg" style="flex-basis: \d+%;"><code>[a-z]{3}<\/code> ([^<]+)<\/span>/g),
+    section.matchAll(/<span class="learning-invest-seg(?:\s+learning-invest-seg-horizon)?" style="flex-basis: \d+%;"><code>[a-z]{3}<\/code> ([^<]+)<\/span>/g),
     (match) => match[1].trim(),
   );
-  const expectedLabels = isTurkish ? ["%30", "%25", "%20", "%15", "%10"] : ["30%", "25%", "20%", "15%", "10%"];
+  const expectedLabels = isTurkish
+    ? ["%30", "%25", "%20", "%15", "%7", "%1", "%1", "%1"]
+    : ["30%", "25%", "20%", "15%", "7%", "1%", "1%", "1%"];
   check(JSON.stringify(labels) === JSON.stringify(expectedLabels), `${locale}: learning investment percentages differ`);
-  const expectedBasis = ["30", "25", "20", "15", "10"];
+  const expectedBasis = ["30", "25", "20", "15", "7", "1", "1", "1"];
   const basis = matches(section, /flex-basis: (\d+)%;/g);
   check(JSON.stringify(basis) === JSON.stringify(expectedBasis), `${locale}: learning investment weights differ`);
 }

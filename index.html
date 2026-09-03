@@ -32,8 +32,8 @@
   <meta name="twitter:description" content="From mechanics and manufacturing to data, software, and AI engineering.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260903-orthogonal-evidence">
-  <script src="/scripts.js?v=20260903-orthogonal-evidence" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260903-horizon-spine">
+  <script src="/scripts.js?v=20260903-horizon-spine" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -238,12 +238,12 @@
       <div class="learning-intro">
         <p class="learning-kicker">Learning system · AI Ecosystem Atlas</p>
         <h2 id="learning-title">The atlas is a learning system.</h2>
-        <p id="learning-description">The ten applications form one learning loop: AIA orients the system; GPU provides the compute foundation; USL adapts models; and LLM connects both through runtime and serving. HNS maps the harness layer that turns served model capability into a reliable agent system; CTX designs what the model actually sees; SEC then tests whether that system can be trusted from identity through audit and incident recovery; EVL closes the loop with evidence rather than assumption. GPU and CTX inform the local-compute path in LCL, while SEC and EVL inform the cloud-services path in CLD. Evidence from both decision surfaces flows back into the atlas.</p>
+        <p id="learning-description">The ten applications form one learning loop: AIA orients the system; GPU provides the compute foundation; USL adapts models; and LLM connects both through runtime and serving. HNS maps the harness layer that turns served model capability into a reliable agent system; CTX designs what the model actually sees; SEC then tests whether that system can be trusted from identity through audit and incident recovery; EVL closes the loop with evidence rather than assumption. GPU and CTX inform the local-compute path in LCL, while SEC and EVL inform the cloud-services path in CLD. Evidence from both decision surfaces flows back into the atlas. Below the loop, the horizon spine descends from LCL and CLD through WFM, ITL, and ENG — world models, industrial twins, and the long-term embodied destination the whole learning system serves.</p>
       </div>
       <figure class="learning-diagram-wrap">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 650" role="img" aria-labelledby="ld-title ld-desc" class="ld-svg">
-          <title id="ld-title">AI Ecosystem Atlas learning loop</title>
-          <desc id="ld-desc">AIA orients the system. GPU provides the compute foundation and USL adapts models; both connect through the LLM runtime and serving hub, which also feeds implementation knowledge back to GPU. LLM feeds HNS, where harness engineering turns model capability into a reliable agent system. HNS branches into CTX, where context engineering designs what the model actually sees; SEC, where identity, authorization, constrained action, audit, and recovery become a trust path; and EVL, where evaluation turns releases into evidence. GPU and CTX inform LCL, while SEC and EVL inform CLD. Evidence from LCL and CLD returns to AIA.</desc>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 880" role="img" aria-labelledby="ld-title ld-desc" class="ld-svg">
+          <title id="ld-title">AI Ecosystem Atlas learning loop with horizon spine</title>
+          <desc id="ld-desc">AIA orients the system. GPU provides the compute foundation and USL adapts models; both connect through the LLM runtime and serving hub, which also feeds implementation knowledge back to GPU. LLM feeds HNS, where harness engineering turns model capability into a reliable agent system. HNS branches into CTX, where context engineering designs what the model actually sees; SEC, where identity, authorization, constrained action, audit, and recovery become a trust path; and EVL, where evaluation turns releases into evidence. GPU and CTX inform LCL, while SEC and EVL inform CLD. Evidence from LCL and CLD returns to AIA. From LCL and CLD the horizon spine descends: WFM traces world models, ITL grounds them in industrial twins, and ENG is the long-term embodied destination the loop serves.</desc>
           <defs>
             <marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 1 L 9 5 L 0 9 z" fill="rgba(200,255,54,0.55)"/>
@@ -267,6 +267,10 @@
             <path data-learning-edge="lcl-to-evidence" d="M 235 562 L 235 584 L 320 604"/>
             <path data-learning-edge="cld-to-evidence" d="M 405 562 L 405 584 L 320 604"/>
             <path data-learning-edge="evidence-to-aia" class="ld-edge-feedback" d="M 320 604 L 615 604 L 615 68 L 390 68" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="lcl-to-wfm" class="ld-edge-horizon" d="M 235 562 C 235 600 260 620 280 640" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="cld-to-wfm" class="ld-edge-horizon" d="M 405 562 C 405 600 380 620 360 640" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 320 696 L 320 720" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 320 776 L 320 800" marker-end="url(#ld-arrow)"/>
           </g>
           <g class="ld-pulse-dot">
             <circle cx="320" cy="90" r="4"/>
@@ -280,6 +284,9 @@
             <circle cx="320" cy="604" r="3"/>
             <circle cx="235" cy="562" r="3"/>
             <circle cx="405" cy="562" r="3"/>
+            <circle cx="320" cy="668" r="3"/>
+            <circle cx="320" cy="748" r="3"/>
+            <circle cx="320" cy="828" r="3"/>
           </g>
           <g class="ld-nodes">
             <a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-aia" data-learning-role="map" aria-label="AIA AI Ecosystem Atlas" aria-describedby="ld-new-tab-aia-en">
@@ -341,6 +348,24 @@
 <rect x="335" y="506" width="140" height="56" rx="10"/>
               <text x="405" y="534" class="ld-code" text-anchor="middle">CLD</text>
               <text x="405" y="550" class="ld-label" text-anchor="middle">Cloud Infrastructure</text>
+</a>
+            <a href="https://wfm.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-horizon" data-learning-role="world" aria-label="WFM World Models" aria-describedby="ld-new-tab-wfm-en">
+              <title id="ld-new-tab-wfm-en">Opens in a new tab</title>
+<rect x="180" y="640" width="280" height="56" rx="10"/>
+              <text x="320" y="666" class="ld-code" text-anchor="middle">WFM</text>
+              <text x="320" y="684" class="ld-label" text-anchor="middle">World Models</text>
+</a>
+            <a href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-horizon" data-learning-role="twin" aria-label="ITL Industrial Twin" aria-describedby="ld-new-tab-itl-en">
+              <title id="ld-new-tab-itl-en">Opens in a new tab</title>
+<rect x="180" y="720" width="280" height="56" rx="10"/>
+              <text x="320" y="746" class="ld-code" text-anchor="middle">ITL</text>
+              <text x="320" y="764" class="ld-label" text-anchor="middle">Industrial Twin</text>
+</a>
+            <a href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-horizon" data-learning-role="horizon" aria-label="ENG Humanoid Engineering" aria-describedby="ld-new-tab-eng-en">
+              <title id="ld-new-tab-eng-en">Opens in a new tab</title>
+<rect x="180" y="800" width="280" height="56" rx="10"/>
+              <text x="320" y="826" class="ld-code" text-anchor="middle">ENG</text>
+              <text x="320" y="844" class="ld-label" text-anchor="middle">Humanoid Engineering</text>
 </a>
           </g>
         </svg>
@@ -476,7 +501,7 @@
       <aside class="learning-horizon" id="horizon" aria-labelledby="learning-horizon-title" aria-describedby="learning-horizon-desc">
         <p class="learning-horizon-kicker">The horizon · what this loop serves</p>
         <h3 id="learning-horizon-title">Open Humanoid Engineering</h3>
-        <p id="learning-horizon-desc">The atlas, hardware, runtime, training, and deployment decisions are the preamble. <strong>World Models Atlas</strong> traces the bridge across perception, prediction, planning, and action; Industrial Twin Lab makes that bridge testable around digital twins and physical assets. <strong>Open Humanoid Engineering</strong> is the long-term destination: embodied, open, and built in the physical world.</p>
+        <p id="learning-horizon-desc">The horizon spine in the diagram above descends from deployment as the long-term destination the learning loop serves. <strong>World Models Atlas</strong> traces the bridge across perception, prediction, planning, and action; Industrial Twin Lab makes that bridge testable around digital twins and physical assets. <strong>Open Humanoid Engineering</strong> is the long-term destination: embodied, open, and built in the physical world.</p>
         <div class="learning-horizon-links">
           <a class="learning-horizon-link" href="https://wfm.aserdargun.com/" target="_blank" rel="noreferrer">wfm.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a>
           <a class="learning-horizon-link" href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer">itl.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a>
@@ -610,9 +635,12 @@
         <span class="learning-invest-seg" style="flex-basis: 25%;"><code>gpu</code> 25%</span>
         <span class="learning-invest-seg" style="flex-basis: 20%;"><code>usl</code> 20%</span>
         <span class="learning-invest-seg" style="flex-basis: 15%;"><code>cld</code> 15%</span>
-        <span class="learning-invest-seg" style="flex-basis: 10%;"><code>aia</code> 10%</span>
+        <span class="learning-invest-seg" style="flex-basis: 7%;"><code>aia</code> 7%</span>
+        <span class="learning-invest-seg learning-invest-seg-horizon" style="flex-basis: 1%;"><code>wfm</code> 1%</span>
+        <span class="learning-invest-seg learning-invest-seg-horizon" style="flex-basis: 1%;"><code>itl</code> 1%</span>
+        <span class="learning-invest-seg learning-invest-seg-horizon" style="flex-basis: 1%;"><code>eng</code> 1%</span>
       </div>
-      <p class="learning-invest-note">The study order is AIA → GPU → LLM → USL → CLD; the depth priority is LLM first. Right now the center of gravity is the GPU + LLM pair — where the hardware meets the runtime.</p>
+      <p class="learning-invest-note">The study order is AIA → GPU → LLM → USL → CLD; the depth priority is LLM first. Right now the center of gravity is the GPU + LLM pair — where the hardware meets the runtime. The horizon spine (WFM, ITL, ENG) is the long-term destination, kept visible at 1% each so the loop never forgets what it serves.</p>
     </section>
   </main>
 

@@ -549,13 +549,16 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://evl.aserdargun.com/", "EVL"],
       ["https://lcl.aserdargun.com/", "LCL"],
       ["https://cld.aserdargun.com/", "CLD"],
+      ["https://wfm.aserdargun.com/", "WFM"],
+      ["https://itl.aserdargun.com/", "ITL"],
+      ["https://eng.aserdargun.com/", "ENG"],
     ];
 
     assert.ok(svg, "learning diagram SVG must remain a closed source scope");
     assert.equal(extraSvgScopes.length, 0);
     assert.doesNotMatch(svg, /<(?:span|foreignObject)\b/i, "HTML must never be inserted into SVG");
     const svgBlankAnchors = anchors(svg).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
-    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all eight diagram nodes must remain inside SVG");
+    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all thirteen diagram nodes must remain inside SVG");
 
     assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")), expectedNodes.map(([href]) => href));
     for (const [index, anchor] of svgBlankAnchors.entries()) {
