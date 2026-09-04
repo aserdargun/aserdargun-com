@@ -21,7 +21,7 @@ import {
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rendererPath = path.join(rootDir, "tools", "render-living-system.mjs");
-const today = new Date("2026-09-02T12:00:00Z");
+const today = new Date("2026-09-04T12:00:00Z");
 
 async function readFixtureData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -800,7 +800,7 @@ test("renders absolute application freshness with an accessible, derived current
 
   assert.match(
     rendered,
-    /<span class="freshness freshness--current" data-freshness-date="2026-09-02" data-freshness-state="current">[\s\S]*?<time datetime="2026-09-02">2026-09-02<\/time>[\s\S]*?<\/span>/,
+    /<span class="freshness freshness--current" data-freshness-date="2026-09-03" data-freshness-state="current">[\s\S]*?<time datetime="2026-09-03">2026-09-03<\/time>[\s\S]*?<\/span>/,
   );
   assert.match(rendered, /<span class="freshness-label">Current<\/span>/);
   assert.equal(rendered.includes("today"), false);
@@ -809,12 +809,11 @@ test("renders absolute application freshness with an accessible, derived current
 
 test("renders Now freshness from its canonical date at current and needs-refresh boundaries", async () => {
   const data = await readFixtureData();
-  data.applications.find((application) => application.code === "lcl").updatedAt = "2026-08-28";
-  data.applications.find((application) => application.code === "wfm").updatedAt = "2026-08-28";
-  data.applications.find((application) => application.code === "hns").updatedAt = "2026-08-28";
-  data.applications.find((application) => application.code === "sec").updatedAt = "2026-08-28";
-  data.applications.find((application) => application.code === "ctx").updatedAt = "2026-08-28";
-  data.applications.find((application) => application.code === "evl").updatedAt = "2026-08-28";
+  data.now.updatedAt = "2026-08-21";
+  data.now.week = "2026-W34";
+  for (const application of data.applications) {
+    application.updatedAt = "2026-08-28";
+  }
   const current = renderDocument({
     html: nowDocument(),
     page: "now",
@@ -844,26 +843,40 @@ test("renders the application-map summary from semantic roles", async () => {
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /Ten core learning applications, one lab, one horizon bridge, and one long-term horizon\./);
+  assert.match(rendered, /Ten core learning applications, one standalone lab, one horizon bridge, and one long-term horizon\./);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
 });
 
 test("preserves the complete localized Now tag sets", async () => {
   const data = await readFixtureData();
-  const tags = (html) => Array.from(html.matchAll(/<li>([^<]+)<\/li>/g), (match) => match[1]);
+  const tags = (html) => Array.from(html.matchAll(/<li(?:\s+[^>]*)?>([^<]+)<\/li>/g), (match) => match[1]);
   const english = renderDocument({ html: nowDocument(), page: "now", locale: "en", data, today });
   const turkish = renderDocument({ html: nowDocument(), page: "now", locale: "tr", data, today });
 
   assert.deepEqual(tags(english), [
-    "GPU memory bandwidth", "PagedAttention", "KV cache", "Atlas cross-references",
-    "Learning system", "Guiding questions", "Investment bar", "Evidence flow",
-    "Traceability", "Human review", "Deployment constraints", "Operator-first",
+    "System topology", "Bilingual parity", "Evidence loop", "Deployment paths",
+    "Product consistency", "Source freshness", "Responsive QA", "Production evidence",
+    "Traceability", "Human review", "Operational safety", "Operator first",
   ]);
   assert.deepEqual(tags(turkish), [
-    "GPU bellek bant genişliği", "PagedAttention", "KV cache", "Atlas çapraz referansları",
-    "Öğrenme sistemi", "Yönlendirici sorular", "Yatırım çubuğu", "Kanıt akışı",
-    "İzlenebilirlik", "İnsan incelemesi", "Dağıtım kısıtları", "Operatör-odaklı",
+    "Sistem topolojisi", "Dil eşliği", "Kanıt döngüsü", "Dağıtım yolları",
+    "Ürün tutarlılığı", "Kaynak güncelliği", "Duyarlı arayüz kontrolü", "Üretim kanıtı",
+    "İzlenebilirlik", "İnsan incelemesi", "Operasyonel güvenlik", "Önce operatör",
   ]);
+});
+
+test("marks language-invariant Now tags so Turkish uppercasing preserves technical names", async () => {
+  const data = await readFixtureData();
+  data.now.items[0].tags = [
+    { en: "PagedAttention", tr: "PagedAttention" },
+    { en: "GPU memory bandwidth", tr: "GPU bellek bant genişliği" },
+    { en: "KV cache", tr: "KV cache" },
+  ];
+  const turkish = renderDocument({ html: nowDocument(), page: "now", locale: "tr", data, today });
+
+  assert.match(turkish, /<li lang="en">PagedAttention<\/li>/);
+  assert.match(turkish, /<li lang="en">KV cache<\/li>/);
+  assert.match(turkish, /<li>GPU bellek bant genişliği<\/li>/);
 });
 
 test("renders existing bilingual Now archives newest-first on current pages", async () => {
@@ -1607,7 +1620,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const generate = spawnSync(process.execPath, [rendererPath], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-02" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-04" },
   });
   assert.equal(generate.status, 0, generate.stderr);
 
@@ -1622,7 +1635,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const check = spawnSync(process.execPath, [rendererPath, "--check"], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-02" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-04" },
   });
   const after = Object.fromEntries(await Promise.all(paths.map(async (relativePath) => [
     relativePath,

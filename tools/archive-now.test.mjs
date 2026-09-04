@@ -16,6 +16,57 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const archiveToolPath = path.join(rootDir, "tools", "archive-now.mjs");
 const dataSourcePath = path.join(rootDir, "data", "living-system.json");
 const canonicalWeek = "2026-W34";
+const archivedNowFixture = {
+  updatedAt: "2026-08-21",
+  week: canonicalWeek,
+  items: [
+    {
+      id: "week",
+      timeframe: "week",
+      title: { en: "Closing the GPU + LLM pair", tr: "GPU + LLM çiftini kapatmak" },
+      summary: {
+        en: "Where the kernel atlas meets the runtime atlas. I'm reading CUDA memory traffic patterns and pairing them with vLLM PagedAttention so the next GPU atlas chapter lands with the right model context, not in isolation.",
+        tr: "Kernel atlasının runtime atlasıyla buluştuğu yer. CUDA bellek trafik örüntülerini okuyor ve bir sonraki GPU atlas bölümünü doğru model bağlamıyla, yalnız değil, vLLM PagedAttention ile eşleştirerek hazırlıyorum.",
+      },
+      tags: [
+        { en: "GPU memory bandwidth", tr: "GPU bellek bant genişliği" },
+        { en: "PagedAttention", tr: "PagedAttention" },
+        { en: "KV cache", tr: "KV cache" },
+        { en: "Atlas cross-references", tr: "Atlas çapraz referansları" },
+      ],
+    },
+    {
+      id: "month",
+      timeframe: "month",
+      title: { en: "Atlas as a learning loop", tr: "Atlası bir öğrenme döngüsüne çevirmek" },
+      summary: {
+        en: "Converting the public atlas map from a flat directory into the learning system you now see on the homepage — a study order, three parallel tracks (hardware, serving, training), and a converge step. The /now page is the next piece of that loop.",
+        tr: "Genel atlas haritasını düz bir dizinden, ana sayfada gördüğün öğrenme sistemine dönüştürüyorum: çalışma sırası, üç paralel rota (donanım, servis, eğitim) ve birleşim adımı. Bu /now sayfası o döngünün bir sonraki parçası.",
+      },
+      tags: [
+        { en: "Learning system", tr: "Öğrenme sistemi" },
+        { en: "Guiding questions", tr: "Yönlendirici sorular" },
+        { en: "Investment bar", tr: "Yatırım çubuğu" },
+        { en: "Evidence flow", tr: "Kanıt akışı" },
+      ],
+    },
+    {
+      id: "long-term",
+      timeframe: "long-term",
+      title: { en: "Industrial AI that operators trust", tr: "Operatörün güvendiği endüstriyel yapay zekâ" },
+      summary: {
+        en: 'The through-line from mechanical engineering to AI engineering is "decisions a real person has to act on". Every atlas and every notebook is an attempt to make industrial intelligence legible, reviewable, and operable — not just accurate.',
+        tr: 'Makine mühendisliğinden yapay zekâ mühendisliğine uzanan ortak şu: "kararı gerçek bir kişinin uygulayacağı". Her atlas ve her defter, endüstriyel zekâı okunabilir, denetlenebilir ve işletilebilir kılma denemesi — sadece doğru değil.',
+      },
+      tags: [
+        { en: "Traceability", tr: "İzlenebilirlik" },
+        { en: "Human review", tr: "İnsan incelemesi" },
+        { en: "Deployment constraints", tr: "Dağıtım kısıtları" },
+        { en: "Operator-first", tr: "Operatör-odaklı" },
+      ],
+    },
+  ],
+};
 const baseSitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
@@ -39,9 +90,11 @@ async function createSiteFixture(t) {
   const fixtureDir = await mkdtemp(path.join(tmpdir(), "archive-now-site-"));
   t.after(() => rm(fixtureDir, { recursive: true, force: true }));
   await mkdir(path.join(fixtureDir, "data"));
+  const data = JSON.parse(await readFile(dataSourcePath, "utf8"));
+  data.now = structuredClone(archivedNowFixture);
   await writeFile(
     path.join(fixtureDir, "data", "living-system.json"),
-    await readFile(dataSourcePath),
+    `${JSON.stringify(data, null, 2)}\n`,
   );
   await writeFile(path.join(fixtureDir, "sitemap.xml"), baseSitemap);
   return fixtureDir;
@@ -96,7 +149,7 @@ function cardValues(html) {
     (match) => ({
       title: match[1],
       summary: match[2],
-      tags: Array.from(match[3].matchAll(/<li>([^<]+)<\/li>/g), (tag) => tag[1]),
+      tags: Array.from(match[3].matchAll(/<li(?:\s[^>]*)?>([^<]+)<\/li>/g), (tag) => tag[1]),
     }),
   );
 }
@@ -619,6 +672,7 @@ test("fault-injected archive installation rolls back every final and staging art
 
 test("the planning and rendering API validates canonical inputs without touching disk", async () => {
   const data = JSON.parse(await readFile(dataSourcePath, "utf8"));
+  data.now = structuredClone(archivedNowFixture);
   const fixtureRoot = path.join(tmpdir(), "archive-now-nonexistent-planning-root");
   const plan = planNowArchive({ rootDir: fixtureRoot, data, week: canonicalWeek });
   const header = '<header><nav aria-label="Primary navigation"></nav></header>';

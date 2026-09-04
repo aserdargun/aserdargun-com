@@ -405,7 +405,10 @@ export function renderNowCards({ locale, data }) {
   };
   return order.map((timeframe, index) => {
     const item = data.now.items.find((candidate) => candidate.timeframe === timeframe);
-    const tags = item.tags.map((tag) => `          <li>${escapeHtml(tag[locale])}</li>`).join("\n");
+    const tags = item.tags.map((tag) => {
+      const language = tag.en === tag.tr ? ' lang="en"' : "";
+      return `          <li${language}>${escapeHtml(tag[locale])}</li>`;
+    }).join("\n");
     return [
       '      <article class="now-card now-card-this">',
       `        <p class="now-card-label"><span aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>${timeframeLabels[timeframe]}</p>`,

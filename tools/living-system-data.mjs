@@ -606,11 +606,11 @@ export function summarizeApplications(applications) {
     return value.charAt(0).toLocaleUpperCase("tr-TR") + value.slice(1);
   };
   const applicationNoun = counts["core-learning"] === 1 ? "application" : "applications";
-  const labNoun = counts.lab === 1 ? "lab" : "labs";
+  const labNoun = counts.lab === 1 ? "standalone lab" : "standalone labs";
   const bridgeNoun = counts["horizon-bridge"] === 1 ? "horizon bridge" : "horizon bridges";
   const horizonNoun = counts.horizon === 1 ? "horizon" : "horizons";
   return {
     en: `${sentenceNumber(englishNumber, counts["core-learning"])} core learning ${applicationNoun}, ${number(englishNumber, counts.lab)} ${labNoun}, ${number(englishNumber, counts["horizon-bridge"])} ${bridgeNoun}, and ${number(englishNumber, counts.horizon)} long-term ${horizonNoun}.`,
-    tr: `${sentenceNumber(turkishNumber, counts["core-learning"])} çekirdek öğrenme uygulaması, ${number(turkishNumber, counts.lab)} laboratuvar, ${number(turkishNumber, counts["horizon-bridge"])} ufuk köprüsü ve ${number(turkishNumber, counts.horizon)} uzun vadeli ufuk.`,
+    tr: `${sentenceNumber(turkishNumber, counts["core-learning"])} çekirdek öğrenme uygulaması, ${number(turkishNumber, counts.lab)} bağımsız laboratuvar, ${number(turkishNumber, counts["horizon-bridge"])} ufuk köprüsü ve ${number(turkishNumber, counts.horizon)} uzun vadeli ufuk.`,
   };
 }

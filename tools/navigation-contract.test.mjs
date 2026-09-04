@@ -481,7 +481,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       /<code class="learning-code">hns<\/code>/.test(scope)
     ));
     const expectedQuestion = document.locale === "tr"
-      ? "“Model kabiliyetini nasıl güvenilir bir agent sistemine dönüştürürüm?”"
+      ? "“Model yeteneğini nasıl güvenilir bir ajan sistemine dönüştürürüm?”"
       : "“How do I turn model capability into a reliable agent system?”";
 
     assert.ok(harnessCard, "the detailed learning flow must expose the HNS harness card");
@@ -504,7 +504,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       /<code class="learning-code">sec<\/code>/.test(scope)
     ));
     const expectedQuestion = document.locale === "tr"
-      ? "“Bu agent sistemine neden güvenmeliyim?”"
+      ? "“Bu ajan sistemine neden güvenmeliyim?”"
       : "“Why should I trust this agent system?”";
 
     assert.ok(securityCard, "the quality row must expose the SEC assurance card");

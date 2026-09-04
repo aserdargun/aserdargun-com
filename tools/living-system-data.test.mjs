@@ -452,7 +452,7 @@ test("accepts the CTX observatory as a canonical public core-learning applicatio
     ...observatoryData.applications[0],
     code: "ctx",
     kind: "observatory",
-    title: localized("Context Engineering Observatory", "Bağlam Mühendisliği Gözlemevi"),
+    title: localized("Context & Knowledge Engineering", "Bağlam ve Bilgi Mühendisliği"),
     repository: "https://github.com/aserdargun/ctx-aserdargun-com",
     address: "https://ctx.aserdargun.com/",
   };
@@ -460,18 +460,18 @@ test("accepts the CTX observatory as a canonical public core-learning applicatio
   assert.deepEqual(validateLivingSystemData(observatoryData).errors, []);
 });
 
-test("accepts the EVL observatory as a canonical public core-learning application", () => {
-  const observatoryData = validData();
-  observatoryData.applications[0] = {
-    ...observatoryData.applications[0],
+test("accepts the EVL lab as a canonical public core-learning application", () => {
+  const labData = validData();
+  labData.applications[0] = {
+    ...labData.applications[0],
     code: "evl",
-    kind: "observatory",
-    title: localized("LLM Evaluation Observatory", "LLM Değerlendirme Gözlemevi"),
+    kind: "lab",
+    title: localized("AI Evaluation & Reliability Lab", "AI Değerlendirme ve Güvenilirlik Laboratuvarı"),
     repository: "https://github.com/aserdargun/evl-aserdargun-com",
     address: "https://evl.aserdargun.com/",
   };
 
-  assert.deepEqual(validateLivingSystemData(observatoryData).errors, []);
+  assert.deepEqual(validateLivingSystemData(labData).errors, []);
 });
 
 test("summarizes semantic system roles rather than application array length", () => {
@@ -487,8 +487,8 @@ test("summarizes semantic system roles rather than application array length", ()
   ];
 
   assert.deepEqual(summarizeApplications(applications), {
-    en: "Five core learning applications, one lab, one horizon bridge, and one long-term horizon.",
-    tr: "Beş çekirdek öğrenme uygulaması, bir laboratuvar, bir ufuk köprüsü ve bir uzun vadeli ufuk.",
+    en: "Five core learning applications, one standalone lab, one horizon bridge, and one long-term horizon.",
+    tr: "Beş çekirdek öğrenme uygulaması, bir bağımsız laboratuvar, bir ufuk köprüsü ve bir uzun vadeli ufuk.",
   });
 });
 
@@ -582,7 +582,7 @@ test("rejects private-system records and reserved private-navigation codes", () 
 test("loads and validates the committed canonical manifest", async () => {
   const filePath = fileURLToPath(new URL("../data/living-system.json", import.meta.url));
   const data = await loadLivingSystemData(filePath);
-  const canonicalToday = new Date("2026-09-02T12:00:00+03:00");
+  const canonicalToday = new Date("2026-09-04T12:00:00+03:00");
 
   assert.equal(data.applications.length, 13);
   assert.deepEqual(
@@ -596,11 +596,11 @@ test("loads and validates the committed canonical manifest", async () => {
       title: localized("Harness Engineering Observatory", "Harness Engineering Observatory"),
       summary: localized(
         "A bilingual, source-backed observatory for comparing the harnesses, runtimes, orchestration, execution, verification, and observability layers that turn model capability into reliable agent systems.",
-        "Model kabiliyetini güvenilir agent sistemlerine dönüştüren harness, runtime, orkestrasyon, yürütme, doğrulama ve gözlemlenebilirlik katmanlarını karşılaştıran iki dilli, kaynak-temelli gözlemevi.",
+        "Model yeteneğini güvenilir ajan sistemlerine dönüştüren harness, çalıştırma, orkestrasyon, yürütme, doğrulama ve gözlemlenebilirlik katmanlarını karşılaştıran iki dilli, kaynaklı gözlemevi.",
       ),
       repository: "https://github.com/aserdargun/hns-aserdargun-com",
       address: "https://hns.aserdargun.com/",
-      updatedAt: "2026-09-02",
+      updatedAt: "2026-09-03",
       relatedMemoryIds: [],
     },
   );
@@ -612,14 +612,14 @@ test("loads and validates the committed canonical manifest", async () => {
       systemRole: "core-learning",
       visibility: "public",
       status: "live",
-      title: localized("Context Engineering Observatory", "Bağlam Mühendisliği Gözlemevi"),
+      title: localized("Context & Knowledge Engineering", "Bağlam ve Bilgi Mühendisliği"),
       summary: localized(
-        "A bilingual observatory for the prompt, retrieval, and memory decisions that decide what the model actually sees — system messages, chunking, embeddings, vector search, tool use, and token budgets tracked against evidence.",
-        "Prompt, retrieval ve bellek kararlarının modelin gerçekte ne gördüğünü nasıl belirlediğini izleyen iki dilli gözlemevi — sistem mesajları, chunking, embedding'ler, vektör arama, araç kullanımı ve token bütçeleri kanıtlarla takip edilir.",
+        "A bilingual, source-backed field guide to the information system that runs before a model answers, from ingestion and retrieval through citation, caching, and memory.",
+        "Model yanıtından önce çalışan bilgi sistemini alım ve erişimden alıntılama, önbellekleme ve belleğe kadar tasarlamaya yarayan iki dilli, kaynaklı alan rehberi.",
       ),
       repository: "https://github.com/aserdargun/ctx-aserdargun-com",
       address: "https://ctx.aserdargun.com/",
-      updatedAt: "2026-09-02",
+      updatedAt: "2026-09-04",
       relatedMemoryIds: [],
     },
   );
@@ -627,18 +627,18 @@ test("loads and validates the committed canonical manifest", async () => {
     data.applications.find((application) => application.code === "evl"),
     {
       code: "evl",
-      kind: "observatory",
+      kind: "lab",
       systemRole: "core-learning",
       visibility: "public",
       status: "live",
-      title: localized("LLM Evaluation Observatory", "LLM Değerlendirme Gözlemevi"),
+      title: localized("AI Evaluation & Reliability Lab", "AI Değerlendirme ve Güvenilirlik Laboratuvarı"),
       summary: localized(
-        "A bilingual observatory for LLM evaluation: golden sets, metrics, LLM-as-judge, A/B tests, regression suites, and online monitoring that turn releases into evidence rather than assumptions.",
-        "Sürümleri varsayım değil kanıt yapan LLM değerlendirme gözlemevi: golden set, metrikler, LLM-as-judge, A/B testleri, regresyon paketleri ve online izleme — iki dilli.",
+        "A bilingual, evidence-aware workbench for evaluation contracts and deterministic AI release decisions across output, trajectory, outcome, robustness, safety, and operations.",
+        "Çıktı, izlenen yol, sonuç, sağlamlık, güvenlik ve operasyon katmanlarında değerlendirme sözleşmeleriyle belirlenebilir AI sürüm kararları üretmeye yarayan iki dilli, kanıt duyarlı çalışma alanı.",
       ),
       repository: "https://github.com/aserdargun/evl-aserdargun-com",
       address: "https://evl.aserdargun.com/",
-      updatedAt: "2026-09-02",
+      updatedAt: "2026-09-04",
       relatedMemoryIds: [],
     },
   );
@@ -657,7 +657,7 @@ test("loads and validates the committed canonical manifest", async () => {
       ),
       repository: "https://github.com/aserdargun/wfm-aserdargun-com",
       address: "https://wfm.aserdargun.com/",
-      updatedAt: "2026-09-01",
+      updatedAt: "2026-09-03",
       relatedMemoryIds: [],
     },
   );
@@ -672,11 +672,11 @@ test("loads and validates the committed canonical manifest", async () => {
       title: localized("AI Systems Security Observatory", "AI Sistemleri Güvenlik Gözlemevi"),
       summary: localized(
         "A bilingual, evidence-aware observatory for tracing AI-agent trust from model intent through identity, authorization, constrained action, audit, and incident recovery.",
-        "AI agent güvenini model niyetinden kimlik, yetkilendirme, kısıtlı eylem, denetim ve olay kurtarmaya kadar izleyen iki dilli, kanıt duyarlı gözlemevi.",
+        "Model niyetinden kimliğe, yetkilendirmeye, kısıtlı eyleme, denetime ve olay sonrası toparlanmaya kadar AI ajanlarına duyulan güveni izleyen iki dilli, kanıt duyarlı gözlemevi.",
       ),
       repository: "https://github.com/aserdargun/sec-aserdargun-com",
       address: "https://sec.aserdargun.com/",
-      updatedAt: "2026-09-02",
+      updatedAt: "2026-09-03",
       relatedMemoryIds: [],
     },
   );

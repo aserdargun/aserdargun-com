@@ -2,26 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://aserdargun.com/</loc>
+    <lastmod>2026-09-04</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/" />
     <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/" />
   </url>
   <url>
     <loc>https://aserdargun.com/tr/</loc>
+    <lastmod>2026-09-04</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/" />
     <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/" />
   </url>
   <url>
     <loc>https://aserdargun.com/now/</loc>
-    <lastmod>2026-08-21</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/now/" />
     <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/now/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/now/" />
   </url>
   <url>
     <loc>https://aserdargun.com/tr/now/</loc>
-    <lastmod>2026-08-21</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/now/" />
     <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/now/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/now/" />

@@ -236,9 +236,9 @@ const expectedLearningQuestions = {
     "“Hesaplama nasıl çalışır?”",
     "“Modeller nasıl çalıştırılır?”",
     "“Modeller nasıl öğrenir/değişir?”",
-    "“Model kabiliyetini nasıl güvenilir bir agent sistemine dönüştürürüm?”",
+    "“Model yeteneğini nasıl güvenilir bir ajan sistemine dönüştürürüm?”",
     "“Model gerçekte ne görüyor?”",
-    "“Bu agent sistemine neden güvenmeliyim?”",
+    "“Bu ajan sistemine neden güvenmeliyim?”",
     "“Çalıştığını nereden biliyorum?”",
     "“Hangi laboratuvarı almalıyım?”",
     "“Bunu ölçekte nasıl işletirim?”",
@@ -263,7 +263,7 @@ const expectedLearningStudyRoles = {
     "Temel katman",
     "Ana proje",
     "Çalıştırmadan değiştirmeye",
-    "Güvenilir agent sistemi katmanı",
+    "Güvenilir ajan sistemi katmanı",
     "Modelin gerçekte gördüğü",
     "Güven ve güvence katmanı",
     "Varsayım yerine kanıt",
@@ -279,9 +279,9 @@ const expectedLearningTopics = {
     "Ollama · llama.cpp · vLLM · SGLang · TensorRT-LLM · Transformers · MLX",
     "pretrained model → dataset → tokenization → LoRA → QLoRA → SFT → DPO → GRPO → evaluation → merged model → LLM runtime",
     "model capability → context → tools → orchestration → sandbox → memory → verification → observability → reliable agent system",
-    "system message → context window → chunking → embeddings → vector DB → retrieval → memory → tool use → token budget",
+    "ingestion → chunking → embeddings → vector DB → retrieval → citations → cache → memory → tool use → token budget",
     "model → agent → identity → credential → authorization → tool → sandbox → data → action → audit → incident",
-    "golden set → metrics → LLM-as-judge → A/B test → regression suite → human eval → benchmark → online monitoring",
+    "golden set → output → trace → outcome → robustness → safety → operations → release decision",
     "open-weight model → workload → memory → NVIDIA / AMD / Apple → privacy / power / noise → local lab",
     "model → vLLM → Docker → GPU instance → cloud GPU → load balancer → autoscaling → API",
   ],
@@ -291,10 +291,10 @@ const expectedLearningTopics = {
     "model → mimari → hassasiyet → bellek hesabı → runtime → inference motoru → sunum → API → benchmark",
     "Ollama · llama.cpp · vLLM · SGLang · TensorRT-LLM · Transformers · MLX",
     "eğitilmiş model → veri seti → tokenization → LoRA → QLoRA → SFT → DPO → GRPO → değerlendirme → birleştirilmiş model → LLM runtime",
-    "model kabiliyeti → bağlam → araçlar → orkestrasyon → sandbox → bellek → doğrulama → gözlemlenebilirlik → güvenilir agent sistemi",
-    "sistem mesajı → bağlam penceresi → chunking → embedding → vektör veritabanı → retrieval → bellek → araç kullanımı → token bütçesi",
-    "model → agent → kimlik → kimlik bilgisi → yetkilendirme → araç → sandbox → veri → eylem → denetim → olay",
-    "golden set → metrikler → LLM-as-judge → A/B testi → regresyon paketi → insan değerlendirmesi → benchmark → online izleme",
+    "model yeteneği → bağlam → araçlar → orkestrasyon → sandbox → bellek → doğrulama → gözlemlenebilirlik → güvenilir ajan sistemi",
+    "alım → parçalama → gömme → vektör veritabanı → erişim → alıntılama → önbellek → bellek → araç kullanımı → token bütçesi",
+    "model → ajan → kimlik → kimlik bilgisi → yetkilendirme → araç → sandbox → veri → eylem → denetim → olay",
+    "referans kümesi → çıktı → izlenen yol → sonuç → sağlamlık → güvenlik → operasyon → sürüm kararı",
     "açık ağırlıklı model → iş yükü → bellek → NVIDIA / AMD / Apple → gizlilik / güç / gürültü → yerel laboratuvar",
     "model → vLLM → Docker → GPU instance → bulut GPU → load balancer → autoscaling → API",
   ],
@@ -318,8 +318,8 @@ function validateLearningSystem(locale, html) {
   check(intro.includes(expectedKicker), `${locale}: learning system kicker is missing`);
   check(intro.includes(expectedHeading), `${locale}: learning system heading is missing`);
   const expectedSystemCount = isTurkish
-    ? "On uygulama tek bir öğrenme döngüsü oluşturur"
-    : "The ten applications form one learning loop";
+    ? "On üç uygulama tek bir öğrenme döngüsü oluşturur"
+    : "Thirteen applications form one learning loop";
   check(intro.includes(expectedSystemCount), `${locale}: learning system application count is stale`);
   check(
     section.includes('<figure class="learning-diagram-wrap">')
@@ -540,18 +540,18 @@ function validateLearningInvest(locale, html) {
   const section = html.match(/<section class="learning-invest"[\s\S]*?<\/section>/)?.[0] ?? "";
   check(section.length > 0, `${locale}: learning investment section is missing`);
   if (section.length === 0) return;
-  const segments = matches(section, /<span class="learning-invest-seg(?:\s+learning-invest-seg-horizon)?" style="flex-basis: \d+%;"><code>([a-z]{3})<\/code> ([^<]+)<\/span>/g);
-  const expectedCodes = ["llm", "gpu", "usl", "cld", "aia", "wfm", "itl", "eng"];
+  const segments = matches(section, /<span class="learning-invest-seg(?:\s+learning-invest-seg-horizon)?" style="flex-basis: \d+%;"><code>([^<]+)<\/code> ([^<]+)<\/span>/g);
+  const expectedCodes = ["gpu · llm · usl", "hns · ctx", "sec · evl", "lcl · cld", "aia", "wfm · itl · eng"];
   check(JSON.stringify(segments) === JSON.stringify(expectedCodes), `${locale}: learning investment segment codes or order differ`);
   const labels = Array.from(
-    section.matchAll(/<span class="learning-invest-seg(?:\s+learning-invest-seg-horizon)?" style="flex-basis: \d+%;"><code>[a-z]{3}<\/code> ([^<]+)<\/span>/g),
+    section.matchAll(/<span class="learning-invest-seg(?:\s+learning-invest-seg-horizon)?" style="flex-basis: \d+%;"><code>[^<]+<\/code> ([^<]+)<\/span>/g),
     (match) => match[1].trim(),
   );
   const expectedLabels = isTurkish
-    ? ["%30", "%25", "%20", "%15", "%7", "%1", "%1", "%1"]
-    : ["30%", "25%", "20%", "15%", "7%", "1%", "1%", "1%"];
+    ? ["%30", "%25", "%20", "%15", "%7", "%3"]
+    : ["30%", "25%", "20%", "15%", "7%", "3%"];
   check(JSON.stringify(labels) === JSON.stringify(expectedLabels), `${locale}: learning investment percentages differ`);
-  const expectedBasis = ["30", "25", "20", "15", "7", "1", "1", "1"];
+  const expectedBasis = ["30", "25", "20", "15", "7", "3"];
   const basis = matches(section, /flex-basis: (\d+)%;/g);
   check(JSON.stringify(basis) === JSON.stringify(expectedBasis), `${locale}: learning investment weights differ`);
 }
@@ -1001,6 +1001,17 @@ for (const [locale, localizedPages] of Object.entries(routePages)) {
     JSON.stringify(renderedArchiveLinks) === JSON.stringify(expectedArchiveLinks),
     `${locale}/now: weekly archive links must list every local pair newest-first`,
   );
+  const nowJsonLdMatch = localizedPages.now.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  check(Boolean(nowJsonLdMatch), `${locale}/now: JSON-LD is missing`);
+  if (nowJsonLdMatch) {
+    try {
+      const nowJsonLd = JSON.parse(nowJsonLdMatch[1]);
+      check(nowJsonLd["@type"] === "WebPage", `${locale}/now: JSON-LD type must be WebPage`);
+      check(nowJsonLd.dateModified === livingSystem.now.updatedAt, `${locale}/now: JSON-LD dateModified differs from canonical Now data`);
+    } catch (error) {
+      failures.push(`${locale}/now: JSON-LD is invalid JSON (${error.message})`);
+    }
+  }
 }
 
 const archiveUpdatedDates = new Map();
@@ -1154,6 +1165,15 @@ const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
 check(sitemap.includes("<loc>https://aserdargun.com/</loc>"), "Sitemap is missing root URL");
 check(!sitemap.includes("https://aserdargun.com/en/"), "Sitemap must not list the redirected /en/ URL");
 check(sitemap.includes("<loc>https://aserdargun.com/tr/</loc>"), "Sitemap is missing /tr/");
+for (const url of [
+  "https://aserdargun.com/",
+  "https://aserdargun.com/tr/",
+  "https://aserdargun.com/now/",
+  "https://aserdargun.com/tr/now/",
+]) {
+  const entry = sitemap.match(new RegExp(`<url>\\s*<loc>${url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}<\\/loc>[\\s\\S]*?<\\/url>`))?.[0] ?? "";
+  check(entry.includes(`<lastmod>${livingSystem.now.updatedAt}</lastmod>`), `Sitemap current-content lastmod differs: ${url}`);
+}
 const publicMemoryUrls = {
   en: "https://aserdargun.com/memory/",
   tr: "https://aserdargun.com/tr/memory/",
