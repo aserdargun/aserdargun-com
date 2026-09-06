@@ -48,6 +48,7 @@
     "X-Frame-Options": "DENY"
   },
   "mimeTypes": {
-    ".avif": "image/avif"
+    ".avif": "image/avif",
+    ".mp4": "video/mp4"
   }
 }
