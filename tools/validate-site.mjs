@@ -68,7 +68,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "apps", "learning", "journey", "horizon", "approach", "about"];
-const expectedAssetVersion = "20260906-site-alignment-3";
+const expectedAssetVersion = "20260906-swarm-labs";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -84,6 +84,8 @@ const expectedApplicationRows = [
   { code: "lcl", repository: "lcl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/lcl-aserdargun-com", productUrl: "https://lcl.aserdargun.com/", productLabel: "lcl.aserdargun.com" },
   { code: "wfm", repository: "wfm-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/wfm-aserdargun-com", productUrl: "https://wfm.aserdargun.com/", productLabel: "wfm.aserdargun.com" },
   { code: "swi", repository: "swi-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/swi-aserdargun-com", productUrl: "https://swi.aserdargun.com/", productLabel: "swi.aserdargun.com" },
+  { code: "ant", repository: "ant-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/ant-aserdargun-com", productUrl: "https://ant.aserdargun.com/", productLabel: "ant.aserdargun.com" },
+  { code: "bee", repository: "bee-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/bee-aserdargun-com", productUrl: "https://bee.aserdargun.com/", productLabel: "bee.aserdargun.com" },
   { code: "itl", repository: "itl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/itl-aserdargun-com", productUrl: "https://itl.aserdargun.com/", productLabel: "itl.aserdargun.com" },
   { code: "eng", repository: "eng-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/eng-aserdargun-com", productUrl: "https://eng.aserdargun.com/", productLabel: "eng.aserdargun.com" },
 ].map((row) => ({
@@ -320,8 +322,8 @@ function validateLearningSystem(locale, html) {
   check(intro.includes(expectedKicker), `${locale}: learning system kicker is missing`);
   check(intro.includes(expectedHeading), `${locale}: learning system heading is missing`);
   const expectedSystemCount = isTurkish
-    ? "On dört uygulama tek bir öğrenme sistemi oluşturur"
-    : "Fourteen applications form one learning system";
+    ? "On altı uygulama tek bir öğrenme sistemi oluşturur"
+    : "Sixteen applications form one learning system";
   check(intro.includes(expectedSystemCount), `${locale}: learning system application count is stale`);
   check(
     section.includes('<figure class="learning-diagram-wrap">')
@@ -360,6 +362,8 @@ function validateLearningSystem(locale, html) {
       "cld:deployment",
       "wfm:world",
       "swi:collective",
+      "ant:colony-lab",
+      "bee:colony-lab",
       "itl:twin",
       "eng:horizon",
     ]),
@@ -386,6 +390,8 @@ function validateLearningSystem(locale, html) {
       "deployment-to-swi",
       "wfm-to-itl",
       "swi-to-itl",
+      "swi-to-ant",
+      "swi-to-bee",
       "itl-to-eng",
     ]),
     `${locale}: learning diagram edges differ from the application content model`,
@@ -454,7 +460,7 @@ function validateLearningHorizon(locale, html) {
   check(aside.includes(expectedKicker), `${locale}: learning horizon kicker is missing`);
   check(aside.includes("Open Humanoid Engineering"), `${locale}: learning horizon title is missing`);
   const horizonCodes = matches(aside, /href="https:\/\/([a-z]{3})\.aserdargun\.com\/"/g);
-  check(JSON.stringify(horizonCodes) === JSON.stringify(["wfm", "swi", "itl", "eng"]), `${locale}: learning horizon bridge, lab, and destination order differ`);
+  check(JSON.stringify(horizonCodes) === JSON.stringify(["wfm", "swi", "itl", "eng", "ant", "bee"]), `${locale}: learning horizon bridge, lab, and destination order differ`);
   const bridgeCopy = isTurkish
     ? "algı, tahmin, planlama ve eylem"
     : "perception, prediction, planning, and action";
@@ -559,13 +565,13 @@ function validateSystemFocus(locale, html) {
     ["agent-system", "Ajan sistemi", ["hns", "ctx"]],
     ["assurance", "Güvence", ["sec", "evl"]],
     ["deployment", "Dağıtım", ["cld", "lcl"]],
-    ["physical-ai", "Fiziksel AI", ["wfm", "swi", "itl", "eng"]],
+    ["physical-ai", "Fiziksel AI", ["wfm", "swi", "ant", "bee", "itl", "eng"]],
   ] : [
     ["foundation", "Foundation", ["aia", "llm", "usl", "gpu"]],
     ["agent-system", "Agent system", ["hns", "ctx"]],
     ["assurance", "Assurance", ["sec", "evl"]],
     ["deployment", "Deployment", ["cld", "lcl"]],
-    ["physical-ai", "Physical AI", ["wfm", "swi", "itl", "eng"]],
+    ["physical-ai", "Physical AI", ["wfm", "swi", "ant", "bee", "itl", "eng"]],
   ];
   for (const [layer, heading, expectedCodes] of expected) {
     const card = section.match(new RegExp(`<article class="system-focus-card system-focus-card--${layer}">[\\s\\S]*?<\\/article>`))?.[0] ?? "";

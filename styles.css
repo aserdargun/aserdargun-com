@@ -3186,6 +3186,85 @@ footer a {
   margin-top: 2px;
 }
 
+.swarm-labs {
+  margin-top: 16px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(200, 255, 54, 0.22);
+}
+
+.learning-horizon .swarm-labs__kicker {
+  color: var(--lime);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.7rem;
+}
+
+.swarm-labs h4 {
+  margin: 8px 0;
+  font-size: 1.05rem;
+  color: var(--white);
+}
+
+.swarm-labs__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 20px 0 16px;
+}
+
+.swarm-lab {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--line-dark);
+  border-radius: 10px;
+  background: rgba(255, 253, 247, 0.025);
+}
+
+.swarm-lab__identity {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.swarm-lab__identity code {
+  color: var(--lime);
+}
+
+.swarm-lab__identity span {
+  font-size: 0.75rem;
+}
+
+.swarm-lab h5 {
+  margin: 0;
+  color: var(--white);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.swarm-lab .learning-horizon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.learning-horizon .swarm-labs__note {
+  font-size: 0.8rem;
+  color: rgba(255, 253, 247, 0.65);
+}
+
+@media (max-width: 600px) {
+  .swarm-labs__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 900px) {
   .learning-system-inner {
     padding: 84px 20px;

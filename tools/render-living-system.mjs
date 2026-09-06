@@ -21,6 +21,7 @@ const GENERATED_BLOCKS = new Set([
   "primary-navigation",
   "application-map",
   "system-focus",
+  "swarm-labs",
   "now-content",
   "public-memory",
   "journey-evidence",
@@ -374,11 +375,16 @@ export function renderApplicationMap({ locale, data, today }) {
       "                  </ul>",
       "                </section>",
     ].join("\n");
-    const evidenceDates = application.researchCutoff === undefined ? "" : [
-      `                  <div><dt>${label(locale, "Research cutoff", "Araştırma kesiti")}</dt><dd><time datetime="${escapeHtml(application.researchCutoff)}">${escapeHtml(application.researchCutoff)}</time></dd></div>`,
-      `                  <div><dt>${label(locale, "Verified", "Doğrulandı")}</dt><dd><time datetime="${escapeHtml(application.lastVerified)}">${escapeHtml(application.lastVerified)}</time></dd></div>`,
-      `                  <div><dt>${label(locale, "Released", "Yayınlandı")}</dt><dd><time datetime="${escapeHtml(application.lastReleased)}">${escapeHtml(application.lastReleased)}</time><code>${escapeHtml(application.releaseSha.slice(0, 8))}</code></dd></div>`,
-    ].join("\n");
+    const evidenceDates = [
+      ["researchCutoff", "Research cutoff", "Araştırma kesiti"],
+      ["lastVerified", "Verified", "Doğrulandı"],
+      ["lastReleased", "Released", "Yayınlandı"],
+    ].filter(([key]) => application[key] !== undefined).map(([key, en, tr]) => {
+      const date = escapeHtml(application[key]);
+      const release = key === "lastReleased" && application.releaseSha
+        ? `<code>${escapeHtml(application.releaseSha.slice(0, 8))}</code>` : "";
+      return `                  <div><dt>${label(locale, en, tr)}</dt><dd><time datetime="${date}">${date}</time>${release}</dd></div>`;
+    }).join("\n");
     const applicationDetails = [
       '                <dl class="app-record-meta">',
       `                  <div><dt>${label(locale, "Kind", "Tür")}</dt><dd>${kindLabels[application.type]}</dd></div>`,
@@ -442,7 +448,7 @@ export function renderSystemFocus({ locale, data }) {
     {
       key: "physical-ai",
       title: label(locale, "Physical AI", "Fiziksel AI"),
-      description: label(locale, "World models and swarm coordination meet in digital twins and embodied engineering.", "Dünya modelleri ve sürü koordinasyonu, dijital ikizlerde ve bedenlenmiş mühendislikte buluşur."),
+      description: label(locale, "World models, swarm research, and the ANT / BEE colony experiments inform digital twins and embodied engineering.", "Dünya modelleri, sürü araştırmaları ve ANT / BEE koloni deneyleri, dijital ikizlere ve bedenlenmiş mühendisliğe bilgi sağlar."),
     },
   ];
   const registry = buildPortfolioRegistry({ applications: data.applications, generatedAt: data.now.updatedAt });
@@ -472,6 +478,30 @@ export function renderSystemFocus({ locale, data }) {
     ...cards,
     "      </div>",
     "    </section>",
+  ].join("\n");
+}
+
+export function renderSwarmLabs({ locale, data }) {
+  const parent = data.applications.find(({ code }) => code === "swi");
+  const labs = data.applications.filter(({ kind, upstreamApps = [] }) => kind === "lab" && upstreamApps.length === 1 && upstreamApps[0] === "swi");
+  if (!parent || labs.length === 0) return "";
+  return [
+    `        <div class="swarm-labs" data-swarm-parent="swi" role="group" aria-labelledby="swarm-labs-title-${locale}">`,
+    `          <p class="swarm-labs__kicker">${label(locale, "SWI · collective intelligence in practice", "SWI · deneylerle kolektif zekâ")}</p>`,
+    `          <h4 id="swarm-labs-title-${locale}">${label(locale, "From research to colony experiments", "Araştırmadan koloni deneylerine")}</h4>`,
+    `          <p>${label(locale, "Start with the mechanisms in SWI, then explore them in its two independent laboratories. Change a parameter, keep the same seed, and observe how local decisions shape the colony.", "Önce SWI’deki mekanizmaları incele, sonra onun altındaki iki bağımsız laboratuvarda dene. Bir parametreyi değiştir, aynı rastgelelik tohumunu koru ve yerel kararların koloniyi nasıl şekillendirdiğini gözle.")}</p>`,
+    '          <div class="swarm-labs__grid">',
+    ...labs.map((lab) => [
+      `            <article class="swarm-lab" data-swarm-lab="${escapeHtml(lab.code)}">`,
+      `              <p class="swarm-lab__identity"><code>${escapeHtml(lab.code.toUpperCase())}</code><span>${escapeHtml(lab.statusLabel[locale])}</span></p>`,
+      `              <h5>${escapeHtml(lab.guidingQuestion[locale])}</h5>`,
+      `              <p>${escapeHtml(lab.summary[locale])}</p>`,
+      `              <a class="learning-horizon-link" href="${escapeHtml(lab.address)}" target="_blank" rel="noreferrer">${label(locale, `Open ${lab.code.toUpperCase()} lab`, `${lab.code.toUpperCase()} laboratuvarını aç`)} <span aria-hidden="true">↗</span></a>`,
+      "            </article>",
+    ].join("\n")),
+    "          </div>",
+    `          <p class="swarm-labs__note">${label(locale, "These are educational models: the results describe the simulation and are not biological field measurements.", "Bunlar eğitim modelleridir: sonuçlar simülasyonu açıklar; biyolojik saha ölçümü değildir.")}</p>`,
+    "        </div>",
   ].join("\n");
 }
 
@@ -721,6 +751,7 @@ export function renderDocument({ html, page, locale, data, today, archiveLinks =
     "living-system": () => renderLivingSystem({ locale, data, today }),
     "application-map": () => renderApplicationMap({ locale, data, today }),
     "system-focus": () => renderSystemFocus({ locale, data }),
+    "swarm-labs": () => renderSwarmLabs({ locale, data }),
     "now-content": () => renderNowContent({ locale, data, today, archiveLinks }),
     "public-memory": () => renderPublicMemory({ locale, data }),
     "journey-evidence": () => renderJourneyEvidence({ locale, data, documentHtml: html }),

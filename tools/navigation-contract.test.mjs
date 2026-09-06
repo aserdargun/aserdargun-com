@@ -420,8 +420,8 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ? "algı, tahmin, planlama ve eylem"
       : "perception, prediction, planning, and action";
     const expectedCollectiveCopy = document.locale === "tr"
-      ? "kolektif davranış, koordinasyon ve çoklu ajan sistemlerini"
-      : "collective behavior, coordination, and multi-agent systems";
+      ? "biyolojik mekanizmaları ve ajan protokollerini"
+      : "biological mechanisms and agent protocols";
 
     assert.ok(horizon, "learning horizon callout must remain visible");
     assert.match(horizon, new RegExp(expectedBridgeCopy));
@@ -433,6 +433,8 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
         "https://swi.aserdargun.com/",
         "https://itl.aserdargun.com/",
         "https://eng.aserdargun.com/",
+        "https://ant.aserdargun.com/",
+        "https://bee.aserdargun.com/",
       ],
     );
   });
@@ -542,6 +544,8 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://cld.aserdargun.com/", "CLD"],
       ["https://wfm.aserdargun.com/", "WFM"],
       ["https://swi.aserdargun.com/", "SWI"],
+      ["https://ant.aserdargun.com/", "ANT"],
+      ["https://bee.aserdargun.com/", "BEE"],
       ["https://itl.aserdargun.com/", "ITL"],
       ["https://eng.aserdargun.com/", "ENG"],
     ];
@@ -550,7 +554,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.equal(extraSvgScopes.length, 0);
     assert.doesNotMatch(svg, /<(?:span|foreignObject)\b/i, "HTML must never be inserted into SVG");
     const svgBlankAnchors = anchors(svg).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
-    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all fourteen diagram nodes must remain inside SVG");
+    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all sixteen diagram nodes must remain inside SVG");
 
     assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")), expectedNodes.map(([href]) => href));
     for (const [index, anchor] of svgBlankAnchors.entries()) {
@@ -579,7 +583,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.match(svg, /class="ld-legend"/, "primary, supporting, and horizon relationships need a legend");
 
     const edges = Array.from(svg.matchAll(/<path data-learning-edge="([^"]+)"[^>]*d="([^"]+)"[^>]*marker-end="url\(#ld-arrow\)"\/>/g));
-    assert.equal(edges.length, 19, "every directed relationship must terminate with an arrow marker");
+    assert.equal(edges.length, 21, "every directed relationship must terminate with an arrow marker");
     assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-wfm")).length, 1, "WFM must receive one arrow");
     assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-swi")).length, 1, "SWI must receive one arrow");
     const deploymentConnectors = Array.from(svg.matchAll(/<path data-learning-connector="([^"]+)"[^>]*d="([^"]+)"\/>/g));

@@ -545,14 +545,14 @@
       },
       "shortName": "SWI",
       "description": {
-        "en": "A bilingual research map connecting collective behavior in nature with coordination principles, algorithms, robotics, and artificial agents.",
-        "tr": "Doğadaki kolektif davranışı koordinasyon ilkeleri, algoritmalar, robotik ve yapay ajanlarla birleştiren iki dilli araştırma haritası."
+        "en": "A bilingual research platform connecting biological mechanisms, source-backed studies, and agent experiment recipes. ANT and BEE extend its collective-intelligence research into interactive colony laboratories.",
+        "tr": "Biyolojik mekanizmaları, kaynaklı araştırmaları ve ajan deney reçetelerini birleştiren iki dilli araştırma platformu. ANT ve BEE, kolektif zekâ araştırmasını etkileşimli koloni laboratuvarlarına taşır."
       },
       "type": "atlas",
-      "status": "active",
+      "status": "live",
       "statusLabel": {
-        "en": "Research · verification pending",
-        "tr": "Araştırma · doğrulama bekliyor"
+        "en": "Live",
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -560,6 +560,10 @@
       ],
       "productionUrl": "https://swi.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/swi-aserdargun-com",
+      "researchCutoff": "2026-09-06",
+      "lastVerified": "2026-09-06",
+      "lastReleased": "2026-09-06",
+      "releaseSha": "347acfe0ebb0ccb70f474b5a4bb25bf8cb189e91",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -568,6 +572,8 @@
         "cld"
       ],
       "downstreamApps": [
+        "ant",
+        "bee",
         "itl"
       ],
       "tracks": [
@@ -580,6 +586,100 @@
       ],
       "portfolioLayer": "physical-ai",
       "focusState": "horizon"
+    },
+    {
+      "code": "ant",
+      "name": {
+        "en": "ANT — Ant Colony Intelligence Laboratory",
+        "tr": "ANT — Karınca Kolonisi Zekâ Laboratuvarı"
+      },
+      "shortName": "ANT",
+      "description": {
+        "en": "A colony experiment lab within SWI’s research family. Explore how local rules, pheromone trails, evaporation, and exploration produce collective foraging through reproducible simulations.",
+        "tr": "SWI araştırma ailesinde bir koloni deney laboratuvarı. Yerel kuralların, feromon izlerinin, buharlaşmanın ve keşfin ortak besin arama davranışını nasıl oluşturduğunu tekrarlanabilir simülasyonlarla incele."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://ant.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/ant-aserdargun-com",
+      "lastVerified": "2026-09-06",
+      "lastReleased": "2026-09-06",
+      "releaseSha": "a08e44f9a8f4d9a41fac934834008e5ad998542c",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "swi"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "swarm-intelligence",
+        "stigmergy",
+        "pheromones",
+        "foraging",
+        "simulation"
+      ],
+      "entityIds": [
+        "entity:swarm-intelligence",
+        "entity:ant-colony"
+      ],
+      "portfolioLayer": "physical-ai",
+      "focusState": "active"
+    },
+    {
+      "code": "bee",
+      "name": {
+        "en": "BEE — Honey Bee Collective Intelligence Laboratory",
+        "tr": "BEE — Bal Arısı Kolektif Zekâ Laboratuvarı"
+      },
+      "shortName": "BEE",
+      "description": {
+        "en": "A colony experiment lab within SWI’s research family. Study honey bee discovery, waggle-dance recruitment, and resource allocation, including a paired control colony with dance communication disabled.",
+        "tr": "SWI araştırma ailesinde bir koloni deney laboratuvarı. Bal arılarında keşfi, sallanma dansıyla katılımı ve kaynak paylaşımını, dans iletişimi kapalı eşzamanlı bir kontrol kolonisiyle karşılaştırarak incele."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://bee.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/bee-aserdargun-com",
+      "lastVerified": "2026-09-06",
+      "lastReleased": "2026-09-06",
+      "releaseSha": "121f40eb56b8a447e36c932cc9ed163e12263dba",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "swi"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "swarm-intelligence",
+        "waggle-dance",
+        "recruitment",
+        "foraging",
+        "simulation"
+      ],
+      "entityIds": [
+        "entity:swarm-intelligence",
+        "entity:honey-bee-colony"
+      ],
+      "portfolioLayer": "physical-ai",
+      "focusState": "active"
     },
     {
       "code": "itl",

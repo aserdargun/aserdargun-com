@@ -349,10 +349,10 @@
       "kind": "atlas",
       "systemRole": "horizon-bridge",
       "visibility": "public",
-      "status": "active",
+      "status": "live",
       "statusLabel": {
-        "en": "Research · verification pending",
-        "tr": "Araştırma · doğrulama bekliyor"
+        "en": "Live",
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -363,12 +363,16 @@
         "tr": "SWI — Sürü Zekâsı"
       },
       "summary": {
-        "en": "A bilingual research map connecting collective behavior in nature with coordination principles, algorithms, robotics, and artificial agents.",
-        "tr": "Doğadaki kolektif davranışı koordinasyon ilkeleri, algoritmalar, robotik ve yapay ajanlarla birleştiren iki dilli araştırma haritası."
+        "en": "A bilingual research platform connecting biological mechanisms, source-backed studies, and agent experiment recipes. ANT and BEE extend its collective-intelligence research into interactive colony laboratories.",
+        "tr": "Biyolojik mekanizmaları, kaynaklı araştırmaları ve ajan deney reçetelerini birleştiren iki dilli araştırma platformu. ANT ve BEE, kolektif zekâ araştırmasını etkileşimli koloni laboratuvarlarına taşır."
       },
       "repository": "https://github.com/aserdargun/swi-aserdargun-com",
       "address": "https://swi.aserdargun.com/",
       "updatedAt": "2026-09-06",
+      "researchCutoff": "2026-09-06",
+      "lastVerified": "2026-09-06",
+      "lastReleased": "2026-09-06",
+      "releaseSha": "347acfe0ebb0ccb70f474b5a4bb25bf8cb189e91",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -377,6 +381,8 @@
         "cld"
       ],
       "downstreamApps": [
+        "ant",
+        "bee",
         "itl"
       ],
       "tracks": [
@@ -389,6 +395,74 @@
       ],
       "portfolioLayer": "physical-ai",
       "focusState": "horizon",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "ant",
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": { "en": "Live", "tr": "Yayında" },
+      "languages": ["tr", "en"],
+      "title": { "en": "ANT — Ant Colony Intelligence Laboratory", "tr": "ANT — Karınca Kolonisi Zekâ Laboratuvarı" },
+      "summary": {
+        "en": "A colony experiment lab within SWI’s research family. Explore how local rules, pheromone trails, evaporation, and exploration produce collective foraging through reproducible simulations.",
+        "tr": "SWI araştırma ailesinde bir koloni deney laboratuvarı. Yerel kuralların, feromon izlerinin, buharlaşmanın ve keşfin ortak besin arama davranışını nasıl oluşturduğunu tekrarlanabilir simülasyonlarla incele."
+      },
+      "guidingQuestion": {
+        "en": "How does a colony find a shared trail without a central plan?",
+        "tr": "Bir koloni merkezi bir plan olmadan ortak yolu nasıl bulur?"
+      },
+      "repository": "https://github.com/aserdargun/ant-aserdargun-com",
+      "address": "https://ant.aserdargun.com/",
+      "updatedAt": "2026-09-06",
+      "lastVerified": "2026-09-06",
+      "lastReleased": "2026-09-06",
+      "releaseSha": "a08e44f9a8f4d9a41fac934834008e5ad998542c",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": ["swi"],
+      "downstreamApps": [],
+      "tracks": ["swarm-intelligence", "stigmergy", "pheromones", "foraging", "simulation"],
+      "entityIds": ["entity:swarm-intelligence", "entity:ant-colony"],
+      "portfolioLayer": "physical-ai",
+      "focusState": "active",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "bee",
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": { "en": "Live", "tr": "Yayında" },
+      "languages": ["tr", "en"],
+      "title": { "en": "BEE — Honey Bee Collective Intelligence Laboratory", "tr": "BEE — Bal Arısı Kolektif Zekâ Laboratuvarı" },
+      "summary": {
+        "en": "A colony experiment lab within SWI’s research family. Study honey bee discovery, waggle-dance recruitment, and resource allocation, including a paired control colony with dance communication disabled.",
+        "tr": "SWI araştırma ailesinde bir koloni deney laboratuvarı. Bal arılarında keşfi, sallanma dansıyla katılımı ve kaynak paylaşımını, dans iletişimi kapalı eşzamanlı bir kontrol kolonisiyle karşılaştırarak incele."
+      },
+      "guidingQuestion": {
+        "en": "How does dance communication change a colony’s foraging choices?",
+        "tr": "Dansla iletişim koloninin besin arama tercihlerini nasıl değiştirir?"
+      },
+      "repository": "https://github.com/aserdargun/bee-aserdargun-com",
+      "address": "https://bee.aserdargun.com/",
+      "updatedAt": "2026-09-06",
+      "lastVerified": "2026-09-06",
+      "lastReleased": "2026-09-06",
+      "releaseSha": "121f40eb56b8a447e36c932cc9ed163e12263dba",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": ["swi"],
+      "downstreamApps": [],
+      "tracks": ["swarm-intelligence", "waggle-dance", "recruitment", "foraging", "simulation"],
+      "entityIds": ["entity:swarm-intelligence", "entity:honey-bee-colony"],
+      "portfolioLayer": "physical-ai",
+      "focusState": "active",
       "relatedMemoryIds": []
     },
     {
@@ -463,8 +537,8 @@
         "timeframe": "week",
         "title": { "en": "Closing the learning loop", "tr": "Öğrenme döngüsünü kapatmak" },
         "summary": {
-          "en": "I am bringing 14 applications into one learning system, from foundations and agent engineering to physical AI. This week’s focus is clearer relationships, searchable applications, and published notes with their sources. Earlier frontend exercises are retired, and research awaiting release verification is labeled explicitly.",
-          "tr": "Temellerden ajan mühendisliğine ve fiziksel yapay zekâya uzanan 14 uygulamayı tek bir öğrenme sisteminde topluyorum. Bu haftanın odağı; anlaşılır ilişkiler, aranabilir uygulamalar ve kaynaklarıyla yayınlanan notlar. Eski ön yüz alıştırmaları kaldırıldı; yayın doğrulaması bekleyen araştırmalar açıkça etiketleniyor."
+          "en": "I am connecting 16 applications into one learning system, from foundations and agent engineering to physical AI. SWI is live as the collective-intelligence research platform; its ANT and BEE laboratories make pheromone trails, dance communication, and collective foraging observable through reproducible experiments. This week’s focus is connecting the research to experiments with clear relationships and dated evidence.",
+          "tr": "Temellerden ajan mühendisliğine ve fiziksel yapay zekâya uzanan 16 uygulamayı tek bir öğrenme sisteminde birleştiriyorum. Kolektif zekâ araştırma platformu SWI yayında; onun altındaki ANT ve BEE laboratuvarları feromon izlerini, dansla iletişimi ve ortak besin aramayı tekrarlanabilir deneylerle gözlemlenebilir kılıyor. Bu haftanın odağı, araştırmayı açık ilişkiler ve tarihli kanıtlarla deneylere bağlamak."
         },
         "tags": [
           { "en": "System topology", "tr": "Sistem topolojisi" },

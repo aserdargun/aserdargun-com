@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import {
   renderApplicationMap,
   renderPublicMemory,
+  renderSwarmLabs,
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -19,7 +20,7 @@ async function readData() {
 test("the public application contract keeps verification, research, and release facts separate", async () => {
   const data = await readData();
 
-  for (const application of data.applications.filter(({ code }) => code !== "swi")) {
+  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee"].includes(code))) {
     assert.match(application.researchCutoff, /^2026-\d{2}-\d{2}$/, `${application.code} research cutoff`);
     assert.equal(application.lastVerified, "2026-09-04", `${application.code} verification date`);
     assert.match(application.lastReleased, /^2026-\d{2}-\d{2}$/, `${application.code} release date`);
@@ -52,7 +53,7 @@ test("the portfolio registry is a deterministic public projection of application
 
   assert.equal(registry.schemaVersion, 1);
   assert.equal(registry.generatedAt, "2026-09-04");
-  assert.equal(registry.applications.length, 14);
+  assert.equal(registry.applications.length, 16);
   assert.deepEqual(registry.applications.map(({ code }) => code), data.applications.map(({ code }) => code));
   assert.deepEqual(
     registry.applications.find(({ code }) => code === "ctx"),
@@ -136,22 +137,50 @@ test("approved knowledge records render content, limitations, sources, apps, and
   assert.doesNotMatch(english, /nxt\.aserdargun\.com/);
 });
 
-test("unverified SWI remains discoverable without invented verification or release evidence", async () => {
+test("verified SWI exposes its published research snapshot and release evidence", async () => {
   const data = await readData();
   const swi = data.applications.find(({ code }) => code === "swi");
-  assert.equal(swi.status, "active");
-  for (const key of ["researchCutoff", "lastVerified", "lastReleased", "releaseSha"]) {
-    assert.equal(swi[key], undefined, `${key} needs evidence`);
-  }
+  assert.equal(swi.status, "live");
+  assert.equal(swi.researchCutoff, "2026-09-06", "the live SWI workspace explicitly dates its research snapshot");
+  assert.match(swi.lastVerified, /^\d{4}-\d{2}-\d{2}$/);
+  assert.match(swi.lastReleased, /^\d{4}-\d{2}-\d{2}$/);
+  assert.match(swi.releaseSha, /^[a-f0-9]{40}$/);
   for (const locale of ["en", "tr"]) {
     const html = renderApplicationMap({ locale, data, today });
     const row = html.match(/<tr[^>]*data-app-code="swi"[\s\S]*?<\/tr>/)?.[0];
     assert.ok(row);
     assert.ok(row.includes(swi.statusLabel[locale]));
-    assert.doesNotMatch(row, /data-freshness-date|<time|undefined|null/);
+    assert.ok(row.includes(swi.lastVerified));
+    assert.ok(row.includes(swi.lastReleased));
+    assert.doesNotMatch(row, /undefined|null/);
   }
   for (const code of ["lcl", "cld"]) assert.ok(data.applications.find((app) => app.code === code).downstreamApps.includes("swi"));
   assert.ok(data.applications.find((app) => app.code === "itl").upstreamApps.includes("swi"));
+});
+
+test("SWI colony labs preserve their relationship and show release evidence without a research cutoff", async () => {
+  const data = await readData();
+  const swi = data.applications.find(({ code }) => code === "swi");
+  for (const code of ["ant", "bee"]) {
+    const lab = data.applications.find((application) => application.code === code);
+    assert.equal(lab.status, "live");
+    assert.deepEqual(lab.upstreamApps, ["swi"]);
+    assert.ok(swi.downstreamApps.includes(code));
+    assert.equal(lab.researchCutoff, undefined, "a release does not establish a research cutoff");
+    for (const locale of ["en", "tr"]) {
+      const html = renderApplicationMap({ locale, data, today });
+      const row = html.match(new RegExp(`<tr[^>]*data-app-code="${code}"[\\s\\S]*?<\\/tr>`))?.[0];
+      assert.ok(row.includes(lab.lastVerified));
+      assert.ok(row.includes(lab.lastReleased));
+      assert.ok(row.includes(lab.releaseSha.slice(0, 8)), "the release remains visible without a research cutoff");
+      assert.doesNotMatch(row, /Research cutoff|Araştırma kesiti|undefined|null/);
+      const labs = renderSwarmLabs({ locale, data });
+      assert.match(labs, /data-swarm-parent="swi"/);
+      assert.ok(labs.includes(`data-swarm-lab="${code}"`));
+      assert.ok(labs.includes(`href="${lab.address}"`));
+      assert.doesNotMatch(labs, /data-swarm-lab="itl"/, "the shared industrial-twin bridge is not a SWI colony lab");
+    }
+  }
 });
 
 test("homepage diagram, registry, and layer overview cover the same applications before contact", async () => {

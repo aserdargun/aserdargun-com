@@ -39,15 +39,15 @@ There is no production build step. npm provides the shared development command s
 - Hero + reverse-chronological eight-stage career timeline (`08 AI Engineer` → `01 Mechanical Engineering`)
 - Five-layer overview precedes `#learning`: foundations, agent systems, assurance, deployment, and physical AI
 - `#learning` learning system - an orthogonal SVG relationship map with guiding questions and an accessible mobile equivalent; parallel GPU/USL foundations feed LLM and HNS, followed by CTX/SEC/EVL and parallel LCL/CLD deployment choices
-- WFM and SWI form parallel research bridges into ITL and the long-term ENG horizon
-- `#apps` application map - 14 canonical applications with localized search, layer filters, and expandable evidence; each is keyed by a three-letter code
+- WFM and SWI form parallel research bridges into ITL and the long-term ENG horizon; ANT and BEE branch from SWI as independent colony experiment labs
+- `#apps` application map - 16 canonical applications with localized search, layer filters, and expandable evidence; each is keyed by a three-letter code
 - `/now/` and `/tr/now/` - dated current work with frozen weekly archives
 - `/memory/` and `/tr/memory/` - five explicitly authored public Knowledge notes with sources and related applications
 - `#approach` working principles, `#about` + verified credentials, contact
 
 ### Application identities and evidence
 
-Read identities, roles, lifecycle status, dates, and relationships from `data/living-system.json`; do not maintain a second product inventory here. Every application belongs in the registry, application map, system overview, and corresponding learning relationship. A public link does not establish verified production status. SWI currently has a pending verification label and no asserted release evidence. Preserve missing evidence instead of fabricating dates or SHAs.
+Read identities, roles, lifecycle status, dates, and relationships from `data/living-system.json`; do not maintain a second product inventory here. Every application belongs in the registry, application map, system overview, and corresponding learning relationship. A public link does not establish verified production status. SWI, ANT, and BEE are live with dated verification and release evidence. ANT and BEE have no asserted research cutoff; their educational models are distinct from biological field measurements. Preserve missing evidence instead of fabricating dates or SHAs.
 
 Knowledge renders only the explicitly authored public records in the canonical source. Private NXT content must never be inferred or copied into public pages or the registry. Historical Now content retains its original dates.
 

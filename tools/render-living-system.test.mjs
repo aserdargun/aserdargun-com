@@ -521,6 +521,10 @@ test("escapes application data derived from the public manifest", async () => {
 
 test("renders application codes and empty relationship blocks with locale parity", async () => {
   const data = await readFixtureData();
+  for (const application of data.applications) {
+    delete application.guidingQuestion;
+    delete application.nextDirection;
+  }
   const english = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
   const turkish = renderDocument({ html: homeDocument(), page: "home", locale: "tr", data, today });
   const codes = (html) => Array.from(html.matchAll(/<th scope="row"><code>([a-z]{3})<\/code><\/th>/g), (match) => match[1]);
@@ -855,7 +859,7 @@ test("renders the application-map summary from semantic roles", async () => {
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /Ten core learning applications, one standalone lab, two horizon bridges, and one long-term horizon\./);
+  assert.match(rendered, /Ten core learning applications, three standalone labs, two horizon bridges, and one long-term horizon\./);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
 });
 
