@@ -427,15 +427,21 @@ for (const document of routes) {
 }
 
 for (const document of routes.filter(({ route }) => route === "/" || route === "/tr/")) {
-  test(`${document.route} presents the horizon path from world models through the twin lab to humanoid engineering`, async () => {
+  test(`${document.route} presents parallel world-model and collective-intelligence bridges into the twin lab`, async () => {
     const html = await readFile(path.join(rootDir, document.file), "utf8");
     const horizon = scopedElements(html, "aside").find((scope) => /class="learning-horizon"/.test(scope));
     const expectedBridgeCopy = document.locale === "tr"
       ? "algı, tahmin, planlama ve eylem"
       : "perception, prediction, planning, and action";
+    const expectedCollectiveCopy = document.locale === "tr"
+      ? "kolektif davranış, koordinasyon ve çoklu ajan sistemlerini"
+      : "collective behavior, coordination, and multi-agent systems";
 
     assert.ok(horizon, "learning horizon callout must remain visible");
     assert.match(horizon, new RegExp(expectedBridgeCopy));
+    assert.match(horizon, new RegExp(expectedCollectiveCopy));
+    assert.match(horizon, /data-learning-status="development"[^>]*>swi\.aserdargun\.com/);
+    assert.doesNotMatch(horizon, /href="https:\/\/swi\.aserdargun\.com\//, "SWI must not link before verified deployment");
     assert.deepEqual(
       anchors(horizon).map(({ openingTag }) => attribute(openingTag, "href")),
       [
@@ -463,7 +469,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     );
     assert.deepEqual(
       cards.map((card) => card.match(/<span class="learning-order" aria-hidden="true">([^<]+)<\/span>/)?.[1]),
-      ["7A", "7B"],
+      [undefined, undefined],
     );
     assert.equal(cards[0].includes(expectedQuestion), true);
     assert.deepEqual(
@@ -582,12 +588,31 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
         return [code, rect && { x: Number(rect[1]), y: Number(rect[2]), width: Number(rect[3]), height: Number(rect[4]) }];
       }),
     );
+    const swiRectMatch = svg.match(/<g class="ld-node ld-node-horizon" data-learning-role="collective"[\s\S]*?<rect x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)"/);
+    assert.ok(swiRectMatch, "the developing SWI node needs geometry for route checks");
+    nodeRects.set("swi", {
+      x: Number(swiRectMatch[1]),
+      y: Number(swiRectMatch[2]),
+      width: Number(swiRectMatch[3]),
+      height: Number(swiRectMatch[4]),
+    });
 
     assert.match(svg, /class="ld-stage-index"/, "the complete system needs a visible stage rail");
     assert.match(svg, /class="ld-legend"/, "primary, supporting, and horizon relationships need a legend");
 
     const edges = Array.from(svg.matchAll(/<path data-learning-edge="([^"]+)"[^>]*d="([^"]+)"[^>]*marker-end="url\(#ld-arrow\)"\/>/g));
-    assert.equal(edges.length, 18, "every relationship must terminate with an arrow marker");
+    assert.equal(edges.length, 19, "every directed relationship must terminate with an arrow marker");
+    assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-wfm")).length, 1, "WFM must receive one arrow");
+    assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-swi")).length, 1, "SWI must receive one arrow");
+    const deploymentConnectors = Array.from(svg.matchAll(/<path data-learning-connector="([^"]+)"[^>]*d="([^"]+)"\/>/g));
+    assert.deepEqual(
+      deploymentConnectors.map(([, connectorName]) => connectorName),
+      ["lcl-to-stage-07", "cld-to-stage-07"],
+      "local and cloud paths must merge into the shared stage-07 bus",
+    );
+    for (const [, connectorName, route] of deploymentConnectors) {
+      assert.doesNotMatch(route, /[CLQAST]/, `${connectorName} must use an orthogonal route`);
+    }
 
     const segmentCrossesInterior = (start, end, rect) => {
       const right = rect.x + rect.width;

@@ -238,12 +238,12 @@
       <div class="learning-intro">
         <p class="learning-kicker">Öğrenme sistemi · AI Ekosistem Atlası</p>
         <h2 id="learning-title">Atlas bir öğrenme sistemidir.</h2>
-        <p id="learning-description">On üç uygulama tek bir öğrenme döngüsü oluşturur: AIA sisteme yön verir; GPU hesaplama temelini sağlar; USL modelleri uyarlar; LLM ise ikisini çalıştırma ve servis katmanında buluşturur. HNS sunulan model yeteneğini güvenilir bir ajan sistemine dönüştüren harness katmanını haritalar; CTX modelin gerçekte gördüğü bilgi sistemini tasarlar, bu bağlamı LLM çalıştırma katmanına geri besler ve aynı zamanda LCL&apos;deki yerel hesaplama yolunu da besler; SEC bu sistemin kimlikten denetim ve olay sonrası toparlanmaya kadar güvenilirliğini sınar; EVL ise sürümleri varsayım yerine kanıtla kapatır. SEC hem LCL hem CLD&apos;yi besler; EVL ise CLD&apos;deki bulut yolunu besler. Döngünün altında, LCL ve CLD&apos;den inen ufuk omurgası WFM, ITL ve ENG&apos;den geçer — dünya modelleri, endüstriyel ikizler ve tüm öğrenme sisteminin hizmet ettiği uzun vadeli bedenlenmiş varış noktası.</p>
+        <p id="learning-description">On üç canlı uygulama ve geliştirilmekte olan bir laboratuvar tek bir öğrenme sistemi oluşturur: AIA sisteme yön verir; GPU hesaplama temelini sağlar; USL modelleri uyarlar; LLM ise ikisini çalıştırma ve servis katmanında buluşturur. HNS sunulan model yeteneğini güvenilir bir ajan sistemine dönüştüren harness katmanını haritalar; CTX modelin gerçekte gördüğü bilgi sistemini tasarlar, bu bağlamı LLM çalıştırma katmanına geri besler ve aynı zamanda LCL&apos;deki yerel hesaplama yolunu da besler; SEC bu sistemin kimlikten denetim ve olay sonrası toparlanmaya kadar güvenilirliğini sınar; EVL ise sürümleri varsayım yerine kanıtla kapatır. SEC hem LCL hem CLD&apos;yi besler; EVL ise CLD&apos;deki bulut yolunu besler. Döngünün altında lokal ve bulut dağıtımı iki paralel ufuk köprüsüne açılır: WFM bir ajanın dünyayı nasıl modellediğini, tahmin ettiğini, planladığını ve eyleme geçtiğini; SWI ise çok sayıda sınırlı ajanın uyarlanabilir tek bir sistem gibi nasıl koordine olduğunu inceler. İki kol ITL&apos;de birleşip ENG&apos;deki uzun vadeli bedenlenmiş varış noktasına ilerler.</p>
       </div>
       <figure class="learning-diagram-wrap">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 900" role="img" aria-labelledby="ld-title-tr ld-desc-tr" class="ld-svg">
-          <title id="ld-title-tr">AI Ekosistem Atlası bütünsel öğrenme sistemi ve ufuk omurgası</title>
-          <desc id="ld-desc-tr">AIA yön verir; GPU ve USL temelleri LLM çalıştırma merkezinde birleşir. LLM, HNS ajan sistemi katmanını besler. HNS; CTX bağlam, SEC güvence ve EVL değerlendirme yollarına açılır. CTX LLM&apos;ye geri besleme yapar; CTX ve SEC LCL&apos;yi, SEC ve EVL CLD&apos;yi besler. LCL ile CLD, WFM, ITL ve ENG ufuk omurgasında yeniden birleşir. Tüm ilişkiler kutuların dışındaki yatay ve dikey koridorlardan geçer.</desc>
+          <title id="ld-title-tr">Dünya modeli ve kolektif zekâ köprülerini paralel gösteren bütünsel AI Ekosistem Atlası öğrenme sistemi</title>
+          <desc id="ld-desc-tr">AIA yön verir; GPU ve USL temelleri LLM çalıştırma merkezinde birleşir. LLM, HNS ajan sistemi katmanını besler. HNS; CTX bağlam, SEC güvence ve EVL değerlendirme yollarına açılır. CTX LLM&apos;ye geri besleme yapar; CTX ve SEC LCL&apos;yi, SEC ve EVL CLD&apos;yi besler. LCL ile CLD paralel WFM dünya modeli ve SWI kolektif zekâ köprülerini besler. WFM ile SWI, bedenlenmiş ENG ufkundan önce ITL&apos;de birleşir. SWI geliştirme aşamasında gösterilir ve public deploy doğrulanana kadar bağlantı değildir. Tüm ilişkiler kutuların dışındaki yatay ve dikey koridorlardan geçer.</desc>
           <defs>
             <marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M 0 1 L 9 5 L 0 9 z" fill="rgba(200,255,54,0.55)"/>
@@ -256,7 +256,7 @@
             <text x="24" y="303">04 · AJAN SİSTEMİ</text>
             <text x="24" y="388">05 · KALİTE DÖNGÜSÜ</text>
             <text x="24" y="488">06 · DAĞITIM</text>
-            <text x="24" y="618">07 · DÜNYA MODELLERİ</text>
+            <text x="24" y="618">07 · MODELLE &amp; KOORDİNE ET</text>
             <text x="24" y="708">08 · ENDÜSTRİYEL İKİZ</text>
             <text x="24" y="798">09 · BEDENLENMİŞ UFUK</text>
           </g>
@@ -275,9 +275,12 @@
             <path data-learning-edge="sec-to-cld" class="ld-edge-decision" d="M 510 410 V 435 H 620 V 460" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="evl-to-cld" class="ld-edge-context" d="M 690 410 V 445 H 660 V 460" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="ctx-to-lcl" class="ld-edge-context" d="M 270 410 V 445 H 300 V 460" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="lcl-to-wfm" class="ld-edge-horizon" d="M 340 510 V 550 H 440 V 590" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="cld-to-wfm" class="ld-edge-horizon" d="M 620 510 V 550 H 520 V 590" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 480 640 V 680" marker-end="url(#ld-arrow)"/>
+            <path data-learning-connector="lcl-to-stage-07" class="ld-edge-horizon" d="M 340 510 V 530 H 480 V 570"/>
+            <path data-learning-connector="cld-to-stage-07" class="ld-edge-horizon" d="M 620 510 V 530 H 480"/>
+            <path data-learning-edge="deployment-to-wfm" class="ld-edge-horizon" d="M 480 570 H 290 V 590" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="deployment-to-swi" class="ld-edge-horizon" d="M 480 570 H 670 V 590" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 290 640 V 660 H 450 V 680" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="swi-to-itl" class="ld-edge-horizon" d="M 670 640 V 660 H 510 V 680" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 480 730 V 770" marker-end="url(#ld-arrow)"/>
           </g>
           <g class="ld-nodes">
@@ -343,10 +346,16 @@
             </a>
             <a href="https://wfm.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-horizon" data-learning-role="world" aria-label="WFM Dünya Modelleri" aria-describedby="ld-new-tab-wfm-tr">
               <title id="ld-new-tab-wfm-tr">Yeni sekmede açılır</title>
-<rect x="370" y="590" width="220" height="50" rx="10"/>
-              <text x="480" y="614" class="ld-code" text-anchor="middle">WFM</text>
-              <text x="480" y="630" class="ld-label" text-anchor="middle">Dünya Modelleri</text>
+<rect x="180" y="590" width="220" height="50" rx="10"/>
+              <text x="290" y="614" class="ld-code" text-anchor="middle">WFM</text>
+              <text x="290" y="630" class="ld-label" text-anchor="middle">Dünya Modelleri</text>
             </a>
+            <g class="ld-node ld-node-horizon" data-learning-role="collective" data-learning-status="development" aria-label="SWI Sürü Zekâsı, geliştirme aşamasında">
+              <title>Geliştirme aşamasında · doğrulanmış deploy sonrasında bağlantı etkinleşir</title>
+<rect x="560" y="590" width="220" height="50" rx="10"/>
+              <text x="670" y="614" class="ld-code" text-anchor="middle">SWI</text>
+              <text x="670" y="630" class="ld-label" text-anchor="middle">Sürü Zekâsı</text>
+            </g>
             <a href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-horizon" data-learning-role="twin" aria-label="ITL Endüstriyel İkiz" aria-describedby="ld-new-tab-itl-tr">
               <title id="ld-new-tab-itl-tr">Yeni sekmede açılır</title>
 <rect x="370" y="680" width="220" height="50" rx="10"/>
@@ -471,7 +480,7 @@
           <p class="learning-stage-label"><span class="learning-step" aria-hidden="true">05</span>Dağıt · yerel ve bulut paralel</p>
           <ul class="learning-deployment-paths" aria-label="Yerel ve bulut dağıtım kararları">
             <li class="learning-node learning-node-exit learning-node-deployment">
-              <div class="learning-node-head"><code class="learning-code">lcl</code><span class="learning-order" aria-hidden="true">7A</span><h3>Yerel AI Laboratuvarı</h3></div>
+              <div class="learning-node-head"><code class="learning-code">lcl</code><h3>Yerel AI Laboratuvarı</h3></div>
               <p class="learning-question">“Hangi laboratuvarı almalıyım?”</p>
               <p class="learning-track-app">Local Compute Lab</p>
               <p>Açık ağırlıklı model gereksinimlerini NVIDIA, AMD ve Apple cihazlarıyla eşleştir. Yerel laboratuvarını seçmeden önce iş yükünü, belleği, gizliliği, gücü, gürültüyü ve mevcut ekipmanı karşılaştır.</p>
@@ -479,7 +488,7 @@
               <a class="learning-node-link" href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer">lcl.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a>
             </li>
             <li class="learning-node learning-node-exit learning-node-deployment">
-              <div class="learning-node-head"><code class="learning-code">cld</code><span class="learning-order" aria-hidden="true">7B</span><h3>AI Altyapısı</h3></div>
+              <div class="learning-node-head"><code class="learning-code">cld</code><h3>AI Altyapısı</h3></div>
               <p class="learning-question">“Bunu ölçekte nasıl işletirim?”</p>
               <p class="learning-track-app">Bulut Sağlayıcı Maliyet Karşılaştırması</p>
               <p>Yığını karara dönüştür: Türkiye'den erişilebilen bulut servislerinin vergi öncesi USD maliyetlerini karşılaştır ve tüm sistemin nerede çalışacağını seç. Bulut bilerek en sonda — neyi deploy ettiğini bilince altyapı soyut olmaktan çıkar.</p>
@@ -501,9 +510,10 @@
       <aside class="learning-horizon" id="horizon" aria-labelledby="learning-horizon-title" aria-describedby="learning-horizon-desc">
         <p class="learning-horizon-kicker">Ufuk · bu döngünün hizmet ettiği şey</p>
         <h3 id="learning-horizon-title">Open Humanoid Engineering</h3>
-        <p id="learning-horizon-desc">Yukarıdaki diyagramdaki ufuk omurgası, dağıtımdan aşağı inen ve öğrenme döngüsünün hizmet ettiği uzun vadeli varış noktasıdır. <strong>World Models Atlas</strong> algı, tahmin, planlama ve eylem arasındaki köprüyü izler; Industrial Twin Lab bu köprüyü dijital ikizler ve fiziksel varlıklar çevresinde sınanabilir kılar. <strong>Open Humanoid Engineering</strong> uzun vadeli hedeftir: bedenlenmiş, açık ve fiziksel dünyada inşa edilen.</p>
+        <p id="learning-horizon-desc">Diyagram dağıtımdan sonra iki paralel köprüye açılır. <strong>World Models Atlas</strong> algı, tahmin, planlama ve eylemi; <strong>SWI — Swarm Intelligence</strong> kolektif davranış, koordinasyon ve çoklu ajan sistemlerini izler. Industrial Twin Lab iki köprüyü de dijital ikizler ve fiziksel varlıklar çevresinde sınanabilir kılar. <strong>Open Humanoid Engineering</strong> uzun vadeli hedeftir: bedenlenmiş, açık ve fiziksel dünyada inşa edilen.</p>
         <div class="learning-horizon-links">
           <a class="learning-horizon-link" href="https://wfm.aserdargun.com/" target="_blank" rel="noreferrer">wfm.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a>
+          <span class="learning-horizon-link" data-learning-status="development" aria-label="swi.aserdargun.com, geliştirme aşamasında">swi.aserdargun.com · geliştirme aşamasında</span>
           <a class="learning-horizon-link" href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer">itl.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a>
           <a class="learning-horizon-link" href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer">eng.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a>
         </div>

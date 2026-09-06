@@ -318,8 +318,8 @@ function validateLearningSystem(locale, html) {
   check(intro.includes(expectedKicker), `${locale}: learning system kicker is missing`);
   check(intro.includes(expectedHeading), `${locale}: learning system heading is missing`);
   const expectedSystemCount = isTurkish
-    ? "On üç uygulama tek bir öğrenme döngüsü oluşturur"
-    : "Thirteen applications form one learning loop";
+    ? "On üç canlı uygulama ve geliştirilmekte olan bir laboratuvar tek bir öğrenme sistemi oluşturur"
+    : "Thirteen live applications and one developing lab form one learning system";
   check(intro.includes(expectedSystemCount), `${locale}: learning system application count is stale`);
   check(
     section.includes('<figure class="learning-diagram-wrap">')
@@ -327,7 +327,7 @@ function validateLearningSystem(locale, html) {
     `${locale}: learning system diagram is missing`,
   );
   const diagram = section.match(/<svg\b[^>]*class="ld-svg"[\s\S]*?<\/svg>/)?.[0] ?? "";
-  check(diagram.includes("AIA") && diagram.includes("HNS") && diagram.includes("SEC") && diagram.includes("CLD") && diagram.includes("LCL") && diagram.includes("WFM") && diagram.includes("ITL") && diagram.includes("ENG"), `${locale}: learning system diagram endpoints are missing`);
+  check(diagram.includes("AIA") && diagram.includes("HNS") && diagram.includes("SEC") && diagram.includes("CLD") && diagram.includes("LCL") && diagram.includes("WFM") && diagram.includes("SWI") && diagram.includes("ITL") && diagram.includes("ENG"), `${locale}: learning system diagram endpoints are missing`);
   const deploymentNodes = Array.from(
     diagram.matchAll(/<a href="https:\/\/(lcl|cld)\.aserdargun\.com\/"[^>]*data-learning-plane="deployment"[^>]*>[\s\S]*?<rect x="[0-9]+" y="([0-9]+)"/g),
     (match) => ({ code: match[1], y: match[2] }),
@@ -362,6 +362,9 @@ function validateLearningSystem(locale, html) {
     ]),
     `${locale}: learning diagram node roles differ from the application content model`,
   );
+  const developingSwi = diagram.match(/<g class="ld-node ld-node-horizon" data-learning-role="collective" data-learning-status="development"[^>]*>[\s\S]*?<text[^>]*>SWI<\/text>[\s\S]*?<\/g>/)?.[0] ?? "";
+  check(developingSwi.length > 0, `${locale}: SWI must be represented as the developing collective-intelligence node`);
+  check(!developingSwi.includes("<a ") && !developingSwi.includes("href="), `${locale}: SWI must remain non-clickable before verified deployment`);
   const learningEdges = matches(diagram, /<path data-learning-edge="([^"]+)"/g);
   check(
     JSON.stringify(learningEdges) === JSON.stringify([
@@ -379,12 +382,23 @@ function validateLearningSystem(locale, html) {
       "sec-to-cld",
       "evl-to-cld",
       "ctx-to-lcl",
-      "lcl-to-wfm",
-      "cld-to-wfm",
+      "deployment-to-wfm",
+      "deployment-to-swi",
       "wfm-to-itl",
+      "swi-to-itl",
       "itl-to-eng",
     ]),
     `${locale}: learning diagram edges differ from the application content model`,
+  );
+  const deploymentConnectors = matches(diagram, /<path data-learning-connector="([^"]+)"/g);
+  check(
+    JSON.stringify(deploymentConnectors) === JSON.stringify(["lcl-to-stage-07", "cld-to-stage-07"]),
+    `${locale}: deployment paths must merge before branching once to WFM and SWI`,
+  );
+  check(
+    learningEdges.filter((edge) => edge.endsWith("-to-wfm")).length === 1
+      && learningEdges.filter((edge) => edge.endsWith("-to-swi")).length === 1,
+    `${locale}: WFM and SWI must each receive exactly one arrow`,
   );
   const codes = matches(section, /<code class="learning-code">([a-z]{3})<\/code>/g);
   check(JSON.stringify(codes) === JSON.stringify(expectedLearningCodes), `${locale}: learning system node codes or order differ`);
@@ -396,8 +410,8 @@ function validateLearningSystem(locale, html) {
     `${locale}: detailed deployment cards must expose LCL and CLD in order`,
   );
   check(
-    JSON.stringify(deploymentCardOrders) === JSON.stringify(["7A", "7B"]),
-    `${locale}: detailed deployment cards must label LCL and CLD as 7A and 7B`,
+    deploymentCardOrders.length === 0,
+    `${locale}: parallel deployment cards must omit branch-number labels`,
   );
   const urls = matches(section, /<a class="learning-node-link" href="(https:\/\/[a-z]{3}\.aserdargun\.com\/)" target="_blank" rel="noreferrer">/g);
   check(JSON.stringify(urls) === JSON.stringify(expectedLearningUrls), `${locale}: learning system node links or order differ`);

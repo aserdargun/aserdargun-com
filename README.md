@@ -10,8 +10,10 @@ manufacturing leadership, data science, full-stack AI, and AI engineering,
 followed by a learning-system map that connects parallel compute/model
 foundations to the LLM runtime, the Harness Engineering Observatory (`hns`),
 and a context/security/evaluation quality loop (`ctx` / `sec` / `evl`). Local
-and cloud deployment decisions (`lcl` / `cld`) then converge on the World Models
-Atlas (`wfm`), the industrial-twin lab, and the long-term open-humanoid horizon.
+and cloud deployment decisions (`lcl` / `cld`) then open into parallel World
+Models (`wfm`) and developing Swarm Intelligence (`swi`) bridges. Both converge
+in the industrial-twin lab before the long-term open-humanoid horizon. SWI stays
+non-clickable until its public deployment and release identity are verified.
 The desktop diagram uses box-free orthogonal routing; mobile keeps the same core
 sequence through full-width accessible links.
 
