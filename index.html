@@ -32,8 +32,8 @@
   <meta name="twitter:description" content="From mechanics and manufacturing to data, software, and AI engineering.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260906-private-blue">
-  <script src="/scripts.js?v=20260906-private-blue" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260906-loop-anim">
+  <script src="/scripts.js?v=20260906-loop-anim" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -518,6 +518,32 @@
           <a class="learning-horizon-link" href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer">eng.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">opens in a new tab</span></a>
         </div>
       </aside>
+      <button class="learning-loop-trigger" type="button" aria-label="Watch the learning system loop animation" aria-expanded="false" aria-controls="learning-loop-modal">
+        <span class="learning-loop-trigger-disc" aria-hidden="true">
+          <span class="learning-loop-trigger-pulse"></span>
+          <span class="learning-loop-trigger-icon"></span>
+        </span>
+        <span class="learning-loop-trigger-label">Watch the loop</span>
+      </button>
+      <div class="learning-loop-modal" id="learning-loop-modal" role="dialog" aria-modal="true" aria-labelledby="learning-loop-modal-title" hidden>
+        <div class="learning-loop-modal-backdrop" data-learning-loop-close></div>
+        <div class="learning-loop-modal-frame" role="document">
+          <div class="learning-loop-modal-head">
+            <p class="learning-loop-modal-kicker">Learning system · animated overview</p>
+            <h3 class="learning-loop-modal-title" id="learning-loop-modal-title">The atlas as a learning loop</h3>
+            <p class="learning-loop-modal-desc">Each card morphs into the shape that names it: AIA becomes a network, GPU a silicon die, LLM flowing tokens, HNS a hexagon, CTX brackets, SEC a shield, EVL a scale, LCL a local home, CLD a cloud, WFM a globe, ITL twin panels, ENG a humanoid.</p>
+            <button class="learning-loop-modal-close" type="button" data-learning-loop-close aria-label="Close learning system animation">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="learning-loop-modal-video">
+            <video class="learning-loop-modal-player" id="learning-loop-video" controls preload="metadata" playsinline>
+              <source src="/images/learning-system-loop.mp4" type="video/mp4">
+              Your browser does not support embedded video.
+            </video>
+          </div>
+        </div>
+      </div>
       </div>
     </section>
 

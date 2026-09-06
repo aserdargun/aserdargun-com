@@ -1138,10 +1138,84 @@ function initializeHiddenFilm() {
   });
 }
 
+function initializeLearningLoop() {
+  const trigger = document.querySelector(".learning-loop-trigger");
+  const modal = document.getElementById("learning-loop-modal");
+  if (!trigger || !modal) return;
+  const video = modal.querySelector(".learning-loop-modal-player");
+  const closers = modal.querySelectorAll("[data-learning-loop-close]");
+  if (!video) return;
+
+  let lastFocused = null;
+  let bodyOverflow = "";
+
+  const focusable = () =>
+    Array.from(
+      modal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter((el) => !el.hasAttribute("disabled"));
+
+  const setOpen = (open) => {
+    if (open) {
+      lastFocused = document.activeElement;
+      bodyOverflow = document.body.style.overflow;
+      modal.hidden = false;
+      trigger.setAttribute("aria-expanded", "true");
+      document.body.classList.add("learning-loop-open");
+      document.body.style.overflow = "hidden";
+      const first = focusable()[0];
+      if (first) {
+        try { first.focus({ preventScroll: true }); } catch {}
+      }
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {});
+      }
+    } else {
+      modal.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("learning-loop-open");
+      document.body.style.overflow = bodyOverflow;
+      try { video.pause(); } catch {}
+      try { video.currentTime = 0; } catch {}
+      if (lastFocused && typeof lastFocused.focus === "function") {
+        try { lastFocused.focus({ preventScroll: true }); } catch {}
+      }
+    }
+  };
+
+  trigger.addEventListener("click", () => setOpen(true));
+  closers.forEach((el) => el.addEventListener("click", () => setOpen(false)));
+
+  document.addEventListener("keydown", (event) => {
+    if (modal.hidden) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      setOpen(false);
+      return;
+    }
+    if (event.key === "Tab") {
+      const items = focusable();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initializeLanguageSwitch();
   initializeMobileNav();
   initializeRelativeFreshness();
   initializeTimeline();
   initializeHiddenFilm();
+  initializeLearningLoop();
 });

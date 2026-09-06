@@ -32,8 +32,8 @@
   <meta name="twitter:description" content="Mekanik ve üretimden veri, yazılım ve yapay zekâ mühendisliğine uzanan bir yolculuk.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii-tr.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260906-private-blue">
-  <script src="/scripts.js?v=20260906-private-blue" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260906-loop-anim">
+  <script src="/scripts.js?v=20260906-loop-anim" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -518,6 +518,32 @@
           <a class="learning-horizon-link" href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer">eng.aserdargun.com <span aria-hidden="true">↗</span> <span class="sr-only">yeni sekmede açılır</span></a>
         </div>
       </aside>
+      <button class="learning-loop-trigger" type="button" aria-label="Öğrenme sistemi döngü animasyonunu izle" aria-expanded="false" aria-controls="learning-loop-modal">
+        <span class="learning-loop-trigger-disc" aria-hidden="true">
+          <span class="learning-loop-trigger-pulse"></span>
+          <span class="learning-loop-trigger-icon"></span>
+        </span>
+        <span class="learning-loop-trigger-label">Döngüyü izle</span>
+      </button>
+      <div class="learning-loop-modal" id="learning-loop-modal" role="dialog" aria-modal="true" aria-labelledby="learning-loop-modal-title" hidden>
+        <div class="learning-loop-modal-backdrop" data-learning-loop-close></div>
+        <div class="learning-loop-modal-frame" role="document">
+          <div class="learning-loop-modal-head">
+            <p class="learning-loop-modal-kicker">Öğrenme sistemi · animasyonlu genel bakış</p>
+            <h3 class="learning-loop-modal-title" id="learning-loop-modal-title">Atlas bir öğrenme döngüsü olarak</h3>
+            <p class="learning-loop-modal-desc">Her kart kendisini adlandıran şekle dönüşür: AIA bir ağ, GPU bir silikon kalıp, LLM akan tokenler, HNS bir altıgen, CTX köşeli parantezler, SEC bir kalkan, EVL bir terazi, LCL yerel bir ev, CLD bir bulut, WFM bir küre, ITL ikiz paneller, ENG bir insansı.</p>
+            <button class="learning-loop-modal-close" type="button" data-learning-loop-close aria-label="Öğrenme sistemi animasyonunu kapat">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="learning-loop-modal-video">
+            <video class="learning-loop-modal-player" id="learning-loop-video" controls preload="metadata" playsinline>
+              <source src="/images/learning-system-loop.mp4" type="video/mp4">
+              Tarayıcınız gömülü videoyu desteklemiyor.
+            </video>
+          </div>
+        </div>
+      </div>
       </div>
     </section>
 
