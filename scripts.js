@@ -1062,9 +1062,86 @@ function initializeCareerPortraitTransition() {
   };
 }
 
+function initializeHiddenFilm() {
+  const trigger = document.querySelector("[data-journey]") && document.querySelector(".wordmark");
+  if (!trigger || typeof HTMLDialogElement === "undefined") return;
+
+  const tr = document.documentElement.lang === "tr";
+  const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const dialog = document.createElement("dialog");
+  dialog.className = "hidden-film";
+  dialog.setAttribute("aria-labelledby", "hidden-film-title");
+  dialog.innerHTML = `
+    <div class="hidden-film__panel">
+      <header class="hidden-film__header">
+        <div><p class="hidden-film__eyebrow">SG / 001</p>
+          <h2 id="hidden-film-title">${tr ? "Mekanikten dijitale" : "From mechanics to digital"}</h2></div>
+        <button class="hidden-film__close" type="button" autofocus aria-label="${tr ? "Videoyu kapat" : "Close video"}">×</button>
+      </header>
+      <video class="hidden-film__video" preload="none" playsinline muted loop controls aria-label="${tr ? "Mekanik dişlilerin dijital karakterlere dönüşümü; sessiz video" : "Mechanical gears transform into digital characters; silent film"}"></video>
+      <p class="hidden-film__caption">${tr ? "Gizli bağlantıyı buldun. Fiziksel dünyadan dijital zekâya." : "You found the hidden connection. From the physical world to digital intelligence."}</p>
+      <p class="hidden-film__error" role="status" hidden>${tr ? "Video yüklenemedi. " : "The video could not load. "}<a href="/videos/mechanics-to-digital-v1.mp4">${tr ? "Videoyu doğrudan aç" : "Open the video directly"} ↗</a></p>
+    </div>`;
+  document.body.append(dialog);
+  const video = dialog.querySelector("video");
+  const closeButton = dialog.querySelector("button");
+  const error = dialog.querySelector(".hidden-film__error");
+  video.muted = true;
+  let clicks = [];
+  let outsidePress = false;
+
+  const close = () => dialog.close();
+  closeButton.addEventListener("click", close);
+  dialog.addEventListener("pointerdown", (event) => { outsidePress = event.target === dialog; });
+  dialog.addEventListener("click", (event) => {
+    if (outsidePress && event.target === dialog) close();
+    outsidePress = false;
+  });
+  dialog.addEventListener("close", () => {
+    video.pause();
+    video.currentTime = 0;
+    document.body.classList.remove("hidden-film-open");
+    trigger.focus({ preventScroll: true });
+  });
+  video.addEventListener("error", () => { error.hidden = false; });
+  motion.addEventListener("change", () => {
+    if (motion.matches) video.pause();
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) video.pause();
+  });
+  trigger.addEventListener("click", (event) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button > 0) return;
+    const now = performance.now();
+    clicks = clicks.filter((time) => now - time < 1600);
+    clicks.push(now);
+    event.preventDefault();
+    if (clicks.length < 3) {
+      // Native fragment navigation moves keyboard focus away from the wordmark.
+      // Keep its scroll/history behavior while retaining focus for the sequence.
+      if (window.location.hash !== trigger.hash) window.history.pushState(null, "", trigger.hash);
+      document.querySelector("[data-journey]").scrollIntoView({ behavior: motion.matches ? "instant" : "smooth" });
+      return;
+    }
+    clicks = [];
+    error.hidden = true;
+    video.poster = "/images/mechanics-to-digital-v1.jpg";
+    if (!video.hasAttribute("src") || video.error) {
+      video.src = "/videos/mechanics-to-digital-v1.mp4";
+      video.load();
+    }
+    dialog.showModal();
+    document.body.classList.add("hidden-film-open");
+    if (!motion.matches) video.play().catch(() => {
+      // Native controls remain available when autoplay is blocked.
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initializeLanguageSwitch();
   initializeMobileNav();
   initializeRelativeFreshness();
   initializeTimeline();
+  initializeHiddenFilm();
 });
