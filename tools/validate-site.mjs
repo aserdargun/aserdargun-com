@@ -68,7 +68,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "apps", "learning", "journey", "horizon", "approach", "about"];
-const expectedAssetVersion = "20260906-hidden-film";
+const expectedAssetVersion = "20260906-private-blue";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [

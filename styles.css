@@ -339,6 +339,10 @@ ul {
   border-right: 1px solid rgba(255, 253, 247, 0.22);
 }
 
+.nav-links__group[data-nav-group="private"] .nav-links__section {
+  color: #3b82f6;
+}
+
 .nav-links__external {
   color: rgba(255, 253, 247, 0.92);
   font-weight: 600;
