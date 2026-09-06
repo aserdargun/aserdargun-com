@@ -4014,18 +4014,26 @@ body:has(main.memory-page) {
 }
 
 /* Learning system · animated loop trigger and modal */
-.learning-loop-trigger {
-  position: absolute;
-  top: 96px;
-  right: clamp(24px, 7vw, 104px);
+.learning-loop-trigger-wrap {
+  position: sticky;
+  top: 84px;
   z-index: 6;
+  display: flex;
+  justify-content: flex-end;
+  margin: -68px 0 0;
+  padding: 0 clamp(24px, 7vw, 104px) 0 0;
+  pointer-events: none;
+}
+
+.learning-loop-trigger {
+  pointer-events: auto;
   display: inline-flex;
   align-items: center;
   gap: 12px;
   padding: 6px 18px 6px 6px;
-  border: 1px solid rgba(200, 255, 54, 0.34);
+  border: 1px solid rgba(200, 255, 54, 0.42);
   border-radius: 999px;
-  background: rgba(18, 19, 16, 0.78);
+  background: linear-gradient(180deg, rgba(28, 30, 24, 0.84), rgba(12, 13, 10, 0.84));
   color: var(--white);
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.66rem;
@@ -4033,22 +4041,37 @@ body:has(main.memory-page) {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  box-shadow:
+    0 1px 0 rgba(200, 255, 54, 0.18) inset,
+    0 8px 28px rgba(0, 0, 0, 0.45);
+  transition: border-color 200ms ease, background 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+  will-change: transform, box-shadow;
+  animation: learning-loop-enter 480ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
+}
+
+@keyframes learning-loop-enter {
+  from { opacity: 0; transform: translateY(-6px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .learning-loop-trigger:hover,
 .learning-loop-trigger:focus-visible {
-  border-color: rgba(200, 255, 54, 0.72);
-  background: rgba(200, 255, 54, 0.12);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(200, 255, 54, 0.18);
+  border-color: rgba(200, 255, 54, 0.85);
+  background: linear-gradient(180deg, rgba(48, 52, 30, 0.9), rgba(22, 26, 12, 0.9));
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 rgba(200, 255, 54, 0.28) inset,
+    0 10px 30px rgba(200, 255, 54, 0.22);
   outline: none;
 }
 
 .learning-loop-trigger:focus-visible {
-  box-shadow: 0 0 0 2px var(--white), 0 6px 24px rgba(200, 255, 54, 0.22);
+  box-shadow:
+    0 0 0 2px var(--white),
+    0 1px 0 rgba(200, 255, 54, 0.32) inset,
+    0 10px 30px rgba(200, 255, 54, 0.22);
 }
 
 .learning-loop-trigger-disc {
@@ -4062,22 +4085,26 @@ body:has(main.memory-page) {
   color: #0c0d0a;
   flex: 0 0 auto;
   overflow: visible;
+  box-shadow:
+    0 0 0 2px rgba(12, 13, 10, 0.6),
+    0 0 0 3px rgba(200, 255, 54, 0.25);
 }
 
 .learning-loop-trigger-pulse {
   position: absolute;
-  inset: 0;
+  inset: -2px;
   border-radius: 50%;
   background: var(--lime);
-  opacity: 0.55;
-  animation: learning-loop-pulse 2.4s ease-out infinite;
+  opacity: 0.5;
+  animation: learning-loop-pulse 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
 @keyframes learning-loop-pulse {
-  0% { transform: scale(0.85); opacity: 0.55; }
-  70% { transform: scale(1.55); opacity: 0; }
-  100% { transform: scale(1.55); opacity: 0; }
+  0% { transform: scale(0.9); opacity: 0.55; }
+  70% { transform: scale(1.7); opacity: 0; }
+  100% { transform: scale(1.7); opacity: 0; }
 }
 
 .learning-loop-trigger-icon {
@@ -4100,6 +4127,16 @@ body:has(main.memory-page) {
 
 .learning-loop-trigger[aria-expanded="true"] .learning-loop-trigger-pulse {
   display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learning-loop-trigger,
+  .learning-loop-trigger-pulse {
+    animation: none;
+  }
+  .learning-loop-trigger:hover {
+    transform: none;
+  }
 }
 
 .learning-loop-modal {
@@ -4220,9 +4257,13 @@ body.learning-loop-open {
 }
 
 @media (max-width: 900px) {
+  .learning-loop-trigger-wrap {
+    top: 60px;
+    margin: -56px 0 0;
+    padding-right: 20px;
+  }
+
   .learning-loop-trigger {
-    top: 64px;
-    right: 20px;
     padding: 5px 12px 5px 5px;
     font-size: 0.58rem;
     letter-spacing: 0.12em;
