@@ -318,8 +318,8 @@ function validateLearningSystem(locale, html) {
   check(intro.includes(expectedKicker), `${locale}: learning system kicker is missing`);
   check(intro.includes(expectedHeading), `${locale}: learning system heading is missing`);
   const expectedSystemCount = isTurkish
-    ? "On üç canlı uygulama ve geliştirilmekte olan bir laboratuvar tek bir öğrenme sistemi oluşturur"
-    : "Thirteen live applications and one developing lab form one learning system";
+    ? "On dört uygulama tek bir öğrenme sistemi oluşturur"
+    : "Fourteen applications form one learning system";
   check(intro.includes(expectedSystemCount), `${locale}: learning system application count is stale`);
   check(
     section.includes('<figure class="learning-diagram-wrap">')
@@ -357,14 +357,12 @@ function validateLearningSystem(locale, html) {
       "lcl:deployment",
       "cld:deployment",
       "wfm:world",
+      "swi:collective",
       "itl:twin",
       "eng:horizon",
     ]),
     `${locale}: learning diagram node roles differ from the application content model`,
   );
-  const developingSwi = diagram.match(/<g class="ld-node ld-node-horizon" data-learning-role="collective" data-learning-status="development"[^>]*>[\s\S]*?<text[^>]*>SWI<\/text>[\s\S]*?<\/g>/)?.[0] ?? "";
-  check(developingSwi.length > 0, `${locale}: SWI must be represented as the developing collective-intelligence node`);
-  check(!developingSwi.includes("<a ") && !developingSwi.includes("href="), `${locale}: SWI must remain non-clickable before verified deployment`);
   const learningEdges = matches(diagram, /<path data-learning-edge="([^"]+)"/g);
   check(
     JSON.stringify(learningEdges) === JSON.stringify([
@@ -454,7 +452,7 @@ function validateLearningHorizon(locale, html) {
   check(aside.includes(expectedKicker), `${locale}: learning horizon kicker is missing`);
   check(aside.includes("Open Humanoid Engineering"), `${locale}: learning horizon title is missing`);
   const horizonCodes = matches(aside, /href="https:\/\/([a-z]{3})\.aserdargun\.com\/"/g);
-  check(JSON.stringify(horizonCodes) === JSON.stringify(["wfm", "itl", "eng"]), `${locale}: learning horizon bridge, lab, and destination order differ`);
+  check(JSON.stringify(horizonCodes) === JSON.stringify(["wfm", "swi", "itl", "eng"]), `${locale}: learning horizon bridge, lab, and destination order differ`);
   const bridgeCopy = isTurkish
     ? "algı, tahmin, planlama ve eylem"
     : "perception, prediction, planning, and action";

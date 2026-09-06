@@ -440,12 +440,11 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.ok(horizon, "learning horizon callout must remain visible");
     assert.match(horizon, new RegExp(expectedBridgeCopy));
     assert.match(horizon, new RegExp(expectedCollectiveCopy));
-    assert.match(horizon, /data-learning-status="development"[^>]*>swi\.aserdargun\.com/);
-    assert.doesNotMatch(horizon, /href="https:\/\/swi\.aserdargun\.com\//, "SWI must not link before verified deployment");
     assert.deepEqual(
       anchors(horizon).map(({ openingTag }) => attribute(openingTag, "href")),
       [
         "https://wfm.aserdargun.com/",
+        "https://swi.aserdargun.com/",
         "https://itl.aserdargun.com/",
         "https://eng.aserdargun.com/",
       ],
@@ -556,6 +555,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://lcl.aserdargun.com/", "LCL"],
       ["https://cld.aserdargun.com/", "CLD"],
       ["https://wfm.aserdargun.com/", "WFM"],
+      ["https://swi.aserdargun.com/", "SWI"],
       ["https://itl.aserdargun.com/", "ITL"],
       ["https://eng.aserdargun.com/", "ENG"],
     ];
@@ -564,7 +564,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.equal(extraSvgScopes.length, 0);
     assert.doesNotMatch(svg, /<(?:span|foreignObject)\b/i, "HTML must never be inserted into SVG");
     const svgBlankAnchors = anchors(svg).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
-    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all thirteen diagram nodes must remain inside SVG");
+    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all fourteen diagram nodes must remain inside SVG");
 
     assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")), expectedNodes.map(([href]) => href));
     for (const [index, anchor] of svgBlankAnchors.entries()) {
@@ -588,14 +588,6 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
         return [code, rect && { x: Number(rect[1]), y: Number(rect[2]), width: Number(rect[3]), height: Number(rect[4]) }];
       }),
     );
-    const swiRectMatch = svg.match(/<g class="ld-node ld-node-horizon" data-learning-role="collective"[\s\S]*?<rect x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)"/);
-    assert.ok(swiRectMatch, "the developing SWI node needs geometry for route checks");
-    nodeRects.set("swi", {
-      x: Number(swiRectMatch[1]),
-      y: Number(swiRectMatch[2]),
-      width: Number(swiRectMatch[3]),
-      height: Number(swiRectMatch[4]),
-    });
 
     assert.match(svg, /class="ld-stage-index"/, "the complete system needs a visible stage rail");
     assert.match(svg, /class="ld-legend"/, "primary, supporting, and horizon relationships need a legend");
