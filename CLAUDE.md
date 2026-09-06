@@ -24,9 +24,12 @@ There is no production build step. npm provides the shared development command s
 - `index.html` - English homepage served at `/` (self-canonical)
 - `tr/index.html` - Turkish homepage with matching anchors and timeline stage keys
 - `styles.css` - Global design system with CSS custom properties; self-hosted Inter variable font (`/fonts/`)
-- `scripts.js` - Language preference, active career timeline, and viewport-aware ASCII portrait animation
+- `scripts.js` - Language preference, navigation, application discovery, relative freshness, and viewport-aware career portrait animation
+- `data/living-system.json` - Canonical public applications, relationships, Now entries, and explicitly authored Knowledge records
+- `tools/render-living-system.mjs` - Shared navigation and bilingual content generator; run `npm run generate:site` after canonical edits
+- `portfolio.json` - Generated public application registry; its manifest contract is in `schemas/aserdargun-app.schema.json`
 - `staticwebapp.config.json` - Route rules: `/en` + `/en/*` 301 to `/`, immutable caching for versioned assets, security headers
-- `sitemap.xml`, `robots.txt` - SEO surfaces listing `/` and `/tr/` only
+- `sitemap.xml`, `robots.txt` - SEO surfaces for both homepages, Now, Knowledge, and dated Now archives
 - `package.json` - Shared setup, preview, and validation command contract
 - `tools/serve.mjs` - Dependency-free local static preview server
 - `tools/serve.test.mjs` - HTTP behavior and path-confinement regression tests
@@ -34,23 +37,23 @@ There is no production build step. npm provides the shared development command s
 
 ### Pages and sections (both locales, keep in parity)
 - Hero + reverse-chronological eight-stage career timeline (`08 AI Engineer` → `01 Mechanical Engineering`)
-- `#learning` learning system - the application atlas expressed as a study loop (AIA → GPU → LLM → USL → CLD) with an ASCII flow diagram, guiding questions, and an investment-priority strip
-- `#apps` application map - five live subdomain products, each keyed by a three-letter code
+- Five-layer overview precedes `#learning`: foundations, agent systems, assurance, deployment, and physical AI
+- `#learning` learning system - an orthogonal SVG relationship map with guiding questions and an accessible mobile equivalent; parallel GPU/USL foundations feed LLM and HNS, followed by CTX/SEC/EVL and parallel LCL/CLD deployment choices
+- WFM and SWI form parallel research bridges into ITL and the long-term ENG horizon
+- `#apps` application map - 14 canonical applications with localized search, layer filters, and expandable evidence; each is keyed by a three-letter code
+- `/now/` and `/tr/now/` - dated current work with frozen weekly archives
+- `/memory/` and `/tr/memory/` - five explicitly authored public Knowledge notes with sources and related applications
 - `#approach` working principles, `#about` + verified credentials, contact
 
-### Application map products
-| Code | Product | Address |
-| ---- | ------- | ------- |
-| `aia` | AI Ecosystem Atlas | https://aia.aserdargun.com/ |
-| `llm` | LLM Runtime & Serving Atlas | https://llm.aserdargun.com/ |
-| `usl` | Unsloth Studio Learning | https://usl.aserdargun.com/ |
-| `gpu` | GPU Kernel Engineering — Kernel Atlas | https://gpu.aserdargun.com/ |
-| `cld` | Cloud Provider Cost Comparison | https://cld.aserdargun.com/ |
-| `eng` | Open Humanoid Engineering *(horizon — not yet realized)* | https://eng.aserdargun.com/ |
+### Application identities and evidence
 
-The five live applications are the "evveliyat" (preamble); `eng` is the long-term horizon everything else serves. Listed in the application map with a horizon marker (not a peer row) and called out in the learning system as the destination the loop serves.
+Read identities, roles, lifecycle status, dates, and relationships from `data/living-system.json`; do not maintain a second product inventory here. Every application belongs in the registry, application map, system overview, and corresponding learning relationship. A public link does not establish verified production status. SWI currently has a pending verification label and no asserted release evidence. Preserve missing evidence instead of fabricating dates or SHAs.
+
+Knowledge renders only the explicitly authored public records in the canonical source. Private NXT content must never be inferred or copied into public pages or the registry. Historical Now content retains its original dates.
 
 Earlier portfolio projects (Stackfolio, PIPolars, PIWebAPI, SWAPP, SCADA Nerve, Industry-Learn, Scikit-Play, Aeon-Play, PyTorch-Play, DSML101) were retired from this site on purpose; `tools/validate-site.mjs` fails the build if any of their URLs reappear.
+
+The old `projects/stage-1-frontend-foundations/` exercise tree is also retired. Do not restore its glossary, KPI tiles, meeting form, troubleshooting wizard, P&ID viewer, or links. Current products listed in the canonical registry and the private-systems navigation are separate from these retired root-site demos.
 
 ### Key Patterns
 

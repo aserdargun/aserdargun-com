@@ -92,6 +92,42 @@ function initializeMobileNav() {
   else if (mq.addListener) mq.addListener(handleMq);
 }
 
+function normalizeApplicationSearch(value) {
+  return value.toLocaleLowerCase("tr-TR").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ı/g, "i");
+}
+
+function initializeApplicationDiscovery() {
+  const controls = document.querySelector("[data-app-controls]");
+  if (!controls) return;
+  const search = controls.querySelector("[data-app-search]");
+  const layer = controls.querySelector("[data-app-layer-filter]");
+  const count = controls.querySelector("[data-app-count]");
+  const empty = document.querySelector("[data-app-empty]");
+  const rows = [...document.querySelectorAll("[data-app-row]")].map((element) => ({
+    element,
+    text: normalizeApplicationSearch(element.textContent),
+    layer: element.dataset.appLayer,
+  }));
+  if (!search || !layer || !count || !empty) return;
+  const turkish = document.documentElement.lang === "tr";
+  function update() {
+    const terms = normalizeApplicationSearch(search.value.trim()).split(/\s+/).filter(Boolean);
+    let visible = 0;
+    for (const row of rows) {
+      const matches = (layer.value === "all" || row.layer === layer.value)
+        && terms.every((term) => row.text.includes(term));
+      row.element.hidden = !matches;
+      if (matches) visible += 1;
+    }
+    count.textContent = turkish ? `${visible} / ${rows.length} uygulama` : `${visible} of ${rows.length} applications`;
+    empty.hidden = visible !== 0;
+  }
+  search.addEventListener("input", update);
+  layer.addEventListener("change", update);
+  controls.hidden = false;
+  update();
+}
+
 function computeFreshnessPresentation(dateOnly, today = new Date(), locale = "en") {
   if (!today || Number.isNaN(today.valueOf())) return null;
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateOnly);
@@ -1215,6 +1251,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeLanguageSwitch();
   initializeMobileNav();
   initializeRelativeFreshness();
+  initializeApplicationDiscovery();
   initializeTimeline();
   initializeHiddenFilm();
   initializeLearningLoop();

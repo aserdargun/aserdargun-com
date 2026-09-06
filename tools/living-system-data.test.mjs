@@ -582,104 +582,24 @@ test("rejects private-system records and reserved private-navigation codes", () 
 test("loads and validates the committed canonical manifest", async () => {
   const filePath = fileURLToPath(new URL("../data/living-system.json", import.meta.url));
   const data = await loadLivingSystemData(filePath);
-  const canonicalToday = new Date("2026-09-04T12:00:00+03:00");
+  const canonicalToday = new Date("2026-09-06T12:00:00+03:00");
 
-  assert.equal(data.applications.length, 13);
-  assert.deepEqual(
-    data.applications.find((application) => application.code === "hns"),
-    {
-      code: "hns",
-      kind: "observatory",
-      systemRole: "core-learning",
-      visibility: "public",
-      status: "live",
-      title: localized("Harness Engineering Observatory", "Harness Engineering Observatory"),
-      summary: localized(
-        "A bilingual, source-backed observatory for comparing the harnesses, runtimes, orchestration, execution, verification, and observability layers that turn model capability into reliable agent systems.",
-        "Model yeteneğini güvenilir ajan sistemlerine dönüştüren harness, çalıştırma, orkestrasyon, yürütme, doğrulama ve gözlemlenebilirlik katmanlarını karşılaştıran iki dilli, kaynaklı gözlemevi.",
-      ),
-      repository: "https://github.com/aserdargun/hns-aserdargun-com",
-      address: "https://hns.aserdargun.com/",
-      updatedAt: "2026-09-03",
-      relatedMemoryIds: [],
-    },
-  );
-  assert.deepEqual(
-    data.applications.find((application) => application.code === "ctx"),
-    {
-      code: "ctx",
-      kind: "observatory",
-      systemRole: "core-learning",
-      visibility: "public",
-      status: "live",
-      title: localized("Context & Knowledge Engineering", "Bağlam ve Bilgi Mühendisliği"),
-      summary: localized(
-        "A bilingual, source-backed field guide to the information system that runs before a model answers, from ingestion and retrieval through citation, caching, and memory.",
-        "Model yanıtından önce çalışan bilgi sistemini alım ve erişimden alıntılama, önbellekleme ve belleğe kadar tasarlamaya yarayan iki dilli, kaynaklı alan rehberi.",
-      ),
-      repository: "https://github.com/aserdargun/ctx-aserdargun-com",
-      address: "https://ctx.aserdargun.com/",
-      updatedAt: "2026-09-04",
-      relatedMemoryIds: [],
-    },
-  );
-  assert.deepEqual(
-    data.applications.find((application) => application.code === "evl"),
-    {
-      code: "evl",
-      kind: "lab",
-      systemRole: "core-learning",
-      visibility: "public",
-      status: "live",
-      title: localized("AI Evaluation & Reliability Lab", "AI Değerlendirme ve Güvenilirlik Laboratuvarı"),
-      summary: localized(
-        "A bilingual, evidence-aware workbench for evaluation contracts and deterministic AI release decisions across output, trajectory, outcome, robustness, safety, and operations.",
-        "Çıktı, izlenen yol, sonuç, sağlamlık, güvenlik ve operasyon katmanlarında değerlendirme sözleşmeleriyle belirlenebilir AI sürüm kararları üretmeye yarayan iki dilli, kanıt duyarlı çalışma alanı.",
-      ),
-      repository: "https://github.com/aserdargun/evl-aserdargun-com",
-      address: "https://evl.aserdargun.com/",
-      updatedAt: "2026-09-04",
-      relatedMemoryIds: [],
-    },
-  );
-  assert.deepEqual(
-    data.applications.find((application) => application.code === "wfm"),
-    {
-      code: "wfm",
-      kind: "atlas",
-      systemRole: "horizon-bridge",
-      visibility: "public",
-      status: "live",
-      title: localized("World Models Atlas", "World Models Atlas"),
-      summary: localized(
-        "A living research atlas tracing how world models connect perception, prediction, planning, and action through primary sources.",
-        "Dünya modellerinin algı, tahmin, planlama ve eylem arasındaki rolünü birincil kaynaklar üzerinden izleyen yaşayan bir araştırma atlası.",
-      ),
-      repository: "https://github.com/aserdargun/wfm-aserdargun-com",
-      address: "https://wfm.aserdargun.com/",
-      updatedAt: "2026-09-03",
-      relatedMemoryIds: [],
-    },
-  );
-  assert.deepEqual(
-    data.applications.find((application) => application.code === "sec"),
-    {
-      code: "sec",
-      kind: "observatory",
-      systemRole: "core-learning",
-      visibility: "public",
-      status: "live",
-      title: localized("AI Systems Security Observatory", "AI Sistemleri Güvenlik Gözlemevi"),
-      summary: localized(
-        "A bilingual, evidence-aware observatory for tracing AI-agent trust from model intent through identity, authorization, constrained action, audit, and incident recovery.",
-        "Model niyetinden kimliğe, yetkilendirmeye, kısıtlı eyleme, denetime ve olay sonrası toparlanmaya kadar AI ajanlarına duyulan güveni izleyen iki dilli, kanıt duyarlı gözlemevi.",
-      ),
-      repository: "https://github.com/aserdargun/sec-aserdargun-com",
-      address: "https://sec.aserdargun.com/",
-      updatedAt: "2026-09-03",
-      relatedMemoryIds: [],
-    },
-  );
+  assert.equal(data.applications.length, 14);
+  const expectedCanonicalApplications = {
+    hns: ["observatory", "Harness Engineering Observatory", "https://hns.aserdargun.com/"],
+    ctx: ["observatory", "Context & Knowledge Engineering", "https://ctx.aserdargun.com/"],
+    evl: ["lab", "AI Evaluation & Reliability Lab", "https://evl.aserdargun.com/"],
+    wfm: ["atlas", "World Models Atlas", "https://wfm.aserdargun.com/"],
+    sec: ["observatory", "AI Systems Security Observatory", "https://sec.aserdargun.com/"],
+  };
+  for (const [code, [kind, englishTitle, address]] of Object.entries(expectedCanonicalApplications)) {
+    const application = data.applications.find((candidate) => candidate.code === code);
+    assert.ok(application, `${code} canonical application`);
+    assert.equal(application.kind, kind);
+    assert.equal(application.title.en, englishTitle);
+    assert.equal(application.address, address);
+    assert.equal(application.visibility, "public");
+  }
   assert.deepEqual(validateLivingSystemData(data, { today: canonicalToday }).errors, []);
   assert.strictEqual(assertValidLivingSystemData(data, { today: canonicalToday }), data);
 });

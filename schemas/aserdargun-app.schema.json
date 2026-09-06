@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aserdargun.com/schemas/aserdargun-app.schema.json",
+  "title": "aserdargun.com public application manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "code",
+    "name",
+    "shortName",
+    "description",
+    "type",
+    "status",
+    "statusLabel",
+    "languages",
+    "productionUrl",
+    "repositoryUrl",
+    "sourceCount",
+    "claimCount",
+    "evidencePolicy",
+    "upstreamApps",
+    "downstreamApps",
+    "tracks",
+    "entityIds",
+    "portfolioLayer",
+    "focusState"
+  ],
+  "properties": {
+    "code": {
+      "type": "string",
+      "pattern": "^[a-z]{3}$"
+    },
+    "name": {
+      "$ref": "#/$defs/localized"
+    },
+    "shortName": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "description": {
+      "$ref": "#/$defs/localized"
+    },
+    "type": {
+      "enum": [
+        "atlas",
+        "observatory",
+        "tool",
+        "lab",
+        "horizon",
+        "private-system"
+      ]
+    },
+    "status": {
+      "enum": [
+        "idea",
+        "design",
+        "active",
+        "live",
+        "paused",
+        "archived"
+      ]
+    },
+    "statusLabel": {
+      "$ref": "#/$defs/localized"
+    },
+    "languages": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "const": "tr"
+        },
+        {
+          "const": "en"
+        }
+      ],
+      "items": false
+    },
+    "productionUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "repositoryUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://github\\.com/aserdargun/"
+    },
+    "researchCutoff": {
+      "$ref": "#/$defs/date"
+    },
+    "lastVerified": {
+      "$ref": "#/$defs/date"
+    },
+    "lastReleased": {
+      "$ref": "#/$defs/date"
+    },
+    "releaseSha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "sourceCount": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "claimCount": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "evidencePolicy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "upstreamApps": {
+      "$ref": "#/$defs/appCodes"
+    },
+    "downstreamApps": {
+      "$ref": "#/$defs/appCodes"
+    },
+    "tracks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "entityIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^entity:[a-z0-9-]+$"
+      },
+      "uniqueItems": true
+    },
+    "portfolioLayer": {
+      "enum": [
+        "foundation",
+        "agent-system",
+        "assurance",
+        "deployment",
+        "physical-ai"
+      ]
+    },
+    "focusState": {
+      "enum": [
+        "foundation",
+        "active",
+        "assurance",
+        "horizon"
+      ]
+    }
+  },
+  "$defs": {
+    "localized": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "tr"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tr": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "appCodes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{3}$"
+      },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "live"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "lastVerified",
+          "lastReleased",
+          "releaseSha"
+        ]
+      }
+    }
+  ]
+}

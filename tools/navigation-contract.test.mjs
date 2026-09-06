@@ -31,7 +31,7 @@ const routes = [
 
 test("the accessibility route set includes every deployable public index document", async () => {
   const discoveredPaths = (await discoverPublicIndexDocuments(rootDir)).map(({ relativePath }) => relativePath);
-  assert.equal(discoveredPaths.length, 13, "fixture must contain all eight living-system and five project pages");
+  assert.equal(discoveredPaths.length, 8, "fixture must contain the eight current living-system pages");
   assert.deepEqual(
     discoveredPaths,
     [
@@ -39,11 +39,6 @@ test("the accessibility route set includes every deployable public index documen
       "memory/index.html",
       "now/archive/2026-W34/index.html",
       "now/index.html",
-      "projects/stage-1-frontend-foundations/1-plant-assets-glossary/index.html",
-      "projects/stage-1-frontend-foundations/2-kpi-tiles/index.html",
-      "projects/stage-1-frontend-foundations/3-weekly-meeting/index.html",
-      "projects/stage-1-frontend-foundations/4-troubleshooting-wizard/index.html",
-      "projects/stage-1-frontend-foundations/5-pid-svg-viewer/index.html",
       "tr/index.html",
       "tr/memory/index.html",
       "tr/now/archive/2026-W34/index.html",
@@ -74,9 +69,9 @@ test("the shared public HTML contract exposes document and coverage validation",
   assert.equal(typeof publicHtmlContract.validatePublicIndexCoverage, "function");
 });
 
-test("the shared coverage gate fails when a discovered project page is omitted", async () => {
+test("the shared coverage gate fails when a discovered public page is omitted", async () => {
   const documents = await discoverPublicIndexDocuments(rootDir);
-  const omittedPath = "projects/stage-1-frontend-foundations/5-pid-svg-viewer/index.html";
+  const omittedPath = "tr/memory/index.html";
   const coveredPaths = documents
     .map(({ relativePath }) => relativePath)
     .filter((relativePath) => relativePath !== omittedPath);
@@ -102,9 +97,13 @@ test("every discovered public index document satisfies the common static accessi
   assert.deepEqual(violations, []);
 });
 
-test("project-page accessibility mutations fail closed", async () => {
-  const relativePath = "projects/stage-1-frontend-foundations/1-plant-assets-glossary/index.html";
-  const validHtml = await readFile(path.join(rootDir, relativePath), "utf8");
+test("public-page accessibility mutations fail closed", () => {
+  const relativePath = "fixture.html";
+  const validHtml = `<!doctype html><html lang="en"><head><title>Fixture</title></head><body id="top">
+    <a class="skip-link" href="#glossary">Skip</a>
+    <header class="page-header"><h1>Fixture heading</h1></header>
+    <main id="glossary"><input aria-describedby="search-hint search-status">
+    <p id="search-hint">Hint</p><p id="search-status">Status</p></main></body></html>`;
   const mutations = [
     {
       code: "skip-link-count",
@@ -125,7 +124,7 @@ test("project-page accessibility mutations fail closed", async () => {
     },
     {
       code: "h1-count",
-      html: validHtml.replace("<h1>Power Plants Asset Glossary</h1>", "<h2>Power Plants Asset Glossary</h2>"),
+      html: validHtml.replace("<h1>Fixture heading</h1>", "<h2>Fixture heading</h2>"),
       name: "missing H1",
     },
     {
@@ -200,24 +199,11 @@ test("the shared decoder consumes numeric references like a browser without loos
   for (const [source, expected] of cases) assert.equal(decodeHtmlReferences(source), expected, source);
 });
 
-test("project skip links expose an explicit two-pixel visible focus indicator", async () => {
-  const projectDirectories = [
-    "2-kpi-tiles",
-    "3-weekly-meeting",
-    "4-troubleshooting-wizard",
-    "5-pid-svg-viewer",
-  ];
-  for (const projectDirectory of projectDirectories) {
-    const css = await readFile(path.join(
-      rootDir,
-      "projects/stage-1-frontend-foundations",
-      projectDirectory,
-      "styles.css",
-    ), "utf8");
-    const focusRule = css.match(/\.skip-link:focus-visible\s*\{([^}]*)\}/)?.[1] ?? "";
-    assert.match(focusRule, /transform:\s*translate\(-50%,\s*0\);/);
-    assert.match(focusRule, /outline:\s*2px\s+solid\s+[^;]+;/, `${projectDirectory} skip link needs a two-pixel focus ring`);
-    assert.match(focusRule, /outline-offset:\s*[1-9][0-9]*px;/, `${projectDirectory} skip link needs a non-zero outline offset`);
+test("retired frontend exercises and their public links stay absent", async () => {
+  await assert.rejects(readFile(path.join(rootDir, "projects/stage-1-frontend-foundations/5-pid-svg-viewer/index.html")), { code: "ENOENT" });
+  for (const document of await discoverPublicIndexDocuments(rootDir)) {
+    assert.ok(!document.relativePath.startsWith("projects/"));
+    assert.doesNotMatch(await readFile(document.absolutePath, "utf8"), /(?:href|src)=["'][^"']*projects\/stage-1-frontend-foundations\//);
   }
 });
 

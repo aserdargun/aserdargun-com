@@ -68,7 +68,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "apps", "learning", "journey", "horizon", "approach", "about"];
-const expectedAssetVersion = "20260906-loop-anim";
+const expectedAssetVersion = "20260906-site-alignment-3";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -83,6 +83,7 @@ const expectedApplicationRows = [
   { code: "cld", repository: "cld-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/cld-aserdargun-com", productUrl: "https://cld.aserdargun.com/", productLabel: "cld.aserdargun.com" },
   { code: "lcl", repository: "lcl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/lcl-aserdargun-com", productUrl: "https://lcl.aserdargun.com/", productLabel: "lcl.aserdargun.com" },
   { code: "wfm", repository: "wfm-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/wfm-aserdargun-com", productUrl: "https://wfm.aserdargun.com/", productLabel: "wfm.aserdargun.com" },
+  { code: "swi", repository: "swi-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/swi-aserdargun-com", productUrl: "https://swi.aserdargun.com/", productLabel: "swi.aserdargun.com" },
   { code: "itl", repository: "itl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/itl-aserdargun-com", productUrl: "https://itl.aserdargun.com/", productLabel: "itl.aserdargun.com" },
   { code: "eng", repository: "eng-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/eng-aserdargun-com", productUrl: "https://eng.aserdargun.com/", productLabel: "eng.aserdargun.com" },
 ].map((row) => ({
@@ -101,6 +102,7 @@ const expectedApplicationRows = [
   productArrowAriaHidden: "true",
 }));
 const retiredProjectUrls = [
+  "/projects/stage-1-frontend-foundations/",
   "https://stackfolio.aserdargun.com/",
   "https://unsloth.aserdargun.com/",
   "https://swapp.org.tr",
@@ -508,7 +510,7 @@ function validatePrimaryNavigation(locale, page, html) {
   check(!primaryLinks.some(([concept]) => ["Approach", "Yaklaşım"].includes(concept)), `${locale}/${page}: Approach remains in top-level navigation`);
 
   const groupExpectations = [
-    ["horizon", locale === "tr" ? "Ufuk" : "The horizon", ["wfm", "itl", "eng"]],
+    ["horizon", locale === "tr" ? "Ufuk" : "The horizon", ["wfm", "swi", "itl", "eng"]],
     ["private", locale === "tr" ? "Özel sistemler" : "Private systems", ["stk", "inf", "nxt"]],
   ];
   for (const [groupName, groupLabel, expectedCodes] of groupExpectations) {
@@ -547,25 +549,30 @@ function validateLivingSystem(locale, html) {
   check(html.indexOf(section) > html.indexOf('class="hero-copy"') && html.indexOf(section) < html.indexOf('class="story-content"'), `${locale}: living-system must follow the hero and precede the detailed journey`);
 }
 
-function validateLearningInvest(locale, html) {
-  const isTurkish = locale === "tr";
-  const section = html.match(/<section class="learning-invest"[\s\S]*?<\/section>/)?.[0] ?? "";
-  check(section.length > 0, `${locale}: learning investment section is missing`);
+function validateSystemFocus(locale, html) {
+  const section = html.match(/<section class="system-focus"[\s\S]*?<\/section>/)?.[0] ?? "";
+  check(section.length > 0, `${locale}: system focus section is missing`);
   if (section.length === 0) return;
-  const segments = matches(section, /<span class="learning-invest-seg(?:\s+learning-invest-seg-horizon)?" style="flex-basis: \d+%;"><code>([^<]+)<\/code> ([^<]+)<\/span>/g);
-  const expectedCodes = ["gpu · llm · usl", "hns · ctx", "sec · evl", "lcl · cld", "aia", "wfm · itl · eng"];
-  check(JSON.stringify(segments) === JSON.stringify(expectedCodes), `${locale}: learning investment segment codes or order differ`);
-  const labels = Array.from(
-    section.matchAll(/<span class="learning-invest-seg(?:\s+learning-invest-seg-horizon)?" style="flex-basis: \d+%;"><code>[^<]+<\/code> ([^<]+)<\/span>/g),
-    (match) => match[1].trim(),
-  );
-  const expectedLabels = isTurkish
-    ? ["%30", "%25", "%20", "%15", "%7", "%3"]
-    : ["30%", "25%", "20%", "15%", "7%", "3%"];
-  check(JSON.stringify(labels) === JSON.stringify(expectedLabels), `${locale}: learning investment percentages differ`);
-  const expectedBasis = ["30", "25", "20", "15", "7", "3"];
-  const basis = matches(section, /flex-basis: (\d+)%;/g);
-  check(JSON.stringify(basis) === JSON.stringify(expectedBasis), `${locale}: learning investment weights differ`);
+
+  const expected = locale === "tr" ? [
+    ["foundation", "Temel", ["aia", "llm", "usl", "gpu"]],
+    ["agent-system", "Ajan sistemi", ["hns", "ctx"]],
+    ["assurance", "Güvence", ["sec", "evl"]],
+    ["deployment", "Dağıtım", ["cld", "lcl"]],
+    ["physical-ai", "Fiziksel AI", ["wfm", "swi", "itl", "eng"]],
+  ] : [
+    ["foundation", "Foundation", ["aia", "llm", "usl", "gpu"]],
+    ["agent-system", "Agent system", ["hns", "ctx"]],
+    ["assurance", "Assurance", ["sec", "evl"]],
+    ["deployment", "Deployment", ["cld", "lcl"]],
+    ["physical-ai", "Physical AI", ["wfm", "swi", "itl", "eng"]],
+  ];
+  for (const [layer, heading, expectedCodes] of expected) {
+    const card = section.match(new RegExp(`<article class="system-focus-card system-focus-card--${layer}">[\\s\\S]*?<\\/article>`))?.[0] ?? "";
+    check(card.includes(`<h3>${heading}</h3>`), `${locale}: ${layer} system focus heading differs`);
+    check(JSON.stringify(matches(card, /<code>([a-z]{3})<\/code>/g)) === JSON.stringify(expectedCodes), `${locale}: ${layer} system focus applications differ`);
+  }
+  check(!/%|flex-basis|depth allocation|derinlik dağılımı/i.test(section), `${locale}: system focus must not expose false percentage precision`);
 }
 
 function stripCssComments(source) {
@@ -850,6 +857,8 @@ const validatedPublicIndexPaths = [];
 for (const document of publicIndexDocuments) {
   const html = await readFile(document.absolutePath, "utf8");
   validatedPublicIndexPaths.push(document.relativePath);
+  check(!document.relativePath.startsWith("projects/stage-1-frontend-foundations/"), `Retired frontend exercise remains: ${document.relativePath}`);
+  check(!/(?:href|src)=["'][^"']*projects\/stage-1-frontend-foundations\//.test(html), `Retired frontend exercise link remains: ${document.relativePath}`);
   for (const diagnostic of validatePublicAccessibilityDocument({ html, relativePath: document.relativePath })) {
     failures.push(`Public HTML accessibility validation failed: file=${diagnostic.relativePath} code=${diagnostic.code} ${diagnostic.message}`);
   }
@@ -923,12 +932,12 @@ for (const [locale, html] of Object.entries(pages)) {
   validateLearningSystem(locale, html);
   validateLearningHorizon(locale, html);
   validateLivingSystem(locale, html);
-  validateLearningInvest(locale, html);
+  validateSystemFocus(locale, html);
 
   const appMapIntro = html.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
   const expectedKicker = locale === "tr"
-    ? "Uygulama haritası · canlı adresler"
-    : "Application map · live destinations";
+    ? "Uygulama haritası · portföyü keşfet"
+    : "Application map · explore the portfolio";
   const expectedHeading = locale === "tr"
     ? "Tek portföy. Odaklı uygulamalar."
     : "One portfolio. Focused applications.";
@@ -1056,8 +1065,10 @@ for (const [locale, localizedArchives] of Object.entries(archiveRoutePages)) {
       `${locale}/${week}: archive card count differs from canonical Now data`,
     );
     check(!/<(?:form|input|textarea|select)\b|contenteditable=|data-(?:edit|delete|publish)/i.test(html), `${locale}/${week}: archive exposes a mutation control`);
-    check(html.includes(`<link rel="stylesheet" href="${expectedStylesheetHref}">`), `${locale}/${week}: archive stylesheet cache version is stale`);
-    check(html.includes(`<script src="${expectedScriptSrc}" defer></script>`), `${locale}/${week}: archive script cache version is stale`);
+    const archiveStylesVersion = html.match(/<link rel="stylesheet" href="\/styles\.css\?v=([a-z0-9-]+)">/)?.[1] ?? "";
+    const archiveScriptVersion = html.match(/<script src="\/scripts\.js\?v=([a-z0-9-]+)" defer><\/script>/)?.[1] ?? "";
+    check(archiveStylesVersion.length > 0, `${locale}/${week}: archive stylesheet cache version is missing`);
+    check(archiveStylesVersion === archiveScriptVersion, `${locale}/${week}: archived stylesheet and script cache versions differ`);
     const ids = matches(html, /\sid="([^"]+)"/g);
     check(new Set(ids).size === ids.length, `${locale}/${week}: archive document IDs must be unique`);
   }
@@ -1160,9 +1171,9 @@ for (const assetName of expectedStageImages) {
 check(!/AI Practitioner/i.test(rootPage.replaceAll("AWS Certified AI Practitioner", "")), "Root AI Practitioner personal title remains");
 validateApplicationMapRows("Root", rootPage);
 validateLearningSystem("Root", rootPage);
-validateLearningInvest("Root", rootPage);
+validateSystemFocus("Root", rootPage);
 const rootAppMapIntro = rootPage.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
-check(rootAppMapIntro.includes("Application map · live destinations"), "Root number-neutral application map kicker is missing");
+check(rootAppMapIntro.includes("Application map · explore the portfolio"), "Root number-neutral application map kicker is missing");
 check(rootAppMapIntro.includes("One portfolio. Focused applications."), "Root number-neutral application map heading is missing");
 check(!/\b(?:05|five)\b/i.test(rootAppMapIntro), "Root stale application count remains in the map introduction");
 check(!rootPage.includes("Stackfolio"), "Root Stackfolio product content remains");

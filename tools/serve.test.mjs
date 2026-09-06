@@ -167,8 +167,8 @@ test("emulates Azure cache headers for shared assets", async () => {
     ["/styles.css", "public, max-age=31536000, immutable"],
     ["/scripts.js", "public, max-age=31536000, immutable"],
     ["/fonts/inter-var-latin.woff2", "public, max-age=31536000, immutable"],
-    ["/images/serdar-gundogdu-ascii-480.webp", "public, max-age=604800"],
-    ["/icons/stackfolio.svg", "public, max-age=604800"],
+    ["/images/career/08-ai-engineer.webp", "public, max-age=604800"],
+    ["/icons/favicon.svg", "public, max-age=604800"],
   ]);
 
   for (const [pathname, cacheControl] of expectations) {

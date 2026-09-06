@@ -7,7 +7,7 @@ duplicate permanently redirects to `/`.
 The opening experience combines an interactive ASCII/pixel portrait engine with a
 reverse-chronological eight-stage career timeline spanning mechanical engineering,
 manufacturing leadership, data science, full-stack AI, and AI engineering,
-followed by a learning-system map that connects parallel compute/model
+followed by a five-layer system overview and a learning-system map that connect parallel compute/model
 foundations to the LLM runtime, the Harness Engineering Observatory (`hns`),
 and a context/security/evaluation quality loop (`ctx` / `sec` / `evl`). Local
 and cloud deployment decisions (`lcl` / `cld`) then open into parallel World
@@ -17,6 +17,14 @@ in the industrial-twin lab before the long-term open-humanoid horizon. SWI links
 does not assert verified DNS, deployment, or release identity.
 The desktop diagram uses box-free orthogonal routing; mobile keeps the same core
 sequence through full-width accessible links.
+
+The application map contains 14 applications from the canonical source, with
+localized search, layer filters, and expandable evidence and knowledge links.
+Unverified applications explicitly show a pending state without invented release
+dates. The Knowledge page offers a topic index for the five authored public notes.
+Now and its historical snapshots retain their dated content. The previous
+Frontend Foundations exercises and unused assets have been removed; their retired
+routes and links are rejected by the public-site validation gate.
 
 ## Development
 
@@ -65,6 +73,31 @@ npm run validate:site
 (Stackfolio, PIPolars, PIWebAPI, SWAPP, SCADA Nerve, Industry-Learn,
 Scikit-Play, Aeon-Play, PyTorch-Play, DSML101). Those projects were removed
 from this site deliberately; the validator fails if any of them reappear.
+
+## Portfolio federation
+
+`data/living-system.json` is the canonical, human-reviewed public source for
+application identities, relationships, research cutoffs, verification dates,
+and release evidence. `tools/portfolio-registry.mjs` projects that allowlisted
+data into the machine-readable `portfolio.json` registry; the application map
+uses the same projection when generating the bilingual portal.
+
+Generate both the registry and the public pages:
+
+```bash
+npm run generate:site
+```
+
+Check that committed generated output has not drifted:
+
+```bash
+npm run check:generated
+```
+
+The per-application public manifest contract is documented as JSON Schema in
+`schemas/aserdargun-app.schema.json`. Private NXT records are never inferred or
+copied into the registry or Knowledge pages; only explicitly authored public
+records in the canonical source are renderable.
 
 ## Assets
 

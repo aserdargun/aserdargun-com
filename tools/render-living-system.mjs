@@ -7,6 +7,7 @@ import {
   loadLivingSystemData,
   summarizeApplications,
 } from "./living-system-data.mjs";
+import { buildPortfolioRegistry } from "./portfolio-registry.mjs";
 import {
   directText as activeDirectText,
   isActive as isActiveHtmlNode,
@@ -19,6 +20,7 @@ const GENERATED_BLOCKS = new Set([
   "living-system",
   "primary-navigation",
   "application-map",
+  "system-focus",
   "now-content",
   "public-memory",
   "journey-evidence",
@@ -182,6 +184,7 @@ export function renderPrimaryNavigation({ locale, page }) {
     `  <div class="nav-links__group" data-nav-group="horizon" role="group" aria-labelledby="nav-horizon-label-${locale}">`,
     `    <span class="nav-links__section" id="nav-horizon-label-${locale}">${label(locale, "The horizon", "Ufuk")}</span>`,
     externalLink("wfm"),
+    externalLink("swi"),
     externalLink("itl"),
     externalLink("eng"),
     "  </div>",
@@ -293,16 +296,16 @@ function addNewTabAccessibilityText(html, locale) {
 export function renderLivingSystem({ locale }) {
   const root = locale === "tr" ? "/tr/" : "/";
   const cards = locale === "tr" ? [
-    { href: `${root}#journey`, eyebrow: "Yolculuk", heading: "Geçmiş", description: "Geride kalan çalışmalar, fiziksel sistemlerden AI&apos;a uzanan izlenebilir bir yolculuktur." },
+    { href: `${root}#journey`, eyebrow: "Yolculuk", heading: "Geçmiş", description: "Bugün geliştirdiğim sistemlerin arkasındaki mühendislik deneyimini keşfet." },
     { href: `${root}now/`, eyebrow: "Aktif", heading: "Şimdi", description: "Dikkatimin ve çalışmalarımın şimdi nereye yöneldiğini gösteren tarihli bir görünüm." },
     { href: `${root}#horizon`, eyebrow: "Ufuk", heading: "Gelecek", description: "Uzun vadeli yön, fiziksel dünyada açık insansı robot mühendisliğidir." },
-    { href: `${root}memory/`, eyebrow: "Yayınlanan", heading: "Bilgi", description: "Burada yalnızca açıkça onaylanmış kamusal hafıza kayıtları görünür." },
+    { href: `${root}memory/`, eyebrow: "Yayınlanan", heading: "Bilgi", description: "Yayınladığım kararları, araştırma notlarını ve dayandıkları kaynakları incele." },
     { href: `${root}#apps`, eyebrow: "Çalışan çıktılar", heading: "Uygulamalar", description: "Birikmiş bilgi; odaklı uygulamalara, laboratuvarlara ve uzun vadeli çalışmalara dönüşür." },
   ] : [
-    { href: `${root}#journey`, eyebrow: "Journey", heading: "Past", description: "The work behind me is a traceable journey from physical systems to AI." },
+    { href: `${root}#journey`, eyebrow: "Journey", heading: "Past", description: "Explore the engineering experience behind the systems I build." },
     { href: `${root}now/`, eyebrow: "Active", heading: "Now", description: "A dated view of where my attention and work are going now." },
     { href: `${root}#horizon`, eyebrow: "Horizon", heading: "Future", description: "The long-term direction is open humanoid engineering in the physical world." },
-    { href: `${root}memory/`, eyebrow: "Published", heading: "Knowledge", description: "Only explicitly approved public memory snapshots appear here." },
+    { href: `${root}memory/`, eyebrow: "Published", heading: "Knowledge", description: "Explore published decisions, research notes, and the sources behind them." },
     { href: `${root}#apps`, eyebrow: "Working outputs", heading: "Applications", description: "Accumulated knowledge becomes focused applications, labs, and long-term work." },
   ];
   const renderedCards = cards.map((card) => [
@@ -325,6 +328,8 @@ export function renderLivingSystem({ locale }) {
 
 export function renderApplicationMap({ locale, data, today }) {
   const summary = summarizeApplications(data.applications)[locale];
+  const registry = buildPortfolioRegistry({ applications: data.applications, generatedAt: data.now.updatedAt });
+  const sourceApplications = new Map(data.applications.map((application) => [application.code, application]));
   const root = locale === "tr" ? "/tr/" : "/";
   const kindLabels = {
     atlas: label(locale, "Atlas", "Atlas"),
@@ -343,56 +348,130 @@ export function renderApplicationMap({ locale, data, today }) {
     archived: label(locale, "Archived", "Arşivlendi"),
   };
   const publicMemory = new Map(data.publicMemory.map((memory) => [memory.id, memory]));
-  const rows = data.applications.map((application) => {
-    const status = application.updatedAt
-      ? renderFreshness({ locale, dateOnly: application.updatedAt, today })
-      : `<span class="app-updated app-updated-horizon"><span class="app-horizon-dot" aria-hidden="true"></span>${label(locale, "Horizon · in design", "Ufuk · tasarım aşamasında")}</span>`;
-    const rowClass = application.systemRole === "horizon" ? ' class="app-row-horizon"' : "";
-    const title = escapeHtml(application.title[locale]);
-    const summary = escapeHtml(application.summary[locale]);
-    const repository = escapeHtml(application.repository);
-    const repositoryName = escapeHtml(repositoryLabel(application.repository));
-    const address = escapeHtml(application.address);
-    const domain = escapeHtml(addressLabel(application.address));
-    const guidingQuestion = application.guidingQuestion === undefined ? "" : `<p class="app-guiding-question"><strong>${label(locale, "Guiding question", "Yönlendirici soru")}</strong>${escapeHtml(application.guidingQuestion[locale])}</p>`;
-    const nextDirection = application.nextDirection === undefined ? "" : `<p class="app-next-direction"><strong>${label(locale, "Next direction", "Sonraki yön")}</strong>${escapeHtml(application.nextDirection[locale])}</p>`;
-    const relatedMemory = application.relatedMemoryIds.length === 0 ? "" : [
+  const rows = registry.applications.map((application) => {
+    const sourceApplication = sourceApplications.get(application.code);
+    const freshnessDate = application.lastVerified ?? (application.status === "live" ? sourceApplication.updatedAt : null);
+    const status = freshnessDate
+      ? renderFreshness({ locale, dateOnly: freshnessDate, today })
+      : `<span class="app-updated app-updated-horizon"><span class="app-horizon-dot" aria-hidden="true"></span>${escapeHtml(application.statusLabel?.[locale] ?? statusLabels[application.status])}</span>`;
+    const rowClass = ` data-app-row data-app-code="${escapeHtml(application.code)}" data-app-layer="${escapeHtml(application.portfolioLayer ?? "")}"${sourceApplication.systemRole === "horizon" ? ' class="app-row-horizon"' : ""}`;
+    const title = escapeHtml(application.name[locale]);
+    const applicationSummary = escapeHtml(application.description[locale]);
+    const repository = escapeHtml(application.repositoryUrl);
+    const repositoryName = escapeHtml(repositoryLabel(application.repositoryUrl));
+    const address = escapeHtml(application.productionUrl);
+    const domain = escapeHtml(addressLabel(application.productionUrl));
+    const guidingQuestion = sourceApplication.guidingQuestion === undefined ? "" : `<p class="app-guiding-question"><strong>${label(locale, "Guiding question", "Yönlendirici soru")}</strong>${escapeHtml(sourceApplication.guidingQuestion[locale])}</p>`;
+    const nextDirection = sourceApplication.nextDirection === undefined ? "" : `<p class="app-next-direction"><strong>${label(locale, "Next direction", "Sonraki yön")}</strong>${escapeHtml(sourceApplication.nextDirection[locale])}</p>`;
+    const relatedMemory = sourceApplication.relatedMemoryIds.length === 0 ? "" : [
       `                <section class="app-related-memory" aria-label="${label(locale, "Related knowledge", "İlgili bilgi")}">`,
-      `                  <h3>${label(locale, "Related knowledge", "İlgili bilgi")} <span class="app-related-memory__count">${application.relatedMemoryIds.length} ${label(locale, application.relatedMemoryIds.length === 1 ? "record" : "records", "kayıt")}</span></h3>`,
+      `                  <h3>${label(locale, "Related knowledge", "İlgili bilgi")} <span class="app-related-memory__count">${sourceApplication.relatedMemoryIds.length} ${label(locale, sourceApplication.relatedMemoryIds.length === 1 ? "record" : "records", "kayıt")}</span></h3>`,
       "                  <ul>",
-      ...application.relatedMemoryIds.map((memoryId) => {
+      ...sourceApplication.relatedMemoryIds.map((memoryId) => {
         const memory = publicMemory.get(memoryId);
         return `                    <li><a href="${root}memory/#memory-${escapeHtml(memoryId)}">${escapeHtml(memory.title[locale])}</a></li>`;
       }),
       "                  </ul>",
       "                </section>",
     ].join("\n");
+    const evidenceDates = application.researchCutoff === undefined ? "" : [
+      `                  <div><dt>${label(locale, "Research cutoff", "Araştırma kesiti")}</dt><dd><time datetime="${escapeHtml(application.researchCutoff)}">${escapeHtml(application.researchCutoff)}</time></dd></div>`,
+      `                  <div><dt>${label(locale, "Verified", "Doğrulandı")}</dt><dd><time datetime="${escapeHtml(application.lastVerified)}">${escapeHtml(application.lastVerified)}</time></dd></div>`,
+      `                  <div><dt>${label(locale, "Released", "Yayınlandı")}</dt><dd><time datetime="${escapeHtml(application.lastReleased)}">${escapeHtml(application.lastReleased)}</time><code>${escapeHtml(application.releaseSha.slice(0, 8))}</code></dd></div>`,
+    ].join("\n");
     const applicationDetails = [
       '                <dl class="app-record-meta">',
-      `                  <div><dt>${label(locale, "Kind", "Tür")}</dt><dd>${kindLabels[application.kind]}</dd></div>`,
-      `                  <div><dt>${label(locale, "Status", "Durum")}</dt><dd>${statusLabels[application.status]}</dd></div>`,
+      `                  <div><dt>${label(locale, "Kind", "Tür")}</dt><dd>${kindLabels[application.type]}</dd></div>`,
+      `                  <div><dt>${label(locale, "Status", "Durum")}</dt><dd>${escapeHtml(application.statusLabel?.[locale] ?? statusLabels[application.status])}</dd></div>`,
+      evidenceDates,
       "                </dl>",
       guidingQuestion,
       nextDirection,
       relatedMemory,
     ].filter(Boolean).join("\n");
-    return `              <tr${rowClass}><th scope="row"><code>${escapeHtml(application.code)}</code></th><td><strong>${title}</strong><span>${summary}</span>${status}\n${applicationDetails}</td><td><a href="${repository}" target="_blank" rel="noreferrer"><code>${repositoryName}</code> <span aria-hidden="true">↗</span></a></td><td><a href="${address}" target="_blank" rel="noreferrer">${domain} <span aria-hidden="true">↗</span></a></td></tr>`;
+    return `              <tr${rowClass}><th scope="row"><code>${escapeHtml(application.code)}</code></th><td><strong>${title}</strong><span>${applicationSummary}</span>${status}\n<details class="app-evidence"><summary>${label(locale, "Evidence & related knowledge", "Kanıt ve ilgili bilgi")}</summary>${applicationDetails}</details></td><td><a href="${repository}" target="_blank" rel="noreferrer"><code>${repositoryName}</code> <span aria-hidden="true">↗</span></a></td><td><a href="${address}" target="_blank" rel="noreferrer">${domain} <span aria-hidden="true">↗</span></a></td></tr>`;
   });
 
   return [
     "          <div class=\"app-map-intro\">",
-    `            <p class="app-map-kicker">${label(locale, "Application map · live destinations", "Uygulama haritası · canlı adresler")}</p>`,
+    `            <p class="app-map-kicker">${label(locale, "Application map · explore the portfolio", "Uygulama haritası · portföyü keşfet")}</p>`,
     `            <h2 id="app-map-title">${label(locale, "One portfolio. Focused applications.", "Tek portföy. Odaklı uygulamalar.")}</h2>`,
     `            <p id="app-map-description">${escapeHtml(summary)} ${label(locale, "The three-letter code is the permanent key between each application, repository, and", "Üç harfli kod; her uygulama, repo ve")} <code>aserdargun.com</code> ${label(locale, "subdomain.", "alt alan adı arasındaki kalıcı anahtardır.")}</p>`,
     "          </div>",
+    `          <div class="app-discovery" data-app-controls hidden>
+            <div class="app-discovery__search"><label for="app-search-${locale}">${label(locale, "Find an application", "Uygulama bul")}</label><input id="app-search-${locale}" data-app-search type="search" placeholder="${label(locale, "Name, code, or topic", "Ad, kod veya konu")}" autocomplete="off" aria-controls="app-table-${locale}"></div>
+            <div><label for="app-layer-${locale}">${label(locale, "System layer", "Sistem katmanı")}</label><select id="app-layer-${locale}" data-app-layer-filter aria-controls="app-table-${locale}"><option value="all">${label(locale, "All layers", "Tüm katmanlar")}</option>${[
+              ["foundation", "Foundation", "Temel"], ["agent-system", "Agent system", "Ajan sistemi"], ["assurance", "Assurance", "Güvence"], ["deployment", "Deployment", "Dağıtım"], ["physical-ai", "Physical AI", "Fiziksel AI"],
+            ].map(([key,en,tr]) => `<option value="${key}">${label(locale,en,tr)}</option>`).join("")}</select></div>
+            <p class="app-discovery__count" data-app-count role="status" aria-live="polite"></p>
+          </div>`,
     "          <div class=\"app-map-table-wrap\" role=\"region\" aria-labelledby=\"app-map-title\" tabindex=\"0\">",
-    "          <table>",
+    `          <table id="app-table-${locale}">`,
     `            <thead><tr><th scope="col">${label(locale, "Code", "Kod")}</th><th scope="col">${label(locale, "Application", "Uygulama")}</th><th scope="col">${label(locale, "Repository", "Repo")}</th><th scope="col">${label(locale, "Address", "Adres")}</th></tr></thead>`,
     "            <tbody>",
     ...rows,
     "            </tbody>",
     "          </table>",
+    `          <p class="app-empty" data-app-empty hidden>${label(locale, "No applications match. Try another term or choose all layers.", "Eşleşen uygulama yok. Başka bir terim dene veya tüm katmanları seç.")}</p>`,
     "          </div>",
+  ].join("\n");
+}
+
+export function renderSystemFocus({ locale, data }) {
+  const layers = [
+    {
+      key: "foundation",
+      title: label(locale, "Foundation", "Temel"),
+      description: label(locale, "Ecosystem, compute, runtime, and model-building foundations.", "Ekosistem, hesaplama, çalışma ortamı ve model geliştirme temelleri."),
+    },
+    {
+      key: "agent-system",
+      title: label(locale, "Agent system", "Ajan sistemi"),
+      description: label(locale, "Harness and context layers that turn model capability into an operating system.", "Model yeteneğini çalışan bir sisteme dönüştüren harness ve bağlam katmanları."),
+    },
+    {
+      key: "assurance",
+      title: label(locale, "Assurance", "Güvence"),
+      description: label(locale, "Security and evaluation contracts for bounded, reviewable behavior.", "Sınırlı ve incelenebilir davranış için güvenlik ve değerlendirme sözleşmeleri."),
+    },
+    {
+      key: "deployment",
+      title: label(locale, "Deployment", "Dağıtım"),
+      description: label(locale, "Local and cloud decisions grounded in workload, control, and cost.", "İş yükü, kontrol ve maliyete dayanan lokal ve bulut kararları."),
+    },
+    {
+      key: "physical-ai",
+      title: label(locale, "Physical AI", "Fiziksel AI"),
+      description: label(locale, "World models and swarm coordination meet in digital twins and embodied engineering.", "Dünya modelleri ve sürü koordinasyonu, dijital ikizlerde ve bedenlenmiş mühendislikte buluşur."),
+    },
+  ];
+  const registry = buildPortfolioRegistry({ applications: data.applications, generatedAt: data.now.updatedAt });
+
+  const cards = layers.map((layer, index) => {
+    const applications = registry.applications.filter((application) => application.portfolioLayer === layer.key);
+    return [
+      `        <article class="system-focus-card system-focus-card--${layer.key}">`,
+      `          <p class="system-focus-card__index">${String(index + 1).padStart(2, "0")}</p>`,
+      `          <h3>${layer.title}</h3>`,
+      `          <p>${layer.description}</p>`,
+      `          <ul aria-label="${escapeHtml(label(locale, `${layer.title} applications`, `${layer.title} uygulamaları`))}">`,
+      ...applications.map((application) => `            <li><a href="${escapeHtml(application.productionUrl)}" target="_blank" rel="noreferrer"><code>${escapeHtml(application.code)}</code><span>${escapeHtml(application.name[locale])}</span></a></li>`),
+      "          </ul>",
+      "        </article>",
+    ].join("\n");
+  });
+
+  return [
+    `    <section class="system-focus" aria-labelledby="system-focus-title-${locale}">`,
+    '      <div class="system-focus__intro">',
+    `        <p class="system-focus__kicker">${label(locale, "System overview · find your starting point", "Sisteme genel bakış · başlangıç noktanı bul")}</p>`,
+    `        <h2 id="system-focus-title-${locale}">${label(locale, "Five layers. One learning loop.", "Beş katman. Tek öğrenme döngüsü.")}</h2>`,
+    `        <p>${label(locale, "Start with a question: understand the foundations, build an agent, assess its behavior, choose where it runs, or explore physical AI. The learning map below connects these five layers.", "Bir soruyla başla: temelleri öğren, ajan geliştir, davranışını değerlendir, nerede çalışacağını seç veya fiziksel AI alanını keşfet. Aşağıdaki öğrenme haritası bu beş katmanı birbirine bağlar.")}</p>`,
+    "      </div>",
+    '      <div class="system-focus__grid">',
+    ...cards,
+    "      </div>",
+    "    </section>",
   ].join("\n");
 }
 
@@ -441,8 +520,8 @@ export function renderNowContent({ locale, data, today, archiveLinks = [] }) {
   return [
     "    <section class=\"now-hero\">",
     `      <p class="now-kicker">${renderFreshness({ locale, dateOnly: data.now.updatedAt, today })} · ${locale === "tr" ? `${Number(data.now.week.slice(-2))}. hafta` : `Week ${Number(data.now.week.slice(-2))}`}</p>`,
-    `      <h1>${label(locale, "What I&apos;m working on, <em>right now.</em>", "Şu an ne üzerinde çalışıyorum, <em>gerçekten.</em>")}</h1>`,
-    `      <p class="now-intro">${label(locale, "A short, dated list — not a curated bio. The point is to show where my attention is going this week and what I&apos;m building toward this month. If something here resonates or you want to swap notes on it, write to me.", "Kısa, tarihli, küratörlük olmayan bir not. Buradaki amaç dikkatimin bu hafta nereye aktığı ve bu ay ne inşa ettiğimi göstermek. Listelenen bir şey sende yankı uyandırırsa ya da not alışverişi yapmak istersen, bana yaz.")}</p>`,
+    `      <h1>${label(locale, "Current work,<br><em>long-term direction.</em>", "Güncel çalışmalar,<br><em>uzun vadeli yön.</em>")}</h1>`,
+    `      <p class="now-intro">${label(locale, "A dated view of what I am building, learning, and working toward. Explore this week’s focus, this month’s work, and the long-term direction.", "Ne geliştirdiğimi, ne öğrendiğimi ve nereye ilerlediğimi gösteren tarihli bir görünüm. Bu haftanın odağını, bu ayın çalışmalarını ve uzun vadeli yönümü incele.")}</p>`,
     "    </section>",
     `    <section class="now-grid" aria-label="${escapeHtml(label(locale, "Current focus", "Şu anki odak"))}">`,
     renderNowCards({ locale, data }),
@@ -465,11 +544,31 @@ export function renderPublicMemory({ locale, data }) {
     publication: label(locale, "Publication", "Yayın"),
   };
   const applications = new Map(data.applications.map((application) => [application.code, application]));
+  const conceptLabels = {
+    evaluation: ["Evaluation", "Değerlendirme"], release: ["Release", "Sürüm"],
+    "human-review": ["Human review", "İnsan incelemesi"], context: ["Context", "Bağlam"],
+    security: ["Security", "Güvenlik"], "local-ai": ["Local AI", "Yerel AI"],
+    cloud: ["Cloud", "Bulut"], deployment: ["Deployment", "Dağıtım"],
+    "world-models": ["World models", "Dünya modelleri"], "digital-twins": ["Digital twins", "Dijital ikizler"],
+    "physical-ai": ["Physical AI", "Fiziksel AI"], "human-control": ["Human control", "İnsan kontrolü"],
+    authority: ["Authority", "Yetki"], safety: ["Safety", "Emniyet"],
+    evidence: ["Evidence", "Kanıt"], mcp: ["MCP", "MCP"], vllm: ["vLLM", "vLLM"],
+    "local-inference": ["Local inference", "Yerel çıkarım"], azure: ["Azure", "Azure"],
+    "world-model": ["World models", "Dünya modelleri"], openusd: ["OpenUSD", "OpenUSD"],
+    "humanoid-robotics": ["Humanoid robotics", "İnsansı robotik"],
+    "human-authority": ["Human authority", "İnsan yetkisi"],
+  };
+  const conceptLabel = (key) => {
+    if (applications.has(key)) return applications.get(key).title[locale];
+    const text = conceptLabels[key];
+    return text ? label(locale, ...text) : key.replaceAll("-", " ");
+  };
   const externalArrow = '<span aria-hidden="true">↗</span>';
   const cards = data.publicMemory.map((memory) => {
+    const isPublishedRecord = memory.content !== undefined;
     const tags = memory.tags.length === 0 ? "" : [
       `        <ul class="memory-card__tags" aria-label="${label(locale, "Tags", "Etiketler")}">`,
-      ...memory.tags.map((tag) => `          <li>${escapeHtml(tag)}</li>`),
+      ...memory.tags.map((tag) => `          <li>${escapeHtml(conceptLabel(tag))}</li>`),
       "        </ul>",
     ].join("\n");
     const relatedApplications = memory.relatedApplicationCodes.length === 0 ? "" : [
@@ -491,23 +590,70 @@ export function renderPublicMemory({ locale, data }) {
       "          </ul>",
       "        </section>",
     ].join("\n");
+    const content = !isPublishedRecord ? "" : [
+      '        <div class="memory-card__content">',
+      `          <p>${escapeHtml(memory.content[locale])}</p>`,
+      "        </div>",
+    ].join("\n");
+    const limitations = !isPublishedRecord ? "" : [
+      '        <section class="memory-card__limitations">',
+      `          <h3>${label(locale, "Limitations", "Sınırlamalar")}</h3>`,
+      `          <p>${escapeHtml(memory.limitations[locale])}</p>`,
+      "        </section>",
+    ].join("\n");
+    const sources = !isPublishedRecord ? "" : [
+      '        <section class="memory-card__sources">',
+      `          <h3>${label(locale, "Sources", "Kaynaklar")}</h3>`,
+      "          <ul>",
+      ...memory.sources.map((source) => `            <li><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.label)} ${externalArrow}</a><time datetime="${escapeHtml(source.verifiedAt)}">${escapeHtml(source.verifiedAt)}</time></li>`),
+      "          </ul>",
+      "        </section>",
+    ].join("\n");
+    const relatedEntities = !isPublishedRecord || memory.relatedEntityIds.length === 0 ? "" : [
+      '        <section class="memory-card__entities">',
+      `          <h3>${label(locale, "Related concepts", "İlgili kavramlar")}</h3>`,
+      "          <ul>",
+      ...memory.relatedEntityIds.map((entityId) => `            <li data-entity-id="${escapeHtml(entityId)}"><span>${escapeHtml(conceptLabel(entityId.slice(7)))}</span></li>`),
+      "          </ul>",
+      "        </section>",
+    ].join("\n");
+    const dates = isPublishedRecord ? [
+      '        <dl class="memory-card__dates">',
+      `          <div><dt>${label(locale, "Created", "Oluşturuldu")}</dt><dd><time datetime="${escapeHtml(memory.createdAt)}">${escapeHtml(memory.createdAt)}</time></dd></div>`,
+      `          <div><dt>${label(locale, "Verified", "Doğrulandı")}</dt><dd><time datetime="${escapeHtml(memory.verifiedAt)}">${escapeHtml(memory.verifiedAt)}</time></dd></div>`,
+      "        </dl>",
+    ].join("\n") : [
+      '        <dl class="memory-card__dates">',
+      `          <div><dt>${label(locale, "Published", "Yayınlandı")}</dt><dd><time datetime="${escapeHtml(memory.publishedAt)}">${escapeHtml(memory.publishedAt)}</time></dd></div>`,
+      `          <div><dt>${label(locale, "Updated", "Güncellendi")}</dt><dd><time datetime="${escapeHtml(memory.updatedAt)}">${escapeHtml(memory.updatedAt)}</time></dd></div>`,
+      "        </dl>",
+    ].join("\n");
+    const sourceSnapshot = isPublishedRecord ? "" : `        <a class="memory-card__source" href="${escapeHtml(memory.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(memory.sourceLabel)} ${externalArrow}</a>`;
     return [
       `      <article class="memory-card" id="memory-${escapeHtml(memory.id)}" data-memory-id="${escapeHtml(memory.id)}">`,
       `        <p class="memory-card__type">${typeLabels[memory.type]}</p>`,
       `        <h2>${escapeHtml(memory.title[locale])}</h2>`,
       `        <p class="memory-card__summary">${escapeHtml(memory.summary[locale])}</p>`,
-      '        <dl class="memory-card__dates">',
-      `          <div><dt>${label(locale, "Published", "Yayınlandı")}</dt><dd><time datetime="${escapeHtml(memory.publishedAt)}">${escapeHtml(memory.publishedAt)}</time></dd></div>`,
-      `          <div><dt>${label(locale, "Updated", "Güncellendi")}</dt><dd><time datetime="${escapeHtml(memory.updatedAt)}">${escapeHtml(memory.updatedAt)}</time></dd></div>`,
-      "        </dl>",
+      content,
+      dates,
       tags,
       relatedApplications,
+      relatedEntities,
+      limitations,
+      sources,
       evidence,
-      `        <a class="memory-card__source" href="${escapeHtml(memory.sourceUrl)}" target="_blank" rel="noreferrer">${escapeHtml(memory.sourceLabel)} ${externalArrow}</a>`,
+      sourceSnapshot,
       "      </article>",
     ].filter(Boolean).join("\n");
   });
-  return ['      <div class="memory-list">', ...cards, "      </div>"].join("\n");
+  const contents = [
+    `<nav class="memory-contents" aria-label="${label(locale, "Published notes", "Yayınlanan notlar")}">`,
+    `<p>${data.publicMemory.length} ${label(locale, "published notes · choose a topic", "yayınlanmış not · bir konu seç")}</p>`,
+    "<ol>",
+    ...data.publicMemory.map((memory, index) => `<li><a href="#memory-${escapeHtml(memory.id)}"><span aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>${escapeHtml(memory.title[locale])}</a></li>`),
+    "</ol></nav>",
+  ].join("\n");
+  return [contents, '<div class="memory-list">', ...cards, "</div>"].join("\n");
 }
 
 export function renderJourneyEvidence({ locale, data, documentHtml }) {
@@ -574,6 +720,7 @@ export function renderDocument({ html, page, locale, data, today, archiveLinks =
     "primary-navigation": () => renderPrimaryNavigation({ locale, page }),
     "living-system": () => renderLivingSystem({ locale, data, today }),
     "application-map": () => renderApplicationMap({ locale, data, today }),
+    "system-focus": () => renderSystemFocus({ locale, data }),
     "now-content": () => renderNowContent({ locale, data, today, archiveLinks }),
     "public-memory": () => renderPublicMemory({ locale, data }),
     "journey-evidence": () => renderJourneyEvidence({ locale, data, documentHtml: html }),
@@ -1105,8 +1252,23 @@ export function validatePublicMemoryDocument({ html, locale, expectedCount, rela
     if (times.length !== 2 || times.some((time) => !archiveIsVisible(time) || archiveSemanticText(time) === "")) {
       publicMemoryStructureError(relativePath, "memory-card-visible-dates");
     }
-    const sources = direct.filter((node) => node.tagName === "a" && archiveHasClass(node, "memory-card__source"));
-    if (sources.length !== 1 || !archiveIsVisible(sources[0]) || archiveSemanticText(sources[0]) === "") {
+    const contentBlocks = direct.filter((node) => node.tagName === "div" && archiveHasClass(node, "memory-card__content"));
+    const sourceSnapshots = direct.filter((node) => node.tagName === "a" && archiveHasClass(node, "memory-card__source"));
+    const isPublishedRecord = contentBlocks.length > 0;
+    if (isPublishedRecord) {
+      if (contentBlocks.length !== 1 || !archiveIsVisible(contentBlocks[0]) || archiveSemanticText(contentBlocks[0]) === "") {
+        publicMemoryStructureError(relativePath, "memory-card-visible-content");
+      }
+      if (sourceSnapshots.length !== 0) publicMemoryStructureError(relativePath, "memory-card-private-source-boundary");
+      for (const groupClass of ["memory-card__limitations", "memory-card__sources", "memory-card__entities"]) {
+        const groups = direct.filter((node) => node.tagName === "section" && archiveHasClass(node, groupClass));
+        if (groups.length !== 1 || !archiveIsVisible(groups[0]) || archiveSemanticText(groups[0]) === "") {
+          publicMemoryStructureError(relativePath, `${groupClass}-visible`);
+        }
+      }
+    } else if (sourceSnapshots.length !== 1
+      || !archiveIsVisible(sourceSnapshots[0])
+      || archiveSemanticText(sourceSnapshots[0]) === "") {
       publicMemoryStructureError(relativePath, "memory-card-visible-source");
     }
 
@@ -1117,7 +1279,7 @@ export function validatePublicMemoryDocument({ html, locale, expectedCount, rela
         publicMemoryStructureError(relativePath, "memory-card-visible-tags");
       }
     }
-    for (const groupClass of ["memory-card__related", "memory-card__evidence"]) {
+    for (const groupClass of ["memory-card__related", "memory-card__sources", "memory-card__evidence"]) {
       const groups = direct.filter((node) => node.tagName === "section" && archiveHasClass(node, groupClass));
       for (const group of groups) {
         const headings = archiveElementsByTag(group, "h3");
@@ -1242,7 +1404,7 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
   const groupElements = primaryNavigation[0].children
     .filter((node) => node.type === "element" && archiveHasAttribute(node, "data-nav-group"));
   const expectedGroups = [
-    { key: "horizon", text: label(locale, "The horizon", "Ufuk"), codes: ["wfm", "itl", "eng"] },
+    { key: "horizon", text: label(locale, "The horizon", "Ufuk"), codes: ["wfm", "swi", "itl", "eng"] },
     { key: "private", text: label(locale, "Private systems", "Özel sistemler"), codes: ["stk", "inf", "nxt"] },
   ];
   const scopedGroupAnchors = [];
@@ -1315,7 +1477,7 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
     .filter((node) => archiveHasClass(node, "nav-links__external"));
   const primaryExternalAnchors = archiveElementsByTag(primaryNavigation[0], "a")
     .filter((node) => archiveHasClass(node, "nav-links__external"));
-  const expectedNewTabHrefs = ["wfm", "itl", "eng", "stk", "inf", "nxt"]
+  const expectedNewTabHrefs = ["wfm", "swi", "itl", "eng", "stk", "inf", "nxt"]
     .map((code) => `https://${code}.aserdargun.com/`);
   const allActiveAnchors = archiveElementsByTag(documentTree, "a");
   const destinationMatches = expectedNewTabHrefs.map((href) => (

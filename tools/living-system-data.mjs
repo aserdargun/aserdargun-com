@@ -15,6 +15,9 @@ const APPLICATION_VISIBILITIES = new Set(["public", "unlisted", "owner-only"]);
 const APPLICATION_STATUSES = new Set(["idea", "design", "active", "live", "paused", "archived"]);
 const SYSTEM_ROLES = new Set(["core-learning", "lab", "horizon-bridge", "horizon"]);
 const MEMORY_TYPES = new Set(["event", "decision", "learning", "plan", "project", "publication"]);
+const MEMORY_STATUSES = new Set(["draft", "published", "archived"]);
+const PORTFOLIO_LAYERS = new Set(["foundation", "agent-system", "assurance", "deployment", "physical-ai"]);
+const FOCUS_STATES = new Set(["foundation", "active", "assurance", "horizon"]);
 const TIMEFRAMES = new Set(["week", "month", "long-term"]);
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const ISO_WEEK_PATTERN = /^(\d{4})-W(\d{2})$/;
@@ -24,13 +27,18 @@ const RESERVED_PRIVATE_NAVIGATION_CODES = new Set(["stk", "inf", "nxt"]);
 const APPLICATION_KEYS = new Set([
   "code", "kind", "systemRole", "visibility", "status", "title", "summary",
   "guidingQuestion", "repository", "address", "updatedAt", "relatedMemoryIds", "nextDirection",
+  "statusLabel", "languages", "researchCutoff", "lastVerified", "lastReleased", "releaseSha",
+  "sourceCount", "claimCount", "evidencePolicy", "upstreamApps", "downstreamApps", "tracks",
+  "entityIds", "portfolioLayer", "focusState",
 ]);
 const NOW_KEYS = new Set(["updatedAt", "week", "items"]);
 const NOW_ITEM_KEYS = new Set(["id", "timeframe", "title", "summary", "tags"]);
 const PUBLIC_MEMORY_KEYS = new Set([
   "id", "type", "visibility", "title", "summary", "publishedAt", "updatedAt",
   "sourceUrl", "sourceLabel", "relatedApplicationCodes", "tags", "evidenceUrls",
+  "status", "content", "createdAt", "verifiedAt", "limitations", "sources", "relatedEntityIds",
 ]);
+const PUBLIC_MEMORY_SOURCE_KEYS = new Set(["label", "url", "verifiedAt"]);
 const JOURNEY_EVIDENCE_KEYS = new Set(["stage", "period", "decision", "evidenceUrls", "relatedApplicationCodes"]);
 
 const isPlainObject = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
@@ -127,6 +135,33 @@ function validateOptionalLocalized(value, label, errors) {
   if (value !== undefined) validateLocalized(value, label, errors);
 }
 
+function validateOptionalDate(value, label, errors, today) {
+  if (value !== undefined) validateDate(value, label, errors, today);
+}
+
+function validateOptionalCount(value, label, errors) {
+  if (value !== undefined && value !== null && (!Number.isInteger(value) || value < 0)) {
+    addError(errors, label, "invalid-count", `${label} must be null or a non-negative integer.`);
+  }
+}
+
+function validateUniqueStringArray(value, label, errors, predicate = () => true) {
+  if (!Array.isArray(value)) {
+    addError(errors, label, "invalid-string-array", `${label} must be an array of unique non-empty strings.`);
+    return;
+  }
+  const seen = new Set();
+  for (const [index, item] of value.entries()) {
+    if (typeof item !== "string" || item.trim() === "" || !predicate(item)) {
+      addError(errors, `${label}[${index}]`, "invalid-value", `${label}[${index}] is not valid.`);
+    } else if (seen.has(item)) {
+      addError(errors, `${label}[${index}]`, "duplicate-value", `${label}[${index}] duplicates an earlier value.`);
+    } else {
+      seen.add(item);
+    }
+  }
+}
+
 function trustedPublicIdentitySet(records, key, pattern, isPublicRecord) {
   if (!Array.isArray(records)) return new Set();
   const matches = new Map();
@@ -184,6 +219,21 @@ function isStructurallyValidPublicApplication(application, today) {
     && isGithubRepositoryForOwner(application.repository)
     && isCanonicalHttpsUrl(application.address)
     && validUpdate
+    && (application.statusLabel === undefined || isCompleteLocalized(application.statusLabel))
+    && (application.languages === undefined || JSON.stringify(application.languages) === JSON.stringify(["tr", "en"]))
+    && (application.researchCutoff === undefined || isValidDateOnOrBefore(application.researchCutoff, today))
+    && (application.lastVerified === undefined || isValidDateOnOrBefore(application.lastVerified, today))
+    && (application.lastReleased === undefined || isValidDateOnOrBefore(application.lastReleased, today))
+    && (application.releaseSha === undefined || /^[a-f0-9]{40}$/.test(application.releaseSha))
+    && (application.sourceCount === undefined || application.sourceCount === null || (Number.isInteger(application.sourceCount) && application.sourceCount >= 0))
+    && (application.claimCount === undefined || application.claimCount === null || (Number.isInteger(application.claimCount) && application.claimCount >= 0))
+    && (application.evidencePolicy === undefined || (typeof application.evidencePolicy === "string" && application.evidencePolicy.trim() !== ""))
+    && (application.upstreamApps === undefined || isUniqueArrayOf(application.upstreamApps, (code) => typeof code === "string" && APPLICATION_CODE_PATTERN.test(code)))
+    && (application.downstreamApps === undefined || isUniqueArrayOf(application.downstreamApps, (code) => typeof code === "string" && APPLICATION_CODE_PATTERN.test(code)))
+    && (application.tracks === undefined || isUniqueArrayOf(application.tracks, (track) => typeof track === "string" && track.trim() !== ""))
+    && (application.entityIds === undefined || isUniqueArrayOf(application.entityIds, (id) => typeof id === "string" && /^entity:[a-z0-9-]+$/.test(id)))
+    && (application.portfolioLayer === undefined || PORTFOLIO_LAYERS.has(application.portfolioLayer))
+    && (application.focusState === undefined || FOCUS_STATES.has(application.focusState))
     && isUniqueArrayOf(
       application.relatedMemoryIds,
       (memoryId) => typeof memoryId === "string" && KEBAB_CASE_PATTERN.test(memoryId),
@@ -191,7 +241,7 @@ function isStructurallyValidPublicApplication(application, today) {
 }
 
 function isStructurallyValidPublicMemory(memory, today) {
-  return hasOnlyAllowedKeys(memory, PUBLIC_MEMORY_KEYS)
+  const shared = hasOnlyAllowedKeys(memory, PUBLIC_MEMORY_KEYS)
     && typeof memory.id === "string"
     && KEBAB_CASE_PATTERN.test(memory.id)
     && MEMORY_TYPES.has(memory.type)
@@ -200,8 +250,6 @@ function isStructurallyValidPublicMemory(memory, today) {
     && isCompleteLocalized(memory.summary)
     && isValidDateOnOrBefore(memory.publishedAt, today)
     && isValidDateOnOrBefore(memory.updatedAt, today)
-    && isNxtSnapshotUrl(memory.sourceUrl)
-    && typeof memory.sourceLabel === "string" && memory.sourceLabel.trim() !== ""
     && Array.isArray(memory.tags)
     && memory.tags.every((tag) => typeof tag === "string" && tag.trim() !== "")
     && Array.isArray(memory.evidenceUrls)
@@ -210,6 +258,27 @@ function isStructurallyValidPublicMemory(memory, today) {
       memory.relatedApplicationCodes,
       (code) => typeof code === "string" && APPLICATION_CODE_PATTERN.test(code),
     );
+  if (!shared) return false;
+
+  if (memory.sourceUrl !== undefined || memory.sourceLabel !== undefined) {
+    return isNxtSnapshotUrl(memory.sourceUrl)
+      && typeof memory.sourceLabel === "string" && memory.sourceLabel.trim() !== "";
+  }
+
+  return MEMORY_STATUSES.has(memory.status)
+    && memory.status === "published"
+    && isCompleteLocalized(memory.content)
+    && isValidDateOnOrBefore(memory.createdAt, today)
+    && isValidDateOnOrBefore(memory.verifiedAt, today)
+    && isCompleteLocalized(memory.limitations)
+    && Array.isArray(memory.sources)
+    && memory.sources.length > 0
+    && memory.sources.every((source) => isPlainObject(source)
+      && hasOnlyAllowedKeys(source, PUBLIC_MEMORY_SOURCE_KEYS)
+      && typeof source.label === "string" && source.label.trim() !== ""
+      && isCanonicalHttpsUrl(source.url)
+      && isValidDateOnOrBefore(source.verifiedAt, today))
+    && isUniqueArrayOf(memory.relatedEntityIds, (id) => typeof id === "string" && /^entity:[a-z0-9-]+$/.test(id));
 }
 
 function validateApplications(applications, errors, today, trustedApplicationCodes) {
@@ -248,6 +317,50 @@ function validateApplications(applications, errors, today, trustedApplicationCod
     validateLocalized(application.summary, `${label}.summary`, errors);
     validateOptionalLocalized(application.guidingQuestion, `${label}.guidingQuestion`, errors);
     validateOptionalLocalized(application.nextDirection, `${label}.nextDirection`, errors);
+    validateOptionalLocalized(application.statusLabel, `${label}.statusLabel`, errors);
+
+    if (application.languages !== undefined
+      && JSON.stringify(application.languages) !== JSON.stringify(["tr", "en"])) {
+      addError(errors, `${label}.languages`, "invalid-languages", `${label}.languages must be exactly ["tr", "en"].`);
+    }
+    validateOptionalDate(application.researchCutoff, `${label}.researchCutoff`, errors, today);
+    validateOptionalDate(application.lastVerified, `${label}.lastVerified`, errors, today);
+    validateOptionalDate(application.lastReleased, `${label}.lastReleased`, errors, today);
+    if (application.releaseSha !== undefined && !/^[a-f0-9]{40}$/.test(application.releaseSha)) {
+      addError(errors, `${label}.releaseSha`, "invalid-release-sha", `${label}.releaseSha must be a complete lowercase Git commit SHA.`);
+    }
+    validateOptionalCount(application.sourceCount, `${label}.sourceCount`, errors);
+    validateOptionalCount(application.claimCount, `${label}.claimCount`, errors);
+    if (application.evidencePolicy !== undefined
+      && (typeof application.evidencePolicy !== "string" || application.evidencePolicy.trim() === "")) {
+      addError(errors, `${label}.evidencePolicy`, "required-value", `${label}.evidencePolicy must be non-empty.`);
+    }
+    if (application.upstreamApps !== undefined) {
+      validateUniqueStringArray(application.upstreamApps, `${label}.upstreamApps`, errors, (code) => APPLICATION_CODE_PATTERN.test(code));
+      for (const code of Array.isArray(application.upstreamApps) ? application.upstreamApps : []) {
+        if (typeof code === "string" && APPLICATION_CODE_PATTERN.test(code) && !trustedApplicationCodes.has(code)) {
+          addError(errors, `${label}.upstreamApps`, "relationship-unresolved", `${label}.upstreamApps references an unknown public application.`);
+        }
+      }
+    }
+    if (application.downstreamApps !== undefined) {
+      validateUniqueStringArray(application.downstreamApps, `${label}.downstreamApps`, errors, (code) => APPLICATION_CODE_PATTERN.test(code));
+      for (const code of Array.isArray(application.downstreamApps) ? application.downstreamApps : []) {
+        if (typeof code === "string" && APPLICATION_CODE_PATTERN.test(code) && !trustedApplicationCodes.has(code)) {
+          addError(errors, `${label}.downstreamApps`, "relationship-unresolved", `${label}.downstreamApps references an unknown public application.`);
+        }
+      }
+    }
+    if (application.tracks !== undefined) validateUniqueStringArray(application.tracks, `${label}.tracks`, errors);
+    if (application.entityIds !== undefined) {
+      validateUniqueStringArray(application.entityIds, `${label}.entityIds`, errors, (id) => /^entity:[a-z0-9-]+$/.test(id));
+    }
+    if (application.portfolioLayer !== undefined && !PORTFOLIO_LAYERS.has(application.portfolioLayer)) {
+      addError(errors, `${label}.portfolioLayer`, "invalid-enum", `${label}.portfolioLayer is not recognized.`);
+    }
+    if (application.focusState !== undefined && !FOCUS_STATES.has(application.focusState)) {
+      addError(errors, `${label}.focusState`, "invalid-enum", `${label}.focusState is not recognized.`);
+    }
 
     if (!isGithubRepositoryForOwner(application.repository)) {
       addError(errors, `${label}.repository`, "unsafe-url", `${label} GitHub repository must be a canonical HTTPS repository under the aserdargun owner.`);
@@ -364,8 +477,35 @@ function validatePublicMemory(publicMemory, applicationCodes, trustedMemoryIds, 
     validateLocalized(memory.summary, `${label}.summary`, errors);
     validateDate(memory.publishedAt, `${label}.publishedAt`, errors, today);
     validateDate(memory.updatedAt, `${label}.updatedAt`, errors, today);
-    if (!isNxtSnapshotUrl(memory.sourceUrl)) addError(errors, `${label}.sourceUrl`, "privacy-boundary", `${label} NXT snapshot sourceUrl must match https://nxt.aserdargun.com/p/<opaque-id>.`);
-    if (typeof memory.sourceLabel !== "string" || memory.sourceLabel.trim() === "") addError(errors, `${label}.sourceLabel`, "required-value", `${label} sourceLabel must be non-empty.`);
+    const isLegacySnapshot = memory.sourceUrl !== undefined || memory.sourceLabel !== undefined;
+    if (isLegacySnapshot) {
+      if (!isNxtSnapshotUrl(memory.sourceUrl)) addError(errors, `${label}.sourceUrl`, "privacy-boundary", `${label} NXT snapshot sourceUrl must match https://nxt.aserdargun.com/p/<opaque-id>.`);
+      if (typeof memory.sourceLabel !== "string" || memory.sourceLabel.trim() === "") addError(errors, `${label}.sourceLabel`, "required-value", `${label} sourceLabel must be non-empty.`);
+    } else {
+      if (!MEMORY_STATUSES.has(memory.status) || memory.status !== "published") {
+        addError(errors, `${label}.status`, "invalid-enum", `${label}.status must be published for public rendering.`);
+      }
+      validateLocalized(memory.content, `${label}.content`, errors);
+      validateDate(memory.createdAt, `${label}.createdAt`, errors, today);
+      validateDate(memory.verifiedAt, `${label}.verifiedAt`, errors, today);
+      validateLocalized(memory.limitations, `${label}.limitations`, errors);
+      if (!Array.isArray(memory.sources) || memory.sources.length === 0) {
+        addError(errors, `${label}.sources`, "missing-evidence", `${label}.sources must include at least one public source.`);
+      } else {
+        for (const [sourceIndex, source] of memory.sources.entries()) {
+          const sourcePath = `${label}.sources[${sourceIndex}]`;
+          if (!isPlainObject(source)) {
+            addError(errors, sourcePath, "invalid-type", `${sourcePath} must be an object.`);
+            continue;
+          }
+          validateAllowedKeys(source, PUBLIC_MEMORY_SOURCE_KEYS, sourcePath, errors);
+          if (typeof source.label !== "string" || source.label.trim() === "") addError(errors, `${sourcePath}.label`, "required-value", `${sourcePath}.label must be non-empty.`);
+          validateUrl(source.url, `${sourcePath}.url`, errors);
+          validateDate(source.verifiedAt, `${sourcePath}.verifiedAt`, errors, today);
+        }
+      }
+      validateUniqueStringArray(memory.relatedEntityIds, `${label}.relatedEntityIds`, errors, (id) => /^entity:[a-z0-9-]+$/.test(id));
+    }
     validateStringArray(memory.tags, `${label}.tags`, errors);
     validateUrls(memory.evidenceUrls, `${label}.evidenceUrls`, errors);
     validateRelatedApplicationCodes(memory.relatedApplicationCodes, label, applicationCodes, errors);

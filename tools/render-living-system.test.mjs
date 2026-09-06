@@ -21,10 +21,22 @@ import {
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rendererPath = path.join(rootDir, "tools", "render-living-system.mjs");
-const today = new Date("2026-09-04T12:00:00Z");
+const today = new Date("2026-09-06T12:00:00Z");
 
 async function readFixtureData() {
-  return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
+  const data = JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
+  const phaseOneFields = [
+    "statusLabel", "languages", "researchCutoff", "lastVerified", "lastReleased", "releaseSha",
+    "sourceCount", "claimCount", "evidencePolicy", "upstreamApps", "downstreamApps", "tracks",
+    "entityIds", "portfolioLayer", "focusState",
+  ];
+  for (const application of data.applications) {
+    for (const field of phaseOneFields) delete application[field];
+    application.relatedMemoryIds = [];
+    if (application.code === "eng") application.status = "live";
+  }
+  data.publicMemory = [];
+  return data;
 }
 
 function homeDocument() {
@@ -220,7 +232,7 @@ test("renders assistive-technology-visible horizon and private-system groups", (
   assert.equal(/nav-links__section[^>]*aria-hidden="true"/.test(english), false);
   assert.deepEqual(
     Array.from(english.matchAll(/data-nav-group="horizon"[\s\S]*?<\/div>/g), (group) => Array.from(group[0].matchAll(/https:\/\/([a-z]{3})\.aserdargun\.com\//g), (match) => match[1])).flat(),
-    ["wfm", "itl", "eng"],
+    ["wfm", "swi", "itl", "eng"],
   );
   assert.deepEqual(
     Array.from(english.matchAll(/data-nav-group="private"[\s\S]*?<\/div>/g), (group) => Array.from(group[0].matchAll(/https:\/\/([a-z]{3})\.aserdargun\.com\//g), (match) => match[1])).flat(),
@@ -255,17 +267,17 @@ test("renders five localized living-system links in chronological meaning order"
   const turkish = renderLivingSystem({ locale: "tr" });
 
   assert.deepEqual(livingSystemCards(english), [
-    { href: "/#journey", eyebrow: "Journey", heading: "Past", description: "The work behind me is a traceable journey from physical systems to AI." },
+    { href: "/#journey", eyebrow: "Journey", heading: "Past", description: "Explore the engineering experience behind the systems I build." },
     { href: "/now/", eyebrow: "Active", heading: "Now", description: "A dated view of where my attention and work are going now." },
     { href: "/#horizon", eyebrow: "Horizon", heading: "Future", description: "The long-term direction is open humanoid engineering in the physical world." },
-    { href: "/memory/", eyebrow: "Published", heading: "Knowledge", description: "Only explicitly approved public memory snapshots appear here." },
+    { href: "/memory/", eyebrow: "Published", heading: "Knowledge", description: "Explore published decisions, research notes, and the sources behind them." },
     { href: "/#apps", eyebrow: "Working outputs", heading: "Applications", description: "Accumulated knowledge becomes focused applications, labs, and long-term work." },
   ]);
   assert.deepEqual(livingSystemCards(turkish), [
-    { href: "/tr/#journey", eyebrow: "Yolculuk", heading: "Geçmiş", description: "Geride kalan çalışmalar, fiziksel sistemlerden AI&apos;a uzanan izlenebilir bir yolculuktur." },
+    { href: "/tr/#journey", eyebrow: "Yolculuk", heading: "Geçmiş", description: "Bugün geliştirdiğim sistemlerin arkasındaki mühendislik deneyimini keşfet." },
     { href: "/tr/now/", eyebrow: "Aktif", heading: "Şimdi", description: "Dikkatimin ve çalışmalarımın şimdi nereye yöneldiğini gösteren tarihli bir görünüm." },
     { href: "/tr/#horizon", eyebrow: "Ufuk", heading: "Gelecek", description: "Uzun vadeli yön, fiziksel dünyada açık insansı robot mühendisliğidir." },
-    { href: "/tr/memory/", eyebrow: "Yayınlanan", heading: "Bilgi", description: "Burada yalnızca açıkça onaylanmış kamusal hafıza kayıtları görünür." },
+    { href: "/tr/memory/", eyebrow: "Yayınlanan", heading: "Bilgi", description: "Yayınladığım kararları, araştırma notlarını ve dayandıkları kaynakları incele." },
     { href: "/tr/#apps", eyebrow: "Çalışan çıktılar", heading: "Uygulamalar", description: "Birikmiş bilgi; odaklı uygulamalara, laboratuvarlara ve uzun vadeli çalışmalara dönüşür." },
   ]);
 });
@@ -843,7 +855,7 @@ test("renders the application-map summary from semantic roles", async () => {
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /Ten core learning applications, one standalone lab, one horizon bridge, and one long-term horizon\./);
+  assert.match(rendered, /Ten core learning applications, one standalone lab, two horizon bridges, and one long-term horizon\./);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
 });
 
@@ -1208,7 +1220,7 @@ test("filesystem archive discovery rejects external links laundered by valid gro
       html.matchAll(/      <a class="nav-links__external"[^\n]+<\/a>/g),
       (match) => match[0],
     );
-    assert.equal(externalAnchors.length, 6, "fixture must copy all six external navigation anchors");
+    assert.equal(externalAnchors.length, 7, "fixture must copy all seven external navigation anchors");
     let mutated = html;
     for (const anchor of externalAnchors) {
       mutated = mutated.replace(anchor, anchor.replace('target="_blank"', 'target="_self"'));
@@ -1285,7 +1297,7 @@ test("filesystem archive discovery rejects assistive text laundered through temp
   const fixtureDir = await createArchiveFilesystemFixture(t);
   await mutateFixture(fixtureDir, "now/archive/2026-W34/index.html", (html) => {
     const literal = '<span class="sr-only">opens in a new tab</span>';
-    assert.equal(html.split(literal).length - 1, 6, "expected six localized assistive labels");
+    assert.equal(html.split(literal).length - 1, 7, "expected seven localized assistive labels");
     return html.replaceAll(
       literal,
       '<span class="sr-only"><template>opens in a new tab</template></span>',
@@ -1620,7 +1632,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const generate = spawnSync(process.execPath, [rendererPath], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-04" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-06" },
   });
   assert.equal(generate.status, 0, generate.stderr);
 
@@ -1635,7 +1647,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const check = spawnSync(process.execPath, [rendererPath, "--check"], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-04" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-06" },
   });
   const after = Object.fromEntries(await Promise.all(paths.map(async (relativePath) => [
     relativePath,

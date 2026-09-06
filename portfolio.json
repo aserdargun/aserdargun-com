@@ -1,0 +1,678 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-06",
+  "applications": [
+    {
+      "code": "aia",
+      "name": {
+        "en": "AI Ecosystem Atlas",
+        "tr": "AI Ecosystem Atlas"
+      },
+      "shortName": "AIA",
+      "description": {
+        "en": "An evidence-backed research console for comparing AI products and developer ecosystems.",
+        "tr": "Yapay zekâ ürünlerini ve geliştirici ekosistemlerini kanıtlarıyla karşılaştıran araştırma konsolu."
+      },
+      "type": "atlas",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://aia.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/aia-aserdargun-com",
+      "researchCutoff": "2026-08-24",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "aaf2843a1470154f2dff93dc0a11fc35ddc0b54d",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [],
+      "downstreamApps": [
+        "gpu",
+        "llm",
+        "usl"
+      ],
+      "tracks": [
+        "ecosystem",
+        "products",
+        "evidence"
+      ],
+      "entityIds": [
+        "entity:ai-ecosystem"
+      ],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation"
+    },
+    {
+      "code": "llm",
+      "name": {
+        "en": "LLM Runtime & Serving Atlas",
+        "tr": "LLM Runtime & Serving Atlas"
+      },
+      "shortName": "LLM",
+      "description": {
+        "en": "A source-backed field guide to LLM runtimes and serving engines across seven architectural layers, with an interactive learning layer.",
+        "tr": "LLM çalıştırma ortamlarını ve sunma motorlarını yedi mimari katmanda sınıflandıran, etkileşimli öğrenme katmanına sahip kaynaklı alan rehberi."
+      },
+      "type": "atlas",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://llm.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/llm-aserdargun-com",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-03",
+      "releaseSha": "1dcffa15cc2c5504f0f0c97b5dd0717ff9322a86",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "aia",
+        "gpu",
+        "usl",
+        "ctx"
+      ],
+      "downstreamApps": [
+        "hns"
+      ],
+      "tracks": [
+        "runtime",
+        "serving",
+        "inference"
+      ],
+      "entityIds": [
+        "entity:vllm"
+      ],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation"
+    },
+    {
+      "code": "hns",
+      "name": {
+        "en": "Harness Engineering Observatory",
+        "tr": "Harness Engineering Observatory"
+      },
+      "shortName": "HNS",
+      "description": {
+        "en": "A bilingual, source-backed observatory for comparing the harnesses, runtimes, orchestration, execution, verification, and observability layers that turn model capability into reliable agent systems.",
+        "tr": "Model yeteneğini güvenilir ajan sistemlerine dönüştüren harness, çalıştırma, orkestrasyon, yürütme, doğrulama ve gözlemlenebilirlik katmanlarını karşılaştıran iki dilli, kaynaklı gözlemevi."
+      },
+      "type": "observatory",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://hns.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/hns-aserdargun-com",
+      "researchCutoff": "2026-09-02",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "c8dc99e23ce7931583b8de47424a7ee525566db7",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "llm"
+      ],
+      "downstreamApps": [
+        "ctx",
+        "sec",
+        "evl"
+      ],
+      "tracks": [
+        "harness",
+        "orchestration",
+        "observability"
+      ],
+      "entityIds": [
+        "entity:agent-harness"
+      ],
+      "portfolioLayer": "agent-system",
+      "focusState": "active"
+    },
+    {
+      "code": "sec",
+      "name": {
+        "en": "AI Systems Security Observatory",
+        "tr": "AI Sistemleri Güvenlik Gözlemevi"
+      },
+      "shortName": "SEC",
+      "description": {
+        "en": "A bilingual, evidence-aware observatory for tracing AI-agent trust from model intent through identity, authorization, constrained action, audit, and incident recovery.",
+        "tr": "Model niyetinden kimliğe, yetkilendirmeye, kısıtlı eyleme, denetime ve olay sonrası toparlanmaya kadar AI ajanlarına duyulan güveni izleyen iki dilli, kanıt duyarlı gözlemevi."
+      },
+      "type": "observatory",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://sec.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/sec-aserdargun-com",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "20e8831461ce0b7c09530e7626e39af67830ac6f",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "hns"
+      ],
+      "downstreamApps": [
+        "lcl",
+        "cld"
+      ],
+      "tracks": [
+        "identity",
+        "authorization",
+        "audit",
+        "recovery"
+      ],
+      "entityIds": [
+        "entity:agent-security"
+      ],
+      "portfolioLayer": "assurance",
+      "focusState": "assurance"
+    },
+    {
+      "code": "ctx",
+      "name": {
+        "en": "Context & Knowledge Engineering",
+        "tr": "Bağlam ve Bilgi Mühendisliği"
+      },
+      "shortName": "CTX",
+      "description": {
+        "en": "A bilingual, source-backed field guide to the information system that runs before a model answers, from ingestion and retrieval through citation, caching, and memory.",
+        "tr": "Model yanıtından önce çalışan bilgi sistemini alım ve erişimden alıntılama, önbellekleme ve belleğe kadar tasarlamaya yarayan iki dilli, kaynaklı alan rehberi."
+      },
+      "type": "observatory",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://ctx.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/ctx-aserdargun-com",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "49eee95c8030428af8136594d01600c126249740",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "hns"
+      ],
+      "downstreamApps": [
+        "llm",
+        "lcl"
+      ],
+      "tracks": [
+        "context",
+        "knowledge",
+        "retrieval",
+        "memory"
+      ],
+      "entityIds": [
+        "entity:mcp"
+      ],
+      "portfolioLayer": "agent-system",
+      "focusState": "active"
+    },
+    {
+      "code": "evl",
+      "name": {
+        "en": "AI Evaluation & Reliability Lab",
+        "tr": "AI Değerlendirme ve Güvenilirlik Laboratuvarı"
+      },
+      "shortName": "EVL",
+      "description": {
+        "en": "A bilingual, evidence-aware workbench for evaluation contracts and deterministic AI release decisions across output, trajectory, outcome, robustness, safety, and operations.",
+        "tr": "Çıktı, izlenen yol, sonuç, sağlamlık, güvenlik ve operasyon katmanlarında değerlendirme sözleşmeleriyle belirlenebilir AI sürüm kararları üretmeye yarayan iki dilli, kanıt duyarlı çalışma alanı."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://evl.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/evl-aserdargun-com",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "8b4e89876bafa447d19094c09d2d316e3ec94174",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "hns"
+      ],
+      "downstreamApps": [
+        "cld"
+      ],
+      "tracks": [
+        "evaluation",
+        "reliability",
+        "release-gates"
+      ],
+      "entityIds": [
+        "entity:evl"
+      ],
+      "portfolioLayer": "assurance",
+      "focusState": "assurance"
+    },
+    {
+      "code": "usl",
+      "name": {
+        "en": "Unsloth Studio Learning Atlas",
+        "tr": "Unsloth Studio Learning Atlas"
+      },
+      "shortName": "USL",
+      "description": {
+        "en": "A bilingual, evidence-aware learning atlas for Unsloth Studio, LoRA, QLoRA, dataset engineering, evaluation, and local model deployment.",
+        "tr": "Unsloth Studio, LoRA, QLoRA, veri seti mühendisliği, değerlendirme ve yerel model dağıtımı için iki dilli, kanıt duyarlı öğrenme atlası."
+      },
+      "type": "atlas",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://usl.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/usl-aserdargun-com",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "04bdc5e0658f58a4316b0be4518e8589051364a5",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "aia"
+      ],
+      "downstreamApps": [
+        "llm"
+      ],
+      "tracks": [
+        "training",
+        "lora",
+        "qlora",
+        "datasets"
+      ],
+      "entityIds": [
+        "entity:unsloth"
+      ],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation"
+    },
+    {
+      "code": "gpu",
+      "name": {
+        "en": "GPU Kernel Engineering — Kernel Atlas",
+        "tr": "GPU Kernel Engineering — Kernel Atlas"
+      },
+      "shortName": "GPU",
+      "description": {
+        "en": "A bilingual 12-week interactive atlas for CUDA, Triton, GPU memory, LLM operators, correctness, profiling, inference, and multi-GPU systems.",
+        "tr": "CUDA, Triton, GPU belleği, LLM işleçleri, doğruluk, profil çıkarma, çıkarım ve çoklu GPU sistemleri için iki dilli, etkileşimli 12 haftalık atlas."
+      },
+      "type": "atlas",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://gpu.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/gpu-aserdargun-com",
+      "researchCutoff": "2026-08-29",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-03",
+      "releaseSha": "d6cd2540c321b6fbe1aec15f404687a5fbfc59e0",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "aia"
+      ],
+      "downstreamApps": [
+        "llm"
+      ],
+      "tracks": [
+        "cuda",
+        "triton",
+        "kernels",
+        "profiling"
+      ],
+      "entityIds": [
+        "entity:cuda"
+      ],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation"
+    },
+    {
+      "code": "cld",
+      "name": {
+        "en": "Cloud Provider Cost Comparison",
+        "tr": "Bulut Sağlayıcı Maliyet Karşılaştırması"
+      },
+      "shortName": "CLD",
+      "description": {
+        "en": "A source-backed decision tool comparing pre-tax USD costs for cloud services available from Türkiye.",
+        "tr": "Türkiye’den erişilebilen bulut servislerini kaynaklı, vergiler hariç USD maliyetleriyle karşılaştıran karar destek aracı."
+      },
+      "type": "tool",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://cld.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/cld-aserdargun-com",
+      "researchCutoff": "2026-08-14",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "af3014138ff753c9591635f8e75a7c29d21299ce",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "sec",
+        "evl"
+      ],
+      "downstreamApps": [
+        "wfm",
+        "swi"
+      ],
+      "tracks": [
+        "cloud",
+        "cost",
+        "deployment"
+      ],
+      "entityIds": [
+        "entity:azure"
+      ],
+      "portfolioLayer": "deployment",
+      "focusState": "active"
+    },
+    {
+      "code": "lcl",
+      "name": {
+        "en": "Local Compute Lab",
+        "tr": "Local Compute Lab"
+      },
+      "shortName": "LCL",
+      "description": {
+        "en": "A source-backed decision workbench matching open-weight model requirements with NVIDIA, AMD, and Apple devices for a local AI lab.",
+        "tr": "Açık ağırlıklı model gereksinimlerini özel bir yerel yapay zekâ laboratuvarı için NVIDIA, AMD ve Apple cihazlarıyla eşleştiren kaynaklı karar çalışma alanı."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://lcl.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/lcl-aserdargun-com",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-03",
+      "releaseSha": "0b52f9534ed9559d6e5dd7169a7987a6a007a1b9",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "ctx",
+        "sec"
+      ],
+      "downstreamApps": [
+        "wfm",
+        "swi"
+      ],
+      "tracks": [
+        "hardware",
+        "models",
+        "runtime",
+        "local-ai"
+      ],
+      "entityIds": [
+        "entity:local-inference"
+      ],
+      "portfolioLayer": "deployment",
+      "focusState": "active"
+    },
+    {
+      "code": "wfm",
+      "name": {
+        "en": "World Models Atlas",
+        "tr": "World Models Atlas"
+      },
+      "shortName": "WFM",
+      "description": {
+        "en": "A living research atlas tracing how world models connect perception, prediction, planning, and action through primary sources.",
+        "tr": "Dünya modellerinin algı, tahmin, planlama ve eylem arasındaki rolünü birincil kaynaklar üzerinden izleyen yaşayan bir araştırma atlası."
+      },
+      "type": "atlas",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://wfm.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/wfm-aserdargun-com",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "3e29ae5dc3139c55edfb52458703bceed8ca39f8",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "lcl",
+        "cld"
+      ],
+      "downstreamApps": [
+        "itl"
+      ],
+      "tracks": [
+        "perception",
+        "prediction",
+        "planning",
+        "action"
+      ],
+      "entityIds": [
+        "entity:world-model"
+      ],
+      "portfolioLayer": "physical-ai",
+      "focusState": "horizon"
+    },
+    {
+      "code": "swi",
+      "name": {
+        "en": "SWI — Swarm Intelligence",
+        "tr": "SWI — Sürü Zekâsı"
+      },
+      "shortName": "SWI",
+      "description": {
+        "en": "A bilingual research map connecting collective behavior in nature with coordination principles, algorithms, robotics, and artificial agents.",
+        "tr": "Doğadaki kolektif davranışı koordinasyon ilkeleri, algoritmalar, robotik ve yapay ajanlarla birleştiren iki dilli araştırma haritası."
+      },
+      "type": "atlas",
+      "status": "active",
+      "statusLabel": {
+        "en": "Research · verification pending",
+        "tr": "Araştırma · doğrulama bekliyor"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://swi.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/swi-aserdargun-com",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "lcl",
+        "cld"
+      ],
+      "downstreamApps": [
+        "itl"
+      ],
+      "tracks": [
+        "collective-behavior",
+        "coordination",
+        "swarm-intelligence"
+      ],
+      "entityIds": [
+        "entity:swarm-intelligence"
+      ],
+      "portfolioLayer": "physical-ai",
+      "focusState": "horizon"
+    },
+    {
+      "code": "itl",
+      "name": {
+        "en": "Industrial Twin Lab",
+        "tr": "Industrial Twin Lab"
+      },
+      "shortName": "ITL",
+      "description": {
+        "en": "A public research publication and deterministic concept demonstrator for isolated, reproducible industrial machine-intelligence experiments in digital twins.",
+        "tr": "Dijital ikizlerde izole ve tekrarlanabilir endüstriyel makine zekâsı deneyleri için kamusal araştırma yayını ve deterministik kavram gösterimi."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://itl.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/itl-aserdargun-com",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "b3eaa6254aa104d3940aed13505a2aa17ef60700",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "wfm",
+        "swi"
+      ],
+      "downstreamApps": [
+        "eng"
+      ],
+      "tracks": [
+        "digital-twins",
+        "simulation",
+        "industrial-ai"
+      ],
+      "entityIds": [
+        "entity:openusd"
+      ],
+      "portfolioLayer": "physical-ai",
+      "focusState": "horizon"
+    },
+    {
+      "code": "eng",
+      "name": {
+        "en": "Open Humanoid Engineering",
+        "tr": "Open Humanoid Engineering"
+      },
+      "shortName": "ENG",
+      "description": {
+        "en": "A live manifesto for project-based, AI-native humanoid engineering education and the long-term embodied horizon the learning system serves.",
+        "tr": "Proje tabanlı, yapay zekâ temelli insansı robot mühendisliği eğitimi için canlı manifesto ve öğrenme sisteminin hizmet ettiği uzun vadeli bedenlenmiş ufuk."
+      },
+      "type": "horizon",
+      "status": "active",
+      "statusLabel": {
+        "en": "Horizon · active research",
+        "tr": "Ufuk · aktif araştırma"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://eng.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/eng-aserdargun-com",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "1833a85ed1ad6a8e1dcfbfb4fbd8556662254389",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "itl"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "humanoids",
+        "education",
+        "physical-ai"
+      ],
+      "entityIds": [
+        "entity:humanoid-robotics"
+      ],
+      "portfolioLayer": "physical-ai",
+      "focusState": "horizon"
+    }
+  ]
+}
