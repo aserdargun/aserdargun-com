@@ -66,3 +66,24 @@ test("legacy homepage fragments retain deep links without redirecting new routes
     }
   }
 });
+
+test("legacy fragments also redirect when only the hash changes in an already-open homepage", async () => {
+  const source = await read("scripts.js");
+  const redirects = [];
+  const listeners = new Map();
+  const context = {
+    window: {
+      location: { pathname: "/tr/", hash: "", replace: (url) => redirects.push(url) },
+      addEventListener: (name, callback) => listeners.set(name, callback),
+    },
+    document: { documentElement: { classList: { add() {} } }, addEventListener() {} },
+  };
+  vm.runInNewContext(source, context);
+  assert.deepEqual(redirects, []);
+  context.window.location.hash = "#journey-stage-01";
+  listeners.get("hashchange")();
+  assert.deepEqual(redirects, ["/tr/about/#journey-stage-01"]);
+  context.window.location.hash = "#learning";
+  listeners.get("hashchange")();
+  assert.equal(redirects.length, 1);
+});

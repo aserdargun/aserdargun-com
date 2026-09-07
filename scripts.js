@@ -1,5 +1,6 @@
 // Preserve inbound links to sections moved off the homepage.
-if (typeof window !== "undefined" && window.location && /^\/(?:tr\/)?$/.test(window.location.pathname)) {
+function redirectLegacyHomeFragment() {
+  if (typeof window === "undefined" || !window.location || !/^\/(?:tr\/)?$/.test(window.location.pathname)) return;
   const legacyHash = window.location.hash;
   const localeRoot = window.location.pathname.startsWith("/tr/") ? "/tr/" : "/";
   if (/^#(?:journey(?:-stage-\d{2})?|about|approach)$/.test(legacyHash)) {
@@ -8,6 +9,8 @@ if (typeof window !== "undefined" && window.location && /^\/(?:tr\/)?$/.test(win
     window.location.replace(`${localeRoot}applications/`);
   }
 }
+redirectLegacyHomeFragment();
+if (typeof window !== "undefined") window.addEventListener?.("hashchange", redirectLegacyHomeFragment);
 
 document.documentElement.classList.add("has-js");
 

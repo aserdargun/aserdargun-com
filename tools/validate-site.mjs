@@ -68,7 +68,7 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "learning", "horizon"];
-const expectedAssetVersion = "20260907-learning-system-v2";
+const expectedAssetVersion = "20260907-learning-system-v3";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
