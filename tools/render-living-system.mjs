@@ -28,7 +28,9 @@ const GENERATED_BLOCKS = new Set([
 ]);
 
 const REQUIRED_PAGE_BLOCKS = {
-  home: ["application-map"],
+  home: ["system-focus"],
+  about: ["journey-evidence"],
+  applications: ["application-map"],
   now: ["now-content"],
   memory: ["public-memory"],
 };
@@ -36,6 +38,10 @@ const REQUIRED_PAGE_BLOCKS = {
 const SITE_DOCUMENTS = [
   { relativePath: "index.html", page: "home", locale: "en" },
   { relativePath: "tr/index.html", page: "home", locale: "tr" },
+  { relativePath: "about/index.html", page: "about", locale: "en" },
+  { relativePath: "tr/about/index.html", page: "about", locale: "tr" },
+  { relativePath: "applications/index.html", page: "applications", locale: "en" },
+  { relativePath: "tr/applications/index.html", page: "applications", locale: "tr" },
   { relativePath: "now/index.html", page: "now", locale: "en" },
   { relativePath: "tr/now/index.html", page: "now", locale: "tr" },
   { relativePath: "memory/index.html", page: "memory", locale: "en" },
@@ -162,14 +168,14 @@ export function renderPrimaryNavigation({ locale, page }) {
   const root = locale === "tr" ? "/tr/" : "/";
   const routeFor = (suffix) => `${root}${suffix}`;
   const concepts = [
-    { key: "journey", label: label(locale, "Journey", "Yolculuk"), href: `${root}#journey` },
+    { key: "journey", label: label(locale, "Journey", "Yolculuk"), href: `${root}about/#journey` },
     { key: "now", label: label(locale, "Now", "Şimdi"), href: routeFor("now/") },
     { key: "horizon", label: label(locale, "Horizon", "Ufuk"), href: `${root}#horizon` },
-    { key: "applications", label: label(locale, "Applications", "Uygulamalar"), href: `${root}#apps` },
+    { key: "applications", label: label(locale, "Applications", "Uygulamalar"), href: `${root}applications/` },
     { key: "memory", label: label(locale, "Knowledge", "Bilgi"), href: routeFor("memory/") },
-    { key: "about", label: label(locale, "About", "Hakkımda"), href: `${root}#about` },
+    { key: "about", label: label(locale, "About", "Hakkımda"), href: `${root}about/` },
   ];
-  const currentKey = page === "memory" ? "memory" : ["now", "archive"].includes(page) ? "now" : null;
+  const currentKey = ["about", "applications"].includes(page) ? page : page === "memory" ? "memory" : ["now", "archive"].includes(page) ? "now" : null;
   const primaryLinks = concepts.map((concept) => {
     const current = concept.key === currentKey ? ' aria-current="page"' : "";
     return `    <a class="nav-links__primary-link" href="${concept.href}"${current}>${concept.label}</a>`;
@@ -297,17 +303,17 @@ function addNewTabAccessibilityText(html, locale) {
 export function renderLivingSystem({ locale }) {
   const root = locale === "tr" ? "/tr/" : "/";
   const cards = locale === "tr" ? [
-    { href: `${root}#journey`, eyebrow: "Yolculuk", heading: "Geçmiş", description: "Bugün geliştirdiğim sistemlerin arkasındaki mühendislik deneyimini keşfet." },
+    { href: `${root}about/#journey`, eyebrow: "Yolculuk", heading: "Geçmiş", description: "Bugün geliştirdiğim sistemlerin arkasındaki mühendislik deneyimini keşfet." },
     { href: `${root}now/`, eyebrow: "Aktif", heading: "Şimdi", description: "Dikkatimin ve çalışmalarımın şimdi nereye yöneldiğini gösteren tarihli bir görünüm." },
     { href: `${root}#horizon`, eyebrow: "Ufuk", heading: "Gelecek", description: "Uzun vadeli yön, fiziksel dünyada açık insansı robot mühendisliğidir." },
     { href: `${root}memory/`, eyebrow: "Yayınlanan", heading: "Bilgi", description: "Yayınladığım kararları, araştırma notlarını ve dayandıkları kaynakları incele." },
-    { href: `${root}#apps`, eyebrow: "Çalışan çıktılar", heading: "Uygulamalar", description: "Birikmiş bilgi; odaklı uygulamalara, laboratuvarlara ve uzun vadeli çalışmalara dönüşür." },
+    { href: `${root}applications/`, eyebrow: "Çalışan çıktılar", heading: "Uygulamalar", description: "Birikmiş bilgi; odaklı uygulamalara, laboratuvarlara ve uzun vadeli çalışmalara dönüşür." },
   ] : [
-    { href: `${root}#journey`, eyebrow: "Journey", heading: "Past", description: "Explore the engineering experience behind the systems I build." },
+    { href: `${root}about/#journey`, eyebrow: "Journey", heading: "Past", description: "Explore the engineering experience behind the systems I build." },
     { href: `${root}now/`, eyebrow: "Active", heading: "Now", description: "A dated view of where my attention and work are going now." },
     { href: `${root}#horizon`, eyebrow: "Horizon", heading: "Future", description: "The long-term direction is open humanoid engineering in the physical world." },
     { href: `${root}memory/`, eyebrow: "Published", heading: "Knowledge", description: "Explore published decisions, research notes, and the sources behind them." },
-    { href: `${root}#apps`, eyebrow: "Working outputs", heading: "Applications", description: "Accumulated knowledge becomes focused applications, labs, and long-term work." },
+    { href: `${root}applications/`, eyebrow: "Working outputs", heading: "Applications", description: "Accumulated knowledge becomes focused applications, labs, and long-term work." },
   ];
   const renderedCards = cards.map((card) => [
     `      <a class="living-system-card" href="${card.href}">`,
@@ -327,7 +333,7 @@ export function renderLivingSystem({ locale }) {
   ].join("\n");
 }
 
-export function renderApplicationMap({ locale, data, today }) {
+export function renderApplicationMap({ locale, data, today, page }) {
   const summary = summarizeApplications(data.applications)[locale];
   const registry = buildPortfolioRegistry({ applications: data.applications, generatedAt: data.now.updatedAt });
   const sourceApplications = new Map(data.applications.map((application) => [application.code, application]));
@@ -401,7 +407,7 @@ export function renderApplicationMap({ locale, data, today }) {
   return [
     "          <div class=\"app-map-intro\">",
     `            <p class="app-map-kicker">${label(locale, "Application map · explore the portfolio", "Uygulama haritası · portföyü keşfet")}</p>`,
-    `            <h2 id="app-map-title">${label(locale, "One portfolio. Focused applications.", "Tek portföy. Odaklı uygulamalar.")}</h2>`,
+    `            <${page === "applications" ? "h1" : "h2"} id="app-map-title">${label(locale, "One portfolio. Focused applications.", "Tek portföy. Odaklı uygulamalar.")}</${page === "applications" ? "h1" : "h2"}>`,
     `            <p id="app-map-description">${escapeHtml(summary)} ${label(locale, "The three-letter code is the permanent key between each application, repository, and", "Üç harfli kod; her uygulama, repo ve")} <code>aserdargun.com</code> ${label(locale, "subdomain.", "alt alan adı arasındaki kalıcı anahtardır.")}</p>`,
     "          </div>",
     `          <div class="app-discovery" data-app-controls hidden>
@@ -458,7 +464,7 @@ export function renderSystemFocus({ locale, data }) {
     return [
       `        <article class="system-focus-card system-focus-card--${layer.key}">`,
       `          <p class="system-focus-card__index">${String(index + 1).padStart(2, "0")}</p>`,
-      `          <h3>${layer.title}</h3>`,
+      `          <h2>${layer.title}</h2>`,
       `          <p>${layer.description}</p>`,
       `          <ul aria-label="${escapeHtml(label(locale, `${layer.title} applications`, `${layer.title} uygulamaları`))}">`,
       ...applications.map((application) => `            <li><a href="${escapeHtml(application.productionUrl)}" target="_blank" rel="noreferrer"><code>${escapeHtml(application.code)}</code><span>${escapeHtml(application.name[locale])}</span></a></li>`),
@@ -468,12 +474,13 @@ export function renderSystemFocus({ locale, data }) {
   });
 
   return [
-    `    <section class="system-focus" aria-labelledby="system-focus-title-${locale}">`,
+    `    <section class="system-focus" id="top" aria-labelledby="system-focus-title-${locale}">`,
     '      <div class="system-focus__intro">',
-    `        <p class="system-focus__kicker">${label(locale, "System overview · find your starting point", "Sisteme genel bakış · başlangıç noktanı bul")}</p>`,
-    `        <h2 id="system-focus-title-${locale}">${label(locale, "Five layers. One learning loop.", "Beş katman. Tek öğrenme döngüsü.")}</h2>`,
-    `        <p>${label(locale, "Start with a question: understand the foundations, build an agent, assess its behavior, choose where it runs, or explore physical AI. The learning map below connects these five layers.", "Bir soruyla başla: temelleri öğren, ajan geliştir, davranışını değerlendir, nerede çalışacağını seç veya fiziksel AI alanını keşfet. Aşağıdaki öğrenme haritası bu beş katmanı birbirine bağlar.")}</p>`,
+    `        <p class="system-focus__kicker">${label(locale, "AI Learning System", "AI Learning System")}</p>`,
+    `        <h1 id="system-focus-title-${locale}">${label(locale, "Five layers. One learning loop.", "Beş katman. Tek öğrenme döngüsü.")}</h1>`,
+    `        <p>${label(locale, "A public learning system connecting what I study, what I build, and what comes next. Explore the research, try working experiments, and find your own path through five connected layers.", "Öğrendiklerimi, geliştirdiğim projeleri ve sonraki adımlarımı birbirine bağlayan açık bir öğrenme sistemi. Araştırmaları keşfet, çalışan deneyleri dene ve birbirine bağlı beş katmanda kendi öğrenme yolunu bul.")}</p>`,
     "      </div>",
+    `        <nav class="system-actions" aria-label="${label(locale, "Explore the learning system", "Öğrenme sistemini keşfet")}"><a href="${locale === "tr" ? "/tr/" : "/"}applications/">${label(locale, "Explore applications", "Uygulamaları keşfet")} <span aria-hidden="true">→</span></a><a href="${locale === "tr" ? "/tr/" : "/"}now/">${label(locale, "What I’m working on", "Şu anda ne yapıyorum")} <span aria-hidden="true">→</span></a><a href="${locale === "tr" ? "/tr/" : "/"}memory/">${label(locale, "Read the research", "Araştırmaları oku")} <span aria-hidden="true">→</span></a></nav>`,
     '      <div class="system-focus__grid">',
     ...cards,
     "      </div>",
@@ -749,7 +756,7 @@ export function renderDocument({ html, page, locale, data, today, archiveLinks =
     "site-header": () => renderSiteHeader({ locale, page }),
     "primary-navigation": () => renderPrimaryNavigation({ locale, page }),
     "living-system": () => renderLivingSystem({ locale, data, today }),
-    "application-map": () => renderApplicationMap({ locale, data, today }),
+    "application-map": () => renderApplicationMap({ locale, data, today, page }),
     "system-focus": () => renderSystemFocus({ locale, data }),
     "swarm-labs": () => renderSwarmLabs({ locale, data }),
     "now-content": () => renderNowContent({ locale, data, today, archiveLinks }),
@@ -1407,12 +1414,12 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
       current: archiveAttribute(node, "aria-current"),
     }));
   const expectedPrimaryLinks = [
-    { href: `${root}#journey`, text: label(locale, "Journey", "Yolculuk"), current: null },
+    { href: `${root}about/#journey`, text: label(locale, "Journey", "Yolculuk"), current: null },
     { href: currentPath, text: label(locale, "Now", "Şimdi"), current: "page" },
     { href: `${root}#horizon`, text: label(locale, "Horizon", "Ufuk"), current: null },
-    { href: `${root}#apps`, text: label(locale, "Applications", "Uygulamalar"), current: null },
+    { href: `${root}applications/`, text: label(locale, "Applications", "Uygulamalar"), current: null },
     { href: `${root}memory/`, text: label(locale, "Knowledge", "Bilgi"), current: null },
-    { href: `${root}#about`, text: label(locale, "About", "Hakkımda"), current: null },
+    { href: `${root}about/`, text: label(locale, "About", "Hakkımda"), current: null },
   ];
   assertArchiveNavigation(
     JSON.stringify(primaryLinks) === JSON.stringify(expectedPrimaryLinks),

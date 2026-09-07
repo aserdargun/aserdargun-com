@@ -67,8 +67,8 @@ const expectedTurkishBridges = [
   "Sistemler ve akış",
   "Madde ve mekanik",
 ];
-const expectedAnchors = ["top", "apps", "learning", "journey", "horizon", "approach", "about"];
-const expectedAssetVersion = "20260906-swarm-labs";
+const expectedAnchors = ["top", "learning", "horizon"];
+const expectedAssetVersion = "20260907-learning-system-v2";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -314,16 +314,16 @@ function validateLearningSystem(locale, html) {
   check(section.includes('aria-describedby="learning-description"'), `${locale}: learning system description relationship is missing`);
   const intro = section.match(/<div class="learning-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
   const expectedKicker = isTurkish
-    ? "Öğrenme sistemi · AI Ekosistem Atlası"
-    : "Learning system · AI Ecosystem Atlas";
+    ? "Öğrenme sistemi · AI Learning System"
+    : "AI Learning System · connected paths";
   const expectedHeading = isTurkish
-    ? "Atlas bir öğrenme sistemidir."
-    : "The atlas is a learning system.";
+    ? "Sistem nasıl bağlanıyor?"
+    : "How the system connects.";
   check(intro.includes(expectedKicker), `${locale}: learning system kicker is missing`);
   check(intro.includes(expectedHeading), `${locale}: learning system heading is missing`);
   const expectedSystemCount = isTurkish
-    ? "On altı uygulama tek bir öğrenme sistemi oluşturur"
-    : "Sixteen applications form one learning system";
+    ? "Uygulamalar tek bir öğrenme sistemi oluşturur"
+    : "The applications form one learning system";
   check(intro.includes(expectedSystemCount), `${locale}: learning system application count is stale`);
   check(
     section.includes('<figure class="learning-diagram-wrap">')
@@ -472,20 +472,20 @@ function validateLearningHorizon(locale, html) {
 
 const expectedPrimaryNavigation = {
   en: [
-    ["Journey", "/#journey"],
+    ["Journey", "/about/#journey"],
     ["Now", "/now/"],
     ["Horizon", "/#horizon"],
-    ["Applications", "/#apps"],
+    ["Applications", "/applications/"],
     ["Knowledge", "/memory/"],
-    ["About", "/#about"],
+    ["About", "/about/"],
   ],
   tr: [
-    ["Yolculuk", "/tr/#journey"],
+    ["Yolculuk", "/tr/about/#journey"],
     ["Şimdi", "/tr/now/"],
     ["Ufuk", "/tr/#horizon"],
-    ["Uygulamalar", "/tr/#apps"],
+    ["Uygulamalar", "/tr/applications/"],
     ["Bilgi", "/tr/memory/"],
-    ["Hakkımda", "/tr/#about"],
+    ["Hakkımda", "/tr/about/"],
   ],
 };
 
@@ -507,7 +507,7 @@ function validatePrimaryNavigation(locale, page, html) {
   const currentLinks = Array.from(nav.matchAll(/<a class="nav-links__primary-link"[^>]*aria-current="page"[^>]*>([^<]+)<\/a>/g), (match) => match[1]);
   const expectedCurrent = page === "memory"
     ? [locale === "tr" ? "Bilgi" : "Knowledge"]
-    : ["now", "archive"].includes(page) ? [locale === "tr" ? "Şimdi" : "Now"] : [];
+    : ["now", "archive"].includes(page) ? [locale === "tr" ? "Şimdi" : "Now"] : page === "about" ? [locale === "tr" ? "Hakkımda" : "About"] : page === "applications" ? [locale === "tr" ? "Uygulamalar" : "Applications"] : [];
   check(JSON.stringify(currentLinks) === JSON.stringify(expectedCurrent), `${locale}/${page}: routed primary current state differs`);
   const learningLabel = locale === "tr" ? "Öğrenme" : "Learning";
   const localeRoot = locale === "tr" ? "/tr/" : "/";
@@ -545,9 +545,9 @@ function validateLivingSystem(locale, html) {
     (match) => ({ href: match[1], eyebrow: match[2], heading: match[3], description: match[4] }),
   );
   const expected = locale === "tr" ? [
-    ["Geçmiş", "/tr/#journey"], ["Şimdi", "/tr/now/"], ["Gelecek", "/tr/#horizon"], ["Bilgi", "/tr/memory/"], ["Uygulamalar", "/tr/#apps"],
+    ["Geçmiş", "/tr/about/#journey"], ["Şimdi", "/tr/now/"], ["Gelecek", "/tr/#horizon"], ["Bilgi", "/tr/memory/"], ["Uygulamalar", "/tr/applications/"],
   ] : [
-    ["Past", "/#journey"], ["Now", "/now/"], ["Future", "/#horizon"], ["Knowledge", "/memory/"], ["Applications", "/#apps"],
+    ["Past", "/about/#journey"], ["Now", "/now/"], ["Future", "/#horizon"], ["Knowledge", "/memory/"], ["Applications", "/applications/"],
   ];
   check(JSON.stringify(cards.map((card) => [card.heading, card.href])) === JSON.stringify(expected), `${locale}: living-system order or destinations differ`);
   check(cards.length === 5 && cards.every((card) => card.eyebrow.length > 0 && card.description.length > 0), `${locale}: living-system cards require localized eyebrows and descriptions`);
@@ -575,7 +575,7 @@ function validateSystemFocus(locale, html) {
   ];
   for (const [layer, heading, expectedCodes] of expected) {
     const card = section.match(new RegExp(`<article class="system-focus-card system-focus-card--${layer}">[\\s\\S]*?<\\/article>`))?.[0] ?? "";
-    check(card.includes(`<h3>${heading}</h3>`), `${locale}: ${layer} system focus heading differs`);
+    check(card.includes(`<h2>${heading}</h2>`), `${locale}: ${layer} system focus heading differs`);
     check(JSON.stringify(matches(card, /<code>([a-z]{3})<\/code>/g)) === JSON.stringify(expectedCodes), `${locale}: ${layer} system focus applications differ`);
   }
   check(!/%|flex-basis|depth allocation|derinlik dağılımı/i.test(section), `${locale}: system focus must not expose false percentage precision`);
@@ -804,11 +804,15 @@ const routePages = {
     home: pages.en,
     now: await readRoute("now/index.html"),
     memory: await readRoute("memory/index.html"),
+    about: await readRoute("about/index.html"),
+    applications: await readRoute("applications/index.html"),
   },
   tr: {
     home: pages.tr,
     now: await readRoute("tr/now/index.html"),
     memory: await readRoute("tr/memory/index.html"),
+    about: await readRoute("tr/about/index.html"),
+    applications: await readRoute("tr/applications/index.html"),
   },
 };
 
@@ -875,6 +879,8 @@ for (const diagnostic of validatePublicIndexCoverage(publicIndexDocuments, valid
 const applicationSummaries = summarizeApplications(livingSystem.applications);
 
 for (const [locale, html] of Object.entries(pages)) {
+  const about = routePages[locale].about;
+  const applications = routePages[locale].applications;
   const expectedCanonical = locale === "tr" ? "https://aserdargun.com/tr/" : "https://aserdargun.com/";
   check(html.includes(`<html lang="${locale}" data-locale="${locale}">`), `${locale}: html language marker is missing`);
   check(html.includes(`<link rel="canonical" href="${expectedCanonical}">`), `${locale}: canonical URL is incorrect`);
@@ -893,26 +899,26 @@ for (const [locale, html] of Object.entries(pages)) {
   check(html.includes("/styles.css") && html.includes("/scripts.js"), `${locale}: shared root assets are not linked`);
   check(html.includes(`<link rel="stylesheet" href="${expectedStylesheetHref}">`), `${locale}: stylesheet cache version is stale`);
   check(html.includes(`<script src="${expectedScriptSrc}" defer></script>`), `${locale}: script cache version is stale`);
-  check(html.includes("data-career-portrait"), `${locale}: career portrait stage is missing`);
-  check(html.includes("data-career-transition"), `${locale}: career transition canvas is missing`);
-  check(html.includes('width="640" height="800"'), `${locale}: normalized career portrait dimensions are missing`);
-  check(!html.includes("current-stage-link"), `${locale}: current-stage Explore buttons must be removed`);
+  check(about.includes("data-career-portrait"), `${locale}: career portrait stage is missing`);
+  check(about.includes("data-career-transition"), `${locale}: career transition canvas is missing`);
+  check(about.includes('width="640" height="800"'), `${locale}: normalized career portrait dimensions are missing`);
+  check(!about.includes("current-stage-link"), `${locale}: current-stage Explore buttons must be removed`);
 
-  const stageKeys = matches(html, /data-stage-key="([^"]+)"/g);
+  const stageKeys = matches(about, /data-stage-key="([^"]+)"/g);
   check(JSON.stringify(stageKeys) === JSON.stringify(expectedStageKeys), `${locale}: timeline stage keys or order differ`);
-  const stageNumbers = matches(html, /class="timeline-index">(\d+)<\/span>/g);
+  const stageNumbers = matches(about, /class="timeline-index">(\d+)<\/span>/g);
   check(JSON.stringify(stageNumbers) === JSON.stringify(expectedStageNumbers), `${locale}: timeline stage numbers must descend from 08 to 01`);
-  const portraitModes = matches(html, /data-stage-portrait-mode="([^"]+)"/g);
+  const portraitModes = matches(about, /data-stage-portrait-mode="([^"]+)"/g);
   check(JSON.stringify(portraitModes) === JSON.stringify(expectedPortraitModes), `${locale}: portrait modes or order differ`);
-  const pixelSizes = matches(html, /data-stage-pixel-size="([^"]+)"/g);
+  const pixelSizes = matches(about, /data-stage-pixel-size="([^"]+)"/g);
   check(JSON.stringify(pixelSizes) === JSON.stringify(expectedPixelSizes), `${locale}: analog pixel sizes must be 4, 6, 8, 11, 14 in reverse timeline order`);
-  const paletteLevels = matches(html, /data-stage-palette-levels="([^"]+)"/g);
+  const paletteLevels = matches(about, /data-stage-palette-levels="([^"]+)"/g);
   check(JSON.stringify(paletteLevels) === JSON.stringify(expectedPaletteLevels), `${locale}: analog palette levels must be 5, 4, 4, 3, 2 in reverse timeline order`);
   const expectedBridges = locale === "tr" ? expectedTurkishBridges : expectedEnglishBridges;
-  const bridges = matches(html, /class="portrait-story-bridge">([^<]+)<\/span>/g);
+  const bridges = matches(about, /class="portrait-story-bridge">([^<]+)<\/span>/g);
   check(JSON.stringify(bridges) === JSON.stringify(expectedBridges), `${locale}: physical-to-digital bridge copy differs`);
-  check((html.match(/class="portrait-story"/g) || []).length === 8, `${locale}: every portrait needs one visible story`);
-  const worldLabels = matches(html, /class="portrait-story-world"><span aria-hidden="true">[^<]*<\/span>\s*([^<]+)<\/span>/g);
+  check((about.match(/class="portrait-story"/g) || []).length === 8, `${locale}: every portrait needs one visible story`);
+  const worldLabels = matches(about, /class="portrait-story-world"><span aria-hidden="true">[^<]*<\/span>\s*([^<]+)<\/span>/g);
   const expectedWorldLabels = expectedPortraitModes.map((mode) => (
     locale === "tr"
       ? mode === "pixel-analog" ? "FİZİKSEL DÜNYA" : "DİJİTAL DÜNYA"
@@ -920,27 +926,27 @@ for (const [locale, html] of Object.entries(pages)) {
   ));
   check(JSON.stringify(worldLabels) === JSON.stringify(expectedWorldLabels), `${locale}: physical/digital world labels differ`);
   for (const assetName of expectedStageImages) {
-    check(html.includes(`/images/career/${assetName}.webp`), `${locale}: WebP career portrait is missing: ${assetName}`);
-    check(html.includes(`/images/career/${assetName}.png`), `${locale}: PNG career portrait is missing: ${assetName}`);
+    check(about.includes(`/images/career/${assetName}.webp`), `${locale}: WebP career portrait is missing: ${assetName}`);
+    check(about.includes(`/images/career/${assetName}.png`), `${locale}: PNG career portrait is missing: ${assetName}`);
   }
-  const withoutCredential = html.replaceAll("AWS Certified AI Practitioner", "");
+  const withoutCredential = about.replaceAll("AWS Certified AI Practitioner", "");
   check(!/AI Practitioner/i.test(withoutCredential), `${locale}: AI Practitioner remains as a personal title`);
 
   for (const anchor of expectedAnchors) {
     check(new RegExp(`id="${anchor}"`).test(html), `${locale}: #${anchor} anchor is missing`);
   }
 
-  check(html.includes('class="app-map"'), `${locale}: application map is missing`);
-  check(html.includes('class="app-map-band"'), `${locale}: standalone application map band is missing`);
-  check(html.includes('aria-labelledby="app-map-title"'), `${locale}: application map heading relationship is missing`);
-  check(html.includes('aria-describedby="app-map-description"'), `${locale}: application map description relationship is missing`);
-  validateApplicationMapRows(locale, html);
+  check(applications.includes('class="app-map"'), `${locale}: application map is missing`);
+  check(applications.includes('class="app-map-band"'), `${locale}: standalone application map band is missing`);
+  check(applications.includes('aria-labelledby="app-map-title"'), `${locale}: application map heading relationship is missing`);
+  check(applications.includes('aria-describedby="app-map-description"'), `${locale}: application map description relationship is missing`);
+  validateApplicationMapRows(locale, applications);
   validateLearningSystem(locale, html);
   validateLearningHorizon(locale, html);
-  validateLivingSystem(locale, html);
+  validateLivingSystem(locale, about);
   validateSystemFocus(locale, html);
 
-  const appMapIntro = html.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
+  const appMapIntro = applications.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
   const expectedKicker = locale === "tr"
     ? "Uygulama haritası · portföyü keşfet"
     : "Application map · explore the portfolio";
@@ -970,7 +976,7 @@ for (const [locale, html] of Object.entries(pages)) {
   if (jsonLdMatch) {
     try {
       const jsonLd = JSON.parse(jsonLdMatch[1]);
-      check(jsonLd["@type"] === "Person", `${locale}: JSON-LD type must be Person`);
+      check(jsonLd["@type"] === "WebSite", `${locale}: home JSON-LD type must be WebSite`);
       check(jsonLd.url === (locale === "tr" ? "https://aserdargun.com/tr/" : "https://aserdargun.com/"), `${locale}: JSON-LD URL is incorrect`);
       check(!String(jsonLd.image || "").includes("?"), `${locale}: JSON-LD image URL must not carry a cache-busting query`);
     } catch (error) {
@@ -979,7 +985,7 @@ for (const [locale, html] of Object.entries(pages)) {
   }
 
   check(html.includes('rel="preload" href="/fonts/inter-var-latin.woff2"'), `${locale}: self-hosted Inter preload is missing`);
-  check(html.includes('class="contact-kicker"'), `${locale}: contact section heading is missing`);
+  check(about.includes('class="contact-kicker"'), `${locale}: contact section heading is missing`);
 }
 
 for (const [locale, localizedPages] of Object.entries(routePages)) {
@@ -988,7 +994,7 @@ for (const [locale, localizedPages] of Object.entries(routePages)) {
     check(html.includes(`<link rel="stylesheet" href="${expectedStylesheetHref}">`), `${locale}/${page}: stylesheet cache version is stale`);
     check(html.includes(`<script src="${expectedScriptSrc}" defer></script>`), `${locale}/${page}: script cache version is stale`);
   }
-  const tableWrapper = localizedPages.home.match(/<div class="app-map-table-wrap"[^>]*>/)?.[0] ?? "";
+  const tableWrapper = localizedPages.applications.match(/<div class="app-map-table-wrap"[^>]*>/)?.[0] ?? "";
   check(tableWrapper.includes('role="region"'), `${locale}/home: application table scroll region role is missing`);
   check(tableWrapper.includes('aria-labelledby="app-map-title"'), `${locale}/home: application table scroll region label is missing`);
   check(tableWrapper.includes('tabindex="0"'), `${locale}/home: application table scroll region must be keyboard reachable`);
@@ -1108,14 +1114,14 @@ check(pages.en.includes("https://aserdargun.com/images/og-ascii.jpg"), "English 
 check(pages.tr.includes("https://aserdargun.com/images/og-ascii-tr.jpg"), "Turkish Open Graph image is incorrect");
 check(pages.en.includes('<meta property="og:image:type" content="image/jpeg">'), "English Open Graph image MIME type is missing");
 check(pages.tr.includes('<meta property="og:image:type" content="image/jpeg">'), "Turkish Open Graph image MIME type is missing");
-check(pages.en.includes("AI Engineer"), "English AI Engineer status is missing");
-check(pages.tr.includes("AI Engineer"), "Turkish AI Engineer status is missing");
-check(pages.en.includes("Reading direction · 08 → 01"), "English reverse-chronology explanation is missing");
-check(pages.tr.includes("Okuma yönü · 08 → 01"), "Turkish reverse-chronology explanation is missing");
+check(routePages.en.about.includes("AI Engineer"), "English AI Engineer status is missing");
+check(routePages.tr.about.includes("AI Engineer"), "Turkish AI Engineer status is missing");
+check(routePages.en.about.includes("Reading direction · 08 → 01"), "English reverse-chronology explanation is missing");
+check(routePages.tr.about.includes("Okuma yönü · 08 → 01"), "Turkish reverse-chronology explanation is missing");
 check(pages.en.includes("https://gpu.aserdargun.com/") && pages.tr.includes("https://gpu.aserdargun.com/"), "Kernel Atlas link is missing");
 check(pages.en.includes("https://usl.aserdargun.com/") && pages.tr.includes("https://usl.aserdargun.com/"), "Unsloth Studio Learning link is missing");
-check(pages.en.includes("One portfolio. Focused applications."), "English application map definition is missing");
-check(pages.tr.includes("Tek portföy. Odaklı uygulamalar."), "Turkish application map definition is missing");
+check(routePages.en.applications.includes("One portfolio. Focused applications."), "English application map definition is missing");
+check(routePages.tr.applications.includes("Tek portföy. Odaklı uygulamalar."), "Turkish application map definition is missing");
 check(!pages.en.includes("<h3>GPU Kernel Engineer") && !pages.tr.includes("<h3>GPU Kernel Engineer"), "Legacy GPU Kernel Engineer career title is still present");
 check(styles.includes(".career-transition"), "Career transition canvas styles are missing");
 check(styles.includes(".career-portrait-fallback"), "Career portrait fallback styles are missing");
@@ -1161,34 +1167,35 @@ check(rootPage.includes(`<script src="${expectedScriptSrc}" defer></script>`), "
 check(rootPage.includes('"url": "https://aserdargun.com/"'), "Root JSON-LD URL is incorrect");
 check(!rootPage.includes("window.location.replace"), "Root must not redirect with client JavaScript");
 check(rootPage.includes('href="/tr/"') && rootPage.includes('data-language-link="en"'), "Root language links are missing");
-check(JSON.stringify(matches(rootPage, /data-stage-key="([^"]+)"/g)) === JSON.stringify(expectedStageKeys), "Root timeline stage keys or order differ");
-check(JSON.stringify(matches(rootPage, /class="timeline-index">(\d+)<\/span>/g)) === JSON.stringify(expectedStageNumbers), "Root timeline stage numbers must descend from 08 to 01");
-check(JSON.stringify(matches(rootPage, /data-stage-portrait-mode="([^"]+)"/g)) === JSON.stringify(expectedPortraitModes), "Root portrait modes or order differ");
-check(JSON.stringify(matches(rootPage, /data-stage-pixel-size="([^"]+)"/g)) === JSON.stringify(expectedPixelSizes), "Root analog pixel sizes must be 4, 6, 8, 11, 14 in reverse timeline order");
-check(JSON.stringify(matches(rootPage, /data-stage-palette-levels="([^"]+)"/g)) === JSON.stringify(expectedPaletteLevels), "Root analog palette levels must be 5, 4, 4, 3, 2 in reverse timeline order");
-check(JSON.stringify(matches(rootPage, /class="portrait-story-bridge">([^<]+)<\/span>/g)) === JSON.stringify(expectedEnglishBridges), "Root physical-to-digital bridge copy differs");
-check((rootPage.match(/class="portrait-story"/g) || []).length === 8, "Root every portrait needs one visible story");
-const rootWorldLabels = matches(rootPage, /class="portrait-story-world"><span aria-hidden="true">[^<]*<\/span>\s*([^<]+)<\/span>/g);
+const rootAbout = routePages.en.about;
+check(JSON.stringify(matches(rootAbout, /data-stage-key="([^"]+)"/g)) === JSON.stringify(expectedStageKeys), "Root timeline stage keys or order differ");
+check(JSON.stringify(matches(rootAbout, /class="timeline-index">(\d+)<\/span>/g)) === JSON.stringify(expectedStageNumbers), "Root timeline stage numbers must descend from 08 to 01");
+check(JSON.stringify(matches(rootAbout, /data-stage-portrait-mode="([^"]+)"/g)) === JSON.stringify(expectedPortraitModes), "Root portrait modes or order differ");
+check(JSON.stringify(matches(rootAbout, /data-stage-pixel-size="([^"]+)"/g)) === JSON.stringify(expectedPixelSizes), "Root analog pixel sizes must be 4, 6, 8, 11, 14 in reverse timeline order");
+check(JSON.stringify(matches(rootAbout, /data-stage-palette-levels="([^"]+)"/g)) === JSON.stringify(expectedPaletteLevels), "Root analog palette levels must be 5, 4, 4, 3, 2 in reverse timeline order");
+check(JSON.stringify(matches(rootAbout, /class="portrait-story-bridge">([^<]+)<\/span>/g)) === JSON.stringify(expectedEnglishBridges), "Root physical-to-digital bridge copy differs");
+check((rootAbout.match(/class="portrait-story"/g) || []).length === 8, "Root every portrait needs one visible story");
+const rootWorldLabels = matches(rootAbout, /class="portrait-story-world"><span aria-hidden="true">[^<]*<\/span>\s*([^<]+)<\/span>/g);
 check(JSON.stringify(rootWorldLabels) === JSON.stringify(expectedPortraitModes.map((mode) => mode === "pixel-analog" ? "PHYSICAL WORLD" : "DIGITAL WORLD")), "Root physical/digital world labels differ");
 for (const assetName of expectedStageImages) {
-  check(rootPage.includes(`/images/career/${assetName}.webp`), `Root WebP career portrait is missing: ${assetName}`);
-  check(rootPage.includes(`/images/career/${assetName}.png`), `Root PNG career portrait is missing: ${assetName}`);
+  check(rootAbout.includes(`/images/career/${assetName}.webp`), `Root WebP career portrait is missing: ${assetName}`);
+  check(rootAbout.includes(`/images/career/${assetName}.png`), `Root PNG career portrait is missing: ${assetName}`);
 }
-check(!/AI Practitioner/i.test(rootPage.replaceAll("AWS Certified AI Practitioner", "")), "Root AI Practitioner personal title remains");
-validateApplicationMapRows("Root", rootPage);
+check(!/AI Practitioner/i.test(rootAbout.replaceAll("AWS Certified AI Practitioner", "")), "Root AI Practitioner personal title remains");
+validateApplicationMapRows("Root", routePages.en.applications);
 validateLearningSystem("Root", rootPage);
 validateSystemFocus("Root", rootPage);
-const rootAppMapIntro = rootPage.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
+const rootAppMapIntro = routePages.en.applications.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
 check(rootAppMapIntro.includes("Application map · explore the portfolio"), "Root number-neutral application map kicker is missing");
 check(rootAppMapIntro.includes("One portfolio. Focused applications."), "Root number-neutral application map heading is missing");
 check(!/\b(?:05|five)\b/i.test(rootAppMapIntro), "Root stale application count remains in the map introduction");
-check(!rootPage.includes("Stackfolio"), "Root Stackfolio product content remains");
-check(!rootPage.includes("stk-aserdargun-com"), "Root Stackfolio repository name remains");
-check(!rootPage.includes("https://github.com/aserdargun/stk-aserdargun-com"), "Root Stackfolio repository URL remains");
-check(rootPage.includes('href="https://stk.aserdargun.com/"'), "Root private system stk link is missing from primary navigation");
-check(rootPage.includes('href="https://inf.aserdargun.com/"'), "Root private system inf link is missing from primary navigation");
-check(rootPage.includes("<h3>AI Engineer</h3>") && !rootPage.includes("<h3>GPU Kernel Engineer"), "Root AI Engineer career content is incorrect");
-check(!rootPage.includes("current-stage-link"), "Root current-stage Explore buttons must be removed");
+check(!rootAbout.includes("Stackfolio"), "Root Stackfolio product content remains");
+check(!rootAbout.includes("stk-aserdargun-com"), "Root Stackfolio repository name remains");
+check(!rootAbout.includes("https://github.com/aserdargun/stk-aserdargun-com"), "Root Stackfolio repository URL remains");
+check(rootAbout.includes('href="https://stk.aserdargun.com/"'), "Root private system stk link is missing from primary navigation");
+check(rootAbout.includes('href="https://inf.aserdargun.com/"'), "Root private system inf link is missing from primary navigation");
+check(rootAbout.includes("<h3>AI Engineer</h3>") && !rootAbout.includes("<h3>GPU Kernel Engineer"), "Root AI Engineer career content is incorrect");
+check(!rootAbout.includes("current-stage-link"), "Root current-stage Explore buttons must be removed");
 
 const sitemap = await readFile(path.join(root, "sitemap.xml"), "utf8");
 check(sitemap.includes("<loc>https://aserdargun.com/</loc>"), "Sitemap is missing root URL");
@@ -1201,7 +1208,8 @@ for (const url of [
   "https://aserdargun.com/tr/now/",
 ]) {
   const entry = sitemap.match(new RegExp(`<url>\\s*<loc>${url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}<\\/loc>[\\s\\S]*?<\\/url>`))?.[0] ?? "";
-  check(entry.includes(`<lastmod>${livingSystem.now.updatedAt}</lastmod>`), `Sitemap current-content lastmod differs: ${url}`);
+  const expectedModified = ["https://aserdargun.com/", "https://aserdargun.com/tr/"].includes(url) ? "2026-09-07" : livingSystem.now.updatedAt;
+  check(entry.includes(`<lastmod>${expectedModified}</lastmod>`), `Sitemap current-content lastmod differs: ${url}`);
 }
 const publicMemoryUrls = {
   en: "https://aserdargun.com/memory/",

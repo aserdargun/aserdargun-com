@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://aserdargun.com/</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/" />
     <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/" />
   </url>
   <url>
     <loc>https://aserdargun.com/tr/</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/" />
     <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/" />
@@ -53,5 +53,33 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/now/archive/2026-W34/" />
     <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/now/archive/2026-W34/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/now/archive/2026-W34/" />
+  </url>
+  <url>
+    <loc>https://aserdargun.com/about/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/about/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/about/" />
+  </url>
+  <url>
+    <loc>https://aserdargun.com/tr/about/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/about/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/about/" />
+  </url>
+  <url>
+    <loc>https://aserdargun.com/applications/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/applications/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/applications/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/applications/" />
+  </url>
+  <url>
+    <loc>https://aserdargun.com/tr/applications/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/applications/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/applications/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/applications/" />
   </url>
 </urlset>

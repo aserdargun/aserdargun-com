@@ -109,10 +109,10 @@ test("the system focus model names five layers without percentage theater", asyn
   const turkish = rendererModule.renderSystemFocus({ locale: "tr", data });
 
   for (const heading of ["Foundation", "Agent system", "Assurance", "Deployment", "Physical AI"]) {
-    assert.match(english, new RegExp(`<h3>${heading}<\\/h3>`));
+    assert.match(english, new RegExp(`<h2>${heading}<\\/h2>`));
   }
   for (const heading of ["Temel", "Ajan sistemi", "Güvence", "Dağıtım", "Fiziksel AI"]) {
-    assert.match(turkish, new RegExp(`<h3>${heading}<\\/h3>`));
+    assert.match(turkish, new RegExp(`<h2>${heading}<\\/h2>`));
   }
   assert.doesNotMatch(english, /\d+%|flex-basis|depth allocation/i);
   assert.doesNotMatch(turkish, /%\d+|flex-basis|derinlik dağılımı/i);
@@ -183,7 +183,7 @@ test("SWI colony labs preserve their relationship and show release evidence with
   }
 });
 
-test("homepage diagram, registry, and layer overview cover the same applications before contact", async () => {
+test("homepage diagram, registry, and layer overview cover the same applications across their dedicated pages", async () => {
   const data = await readData();
   const expected = data.applications.map(({ code }) => code).sort();
   for (const file of ["index.html", "tr/index.html"]) {
@@ -191,9 +191,10 @@ test("homepage diagram, registry, and layer overview cover the same applications
     const svg = html.match(/<g class="ld-nodes">([\s\S]*?)<\/svg>/)?.[1] ?? "";
     const diagram = [...svg.matchAll(/href="https:\/\/([a-z]{3})\.aserdargun\.com\/"/g)].map((match) => match[1]).sort();
     assert.deepEqual(diagram, expected);
-    const map = [...html.matchAll(/data-app-code="([a-z]{3})"/g)].map((match) => match[1]).sort();
+    const applicationMap = await readFile(path.join(rootDir, file.replace("index.html", "applications/index.html")), "utf8");
+    const map = [...applicationMap.matchAll(/data-app-code="([a-z]{3})"/g)].map((match) => match[1]).sort();
     assert.deepEqual(map, expected);
     assert.ok(html.indexOf('class="system-focus"') < html.indexOf('class="learning-system"'));
-    assert.ok(html.indexOf('class="app-map"') < html.indexOf('class="contact"'));
+    assert.equal(html.includes('class="app-map"'), false, "the full application table belongs on its dedicated page");
   }
 });

@@ -1,30 +1,43 @@
-# Personal Profile Page
+# AI Learning System
 
-Bilingual personal portfolio for Serdar Gündoğdu. The English homepage is served
-directly at `/`, the Turkish edition lives at `/tr/`, and the retired `/en/`
-duplicate permanently redirects to `/`.
+A bilingual public learning system by Serdar Gündoğdu. English starts at `/`
+and Turkish at `/tr/`; the retired `/en/` duplicate permanently redirects to `/`.
 
-The opening experience combines an interactive ASCII/pixel portrait engine with a
-reverse-chronological eight-stage career timeline spanning mechanical engineering,
-manufacturing leadership, data science, full-stack AI, and AI engineering,
-followed by a five-layer system overview and a learning-system map that connect parallel compute/model
-foundations to the LLM runtime, the Harness Engineering Observatory (`hns`),
-and a context/security/evaluation quality loop (`ctx` / `sec` / `evl`). Local
-and cloud deployment decisions (`lcl` / `cld`) then open into parallel World
-Models (`wfm`) and Swarm Intelligence (`swi`) bridges. SWI branches into the live ANT pheromone-trail and BEE honey-bee communication
-laboratories. WFM and SWI converge in the industrial-twin lab before the long-term open-humanoid horizon. The SWI research snapshot and successful deployment, plus the ANT and BEE live
-release manifests, were checked on 6 September 2026. Their relationship is
-conceptual; the laboratories run independently.
-The desktop diagram uses box-free orthogonal routing; mobile keeps the same core
-sequence through full-width accessible links.
+The homepage opens with **Five layers. One learning loop.** It connects the
+foundation, agent system, assurance, deployment, and physical AI layers to the
+existing interactive SVG. Its geometry, orthogonal routing, desktop links,
+accessible mobile alternatives, and learning-loop video are preserved.
 
-The application map contains 16 applications from the canonical source, with
-localized search, layer filters, and expandable evidence and knowledge links.
-Unverified applications explicitly show a pending state without invented release
-dates. The Knowledge page offers a topic index for the five authored public notes.
-Now and its historical snapshots retain their dated content. The previous
-Frontend Foundations exercises and unused assets have been removed; their retired
-routes and links are rejected by the public-site validation gate.
+- `/about/` and `/tr/about/` contain the personal introduction, interactive
+  ASCII/pixel portraits, eight-stage career journey, working principles,
+  credentials, and future direction.
+- `/applications/` and `/tr/applications/` contain the complete application map,
+  localized search, layer filters, and expandable evidence and knowledge links.
+- `/now/` and `/tr/now/` retain dated current work; the historical snapshots keep
+  their original article content and dates.
+- `/memory/` and `/tr/memory/` contain authored public research and decisions.
+- `/llms.txt` guides agents to the public pages and `portfolio.json`; structured
+  website and person metadata connects the learning system to its author.
+
+Older homepage links to `#journey`, career stages, `#about`, `#approach`, and
+`#apps` continue to the corresponding new page. Language switches retain the
+current page. Existing application names remain their canonical product names;
+**AI Learning System** is the root site's identity.
+
+## Extending the learning system
+
+Add public applications and reciprocal relationships in `data/living-system.json`.
+The generator builds the Five Layers cards, application rows, search metadata,
+and `portfolio.json` from that source. Every new application must declare its
+layer and keep research, verification, and release dates separate.
+
+The SVG topology and matching learning path remain in the bilingual homepage
+files. When adding a node, update both diagrams, their descriptions, and the
+mobile learning targets together; preserve the orthogonal paths and keyboard
+access. `tools/portfolio-phase-one.test.mjs` checks diagram membership against
+canonical data and the dedicated application map. The navigation tests check
+edge routing, touch alternatives, and accessible names, so adding data without
+updating the diagram fails validation.
 
 ## Development
 

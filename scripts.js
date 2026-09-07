@@ -1,3 +1,14 @@
+// Preserve inbound links to sections moved off the homepage.
+if (typeof window !== "undefined" && window.location && /^\/(?:tr\/)?$/.test(window.location.pathname)) {
+  const legacyHash = window.location.hash;
+  const localeRoot = window.location.pathname.startsWith("/tr/") ? "/tr/" : "/";
+  if (/^#(?:journey(?:-stage-\d{2})?|about|approach)$/.test(legacyHash)) {
+    window.location.replace(`${localeRoot}about/${legacyHash}`);
+  } else if (legacyHash === "#apps") {
+    window.location.replace(`${localeRoot}applications/`);
+  }
+}
+
 document.documentElement.classList.add("has-js");
 
 const LANGUAGE_STORAGE_KEY = "portfolio-language";
@@ -1100,7 +1111,7 @@ function initializeCareerPortraitTransition() {
 
 function initializeHiddenFilm() {
   const trigger = document.querySelector("[data-journey]") && document.querySelector(".wordmark");
-  if (!trigger || typeof HTMLDialogElement === "undefined") return;
+  if (!trigger || trigger.pathname !== window.location.pathname || typeof HTMLDialogElement === "undefined") return;
 
   const tr = document.documentElement.lang === "tr";
   const motion = window.matchMedia("(prefers-reduced-motion: reduce)");

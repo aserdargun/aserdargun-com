@@ -560,6 +560,7 @@ ul {
   text-transform: uppercase;
 }
 
+.app-map-intro h1,
 .app-map-intro h2 {
   max-width: 660px;
   margin-top: 10px;
@@ -2506,6 +2507,7 @@ footer a {
     padding: 19px 18px 20px;
   }
 
+  .app-map-intro h1,
   .app-map-intro h2 {
     font-size: 1.72rem;
   }
@@ -2897,7 +2899,7 @@ footer a {
   text-transform: uppercase;
 }
 
-.system-focus__intro h2 {
+.system-focus__intro h1 {
   max-width: 760px;
   margin-top: 12px;
   font-size: clamp(2.5rem, 5vw, 4.8rem);
@@ -2931,7 +2933,7 @@ footer a {
   border-left: 0;
 }
 
-.system-focus-card h3 {
+.system-focus-card h2 {
   margin-top: 14px;
   font-size: 1.05rem;
   font-weight: 680;
@@ -4185,7 +4187,7 @@ body:has(main.memory-page) {
   padding-block: 64px;
   padding-inline: max(20px, calc((100% - 1200px) / 2));
 }
-.system-focus__intro h2 { font-size: clamp(2.2rem, 4.2vw, 3.5rem); line-height: 1.08; }
+.system-focus__intro h1 { font-size: clamp(2.2rem, 4.2vw, 3.5rem); line-height: 1.08; }
 .system-focus-card > p:not(.system-focus-card__index) { font-size: .85rem; color: #bcc2b0; }
 .system-focus-card a { font-size: .77rem; color: #d0d5c4; }
 .system-focus-card code { font-size: .68rem; }
@@ -4646,3 +4648,16 @@ body.learning-loop-open {
     font-size: 1.2rem;
   }
 }
+
+/* AI Learning System: the existing five-layer overview is the homepage opening. */
+.system-home .system-focus { padding-top: 112px; }
+.system-actions { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 18px; }
+.system-actions a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--lime); font-size: .9rem; }
+.applications-page .app-map-band { min-height: 70vh; }
+@media (max-width: 900px) {
+  .system-home .system-focus { padding-top: 52px; }
+  .system-actions { gap: 6px 22px; }
+}
+
+.footer-inner > * { min-width: 0; }
+.footer-links { flex-wrap: wrap; }

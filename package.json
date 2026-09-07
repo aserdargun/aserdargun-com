@@ -21,7 +21,7 @@
     "test:archive": "node --test tools/archive-now.test.mjs",
     "test:archive-now": "node --test tools/archive-now.test.mjs",
     "test:render": "node --test tools/render-living-system.test.mjs",
-    "test:navigation": "node --test tools/navigation-contract.test.mjs",
+    "test:navigation": "node --test tools/navigation-contract.test.mjs tools/site-structure.test.mjs",
     "test:server": "node --test tools/serve.test.mjs",
     "test:stop": "node --test tools/preview-control.test.mjs tools/preview-stop.test.mjs",
     "validate:site": "node tools/validate-site.mjs",

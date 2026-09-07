@@ -26,19 +26,27 @@ const routes = [
   { route: "/tr/now/", file: "tr/now/index.html", locale: "tr" },
   { route: "/memory/", file: "memory/index.html", locale: "en" },
   { route: "/tr/memory/", file: "tr/memory/index.html", locale: "tr" },
+  ...["about", "applications"].flatMap((page) => [
+    { route: `/${page}/`, file: `${page}/index.html`, locale: "en" },
+    { route: `/tr/${page}/`, file: `tr/${page}/index.html`, locale: "tr" },
+  ]),
   ...archiveRoutes,
 ];
 
 test("the accessibility route set includes every deployable public index document", async () => {
   const discoveredPaths = (await discoverPublicIndexDocuments(rootDir)).map(({ relativePath }) => relativePath);
-  assert.equal(discoveredPaths.length, 8, "fixture must contain the eight current living-system pages");
+  assert.equal(discoveredPaths.length, 12, "fixture must contain all twelve public pages");
   assert.deepEqual(
     discoveredPaths,
     [
+      "about/index.html",
+      "applications/index.html",
       "index.html",
       "memory/index.html",
       "now/archive/2026-W34/index.html",
       "now/index.html",
+      "tr/about/index.html",
+      "tr/applications/index.html",
       "tr/index.html",
       "tr/memory/index.html",
       "tr/now/archive/2026-W34/index.html",
@@ -516,8 +524,8 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     );
   });
 
-  test(`${document.route} labels and contains the application table scroll region`, async () => {
-    const html = await readFile(path.join(rootDir, document.file), "utf8");
+  test(`${document.route}applications/ labels and contains the application table scroll region`, async () => {
+    const html = await readFile(path.join(rootDir, document.file.replace("index.html", "applications/index.html")), "utf8");
     const wrappers = openingTags(html, "class=\"app-map-table-wrap\"");
     assert.equal(wrappers.length, 1, "expected one application table wrapper");
     assert.equal(attribute(wrappers[0], "role"), "region");

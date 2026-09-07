@@ -42,6 +42,7 @@ async function readFixtureData() {
 function homeDocument() {
   return `<!doctype html>
 <!-- GENERATED:primary-navigation:start --><!-- GENERATED:primary-navigation:end -->
+<!-- GENERATED:system-focus:start --><!-- GENERATED:system-focus:end -->
 <!-- GENERATED:living-system:start --><!-- GENERATED:living-system:end -->
 <section class="app-map" id="apps" aria-labelledby="app-map-title" aria-describedby="app-map-description">
 <!-- GENERATED:application-map:start -->
@@ -63,6 +64,7 @@ function completeHomeDocument({ head = "", bodyContent = "", afterBody = "", aft
 <head>${head}</head>
 <body>
 <!-- GENERATED:primary-navigation:start --><!-- GENERATED:primary-navigation:end -->
+<!-- GENERATED:system-focus:start --><!-- GENERATED:system-focus:end -->
 <!-- GENERATED:living-system:start --><!-- GENERATED:living-system:end -->
 <section class="app-map" id="apps">
 <!-- GENERATED:application-map:start --><!-- GENERATED:application-map:end -->
@@ -130,6 +132,12 @@ async function createSiteFixture() {
     path.join(fixtureDir, "tr", "memory", "index.html"),
     completeMemoryDocument().replaceAll('lang="en" data-locale="en"', 'lang="tr" data-locale="tr"'),
   );
+  for (const prefix of ["", "tr/"]) {
+    for (const page of ["about", "applications"]) {
+      await mkdir(path.join(fixtureDir, prefix, page), { recursive: true });
+      await writeFile(path.join(fixtureDir, prefix, page, "index.html"), homeDocument());
+    }
+  }
   return fixtureDir;
 }
 
@@ -186,20 +194,20 @@ test("renders the exact six localized primary concepts and page-aware destinatio
   const turkish = renderPrimaryNavigation({ locale: "tr", page: "home" });
 
   assert.deepEqual(primaryLinks(english), [
-    { href: "/#journey", label: "Journey", current: false },
+    { href: "/about/#journey", label: "Journey", current: false },
     { href: "/now/", label: "Now", current: false },
     { href: "/#horizon", label: "Horizon", current: false },
-    { href: "/#apps", label: "Applications", current: false },
+    { href: "/applications/", label: "Applications", current: false },
     { href: "/memory/", label: "Knowledge", current: false },
-    { href: "/#about", label: "About", current: false },
+    { href: "/about/", label: "About", current: false },
   ]);
   assert.deepEqual(primaryLinks(turkish), [
-    { href: "/tr/#journey", label: "Yolculuk", current: false },
+    { href: "/tr/about/#journey", label: "Yolculuk", current: false },
     { href: "/tr/now/", label: "Şimdi", current: false },
     { href: "/tr/#horizon", label: "Ufuk", current: false },
-    { href: "/tr/#apps", label: "Uygulamalar", current: false },
+    { href: "/tr/applications/", label: "Uygulamalar", current: false },
     { href: "/tr/memory/", label: "Bilgi", current: false },
-    { href: "/tr/#about", label: "Hakkımda", current: false },
+    { href: "/tr/about/", label: "Hakkımda", current: false },
   ]);
 });
 
@@ -267,18 +275,18 @@ test("renders five localized living-system links in chronological meaning order"
   const turkish = renderLivingSystem({ locale: "tr" });
 
   assert.deepEqual(livingSystemCards(english), [
-    { href: "/#journey", eyebrow: "Journey", heading: "Past", description: "Explore the engineering experience behind the systems I build." },
+    { href: "/about/#journey", eyebrow: "Journey", heading: "Past", description: "Explore the engineering experience behind the systems I build." },
     { href: "/now/", eyebrow: "Active", heading: "Now", description: "A dated view of where my attention and work are going now." },
     { href: "/#horizon", eyebrow: "Horizon", heading: "Future", description: "The long-term direction is open humanoid engineering in the physical world." },
     { href: "/memory/", eyebrow: "Published", heading: "Knowledge", description: "Explore published decisions, research notes, and the sources behind them." },
-    { href: "/#apps", eyebrow: "Working outputs", heading: "Applications", description: "Accumulated knowledge becomes focused applications, labs, and long-term work." },
+    { href: "/applications/", eyebrow: "Working outputs", heading: "Applications", description: "Accumulated knowledge becomes focused applications, labs, and long-term work." },
   ]);
   assert.deepEqual(livingSystemCards(turkish), [
-    { href: "/tr/#journey", eyebrow: "Yolculuk", heading: "Geçmiş", description: "Bugün geliştirdiğim sistemlerin arkasındaki mühendislik deneyimini keşfet." },
+    { href: "/tr/about/#journey", eyebrow: "Yolculuk", heading: "Geçmiş", description: "Bugün geliştirdiğim sistemlerin arkasındaki mühendislik deneyimini keşfet." },
     { href: "/tr/now/", eyebrow: "Aktif", heading: "Şimdi", description: "Dikkatimin ve çalışmalarımın şimdi nereye yöneldiğini gösteren tarihli bir görünüm." },
     { href: "/tr/#horizon", eyebrow: "Ufuk", heading: "Gelecek", description: "Uzun vadeli yön, fiziksel dünyada açık insansı robot mühendisliğidir." },
     { href: "/tr/memory/", eyebrow: "Yayınlanan", heading: "Bilgi", description: "Yayınladığım kararları, araştırma notlarını ve dayandıkları kaynakları incele." },
-    { href: "/tr/#apps", eyebrow: "Çalışan çıktılar", heading: "Uygulamalar", description: "Birikmiş bilgi; odaklı uygulamalara, laboratuvarlara ve uzun vadeli çalışmalara dönüşür." },
+    { href: "/tr/applications/", eyebrow: "Çalışan çıktılar", heading: "Uygulamalar", description: "Birikmiş bilgi; odaklı uygulamalara, laboratuvarlara ve uzun vadeli çalışmalara dönüşür." },
   ]);
 });
 
@@ -528,7 +536,7 @@ test("renders application codes and empty relationship blocks with locale parity
   const english = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
   const turkish = renderDocument({ html: homeDocument(), page: "home", locale: "tr", data, today });
   const codes = (html) => Array.from(html.matchAll(/<th scope="row"><code>([a-z]{3})<\/code><\/th>/g), (match) => match[1]);
-  const relationshipCount = (html) => (html.match(/<article\b/g) ?? []).length;
+  const relationshipCount = (html) => (html.match(/<article class="(?:memory-card|journey-evidence-card)"/g) ?? []).length;
 
   assert.deepEqual(codes(english), codes(turkish));
   assert.equal(relationshipCount(english), relationshipCount(turkish));
@@ -639,7 +647,7 @@ test("attaches supplied journey evidence to an existing stage without deriving m
   assert.doesNotMatch(minimalHtml, /journey-evidence-card__(?:period|evidence|applications)/);
 });
 
-test("attaches approved journey evidence through the actual bilingual home documents", async () => {
+test("attaches approved journey evidence through the actual bilingual About documents", async () => {
   const data = await readFixtureData();
   data.journeyEvidence = [{
     stage: "01",
@@ -654,13 +662,13 @@ test("attaches approved journey evidence through the actual bilingual home docum
   const cases = [
     {
       locale: "en",
-      filePath: path.join(rootDir, "index.html"),
+      filePath: path.join(rootDir, "about", "index.html"),
       stageLabel: "Stage 01",
       decision: "Verified mechanical engineering foundation.",
     },
     {
       locale: "tr",
-      filePath: path.join(rootDir, "tr", "index.html"),
+      filePath: path.join(rootDir, "tr", "about", "index.html"),
       stageLabel: "Aşama 01",
       decision: "Doğrulanmış makine mühendisliği temeli.",
     },
@@ -668,7 +676,7 @@ test("attaches approved journey evidence through the actual bilingual home docum
 
   for (const { locale, filePath, stageLabel, decision } of cases) {
     const html = await readFile(filePath, "utf8");
-    const rendered = renderDocument({ html, page: "home", locale, data, today });
+    const rendered = renderDocument({ html, page: "about", locale, data, today });
     assert.match(rendered, new RegExp(`href="#journey-stage-01">${stageLabel}<\\/a>`));
     assert.match(rendered, new RegExp(`<p class="journey-evidence-card__decision">${decision.replace(".", "\\.")}<\\/p>`));
   }
@@ -1040,7 +1048,7 @@ test("filesystem archive discovery rejects review gap: a visible update time tha
 });
 
 test("filesystem archive discovery rejects every shared header accessibility contract mutation", async (t) => {
-  const englishJourney = '    <a class="nav-links__primary-link" href="/#journey">Journey</a>';
+  const englishJourney = '    <a class="nav-links__primary-link" href="/about/#journey">Journey</a>';
   const englishNow = '    <a class="nav-links__primary-link" href="/now/" aria-current="page">Now</a>';
   const mutations = [
     ["missing language navigation accessible name", (html) => html.replace(' aria-label="Language selection"', "")],
@@ -1392,8 +1400,8 @@ test("filesystem archive discovery rejects hidden or inert required content", as
       '<section class="now-contact" inert>',
     )],
     ["primary navigation label hidden on its anchor", (html) => html.replace(
-      '<a class="nav-links__primary-link" href="/#journey">Journey</a>',
-      '<a class="nav-links__primary-link" href="/#journey" hidden>Journey</a>',
+      '<a class="nav-links__primary-link" href="/about/#journey">Journey</a>',
+      '<a class="nav-links__primary-link" href="/about/#journey" hidden>Journey</a>',
     )],
     ["group label inside a hidden group", (html) => html.replace(
       'data-nav-group="horizon" role="group"',
