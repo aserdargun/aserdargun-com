@@ -483,7 +483,6 @@ export function renderSystemFocus({ locale, data }) {
     `        <h1 id="system-focus-title-${locale}">${label(locale, "Five layers. One learning loop.", "Beş katman. Tek öğrenme döngüsü.")}</h1>`,
     `        <p>${label(locale, "A public learning system connecting what I study, what I build, and what comes next. Explore the research, try working experiments, and find your own path through five connected layers.", "Öğrendiklerimi, geliştirdiğim projeleri ve sonraki adımlarımı birbirine bağlayan açık bir öğrenme sistemi. Araştırmaları keşfet, çalışan deneyleri dene ve birbirine bağlı beş katmanda kendi öğrenme yolunu bul.")}</p>`,
     "      </div>",
-    `        <nav class="system-actions" aria-label="${label(locale, "Explore the learning system", "Öğrenme sistemini keşfet")}"><a href="${locale === "tr" ? "/tr/" : "/"}applications/">${label(locale, "Explore applications", "Uygulamaları keşfet")} <span aria-hidden="true">→</span></a><a href="${locale === "tr" ? "/tr/" : "/"}now/">${label(locale, "What I’m working on", "Şu anda ne yapıyorum")} <span aria-hidden="true">→</span></a><a href="${locale === "tr" ? "/tr/" : "/"}memory/">${label(locale, "Read the research", "Araştırmaları oku")} <span aria-hidden="true">→</span></a></nav>`,
     '      <div class="system-focus__grid">',
     ...cards,
     "      </div>",
