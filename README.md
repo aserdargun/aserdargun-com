@@ -11,6 +11,7 @@ accessible mobile alternatives, and learning-loop video are preserved.
 - `/about/` and `/tr/about/` contain the personal introduction, interactive
   ASCII/pixel portraits, eight-stage career journey, working principles,
   credentials, and future direction.
+- `/journey/` and `/tr/journey/` contain the learning path, six detailed learning stages, and the physical AI horizon and colony labs.
 - `/applications/` and `/tr/applications/` contain the complete application map,
   localized search, layer filters, and expandable evidence and knowledge links.
 - `/now/` and `/tr/now/` retain dated current work; the historical snapshots keep
@@ -31,8 +32,8 @@ The generator builds the Five Layers cards, application rows, search metadata,
 and `portfolio.json` from that source. Every new application must declare its
 layer and keep research, verification, and release dates separate.
 
-The SVG topology and matching learning path remain in the bilingual homepage
-files. When adding a node, update both diagrams, their descriptions, and the
+The SVG topology remains in the bilingual homepage files; the detailed learning
+path lives in the Journey pages. When adding a node, update both diagrams, their descriptions, and the
 mobile learning targets together; preserve the orthogonal paths and keyboard
 access. `tools/portfolio-phase-one.test.mjs` checks diagram membership against
 canonical data and the dedicated application map. The navigation tests check

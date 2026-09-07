@@ -82,4 +82,18 @@
     <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/applications/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/applications/" />
   </url>
+  <url>
+    <loc>https://aserdargun.com/journey/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/journey/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/journey/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/journey/" />
+  </url>
+  <url>
+    <loc>https://aserdargun.com/tr/journey/</loc>
+    <lastmod>2026-09-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aserdargun.com/journey/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://aserdargun.com/tr/journey/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aserdargun.com/journey/" />
+  </url>
 </urlset>

@@ -50,6 +50,8 @@ test("Azure deployment root contains every public route and shared asset", async
     "llms.txt",
     "about/index.html",
     "tr/about/index.html",
+    "journey/index.html",
+    "tr/journey/index.html",
     "applications/index.html",
     "tr/applications/index.html",
   ];

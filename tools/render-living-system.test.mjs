@@ -133,7 +133,7 @@ async function createSiteFixture() {
     completeMemoryDocument().replaceAll('lang="en" data-locale="en"', 'lang="tr" data-locale="tr"'),
   );
   for (const prefix of ["", "tr/"]) {
-    for (const page of ["about", "applications"]) {
+    for (const page of ["about", "applications", "journey"]) {
       await mkdir(path.join(fixtureDir, prefix, page), { recursive: true });
       await writeFile(path.join(fixtureDir, prefix, page, "index.html"), homeDocument());
     }
@@ -194,17 +194,17 @@ test("renders the exact six localized primary concepts and page-aware destinatio
   const turkish = renderPrimaryNavigation({ locale: "tr", page: "home" });
 
   assert.deepEqual(primaryLinks(english), [
-    { href: "/about/#journey", label: "Journey", current: false },
+    { href: "/journey/", label: "Journey", current: false },
     { href: "/now/", label: "Now", current: false },
-    { href: "/#horizon", label: "Horizon", current: false },
+    { href: "/journey/#horizon", label: "Horizon", current: false },
     { href: "/applications/", label: "Applications", current: false },
     { href: "/memory/", label: "Knowledge", current: false },
     { href: "/about/", label: "About", current: false },
   ]);
   assert.deepEqual(primaryLinks(turkish), [
-    { href: "/tr/about/#journey", label: "Yolculuk", current: false },
+    { href: "/tr/journey/", label: "Yolculuk", current: false },
     { href: "/tr/now/", label: "Şimdi", current: false },
-    { href: "/tr/#horizon", label: "Ufuk", current: false },
+    { href: "/tr/journey/#horizon", label: "Ufuk", current: false },
     { href: "/tr/applications/", label: "Uygulamalar", current: false },
     { href: "/tr/memory/", label: "Bilgi", current: false },
     { href: "/tr/about/", label: "Hakkımda", current: false },
@@ -277,14 +277,14 @@ test("renders five localized living-system links in chronological meaning order"
   assert.deepEqual(livingSystemCards(english), [
     { href: "/about/#journey", eyebrow: "Journey", heading: "Past", description: "Explore the engineering experience behind the systems I build." },
     { href: "/now/", eyebrow: "Active", heading: "Now", description: "A dated view of where my attention and work are going now." },
-    { href: "/#horizon", eyebrow: "Horizon", heading: "Future", description: "The long-term direction is open humanoid engineering in the physical world." },
+    { href: "/journey/#horizon", eyebrow: "Horizon", heading: "Future", description: "The long-term direction is open humanoid engineering in the physical world." },
     { href: "/memory/", eyebrow: "Published", heading: "Knowledge", description: "Explore published decisions, research notes, and the sources behind them." },
     { href: "/applications/", eyebrow: "Working outputs", heading: "Applications", description: "Accumulated knowledge becomes focused applications, labs, and long-term work." },
   ]);
   assert.deepEqual(livingSystemCards(turkish), [
     { href: "/tr/about/#journey", eyebrow: "Yolculuk", heading: "Geçmiş", description: "Bugün geliştirdiğim sistemlerin arkasındaki mühendislik deneyimini keşfet." },
     { href: "/tr/now/", eyebrow: "Aktif", heading: "Şimdi", description: "Dikkatimin ve çalışmalarımın şimdi nereye yöneldiğini gösteren tarihli bir görünüm." },
-    { href: "/tr/#horizon", eyebrow: "Ufuk", heading: "Gelecek", description: "Uzun vadeli yön, fiziksel dünyada açık insansı robot mühendisliğidir." },
+    { href: "/tr/journey/#horizon", eyebrow: "Ufuk", heading: "Gelecek", description: "Uzun vadeli yön, fiziksel dünyada açık insansı robot mühendisliğidir." },
     { href: "/tr/memory/", eyebrow: "Yayınlanan", heading: "Bilgi", description: "Yayınladığım kararları, araştırma notlarını ve dayandıkları kaynakları incele." },
     { href: "/tr/applications/", eyebrow: "Çalışan çıktılar", heading: "Uygulamalar", description: "Birikmiş bilgi; odaklı uygulamalara, laboratuvarlara ve uzun vadeli çalışmalara dönüşür." },
   ]);
@@ -1048,7 +1048,7 @@ test("filesystem archive discovery rejects review gap: a visible update time tha
 });
 
 test("filesystem archive discovery rejects every shared header accessibility contract mutation", async (t) => {
-  const englishJourney = '    <a class="nav-links__primary-link" href="/about/#journey">Journey</a>';
+  const englishJourney = '    <a class="nav-links__primary-link" href="/journey/">Journey</a>';
   const englishNow = '    <a class="nav-links__primary-link" href="/now/" aria-current="page">Now</a>';
   const mutations = [
     ["missing language navigation accessible name", (html) => html.replace(' aria-label="Language selection"', "")],
@@ -1400,8 +1400,8 @@ test("filesystem archive discovery rejects hidden or inert required content", as
       '<section class="now-contact" inert>',
     )],
     ["primary navigation label hidden on its anchor", (html) => html.replace(
-      '<a class="nav-links__primary-link" href="/about/#journey">Journey</a>',
-      '<a class="nav-links__primary-link" href="/about/#journey" hidden>Journey</a>',
+      '<a class="nav-links__primary-link" href="/journey/">Journey</a>',
+      '<a class="nav-links__primary-link" href="/journey/" hidden>Journey</a>',
     )],
     ["group label inside a hidden group", (html) => html.replace(
       'data-nav-group="horizon" role="group"',

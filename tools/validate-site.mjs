@@ -67,8 +67,8 @@ const expectedTurkishBridges = [
   "Sistemler ve akış",
   "Madde ve mekanik",
 ];
-const expectedAnchors = ["top", "learning", "horizon"];
-const expectedAssetVersion = "20260907-learning-system-v3";
+const expectedAnchors = ["top", "learning"];
+const expectedAssetVersion = "20260907-learning-journey-v1";
 const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
@@ -406,6 +406,12 @@ function validateLearningSystem(locale, html) {
       && learningEdges.filter((edge) => edge.endsWith("-to-swi")).length === 1,
     `${locale}: WFM and SWI must each receive exactly one arrow`,
   );
+}
+
+function validateLearningPath(locale, html) {
+  const isTurkish = locale === "tr";
+  const section = html.match(/<section class="learning-system"[\s\S]*?<\/section>/)?.[0] ?? "";
+  check(section.length > 0, `${locale}: Journey learning path is missing`);
   const codes = matches(section, /<code class="learning-code">([a-z]{3})<\/code>/g);
   check(JSON.stringify(codes) === JSON.stringify(expectedLearningCodes), `${locale}: learning system node codes or order differ`);
   const deploymentCards = section.match(/<ul class="learning-deployment-paths"[\s\S]*?<\/ul>/)?.[0] ?? "";
@@ -472,17 +478,17 @@ function validateLearningHorizon(locale, html) {
 
 const expectedPrimaryNavigation = {
   en: [
-    ["Journey", "/about/#journey"],
+    ["Journey", "/journey/"],
     ["Now", "/now/"],
-    ["Horizon", "/#horizon"],
+    ["Horizon", "/journey/#horizon"],
     ["Applications", "/applications/"],
     ["Knowledge", "/memory/"],
     ["About", "/about/"],
   ],
   tr: [
-    ["Yolculuk", "/tr/about/#journey"],
+    ["Yolculuk", "/tr/journey/"],
     ["Şimdi", "/tr/now/"],
-    ["Ufuk", "/tr/#horizon"],
+    ["Ufuk", "/tr/journey/#horizon"],
     ["Uygulamalar", "/tr/applications/"],
     ["Bilgi", "/tr/memory/"],
     ["Hakkımda", "/tr/about/"],
@@ -507,7 +513,7 @@ function validatePrimaryNavigation(locale, page, html) {
   const currentLinks = Array.from(nav.matchAll(/<a class="nav-links__primary-link"[^>]*aria-current="page"[^>]*>([^<]+)<\/a>/g), (match) => match[1]);
   const expectedCurrent = page === "memory"
     ? [locale === "tr" ? "Bilgi" : "Knowledge"]
-    : ["now", "archive"].includes(page) ? [locale === "tr" ? "Şimdi" : "Now"] : page === "about" ? [locale === "tr" ? "Hakkımda" : "About"] : page === "applications" ? [locale === "tr" ? "Uygulamalar" : "Applications"] : [];
+    : ["now", "archive"].includes(page) ? [locale === "tr" ? "Şimdi" : "Now"] : page === "journey" ? [locale === "tr" ? "Yolculuk" : "Journey"] : page === "about" ? [locale === "tr" ? "Hakkımda" : "About"] : page === "applications" ? [locale === "tr" ? "Uygulamalar" : "Applications"] : [];
   check(JSON.stringify(currentLinks) === JSON.stringify(expectedCurrent), `${locale}/${page}: routed primary current state differs`);
   const learningLabel = locale === "tr" ? "Öğrenme" : "Learning";
   const localeRoot = locale === "tr" ? "/tr/" : "/";
@@ -545,9 +551,9 @@ function validateLivingSystem(locale, html) {
     (match) => ({ href: match[1], eyebrow: match[2], heading: match[3], description: match[4] }),
   );
   const expected = locale === "tr" ? [
-    ["Geçmiş", "/tr/about/#journey"], ["Şimdi", "/tr/now/"], ["Gelecek", "/tr/#horizon"], ["Bilgi", "/tr/memory/"], ["Uygulamalar", "/tr/applications/"],
+    ["Geçmiş", "/tr/about/#journey"], ["Şimdi", "/tr/now/"], ["Gelecek", "/tr/journey/#horizon"], ["Bilgi", "/tr/memory/"], ["Uygulamalar", "/tr/applications/"],
   ] : [
-    ["Past", "/about/#journey"], ["Now", "/now/"], ["Future", "/#horizon"], ["Knowledge", "/memory/"], ["Applications", "/applications/"],
+    ["Past", "/about/#journey"], ["Now", "/now/"], ["Future", "/journey/#horizon"], ["Knowledge", "/memory/"], ["Applications", "/applications/"],
   ];
   check(JSON.stringify(cards.map((card) => [card.heading, card.href])) === JSON.stringify(expected), `${locale}: living-system order or destinations differ`);
   check(cards.length === 5 && cards.every((card) => card.eyebrow.length > 0 && card.description.length > 0), `${locale}: living-system cards require localized eyebrows and descriptions`);
@@ -805,6 +811,7 @@ const routePages = {
     now: await readRoute("now/index.html"),
     memory: await readRoute("memory/index.html"),
     about: await readRoute("about/index.html"),
+    journey: await readRoute("journey/index.html"),
     applications: await readRoute("applications/index.html"),
   },
   tr: {
@@ -812,6 +819,7 @@ const routePages = {
     now: await readRoute("tr/now/index.html"),
     memory: await readRoute("tr/memory/index.html"),
     about: await readRoute("tr/about/index.html"),
+    journey: await readRoute("tr/journey/index.html"),
     applications: await readRoute("tr/applications/index.html"),
   },
 };
@@ -942,7 +950,8 @@ for (const [locale, html] of Object.entries(pages)) {
   check(applications.includes('aria-describedby="app-map-description"'), `${locale}: application map description relationship is missing`);
   validateApplicationMapRows(locale, applications);
   validateLearningSystem(locale, html);
-  validateLearningHorizon(locale, html);
+  validateLearningPath(locale, routePages[locale].journey);
+  validateLearningHorizon(locale, routePages[locale].journey);
   validateLivingSystem(locale, about);
   validateSystemFocus(locale, html);
 

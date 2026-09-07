@@ -26,7 +26,7 @@ const routes = [
   { route: "/tr/now/", file: "tr/now/index.html", locale: "tr" },
   { route: "/memory/", file: "memory/index.html", locale: "en" },
   { route: "/tr/memory/", file: "tr/memory/index.html", locale: "tr" },
-  ...["about", "applications"].flatMap((page) => [
+  ...["about", "applications", "journey"].flatMap((page) => [
     { route: `/${page}/`, file: `${page}/index.html`, locale: "en" },
     { route: `/tr/${page}/`, file: `tr/${page}/index.html`, locale: "tr" },
   ]),
@@ -35,19 +35,21 @@ const routes = [
 
 test("the accessibility route set includes every deployable public index document", async () => {
   const discoveredPaths = (await discoverPublicIndexDocuments(rootDir)).map(({ relativePath }) => relativePath);
-  assert.equal(discoveredPaths.length, 12, "fixture must contain all twelve public pages");
+  assert.equal(discoveredPaths.length, 14, "fixture must contain all fourteen public pages");
   assert.deepEqual(
     discoveredPaths,
     [
       "about/index.html",
       "applications/index.html",
       "index.html",
+      "journey/index.html",
       "memory/index.html",
       "now/archive/2026-W34/index.html",
       "now/index.html",
       "tr/about/index.html",
       "tr/applications/index.html",
       "tr/index.html",
+      "tr/journey/index.html",
       "tr/memory/index.html",
       "tr/now/archive/2026-W34/index.html",
       "tr/now/index.html",
@@ -421,8 +423,8 @@ for (const document of routes) {
 }
 
 for (const document of routes.filter(({ route }) => route === "/" || route === "/tr/")) {
-  test(`${document.route} presents parallel world-model and collective-intelligence bridges into the twin lab`, async () => {
-    const html = await readFile(path.join(rootDir, document.file), "utf8");
+  test(`${document.route}journey/ presents parallel world-model and collective-intelligence bridges into the twin lab`, async () => {
+    const html = await readFile(path.join(rootDir, document.file.replace("index.html", "journey/index.html")), "utf8");
     const horizon = scopedElements(html, "aside").find((scope) => /class="learning-horizon"/.test(scope));
     const expectedBridgeCopy = document.locale === "tr"
       ? "algı, tahmin, planlama ve eylem"
@@ -447,8 +449,8 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     );
   });
 
-  test(`${document.route} exposes local and cloud deployment as two detailed learning cards`, async () => {
-    const html = await readFile(path.join(rootDir, document.file), "utf8");
+  test(`${document.route}journey/ exposes local and cloud deployment as two detailed learning cards`, async () => {
+    const html = await readFile(path.join(rootDir, document.file.replace("index.html", "journey/index.html")), "utf8");
     const learning = scopedElements(html, "section").find((scope) => /class="learning-system"/.test(scope));
     const deploymentPaths = scopedElements(learning ?? "", "ul").find((scope) => /class="learning-deployment-paths"/.test(scope));
     const expectedQuestion = document.locale === "tr"
@@ -475,8 +477,8 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     );
   });
 
-  test(`${document.route} places the HNS harness card between model serving and deployment`, async () => {
-    const html = await readFile(path.join(rootDir, document.file), "utf8");
+  test(`${document.route}journey/ places the HNS harness card between model serving and deployment`, async () => {
+    const html = await readFile(path.join(rootDir, document.file.replace("index.html", "journey/index.html")), "utf8");
     const learning = scopedElements(html, "section").find((scope) => /class="learning-system"/.test(scope));
     const harnessCard = scopedElements(learning ?? "", "article").find((scope) => (
       /<code class="learning-code">hns<\/code>/.test(scope)
@@ -497,8 +499,8 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     );
   });
 
-  test(`${document.route} places SEC inside the context and assurance quality row, after HNS`, async () => {
-    const html = await readFile(path.join(rootDir, document.file), "utf8");
+  test(`${document.route}journey/ places SEC inside the context and assurance quality row, after HNS`, async () => {
+    const html = await readFile(path.join(rootDir, document.file.replace("index.html", "journey/index.html")), "utf8");
     const learning = scopedElements(html, "section").find((scope) => /class="learning-system"/.test(scope));
     const qualityRow = scopedElements(learning ?? "", "ul").find((scope) => /\bclass="[^"]*\blearning-tracks-quality\b/.test(scope));
     const securityCard = scopedElements(qualityRow ?? "", "li").find((scope) => (
@@ -646,8 +648,8 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     }
   });
 
-  test(`${document.route} provides all ten mobile learning targets without exposing the undersized SVG set`, async () => {
-    const html = await readFile(path.join(rootDir, document.file), "utf8");
+  test(`${document.route}journey/ provides all ten mobile learning targets without exposing the undersized SVG set`, async () => {
+    const html = await readFile(path.join(rootDir, document.file.replace("index.html", "journey/index.html")), "utf8");
     const studyList = scopedElements(html, "ol").find((scope) => /class="learning-study-list"/.test(scope));
     const expectedText = document.locale === "tr" ? "yeni sekmede açılır" : "opens in a new tab";
     const expectedDestinations = ["aia", "gpu", "llm", "usl", "hns", "ctx", "sec", "evl", "lcl", "cld"].map((code) => `https://${code}.aserdargun.com/`);

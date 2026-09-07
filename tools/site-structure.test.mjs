@@ -8,13 +8,17 @@ const read = (file) => readFile(new URL(`../${file}`, import.meta.url), "utf8");
 for (const locale of ["en", "tr"]) {
   const root = locale === "tr" ? "tr/" : "";
   test(`${locale}: the homepage, About, and Application Map have distinct responsibilities`, async () => {
-    const [home, about, applications, data] = await Promise.all([
+    const [home, about, applications, data, journey] = await Promise.all([
       read(`${root}index.html`), read(`${root}about/index.html`),
-      read(`${root}applications/index.html`), read("data/living-system.json").then(JSON.parse),
+      read(`${root}applications/index.html`), read("data/living-system.json").then(JSON.parse), read(`${root}journey/index.html`),
     ]);
     assert.match(home, /<main[^>]*>\s*<!-- GENERATED:system-focus:start -->\s*<section class="system-focus"/);
     assert.match(home, /<h1[^>]*>[^<]+<\/h1>/);
     assert.doesNotMatch(home, /class="(?:journey-shell|app-map|section section-about)"/);
+    assert.doesNotMatch(home, /class="(?:learning-study|learning-flow|learning-horizon)"/);
+    assert.equal((journey.match(/class="learning-stage-label"/g) ?? []).length, 6);
+    assert.ok(journey.includes('id="horizon"'));
+    assert.ok(home.includes(`href="/${root}journey/"`));
     assert.equal((about.match(/data-timeline-step /g) ?? []).length, 8);
     for (const id of ["journey", "about", "approach"]) assert.ok(about.includes(`id="${id}"`));
     assert.doesNotMatch(about, /class="(?:learning-system|app-map)"/);
@@ -27,7 +31,7 @@ for (const locale of ["en", "tr"]) {
   });
 
   test(`${locale}: routed metadata and agent discovery identify the author and correct language pair`, async () => {
-    for (const page of ["about", "applications"]) {
+    for (const page of ["about", "applications", "journey"]) {
       const html = await read(`${root}${page}/index.html`);
       const url = `https://aserdargun.com/${root}${page}/`;
       assert.ok(html.includes(`<link rel="canonical" href="${url}">`));
@@ -37,7 +41,7 @@ for (const locale of ["en", "tr"]) {
       }
       const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
       assert.equal(schema.url, url);
-      assert.equal(schema["@type"], page === "about" ? "Person" : "CollectionPage");
+      assert.equal(schema["@type"], page === "about" ? "Person" : page === "journey" ? "WebPage" : "CollectionPage");
       assert.ok(html.includes('href="/llms.txt"'));
     }
     const home = await read(`${root}index.html`);
@@ -58,7 +62,7 @@ test("legacy homepage fragments retain deep links without redirecting new routes
       };
       vm.runInNewContext(source, context);
       assert.deepEqual(redirects, hash === "#apps" ? [`${root}applications/`]
-        : ["#learning", "#horizon"].includes(hash) ? [] : [`${root}about/${hash}`]);
+        : hash === "#horizon" ? [`${root}journey/#horizon`] : hash === "#learning" ? [] : [`${root}about/${hash}`]);
       context.window.location.pathname = `${root}about/`;
       redirects.length = 0;
       vm.runInNewContext(source, { ...context });

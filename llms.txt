@@ -5,12 +5,13 @@
 ## Start here
 - [System overview](https://aserdargun.com/): Five layers and their learning relationships.
 - [About Serdar](https://aserdargun.com/about/): Professional identity, career journey, working principles, and public contact links.
+- [Journey](https://aserdargun.com/journey/): Learning path, six detailed stages, and the physical AI horizon with colony laboratories.
 - [Application Map](https://aserdargun.com/applications/): Search projects by topic and layer; inspect release and research evidence.
 - [Now](https://aserdargun.com/now/): Dated work and planned direction. Read its date before describing an item as current.
 - [Knowledge](https://aserdargun.com/memory/): Authored public research notes and decisions with sources.
 - [Portfolio registry](https://aserdargun.com/portfolio.json): Structured public application identities and relationships.
 - [Application schema](https://aserdargun.com/schemas/aserdargun-app.schema.json): Public manifest contract.
-- [Türkçe](https://aserdargun.com/tr/): Turkish overview; /tr/about/, /tr/applications/, /tr/now/, and /tr/memory/ provide matching editions.
+- [Türkçe](https://aserdargun.com/tr/): Turkish overview; /tr/about/, /tr/journey/, /tr/applications/, /tr/now/, and /tr/memory/ provide matching editions.
 
 ## Reading the evidence
 Research cutoffs, verification dates, release dates, and release SHAs describe different events. A missing value means unknown. Planned directions are not completed products. Diagram relationships describe how topics inform each other; they do not establish runtime integration. Private systems are linked as separate applications; their private records are not part of this public source.

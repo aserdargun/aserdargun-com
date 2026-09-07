@@ -29,6 +29,7 @@ const GENERATED_BLOCKS = new Set([
 
 const REQUIRED_PAGE_BLOCKS = {
   home: ["system-focus"],
+  journey: [],
   about: ["journey-evidence"],
   applications: ["application-map"],
   now: ["now-content"],
@@ -36,6 +37,8 @@ const REQUIRED_PAGE_BLOCKS = {
 };
 
 const SITE_DOCUMENTS = [
+  { relativePath: "journey/index.html", page: "journey", locale: "en" },
+  { relativePath: "tr/journey/index.html", page: "journey", locale: "tr" },
   { relativePath: "index.html", page: "home", locale: "en" },
   { relativePath: "tr/index.html", page: "home", locale: "tr" },
   { relativePath: "about/index.html", page: "about", locale: "en" },
@@ -168,14 +171,14 @@ export function renderPrimaryNavigation({ locale, page }) {
   const root = locale === "tr" ? "/tr/" : "/";
   const routeFor = (suffix) => `${root}${suffix}`;
   const concepts = [
-    { key: "journey", label: label(locale, "Journey", "Yolculuk"), href: `${root}about/#journey` },
+    { key: "journey", label: label(locale, "Journey", "Yolculuk"), href: `${root}journey/` },
     { key: "now", label: label(locale, "Now", "Şimdi"), href: routeFor("now/") },
-    { key: "horizon", label: label(locale, "Horizon", "Ufuk"), href: `${root}#horizon` },
+    { key: "horizon", label: label(locale, "Horizon", "Ufuk"), href: `${root}journey/#horizon` },
     { key: "applications", label: label(locale, "Applications", "Uygulamalar"), href: `${root}applications/` },
     { key: "memory", label: label(locale, "Knowledge", "Bilgi"), href: routeFor("memory/") },
     { key: "about", label: label(locale, "About", "Hakkımda"), href: `${root}about/` },
   ];
-  const currentKey = ["about", "applications"].includes(page) ? page : page === "memory" ? "memory" : ["now", "archive"].includes(page) ? "now" : null;
+  const currentKey = ["about", "applications", "journey"].includes(page) ? page : page === "memory" ? "memory" : ["now", "archive"].includes(page) ? "now" : null;
   const primaryLinks = concepts.map((concept) => {
     const current = concept.key === currentKey ? ' aria-current="page"' : "";
     return `    <a class="nav-links__primary-link" href="${concept.href}"${current}>${concept.label}</a>`;
@@ -305,13 +308,13 @@ export function renderLivingSystem({ locale }) {
   const cards = locale === "tr" ? [
     { href: `${root}about/#journey`, eyebrow: "Yolculuk", heading: "Geçmiş", description: "Bugün geliştirdiğim sistemlerin arkasındaki mühendislik deneyimini keşfet." },
     { href: `${root}now/`, eyebrow: "Aktif", heading: "Şimdi", description: "Dikkatimin ve çalışmalarımın şimdi nereye yöneldiğini gösteren tarihli bir görünüm." },
-    { href: `${root}#horizon`, eyebrow: "Ufuk", heading: "Gelecek", description: "Uzun vadeli yön, fiziksel dünyada açık insansı robot mühendisliğidir." },
+    { href: `${root}journey/#horizon`, eyebrow: "Ufuk", heading: "Gelecek", description: "Uzun vadeli yön, fiziksel dünyada açık insansı robot mühendisliğidir." },
     { href: `${root}memory/`, eyebrow: "Yayınlanan", heading: "Bilgi", description: "Yayınladığım kararları, araştırma notlarını ve dayandıkları kaynakları incele." },
     { href: `${root}applications/`, eyebrow: "Çalışan çıktılar", heading: "Uygulamalar", description: "Birikmiş bilgi; odaklı uygulamalara, laboratuvarlara ve uzun vadeli çalışmalara dönüşür." },
   ] : [
     { href: `${root}about/#journey`, eyebrow: "Journey", heading: "Past", description: "Explore the engineering experience behind the systems I build." },
     { href: `${root}now/`, eyebrow: "Active", heading: "Now", description: "A dated view of where my attention and work are going now." },
-    { href: `${root}#horizon`, eyebrow: "Horizon", heading: "Future", description: "The long-term direction is open humanoid engineering in the physical world." },
+    { href: `${root}journey/#horizon`, eyebrow: "Horizon", heading: "Future", description: "The long-term direction is open humanoid engineering in the physical world." },
     { href: `${root}memory/`, eyebrow: "Published", heading: "Knowledge", description: "Explore published decisions, research notes, and the sources behind them." },
     { href: `${root}applications/`, eyebrow: "Working outputs", heading: "Applications", description: "Accumulated knowledge becomes focused applications, labs, and long-term work." },
   ];
@@ -1414,9 +1417,9 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
       current: archiveAttribute(node, "aria-current"),
     }));
   const expectedPrimaryLinks = [
-    { href: `${root}about/#journey`, text: label(locale, "Journey", "Yolculuk"), current: null },
+    { href: `${root}journey/`, text: label(locale, "Journey", "Yolculuk"), current: null },
     { href: currentPath, text: label(locale, "Now", "Şimdi"), current: "page" },
-    { href: `${root}#horizon`, text: label(locale, "Horizon", "Ufuk"), current: null },
+    { href: `${root}journey/#horizon`, text: label(locale, "Horizon", "Ufuk"), current: null },
     { href: `${root}applications/`, text: label(locale, "Applications", "Uygulamalar"), current: null },
     { href: `${root}memory/`, text: label(locale, "Knowledge", "Bilgi"), current: null },
     { href: `${root}about/`, text: label(locale, "About", "Hakkımda"), current: null },

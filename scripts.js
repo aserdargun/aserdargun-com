@@ -5,6 +5,8 @@ function redirectLegacyHomeFragment() {
   const localeRoot = window.location.pathname.startsWith("/tr/") ? "/tr/" : "/";
   if (/^#(?:journey(?:-stage-\d{2})?|about|approach)$/.test(legacyHash)) {
     window.location.replace(`${localeRoot}about/${legacyHash}`);
+  } else if (legacyHash === "#horizon") {
+    window.location.replace(`${localeRoot}journey/#horizon`);
   } else if (legacyHash === "#apps") {
     window.location.replace(`${localeRoot}applications/`);
   }
