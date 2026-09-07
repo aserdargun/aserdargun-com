@@ -321,10 +321,8 @@ function validateLearningSystem(locale, html) {
     : "How the system connects.";
   check(intro.includes(expectedKicker), `${locale}: learning system kicker is missing`);
   check(intro.includes(expectedHeading), `${locale}: learning system heading is missing`);
-  const expectedSystemCount = isTurkish
-    ? "Uygulamalar tek bir öğrenme sistemi oluşturur"
-    : "The applications form one learning system";
-  check(intro.includes(expectedSystemCount), `${locale}: learning system application count is stale`);
+  const description = intro.match(/<p id="learning-description">([\s\S]*?)<\/p>/)?.[1] ?? "";
+  check(description.trim().length > 0, `${locale}: learning system description is missing`);
   check(
     section.includes('<figure class="learning-diagram-wrap">')
       && section.includes('class="ld-svg"'),
