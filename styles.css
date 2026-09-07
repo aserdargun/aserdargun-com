@@ -4670,4 +4670,19 @@ body.learning-loop-open {
 
 @media (min-width: 1181px) {
   .site-header-page { padding-inline: max(40px, calc((100% - var(--content)) / 2 + 40px)); }
+  .site-header {
+    grid-template-columns: minmax(190px, 280px) auto minmax(210px, 280px);
+  }
+  .system-focus {
+    padding-inline: clamp(24px, 7vw, 104px);
+    max-width: 1440px;
+    margin-inline: auto;
+  }
+  .system-focus__grid {
+    max-width: 1280px;
+    margin-inline: auto;
+  }
+  .system-focus__intro {
+    max-width: 760px;
+  }
 }
