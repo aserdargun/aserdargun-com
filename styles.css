@@ -4664,6 +4664,7 @@ body.learning-loop-open {
 .footer-links { flex-wrap: wrap; }
 
 /* Dedicated learning journey uses the same readable column as the overview. */
+.journey-page #horizon { scroll-margin-top: 100px; }
 .journey-page { background: var(--ink); color: var(--white); }
 .journey-page .learning-intro h1 { font-size: clamp(2.6rem, 5vw, 4.8rem); line-height: 1.06; margin-block: 16px 24px; }
 
