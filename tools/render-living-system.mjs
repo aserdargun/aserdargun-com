@@ -476,13 +476,15 @@ export function renderSystemFocus({ locale, data }) {
 
   return [
     `    <section class="system-focus" id="top" aria-labelledby="system-focus-title-${locale}">`,
-    '      <div class="system-focus__intro">',
-    `        <p class="system-focus__kicker">${label(locale, "AI Learning System", "AI Learning System")}</p>`,
-    `        <h1 id="system-focus-title-${locale}">${label(locale, "Learn AI. Put it to work.", "Yapay zekâyı öğren. Uygulamaya geçir.")}</h1>`,
-    `        <p>${label(locale, "Explore how AI systems work through research, applications, and hands-on experiments. Follow five connected layers from compute and models to agents, deployment, and physical AI. Connect ideas, test what you learn, and use it to build your next project.", "Araştırmalar, uygulamalar ve deneylerle yapay zekâ sistemlerinin nasıl çalıştığını keşfet. Hesaplama altyapısı ve modellerden ajanlara, dağıtıma ve fiziksel yapay zekâya uzanan beş katmanda ilerle. Fikirler arasında bağ kur, öğrendiklerini test et ve yeni projelere taşı.")}</p>`,
-    "      </div>",
-    '      <div class="system-focus__grid">',
+    '      <div class="system-focus-inner">',
+    '        <div class="system-focus__intro">',
+    `          <p class="system-focus__kicker">${label(locale, "AI Learning System", "AI Learning System")}</p>`,
+    `          <h1 id="system-focus-title-${locale}">${label(locale, "Learn AI. Put it to work.", "Yapay zekâyı öğren. Uygulamaya geçir.")}</h1>`,
+    `          <p>${label(locale, "Explore how AI systems work through research, applications, and hands-on experiments. Follow five connected layers from compute and models to agents, deployment, and physical AI. Connect ideas, test what you learn, and use it to build your next project.", "Araştırmalar, uygulamalar ve deneylerle yapay zekâ sistemlerinin nasıl çalıştığını keşfet. Hesaplama altyapısı ve modellerden ajanlara, dağıtıma ve fiziksel yapay zekâya uzanan beş katmanda ilerle. Fikirler arasında bağ kur, öğrendiklerini test et ve yeni projelere taşı.")}</p>`,
+    "        </div>",
+    '        <div class="system-focus__grid">',
     ...cards,
+    "        </div>",
     "      </div>",
     "    </section>",
   ].join("\n");

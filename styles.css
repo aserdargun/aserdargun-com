@@ -2878,11 +2878,16 @@ footer a {
 
 .system-focus {
   border-top: 1px solid var(--line-dark);
-  padding: clamp(72px, 9vw, 116px) clamp(24px, 7vw, 104px);
   background:
     radial-gradient(circle at 86% 4%, rgba(200, 255, 54, 0.07), transparent 38%),
     var(--ink);
   color: var(--white);
+}
+
+.system-focus-inner {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: clamp(72px, 9vw, 116px) clamp(24px, 7vw, 104px);
 }
 
 .system-focus__intro {
@@ -3344,7 +3349,7 @@ footer a {
 }
 
 @media (max-width: 560px) {
-  .system-focus {
+  .system-focus-inner {
     padding-inline: 20px;
   }
 
@@ -4184,7 +4189,7 @@ body:has(main.memory-page) {
 .memory-card__sources li { align-items: start; }
 .memory-card__sources a { min-height: 44px; }
 
-.system-focus {
+.system-focus-inner {
   padding-block: 64px;
   padding-inline: max(20px, calc((100% - 1200px) / 2));
 }
@@ -4217,7 +4222,7 @@ body:has(main.memory-page) {
   .site-header-page { position: sticky; }
   .now-hero,
   .memory-hero { padding-top: 56px; padding-bottom: 40px; }
-  .system-focus { padding-block: 52px; }
+  .system-focus-inner { padding-block: 52px; }
   .system-focus-card > p:not(.system-focus-card__index) { min-height: 0; }
   .learning-system-inner { padding-top: 52px; }
   .app-map-band { padding: 64px 20px; }
@@ -4369,12 +4374,12 @@ body:has(main.memory-page) {
 }
 
 /* AI Learning System: the existing five-layer overview is the homepage opening. */
-.system-home .system-focus { padding-top: 112px; }
+.system-home .system-focus-inner { padding-top: 112px; }
 .system-actions { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 18px; }
 .system-actions a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--lime); font-size: .9rem; }
 .applications-page .app-map-band { min-height: 70vh; }
 @media (max-width: 900px) {
-  .system-home .system-focus { padding-top: 52px; }
+  .system-home .system-focus-inner { padding-top: 52px; }
   .system-actions { gap: 6px 22px; }
 }
 
@@ -4390,11 +4395,6 @@ body:has(main.memory-page) {
   .site-header-page { padding-inline: max(40px, calc((100% - var(--content)) / 2 + 40px)); }
   .site-header {
     grid-template-columns: minmax(190px, 280px) auto minmax(210px, 280px);
-  }
-  .system-focus {
-    padding-inline: clamp(24px, 7vw, 104px);
-    max-width: 1440px;
-    margin-inline: auto;
   }
   .system-focus__grid {
     max-width: 1280px;
