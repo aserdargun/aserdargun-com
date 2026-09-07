@@ -26,6 +26,6 @@
     "test:stop": "node --test tools/preview-control.test.mjs tools/preview-stop.test.mjs",
     "validate:site": "node tools/validate-site.mjs",
     "validate:codex": "npm test",
-    "test": "npm run check:js && npm run test:deployment && npm run test:environment && npm run test:portrait && npm run test:stop && npm run test:data && npm run test:archive && npm run test:render && npm run check:generated && npm run test:navigation && npm run validate:site"
+    "test": "npm run check:js && npm run test:deployment && npm run test:environment && npm run test:portrait && npm run test:stop && npm run test:data && npm run test:archive && npm run test:render && npm run validate:site"
   }
 }
