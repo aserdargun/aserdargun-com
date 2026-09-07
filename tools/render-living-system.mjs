@@ -173,7 +173,6 @@ export function renderPrimaryNavigation({ locale, page }) {
   const concepts = [
     { key: "journey", label: label(locale, "Journey", "Yolculuk"), href: `${root}journey/` },
     { key: "now", label: label(locale, "Now", "Şimdi"), href: routeFor("now/") },
-    { key: "horizon", label: label(locale, "Horizon", "Ufuk"), href: `${root}journey/#horizon` },
     { key: "applications", label: label(locale, "Applications", "Uygulamalar"), href: `${root}applications/` },
     { key: "memory", label: label(locale, "Knowledge", "Bilgi"), href: routeFor("memory/") },
     { key: "about", label: label(locale, "About", "Hakkımda"), href: `${root}about/` },
@@ -190,7 +189,6 @@ export function renderPrimaryNavigation({ locale, page }) {
     '  <div class="nav-links__primary">',
     ...primaryLinks,
     "  </div>",
-    `  <a class="nav-links__secondary-link" href="${root}#learning">${label(locale, "Learning", "Öğrenme")}</a>`,
     `  <div class="nav-links__group" data-nav-group="horizon" role="group" aria-labelledby="nav-horizon-label-${locale}">`,
     `    <span class="nav-links__section" id="nav-horizon-label-${locale}">${label(locale, "The horizon", "Ufuk")}</span>`,
     externalLink("wfm"),
@@ -1418,7 +1416,6 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
   const expectedPrimaryLinks = [
     { href: `${root}journey/`, text: label(locale, "Journey", "Yolculuk"), current: null },
     { href: currentPath, text: label(locale, "Now", "Şimdi"), current: "page" },
-    { href: `${root}journey/#horizon`, text: label(locale, "Horizon", "Ufuk"), current: null },
     { href: `${root}applications/`, text: label(locale, "Applications", "Uygulamalar"), current: null },
     { href: `${root}memory/`, text: label(locale, "Knowledge", "Bilgi"), current: null },
     { href: `${root}about/`, text: label(locale, "About", "Hakkımda"), current: null },
@@ -1433,12 +1430,10 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
   const secondaryLinks = archiveElementsByTag(primaryNavigation[0], "a")
     .filter((node) => archiveHasClass(node, "nav-links__secondary-link"));
   assertArchiveNavigation(
-    secondaryLinks.length === 1
-      && archiveAttribute(secondaryLinks[0], "href") === `${root}#learning`
-      && archiveDirectText(secondaryLinks[0]) === label(locale, "Learning", "Öğrenme"),
+    secondaryLinks.length === 0,
     week,
     locale,
-    "secondary Learning link differs",
+    "removed secondary Learning link remains",
   );
 
   const groupElements = primaryNavigation[0].children

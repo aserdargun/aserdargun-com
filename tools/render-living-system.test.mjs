@@ -189,14 +189,13 @@ function livingSystemCards(html) {
   );
 }
 
-test("renders the exact six localized primary concepts and page-aware destinations", () => {
+test("renders the exact five localized primary concepts and page-aware destinations", () => {
   const english = renderPrimaryNavigation({ locale: "en", page: "home" });
   const turkish = renderPrimaryNavigation({ locale: "tr", page: "home" });
 
   assert.deepEqual(primaryLinks(english), [
     { href: "/journey/", label: "Journey", current: false },
     { href: "/now/", label: "Now", current: false },
-    { href: "/journey/#horizon", label: "Horizon", current: false },
     { href: "/applications/", label: "Applications", current: false },
     { href: "/memory/", label: "Knowledge", current: false },
     { href: "/about/", label: "About", current: false },
@@ -204,14 +203,13 @@ test("renders the exact six localized primary concepts and page-aware destinatio
   assert.deepEqual(primaryLinks(turkish), [
     { href: "/tr/journey/", label: "Yolculuk", current: false },
     { href: "/tr/now/", label: "Şimdi", current: false },
-    { href: "/tr/journey/#horizon", label: "Ufuk", current: false },
     { href: "/tr/applications/", label: "Uygulamalar", current: false },
     { href: "/tr/memory/", label: "Bilgi", current: false },
     { href: "/tr/about/", label: "Hakkımda", current: false },
   ]);
 });
 
-test("marks only routed primary concepts current and keeps Learning secondary", () => {
+test("marks only routed primary concepts current and omits Learning", () => {
   const now = renderPrimaryNavigation({ locale: "en", page: "now" });
   const memory = renderPrimaryNavigation({ locale: "tr", page: "memory" });
   const archive = renderPrimaryNavigation({ locale: "en", page: "archive" });
@@ -225,7 +223,7 @@ test("marks only routed primary concepts current and keeps Learning secondary", 
   assert.deepEqual(primaryLinks(archive).filter((link) => link.current), [
     { href: "/now/", label: "Now", current: true },
   ]);
-  assert.match(now, /<a class="nav-links__secondary-link" href="\/#learning">Learning<\/a>/);
+  assert.doesNotMatch(now, /class="nav-links__secondary-link"/);
   assert.equal(primaryLinks(now).some((link) => link.label === "Learning"), false);
 });
 

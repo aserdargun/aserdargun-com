@@ -478,7 +478,6 @@ const expectedPrimaryNavigation = {
   en: [
     ["Journey", "/journey/"],
     ["Now", "/now/"],
-    ["Horizon", "/journey/#horizon"],
     ["Applications", "/applications/"],
     ["Knowledge", "/memory/"],
     ["About", "/about/"],
@@ -486,7 +485,6 @@ const expectedPrimaryNavigation = {
   tr: [
     ["Yolculuk", "/tr/journey/"],
     ["Şimdi", "/tr/now/"],
-    ["Ufuk", "/tr/journey/#horizon"],
     ["Uygulamalar", "/tr/applications/"],
     ["Bilgi", "/tr/memory/"],
     ["Hakkımda", "/tr/about/"],
@@ -515,8 +513,8 @@ function validatePrimaryNavigation(locale, page, html) {
   check(JSON.stringify(currentLinks) === JSON.stringify(expectedCurrent), `${locale}/${page}: routed primary current state differs`);
   const learningLabel = locale === "tr" ? "Öğrenme" : "Learning";
   const localeRoot = locale === "tr" ? "/tr/" : "/";
-  check(nav.includes(`<a class="nav-links__secondary-link" href="${localeRoot}#learning">${learningLabel}</a>`), `${locale}/${page}: secondary Learning link is missing`);
-  check(!primaryLinks.some(([concept]) => concept === learningLabel), `${locale}/${page}: Learning must not be a seventh primary concept`);
+  check(!nav.includes('class="nav-links__secondary-link"'), `${locale}/${page}: removed Learning link remains`);
+  check(!primaryLinks.some(([concept]) => concept === learningLabel), `${locale}/${page}: Learning must not remain a primary concept`);
   check(!primaryLinks.some(([concept]) => ["Approach", "Yaklaşım"].includes(concept)), `${locale}/${page}: Approach remains in top-level navigation`);
 
   const groupExpectations = [
