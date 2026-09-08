@@ -12,7 +12,8 @@ Hangi agent hangi dizinde okur/yazar, hangi dış kaynağa erişir. Capability i
 | `brand-guardian` | **write** | **write** (izinli scope) | — | commit + push (sıralı, 16 proje dahil) |
 | `repo-auditor` | read | read | read | — |
 | `memory-curator` | read | read | **read + edit (sadece `*/memory/`)** | — |
-| `<code>-worker` | read | **write** (sadece kendi scope) | — | commit + push (sadece kendi `<code>-aserdargun-com` main) |
+| `<code>-worker` (public) | read | **write** (sadece kendi scope) | — | commit + push (sadece kendi `<code>-aserdargun-com` main) |
+| `nxt-worker` / `stk-worker` / `inf-worker` (PRIVATE) | **read only** | **read only** (public + private) | — | commit + push (sadece kendi private subdomain main) |
 
 ## Okuma izinleri
 
