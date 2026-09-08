@@ -105,7 +105,6 @@ const expectedApplicationRows = [
 }));
 const retiredProjectUrls = [
   "/projects/stage-1-frontend-foundations/",
-  "https://stackfolio.aserdargun.com/",
   "https://unsloth.aserdargun.com/",
   "https://swapp.org.tr",
   "https://github.com/aserdargun/pipolars",
