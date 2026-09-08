@@ -625,37 +625,6 @@
       "portfolioLayer": "foundation",
       "focusState": "foundation",
       "relatedMemoryIds": []
-    },
-    {
-      "code": "nxt",
-      "kind": "private-system",
-      "systemRole": "lab",
-      "visibility": "owner-only",
-      "status": "live",
-      "statusLabel": { "en": "Live (private)", "tr": "Yayında (özel)" },
-      "languages": ["en"],
-      "title": { "en": "NXT", "tr": "NXT" },
-      "summary": {
-        "en": "Private Obsidian-like note workspace with local-first architecture.",
-        "tr": "Yerel öncelikli mimariyle çalışan özel Obsidian benzeri not çalışma alanı."
-      },
-      "repository": "https://github.com/aserdargun/nxt-aserdargun-com",
-      "address": "https://nxt.aserdargun.com/",
-      "updatedAt": "2026-09-06",
-      "researchCutoff": "2026-09-06",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-06",
-      "releaseSha": "038144c5590b17cf1dd7d9b4da6cd4f45e612828",
-      "sourceCount": null,
-      "claimCount": null,
-      "evidencePolicy": "primary-source-backed",
-      "upstreamApps": [],
-      "downstreamApps": [],
-      "tracks": ["private-notes", "local-first"],
-      "entityIds": ["entity:nxt-workspace"],
-      "portfolioLayer": "deployment",
-      "focusState": "active",
-      "relatedMemoryIds": []
     }
   ],
   "now": {

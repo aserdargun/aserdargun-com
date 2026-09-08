@@ -25,9 +25,7 @@ test("the public application contract keeps verification, research, and release 
     assert.equal(application.lastVerified, "2026-09-04", `${application.code} verification date`);
     assert.match(application.lastReleased, /^2026-\d{2}-\d{2}$/, `${application.code} release date`);
     assert.match(application.releaseSha, /^[a-f0-9]{40}$/, `${application.code} release SHA`);
-    if (application.visibility === "public") {
-      assert.deepEqual(application.languages, ["tr", "en"], `${application.code} language contract`);
-    }
+    assert.deepEqual(application.languages, ["tr", "en"], `${application.code} language contract`);
     assert.ok(Array.isArray(application.upstreamApps), `${application.code} upstream relationships`);
     assert.ok(Array.isArray(application.downstreamApps), `${application.code} downstream relationships`);
     assert.ok(Array.isArray(application.tracks), `${application.code} tracks`);
@@ -187,7 +185,7 @@ test("SWI colony labs preserve their relationship and show release evidence with
 
 test("homepage diagram, registry, and layer overview cover the same applications across their dedicated pages", async () => {
   const data = await readData();
-  const expected = data.applications.filter(({ visibility }) => visibility === "public").map(({ code }) => code).sort();
+  const expected = data.applications.map(({ code }) => code).sort();
   for (const file of ["index.html", "tr/index.html"]) {
     const html = await readFile(path.join(rootDir, file), "utf8");
     const svg = html.match(/<g class="ld-nodes">([\s\S]*?)<\/svg>/)?.[1] ?? "";

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "contentPolicyVersion": 1,
+  "applications": [
+    {
+      "code": "nxt",
+      "kind": "private-system",
+      "systemRole": "horizon",
+      "visibility": "owner-only",
+      "status": "active",
+      "statusLabel": { "en": "Active (private)", "tr": "Etkin (özel)" },
+      "languages": ["tr", "en"],
+      "title": { "en": "NXT", "tr": "NXT" },
+      "summary": {
+        "en": "Owner-only experimental workbench. Not visible in the public site.",
+        "tr": "Sahibine özel deneysel çalışma alanı. Herkese açık sitede görünmez."
+      },
+      "repository": "https://github.com/aserdargun/nxt-aserdargun-com",
+      "address": "https://nxt.aserdargun.com/",
+      "updatedAt": "2026-09-06"
+    },
+    {
+      "code": "stk",
+      "kind": "private-system",
+      "systemRole": "horizon",
+      "visibility": "owner-only",
+      "status": "active",
+      "statusLabel": { "en": "Active (private)", "tr": "Etkin (özel)" },
+      "languages": ["tr", "en"],
+      "title": { "en": "STK", "tr": "STK" },
+      "summary": {
+        "en": "Owner-only workbench. Not visible in the public site.",
+        "tr": "Sahibine özel çalışma alanı. Herkese açık sitede görünmez."
+      },
+      "repository": "https://github.com/aserdargun/stk-private-workspace",
+      "address": "https://stk.aserdargun.com/",
+      "updatedAt": "2026-09-06"
+    },
+    {
+      "code": "inf",
+      "kind": "private-system",
+      "systemRole": "horizon",
+      "visibility": "owner-only",
+      "status": "active",
+      "statusLabel": { "en": "Active (private)", "tr": "Etkin (özel)" },
+      "languages": ["tr", "en"],
+      "title": { "en": "INF", "tr": "INF" },
+      "summary": {
+        "en": "Owner-only infrastructure dashboard. Not visible in the public site.",
+        "tr": "Sahibine özel altyapı paneli. Herkese açık sitede görünmez."
+      },
+      "repository": "https://github.com/aserdargun/inf-aserdargun-com",
+      "address": "https://inf.aserdargun.com/",
+      "updatedAt": "2026-09-06"
+    }
+  ]
+}

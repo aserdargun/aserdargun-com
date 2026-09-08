@@ -3,10 +3,13 @@ import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import {
   assertValidLivingSystemData,
+  assertValidPrivateApplicationsData,
   getFreshnessState,
   loadLivingSystemData,
+  loadPrivateApplicationsData,
   summarizeApplications,
   validateLivingSystemData,
+  validatePrivateApplicationsData,
 } from "./living-system-data.mjs";
 
 const localized = (en, tr) => ({ en, tr });
@@ -562,7 +565,7 @@ test("public-memory privacy failures name the source file and forbidden field wi
   }
 });
 
-test("rejects private-system records and reserved private-navigation codes (public visibility only)", () => {
+test("rejects private-system records and reserved private-navigation codes", () => {
   for (const code of ["stk", "inf", "nxt"]) {
     const errors = errorsFor((data) => {
       data.applications[0].code = code;
@@ -572,23 +575,11 @@ test("rejects private-system records and reserved private-navigation codes (publ
 
   const errors = errorsFor((data) => {
     data.applications[0].kind = "private-system";
-  });
-
-  assert.match(errorText(errors), /private-system/i);
-});
-
-test("accepts private-system with non-public visibility (owner-only)", () => {
-  const errors = errorsFor((data) => {
-    data.applications[0].code = "nxt";
-    data.applications[0].kind = "private-system";
     data.applications[0].visibility = "owner-only";
   });
 
-  assert.equal(
-    errors.filter((e) => e.code === "privacy-boundary").length,
-    0,
-    "nxt with private-system kind + owner-only visibility should not trigger any privacy-boundary errors",
-  );
+  assert.match(errorText(errors), /private-system/i);
+  assert.match(errorText(errors), /visibility must be public/i);
 });
 
 test("loads and validates the committed canonical manifest", async () => {
@@ -629,4 +620,87 @@ test("aggregate assertion reports every invalid path with code and message", () 
       return true;
     },
   );
+});
+
+const validPrivateData = () => ({
+  schemaVersion: 1,
+  contentPolicyVersion: 1,
+  applications: [
+    {
+      code: "nxt",
+      kind: "private-system",
+      systemRole: "horizon",
+      visibility: "owner-only",
+      status: "active",
+      title: localized("NXT", "NXT"),
+      summary: localized("Owner-only workbench.", "Sahibine özel çalışma alanı."),
+      repository: "https://github.com/aserdargun/nxt-aserdargun-com",
+      address: "https://nxt.aserdargun.com/",
+      updatedAt: "2026-08-25",
+      relatedMemoryIds: [],
+    },
+  ],
+});
+
+test("validates a structurally sound private manifest with reserved codes", () => {
+  const data = validPrivateData();
+  const result = validatePrivateApplicationsData(data, { today: testToday });
+  assert.deepEqual(result.errors, []);
+  assert.strictEqual(result.valid, true);
+  assert.strictEqual(assertValidPrivateApplicationsData(data, { today: testToday }), data);
+});
+
+test("rejects public codes in the private manifest", () => {
+  const data = validPrivateData();
+  data.applications[0].code = "aia";
+  const errors = validatePrivateApplicationsData(data, { today: testToday }).errors;
+  const messages = errorMessages(errors);
+  assert.ok(
+    messages.some((message) => /not in the reserved private-navigation set/i.test(message)),
+    "private manifest must reject public codes (aia) with a privacy-boundary error",
+  );
+});
+
+test("rejects public visibility or non-private kind in the private manifest", () => {
+  const data = validPrivateData();
+  data.applications[0].kind = "atlas";
+  data.applications[0].visibility = "public";
+  const errors = validatePrivateApplicationsData(data, { today: testToday }).errors;
+  const messages = errorMessages(errors);
+  assert.ok(
+    messages.some((message) => /private-manifest application kind must be private-system/i.test(message)),
+    "private manifest must reject non-private-system kind",
+  );
+  assert.ok(
+    messages.some((message) => /private-manifest application visibility must be owner-only/i.test(message)),
+    "private manifest must reject public visibility",
+  );
+});
+
+test("rejects unknown top-level keys in the private manifest", () => {
+  const data = validPrivateData();
+  data.publicMemory = [];
+  const errors = validatePrivateApplicationsData(data, { today: testToday }).errors;
+  const messages = errorMessages(errors);
+  assert.ok(
+    messages.some((message) => /not recognized in the private manifest/i.test(message)),
+    "private manifest must reject unknown top-level keys",
+  );
+});
+
+test("loads and validates the committed private manifest", async () => {
+  const filePath = fileURLToPath(new URL("../data/private-applications.json", import.meta.url));
+  const data = await loadPrivateApplicationsData(filePath);
+  const canonicalToday = new Date("2026-09-06T12:00:00+03:00");
+
+  assert.equal(data.applications.length, 3, "private manifest must have exactly 3 entries (nxt/stk/inf)");
+  const codes = data.applications.map((application) => application.code).sort();
+  assert.deepEqual(codes, ["inf", "nxt", "stk"]);
+  for (const application of data.applications) {
+    assert.equal(application.kind, "private-system", `${application.code} kind must be private-system`);
+    assert.equal(application.visibility, "owner-only", `${application.code} visibility must be owner-only`);
+    assert.equal(application.updatedAt, "2026-09-06", `${application.code} updatedAt must match canonicalToday`);
+  }
+  assert.deepEqual(validatePrivateApplicationsData(data, { today: canonicalToday }).errors, []);
+  assert.strictEqual(assertValidPrivateApplicationsData(data, { today: canonicalToday }), data);
 });

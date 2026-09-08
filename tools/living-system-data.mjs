@@ -198,6 +198,162 @@ function isUniqueArrayOf(value, predicate) {
     && new Set(value).size === value.length;
 }
 
+const PRIVATE_APPLICATION_TOP_LEVEL_KEYS = ["schemaVersion", "contentPolicyVersion", "applications"];
+
+function isStructurallyValidPrivateApplication(application, today) {
+  const allowsNullUpdate = ["idea", "design", "paused", "archived"].includes(application.status);
+  const validUpdate = application.updatedAt === null
+    ? allowsNullUpdate
+    : isValidDateOnOrBefore(application.updatedAt, today);
+  return hasOnlyAllowedKeys(application, APPLICATION_KEYS)
+    && typeof application.code === "string"
+    && APPLICATION_CODE_PATTERN.test(application.code)
+    && RESERVED_PRIVATE_NAVIGATION_CODES.has(application.code)
+    && APPLICATION_KINDS.has(application.kind)
+    && application.kind === "private-system"
+    && application.visibility === "owner-only"
+    && APPLICATION_STATUSES.has(application.status)
+    && isCompleteLocalized(application.title)
+    && isCompleteLocalized(application.summary)
+    && (application.guidingQuestion === undefined || isCompleteLocalized(application.guidingQuestion))
+    && (application.nextDirection === undefined || isCompleteLocalized(application.nextDirection))
+    && isGithubRepositoryForOwner(application.repository)
+    && isCanonicalHttpsUrl(application.address)
+    && validUpdate
+    && (application.statusLabel === undefined || isCompleteLocalized(application.statusLabel))
+    && (application.researchCutoff === undefined || isValidDateOnOrBefore(application.researchCutoff, today))
+    && (application.lastVerified === undefined || isValidDateOnOrBefore(application.lastVerified, today))
+    && (application.lastReleased === undefined || isValidDateOnOrBefore(application.lastReleased, today))
+    && (application.releaseSha === undefined || /^[a-f0-9]{40}$/.test(application.releaseSha))
+    && (application.sourceCount === undefined || application.sourceCount === null || (Number.isInteger(application.sourceCount) && application.sourceCount >= 0))
+    && (application.claimCount === undefined || application.claimCount === null || (Number.isInteger(application.claimCount) && application.claimCount >= 0))
+    && (application.evidencePolicy === undefined || (typeof application.evidencePolicy === "string" && application.evidencePolicy.trim() !== ""))
+    && (application.tracks === undefined || isUniqueArrayOf(application.tracks, (track) => typeof track === "string" && track.trim() !== ""))
+    && (application.entityIds === undefined || isUniqueArrayOf(application.entityIds, (id) => typeof id === "string" && /^entity:[a-z0-9-]+$/.test(id))
+      && application.entityIds.every((id) => !id.endsWith("-public") && !id.endsWith("-public-snapshot"))
+      || true)
+    && (application.relatedMemoryIds === undefined
+      || isUniqueArrayOf(application.relatedMemoryIds, (memoryId) => typeof memoryId === "string" && KEBAB_CASE_PATTERN.test(memoryId)));
+}
+
+function validatePrivateApplications(applications, errors, today) {
+  if (!Array.isArray(applications)) {
+    addError(errors, "applications", "invalid-type", "private-applications applications must be an array.");
+    return new Set();
+  }
+
+  const codeFirstIndexes = new Map();
+  for (const [index, application] of applications.entries()) {
+    const label = `applications[${index}]`;
+    if (!isPlainObject(application)) {
+      addError(errors, label, "invalid-type", `${label} must be an object.`);
+      continue;
+    }
+    validateAllowedKeys(application, APPLICATION_KEYS, label, errors);
+
+    if (typeof application.code !== "string" || !APPLICATION_CODE_PATTERN.test(application.code)) {
+      addError(errors, `${label}.code`, "invalid-application-code", `${label} private application code must be a unique lowercase three-letter code.`);
+    } else if (!RESERVED_PRIVATE_NAVIGATION_CODES.has(application.code)) {
+      addError(errors, `${label}.code`, "privacy-boundary", `${label}.code is not in the reserved private-navigation set; private applications must use stk, inf, or nxt.`);
+    } else if (codeFirstIndexes.has(application.code)) {
+      addError(errors, `${label}.code`, "duplicate-identity", `${label}.code duplicates applications[${codeFirstIndexes.get(application.code)}].code; value=<redacted>.`);
+    } else {
+      codeFirstIndexes.set(application.code, index);
+    }
+
+    if (!APPLICATION_KINDS.has(application.kind)) addError(errors, `${label}.kind`, "invalid-enum", `${label} application kind is not recognized.`);
+    if (application.kind !== "private-system") addError(errors, `${label}.kind`, "privacy-boundary", `${label} private-manifest application kind must be private-system.`);
+    if (!APPLICATION_VISIBILITIES.has(application.visibility)) addError(errors, `${label}.visibility`, "invalid-enum", `${label} application visibility is not recognized.`);
+    if (application.visibility !== "owner-only") addError(errors, `${label}.visibility`, "privacy-boundary", `${label} private-manifest application visibility must be owner-only.`);
+    if (!APPLICATION_STATUSES.has(application.status)) addError(errors, `${label}.status`, "invalid-enum", `${label} application status is not recognized.`);
+
+    validateLocalized(application.title, `${label}.title`, errors);
+    validateLocalized(application.summary, `${label}.summary`, errors);
+    validateOptionalLocalized(application.guidingQuestion, `${label}.guidingQuestion`, errors);
+    validateOptionalLocalized(application.nextDirection, `${label}.nextDirection`, errors);
+    validateOptionalLocalized(application.statusLabel, `${label}.statusLabel`, errors);
+
+    if (!isGithubRepositoryForOwner(application.repository)) {
+      addError(errors, `${label}.repository`, "unsafe-url", `${label} GitHub repository must be a canonical HTTPS repository under the aserdargun owner.`);
+    }
+    validateUrl(application.address, `${label}.address`, errors);
+
+    const allowsNullUpdate = ["idea", "design", "paused", "archived"].includes(application.status);
+    if (application.updatedAt === null) {
+      if (!allowsNullUpdate) addError(errors, `${label}.updatedAt`, "required-value", `${label} updatedAt is required for active and live applications.`);
+    } else {
+      validateDate(application.updatedAt, `${label}.updatedAt`, errors, today);
+    }
+    if (application.updatedAt === undefined) addError(errors, `${label}.updatedAt`, "required-value", `${label} updatedAt is required.`);
+
+    if (application.relatedMemoryIds !== undefined) {
+      if (!Array.isArray(application.relatedMemoryIds)) {
+        addError(errors, `${label}.relatedMemoryIds`, "invalid-type", `${label} relatedMemoryIds must be an array.`);
+      } else {
+        const memoryIdFirstIndexes = new Map();
+        for (const [memoryIndex, memoryId] of application.relatedMemoryIds.entries()) {
+          const relationshipPath = `${label}.relatedMemoryIds[${memoryIndex}]`;
+          if (typeof memoryId !== "string" || !KEBAB_CASE_PATTERN.test(memoryId)) {
+            addError(errors, relationshipPath, "invalid-relationship", `${relationshipPath} must be a stable kebab-case memory ID; value=<redacted>.`);
+          } else if (memoryIdFirstIndexes.has(memoryId)) {
+            addError(errors, relationshipPath, "relationship-duplicate", `${relationshipPath} duplicates an earlier relationship value; value=<redacted>.`);
+          } else {
+            memoryIdFirstIndexes.set(memoryId, memoryIndex);
+          }
+        }
+      }
+    }
+  }
+  return new Set(codeFirstIndexes.keys());
+}
+
+export function validatePrivateApplicationsData(data, options = {}) {
+  const errors = [];
+  const today = todayUtcDate(resolveToday(options));
+  if (!isPlainObject(data)) return {
+    valid: false,
+    errors: [{ path: "root", code: "invalid-type", message: "private applications data must be an object." }],
+  };
+
+  for (const key of PRIVATE_APPLICATION_TOP_LEVEL_KEYS) {
+    if (!(key in data)) addError(errors, key, "required-key", `top-level key ${key} is required in the private manifest.`);
+  }
+  for (const key of Object.keys(data)) {
+    if (!PRIVATE_APPLICATION_TOP_LEVEL_KEYS.includes(key)) addError(errors, key, "unknown-key", `top-level key ${key} is not recognized in the private manifest.`);
+  }
+  for (const versionKey of ["schemaVersion", "contentPolicyVersion"]) {
+    if (!Number.isInteger(data[versionKey]) || data[versionKey] < 1) addError(errors, versionKey, "invalid-version", `${versionKey} must be a positive integer.`);
+  }
+
+  validatePrivateApplications(data.applications, errors, today);
+  return { valid: errors.length === 0, errors };
+}
+
+export function assertValidPrivateApplicationsData(data, options = {}) {
+  const { errors } = validatePrivateApplicationsData(data, options);
+  if (errors.length === 0) return data;
+  const source = typeof options?.sourcePath === "string" && options.sourcePath.trim() !== ""
+    ? `file=${options.sourcePath} `
+    : "";
+  const entries = errors.map(({ path, code, message }) => `${source}path=${path} code=${code} message=${message}`);
+  throw new Error(`Private applications data validation failed:\n${entries.join("\n")}`);
+}
+
+export async function loadPrivateApplicationsData(filePath) {
+  const path = String(filePath);
+  let source;
+  try {
+    source = await readFile(filePath, "utf8");
+  } catch (error) {
+    throw new Error(`Unable to read private applications data at ${path}: ${error.message}`);
+  }
+  try {
+    return JSON.parse(source);
+  } catch (error) {
+    throw new Error(`Unable to parse private applications data at ${path}: ${error.message}`);
+  }
+}
+
 function isStructurallyValidPublicApplication(application, today) {
   const allowsNullUpdate = ["idea", "design", "paused", "archived"].includes(application.status);
   const validUpdate = application.updatedAt === null
@@ -298,7 +454,7 @@ function validateApplications(applications, errors, today, trustedApplicationCod
 
     if (typeof application.code !== "string" || !APPLICATION_CODE_PATTERN.test(application.code)) {
       addError(errors, `${label}.code`, "invalid-application-code", `${label} application code must be a unique lowercase three-letter code.`);
-    } else if (application.visibility === "public" && RESERVED_PRIVATE_NAVIGATION_CODES.has(application.code)) {
+    } else if (RESERVED_PRIVATE_NAVIGATION_CODES.has(application.code)) {
       addError(errors, `${label}.code`, "privacy-boundary", `${label}.code is reserved for private navigation; value=<redacted>.`);
     } else if (codeFirstIndexes.has(application.code)) {
       addError(errors, `${label}.code`, "duplicate-identity", `${label}.code duplicates applications[${codeFirstIndexes.get(application.code)}].code; value=<redacted>.`);
@@ -307,9 +463,9 @@ function validateApplications(applications, errors, today, trustedApplicationCod
     }
 
     if (!APPLICATION_KINDS.has(application.kind)) addError(errors, `${label}.kind`, "invalid-enum", `${label} application kind is not recognized.`);
-    if (application.kind === "private-system" && application.visibility === "public") addError(errors, `${label}.kind`, "privacy-boundary", `${label} private-system applications are not allowed in this public manifest.`);
+    if (application.kind === "private-system") addError(errors, `${label}.kind`, "privacy-boundary", `${label} private-system applications are not allowed in this public manifest.`);
     if (!APPLICATION_VISIBILITIES.has(application.visibility)) addError(errors, `${label}.visibility`, "invalid-enum", `${label} application visibility is not recognized.`);
-    if (application.visibility !== "public" && !["unlisted", "owner-only"].includes(application.visibility)) addError(errors, `${label}.visibility`, "privacy-boundary", `${label} application visibility must be public, unlisted, or owner-only.`);
+    if (application.visibility !== "public") addError(errors, `${label}.visibility`, "privacy-boundary", `${label} application visibility must be public in this public manifest.`);
     if (!APPLICATION_STATUSES.has(application.status)) addError(errors, `${label}.status`, "invalid-enum", `${label} application status is not recognized.`);
     if (!SYSTEM_ROLES.has(application.systemRole)) addError(errors, `${label}.systemRole`, "invalid-enum", `${label} systemRole is not recognized.`);
 
@@ -319,10 +475,9 @@ function validateApplications(applications, errors, today, trustedApplicationCod
     validateOptionalLocalized(application.nextDirection, `${label}.nextDirection`, errors);
     validateOptionalLocalized(application.statusLabel, `${label}.statusLabel`, errors);
 
-    if (application.visibility === "public"
-      && application.languages !== undefined
+    if (application.languages !== undefined
       && JSON.stringify(application.languages) !== JSON.stringify(["tr", "en"])) {
-      addError(errors, `${label}.languages`, "invalid-languages", `${label} public application languages must be exactly ["tr", "en"].`);
+      addError(errors, `${label}.languages`, "invalid-languages", `${label}.languages must be exactly ["tr", "en"].`);
     }
     validateOptionalDate(application.researchCutoff, `${label}.researchCutoff`, errors, today);
     validateOptionalDate(application.lastVerified, `${label}.lastVerified`, errors, today);

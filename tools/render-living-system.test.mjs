@@ -865,8 +865,37 @@ test("renders the application-map summary from semantic roles", async () => {
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /12 core learning applications, five standalone labs, two horizon bridges, and one long-term horizon\./);
+  assert.match(rendered, /12 core learning applications, four standalone labs, two horizon bridges, and one long-term horizon\./);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
+});
+
+test("public render excludes nxt/stk/inf from the system focus and application map", async () => {
+  const data = await readFixtureData();
+  for (const locale of ["en", "tr"]) {
+    const rendered = renderDocument({ html: homeDocument(), page: "home", locale, data, today });
+    const systemFocusBlock = rendered.match(/<!-- GENERATED:system-focus:start -->[\s\S]*?<!-- GENERATED:system-focus:end -->/)?.[0] ?? "";
+    const applicationMapBlock = rendered.match(/<!-- GENERATED:application-map:start -->[\s\S]*?<!-- GENERATED:application-map:end -->/)?.[0] ?? "";
+    for (const blockName of ["system-focus", "application-map"]) {
+      const block = blockName === "system-focus" ? systemFocusBlock : applicationMapBlock;
+      for (const code of ["nxt", "stk", "inf"]) {
+        assert.equal(
+          block.includes(`>${code.toUpperCase()}<`),
+          false,
+          `${locale} ${blockName} must not advertise the private-system code ${code.toUpperCase()}`,
+        );
+        assert.equal(
+          block.includes(`https://${code}.aserdargun.com/`),
+          false,
+          `${locale} ${blockName} must not link to the private subdomain ${code}.aserdargun.com`,
+        );
+      }
+    }
+  }
+  for (const application of data.applications) {
+    assert.notEqual(application.kind, "private-system", "public manifest must not list private-system applications");
+    assert.equal(application.visibility, "public", "public manifest must keep every entry public");
+    assert.ok(!["nxt", "stk", "inf"].includes(application.code), `public manifest must not include the reserved code ${application.code}`);
+  }
 });
 
 test("preserves the complete localized Now tag sets", async () => {

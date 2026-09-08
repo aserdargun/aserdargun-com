@@ -3,7 +3,9 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import {
   assertValidLivingSystemData,
+  assertValidPrivateApplicationsData,
   loadLivingSystemData,
+  loadPrivateApplicationsData,
   summarizeApplications,
 } from "./living-system-data.mjs";
 import { scanPublicHtmlFiles } from "./render-living-system.mjs";
@@ -12,6 +14,12 @@ import {
   validatePublicAccessibilityDocument,
   validatePublicIndexCoverage,
 } from "./public-html-contract.mjs";
+
+const expectedPublicApplicationCodes = [
+  "aia", "llm", "hns", "sec", "ctx", "evl", "usl", "gpu", "cld", "lcl",
+  "wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng", "gex",
+].sort();
+const expectedPrivateApplicationCodes = ["nxt", "stk", "inf"].sort();
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const expectedStageKeys = [
@@ -573,13 +581,13 @@ function validateSystemFocus(locale, html) {
     ["foundation", "Temel", ["aia", "llm", "usl", "gpu", "gex"]],
     ["agent-system", "Ajan sistemi", ["hns", "ctx"]],
     ["assurance", "Güvence", ["sec", "evl"]],
-    ["deployment", "Dağıtım", ["cld", "lcl", "nxt"]],
+    ["deployment", "Dağıtım", ["cld", "lcl"]],
     ["physical-ai", "Fiziksel AI", ["wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng"]],
   ] : [
     ["foundation", "Foundation", ["aia", "llm", "usl", "gpu", "gex"]],
     ["agent-system", "Agent system", ["hns", "ctx"]],
     ["assurance", "Assurance", ["sec", "evl"]],
-    ["deployment", "Deployment", ["cld", "lcl", "nxt"]],
+    ["deployment", "Deployment", ["cld", "lcl"]],
     ["physical-ai", "Physical AI", ["wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng"]],
   ];
   for (const [layer, heading, expectedCodes] of expected) {
@@ -870,6 +878,30 @@ check(
 );
 const livingSystem = await loadLivingSystemData(path.join(root, "data", "living-system.json"));
 assertValidLivingSystemData(livingSystem, { sourcePath: "data/living-system.json" });
+const publicCodes = livingSystem.applications.map((application) => application.code).sort();
+check(
+  JSON.stringify(publicCodes) === JSON.stringify(expectedPublicApplicationCodes),
+  `Public manifest codes must be exactly ${expectedPublicApplicationCodes.join(", ")} (got ${publicCodes.join(", ")})`,
+);
+for (const reservedCode of expectedPrivateApplicationCodes) {
+  check(
+    !publicCodes.includes(reservedCode),
+    `Public manifest must not list the reserved private-navigation code ${reservedCode}`,
+  );
+}
+const privateManifest = await loadPrivateApplicationsData(path.join(root, "data", "private-applications.json"));
+assertValidPrivateApplicationsData(privateManifest, { sourcePath: "data/private-applications.json" });
+const privateCodes = privateManifest.applications.map((application) => application.code).sort();
+check(
+  JSON.stringify(privateCodes) === JSON.stringify(expectedPrivateApplicationCodes),
+  `Private manifest codes must be exactly ${expectedPrivateApplicationCodes.join(", ")} (got ${privateCodes.join(", ")})`,
+);
+for (const application of privateManifest.applications) {
+  check(
+    application.kind === "private-system" && application.visibility === "owner-only",
+    `Private manifest entry ${application.code} must declare kind=private-system and visibility=owner-only`,
+  );
+}
 for (const diagnostic of await scanPublicHtmlFiles(root)) {
   failures.push(`Public HTML privacy validation failed: ${diagnostic}`);
 }
@@ -1202,7 +1234,7 @@ validateSystemFocus("Root", rootPage);
 const rootAppMapIntro = routePages.en.applications.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
 check(rootAppMapIntro.includes("Application map · explore the portfolio"), "Root number-neutral application map kicker is missing");
 check(rootAppMapIntro.includes("One portfolio. Focused applications."), "Root number-neutral application map heading is missing");
-check(!/\b(?:05|05-)\b/i.test(rootAppMapIntro), "Root stale application count remains in the map introduction");
+check(!/\b(?:05|five)\b/i.test(rootAppMapIntro), "Root stale application count remains in the map introduction");
 check(!rootAbout.includes("Stackfolio"), "Root Stackfolio product content remains");
 check(!rootAbout.includes("stk-aserdargun-com"), "Root Stackfolio repository name remains");
 check(!rootAbout.includes("https://github.com/aserdargun/stk-aserdargun-com"), "Root Stackfolio repository URL remains");
