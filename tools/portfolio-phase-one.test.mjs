@@ -123,7 +123,7 @@ test("approved knowledge records render content, limitations, sources, apps, and
   const english = renderPublicMemory({ locale: "en", data });
   const turkish = renderPublicMemory({ locale: "tr", data });
 
-  assert.equal(data.publicMemory.length, 5);
+  assert.ok(data.publicMemory.length >= 5, "data.publicMemory must have at least 5 entries");
   assert.match(english, /<h2>Evidence Before Deployment<\/h2>/);
   assert.match(turkish, /<h2>Dağıtımdan Önce Kanıt<\/h2>/);
   assert.match(english, /class="memory-card__content"/);

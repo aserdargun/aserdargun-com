@@ -42,7 +42,7 @@ There is no production build step. npm provides the shared development command s
 - WFM and SWI form parallel research bridges into ITL and the long-term ENG horizon; ANT and BEE branch from SWI as independent colony experiment labs
 - `#apps` application map - 16 canonical applications with localized search, layer filters, and expandable evidence; each is keyed by a three-letter code
 - `/now/` and `/tr/now/` - dated current work with frozen weekly archives
-- `/memory/` and `/tr/memory/` - five explicitly authored public Knowledge notes with sources and related applications
+- `/memory/` and `/tr/memory/` - five or more explicitly authored public Knowledge notes with sources and related applications
 - `#approach` working principles, `#about` + verified credentials, contact
 
 ### Application identities and evidence

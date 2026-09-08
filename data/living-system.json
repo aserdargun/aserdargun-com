@@ -94,7 +94,7 @@
       "entityIds": ["entity:agent-harness"],
       "portfolioLayer": "agent-system",
       "focusState": "active",
-      "relatedMemoryIds": ["evidence-before-deployment", "context-security-evaluation"]
+      "relatedMemoryIds": ["evidence-before-deployment", "context-security-evaluation", "agent-orchestration-2026-09-08"]
     },
     {
       "code": "sec",
@@ -156,7 +156,7 @@
       "entityIds": ["entity:mcp"],
       "portfolioLayer": "agent-system",
       "focusState": "active",
-      "relatedMemoryIds": ["context-security-evaluation"]
+      "relatedMemoryIds": ["context-security-evaluation", "agent-orchestration-2026-09-08"]
     },
     {
       "code": "evl",
@@ -580,6 +580,37 @@
     ]
   },
   "publicMemory": [
+    {
+      "id": "agent-orchestration-2026-09-08",
+      "type": "learning",
+      "visibility": "public",
+      "status": "published",
+      "title": { "en": "Multi-Agent Orchestration", "tr": "Çoklu Agent Orkestrasyonu" },
+      "summary": {
+        "en": "Hierarchical agent team for bounded, isolated, observable content sync.",
+        "tr": "Hiyerarşik agent team ile sınırlı, izole ve gözlemlenebilir içerik senkronizasyonu."
+      },
+      "content": {
+        "en": "Phase 0 wraps every portfolio project in a root orchestrator that hands bounded slices of work to specialist agents and worker agents. Twenty-two agent records live under ~/.minimax/agents; each declares its own capability matrix (read-only workspace, scoped write paths, no file writes outside its boundary, sequential calls not parallel). Deploy-watch cron runs after every main push, validates the Azure Static Web Apps check run, and verifies the live URL before deleting itself. Private nxt, stk, and inf projects remain off-limits across the team.",
+        "tr": "Phase 0, her portfolyo projesini kök orkestratörle sarar; sınırlı iş dilimlerini uzman agent'lara ve worker agent'lara devreder. ~/.minimax/agents altında 22 agent kaydı yaşar; her biri kendi yetkinlik matrisini (salt okunur workspace, kapsamlı yazma yolları, sınır dışına dosya yazma yok, sıralı çağrı paralel değil) beyan eder. Deploy-watch cron, her main push'tan sonra Azure Static Web Apps check run'unu doğrular, canlı URL'i onaylar ve kendini siler. Özel nxt, stk ve inf projeleri takım genelinde yasaklı kalır."
+      },
+      "createdAt": "2026-09-06",
+      "verifiedAt": "2026-09-06",
+      "publishedAt": "2026-09-06",
+      "updatedAt": "2026-09-06",
+      "limitations": {
+        "en": "Phase 0 is an internal process note, not a public harness benchmark; orchestration details may shift as the team grows.",
+        "tr": "Phase 0 dahili bir süreç notudur, kamuya açık bir harness kıyaslaması değildir; orkestrasyon ayrıntıları takım büyüdükçe değişebilir."
+      },
+      "sources": [
+        { "label": "Harness Engineering Observatory", "url": "https://hns.aserdargun.com/", "verifiedAt": "2026-09-06" },
+        { "label": "Context & Knowledge Engineering", "url": "https://ctx.aserdargun.com/", "verifiedAt": "2026-09-06" }
+      ],
+      "relatedApplicationCodes": ["hns", "ctx"],
+      "relatedEntityIds": ["entity:agent-harness", "entity:mcp"],
+      "tags": ["agent-team", "orchestration", "phase-0"],
+      "evidenceUrls": []
+    },
     {
       "id": "evidence-before-deployment",
       "type": "decision",
