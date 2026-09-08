@@ -87,6 +87,8 @@ const expectedApplicationRows = [
   { code: "ant", repository: "ant-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/ant-aserdargun-com", productUrl: "https://ant.aserdargun.com/", productLabel: "ant.aserdargun.com" },
   { code: "bee", repository: "bee-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/bee-aserdargun-com", productUrl: "https://bee.aserdargun.com/", productLabel: "bee.aserdargun.com" },
   { code: "itl", repository: "itl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/itl-aserdargun-com", productUrl: "https://itl.aserdargun.com/", productLabel: "itl.aserdargun.com" },
+  { code: "pdt", repository: "pdt-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/pdt-aserdargun-com", productUrl: "https://pdt.aserdargun.com/", productLabel: "pdt.aserdargun.com" },
+  { code: "hex", repository: "hex-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/hex-aserdargun-com", productUrl: "https://hex.aserdargun.com/", productLabel: "hex.aserdargun.com" },
   { code: "eng", repository: "eng-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/eng-aserdargun-com", productUrl: "https://eng.aserdargun.com/", productLabel: "eng.aserdargun.com" },
 ].map((row) => ({
   code: row.code,
@@ -363,6 +365,8 @@ function validateLearningSystem(locale, html) {
       "bee:colony-lab",
       "itl:twin",
       "eng:horizon",
+      "pdt:twin-lab",
+      "hex:humanoid-lab",
     ]),
     `${locale}: learning diagram node roles differ from the application content model`,
   );
@@ -390,6 +394,8 @@ function validateLearningSystem(locale, html) {
       "swi-to-ant",
       "swi-to-bee",
       "itl-to-eng",
+      "itl-to-pdt",
+      "eng-to-hex",
     ]),
     `${locale}: learning diagram edges differ from the application content model`,
   );
@@ -566,13 +572,13 @@ function validateSystemFocus(locale, html) {
     ["agent-system", "Ajan sistemi", ["hns", "ctx"]],
     ["assurance", "Güvence", ["sec", "evl"]],
     ["deployment", "Dağıtım", ["cld", "lcl"]],
-    ["physical-ai", "Fiziksel AI", ["wfm", "swi", "ant", "bee", "itl", "eng"]],
+    ["physical-ai", "Fiziksel AI", ["wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng"]],
   ] : [
     ["foundation", "Foundation", ["aia", "llm", "usl", "gpu"]],
     ["agent-system", "Agent system", ["hns", "ctx"]],
     ["assurance", "Assurance", ["sec", "evl"]],
     ["deployment", "Deployment", ["cld", "lcl"]],
-    ["physical-ai", "Physical AI", ["wfm", "swi", "ant", "bee", "itl", "eng"]],
+    ["physical-ai", "Physical AI", ["wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng"]],
   ];
   for (const [layer, heading, expectedCodes] of expected) {
     const card = section.match(new RegExp(`<article class="system-focus-card system-focus-card--${layer}">[\\s\\S]*?<\\/article>`))?.[0] ?? "";

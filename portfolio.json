@@ -730,6 +730,96 @@
       "focusState": "horizon"
     },
     {
+      "code": "pdt",
+      "name": {
+        "en": "P-101 Interactive Digital Twin",
+        "tr": "P-101 İnteraktif Dijital İkiz"
+      },
+      "shortName": "PDT",
+      "description": {
+        "en": "An interactive centrifugal-pump teaching exhibit for the Industrial Twin Lab. Editable Blender source asset, healthy GLB, educational geometry variants, web MVP.",
+        "tr": "Industrial Twin Lab için interaktif santrifüj pompa öğretim sergisi. Düzenlenebilir Blender kaynak varlığı, sağlıklı GLB, eğitsel geometri varyantları, web MVP."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://pdt.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/pdt-aserdargun-com",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "0ec761d6ad01bb796c63d641abf81ffa11e31c2f",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "itl"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "digital-twin",
+        "pump",
+        "teaching-exhibit"
+      ],
+      "entityIds": [
+        "entity:p-101"
+      ],
+      "portfolioLayer": "physical-ai",
+      "focusState": "horizon"
+    },
+    {
+      "code": "hex",
+      "name": {
+        "en": "HEX — Humanoid Engineering Explorer",
+        "tr": "HEX — İnsansı Mühendislik Kaşifi"
+      },
+      "shortName": "HEX",
+      "description": {
+        "en": "An original bilingual interactive humanoid engineering learning object for the ENG curriculum. Blender-authored GLB, ten engineering modes, progressive assembled-to-exploded slider.",
+        "tr": "ENG müfredatı için özgün, iki dilli, interaktif insansı mühendislik öğrenme nesnesi. Blender ile hazırlanmış GLB, on mühendislik modu, kademeli montajdan-patlamış görünüme kaydırıcı."
+      },
+      "type": "atlas",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://hex.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/hex-aserdargun-com",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "ba06cbe9e7b0c902faf605508d8185dc3aedb09a",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "eng"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "humanoid",
+        "interactive",
+        "eng-curriculum"
+      ],
+      "entityIds": [
+        "entity:hex"
+      ],
+      "portfolioLayer": "physical-ai",
+      "focusState": "horizon"
+    },
+    {
       "code": "eng",
       "name": {
         "en": "Open Humanoid Engineering",

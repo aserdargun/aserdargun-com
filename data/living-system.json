@@ -497,6 +497,74 @@
       "relatedMemoryIds": ["world-models-to-digital-twins", "human-control-authority-ladder"]
     },
     {
+      "code": "pdt",
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": { "en": "Live", "tr": "Yayında" },
+      "languages": ["tr", "en"],
+      "title": {
+        "en": "P-101 Interactive Digital Twin",
+        "tr": "P-101 İnteraktif Dijital İkiz"
+      },
+      "summary": {
+        "en": "An interactive centrifugal-pump teaching exhibit for the Industrial Twin Lab. Editable Blender source asset, healthy GLB, educational geometry variants, web MVP.",
+        "tr": "Industrial Twin Lab için interaktif santrifüj pompa öğretim sergisi. Düzenlenebilir Blender kaynak varlığı, sağlıklı GLB, eğitsel geometri varyantları, web MVP."
+      },
+      "repository": "https://github.com/aserdargun/pdt-aserdargun-com",
+      "address": "https://pdt.aserdargun.com/",
+      "updatedAt": "2026-09-04",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "0ec761d6ad01bb796c63d641abf81ffa11e31c2f",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": ["itl"],
+      "downstreamApps": [],
+      "tracks": ["digital-twin", "pump", "teaching-exhibit"],
+      "entityIds": ["entity:p-101"],
+      "portfolioLayer": "physical-ai",
+      "focusState": "horizon",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "hex",
+      "kind": "atlas",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": { "en": "Live", "tr": "Yayında" },
+      "languages": ["tr", "en"],
+      "title": {
+        "en": "HEX — Humanoid Engineering Explorer",
+        "tr": "HEX — İnsansı Mühendislik Kaşifi"
+      },
+      "summary": {
+        "en": "An original bilingual interactive humanoid engineering learning object for the ENG curriculum. Blender-authored GLB, ten engineering modes, progressive assembled-to-exploded slider.",
+        "tr": "ENG müfredatı için özgün, iki dilli, interaktif insansı mühendislik öğrenme nesnesi. Blender ile hazırlanmış GLB, on mühendislik modu, kademeli montajdan-patlamış görünüme kaydırıcı."
+      },
+      "repository": "https://github.com/aserdargun/hex-aserdargun-com",
+      "address": "https://hex.aserdargun.com/",
+      "updatedAt": "2026-09-04",
+      "researchCutoff": "2026-09-04",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-04",
+      "releaseSha": "ba06cbe9e7b0c902faf605508d8185dc3aedb09a",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": ["eng"],
+      "downstreamApps": [],
+      "tracks": ["humanoid", "interactive", "eng-curriculum"],
+      "entityIds": ["entity:hex"],
+      "portfolioLayer": "physical-ai",
+      "focusState": "horizon",
+      "relatedMemoryIds": []
+    },
+    {
       "code": "eng",
       "kind": "horizon",
       "systemRole": "horizon",

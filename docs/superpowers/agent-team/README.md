@@ -16,6 +16,29 @@ Hiyerarşik, tam izole bir agent team. Amaç: kişisel landing (`aserdargun-com`
 
 `nxt-worker`, `stk-worker`, `inf-worker` **başlangıçta kayıt dışı**. Private içerik sızıntısı riski. Yalnız orchestrator özel onayıyla açılır.
 
+## Worker'lar
+
+| Agent | Subdomain | Odak |
+|-------|-----------|------|
+| `aia-worker` | https://aia.aserdargun.com/ | AI Ecosystem Atlas |
+| `llm-worker` | https://llm.aserdargun.com/ | LLM Runtime & Serving Atlas |
+| `hns-worker` | https://hns.aserdargun.com/ | Harness Engineering Observatory |
+| `sec-worker` | https://sec.aserdargun.com/ | AI Systems Security Observatory |
+| `ctx-worker` | https://ctx.aserdargun.com/ | Context & Knowledge Engineering |
+| `evl-worker` | https://evl.aserdargun.com/ | AI Evaluation & Reliability Lab |
+| `usl-worker` | https://usl.aserdargun.com/ | Unsloth Studio Learning Atlas |
+| `gpu-worker` | https://gpu.aserdargun.com/ | GPU Kernel Engineering Atlas |
+| `cld-worker` | https://cld.aserdargun.com/ | Cloud Provider Cost Comparison |
+| `lcl-worker` | https://lcl.aserdargun.com/ | Local Compute Lab |
+| `wfm-worker` | https://wfm.aserdargun.com/ | World Models Atlas |
+| `swi-worker` | https://swi.aserdargun.com/ | Swarm Intelligence |
+| `ant-worker` | https://ant.aserdargun.com/ | Ant Colony Intelligence Lab |
+| `bee-worker` | https://bee.aserdargun.com/ | Honey Bee Collective Intelligence Lab |
+| `itl-worker` | https://itl.aserdargun.com/ | Industrial Twin Lab |
+| `pdt-worker` | https://pdt.aserdargun.com/ | P-101 Interactive Digital Twin |
+| `hex-worker` | https://hex.aserdargun.com/ | HEX — Humanoid Engineering Explorer |
+| `eng-worker` | https://eng.aserdargun.com/ | Open Humanoid Engineering (horizon) |
+
 ## İletişim
 
 - Root → orchestrator: `mavis session send aserdargun-orchestrator ...`
