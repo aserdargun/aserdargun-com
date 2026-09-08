@@ -92,7 +92,7 @@ test("the application map exposes distinct research, verification, and release e
 
   assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-08-24">2026-08-24<\/time><\/dd>/);
   assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-09-04">2026-09-04<\/time><\/dd>/);
-  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-04">2026-09-04<\/time><code>aaf2843a<\/code><\/dd>/);
+  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-06">2026-09-06<\/time><code>59bac5f1<\/code><\/dd>/);
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · active research<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · aktif araştırma<\/dd>/);
 });
