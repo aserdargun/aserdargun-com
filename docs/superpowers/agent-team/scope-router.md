@@ -24,6 +24,7 @@ Kullanıcı mesajı → orchestrator parse eder:
 | Freshness, güncellik, stale proje tarama | (tüm projeler) | `repo-auditor` (rapor) → `content-curator` (uygulama) |
 | Memory temizliği, duplicate/stale raporu | (tüm agent memory'leri) | `memory-curator` |
 | Tek subdomain projesinde bounded iş (içerik, validator fix, dependency update) | `<code>-aserdargun-com` | `<code>-worker` |
+| `nxt/stk/inf` bounded iş (PRIVATE subdomain) | `<private>-aserdargun-com` | `<nxt/stk/inf>-worker` |
 
 ## Karar ağacı (sıralı)
 
@@ -36,11 +37,13 @@ Kullanıcı mesajı → orchestrator parse eder:
    EVET → brand-guardian
 4. Mesajda "memory / stale / duplicate" var mı?
    EVET → memory-curator
-5. Mesajda belirli bir subdomain kodu geçiyor mu? (aia, llm, swi, ...)
+5. Mesajda "private" veya nxt/stk/inf kodu geçiyor mu?
+   EVET → <nxt/stk/inf>-worker (PRIVATE)
+6. Mesajda belirli bir subdomain kodu geçiyor mu? (aia, llm, swi, ...)
    EVET → <code>-worker
-6. Mesaj aserdargun-com'a yönelik mi? (knowledge, now, applications, validator)
+7. Mesaj aserdargun-com'a yönelik mi? (knowledge, now, applications, validator)
    EVET → content-curator
-7. Hiçbiri değil → kullanıcıya "bu işi hangi agent'a yönlendirmemi istersiniz?" diye sor
+8. Hiçbiri değil → kullanıcıya "bu işi hangi agent'a yönlendirmemi istersiniz?" diye sor
 ```
 
 ## Yönlendirme sonrası
@@ -62,6 +65,7 @@ Phase 1'de yalnızca şu yönlendirmeler aktive:
 
 - ✅ İçerik senkronizasyonu → `content-curator`
 - ✅ Deploy izleme → `deploy-watch`
+- ✅ Private subdomain bounded iş → `<nxt/stk/inf>-worker`
 - ❌ Brand refactor → Phase 2
 - ❌ Onboarding → Phase 3
 - ❌ Repo audit / memory curator → Phase 4
