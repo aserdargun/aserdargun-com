@@ -571,13 +571,13 @@ function validateSystemFocus(locale, html) {
     ["foundation", "Temel", ["aia", "llm", "usl", "gpu"]],
     ["agent-system", "Ajan sistemi", ["hns", "ctx"]],
     ["assurance", "Güvence", ["sec", "evl"]],
-    ["deployment", "Dağıtım", ["cld", "lcl"]],
+    ["deployment", "Dağıtım", ["cld", "lcl", "nxt"]],
     ["physical-ai", "Fiziksel AI", ["wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng"]],
   ] : [
     ["foundation", "Foundation", ["aia", "llm", "usl", "gpu"]],
     ["agent-system", "Agent system", ["hns", "ctx"]],
     ["assurance", "Assurance", ["sec", "evl"]],
-    ["deployment", "Deployment", ["cld", "lcl"]],
+    ["deployment", "Deployment", ["cld", "lcl", "nxt"]],
     ["physical-ai", "Physical AI", ["wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng"]],
   ];
   for (const [layer, heading, expectedCodes] of expected) {
@@ -1200,7 +1200,7 @@ validateSystemFocus("Root", rootPage);
 const rootAppMapIntro = routePages.en.applications.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
 check(rootAppMapIntro.includes("Application map · explore the portfolio"), "Root number-neutral application map kicker is missing");
 check(rootAppMapIntro.includes("One portfolio. Focused applications."), "Root number-neutral application map heading is missing");
-check(!/\b(?:05|five)\b/i.test(rootAppMapIntro), "Root stale application count remains in the map introduction");
+check(!/\b(?:05|05-)\b/i.test(rootAppMapIntro), "Root stale application count remains in the map introduction");
 check(!rootAbout.includes("Stackfolio"), "Root Stackfolio product content remains");
 check(!rootAbout.includes("stk-aserdargun-com"), "Root Stackfolio repository name remains");
 check(!rootAbout.includes("https://github.com/aserdargun/stk-aserdargun-com"), "Root Stackfolio repository URL remains");

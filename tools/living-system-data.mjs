@@ -298,7 +298,7 @@ function validateApplications(applications, errors, today, trustedApplicationCod
 
     if (typeof application.code !== "string" || !APPLICATION_CODE_PATTERN.test(application.code)) {
       addError(errors, `${label}.code`, "invalid-application-code", `${label} application code must be a unique lowercase three-letter code.`);
-    } else if (RESERVED_PRIVATE_NAVIGATION_CODES.has(application.code)) {
+    } else if (application.visibility === "public" && RESERVED_PRIVATE_NAVIGATION_CODES.has(application.code)) {
       addError(errors, `${label}.code`, "privacy-boundary", `${label}.code is reserved for private navigation; value=<redacted>.`);
     } else if (codeFirstIndexes.has(application.code)) {
       addError(errors, `${label}.code`, "duplicate-identity", `${label}.code duplicates applications[${codeFirstIndexes.get(application.code)}].code; value=<redacted>.`);
@@ -307,9 +307,9 @@ function validateApplications(applications, errors, today, trustedApplicationCod
     }
 
     if (!APPLICATION_KINDS.has(application.kind)) addError(errors, `${label}.kind`, "invalid-enum", `${label} application kind is not recognized.`);
-    if (application.kind === "private-system") addError(errors, `${label}.kind`, "privacy-boundary", `${label} private-system applications are not allowed in this public manifest.`);
+    if (application.kind === "private-system" && application.visibility === "public") addError(errors, `${label}.kind`, "privacy-boundary", `${label} private-system applications are not allowed in this public manifest.`);
     if (!APPLICATION_VISIBILITIES.has(application.visibility)) addError(errors, `${label}.visibility`, "invalid-enum", `${label} application visibility is not recognized.`);
-    if (application.visibility !== "public") addError(errors, `${label}.visibility`, "privacy-boundary", `${label} application visibility must be public in this public manifest.`);
+    if (application.visibility !== "public" && !["unlisted", "owner-only"].includes(application.visibility)) addError(errors, `${label}.visibility`, "privacy-boundary", `${label} application visibility must be public, unlisted, or owner-only.`);
     if (!APPLICATION_STATUSES.has(application.status)) addError(errors, `${label}.status`, "invalid-enum", `${label} application status is not recognized.`);
     if (!SYSTEM_ROLES.has(application.systemRole)) addError(errors, `${label}.systemRole`, "invalid-enum", `${label} systemRole is not recognized.`);
 
@@ -319,9 +319,10 @@ function validateApplications(applications, errors, today, trustedApplicationCod
     validateOptionalLocalized(application.nextDirection, `${label}.nextDirection`, errors);
     validateOptionalLocalized(application.statusLabel, `${label}.statusLabel`, errors);
 
-    if (application.languages !== undefined
+    if (application.visibility === "public"
+      && application.languages !== undefined
       && JSON.stringify(application.languages) !== JSON.stringify(["tr", "en"])) {
-      addError(errors, `${label}.languages`, "invalid-languages", `${label}.languages must be exactly ["tr", "en"].`);
+      addError(errors, `${label}.languages`, "invalid-languages", `${label} public application languages must be exactly ["tr", "en"].`);
     }
     validateOptionalDate(application.researchCutoff, `${label}.researchCutoff`, errors, today);
     validateOptionalDate(application.lastVerified, `${label}.lastVerified`, errors, today);

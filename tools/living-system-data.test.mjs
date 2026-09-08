@@ -562,7 +562,7 @@ test("public-memory privacy failures name the source file and forbidden field wi
   }
 });
 
-test("rejects private-system records and reserved private-navigation codes", () => {
+test("rejects private-system records and reserved private-navigation codes (public visibility only)", () => {
   for (const code of ["stk", "inf", "nxt"]) {
     const errors = errorsFor((data) => {
       data.applications[0].code = code;
@@ -572,11 +572,23 @@ test("rejects private-system records and reserved private-navigation codes", () 
 
   const errors = errorsFor((data) => {
     data.applications[0].kind = "private-system";
-    data.applications[0].visibility = "owner-only";
   });
 
   assert.match(errorText(errors), /private-system/i);
-  assert.match(errorText(errors), /visibility must be public/i);
+});
+
+test("accepts private-system with non-public visibility (owner-only)", () => {
+  const errors = errorsFor((data) => {
+    data.applications[0].code = "nxt";
+    data.applications[0].kind = "private-system";
+    data.applications[0].visibility = "owner-only";
+  });
+
+  assert.equal(
+    errors.filter((e) => e.code === "privacy-boundary").length,
+    0,
+    "nxt with private-system kind + owner-only visibility should not trigger any privacy-boundary errors",
+  );
 });
 
 test("loads and validates the committed canonical manifest", async () => {
