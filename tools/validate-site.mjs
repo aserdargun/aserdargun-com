@@ -90,6 +90,7 @@ const expectedApplicationRows = [
   { code: "pdt", repository: "pdt-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/pdt-aserdargun-com", productUrl: "https://pdt.aserdargun.com/", productLabel: "pdt.aserdargun.com" },
   { code: "hex", repository: "hex-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/hex-aserdargun-com", productUrl: "https://hex.aserdargun.com/", productLabel: "hex.aserdargun.com" },
   { code: "eng", repository: "eng-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/eng-aserdargun-com", productUrl: "https://eng.aserdargun.com/", productLabel: "eng.aserdargun.com" },
+  { code: "gex", repository: "gex-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/gex-aserdargun-com", productUrl: "https://gex.aserdargun.com/", productLabel: "gex.aserdargun.com" },
 ].map((row) => ({
   code: row.code,
   repository: row.repository,
@@ -351,6 +352,7 @@ function validateLearningSystem(locale, html) {
     JSON.stringify(nodeRoles) === JSON.stringify([
       "aia:map",
       "gpu:foundation",
+      "gex:foundation",
       "llm:hub",
       "usl:adapt",
       "hns:harness",
@@ -568,13 +570,13 @@ function validateSystemFocus(locale, html) {
   if (section.length === 0) return;
 
   const expected = locale === "tr" ? [
-    ["foundation", "Temel", ["aia", "llm", "usl", "gpu"]],
+    ["foundation", "Temel", ["aia", "llm", "usl", "gpu", "gex"]],
     ["agent-system", "Ajan sistemi", ["hns", "ctx"]],
     ["assurance", "Güvence", ["sec", "evl"]],
     ["deployment", "Dağıtım", ["cld", "lcl", "nxt"]],
     ["physical-ai", "Fiziksel AI", ["wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng"]],
   ] : [
-    ["foundation", "Foundation", ["aia", "llm", "usl", "gpu"]],
+    ["foundation", "Foundation", ["aia", "llm", "usl", "gpu", "gex"]],
     ["agent-system", "Agent system", ["hns", "ctx"]],
     ["assurance", "Assurance", ["sec", "evl"]],
     ["deployment", "Deployment", ["cld", "lcl", "nxt"]],

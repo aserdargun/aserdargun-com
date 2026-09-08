@@ -865,6 +865,48 @@
       "focusState": "horizon"
     },
     {
+      "code": "gex",
+      "name": {
+        "en": "GEX — GPU Execution Explorer",
+        "tr": "GEX — GPU Çalıştırma Kaşifi"
+      },
+      "shortName": "GEX",
+      "description": {
+        "en": "Six-mode GPU execution analysis explorer with verified Azure deployment pipeline.",
+        "tr": "Doğrulanmış Azure dağıtım hattı ile altı modlu GPU çalıştırma analiz kaşifi."
+      },
+      "type": "observatory",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://gex.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/gex-aserdargun-com",
+      "researchCutoff": "2026-09-06",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-06",
+      "releaseSha": "7ffa46a1e70f2b3bd8da5948bc637fe4a36b5611",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [],
+      "downstreamApps": [],
+      "tracks": [
+        "gpu",
+        "execution-analysis"
+      ],
+      "entityIds": [
+        "entity:gpu-execution"
+      ],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation"
+    },
+    {
       "code": "nxt",
       "name": {
         "en": "NXT",

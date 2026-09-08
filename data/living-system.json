@@ -596,6 +596,37 @@
       "relatedMemoryIds": ["world-models-to-digital-twins", "human-control-authority-ladder"]
     },
     {
+      "code": "gex",
+      "kind": "observatory",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": { "en": "Live", "tr": "Yayında" },
+      "languages": ["tr", "en"],
+      "title": { "en": "GEX — GPU Execution Explorer", "tr": "GEX — GPU Çalıştırma Kaşifi" },
+      "summary": {
+        "en": "Six-mode GPU execution analysis explorer with verified Azure deployment pipeline.",
+        "tr": "Doğrulanmış Azure dağıtım hattı ile altı modlu GPU çalıştırma analiz kaşifi."
+      },
+      "repository": "https://github.com/aserdargun/gex-aserdargun-com",
+      "address": "https://gex.aserdargun.com/",
+      "updatedAt": "2026-09-06",
+      "researchCutoff": "2026-09-06",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-06",
+      "releaseSha": "7ffa46a1e70f2b3bd8da5948bc637fe4a36b5611",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [],
+      "downstreamApps": [],
+      "tracks": ["gpu", "execution-analysis"],
+      "entityIds": ["entity:gpu-execution"],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation",
+      "relatedMemoryIds": []
+    },
+    {
       "code": "nxt",
       "kind": "private-system",
       "systemRole": "lab",
