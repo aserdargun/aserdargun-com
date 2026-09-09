@@ -905,6 +905,53 @@
       ],
       "portfolioLayer": "foundation",
       "focusState": "foundation"
+    },
+    {
+      "code": "wml",
+      "name": {
+        "en": "WML — World Model Laboratory",
+        "tr": "WML — Dünya Modeli Laboratuvarı"
+      },
+      "shortName": "WML",
+      "description": {
+        "en": "Observe. Imagine. Predict. Act. Learn. A hands-on world model laboratory with physics, belief, planning and counterfactual time travel.",
+        "tr": "Gözle. Hayal et. Tahmin et. Harekete geç. Öğren. Fizik, inanç, planlama ve karşı-olgusal zaman yolculuğu ile etkileşimli dünya modeli laboratuvarı."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://wml.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/wml-aserdargun-com",
+      "researchCutoff": "2026-09-06",
+      "lastVerified": "2026-09-04",
+      "lastReleased": "2026-09-06",
+      "releaseSha": "542b53837b561e60497cb3697e719ee78f9be31e",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed",
+      "upstreamApps": [
+        "wfm"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "world-model",
+        "physics",
+        "3d",
+        "education",
+        "counterfactual"
+      ],
+      "entityIds": [
+        "entity:world-model-lab"
+      ],
+      "portfolioLayer": "foundation",
+      "focusState": "active"
     }
   ]
 }

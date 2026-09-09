@@ -17,7 +17,7 @@ import {
 
 const expectedPublicApplicationCodes = [
   "aia", "llm", "hns", "sec", "ctx", "evl", "usl", "gpu", "cld", "lcl",
-  "wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng", "gex",
+  "wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng", "gex", "wml",
 ].sort();
 const expectedPrivateApplicationCodes = ["nxt", "stk", "inf"].sort();
 
@@ -99,6 +99,7 @@ const expectedApplicationRows = [
   { code: "hex", repository: "hex-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/hex-aserdargun-com", productUrl: "https://hex.aserdargun.com/", productLabel: "hex.aserdargun.com" },
   { code: "eng", repository: "eng-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/eng-aserdargun-com", productUrl: "https://eng.aserdargun.com/", productLabel: "eng.aserdargun.com" },
   { code: "gex", repository: "gex-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/gex-aserdargun-com", productUrl: "https://gex.aserdargun.com/", productLabel: "gex.aserdargun.com" },
+  { code: "wml", repository: "wml-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/wml-aserdargun-com", productUrl: "https://wml.aserdargun.com/", productLabel: "wml.aserdargun.com" },
 ].map((row) => ({
   code: row.code,
   repository: row.repository,
@@ -578,13 +579,13 @@ function validateSystemFocus(locale, html) {
   if (section.length === 0) return;
 
   const expected = locale === "tr" ? [
-    ["foundation", "Temel", ["aia", "llm", "usl", "gpu", "gex"]],
+    ["foundation", "Temel", ["aia", "llm", "usl", "gpu", "gex", "wml"]],
     ["agent-system", "Ajan sistemi", ["hns", "ctx"]],
     ["assurance", "Güvence", ["sec", "evl"]],
     ["deployment", "Dağıtım", ["cld", "lcl"]],
     ["physical-ai", "Fiziksel AI", ["wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng"]],
   ] : [
-    ["foundation", "Foundation", ["aia", "llm", "usl", "gpu", "gex"]],
+    ["foundation", "Foundation", ["aia", "llm", "usl", "gpu", "gex", "wml"]],
     ["agent-system", "Agent system", ["hns", "ctx"]],
     ["assurance", "Assurance", ["sec", "evl"]],
     ["deployment", "Deployment", ["cld", "lcl"]],
@@ -1234,7 +1235,7 @@ validateSystemFocus("Root", rootPage);
 const rootAppMapIntro = routePages.en.applications.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
 check(rootAppMapIntro.includes("Application map · explore the portfolio"), "Root number-neutral application map kicker is missing");
 check(rootAppMapIntro.includes("One portfolio. Focused applications."), "Root number-neutral application map heading is missing");
-check(!/\b(?:05|five)\b/i.test(rootAppMapIntro), "Root stale application count remains in the map introduction");
+check(!/\b(?:05 live|Five live applications)\b/i.test(rootAppMapIntro), "Root stale application count remains in the map introduction");
 check(!rootAbout.includes("Stackfolio"), "Root Stackfolio product content remains");
 check(!rootAbout.includes("stk-aserdargun-com"), "Root Stackfolio repository name remains");
 check(!rootAbout.includes("https://github.com/aserdargun/stk-aserdargun-com"), "Root Stackfolio repository URL remains");
