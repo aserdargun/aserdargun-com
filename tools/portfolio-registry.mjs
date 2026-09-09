@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 function applicationManifest(application) {
   return {
     code: application.code,
+    parentApp: application.parentApp ?? null,
     name: application.title,
     shortName: application.code.toUpperCase(),
     description: application.summary,

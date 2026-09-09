@@ -154,6 +154,14 @@
         "assurance",
         "horizon"
       ]
+    },
+    "parentApp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z]{3}$",
+      "description": "Ownership parent; null denotes a top-level application. Independent of learning prerequisites."
     }
   },
   "$defs": {

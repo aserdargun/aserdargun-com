@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-09-06T12:00:00Z");
+const today = new Date("2026-09-09T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -20,7 +20,7 @@ async function readData() {
 test("the public application contract keeps verification, research, and release facts separate", async () => {
   const data = await readData();
 
-  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee"].includes(code))) {
+  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex"].includes(code))) {
     assert.match(application.researchCutoff, /^2026-\d{2}-\d{2}$/, `${application.code} research cutoff`);
     assert.equal(application.lastVerified, "2026-09-04", `${application.code} verification date`);
     assert.match(application.lastReleased, /^2026-\d{2}-\d{2}$/, `${application.code} release date`);
@@ -53,12 +53,13 @@ test("the portfolio registry is a deterministic public projection of application
 
   assert.equal(registry.schemaVersion, 1);
   assert.equal(registry.generatedAt, "2026-09-04");
-  assert.ok(registry.applications.length >= 16, "portfolio registry must have at least 16 applications");
+  assert.equal(registry.applications.length, 20);
   assert.deepEqual(registry.applications.map(({ code }) => code), data.applications.map(({ code }) => code));
   assert.deepEqual(
     registry.applications.find(({ code }) => code === "ctx"),
     {
       code: "ctx",
+      parentApp: null,
       name: { en: "Context & Knowledge Engineering", tr: "Bağlam ve Bilgi Mühendisliği" },
       shortName: "CTX",
       description: data.applications.find(({ code }) => code === "ctx").summary,
@@ -186,20 +187,40 @@ test("SWI colony labs preserve their relationship and show release evidence with
 test("homepage diagram, registry, and layer overview cover the same applications across their dedicated pages", async () => {
   const data = await readData();
   const expected = data.applications.map(({ code }) => code).sort();
-  // The home page diagram is hand-coded SVG; wml is registered as a public
-  // application but is currently rendered only on the dedicated /applications/
-  // page (per its applications-page contract). The diagram is therefore allowed
-  // to omit wml until the next diagram revision lifts it onto the home page.
-  const diagramExpected = expected.filter((code) => code !== "wml");
   for (const file of ["index.html", "tr/index.html"]) {
     const html = await readFile(path.join(rootDir, file), "utf8");
     const svg = html.match(/<g class="ld-nodes">([\s\S]*?)<\/svg>/)?.[1] ?? "";
     const diagram = [...svg.matchAll(/href="https:\/\/([a-z]{3})\.aserdargun\.com\/"/g)].map((match) => match[1]).sort();
-    assert.deepEqual(diagram, diagramExpected);
+    assert.deepEqual(diagram, expected);
     const applicationMap = await readFile(path.join(rootDir, file.replace("index.html", "applications/index.html")), "utf8");
     const map = [...applicationMap.matchAll(/data-app-code="([a-z]{3})"/g)].map((match) => match[1]).sort();
     assert.deepEqual(map, expected);
     assert.ok(html.indexOf('class="system-focus"') < html.indexOf('class="learning-system"'));
     assert.equal(html.includes('class="app-map"'), false, "the full application table belongs on its dedicated page");
+  }
+});
+
+test("companion learning apps connect to their research parents across both locales", async () => {
+  const data = await readData();
+  const { renderPracticeLabs } = await import("./render-living-system.mjs");
+  const { renderLearningDiagram } = await import("./learning-diagram.mjs");
+  for (const [parentCode, code, layer] of [["gpu", "gex", "foundation"], ["wfm", "wml", "physical-ai"], ["itl", "pdt", "physical-ai"], ["eng", "hex", "physical-ai"]]) {
+    const app = data.applications.find((app) => app.code === code);
+    const parent = data.applications.find((app) => app.code === parentCode);
+    assert.deepEqual(app.upstreamApps, [parentCode]);
+    assert.ok(parent.downstreamApps.includes(code));
+    assert.equal(app.portfolioLayer, layer);
+    assert.equal(app.systemRole, "lab");
+    assert.equal(app.researchCutoff, undefined, "educational applications do not imply a research cutoff");
+    assert.equal(app.lastReleased, undefined, "build timestamps do not establish release dates");
+    for (const locale of ["en", "tr"]) {
+      const cards = renderPracticeLabs({ locale, data });
+      assert.ok(cards.includes(`data-practice-lab="${code}" data-learning-parent="${parentCode}"`));
+      assert.ok(cards.includes(app.summary[locale]));
+      assert.ok(cards.includes(`href="${app.address}"`));
+      assert.ok(cards.includes(`href="${parent.address}"`));
+      const edges = renderLearningDiagram({ locale, data });
+      assert.ok(edges.includes(`data-learning-edge="${parentCode}-to-${code}"`));
+    }
   }
 });

@@ -5,13 +5,27 @@
   "applications": [
     {
       "code": "aia",
+      "parentApp": null,
+      "diagramLabel": {
+        "en": "AI ecosystem",
+        "tr": "AI ekosistemi"
+      },
       "kind": "atlas",
       "systemRole": "core-learning",
       "visibility": "public",
       "status": "live",
-      "statusLabel": { "en": "Live", "tr": "Yayında" },
-      "languages": ["tr", "en"],
-      "title": { "en": "AI Ecosystem Atlas", "tr": "AI Ecosystem Atlas" },
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "AI Ecosystem Atlas",
+        "tr": "AI Ecosystem Atlas"
+      },
       "summary": {
         "en": "An evidence-backed research console for comparing AI products and developer ecosystems.",
         "tr": "Yapay zekâ ürünlerini ve geliştirici ekosistemlerini kanıtlarıyla karşılaştıran araştırma konsolu."
@@ -27,15 +41,27 @@
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [],
-      "downstreamApps": ["gpu", "llm", "usl"],
-      "tracks": ["ecosystem", "products", "evidence"],
-      "entityIds": ["entity:ai-ecosystem"],
+      "downstreamApps": [
+        "gpu",
+        "llm",
+        "usl"
+      ],
+      "tracks": [
+        "ecosystem",
+        "products",
+        "evidence"
+      ],
+      "entityIds": [
+        "entity:ai-ecosystem"
+      ],
       "portfolioLayer": "foundation",
       "focusState": "foundation",
       "relatedMemoryIds": []
     },
     {
       "code": "llm",
+      "parentApp": null,
+      "diagramLabel": {"en": "Runtime · serving", "tr": "Çalıştırma · sunum"},
       "kind": "atlas",
       "systemRole": "core-learning",
       "visibility": "public",
@@ -67,13 +93,27 @@
     },
     {
       "code": "hns",
+      "parentApp": null,
+      "diagramLabel": {
+        "en": "Harness engineering",
+        "tr": "Harness mühendisliği"
+      },
       "kind": "observatory",
       "systemRole": "core-learning",
       "visibility": "public",
       "status": "live",
-      "statusLabel": { "en": "Live", "tr": "Yayında" },
-      "languages": ["tr", "en"],
-      "title": { "en": "Harness Engineering Observatory", "tr": "Harness Engineering Observatory" },
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "Harness Engineering Observatory",
+        "tr": "Harness Engineering Observatory"
+      },
       "summary": {
         "en": "A bilingual, source-backed observatory for comparing the harnesses, runtimes, orchestration, execution, verification, and observability layers that turn model capability into reliable agent systems.",
         "tr": "Model yeteneğini güvenilir ajan sistemlerine dönüştüren harness, çalıştırma, orkestrasyon, yürütme, doğrulama ve gözlemlenebilirlik katmanlarını karşılaştıran iki dilli, kaynaklı gözlemevi."
@@ -88,16 +128,34 @@
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
-      "upstreamApps": ["llm"],
-      "downstreamApps": ["ctx", "sec", "evl"],
-      "tracks": ["harness", "orchestration", "observability"],
-      "entityIds": ["entity:agent-harness"],
+      "upstreamApps": [
+        "llm"
+      ],
+      "downstreamApps": [
+        "ctx",
+        "sec",
+        "evl"
+      ],
+      "tracks": [
+        "harness",
+        "orchestration",
+        "observability"
+      ],
+      "entityIds": [
+        "entity:agent-harness"
+      ],
       "portfolioLayer": "agent-system",
       "focusState": "active",
-      "relatedMemoryIds": ["evidence-before-deployment", "context-security-evaluation", "agent-orchestration-2026-09-08"]
+      "relatedMemoryIds": [
+        "evidence-before-deployment",
+        "context-security-evaluation",
+        "agent-orchestration-2026-09-08"
+      ]
     },
     {
       "code": "sec",
+      "parentApp": null,
+      "diagramLabel": {"en": "Trust · security", "tr": "Güven · güvenlik"},
       "kind": "observatory",
       "systemRole": "core-learning",
       "visibility": "public",
@@ -129,13 +187,27 @@
     },
     {
       "code": "ctx",
+      "parentApp": null,
+      "diagramLabel": {
+        "en": "Context · knowledge",
+        "tr": "Bağlam · bilgi"
+      },
       "kind": "observatory",
       "systemRole": "core-learning",
       "visibility": "public",
       "status": "live",
-      "statusLabel": { "en": "Live", "tr": "Yayında" },
-      "languages": ["tr", "en"],
-      "title": { "en": "Context & Knowledge Engineering", "tr": "Bağlam ve Bilgi Mühendisliği" },
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "Context & Knowledge Engineering",
+        "tr": "Bağlam ve Bilgi Mühendisliği"
+      },
       "summary": {
         "en": "A bilingual, source-backed field guide to the information system that runs before a model answers, from ingestion and retrieval through citation, caching, and memory.",
         "tr": "Model yanıtından önce çalışan bilgi sistemini alım ve erişimden alıntılama, önbellekleme ve belleğe kadar tasarlamaya yarayan iki dilli, kaynaklı alan rehberi."
@@ -150,16 +222,33 @@
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
-      "upstreamApps": ["hns"],
-      "downstreamApps": ["llm", "lcl"],
-      "tracks": ["context", "knowledge", "retrieval", "memory"],
-      "entityIds": ["entity:mcp"],
+      "upstreamApps": [
+        "hns"
+      ],
+      "downstreamApps": [
+        "llm",
+        "lcl"
+      ],
+      "tracks": [
+        "context",
+        "knowledge",
+        "retrieval",
+        "memory"
+      ],
+      "entityIds": [
+        "entity:mcp"
+      ],
       "portfolioLayer": "agent-system",
       "focusState": "active",
-      "relatedMemoryIds": ["context-security-evaluation", "agent-orchestration-2026-09-08"]
+      "relatedMemoryIds": [
+        "context-security-evaluation",
+        "agent-orchestration-2026-09-08"
+      ]
     },
     {
       "code": "evl",
+      "parentApp": null,
+      "diagramLabel": {"en": "Evaluation", "tr": "Değerlendirme"},
       "kind": "lab",
       "systemRole": "core-learning",
       "visibility": "public",
@@ -191,6 +280,8 @@
     },
     {
       "code": "usl",
+      "parentApp": null,
+      "diagramLabel": {"en": "Model training", "tr": "Model eğitimi"},
       "kind": "atlas",
       "systemRole": "core-learning",
       "visibility": "public",
@@ -222,6 +313,8 @@
     },
     {
       "code": "gpu",
+      "parentApp": null,
+      "diagramLabel": {"en": "GPU kernels", "tr": "GPU kernelleri"},
       "kind": "atlas",
       "systemRole": "core-learning",
       "visibility": "public",
@@ -244,7 +337,7 @@
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": ["aia"],
-      "downstreamApps": ["llm"],
+      "downstreamApps": ["llm", "gex"],
       "tracks": ["cuda", "triton", "kernels", "profiling"],
       "entityIds": ["entity:cuda"],
       "portfolioLayer": "foundation",
@@ -253,6 +346,8 @@
     },
     {
       "code": "cld",
+      "parentApp": null,
+      "diagramLabel": {"en": "Cloud deployment", "tr": "Bulut dağıtımı"},
       "kind": "tool",
       "systemRole": "core-learning",
       "visibility": "public",
@@ -284,6 +379,8 @@
     },
     {
       "code": "lcl",
+      "parentApp": null,
+      "diagramLabel": {"en": "Local compute", "tr": "Lokal hesaplama"},
       "kind": "lab",
       "systemRole": "core-learning",
       "visibility": "public",
@@ -315,6 +412,8 @@
     },
     {
       "code": "wfm",
+      "parentApp": null,
+      "diagramLabel": {"en": "World models", "tr": "Dünya modelleri"},
       "kind": "atlas",
       "systemRole": "horizon-bridge",
       "visibility": "public",
@@ -337,7 +436,7 @@
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": ["lcl", "cld"],
-      "downstreamApps": ["itl"],
+      "downstreamApps": ["itl", "wml"],
       "tracks": ["perception", "prediction", "planning", "action"],
       "entityIds": ["entity:world-model"],
       "portfolioLayer": "physical-ai",
@@ -346,6 +445,8 @@
     },
     {
       "code": "swi",
+      "parentApp": null,
+      "diagramLabel": {"en": "Swarm intelligence", "tr": "Sürü zekâsı"},
       "kind": "atlas",
       "systemRole": "horizon-bridge",
       "visibility": "public",
@@ -399,6 +500,8 @@
     },
     {
       "code": "ant",
+      "parentApp": "swi",
+      "diagramLabel": {"en": "Pheromone trails", "tr": "Feromon izleri"},
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
@@ -433,6 +536,8 @@
     },
     {
       "code": "bee",
+      "parentApp": "swi",
+      "diagramLabel": {"en": "Dance communication", "tr": "Dans iletişimi"},
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
@@ -467,6 +572,8 @@
     },
     {
       "code": "itl",
+      "parentApp": null,
+      "diagramLabel": {"en": "Industrial twins", "tr": "Endüstriyel ikizler"},
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
@@ -489,7 +596,7 @@
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": ["wfm", "swi"],
-      "downstreamApps": ["eng"],
+      "downstreamApps": ["eng", "pdt"],
       "tracks": ["digital-twins", "simulation", "industrial-ai"],
       "entityIds": ["entity:openusd"],
       "portfolioLayer": "physical-ai",
@@ -497,75 +604,9 @@
       "relatedMemoryIds": ["world-models-to-digital-twins", "human-control-authority-ladder"]
     },
     {
-      "code": "pdt",
-      "kind": "lab",
-      "systemRole": "lab",
-      "visibility": "public",
-      "status": "live",
-      "statusLabel": { "en": "Live", "tr": "Yayında" },
-      "languages": ["tr", "en"],
-      "title": {
-        "en": "P-101 Interactive Digital Twin",
-        "tr": "P-101 İnteraktif Dijital İkiz"
-      },
-      "summary": {
-        "en": "An interactive centrifugal-pump teaching exhibit for the Industrial Twin Lab. Editable Blender source asset, healthy GLB, educational geometry variants, web MVP.",
-        "tr": "Industrial Twin Lab için interaktif santrifüj pompa öğretim sergisi. Düzenlenebilir Blender kaynak varlığı, sağlıklı GLB, eğitsel geometri varyantları, web MVP."
-      },
-      "repository": "https://github.com/aserdargun/pdt-aserdargun-com",
-      "address": "https://pdt.aserdargun.com/",
-      "updatedAt": "2026-09-04",
-      "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-04",
-      "releaseSha": "0ec761d6ad01bb796c63d641abf81ffa11e31c2f",
-      "sourceCount": null,
-      "claimCount": null,
-      "evidencePolicy": "primary-source-backed",
-      "upstreamApps": ["itl"],
-      "downstreamApps": [],
-      "tracks": ["digital-twin", "pump", "teaching-exhibit"],
-      "entityIds": ["entity:p-101"],
-      "portfolioLayer": "physical-ai",
-      "focusState": "horizon",
-      "relatedMemoryIds": []
-    },
-    {
-      "code": "hex",
-      "kind": "atlas",
-      "systemRole": "core-learning",
-      "visibility": "public",
-      "status": "live",
-      "statusLabel": { "en": "Live", "tr": "Yayında" },
-      "languages": ["tr", "en"],
-      "title": {
-        "en": "HEX — Humanoid Engineering Explorer",
-        "tr": "HEX — İnsansı Mühendislik Kaşifi"
-      },
-      "summary": {
-        "en": "An original bilingual interactive humanoid engineering learning object for the ENG curriculum. Blender-authored GLB, ten engineering modes, progressive assembled-to-exploded slider.",
-        "tr": "ENG müfredatı için özgün, iki dilli, interaktif insansı mühendislik öğrenme nesnesi. Blender ile hazırlanmış GLB, on mühendislik modu, kademeli montajdan-patlamış görünüme kaydırıcı."
-      },
-      "repository": "https://github.com/aserdargun/hex-aserdargun-com",
-      "address": "https://hex.aserdargun.com/",
-      "updatedAt": "2026-09-04",
-      "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-04",
-      "releaseSha": "ba06cbe9e7b0c902faf605508d8185dc3aedb09a",
-      "sourceCount": null,
-      "claimCount": null,
-      "evidencePolicy": "primary-source-backed",
-      "upstreamApps": ["eng"],
-      "downstreamApps": [],
-      "tracks": ["humanoid", "interactive", "eng-curriculum"],
-      "entityIds": ["entity:hex"],
-      "portfolioLayer": "physical-ai",
-      "focusState": "horizon",
-      "relatedMemoryIds": []
-    },
-    {
       "code": "eng",
+      "parentApp": null,
+      "diagramLabel": {"en": "Humanoid engineering", "tr": "İnsansı robot mühendisliği"},
       "kind": "horizon",
       "systemRole": "horizon",
       "visibility": "public",
@@ -588,7 +629,7 @@
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": ["itl"],
-      "downstreamApps": [],
+      "downstreamApps": ["hex"],
       "tracks": ["humanoids", "education", "physical-ai"],
       "entityIds": ["entity:humanoid-robotics"],
       "portfolioLayer": "physical-ai",
@@ -597,65 +638,206 @@
     },
     {
       "code": "gex",
-      "kind": "observatory",
-      "systemRole": "core-learning",
-      "visibility": "public",
-      "status": "live",
-      "statusLabel": { "en": "Live", "tr": "Yayında" },
-      "languages": ["tr", "en"],
-      "title": { "en": "GEX — GPU Execution Explorer", "tr": "GEX — GPU Çalıştırma Kaşifi" },
-      "summary": {
-        "en": "Six-mode GPU execution analysis explorer with verified Azure deployment pipeline.",
-        "tr": "Doğrulanmış Azure dağıtım hattı ile altı modlu GPU çalıştırma analiz kaşifi."
-      },
-      "repository": "https://github.com/aserdargun/gex-aserdargun-com",
-      "address": "https://gex.aserdargun.com/",
-      "updatedAt": "2026-09-06",
-      "researchCutoff": "2026-09-06",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-06",
-      "releaseSha": "7ffa46a1e70f2b3bd8da5948bc637fe4a36b5611",
-      "sourceCount": null,
-      "claimCount": null,
-      "evidencePolicy": "primary-source-backed",
-      "upstreamApps": [],
-      "downstreamApps": [],
-      "tracks": ["gpu", "execution-analysis"],
-      "entityIds": ["entity:gpu-execution"],
-      "portfolioLayer": "foundation",
-      "focusState": "foundation",
-      "relatedMemoryIds": []
-    },
-    {
-      "code": "wml",
+      "parentApp": "gpu",
+      "diagramLabel": {"en": "Kernel execution", "tr": "Kernel yürütme"},
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
       "status": "live",
-      "statusLabel": { "en": "Live", "tr": "Yayında" },
-      "languages": ["tr", "en"],
-      "title": { "en": "WML — World Model Laboratory", "tr": "WML — Dünya Modeli Laboratuvarı" },
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "GPU Execution Explorer",
+        "tr": "GPU Yürütme Gezgini"
+      },
       "summary": {
-        "en": "Observe. Imagine. Predict. Act. Learn. A hands-on world model laboratory with physics, belief, planning and counterfactual time travel.",
-        "tr": "Gözle. Hayal et. Tahmin et. Harekete geç. Öğren. Fizik, inanç, planlama ve karşı-olgusal zaman yolculuğu ile etkileşimli dünya modeli laboratuvarı."
+        "en": "Trace GPU anatomy, kernel launches, warp masks, memory access, and matrix tiles through six interactive lessons. Results come from an educational execution model, not profiler measurements.",
+        "tr": "Altı etkileşimli dersle GPU anatomisini, kernel başlatmayı, warp maskelerini, bellek erişimini ve matris bloklarını izle. Sonuçlar profil ölçümünden değil, eğitim amaçlı yürütme modelinden gelir."
+      },
+      "guidingQuestion": {
+        "en": "How does a kernel become hardware execution?",
+        "tr": "Bir kernel donanım üzerinde nasıl yürütülür?"
+      },
+      "repository": "https://github.com/aserdargun/gex-aserdargun-com",
+      "address": "https://gex.aserdargun.com/",
+      "updatedAt": "2026-09-09",
+      "lastVerified": "2026-09-09",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "gpu"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "gpu",
+        "cuda",
+        "kernels",
+        "memory"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "foundation",
+      "focusState": "active",
+      "relatedMemoryIds": [],
+      "releaseSha": "24ba9288f4dba1ffe49dfc4a185c107d71099b74"
+    },
+    {
+      "code": "wml",
+      "parentApp": "wfm",
+      "diagramLabel": {"en": "Prediction experiments", "tr": "Tahmin deneyleri"},
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "World Model Laboratory",
+        "tr": "Dünya Modeli Laboratuvarı"
+      },
+      "summary": {
+        "en": "Explore observation, belief, prediction, planning, and counterfactual branches in WFM’s experiment laboratory. Compare three hand-coded predictors against a simulated world; these are not trained foundation models.",
+        "tr": "WFM’nin deney laboratuvarında gözlemi, inancı, tahmini, planlamayı ve alternatif eylem dallarını keşfet. Elle tanımlanmış üç tahmin modelini simüle edilen dünyayla karşılaştır; bunlar eğitilmiş temel modeller değildir."
+      },
+      "guidingQuestion": {
+        "en": "How does a prediction change when beliefs or actions change?",
+        "tr": "İnanç veya eylem değiştiğinde tahmin nasıl değişir?"
       },
       "repository": "https://github.com/aserdargun/wml-aserdargun-com",
       "address": "https://wml.aserdargun.com/",
-      "updatedAt": "2026-09-06",
-      "researchCutoff": "2026-09-06",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-06",
-      "releaseSha": "542b53837b561e60497cb3697e719ee78f9be31e",
+      "updatedAt": "2026-09-09",
+      "lastVerified": "2026-09-09",
       "sourceCount": null,
       "claimCount": null,
-      "evidencePolicy": "primary-source-backed",
-      "upstreamApps": ["wfm"],
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "wfm"
+      ],
       "downstreamApps": [],
-      "tracks": ["world-model", "physics", "3d", "education", "counterfactual"],
-      "entityIds": ["entity:world-model-lab"],
-      "portfolioLayer": "foundation",
+      "tracks": [
+        "world-models",
+        "prediction",
+        "planning",
+        "simulation"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "physical-ai",
       "focusState": "active",
-      "relatedMemoryIds": []
+      "relatedMemoryIds": [],
+      "releaseSha": "a4129857a671b01a5e4d07f3d39e71525416ca4d"
+    },
+    {
+      "code": "pdt",
+      "parentApp": "itl",
+      "diagramLabel": {"en": "Pump digital twin", "tr": "Pompa dijital ikizi"},
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "P-101 Interactive Digital Twin",
+        "tr": "P-101 Etkileşimli Dijital İkiz"
+      },
+      "summary": {
+        "en": "Inspect a centrifugal pump, its components, and condition scenarios as an Industrial Twin Lab teaching exhibit. Geometry is simplified and all condition signals are synthetic.",
+        "tr": "Industrial Twin Lab öğrenme örneğinde santrifüj pompayı, bileşenlerini ve durum senaryolarını incele. Geometri sadeleştirilmiştir; tüm durum sinyalleri sentetiktir."
+      },
+      "guidingQuestion": {
+        "en": "How do pump components relate to operating conditions?",
+        "tr": "Pompa bileşenleri çalışma koşullarıyla nasıl ilişkilidir?"
+      },
+      "repository": "https://github.com/aserdargun/pdt-aserdargun-com",
+      "address": "https://pdt.aserdargun.com/",
+      "updatedAt": "2026-09-09",
+      "lastVerified": "2026-09-09",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "itl"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "digital-twins",
+        "pumps",
+        "synthetic-signals"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "physical-ai",
+      "focusState": "active",
+      "relatedMemoryIds": [],
+      "releaseSha": "488bc4fa0500bcd3d56e5966dd7769043a433d20"
+    },
+    {
+      "code": "hex",
+      "parentApp": "eng",
+      "diagramLabel": {"en": "Humanoid exploration", "tr": "İnsansı robot keşfi"},
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "Humanoid Engineering Explorer",
+        "tr": "İnsansı Robot Mühendisliği Gezgini"
+      },
+      "summary": {
+        "en": "Explore humanoid structure, joints, actuation, sensors, and power/data paths through ENG’s interactive 3D learning object. Movements are kinematic teaching aids, with no asserted dynamics or hardware performance.",
+        "tr": "ENG’nin etkileşimli 3B öğrenme uygulamasında insansı robot yapısını, eklemleri, eyleyicileri, sensörleri ve güç/veri yollarını keşfet. Hareketler kinematik öğretim örnekleridir; dinamik veya donanım performansı iddiası taşımaz."
+      },
+      "guidingQuestion": {
+        "en": "How do body, joints, sensing, and control work together?",
+        "tr": "Gövde, eklemler, algılama ve kontrol birlikte nasıl çalışır?"
+      },
+      "repository": "https://github.com/aserdargun/hex-aserdargun-com",
+      "address": "https://hex.aserdargun.com/",
+      "updatedAt": "2026-09-09",
+      "lastVerified": "2026-09-09",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "eng"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "humanoids",
+        "kinematics",
+        "engineering",
+        "physical-ai"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "physical-ai",
+      "focusState": "active",
+      "relatedMemoryIds": [],
+      "releaseSha": "67c6020431ac47b35e1dbc91b6526f8ab6468b75"
     }
   ],
   "now": {

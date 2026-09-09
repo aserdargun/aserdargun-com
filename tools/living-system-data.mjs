@@ -29,7 +29,7 @@ const APPLICATION_KEYS = new Set([
   "guidingQuestion", "repository", "address", "updatedAt", "relatedMemoryIds", "nextDirection",
   "statusLabel", "languages", "researchCutoff", "lastVerified", "lastReleased", "releaseSha",
   "sourceCount", "claimCount", "evidencePolicy", "upstreamApps", "downstreamApps", "tracks",
-  "entityIds", "portfolioLayer", "focusState",
+  "entityIds", "portfolioLayer", "focusState", "parentApp", "diagramLabel",
 ]);
 const NOW_KEYS = new Set(["updatedAt", "week", "items"]);
 const NOW_ITEM_KEYS = new Set(["id", "timeframe", "title", "summary", "tags"]);
@@ -390,6 +390,8 @@ function isStructurallyValidPublicApplication(application, today) {
     && (application.entityIds === undefined || isUniqueArrayOf(application.entityIds, (id) => typeof id === "string" && /^entity:[a-z0-9-]+$/.test(id)))
     && (application.portfolioLayer === undefined || PORTFOLIO_LAYERS.has(application.portfolioLayer))
     && (application.focusState === undefined || FOCUS_STATES.has(application.focusState))
+    && (application.parentApp == null || (typeof application.parentApp === "string" && APPLICATION_CODE_PATTERN.test(application.parentApp)))
+    && (application.diagramLabel === undefined || isCompleteLocalized(application.diagramLabel))
     && isUniqueArrayOf(
       application.relatedMemoryIds,
       (memoryId) => typeof memoryId === "string" && KEBAB_CASE_PATTERN.test(memoryId),
@@ -474,6 +476,30 @@ function validateApplications(applications, errors, today, trustedApplicationCod
     validateOptionalLocalized(application.guidingQuestion, `${label}.guidingQuestion`, errors);
     validateOptionalLocalized(application.nextDirection, `${label}.nextDirection`, errors);
     validateOptionalLocalized(application.statusLabel, `${label}.statusLabel`, errors);
+    validateOptionalLocalized(application.diagramLabel, `${label}.diagramLabel`, errors);
+
+    if (application.parentApp != null) {
+      const parent = applications.find((candidate) => candidate?.code === application.parentApp);
+      if (!trustedApplicationCodes.has(application.parentApp)) {
+        addError(errors, `${label}.parentApp`, "relationship-unresolved", `${label}.parentApp must reference a valid public application.`);
+      }
+      if (parent && parent.portfolioLayer !== application.portfolioLayer) {
+        addError(errors, `${label}.parentApp`, "hierarchy-layer", `${label} must share its parent's portfolio layer.`);
+      }
+      if (parent && (!application.upstreamApps?.includes(parent.code) || !parent.downstreamApps?.includes(application.code))) {
+        addError(errors, `${label}.parentApp`, "hierarchy-relationship", `${label} needs reciprocal learning links with its parent.`);
+      }
+      const ancestors = new Set([application.code]);
+      let ancestor = parent;
+      while (ancestor) {
+        if (ancestors.has(ancestor.code)) {
+          addError(errors, `${label}.parentApp`, "hierarchy-cycle", `${label}.parentApp must not form an ownership cycle.`);
+          break;
+        }
+        ancestors.add(ancestor.code);
+        ancestor = applications.find((candidate) => candidate?.code === ancestor.parentApp);
+      }
+    }
 
     if (application.languages !== undefined
       && JSON.stringify(application.languages) !== JSON.stringify(["tr", "en"])) {

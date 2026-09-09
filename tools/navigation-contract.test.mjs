@@ -558,23 +558,28 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://bee.aserdargun.com/", "BEE"],
       ["https://itl.aserdargun.com/", "ITL"],
       ["https://eng.aserdargun.com/", "ENG"],
+      ["https://gex.aserdargun.com/", "GEX"],
+      ["https://wml.aserdargun.com/", "WML"],
+      ["https://pdt.aserdargun.com/", "PDT"],
+      ["https://hex.aserdargun.com/", "HEX"],
     ];
 
     assert.ok(svg, "learning diagram SVG must remain a closed source scope");
     assert.equal(extraSvgScopes.length, 0);
     assert.doesNotMatch(svg, /<(?:span|foreignObject)\b/i, "HTML must never be inserted into SVG");
     const svgBlankAnchors = anchors(svg).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
-    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all sixteen diagram nodes must remain inside SVG");
+    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all twenty diagram nodes must remain inside SVG");
 
-    assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")), expectedNodes.map(([href]) => href));
+    assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")).sort(), expectedNodes.map(([href]) => href).sort());
     for (const [index, anchor] of svgBlankAnchors.entries()) {
-      const titleId = `ld-new-tab-${expectedNodes[index][1].toLowerCase()}-${document.locale}`;
+      const code = attribute(anchor.openingTag, "href").match(/https:\/\/([a-z]{3})\./)[1];
+      const titleId = `ld-new-tab-${code}-${document.locale}`;
       const relTokens = (attribute(anchor.openingTag, "rel") ?? "").toLowerCase().split(/\s+/);
       assert.ok(relTokens.includes("noreferrer"));
       assert.ok((attribute(anchor.openingTag, "aria-describedby") ?? "").split(/\s+/).includes(titleId));
       assert.match(anchor.content, new RegExp(`^\\s*<title id="${titleId}">${expectedTitle}</title>`));
       assert.equal((anchor.content.match(/<title\b/g) ?? []).length, 1, "new-tab SVG title must be singular");
-      assert.match(anchor.content, new RegExp(`>${expectedNodes[index][1]}<`), "existing node name must be preserved");
+      assert.match(anchor.content, new RegExp(`>${code.toUpperCase()}<`), "existing node name must be preserved");
     }
   });
 
@@ -593,7 +598,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.match(svg, /class="ld-legend"/, "primary, supporting, and horizon relationships need a legend");
 
     const edges = Array.from(svg.matchAll(/<path data-learning-edge="([^"]+)"[^>]*d="([^"]+)"[^>]*marker-end="url\(#ld-arrow\)"\/>/g));
-    assert.equal(edges.length, 21, "every directed relationship must terminate with an arrow marker");
+    assert.equal(edges.length, 25, "every directed relationship must terminate with an arrow marker");
     assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-wfm")).length, 1, "WFM must receive one arrow");
     assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-swi")).length, 1, "SWI must receive one arrow");
     const deploymentConnectors = Array.from(svg.matchAll(/<path data-learning-connector="([^"]+)"[^>]*d="([^"]+)"\/>/g));

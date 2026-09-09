@@ -8,6 +8,8 @@ import {
   summarizeApplications,
 } from "./living-system-data.mjs";
 import { buildPortfolioRegistry } from "./portfolio-registry.mjs";
+import { applicationHierarchy } from "./application-hierarchy.mjs";
+import { renderLearningDiagram } from "./learning-diagram.mjs";
 import {
   directText as activeDirectText,
   isActive as isActiveHtmlNode,
@@ -21,7 +23,9 @@ const GENERATED_BLOCKS = new Set([
   "primary-navigation",
   "application-map",
   "system-focus",
+  "learning-diagram",
   "swarm-labs",
+  "practice-labs",
   "now-content",
   "public-memory",
   "journey-evidence",
@@ -356,13 +360,15 @@ export function renderApplicationMap({ locale, data, today, page }) {
     archived: label(locale, "Archived", "Arşivlendi"),
   };
   const publicMemory = new Map(data.publicMemory.map((memory) => [memory.id, memory]));
-  const rows = registry.applications.map((application) => {
+  const rows = applicationHierarchy(registry.applications).map(({ application, depth }) => {
     const sourceApplication = sourceApplications.get(application.code);
     const freshnessDate = application.lastVerified ?? (application.status === "live" ? sourceApplication.updatedAt : null);
     const status = freshnessDate
       ? renderFreshness({ locale, dateOnly: freshnessDate, today })
       : `<span class="app-updated app-updated-horizon"><span class="app-horizon-dot" aria-hidden="true"></span>${escapeHtml(application.statusLabel?.[locale] ?? statusLabels[application.status])}</span>`;
-    const rowClass = ` data-app-row data-app-code="${escapeHtml(application.code)}" data-app-layer="${escapeHtml(application.portfolioLayer ?? "")}"${sourceApplication.systemRole === "horizon" ? ' class="app-row-horizon"' : ""}`;
+    const rowClasses = [sourceApplication.systemRole === "horizon" ? "app-row-horizon" : "", depth ? "app-row-child" : ""].filter(Boolean).join(" ");
+    const rowClass = ` data-app-row data-app-code="${escapeHtml(application.code)}" data-app-layer="${escapeHtml(application.portfolioLayer ?? "")}" data-app-depth="${depth}"${application.parentApp ? ` data-app-parent="${escapeHtml(application.parentApp)}"` : ""} style="--app-depth: ${depth}"${rowClasses ? ` class="${rowClasses}"` : ""}`;
+    const ownership = application.parentApp ? `<small class="app-parent-label">${escapeHtml(label(locale, `Sub-application of ${application.parentApp.toUpperCase()}`, `${application.parentApp.toUpperCase()} alt uygulaması`))}</small>` : "";
     const title = escapeHtml(application.name[locale]);
     const applicationSummary = escapeHtml(application.description[locale]);
     const repository = escapeHtml(application.repositoryUrl);
@@ -402,7 +408,7 @@ export function renderApplicationMap({ locale, data, today, page }) {
       nextDirection,
       relatedMemory,
     ].filter(Boolean).join("\n");
-    return `              <tr${rowClass}><th scope="row"><code>${escapeHtml(application.code)}</code></th><td><strong>${title}</strong><span>${applicationSummary}</span>${status}\n<details class="app-evidence"><summary>${label(locale, "Evidence & related knowledge", "Kanıt ve ilgili bilgi")}</summary>${applicationDetails}</details></td><td><a href="${repository}" target="_blank" rel="noreferrer"><code>${repositoryName}</code> <span aria-hidden="true">↗</span></a></td><td><a href="${address}" target="_blank" rel="noreferrer">${domain} <span aria-hidden="true">↗</span></a></td></tr>`;
+    return `              <tr${rowClass}><th scope="row"><code>${escapeHtml(application.code)}</code></th><td>${ownership}<strong>${title}</strong><span>${applicationSummary}</span>${status}\n<details class="app-evidence"><summary>${label(locale, "Evidence & related knowledge", "Kanıt ve ilgili bilgi")}</summary>${applicationDetails}</details></td><td><a href="${repository}" target="_blank" rel="noreferrer"><code>${repositoryName}</code> <span aria-hidden="true">↗</span></a></td><td><a href="${address}" target="_blank" rel="noreferrer">${domain} <span aria-hidden="true">↗</span></a></td></tr>`;
   });
 
   return [
@@ -435,7 +441,7 @@ export function renderSystemFocus({ locale, data }) {
     {
       key: "foundation",
       title: label(locale, "Foundation", "Temel"),
-      description: label(locale, "Ecosystem, compute, runtime, and model-building foundations.", "Ekosistem, hesaplama, çalışma ortamı ve model geliştirme temelleri."),
+      description: label(locale, "Ecosystem, compute, runtime, and model-building foundations, with GEX for hands-on GPU execution.", "Ekosistem, hesaplama, çalışma ortamı ve model geliştirme temelleri; GEX ile uygulamalı GPU yürütme."),
     },
     {
       key: "agent-system",
@@ -455,7 +461,7 @@ export function renderSystemFocus({ locale, data }) {
     {
       key: "physical-ai",
       title: label(locale, "Physical AI", "Fiziksel AI"),
-      description: label(locale, "World models, swarm research, and the ANT / BEE colony experiments inform digital twins and embodied engineering.", "Dünya modelleri, sürü araştırmaları ve ANT / BEE koloni deneyleri, dijital ikizlere ve bedenlenmiş mühendisliğe bilgi sağlar."),
+      description: label(locale, "World models and swarm research meet WML and ANT / BEE experiments, PDT pump twins, and HEX humanoid exploration.", "Dünya modelleri ve sürü araştırmaları; WML ve ANT / BEE deneyleri, PDT pompa ikizi ve HEX insansı robot keşfiyle buluşur."),
     },
   ];
   const registry = buildPortfolioRegistry({ applications: data.applications, generatedAt: data.now.updatedAt });
@@ -468,7 +474,7 @@ export function renderSystemFocus({ locale, data }) {
       `          <h2>${layer.title}</h2>`,
       `          <p>${layer.description}</p>`,
       `          <ul aria-label="${escapeHtml(label(locale, `${layer.title} applications`, `${layer.title} uygulamaları`))}">`,
-      ...applications.map((application) => `            <li><a href="${escapeHtml(application.productionUrl)}" target="_blank" rel="noreferrer"><code>${escapeHtml(application.code)}</code><span>${escapeHtml(application.name[locale])}</span></a></li>`),
+      renderFocusApplications(applications, locale),
       "          </ul>",
       "        </article>",
     ].join("\n");
@@ -485,14 +491,51 @@ export function renderSystemFocus({ locale, data }) {
     '        <div class="system-focus__grid">',
     ...cards,
     "        </div>",
+    `      <p class="system-focus__hierarchy-note">${label(locale, "Indented applications belong to the application above them.", "Girintili uygulamalar, üstlerinde yer alan uygulamaya bağlıdır.")}</p>`,
     "      </div>",
     "    </section>",
   ].join("\n");
 }
 
+function renderFocusApplications(applications, locale, parentApp = null) {
+  return applications.filter((app) => app.parentApp === parentApp).map((app) => {
+    const children = applications.filter((child) => child.parentApp === app.code);
+    const ownership = parentApp ? `<span class="sr-only app-ownership">${label(locale, `Sub-application of ${parentApp.toUpperCase()}.`, `${parentApp.toUpperCase()} alt uygulaması.`)}</span>` : "";
+    return `            <li data-focus-app="${app.code}"${parentApp ? ` data-app-parent="${parentApp}"` : ""}><a href="${escapeHtml(app.productionUrl)}" target="_blank" rel="noreferrer"><code>${app.code}</code><span>${escapeHtml(app.name[locale])}${ownership}</span></a>${children.length ? `<ul class="system-focus-children" aria-label="${label(locale, `${app.code.toUpperCase()} sub-applications`, `${app.code.toUpperCase()} alt uygulamaları`)}">${renderFocusApplications(applications, locale, app.code)}</ul>` : ""}</li>`;
+  }).join("\n");
+}
+
+function practiceApplications(data) {
+  return data.applications.filter((app) => app.parentApp && app.parentApp !== "swi");
+}
+
+export function renderPracticeLabs({ locale, data }) {
+  return [
+    `      <section class="learning-horizon practice-labs" aria-labelledby="practice-title-${locale}">`,
+    `        <p class="learning-horizon-kicker">${label(locale, "From research to hands-on learning", "Araştırmadan uygulamalı öğrenmeye")}</p>`,
+    `        <h3 id="practice-title-${locale}">${label(locale, "Explore an idea. Run an experiment.", "Bir fikri keşfet. Bir deney yap.")}</h3>`,
+    `        <p>${label(locale, "Follow each research application into its companion learning experience. These links describe learning relationships; each application runs independently.", "Her araştırma uygulamasından ona bağlı öğrenme deneyimine geç. Bu bağlantılar öğrenme ilişkilerini gösterir; her uygulama bağımsız çalışır.")}</p>`,
+    '        <div class="swarm-labs__grid">',
+    ...practiceApplications(data).map((app) => {
+      const parent = data.applications.find((candidate) => candidate.code === app.parentApp);
+      return [
+        `          <article class="swarm-lab" data-practice-lab="${app.code}" data-learning-parent="${parent.code}">`,
+        `            <p class="swarm-lab__identity"><code>${parent.code.toUpperCase()} → ${app.code.toUpperCase()}</code><span>${escapeHtml(app.statusLabel[locale])}</span></p>`,
+        `            <h4>${escapeHtml(app.guidingQuestion[locale])}</h4>`,
+        `            <p>${escapeHtml(app.summary[locale])}</p>`,
+        `            <a class="learning-horizon-link" href="${escapeHtml(parent.address)}" target="_blank" rel="noreferrer">${label(locale, "Research", "Araştırma")} · ${parent.code.toUpperCase()} ↗</a>`,
+        `            <a class="learning-horizon-link" href="${escapeHtml(app.address)}" target="_blank" rel="noreferrer">${label(locale, "Explore", "Keşfet")} · ${app.code.toUpperCase()} ↗</a>`,
+        "          </article>",
+      ].join("\n");
+    }),
+    "        </div>",
+    "      </section>",
+  ].join("\n");
+}
+
 export function renderSwarmLabs({ locale, data }) {
   const parent = data.applications.find(({ code }) => code === "swi");
-  const labs = data.applications.filter(({ kind, upstreamApps = [] }) => kind === "lab" && upstreamApps.length === 1 && upstreamApps[0] === "swi");
+  const labs = data.applications.filter(({ parentApp }) => parentApp === "swi");
   if (!parent || labs.length === 0) return "";
   return [
     `        <div class="swarm-labs" data-swarm-parent="swi" role="group" aria-labelledby="swarm-labs-title-${locale}">`,
@@ -761,6 +804,8 @@ export function renderDocument({ html, page, locale, data, today, archiveLinks =
     "application-map": () => renderApplicationMap({ locale, data, today, page }),
     "system-focus": () => renderSystemFocus({ locale, data }),
     "swarm-labs": () => renderSwarmLabs({ locale, data }),
+    "practice-labs": () => renderPracticeLabs({ locale, data }),
+    "learning-diagram": () => renderLearningDiagram({ locale, data }),
     "now-content": () => renderNowContent({ locale, data, today, archiveLinks }),
     "public-memory": () => renderPublicMemory({ locale, data }),
     "journey-evidence": () => renderJourneyEvidence({ locale, data, documentHtml: html }),

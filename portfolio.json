@@ -1,9 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-06",
+  "generatedAt": "2026-09-09",
   "applications": [
     {
       "code": "aia",
+      "parentApp": null,
       "name": {
         "en": "AI Ecosystem Atlas",
         "tr": "AI Ecosystem Atlas"
@@ -51,6 +52,7 @@
     },
     {
       "code": "llm",
+      "parentApp": null,
       "name": {
         "en": "LLM Runtime & Serving Atlas",
         "tr": "LLM Runtime & Serving Atlas"
@@ -101,6 +103,7 @@
     },
     {
       "code": "hns",
+      "parentApp": null,
       "name": {
         "en": "Harness Engineering Observatory",
         "tr": "Harness Engineering Observatory"
@@ -150,6 +153,7 @@
     },
     {
       "code": "sec",
+      "parentApp": null,
       "name": {
         "en": "AI Systems Security Observatory",
         "tr": "AI Sistemleri Güvenlik Gözlemevi"
@@ -199,6 +203,7 @@
     },
     {
       "code": "ctx",
+      "parentApp": null,
       "name": {
         "en": "Context & Knowledge Engineering",
         "tr": "Bağlam ve Bilgi Mühendisliği"
@@ -248,6 +253,7 @@
     },
     {
       "code": "evl",
+      "parentApp": null,
       "name": {
         "en": "AI Evaluation & Reliability Lab",
         "tr": "AI Değerlendirme ve Güvenilirlik Laboratuvarı"
@@ -295,6 +301,7 @@
     },
     {
       "code": "usl",
+      "parentApp": null,
       "name": {
         "en": "Unsloth Studio Learning Atlas",
         "tr": "Unsloth Studio Learning Atlas"
@@ -343,6 +350,7 @@
     },
     {
       "code": "gpu",
+      "parentApp": null,
       "name": {
         "en": "GPU Kernel Engineering — Kernel Atlas",
         "tr": "GPU Kernel Engineering — Kernel Atlas"
@@ -375,7 +383,8 @@
         "aia"
       ],
       "downstreamApps": [
-        "llm"
+        "llm",
+        "gex"
       ],
       "tracks": [
         "cuda",
@@ -391,6 +400,7 @@
     },
     {
       "code": "cld",
+      "parentApp": null,
       "name": {
         "en": "Cloud Provider Cost Comparison",
         "tr": "Bulut Sağlayıcı Maliyet Karşılaştırması"
@@ -440,6 +450,7 @@
     },
     {
       "code": "lcl",
+      "parentApp": null,
       "name": {
         "en": "Local Compute Lab",
         "tr": "Local Compute Lab"
@@ -490,6 +501,7 @@
     },
     {
       "code": "wfm",
+      "parentApp": null,
       "name": {
         "en": "World Models Atlas",
         "tr": "World Models Atlas"
@@ -523,7 +535,8 @@
         "cld"
       ],
       "downstreamApps": [
-        "itl"
+        "itl",
+        "wml"
       ],
       "tracks": [
         "perception",
@@ -539,6 +552,7 @@
     },
     {
       "code": "swi",
+      "parentApp": null,
       "name": {
         "en": "SWI — Swarm Intelligence",
         "tr": "SWI — Sürü Zekâsı"
@@ -589,6 +603,7 @@
     },
     {
       "code": "ant",
+      "parentApp": "swi",
       "name": {
         "en": "ANT — Ant Colony Intelligence Laboratory",
         "tr": "ANT — Karınca Kolonisi Zekâ Laboratuvarı"
@@ -636,6 +651,7 @@
     },
     {
       "code": "bee",
+      "parentApp": "swi",
       "name": {
         "en": "BEE — Honey Bee Collective Intelligence Laboratory",
         "tr": "BEE — Bal Arısı Kolektif Zekâ Laboratuvarı"
@@ -683,6 +699,7 @@
     },
     {
       "code": "itl",
+      "parentApp": null,
       "name": {
         "en": "Industrial Twin Lab",
         "tr": "Industrial Twin Lab"
@@ -716,7 +733,8 @@
         "swi"
       ],
       "downstreamApps": [
-        "eng"
+        "eng",
+        "pdt"
       ],
       "tracks": [
         "digital-twins",
@@ -730,97 +748,8 @@
       "focusState": "horizon"
     },
     {
-      "code": "pdt",
-      "name": {
-        "en": "P-101 Interactive Digital Twin",
-        "tr": "P-101 İnteraktif Dijital İkiz"
-      },
-      "shortName": "PDT",
-      "description": {
-        "en": "An interactive centrifugal-pump teaching exhibit for the Industrial Twin Lab. Editable Blender source asset, healthy GLB, educational geometry variants, web MVP.",
-        "tr": "Industrial Twin Lab için interaktif santrifüj pompa öğretim sergisi. Düzenlenebilir Blender kaynak varlığı, sağlıklı GLB, eğitsel geometri varyantları, web MVP."
-      },
-      "type": "lab",
-      "status": "live",
-      "statusLabel": {
-        "en": "Live",
-        "tr": "Yayında"
-      },
-      "languages": [
-        "tr",
-        "en"
-      ],
-      "productionUrl": "https://pdt.aserdargun.com/",
-      "repositoryUrl": "https://github.com/aserdargun/pdt-aserdargun-com",
-      "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-04",
-      "releaseSha": "0ec761d6ad01bb796c63d641abf81ffa11e31c2f",
-      "sourceCount": null,
-      "claimCount": null,
-      "evidencePolicy": "primary-source-backed",
-      "upstreamApps": [
-        "itl"
-      ],
-      "downstreamApps": [],
-      "tracks": [
-        "digital-twin",
-        "pump",
-        "teaching-exhibit"
-      ],
-      "entityIds": [
-        "entity:p-101"
-      ],
-      "portfolioLayer": "physical-ai",
-      "focusState": "horizon"
-    },
-    {
-      "code": "hex",
-      "name": {
-        "en": "HEX — Humanoid Engineering Explorer",
-        "tr": "HEX — İnsansı Mühendislik Kaşifi"
-      },
-      "shortName": "HEX",
-      "description": {
-        "en": "An original bilingual interactive humanoid engineering learning object for the ENG curriculum. Blender-authored GLB, ten engineering modes, progressive assembled-to-exploded slider.",
-        "tr": "ENG müfredatı için özgün, iki dilli, interaktif insansı mühendislik öğrenme nesnesi. Blender ile hazırlanmış GLB, on mühendislik modu, kademeli montajdan-patlamış görünüme kaydırıcı."
-      },
-      "type": "atlas",
-      "status": "live",
-      "statusLabel": {
-        "en": "Live",
-        "tr": "Yayında"
-      },
-      "languages": [
-        "tr",
-        "en"
-      ],
-      "productionUrl": "https://hex.aserdargun.com/",
-      "repositoryUrl": "https://github.com/aserdargun/hex-aserdargun-com",
-      "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-04",
-      "releaseSha": "ba06cbe9e7b0c902faf605508d8185dc3aedb09a",
-      "sourceCount": null,
-      "claimCount": null,
-      "evidencePolicy": "primary-source-backed",
-      "upstreamApps": [
-        "eng"
-      ],
-      "downstreamApps": [],
-      "tracks": [
-        "humanoid",
-        "interactive",
-        "eng-curriculum"
-      ],
-      "entityIds": [
-        "entity:hex"
-      ],
-      "portfolioLayer": "physical-ai",
-      "focusState": "horizon"
-    },
-    {
       "code": "eng",
+      "parentApp": null,
       "name": {
         "en": "Open Humanoid Engineering",
         "tr": "Open Humanoid Engineering"
@@ -852,7 +781,9 @@
       "upstreamApps": [
         "itl"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "hex"
+      ],
       "tracks": [
         "humanoids",
         "education",
@@ -866,16 +797,17 @@
     },
     {
       "code": "gex",
+      "parentApp": "gpu",
       "name": {
-        "en": "GEX — GPU Execution Explorer",
-        "tr": "GEX — GPU Çalıştırma Kaşifi"
+        "en": "GPU Execution Explorer",
+        "tr": "GPU Yürütme Gezgini"
       },
       "shortName": "GEX",
       "description": {
-        "en": "Six-mode GPU execution analysis explorer with verified Azure deployment pipeline.",
-        "tr": "Doğrulanmış Azure dağıtım hattı ile altı modlu GPU çalıştırma analiz kaşifi."
+        "en": "Trace GPU anatomy, kernel launches, warp masks, memory access, and matrix tiles through six interactive lessons. Results come from an educational execution model, not profiler measurements.",
+        "tr": "Altı etkileşimli dersle GPU anatomisini, kernel başlatmayı, warp maskelerini, bellek erişimini ve matris bloklarını izle. Sonuçlar profil ölçümünden değil, eğitim amaçlı yürütme modelinden gelir."
       },
-      "type": "observatory",
+      "type": "lab",
       "status": "live",
       "statusLabel": {
         "en": "Live",
@@ -887,35 +819,36 @@
       ],
       "productionUrl": "https://gex.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/gex-aserdargun-com",
-      "researchCutoff": "2026-09-06",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-06",
-      "releaseSha": "7ffa46a1e70f2b3bd8da5948bc637fe4a36b5611",
+      "lastVerified": "2026-09-09",
+      "releaseSha": "24ba9288f4dba1ffe49dfc4a185c107d71099b74",
       "sourceCount": null,
       "claimCount": null,
-      "evidencePolicy": "primary-source-backed",
-      "upstreamApps": [],
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "gpu"
+      ],
       "downstreamApps": [],
       "tracks": [
         "gpu",
-        "execution-analysis"
+        "cuda",
+        "kernels",
+        "memory"
       ],
-      "entityIds": [
-        "entity:gpu-execution"
-      ],
+      "entityIds": [],
       "portfolioLayer": "foundation",
-      "focusState": "foundation"
+      "focusState": "active"
     },
     {
       "code": "wml",
+      "parentApp": "wfm",
       "name": {
-        "en": "WML — World Model Laboratory",
-        "tr": "WML — Dünya Modeli Laboratuvarı"
+        "en": "World Model Laboratory",
+        "tr": "Dünya Modeli Laboratuvarı"
       },
       "shortName": "WML",
       "description": {
-        "en": "Observe. Imagine. Predict. Act. Learn. A hands-on world model laboratory with physics, belief, planning and counterfactual time travel.",
-        "tr": "Gözle. Hayal et. Tahmin et. Harekete geç. Öğren. Fizik, inanç, planlama ve karşı-olgusal zaman yolculuğu ile etkileşimli dünya modeli laboratuvarı."
+        "en": "Explore observation, belief, prediction, planning, and counterfactual branches in WFM’s experiment laboratory. Compare three hand-coded predictors against a simulated world; these are not trained foundation models.",
+        "tr": "WFM’nin deney laboratuvarında gözlemi, inancı, tahmini, planlamayı ve alternatif eylem dallarını keşfet. Elle tanımlanmış üç tahmin modelini simüle edilen dünyayla karşılaştır; bunlar eğitilmiş temel modeller değildir."
       },
       "type": "lab",
       "status": "live",
@@ -929,28 +862,108 @@
       ],
       "productionUrl": "https://wml.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/wml-aserdargun-com",
-      "researchCutoff": "2026-09-06",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-06",
-      "releaseSha": "542b53837b561e60497cb3697e719ee78f9be31e",
+      "lastVerified": "2026-09-09",
+      "releaseSha": "a4129857a671b01a5e4d07f3d39e71525416ca4d",
       "sourceCount": null,
       "claimCount": null,
-      "evidencePolicy": "primary-source-backed",
+      "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
         "wfm"
       ],
       "downstreamApps": [],
       "tracks": [
-        "world-model",
-        "physics",
-        "3d",
-        "education",
-        "counterfactual"
+        "world-models",
+        "prediction",
+        "planning",
+        "simulation"
       ],
-      "entityIds": [
-        "entity:world-model-lab"
+      "entityIds": [],
+      "portfolioLayer": "physical-ai",
+      "focusState": "active"
+    },
+    {
+      "code": "pdt",
+      "parentApp": "itl",
+      "name": {
+        "en": "P-101 Interactive Digital Twin",
+        "tr": "P-101 Etkileşimli Dijital İkiz"
+      },
+      "shortName": "PDT",
+      "description": {
+        "en": "Inspect a centrifugal pump, its components, and condition scenarios as an Industrial Twin Lab teaching exhibit. Geometry is simplified and all condition signals are synthetic.",
+        "tr": "Industrial Twin Lab öğrenme örneğinde santrifüj pompayı, bileşenlerini ve durum senaryolarını incele. Geometri sadeleştirilmiştir; tüm durum sinyalleri sentetiktir."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
       ],
-      "portfolioLayer": "foundation",
+      "productionUrl": "https://pdt.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/pdt-aserdargun-com",
+      "lastVerified": "2026-09-09",
+      "releaseSha": "488bc4fa0500bcd3d56e5966dd7769043a433d20",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "itl"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "digital-twins",
+        "pumps",
+        "synthetic-signals"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "physical-ai",
+      "focusState": "active"
+    },
+    {
+      "code": "hex",
+      "parentApp": "eng",
+      "name": {
+        "en": "Humanoid Engineering Explorer",
+        "tr": "İnsansı Robot Mühendisliği Gezgini"
+      },
+      "shortName": "HEX",
+      "description": {
+        "en": "Explore humanoid structure, joints, actuation, sensors, and power/data paths through ENG’s interactive 3D learning object. Movements are kinematic teaching aids, with no asserted dynamics or hardware performance.",
+        "tr": "ENG’nin etkileşimli 3B öğrenme uygulamasında insansı robot yapısını, eklemleri, eyleyicileri, sensörleri ve güç/veri yollarını keşfet. Hareketler kinematik öğretim örnekleridir; dinamik veya donanım performansı iddiası taşımaz."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://hex.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/hex-aserdargun-com",
+      "lastVerified": "2026-09-09",
+      "releaseSha": "67c6020431ac47b35e1dbc91b6526f8ab6468b75",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "eng"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "humanoids",
+        "kinematics",
+        "engineering",
+        "physical-ai"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "physical-ai",
       "focusState": "active"
     }
   ]

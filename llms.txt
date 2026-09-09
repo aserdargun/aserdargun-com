@@ -5,7 +5,7 @@
 ## Start here
 - [System overview](https://aserdargun.com/): Five layers and their learning relationships.
 - [About Serdar](https://aserdargun.com/about/): Professional identity, career journey, working principles, and public contact links.
-- [Journey](https://aserdargun.com/journey/): Learning path, six detailed stages, and the physical AI horizon with colony laboratories.
+- [Journey](https://aserdargun.com/journey/): Learning path, six detailed stages, and the physical AI horizon with colony, world-model, pump-twin, and humanoid learning laboratories.
 - [Application Map](https://aserdargun.com/applications/): Search projects by topic and layer; inspect release and research evidence.
 - [Now](https://aserdargun.com/now/): Dated work and planned direction. Read its date before describing an item as current.
 - [Knowledge](https://aserdargun.com/memory/): Authored public research notes and decisions with sources.
@@ -15,3 +15,9 @@
 
 ## Reading the evidence
 Research cutoffs, verification dates, release dates, and release SHAs describe different events. A missing value means unknown. Planned directions are not completed products. Diagram relationships describe how topics inform each other; they do not establish runtime integration. Private systems are linked as separate applications; their private records are not part of this public source.
+
+## Companion learning applications
+- [GEX — GPU Execution Explorer](https://gex.aserdargun.com/): GPU Atlas companion for educational kernel, warp, memory, and matrix execution.
+- [WML — World Model Laboratory](https://wml.aserdargun.com/): WFM companion for observation, prediction, planning, and simulated counterfactual experiments.
+- [PDT — P-101 Interactive Digital Twin](https://pdt.aserdargun.com/): ITL companion with simplified pump geometry and synthetic condition signals.
+- [HEX — Humanoid Engineering Explorer](https://hex.aserdargun.com/): ENG companion for humanoid anatomy, joints, sensors, and illustrative kinematics.

@@ -12,7 +12,7 @@
     "test:deployment": "node --test tools/deployment.test.mjs",
     "test:environment": "node --test tools/environment.test.mjs",
     "test:portrait": "node --test tools/validate-portrait-canvas.mjs",
-    "test:data": "node --test tools/living-system-data.test.mjs tools/portfolio-phase-one.test.mjs",
+    "test:data": "node --test tools/living-system-data.test.mjs tools/portfolio-phase-one.test.mjs tools/application-hierarchy.test.mjs",
     "generate:portfolio": "node tools/portfolio-registry.mjs",
     "check:portfolio": "node tools/portfolio-registry.mjs --check",
     "generate:site": "node tools/portfolio-registry.mjs && node tools/render-living-system.mjs",
@@ -26,6 +26,6 @@
     "test:stop": "node --test tools/preview-control.test.mjs tools/preview-stop.test.mjs",
     "validate:site": "node tools/validate-site.mjs",
     "validate:codex": "npm test",
-    "test": "npm run check:js && npm run test:deployment && npm run test:environment && npm run test:portrait && npm run test:stop && npm run test:data && npm run test:archive && npm run test:render && npm run validate:site"
+    "test": "npm run check:js && npm run test:deployment && npm run test:environment && npm run test:portrait && npm run test:stop && npm run test:data && npm run test:archive && npm run test:render && npm run check:generated && npm run test:navigation && npm run validate:site"
   }
 }

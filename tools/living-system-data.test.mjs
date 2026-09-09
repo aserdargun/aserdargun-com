@@ -585,9 +585,9 @@ test("rejects private-system records and reserved private-navigation codes", () 
 test("loads and validates the committed canonical manifest", async () => {
   const filePath = fileURLToPath(new URL("../data/living-system.json", import.meta.url));
   const data = await loadLivingSystemData(filePath);
-  const canonicalToday = new Date("2026-09-06T12:00:00+03:00");
+  const canonicalToday = new Date("2026-09-09T12:00:00+03:00");
 
-  assert.ok(data.applications.length >= 16, "data.applications must have at least 16 entries");
+  assert.equal(data.applications.length, 20);
   const expectedCanonicalApplications = {
     hns: ["observatory", "Harness Engineering Observatory", "https://hns.aserdargun.com/"],
     ctx: ["observatory", "Context & Knowledge Engineering", "https://ctx.aserdargun.com/"],

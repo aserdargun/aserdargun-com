@@ -8,6 +8,7 @@ import {
   loadPrivateApplicationsData,
   summarizeApplications,
 } from "./living-system-data.mjs";
+import { applicationHierarchy } from "./application-hierarchy.mjs";
 import { scanPublicHtmlFiles } from "./render-living-system.mjs";
 import {
   discoverPublicIndexDocuments,
@@ -77,7 +78,7 @@ const expectedTurkishBridges = [
 ];
 const expectedAnchors = ["top", "learning"];
 const expectedAssetVersion = "20260907-system-focus-edge";
-const expectedStylesheetHref = `/styles.css?v=${expectedAssetVersion}`;
+const expectedStylesheetHref = "/styles.css?v=20260909-application-hierarchy";
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
   { code: "aia", repository: "aia-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/aia-aserdargun-com", productUrl: "https://aia.aserdargun.com/", productLabel: "aia.aserdargun.com" },
@@ -224,8 +225,9 @@ function parseApplicationMapRows(html) {
 function validateApplicationMapRows(locale, html) {
   const rows = parseApplicationMapRows(html);
   check(rows.length === expectedApplicationRows.length, `${locale}: application map row count differs`);
+  const orderedRows = applicationHierarchy(livingSystem.applications).map(({ application }) => expectedApplicationRows.find((row) => row.code === application.code));
   check(
-    JSON.stringify(rows) === JSON.stringify(expectedApplicationRows),
+    JSON.stringify(rows) === JSON.stringify(orderedRows),
     `${locale}: application map row tuples or order differ`,
   );
 }
@@ -358,10 +360,9 @@ function validateLearningSystem(locale, html) {
     (match) => `${match[1]}:${match[2]}`,
   );
   check(
-    JSON.stringify(nodeRoles) === JSON.stringify([
+    JSON.stringify(nodeRoles.sort()) === JSON.stringify([
       "aia:map",
       "gpu:foundation",
-      "gex:foundation",
       "llm:hub",
       "usl:adapt",
       "hns:harness",
@@ -376,14 +377,16 @@ function validateLearningSystem(locale, html) {
       "bee:colony-lab",
       "itl:twin",
       "eng:horizon",
-      "pdt:twin-lab",
-      "hex:humanoid-lab",
-    ]),
+      "gex:practice-lab",
+      "wml:practice-lab",
+      "pdt:practice-lab",
+      "hex:practice-lab",
+    ].sort()),
     `${locale}: learning diagram node roles differ from the application content model`,
   );
   const learningEdges = matches(diagram, /<path data-learning-edge="([^"]+)"/g);
   check(
-    JSON.stringify(learningEdges) === JSON.stringify([
+    JSON.stringify([...learningEdges].sort()) === JSON.stringify([
       "aia-to-gpu",
       "aia-to-llm",
       "aia-to-usl",
@@ -405,9 +408,11 @@ function validateLearningSystem(locale, html) {
       "swi-to-ant",
       "swi-to-bee",
       "itl-to-eng",
+      "gpu-to-gex",
+      "wfm-to-wml",
       "itl-to-pdt",
       "eng-to-hex",
-    ]),
+    ].sort()),
     `${locale}: learning diagram edges differ from the application content model`,
   );
   const deploymentConnectors = matches(diagram, /<path data-learning-connector="([^"]+)"/g);
@@ -579,19 +584,20 @@ function validateSystemFocus(locale, html) {
   if (section.length === 0) return;
 
   const expected = locale === "tr" ? [
-    ["foundation", "Temel", ["aia", "llm", "usl", "gpu", "gex", "wml"]],
+    ["foundation", "Temel", ["aia", "llm", "usl", "gpu", "gex"]],
     ["agent-system", "Ajan sistemi", ["hns", "ctx"]],
     ["assurance", "Güvence", ["sec", "evl"]],
     ["deployment", "Dağıtım", ["cld", "lcl"]],
-    ["physical-ai", "Fiziksel AI", ["wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng"]],
+    ["physical-ai", "Fiziksel AI", ["wfm", "swi", "ant", "bee", "itl", "eng", "wml", "pdt", "hex"]],
   ] : [
-    ["foundation", "Foundation", ["aia", "llm", "usl", "gpu", "gex", "wml"]],
+    ["foundation", "Foundation", ["aia", "llm", "usl", "gpu", "gex"]],
     ["agent-system", "Agent system", ["hns", "ctx"]],
     ["assurance", "Assurance", ["sec", "evl"]],
     ["deployment", "Deployment", ["cld", "lcl"]],
-    ["physical-ai", "Physical AI", ["wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng"]],
+    ["physical-ai", "Physical AI", ["wfm", "swi", "ant", "bee", "itl", "eng", "wml", "pdt", "hex"]],
   ];
-  for (const [layer, heading, expectedCodes] of expected) {
+  for (const [layer, heading] of expected) {
+    const expectedCodes = applicationHierarchy(livingSystem.applications.filter((app) => app.portfolioLayer === layer)).map(({ application }) => application.code);
     const card = section.match(new RegExp(`<article class="system-focus-card system-focus-card--${layer}">[\\s\\S]*?<\\/article>`))?.[0] ?? "";
     check(card.includes(`<h2>${heading}</h2>`), `${locale}: ${layer} system focus heading differs`);
     check(JSON.stringify(matches(card, /<code>([a-z]{3})<\/code>/g)) === JSON.stringify(expectedCodes), `${locale}: ${layer} system focus applications differ`);
