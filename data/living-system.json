@@ -689,7 +689,7 @@
     },
     {
       "code": "tfl",
-      "parentApp": null,
+      "parentApp": "llm",
       "diagramLabel": {"en": "Token serving", "tr": "Token sunumu"},
       "kind": "lab",
       "systemRole": "lab",

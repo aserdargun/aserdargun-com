@@ -843,7 +843,7 @@
     },
     {
       "code": "tfl",
-      "parentApp": null,
+      "parentApp": "llm",
       "name": {
         "en": "TFL — Token Flow Laboratory",
         "tr": "TFL — Token Akışı Laboratuvarı"

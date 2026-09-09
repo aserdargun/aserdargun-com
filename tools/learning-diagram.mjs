@@ -6,8 +6,7 @@ const localized = (locale, en, tr) => locale === "tr" ? tr : en;
 const PARENTS = {
   aia: { cx: 550, y: 30, width: 180, role: "map" },
   gpu: { cx: 300, y: 140, width: 180, role: "foundation" },
-  llm: { cx: 550, y: 330, width: 190, role: "hub" },
-  tfl: { cx: 800, y: 330, width: 180, role: "serving" },
+  llm: { cx: 550, y: 330, width: 190, role: "hub", side: true },
   usl: { cx: 800, y: 140, width: 180, role: "adapt" },
   hns: { cx: 550, y: 440, width: 220, role: "harness" },
   ctx: { cx: 300, y: 560, width: 180, role: "context" },
@@ -28,7 +27,6 @@ const ROUTES = [
   ["gpu-to-llm", "M 390 172 H 470 V 304 H 510 V 330"],
   ["usl-to-llm", "M 800 204 V 304 H 590 V 330"],
   ["llm-to-hns", "M 550 394 V 440"],
-  ["llm-to-tfl", "M 645 362 H 710"],
   ["hns-to-ctx", "M 500 504 V 532 H 300 V 560"],
   ["hns-to-sec", "M 550 504 V 560"],
   ["hns-to-evl", "M 600 504 V 532 H 800 V 560"],
