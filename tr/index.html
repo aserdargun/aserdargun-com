@@ -148,9 +148,10 @@
           <p>Ekosistem, hesaplama, çalışma ortamı ve model geliştirme temelleri; GEX ile uygulamalı GPU yürütme.</p>
           <ul aria-label="Temel uygulamaları">
             <li data-focus-app="aia"><a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer"><code>aia</code><span>AI Ecosystem Atlas</span> <span class="sr-only">yeni sekmede açılır</span></a></li>
-            <li data-focus-app="llm"><a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer"><code>llm</code><span>LLM Runtime &amp; Serving Atlas</span> <span class="sr-only">yeni sekmede açılır</span></a><ul class="system-focus-children" aria-label="LLM alt uygulamaları">            <li data-focus-app="tfl" data-app-parent="llm"><a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer"><code>tfl</code><span>TFL — Token Akışı Laboratuvarı<span class="sr-only app-ownership">LLM alt uygulaması.</span></span> <span class="sr-only">yeni sekmede açılır</span></a></li></ul></li>
+            <li data-focus-app="llm"><a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer"><code>llm</code><span>LLM Runtime &amp; Serving Atlas</span> <span class="sr-only">yeni sekmede açılır</span></a></li>
             <li data-focus-app="usl"><a href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer"><code>usl</code><span>Unsloth Studio Learning Atlas</span> <span class="sr-only">yeni sekmede açılır</span></a></li>
             <li data-focus-app="gpu"><a href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer"><code>gpu</code><span>GPU Kernel Engineering — Kernel Atlas</span> <span class="sr-only">yeni sekmede açılır</span></a><ul class="system-focus-children" aria-label="GPU alt uygulamaları">            <li data-focus-app="gex" data-app-parent="gpu"><a href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer"><code>gex</code><span>GPU Yürütme Gezgini<span class="sr-only app-ownership">GPU alt uygulaması.</span></span> <span class="sr-only">yeni sekmede açılır</span></a></li></ul></li>
+            <li data-focus-app="tfl"><a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer"><code>tfl</code><span>TFL — Token Akışı Laboratuvarı</span> <span class="sr-only">yeni sekmede açılır</span></a></li>
           </ul>
         </article>
         <article class="system-focus-card system-focus-card--agent-system">
@@ -227,7 +228,6 @@
           </g>
           <g class="ld-families" aria-hidden="true">
             <g data-learning-family="gpu"><rect x="194" y="120" width="212" height="186" rx="15"/><text x="396" y="320">GPU + alt uygulamalar</text></g>
-            <g data-learning-family="llm"><rect x="439" y="310" width="222" height="186" rx="15"/><text x="651" y="510">LLM + alt uygulamalar</text></g>
             <g data-learning-family="wfm"><rect x="179" y="860" width="242" height="186" rx="15"/><text x="411" y="1060">WFM + alt uygulamalar</text></g>
             <g data-learning-family="swi"><rect x="624" y="860" width="352" height="186" rx="15"/><text x="966" y="1060">SWI + alt uygulamalar</text></g>
             <g data-learning-family="itl"><rect x="424" y="1100" width="507" height="100" rx="15"/><text x="921" y="1214">ITL + alt uygulamalar</text></g>
@@ -242,6 +242,7 @@
             <path data-learning-edge="gpu-to-llm" class="ld-edge-primary" d="M 390 172 H 470 V 304 H 510 V 330" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="usl-to-llm" class="ld-edge-primary" d="M 800 204 V 304 H 590 V 330" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="llm-to-hns" class="ld-edge-primary" d="M 550 394 V 440" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="llm-to-tfl" class="ld-edge-primary" d="M 645 362 H 710" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-ctx" class="ld-edge-primary" d="M 500 504 V 532 H 300 V 560" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-sec" class="ld-edge-primary" d="M 550 504 V 560" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-evl" class="ld-edge-primary" d="M 600 504 V 532 H 800 V 560" marker-end="url(#ld-arrow)"/>
@@ -256,7 +257,6 @@
             <path data-learning-edge="swi-to-itl" class="ld-edge-horizon" d="M 685 912 H 610 V 1090 H 590 V 1120" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 550 1184 V 1270" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="gpu-to-gex" class="ld-edge-child" d="M 300 204 V 222 H 300 V 240" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="llm-to-tfl" class="ld-edge-child" d="M 550 394 V 412 H 550 V 430" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="wfm-to-wml" class="ld-edge-child" d="M 300 944 V 962 H 300 V 980" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="swi-to-ant" class="ld-edge-child" d="M 765 944 V 962 H 715 V 980" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="swi-to-bee" class="ld-edge-child" d="M 835 944 V 962 H 885 V 980" marker-end="url(#ld-arrow)"/>
@@ -289,11 +289,11 @@
               <text x="550" y="357" class="ld-code">LLM</text>
               <text x="550" y="378" class="ld-label">Çalıştırma · sunum</text>
             </a>
-            <a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="tfl" data-learning-role="practice-lab" data-learning-parent="llm" aria-label="TFL TFL — Token Akışı Laboratuvarı. LLM alt uygulaması. Kuyruklama, kabul, parçalı önyükleme, KV durumu, yinelemeli kod çözme, örnekleme ve token teslimatı boyunca bireysel LLM isteklerini izleyen; rekabet eden istek ömürlerini, temkinli bellek rezervasyonlarını, statik ve sürekli toplu işlemeyi ve gecikme/verim ticaretlerini keşfeden deterministik, iki dilli eğitim laboratuvarı." aria-describedby="ld-new-tab-tfl-tr">
+            <a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="tfl" data-learning-role="serving" aria-label="TFL TFL — Token Akışı Laboratuvarı. Kuyruklama, kabul, parçalı önyükleme, KV durumu, yinelemeli kod çözme, örnekleme ve token teslimatı boyunca bireysel LLM isteklerini izleyen; rekabet eden istek ömürlerini, temkinli bellek rezervasyonlarını, statik ve sürekli toplu işlemeyi ve gecikme/verim ticaretlerini keşfeden deterministik, iki dilli eğitim laboratuvarı." aria-describedby="ld-new-tab-tfl-tr">
               <title id="ld-new-tab-tfl-tr">Yeni sekmede açılır</title>
-              <rect x="475" y="430" width="150" height="50" rx="7"/>
-              <text x="550" y="451" class="ld-code">TFL</text>
-              <text x="550" y="469" class="ld-label">Token sunumu</text>
+              <rect x="710" y="330" width="180" height="64" rx="10"/>
+              <text x="800" y="357" class="ld-code">TFL</text>
+              <text x="800" y="378" class="ld-label">Token sunumu</text>
             </a>
             <a href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="usl" data-learning-role="adapt" aria-label="USL Unsloth Studio Learning Atlas. Unsloth Studio, LoRA, QLoRA, veri seti mühendisliği, değerlendirme ve yerel model dağıtımı için iki dilli, kanıt duyarlı öğrenme atlası." aria-describedby="ld-new-tab-usl-tr">
               <title id="ld-new-tab-usl-tr">Yeni sekmede açılır</title>
@@ -414,13 +414,6 @@
             <p>Altı etkileşimli dersle GPU anatomisini, kernel başlatmayı, warp maskelerini, bellek erişimini ve matris bloklarını izle. Sonuçlar profil ölçümünden değil, eğitim amaçlı yürütme modelinden gelir.</p>
             <a class="learning-horizon-link" href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer">Araştırma · GPU ↗ <span class="sr-only">yeni sekmede açılır</span></a>
             <a class="learning-horizon-link" href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer">Keşfet · GEX ↗ <span class="sr-only">yeni sekmede açılır</span></a>
-          </article>
-          <article class="swarm-lab" data-practice-lab="tfl" data-learning-parent="llm">
-            <p class="swarm-lab__identity"><code>LLM → TFL</code><span>Yayında</span></p>
-            <h4>Bir istek nasıl bir tokena dönüşür?</h4>
-            <p>Kuyruklama, kabul, parçalı önyükleme, KV durumu, yinelemeli kod çözme, örnekleme ve token teslimatı boyunca bireysel LLM isteklerini izleyen; rekabet eden istek ömürlerini, temkinli bellek rezervasyonlarını, statik ve sürekli toplu işlemeyi ve gecikme/verim ticaretlerini keşfeden deterministik, iki dilli eğitim laboratuvarı.</p>
-            <a class="learning-horizon-link" href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer">Araştırma · LLM ↗ <span class="sr-only">yeni sekmede açılır</span></a>
-            <a class="learning-horizon-link" href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer">Keşfet · TFL ↗ <span class="sr-only">yeni sekmede açılır</span></a>
           </article>
           <article class="swarm-lab" data-practice-lab="wml" data-learning-parent="wfm">
             <p class="swarm-lab__identity"><code>WFM → WML</code><span>Yayında</span></p>
