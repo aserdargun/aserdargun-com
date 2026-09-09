@@ -686,7 +686,7 @@ test("mobile keeps the homepage graph readable and the journey alternate accessi
   assert.match(css, /\.learning-study-link\s*\{[\s\S]*?display:\s*flex;[\s\S]*?min-height:\s*44px;/);
   assert.match(css, /\.system-home \.learning-diagram-wrap\s*\{[^}]*display: flex;/);
   assert.match(css, /\.system-home \.learning-diagram-viewport\s*\{[^}]*overflow: auto;/);
-  assert.match(css, /\.system-home \.learning-diagram-viewport \.ld-svg\s*\{[^}]*min-width: 1100px;/);
+  assert.match(css, /\.system-home \.learning-diagram-viewport \.ld-svg\s*\{[^}]*min-width: 100%;/);
 });
 
 test("detailed deployment cards use a two-column desktop and one-column mobile grid", async () => {

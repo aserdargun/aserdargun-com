@@ -4524,9 +4524,15 @@ body:has(main.memory-page) {
     scrollbar-color: #84936d #20271b;
   }
   .system-home .learning-diagram-viewport .ld-svg {
-    width: 1100px;
-    min-width: 1100px;
+    width: var(--map-width, 100%);
+    min-width: 100%;
     max-width: none;
   }
   .system-home .learning-diagram-wrap figcaption { padding-inline: 16px; }
+}
+
+@media (max-width: 900px) {
+  .system-focus-board-track[data-scroll-linked] { position: relative; height: calc(var(--board-height) + var(--board-travel)); margin-top: 12px; }
+  .system-focus-board-track[data-scroll-linked] .system-focus__grid { position: sticky; top: 96px; margin-top: 0; scroll-snap-type: none; background: var(--ink); }
+  .system-home .learning-diagram-viewport { touch-action: pan-x pan-y; overscroll-behavior-x: contain; }
 }

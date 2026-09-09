@@ -1190,12 +1190,109 @@ function initializeHiddenFilm() {
   });
 }
 
+function initializeMobileMaps() {
+  const board = document.querySelector(".system-focus__grid");
+  const track = document.querySelector(".system-focus-board-track");
+  const viewport = document.querySelector(".system-home .learning-diagram-viewport");
+  if (!board || !track || !viewport) return;
+  const mobile = window.matchMedia("(max-width: 900px)");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let frame = 0;
+  const updateBoard = () => {
+    frame = 0;
+    if (!track.hasAttribute("data-scroll-linked")) return;
+    const travel = board.scrollWidth - board.clientWidth;
+    board.scrollLeft = Math.max(0, Math.min(travel, 96 - track.getBoundingClientRect().top));
+  };
+  const measureBoard = () => {
+    const enabled = mobile.matches && !reduced.matches;
+    track.toggleAttribute("data-scroll-linked", enabled);
+    track.style.setProperty("--board-height", `${board.offsetHeight}px`);
+    track.style.setProperty("--board-travel", `${Math.max(0, board.scrollWidth - board.clientWidth)}px`);
+    updateBoard();
+  };
+  window.addEventListener("scroll", () => {
+    if (!frame) frame = requestAnimationFrame(updateBoard);
+  }, { passive: true });
+  new ResizeObserver(measureBoard).observe(board);
+  reduced.addEventListener("change", measureBoard);
+
+  let zoom = 1;
+  let gesture = null;
+  let suppressClickUntil = 0;
+  const renderZoom = (value, anchor) => {
+    const oldWidth = viewport.scrollWidth;
+    const x = anchor?.x ?? viewport.clientWidth / 2;
+    const y = anchor?.y ?? 0;
+    const contentX = anchor?.contentX ?? (viewport.scrollLeft + x) / oldWidth;
+    const contentY = anchor?.contentY ?? (viewport.scrollTop + y) / oldWidth;
+    zoom = Math.max(1, Math.min(5, value));
+    viewport.style.setProperty("--map-width", mobile.matches ? `${viewport.clientWidth * zoom}px` : "100%");
+    const width = viewport.scrollWidth;
+    viewport.scrollLeft = zoom === 1 ? 0 : contentX * width - x;
+    viewport.scrollTop = zoom === 1 ? 0 : contentY * width - y;
+  };
+  const pair = (touches) => {
+    const [a, b] = touches;
+    const rect = viewport.getBoundingClientRect();
+    return { distance: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY),
+      x: (a.clientX + b.clientX) / 2 - rect.left,
+      y: (a.clientY + b.clientY) / 2 - rect.top };
+  };
+  const beginPinch = (event) => {
+    if (!mobile.matches || event.touches.length !== 2) return;
+    event.preventDefault();
+    const point = pair(event.touches);
+    gesture = { ...point, zoom,
+      contentX: (viewport.scrollLeft + point.x) / viewport.scrollWidth,
+      contentY: (viewport.scrollTop + point.y) / viewport.scrollWidth };
+  };
+  viewport.addEventListener("touchstart", beginPinch, { passive: false });
+  viewport.addEventListener("touchmove", (event) => {
+    if (!mobile.matches || event.touches.length !== 2) return;
+    if (!gesture) beginPinch(event);
+    event.preventDefault();
+    const point = pair(event.touches);
+    renderZoom(gesture.zoom * point.distance / Math.max(1, gesture.distance), {
+      ...point, contentX: gesture.contentX, contentY: gesture.contentY,
+    });
+    suppressClickUntil = performance.now() + 500;
+  }, { passive: false });
+  const endPinch = (event) => {
+    if (event.touches.length < 2) {
+      if (gesture) suppressClickUntil = performance.now() + 500;
+      gesture = null;
+    }
+  };
+  viewport.addEventListener("touchend", endPinch);
+  viewport.addEventListener("touchcancel", endPinch);
+  viewport.addEventListener("click", (event) => {
+    if (performance.now() < suppressClickUntil) { event.preventDefault(); event.stopPropagation(); }
+  }, true);
+  // Keyboard users can inspect the same map without touch gestures.
+  viewport.addEventListener("keydown", (event) => {
+    if (!mobile.matches || !["+", "=", "-", "0"].includes(event.key)) return;
+    event.preventDefault();
+    renderZoom(event.key === "0" ? 1 : zoom + (event.key === "-" ? -.25 : .25));
+  });
+  viewport.addEventListener("focusin", (event) => {
+    const node = event.target.closest(".ld-node");
+    if (node && mobile.matches && node.getBoundingClientRect().height < 44) {
+      renderZoom(1100 / viewport.clientWidth);
+      node.scrollIntoView({ block: "nearest", inline: "nearest" });
+    }
+  });
+  let lastWidth = 0;
+  new ResizeObserver(() => {
+    if (viewport.clientWidth !== lastWidth) { lastWidth = viewport.clientWidth; renderZoom(zoom); }
+  }).observe(viewport);
+  mobile.addEventListener("change", () => { measureBoard(); renderZoom(1); });
+  measureBoard();
+  renderZoom(1);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Start the mobile map at AIA; native scrolling also works without JavaScript.
-  const diagramViewport = document.querySelector(".system-home .learning-diagram-viewport");
-  if (diagramViewport && window.matchMedia("(max-width: 900px)").matches) {
-    diagramViewport.scrollLeft = (diagramViewport.scrollWidth - diagramViewport.clientWidth) / 2;
-  }
+  initializeMobileMaps();
   initializeLanguageSwitch();
   initializeMobileNav();
   initializeRelativeFreshness();

@@ -103,7 +103,7 @@ export function renderLearningDiagram({ locale, data }) {
   };
   return [
     '      <figure class="learning-diagram-wrap">',
-    `        <p class="mobile-map-hint" id="diagram-scroll-hint">${localized(locale, "Swipe in any direction to follow the connections. Tap a box to open its application.", "Bağlantıları takip etmek için haritayı her yöne kaydır. Uygulamayı açmak için kutusuna dokun.")}</p>`,
+    `        <p class="mobile-map-hint" id="diagram-scroll-hint">${localized(locale, "Pinch with two fingers to zoom. Drag to explore the enlarged map.", "İki parmağınla açıp kapatarak boyutu ayarla. Büyüttüğün haritada parmağınla gezin.")}</p>`,
     `        <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="${localized(locale, "Application connection map", "Uygulama bağlantı haritası")}">`,
     `        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1430" role="img" aria-labelledby="ld-title ld-desc" class="ld-svg">`,
     `          <title id="ld-title">${localized(locale, "Connected applications and their sub-applications", "Bağlı üst uygulamalar ve alt uygulamaları")}</title>`,
