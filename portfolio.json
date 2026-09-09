@@ -88,7 +88,8 @@
         "ctx"
       ],
       "downstreamApps": [
-        "hns"
+        "hns",
+        "tfl"
       ],
       "tracks": [
         "runtime",
@@ -827,12 +828,60 @@
       "upstreamApps": [
         "gpu"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "tfl"
+      ],
       "tracks": [
         "gpu",
         "cuda",
         "kernels",
         "memory"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "foundation",
+      "focusState": "active"
+    },
+    {
+      "code": "tfl",
+      "parentApp": "llm",
+      "name": {
+        "en": "TFL — Token Flow Laboratory",
+        "tr": "TFL — Token Akışı Laboratuvarı"
+      },
+      "shortName": "TFL",
+      "description": {
+        "en": "A deterministic, bilingual educational laboratory that follows individual LLM requests through queueing, admission, chunked prefill, KV state, iterative decode, sampling, and token delivery, exploring competing request lifetimes, conservative memory reservations, static versus continuous batching, and latency/throughput trade-offs.",
+        "tr": "Kuyruklama, kabul, parçalı önyükleme, KV durumu, yinelemeli kod çözme, örnekleme ve token teslimatı boyunca bireysel LLM isteklerini izleyen; rekabet eden istek ömürlerini, temkinli bellek rezervasyonlarını, statik ve sürekli toplu işlemeyi ve gecikme/verim ticaretlerini keşfeden deterministik, iki dilli eğitim laboratuvarı."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://tfl.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/tfl-aserdargun-com",
+      "lastVerified": "2026-09-09",
+      "lastReleased": "2026-09-09",
+      "releaseSha": "2ae6ddcc227ac472335b1599baedff4e13054d8f",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "llm",
+        "gex"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "serving",
+        "batching",
+        "prefill",
+        "decode",
+        "scheduling"
       ],
       "entityIds": [],
       "portfolioLayer": "foundation",
