@@ -77,8 +77,8 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "learning"];
-const expectedAssetVersion = "20260907-system-focus-edge";
-const expectedStylesheetHref = "/styles.css?v=20260909-application-hierarchy";
+const expectedAssetVersion = "20260909-mobile-map";
+const expectedStylesheetHref = "/styles.css?v=20260909-mobile-map";
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
   { code: "aia", repository: "aia-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/aia-aserdargun-com", productUrl: "https://aia.aserdargun.com/", productLabel: "aia.aserdargun.com" },

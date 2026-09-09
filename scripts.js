@@ -1191,6 +1191,11 @@ function initializeHiddenFilm() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Start the mobile map at AIA; native scrolling also works without JavaScript.
+  const diagramViewport = document.querySelector(".system-home .learning-diagram-viewport");
+  if (diagramViewport && window.matchMedia("(max-width: 900px)").matches) {
+    diagramViewport.scrollLeft = (diagramViewport.scrollWidth - diagramViewport.clientWidth) / 2;
+  }
   initializeLanguageSwitch();
   initializeMobileNav();
   initializeRelativeFreshness();

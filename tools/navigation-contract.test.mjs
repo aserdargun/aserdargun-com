@@ -680,26 +680,13 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
   });
 }
 
-test("mobile learning alternate exposes one non-overlapping 44px focus set while desktop keeps the SVG", async () => {
+test("mobile keeps the homepage graph readable and the journey alternate accessible", async () => {
   const css = await readFile(path.join(rootDir, "styles.css"), "utf8");
-  const svgBaseIndex = css.indexOf("/* Learning diagram (SVG) */");
-  const finalMobileOverrideIndex = css.indexOf("@media (max-width: 900px)", svgBaseIndex);
-
-  assert.match(css, /\.learning-study-link\s*\{[\s\S]*?display:\s*none;/, "mobile alternate links must not duplicate the desktop SVG focus set");
-  assert.match(
-    css,
-    /@media\s*\(max-width:\s*900px\)[\s\S]*?\.learning-diagram-wrap\s*\{[\s\S]*?display:\s*none;[\s\S]*?\.learning-study-copy\s*\{[\s\S]*?display:\s*none;[\s\S]*?\.learning-study-link\s*\{[\s\S]*?display:\s*flex;[\s\S]*?width:\s*100%;[\s\S]*?min-height:\s*44px;/,
-    "mobile must hide the SVG from layout/AT/interaction and expose only ten full-row 44px alternate links",
-  );
-  assert.ok(
-    svgBaseIndex >= 0 && finalMobileOverrideIndex > svgBaseIndex,
-    "the mobile SVG hiding rule must follow the base SVG display rule so the cascade cannot restore undersized anchors",
-  );
-  assert.match(
-    css.slice(finalMobileOverrideIndex),
-    /\.learning-diagram-wrap\s*\{[\s\S]*?display:\s*none;/,
-    "the final mobile cascade must hide the SVG figure",
-  );
+  assert.match(css, /\.learning-study-link\s*\{[\s\S]*?display:\s*none;/);
+  assert.match(css, /\.learning-study-link\s*\{[\s\S]*?display:\s*flex;[\s\S]*?min-height:\s*44px;/);
+  assert.match(css, /\.system-home \.learning-diagram-wrap\s*\{[^}]*display: flex;/);
+  assert.match(css, /\.system-home \.learning-diagram-viewport\s*\{[^}]*overflow: auto;/);
+  assert.match(css, /\.system-home \.learning-diagram-viewport \.ld-svg\s*\{[^}]*min-width: 1100px;/);
 });
 
 test("detailed deployment cards use a two-column desktop and one-column mobile grid", async () => {

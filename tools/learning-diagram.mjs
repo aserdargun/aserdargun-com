@@ -103,6 +103,8 @@ export function renderLearningDiagram({ locale, data }) {
   };
   return [
     '      <figure class="learning-diagram-wrap">',
+    `        <p class="mobile-map-hint" id="diagram-scroll-hint">${localized(locale, "Swipe in any direction to follow the connections. Tap a box to open its application.", "Bağlantıları takip etmek için haritayı her yöne kaydır. Uygulamayı açmak için kutusuna dokun.")}</p>`,
+    `        <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="${localized(locale, "Application connection map", "Uygulama bağlantı haritası")}">`,
     `        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1430" role="img" aria-labelledby="ld-title ld-desc" class="ld-svg">`,
     `          <title id="ld-title">${localized(locale, "Connected applications and their sub-applications", "Bağlı üst uygulamalar ve alt uygulamaları")}</title>`,
     `          <desc id="ld-desc">${escape(description)}</desc>`,
@@ -128,6 +130,7 @@ export function renderLearningDiagram({ locale, data }) {
     `            <path class="ld-legend-child" d="M 710 1400 H 742"/><text x="754" y="1404">${localized(locale, "Sub-application", "Alt uygulama")}</text>`,
     '          </g>',
     '        </svg>',
+    '        </div>',
     `        <figcaption>${localized(locale, "Follow the arrows between main applications. The smaller boxes share a frame with their parent application.", "Üst uygulamalar arasındaki okları takip et. Küçük kutular, bağlı oldukları üst uygulamayla aynı çerçevededir.")}</figcaption>`,
     '      </figure>',
   ].join("\n");
