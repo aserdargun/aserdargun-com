@@ -382,6 +382,7 @@ function validateLearningSystem(locale, html) {
       "wml:practice-lab",
       "pdt:practice-lab",
       "hex:practice-lab",
+      "tfl:practice-lab",
     ].sort()),
     `${locale}: learning diagram node roles differ from the application content model`,
   );
@@ -413,6 +414,7 @@ function validateLearningSystem(locale, html) {
       "wfm-to-wml",
       "itl-to-pdt",
       "eng-to-hex",
+      "llm-to-tfl",
     ].sort()),
     `${locale}: learning diagram edges differ from the application content model`,
   );
