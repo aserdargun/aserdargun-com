@@ -585,7 +585,7 @@ test("rejects private-system records and reserved private-navigation codes", () 
 test("loads and validates the committed canonical manifest", async () => {
   const filePath = fileURLToPath(new URL("../data/living-system.json", import.meta.url));
   const data = await loadLivingSystemData(filePath);
-  const canonicalToday = new Date("2026-09-09T12:00:00+03:00");
+  const canonicalToday = new Date("2026-09-10T12:00:00+03:00");
 
   assert.equal(data.applications.length, 23);
   const expectedCanonicalApplications = {

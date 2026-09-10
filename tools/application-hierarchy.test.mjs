@@ -7,7 +7,7 @@ import { validateLivingSystemData } from "./living-system-data.mjs";
 import { renderApplicationMap, renderSystemFocus } from "./render-living-system.mjs";
 
 const data = JSON.parse(await readFile(new URL("../data/living-system.json", import.meta.url), "utf8"));
-const today = new Date("2026-09-09T12:00:00Z");
+const today = new Date("2026-09-10T12:00:00Z");
 
 test("new parents, children and grandchildren group by ownership regardless of input order or kind", () => {
   const apps = [

@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-09-09T12:00:00Z");
+const today = new Date("2026-09-10T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -22,7 +22,7 @@ test("the public application contract keeps verification, research, and release 
 
   for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex", "tfl", "arl", "adp"].includes(code))) {
     assert.match(application.researchCutoff, /^2026-\d{2}-\d{2}$/, `${application.code} research cutoff`);
-    assert.equal(application.lastVerified, "2026-09-04", `${application.code} verification date`);
+    assert.equal(application.lastVerified, application.code === "eng" ? "2026-09-10" : "2026-09-04", `${application.code} verification date`);
     assert.match(application.lastReleased, /^2026-\d{2}-\d{2}$/, `${application.code} release date`);
     assert.match(application.releaseSha, /^[a-f0-9]{40}$/, `${application.code} release SHA`);
     assert.deepEqual(application.languages, application.code === "eng" ? ["en"] : ["tr", "en"], `${application.code} language contract`);
