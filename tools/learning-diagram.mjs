@@ -8,7 +8,7 @@ const PARENTS = {
   gpu: { cx: 300, y: 140, width: 180, role: "foundation" },
   llm: { cx: 550, y: 330, width: 190, role: "hub", side: true },
   usl: { cx: 800, y: 140, width: 180, role: "adapt" },
-  hns: { cx: 550, y: 440, width: 220, role: "harness" },
+  hns: { cx: 550, y: 440, width: 220, role: "harness", side: true },
   ctx: { cx: 300, y: 560, width: 180, role: "context" },
   sec: { cx: 550, y: 560, width: 180, role: "security" },
   evl: { cx: 800, y: 560, width: 180, role: "evaluation" },

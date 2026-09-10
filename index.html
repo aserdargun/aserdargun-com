@@ -158,7 +158,7 @@
           <h2>Agent system</h2>
           <p>Harness and context layers that turn model capability into an operating system.</p>
           <ul aria-label="Agent system applications">
-            <li data-focus-app="hns"><a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><code>hns</code><span>Harness Engineering Observatory</span> <span class="sr-only">opens in a new tab</span></a></li>
+            <li data-focus-app="hns"><a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><code>hns</code><span>Harness Engineering Observatory</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="HNS sub-applications">            <li data-focus-app="arl" data-app-parent="hns"><a href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer"><code>arl</code><span>ARL — Agent Runtime Laboratory<span class="sr-only app-ownership">Sub-application of HNS.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
             <li data-focus-app="ctx"><a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer"><code>ctx</code><span>Context &amp; Knowledge Engineering</span> <span class="sr-only">opens in a new tab</span></a></li>
           </ul>
         </article>
@@ -228,6 +228,7 @@
           <g class="ld-families" aria-hidden="true">
             <g data-learning-family="gpu"><rect x="194" y="120" width="212" height="186" rx="15"/><text x="396" y="320">GPU + sub-applications</text></g>
             <g data-learning-family="llm"><rect x="439" y="310" width="492" height="100" rx="15"/><text x="921" y="424">LLM + sub-applications</text></g>
+            <g data-learning-family="hns"><rect x="424" y="420" width="507" height="100" rx="15"/><text x="921" y="534">HNS + sub-applications</text></g>
             <g data-learning-family="wfm"><rect x="179" y="860" width="242" height="186" rx="15"/><text x="411" y="1060">WFM + sub-applications</text></g>
             <g data-learning-family="swi"><rect x="624" y="860" width="352" height="186" rx="15"/><text x="966" y="1060">SWI + sub-applications</text></g>
             <g data-learning-family="itl"><rect x="424" y="1100" width="507" height="100" rx="15"/><text x="921" y="1214">ITL + sub-applications</text></g>
@@ -257,6 +258,7 @@
             <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 550 1184 V 1270" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="gpu-to-gex" class="ld-edge-child" d="M 300 204 V 222 H 300 V 240" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="llm-to-tfl" class="ld-edge-child" d="M 645 362 H 710 V 362 H 765" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-arl" class="ld-edge-child" d="M 660 472 H 710 V 472 H 765" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="wfm-to-wml" class="ld-edge-child" d="M 300 944 V 962 H 300 V 980" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="swi-to-ant" class="ld-edge-child" d="M 765 944 V 962 H 715 V 980" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="swi-to-bee" class="ld-edge-child" d="M 835 944 V 962 H 885 V 980" marker-end="url(#ld-arrow)"/>
@@ -306,6 +308,12 @@
               <rect x="440" y="440" width="220" height="64" rx="10"/>
               <text x="550" y="467" class="ld-code">HNS</text>
               <text x="550" y="488" class="ld-label">Harness engineering</text>
+            </a>
+            <a href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="arl" data-learning-role="practice-lab" data-learning-parent="hns" aria-label="ARL ARL — Agent Runtime Laboratory. Sub-application of HNS. A deterministic, bilingual educational agent runtime that inspects a single revenue-update execution across HNS (Harness), CTX (Context), SEC (Security), and EVL (Evaluation). All model decisions are scripted; no LLM API, no live data, no remote telemetry." aria-describedby="ld-new-tab-arl-en">
+              <title id="ld-new-tab-arl-en">Opens in a new tab</title>
+              <rect x="765" y="447" width="150" height="50" rx="7"/>
+              <text x="840" y="468" class="ld-code">ARL</text>
+              <text x="840" y="486" class="ld-label">Agent runtime</text>
             </a>
             <a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="ctx" data-learning-role="context" aria-label="CTX Context &amp; Knowledge Engineering. A bilingual, source-backed field guide to the information system that runs before a model answers, from ingestion and retrieval through citation, caching, and memory." aria-describedby="ld-new-tab-ctx-en">
               <title id="ld-new-tab-ctx-en">Opens in a new tab</title>
@@ -421,6 +429,13 @@
             <p>A deterministic, bilingual educational laboratory that follows individual LLM requests through queueing, admission, chunked prefill, KV state, iterative decode, sampling, and token delivery, exploring competing request lifetimes, conservative memory reservations, static versus continuous batching, and latency/throughput trade-offs.</p>
             <a class="learning-horizon-link" href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer">Research · LLM ↗ <span class="sr-only">opens in a new tab</span></a>
             <a class="learning-horizon-link" href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer">Explore · TFL ↗ <span class="sr-only">opens in a new tab</span></a>
+          </article>
+          <article class="swarm-lab" data-practice-lab="arl" data-learning-parent="hns">
+            <p class="swarm-lab__identity"><code>HNS → ARL</code><span>Live</span></p>
+            <h4>What happens between intent and action?</h4>
+            <p>A deterministic, bilingual educational agent runtime that inspects a single revenue-update execution across HNS (Harness), CTX (Context), SEC (Security), and EVL (Evaluation). All model decisions are scripted; no LLM API, no live data, no remote telemetry.</p>
+            <a class="learning-horizon-link" href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer">Research · HNS ↗ <span class="sr-only">opens in a new tab</span></a>
+            <a class="learning-horizon-link" href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer">Explore · ARL ↗ <span class="sr-only">opens in a new tab</span></a>
           </article>
           <article class="swarm-lab" data-practice-lab="wml" data-learning-parent="wfm">
             <p class="swarm-lab__identity"><code>WFM → WML</code><span>Live</span></p>

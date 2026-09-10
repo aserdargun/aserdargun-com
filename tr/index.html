@@ -158,7 +158,7 @@
           <h2>Ajan sistemi</h2>
           <p>Model yeteneğini çalışan bir sisteme dönüştüren harness ve bağlam katmanları.</p>
           <ul aria-label="Ajan sistemi uygulamaları">
-            <li data-focus-app="hns"><a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><code>hns</code><span>Harness Engineering Observatory</span> <span class="sr-only">yeni sekmede açılır</span></a></li>
+            <li data-focus-app="hns"><a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><code>hns</code><span>Harness Engineering Observatory</span> <span class="sr-only">yeni sekmede açılır</span></a><ul class="system-focus-children" aria-label="HNS alt uygulamaları">            <li data-focus-app="arl" data-app-parent="hns"><a href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer"><code>arl</code><span>ARL — Ajan Çalışma Zamanı Laboratuvarı<span class="sr-only app-ownership">HNS alt uygulaması.</span></span> <span class="sr-only">yeni sekmede açılır</span></a></li></ul></li>
             <li data-focus-app="ctx"><a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer"><code>ctx</code><span>Bağlam ve Bilgi Mühendisliği</span> <span class="sr-only">yeni sekmede açılır</span></a></li>
           </ul>
         </article>
@@ -228,6 +228,7 @@
           <g class="ld-families" aria-hidden="true">
             <g data-learning-family="gpu"><rect x="194" y="120" width="212" height="186" rx="15"/><text x="396" y="320">GPU + alt uygulamalar</text></g>
             <g data-learning-family="llm"><rect x="439" y="310" width="492" height="100" rx="15"/><text x="921" y="424">LLM + alt uygulamalar</text></g>
+            <g data-learning-family="hns"><rect x="424" y="420" width="507" height="100" rx="15"/><text x="921" y="534">HNS + alt uygulamalar</text></g>
             <g data-learning-family="wfm"><rect x="179" y="860" width="242" height="186" rx="15"/><text x="411" y="1060">WFM + alt uygulamalar</text></g>
             <g data-learning-family="swi"><rect x="624" y="860" width="352" height="186" rx="15"/><text x="966" y="1060">SWI + alt uygulamalar</text></g>
             <g data-learning-family="itl"><rect x="424" y="1100" width="507" height="100" rx="15"/><text x="921" y="1214">ITL + alt uygulamalar</text></g>
@@ -257,6 +258,7 @@
             <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 550 1184 V 1270" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="gpu-to-gex" class="ld-edge-child" d="M 300 204 V 222 H 300 V 240" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="llm-to-tfl" class="ld-edge-child" d="M 645 362 H 710 V 362 H 765" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-arl" class="ld-edge-child" d="M 660 472 H 710 V 472 H 765" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="wfm-to-wml" class="ld-edge-child" d="M 300 944 V 962 H 300 V 980" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="swi-to-ant" class="ld-edge-child" d="M 765 944 V 962 H 715 V 980" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="swi-to-bee" class="ld-edge-child" d="M 835 944 V 962 H 885 V 980" marker-end="url(#ld-arrow)"/>
@@ -306,6 +308,12 @@
               <rect x="440" y="440" width="220" height="64" rx="10"/>
               <text x="550" y="467" class="ld-code">HNS</text>
               <text x="550" y="488" class="ld-label">Harness mühendisliği</text>
+            </a>
+            <a href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="arl" data-learning-role="practice-lab" data-learning-parent="hns" aria-label="ARL ARL — Ajan Çalışma Zamanı Laboratuvarı. HNS alt uygulaması. HNS (Harness), CTX (Bağlam), SEC (Güvenlik) ve EVL (Değerlendirme) üzerinden tek bir gelir güncelleme yürütmesini inceleyen deterministik, iki dilli eğitim amaçlı ajan çalışma zamanı. Tüm model kararları komut dosyası tabanlıdır; LLM API&apos;si, canlı veri veya uzak telemetri yoktur." aria-describedby="ld-new-tab-arl-tr">
+              <title id="ld-new-tab-arl-tr">Yeni sekmede açılır</title>
+              <rect x="765" y="447" width="150" height="50" rx="7"/>
+              <text x="840" y="468" class="ld-code">ARL</text>
+              <text x="840" y="486" class="ld-label">Ajan çalışma zamanı</text>
             </a>
             <a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="ctx" data-learning-role="context" aria-label="CTX Bağlam ve Bilgi Mühendisliği. Model yanıtından önce çalışan bilgi sistemini alım ve erişimden alıntılama, önbellekleme ve belleğe kadar tasarlamaya yarayan iki dilli, kaynaklı alan rehberi." aria-describedby="ld-new-tab-ctx-tr">
               <title id="ld-new-tab-ctx-tr">Yeni sekmede açılır</title>
@@ -421,6 +429,13 @@
             <p>Kuyruklama, kabul, parçalı önyükleme, KV durumu, yinelemeli kod çözme, örnekleme ve token teslimatı boyunca bireysel LLM isteklerini izleyen; rekabet eden istek ömürlerini, temkinli bellek rezervasyonlarını, statik ve sürekli toplu işlemeyi ve gecikme/verim ticaretlerini keşfeden deterministik, iki dilli eğitim laboratuvarı.</p>
             <a class="learning-horizon-link" href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer">Araştırma · LLM ↗ <span class="sr-only">yeni sekmede açılır</span></a>
             <a class="learning-horizon-link" href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer">Keşfet · TFL ↗ <span class="sr-only">yeni sekmede açılır</span></a>
+          </article>
+          <article class="swarm-lab" data-practice-lab="arl" data-learning-parent="hns">
+            <p class="swarm-lab__identity"><code>HNS → ARL</code><span>Yayında</span></p>
+            <h4>Niyet ile eylem arasında ne olur?</h4>
+            <p>HNS (Harness), CTX (Bağlam), SEC (Güvenlik) ve EVL (Değerlendirme) üzerinden tek bir gelir güncelleme yürütmesini inceleyen deterministik, iki dilli eğitim amaçlı ajan çalışma zamanı. Tüm model kararları komut dosyası tabanlıdır; LLM API&apos;si, canlı veri veya uzak telemetri yoktur.</p>
+            <a class="learning-horizon-link" href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer">Araştırma · HNS ↗ <span class="sr-only">yeni sekmede açılır</span></a>
+            <a class="learning-horizon-link" href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer">Keşfet · ARL ↗ <span class="sr-only">yeni sekmede açılır</span></a>
           </article>
           <article class="swarm-lab" data-practice-lab="wml" data-learning-parent="wfm">
             <p class="swarm-lab__identity"><code>WFM → WML</code><span>Yayında</span></p>

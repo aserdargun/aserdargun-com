@@ -134,7 +134,8 @@
       "downstreamApps": [
         "ctx",
         "sec",
-        "evl"
+        "evl",
+        "arl"
       ],
       "tracks": [
         "harness",
@@ -738,6 +739,59 @@
       ],
       "entityIds": [],
       "portfolioLayer": "foundation",
+      "focusState": "active",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "arl",
+      "parentApp": "hns",
+      "diagramLabel": {"en": "Agent runtime", "tr": "Ajan çalışma zamanı"},
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "ARL — Agent Runtime Laboratory",
+        "tr": "ARL — Ajan Çalışma Zamanı Laboratuvarı"
+      },
+      "summary": {
+        "en": "A deterministic, bilingual educational agent runtime that inspects a single revenue-update execution across HNS (Harness), CTX (Context), SEC (Security), and EVL (Evaluation). All model decisions are scripted; no LLM API, no live data, no remote telemetry.",
+        "tr": "HNS (Harness), CTX (Bağlam), SEC (Güvenlik) ve EVL (Değerlendirme) üzerinden tek bir gelir güncelleme yürütmesini inceleyen deterministik, iki dilli eğitim amaçlı ajan çalışma zamanı. Tüm model kararları komut dosyası tabanlıdır; LLM API'si, canlı veri veya uzak telemetri yoktur."
+      },
+      "guidingQuestion": {
+        "en": "What happens between intent and action?",
+        "tr": "Niyet ile eylem arasında ne olur?"
+      },
+      "repository": "https://github.com/aserdargun/arl-aserdargun-com",
+      "address": "https://arl.aserdargun.com/",
+      "updatedAt": "2026-09-09",
+      "lastVerified": "2026-09-09",
+      "lastReleased": "2026-09-09",
+      "releaseSha": "3d8474e8c9028909205014de290651be6fa12b54",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "hns"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "agent",
+        "runtime",
+        "execution",
+        "tool-use",
+        "evaluation"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "agent-system",
       "focusState": "active",
       "relatedMemoryIds": []
     },

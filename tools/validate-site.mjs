@@ -18,7 +18,7 @@ import {
 
 const expectedPublicApplicationCodes = [
   "aia", "llm", "hns", "sec", "ctx", "evl", "usl", "gpu", "cld", "lcl",
-  "wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng", "gex", "wml", "tfl",
+  "wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng", "gex", "wml", "tfl", "arl",
 ].sort();
 const expectedPrivateApplicationCodes = ["nxt", "stk", "inf"].sort();
 
@@ -102,6 +102,7 @@ const expectedApplicationRows = [
   { code: "gex", repository: "gex-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/gex-aserdargun-com", productUrl: "https://gex.aserdargun.com/", productLabel: "gex.aserdargun.com" },
   { code: "wml", repository: "wml-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/wml-aserdargun-com", productUrl: "https://wml.aserdargun.com/", productLabel: "wml.aserdargun.com" },
   { code: "tfl", repository: "tfl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/tfl-aserdargun-com", productUrl: "https://tfl.aserdargun.com/", productLabel: "tfl.aserdargun.com" },
+  { code: "arl", repository: "arl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/arl-aserdargun-com", productUrl: "https://arl.aserdargun.com/", productLabel: "arl.aserdargun.com" },
 ].map((row) => ({
   code: row.code,
   repository: row.repository,
@@ -383,6 +384,7 @@ function validateLearningSystem(locale, html) {
       "pdt:practice-lab",
       "hex:practice-lab",
       "tfl:practice-lab",
+      "arl:practice-lab",
     ].sort()),
     `${locale}: learning diagram node roles differ from the application content model`,
   );
@@ -415,6 +417,7 @@ function validateLearningSystem(locale, html) {
       "itl-to-pdt",
       "eng-to-hex",
       "llm-to-tfl",
+      "hns-to-arl",
     ].sort()),
     `${locale}: learning diagram edges differ from the application content model`,
   );
