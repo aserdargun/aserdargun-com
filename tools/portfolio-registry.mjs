@@ -6,6 +6,7 @@ function applicationManifest(application) {
   return {
     code: application.code,
     parentApp: application.parentApp ?? null,
+    ...(application.sharedParentApps ? { sharedParentApps: application.sharedParentApps } : {}),
     name: application.title,
     shortName: application.code.toUpperCase(),
     description: application.summary,

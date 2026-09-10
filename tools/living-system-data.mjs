@@ -1,3 +1,4 @@
+import { applicationParents } from "./application-hierarchy.mjs";
 import { readFile } from "node:fs/promises";
 
 const TOP_LEVEL_KEYS = [
@@ -29,7 +30,7 @@ const APPLICATION_KEYS = new Set([
   "guidingQuestion", "repository", "address", "updatedAt", "relatedMemoryIds", "nextDirection",
   "statusLabel", "languages", "researchCutoff", "lastVerified", "lastReleased", "releaseSha",
   "sourceCount", "claimCount", "evidencePolicy", "upstreamApps", "downstreamApps", "tracks",
-  "entityIds", "portfolioLayer", "focusState", "parentApp", "diagramLabel",
+  "entityIds", "portfolioLayer", "focusState", "parentApp", "sharedParentApps", "diagramLabel",
 ]);
 const NOW_KEYS = new Set(["updatedAt", "week", "items"]);
 const NOW_ITEM_KEYS = new Set(["id", "timeframe", "title", "summary", "tags"]);
@@ -394,6 +395,7 @@ function isStructurallyValidPublicApplication(application, today) {
     && (application.portfolioLayer === undefined || PORTFOLIO_LAYERS.has(application.portfolioLayer))
     && (application.focusState === undefined || FOCUS_STATES.has(application.focusState))
     && (application.parentApp == null || (typeof application.parentApp === "string" && APPLICATION_CODE_PATTERN.test(application.parentApp)))
+    && (application.sharedParentApps === undefined || (application.parentApp == null && Array.isArray(application.sharedParentApps) && application.sharedParentApps.length >= 2 && isUniqueArrayOf(application.sharedParentApps, (code) => typeof code === "string" && APPLICATION_CODE_PATTERN.test(code))))
     && (application.diagramLabel === undefined || isCompleteLocalized(application.diagramLabel))
     && isUniqueArrayOf(
       application.relatedMemoryIds,
@@ -481,9 +483,15 @@ function validateApplications(applications, errors, today, trustedApplicationCod
     validateOptionalLocalized(application.statusLabel, `${label}.statusLabel`, errors);
     validateOptionalLocalized(application.diagramLabel, `${label}.diagramLabel`, errors);
 
-    if (application.parentApp != null) {
-      const parent = applications.find((candidate) => candidate?.code === application.parentApp);
-      if (!trustedApplicationCodes.has(application.parentApp)) {
+    if (application.sharedParentApps !== undefined && !(application.parentApp == null
+      && Array.isArray(application.sharedParentApps) && application.sharedParentApps.length >= 2
+      && isUniqueArrayOf(application.sharedParentApps, (code) => typeof code === "string" && APPLICATION_CODE_PATTERN.test(code)))) {
+      addError(errors, `${label}.sharedParentApps`, "invalid-shared-parents", `${label}.sharedParentApps needs at least two distinct application codes and no single parent.`);
+    }
+
+    for (const parentCode of applicationParents(application)) {
+      const parent = applications.find((candidate) => candidate?.code === parentCode);
+      if (!trustedApplicationCodes.has(parentCode)) {
         addError(errors, `${label}.parentApp`, "relationship-unresolved", `${label}.parentApp must reference a valid public application.`);
       }
       if (parent && parent.portfolioLayer !== application.portfolioLayer) {
@@ -492,16 +500,16 @@ function validateApplications(applications, errors, today, trustedApplicationCod
       if (parent && (!application.upstreamApps?.includes(parent.code) || !parent.downstreamApps?.includes(application.code))) {
         addError(errors, `${label}.parentApp`, "hierarchy-relationship", `${label} needs reciprocal learning links with its parent.`);
       }
-      const ancestors = new Set([application.code]);
-      let ancestor = parent;
-      while (ancestor) {
+      const visit = (ancestor, ancestors) => {
+        if (!ancestor) return;
         if (ancestors.has(ancestor.code)) {
-          addError(errors, `${label}.parentApp`, "hierarchy-cycle", `${label}.parentApp must not form an ownership cycle.`);
-          break;
+          addError(errors, `${label}.parentApp`, "hierarchy-cycle", `${label} must not form an ownership cycle.`);
+          return;
         }
-        ancestors.add(ancestor.code);
-        ancestor = applications.find((candidate) => candidate?.code === ancestor.parentApp);
-      }
+        const next = new Set([...ancestors, ancestor.code]);
+        for (const code of applicationParents(ancestor)) visit(applications.find((candidate) => candidate?.code === code), next);
+      };
+      visit(parent, new Set([application.code]));
     }
 
     if (application.languages !== undefined

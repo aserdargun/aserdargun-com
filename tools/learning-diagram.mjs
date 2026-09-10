@@ -1,3 +1,5 @@
+import { applicationParents, applicationOwnership } from "./application-hierarchy.mjs";
+
 const escape = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");
 const localized = (locale, en, tr) => locale === "tr" ? tr : en;
 
@@ -14,7 +16,7 @@ const PARENTS = {
   evl: { cx: 800, y: 560, width: 180, role: "evaluation" },
   lcl: { cx: 375, y: 710, width: 190, role: "deployment" },
   cld: { cx: 725, y: 710, width: 190, role: "deployment" },
-  dcl: { cx: 550, y: 820, width: 220, role: "decision-lab" },
+  dcl: { cx: 550, y: 820, width: 180, role: "decision-lab" },
   wfm: { cx: 300, y: 990, width: 210, role: "world" },
   swi: { cx: 800, y: 990, width: 230, role: "collective" },
   itl: { cx: 550, y: 1230, width: 220, role: "twin", side: true },
@@ -36,8 +38,8 @@ const ROUTES = [
   ["sec-to-cld", "M 590 624 V 652 H 725 V 710", "decision"],
   ["evl-to-cld", "M 820 624 V 675 H 765 V 710", "context"],
   ["ctx-to-lcl", "M 280 624 V 675 H 335 V 710", "context"],
-  ["lcl-to-dcl", "M 375 774 V 802 H 510 V 820", "decision"],
-  ["cld-to-dcl", "M 725 774 V 802 H 590 V 820", "decision"],
+  ["lcl-to-dcl", "M 375 774 V 802 H 510 V 820", "child"],
+  ["cld-to-dcl", "M 725 774 V 802 H 590 V 820", "child"],
   ["deployment-to-wfm", "M 550 956 H 300 V 990", "horizon"],
   ["deployment-to-swi", "M 550 956 H 800 V 990", "horizon"],
   ["wfm-to-itl", "M 405 1022 H 470 V 1200 H 510 V 1230", "horizon"],
@@ -56,7 +58,7 @@ export function learningDiagramLayout(applications) {
   for (const [code, layout] of Object.entries(PARENTS)) {
     const app = parents.find((candidate) => candidate.code === code);
     if (!app) continue;
-    const parent = { ...layout, x: layout.cx - layout.width / 2, height: 64, app };
+    const parent = { ...layout, x: layout.cx - layout.width / 2, height: app.sharedParentApps ? 50 : 64, app };
     nodes.push(parent);
     const children = applications.filter((child) => child.parentApp === code);
     const childNodes = children.map((child, index) => {
@@ -80,6 +82,12 @@ export function learningDiagramLayout(applications) {
       nodes.push(...childNodes);
     }
   }
+  for (const node of nodes.filter(({ app }) => app.sharedParentApps)) {
+    const members = [node, ...node.app.sharedParentApps.map((code) => nodes.find(({ app }) => app.code === code))];
+    const x = Math.min(...members.map((member) => member.x)) - 16;
+    const y = Math.min(...members.map((member) => member.y)) - 20;
+    families.push({ code: node.app.sharedParentApps.join("-"), parents: node.app.sharedParentApps, x, y, width: Math.max(...members.map((member) => member.x + member.width)) + 16 - x, height: Math.max(...members.map((member) => member.y + member.height)) + 16 - y });
+  }
   if (nodes.length !== applications.length) throw new Error("Every application needs a visible diagram node; extend the layout for deeper hierarchies.");
   return { nodes, edges, families };
 }
@@ -94,14 +102,15 @@ export function renderLearningDiagram({ locale, data }) {
     [1412, "09 · EMBODIED AI", "09 · BEDENLENMİŞ AI"],
   ];
   const description = localized(locale,
-    "Large boxes show the connected main applications. Smaller boxes are sub-applications, enclosed with their parent in a shared frame. AIA connects GPU and USL to LLM, then HNS, CTX, SEC and EVL. CTX feeds back to LLM. Assurance informs parallel LCL and CLD deployment; DCL compares their workload constraints before the path reaches WFM and SWI, then ITL and ENG. USL owns ADP, LLM owns TFL, HNS owns ARL, GPU owns GEX, WFM owns WML, SWI owns ANT and BEE, ITL owns PDT, and ENG owns HEX. A dot marks the shared physical-AI junction.",
-    "Büyük kutular birbirine bağlı üst uygulamaları gösterir. Küçük kutular alt uygulamalardır; üst uygulamalarıyla ortak çerçeve içindedir. AIA, GPU ve USL üzerinden LLM, HNS, CTX, SEC ve EVL’ye bağlanır. CTX, LLM’ye geri bildirim verir. Güvence katmanı paralel LCL ve CLD dağıtımına, DCL bu seçeneklerin iş yükü kısıtlarını karşılaştırır; akış WFM ve SWI’ye, ardından ITL ve ENG’ye bağlanır. USL altında ADP, LLM altında TFL, HNS altında ARL, GPU altında GEX, WFM altında WML, SWI altında ANT ve BEE, ITL altında PDT, ENG altında HEX bulunur. Nokta, ortak fiziksel AI bağlantısını gösterir.");
+    "Large boxes show the connected main applications. Smaller boxes are sub-applications, enclosed with their parent in a shared frame. AIA connects GPU and USL to LLM, then HNS, CTX, SEC and EVL. CTX feeds back to LLM. Assurance informs parallel LCL and CLD deployment; their shared laboratory DCL compares workload constraints before the path reaches WFM and SWI, then ITL and ENG. USL owns ADP, LLM owns TFL, HNS owns ARL, GPU owns GEX, WFM owns WML, SWI owns ANT and BEE, ITL owns PDT, and ENG owns HEX. A dot marks the shared physical-AI junction.",
+    "Büyük kutular birbirine bağlı üst uygulamaları gösterir. Küçük kutular alt uygulamalardır; üst uygulamalarıyla ortak çerçeve içindedir. AIA, GPU ve USL üzerinden LLM, HNS, CTX, SEC ve EVL’ye bağlanır. CTX, LLM’ye geri bildirim verir. Güvence katmanı paralel LCL ve CLD dağıtımına, CLD ve LCL’nin ortak laboratuvarı DCL bu seçeneklerin iş yükü kısıtlarını karşılaştırır; akış WFM ve SWI’ye, ardından ITL ve ENG’ye bağlanır. USL altında ADP, LLM altında TFL, HNS altında ARL, GPU altında GEX, WFM altında WML, SWI altında ANT ve BEE, ITL altında PDT, ENG altında HEX bulunur. Nokta, ortak fiziksel AI bağlantısını gösterir.");
   const renderNode = ({ app, x, y, width, height, cx, role }) => {
-    const parentLabel = app.parentApp ? localized(locale, `Sub-application of ${app.parentApp.toUpperCase()}. `, `${app.parentApp.toUpperCase()} alt uygulaması. `) : "";
-    return `            <a href="${escape(app.address)}" target="_blank" rel="noreferrer" class="ld-node ${app.parentApp ? "ld-node-child" : "ld-node-parent"}${app.code === "aia" ? " ld-node-aia" : ""}" data-learning-app="${app.code}" data-learning-role="${role}"${role === "deployment" ? ' data-learning-plane="deployment"' : ""}${app.parentApp ? ` data-learning-parent="${app.parentApp}"` : ""} aria-label="${escape(`${app.code.toUpperCase()} ${app.title[locale]}. ${parentLabel}${app.summary[locale]}`)}">
-              <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="${app.parentApp ? 7 : 10}"/>
-              <text x="${cx}" y="${y + (app.parentApp ? 21 : 27)}" class="ld-code">${app.code.toUpperCase()}</text>
-              <text x="${cx}" y="${y + (app.parentApp ? 39 : 48)}" class="ld-label">${escape(app.diagramLabel?.[locale] ?? app.title[locale])}</text>
+    const isChild = applicationParents(app).length > 0;
+    const parentLabel = isChild ? `${applicationOwnership(app, locale)}. ` : "";
+    return `            <a href="${escape(app.address)}" target="_blank" rel="noreferrer" class="ld-node ${isChild ? "ld-node-child" : "ld-node-parent"}${app.code === "aia" ? " ld-node-aia" : ""}" data-learning-app="${app.code}" data-learning-role="${role}"${role === "deployment" ? ' data-learning-plane="deployment"' : ""}${app.sharedParentApps ? ` data-learning-parents="${app.sharedParentApps.join(" ")}"` : ""}${app.parentApp ? ` data-learning-parent="${app.parentApp}"` : ""} aria-label="${escape(`${app.code.toUpperCase()} ${app.title[locale]}. ${parentLabel}${app.summary[locale]}`)}">
+              <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="${isChild ? 7 : 10}"/>
+              <text x="${cx}" y="${y + (isChild ? 21 : 27)}" class="ld-code">${app.code.toUpperCase()}</text>
+              <text x="${cx}" y="${y + (isChild ? 39 : 48)}" class="ld-label">${escape(app.diagramLabel?.[locale] ?? app.title[locale])}</text>
             </a>`;
   };
   return [
@@ -116,10 +125,10 @@ export function renderLearningDiagram({ locale, data }) {
     ...stages.map(([y, en, tr]) => `            <text x="12" y="${y}">${escape(localized(locale, en, tr))}</text>`),
     '          </g>',
     '          <g class="ld-families" aria-hidden="true">',
-    ...families.map((family) => `            <g data-learning-family="${family.code}"><rect x="${family.x}" y="${family.y}" width="${family.width}" height="${family.height}" rx="15"/><text x="${family.x + family.width - 10}" y="${family.y + 13}">${localized(locale, `${family.code.toUpperCase()} + sub-applications`, `${family.code.toUpperCase()} + alt uygulamalar`)}</text></g>`),
+    ...families.map((family) => `            <g data-learning-family="${family.code}"><rect x="${family.x}" y="${family.y}" width="${family.width}" height="${family.height}" rx="15"/><text x="${family.x + family.width - 10}" y="${family.y + 13}">${family.parents ? localized(locale, `${family.parents.join(" + ").toUpperCase()} · shared laboratory`, `${family.parents.join(" + ").toUpperCase()} · ortak laboratuvar`) : localized(locale, `${family.code.toUpperCase()} + sub-applications`, `${family.code.toUpperCase()} + alt uygulamalar`)}</text></g>`),
     '          </g>',
     '          <g class="ld-links" aria-hidden="true">',
-    '            <path data-learning-connector="dcl-to-stage-07" class="ld-edge-horizon" d="M 550 884 V 956"/>',
+    '            <path data-learning-connector="dcl-to-stage-07" class="ld-edge-horizon" d="M 550 870 V 956"/>',
     ...edges.map(({ id, path, kind }) => `            <path data-learning-edge="${id}" class="ld-edge-${kind}" d="${path}" marker-end="url(#ld-arrow)"/>`),
     '            <circle class="ld-junction" cx="550" cy="956" r="3"/>',
     '          </g>',
@@ -133,7 +142,7 @@ export function renderLearningDiagram({ locale, data }) {
     '          </g>',
     '        </svg>',
     '        </div>',
-    `        <figcaption>${localized(locale, "Follow the arrows between main applications. The smaller boxes share a frame with their parent application.", "Üst uygulamalar arasındaki okları takip et. Küçük kutular, bağlı oldukları üst uygulamayla aynı çerçevededir.")}</figcaption>`,
+    `        <figcaption>${localized(locale, "Follow the arrows between main applications. The smaller boxes share a frame with their parent application. DCL is the shared laboratory of CLD and LCL.", "Üst uygulamalar arasındaki okları takip et. Küçük kutular, bağlı oldukları üst uygulamayla aynı çerçevededir. DCL, CLD ve LCL’nin ortak laboratuvarıdır.")}</figcaption>`,
     '      </figure>',
   ].join("\n");
 }

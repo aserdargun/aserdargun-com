@@ -238,6 +238,8 @@ test('adaptation, serving and agent companions retain ownership while DCL bridge
   }
   const dcl=data.applications.find(app=>app.code==='dcl');
   assert.equal(dcl.parentApp,null);
+  assert.deepEqual(dcl.sharedParentApps,["cld","lcl"]);
+  for(const parentCode of dcl.sharedParentApps) for(const locale of ["en","tr"]) assert.ok(renderCompanionLinks({locale,data,parentCode}).includes(dcl.address));
   assert.equal(dcl.portfolioLayer,'deployment');
   assert.deepEqual(dcl.upstreamApps,['lcl','cld']);
   assert.equal(dcl.researchCutoff,undefined);

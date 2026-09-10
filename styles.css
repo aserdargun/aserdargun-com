@@ -4567,3 +4567,7 @@ body:has(main.memory-page) {
 .learning-companion a { color: var(--lime); }
 .learning-companion a { text-decoration: underline; text-underline-offset: 3px; }
 .learning-decision-lab { margin-top: 22px; }
+
+/* Shared labs belong equally to both research applications. */
+.system-focus-shared { margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(200, 255, 54, 0.25); }
+.system-focus-shared > .app-parent-label { display: block; margin-bottom: 8px; }

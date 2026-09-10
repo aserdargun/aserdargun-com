@@ -8,7 +8,7 @@ import {
   summarizeApplications,
 } from "./living-system-data.mjs";
 import { buildPortfolioRegistry } from "./portfolio-registry.mjs";
-import { applicationHierarchy } from "./application-hierarchy.mjs";
+import { applicationHierarchy, applicationParents, applicationOwnership } from "./application-hierarchy.mjs";
 import { renderLearningDiagram } from "./learning-diagram.mjs";
 import {
   directText as activeDirectText,
@@ -372,8 +372,8 @@ export function renderApplicationMap({ locale, data, today, page }) {
       ? renderFreshness({ locale, dateOnly: freshnessDate, today })
       : `<span class="app-updated app-updated-horizon"><span class="app-horizon-dot" aria-hidden="true"></span>${escapeHtml(application.statusLabel?.[locale] ?? statusLabels[application.status])}</span>`;
     const rowClasses = [sourceApplication.systemRole === "horizon" ? "app-row-horizon" : "", depth ? "app-row-child" : ""].filter(Boolean).join(" ");
-    const rowClass = ` data-app-row data-app-code="${escapeHtml(application.code)}" data-app-layer="${escapeHtml(application.portfolioLayer ?? "")}" data-app-depth="${depth}"${application.parentApp ? ` data-app-parent="${escapeHtml(application.parentApp)}"` : ""} style="--app-depth: ${depth}"${rowClasses ? ` class="${rowClasses}"` : ""}`;
-    const ownership = application.parentApp ? `<small class="app-parent-label">${escapeHtml(label(locale, `Sub-application of ${application.parentApp.toUpperCase()}`, `${application.parentApp.toUpperCase()} alt uygulaması`))}</small>` : "";
+    const rowClass = ` data-app-row data-app-code="${escapeHtml(application.code)}" data-app-layer="${escapeHtml(application.portfolioLayer ?? "")}" data-app-depth="${depth}"${application.sharedParentApps ? ` data-app-parents="${application.sharedParentApps.join(" ")}"` : ""}${application.parentApp ? ` data-app-parent="${escapeHtml(application.parentApp)}"` : ""} style="--app-depth: ${depth}"${rowClasses ? ` class="${rowClasses}"` : ""}`;
+    const ownership = applicationParents(application).length ? `<small class="app-parent-label">${escapeHtml(applicationOwnership(application, locale))}</small>` : "";
     const title = escapeHtml(application.name[locale]);
     const applicationSummary = escapeHtml(application.description[locale]);
     const repository = escapeHtml(application.repositoryUrl);
@@ -506,15 +506,18 @@ export function renderSystemFocus({ locale, data }) {
 }
 
 function renderFocusApplications(applications, locale, parentApp = null) {
-  return applications.filter((app) => app.parentApp === parentApp).map((app) => {
+  const main = applications.filter((app) => !app.sharedParentApps && app.parentApp === parentApp).map((app) => {
     const children = applications.filter((child) => child.parentApp === app.code);
     const ownership = parentApp ? `<span class="sr-only app-ownership">${label(locale, `Sub-application of ${parentApp.toUpperCase()}.`, `${parentApp.toUpperCase()} alt uygulaması.`)}</span>` : "";
     return `            <li data-focus-app="${app.code}"${parentApp ? ` data-app-parent="${parentApp}"` : ""}><a href="${escapeHtml(app.productionUrl)}" target="_blank" rel="noreferrer"><code>${app.code}</code><span>${escapeHtml(app.name[locale])}${ownership}</span></a>${children.length ? `<ul class="system-focus-children" aria-label="${label(locale, `${app.code.toUpperCase()} sub-applications`, `${app.code.toUpperCase()} alt uygulamaları`)}">${renderFocusApplications(applications, locale, app.code)}</ul>` : ""}</li>`;
   }).join("\n");
+  const shared = parentApp === null ? applications.filter((app) => app.sharedParentApps).map((app) => `
+            <li class="system-focus-shared" data-focus-app="${app.code}" data-app-parents="${app.sharedParentApps.join(" ")}"><small class="app-parent-label">${escapeHtml(applicationOwnership(app, locale))}</small><a href="${escapeHtml(app.productionUrl)}" target="_blank" rel="noreferrer"><code>${app.code}</code><span>${escapeHtml(app.name[locale])}</span></a></li>`).join("\n") : "";
+  return main + shared;
 }
 
 function practiceApplications(data) {
-  return data.applications.filter((app) => app.parentApp && app.parentApp !== "swi");
+  return data.applications.filter((app) => applicationParents(app).length && app.parentApp !== "swi");
 }
 
 export function renderPracticeLabs({ locale, data }) {
@@ -525,13 +528,14 @@ export function renderPracticeLabs({ locale, data }) {
     `        <p>${label(locale, "Follow each research application into its companion learning experience. These links describe learning relationships; each application runs independently.", "Her araştırma uygulamasından ona bağlı öğrenme deneyimine geç. Bu bağlantılar öğrenme ilişkilerini gösterir; her uygulama bağımsız çalışır.")}</p>`,
     '        <div class="swarm-labs__grid">',
     ...practiceApplications(data).map((app) => {
-      const parent = data.applications.find((candidate) => candidate.code === app.parentApp);
+      const parents = applicationParents(app).map((code) => data.applications.find((candidate) => candidate.code === code));
+      const parentCodes = parents.map((parent) => parent.code.toUpperCase()).join(" + ");
       return [
-        `          <article class="swarm-lab" data-practice-lab="${app.code}" data-learning-parent="${parent.code}">`,
-        `            <p class="swarm-lab__identity"><code>${parent.code.toUpperCase()} → ${app.code.toUpperCase()}</code><span>${escapeHtml(app.statusLabel[locale])}</span></p>`,
+        `          <article class="swarm-lab" data-practice-lab="${app.code}" ${app.sharedParentApps ? `data-learning-parents="${app.sharedParentApps.join(" ")}"` : `data-learning-parent="${app.parentApp}"`}>`,
+        `            <p class="swarm-lab__identity"><code>${parentCodes} → ${app.code.toUpperCase()}</code><span>${escapeHtml(app.statusLabel[locale])}</span></p>`,
         `            <h4>${escapeHtml(app.guidingQuestion[locale])}</h4>`,
         `            <p>${escapeHtml(app.summary[locale])}</p>`,
-        `            <a class="learning-horizon-link" href="${escapeHtml(parent.address)}" target="_blank" rel="noreferrer">${label(locale, "Research", "Araştırma")} · ${parent.code.toUpperCase()} ↗</a>`,
+        ...parents.map((parent) => `            <a class="learning-horizon-link" href="${escapeHtml(parent.address)}" target="_blank" rel="noreferrer">${label(locale, "Research", "Araştırma")} · ${parent.code.toUpperCase()} ↗</a>`),
         `            <a class="learning-horizon-link" href="${escapeHtml(app.address)}" target="_blank" rel="noreferrer">${label(locale, "Explore", "Keşfet")} · ${app.code.toUpperCase()} ↗</a>`,
         "          </article>",
       ].join("\n");
@@ -542,15 +546,15 @@ export function renderPracticeLabs({ locale, data }) {
 }
 
 export function renderCompanionLinks({ locale, data, parentCode }) {
-  const labs = data.applications.filter((app) => app.parentApp === parentCode);
+  const labs = data.applications.filter((app) => applicationParents(app).includes(parentCode));
   return labs.map((app) => `<p class="learning-companion" data-companion-of="${parentCode}"><strong>${label(locale, "Try the companion lab", "Eşlikçi laboratuvarı dene")}</strong> · <a href="${escapeHtml(app.address)}" target="_blank" rel="noreferrer">${app.code.toUpperCase()} ↗</a><br>${escapeHtml(app.guidingQuestion[locale])}</p>`).join("\n");
 }
 
 export function renderDeploymentLab({ locale, data }) {
   const app = data.applications.find(({ code }) => code === "dcl");
   if (!app) return "";
-  return `<aside class="learning-node learning-decision-lab" data-deployment-lab="dcl" aria-labelledby="deployment-lab-${locale}">
-    <p class="learning-track-app">LCL + CLD → DCL</p>
+  return `<aside class="learning-node learning-decision-lab" data-deployment-lab="dcl" data-learning-parents="${applicationParents(app).join(" ")}" aria-labelledby="deployment-lab-${locale}">
+    <p class="learning-track-app">${escapeHtml(applicationOwnership(app, locale))} · DCL</p>
     <h3 id="deployment-lab-${locale}">${escapeHtml(app.title[locale])}</h3>
     <p class="learning-question learning-decision-question">${escapeHtml(app.guidingQuestion[locale])}</p>
     <p>${escapeHtml(app.summary[locale])}</p>

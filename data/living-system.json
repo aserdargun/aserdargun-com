@@ -1067,9 +1067,13 @@
     {
       "code": "dcl",
       "parentApp": null,
+      "sharedParentApps": [
+        "cld",
+        "lcl"
+      ],
       "diagramLabel": {
-        "en": "Deployment choices",
-        "tr": "Dağıtım kararları"
+        "en": "Shared deployment lab",
+        "tr": "Ortak dağıtım labı"
       },
       "kind": "lab",
       "systemRole": "lab",
@@ -1088,8 +1092,8 @@
         "tr": "Dağıtım Karar Laboratuvarı"
       },
       "summary": {
-        "en": "Compare local hardware, cloud GPUs, managed inference and token APIs against workload, memory, privacy and cost assumptions. Hard constraints and educational estimates explain conditional choices; no live pricing or universal winner is claimed.",
-        "tr": "Yerel donanım, bulut GPU, yönetilen çıkarım ve token API seçeneklerini iş yükü, bellek, gizlilik ve maliyet varsayımlarıyla karşılaştır. Kesin kısıtlar ve eğitim amaçlı tahminler koşullu kararları açıklar; canlı fiyat veya evrensel kazanan iddiası yoktur."
+        "en": "The shared laboratory of CLD and LCL. Compare local hardware, cloud GPUs, managed inference and token APIs against workload, memory, privacy and cost assumptions. Hard constraints and educational estimates explain conditional choices; no live pricing or universal winner is claimed.",
+        "tr": "CLD ve LCL’nin ortak laboratuvarı. Yerel donanım, bulut GPU, yönetilen çıkarım ve token API seçeneklerini iş yükü, bellek, gizlilik ve maliyet varsayımlarıyla karşılaştır. Kesin kısıtlar ve eğitim amaçlı tahminler koşullu kararları açıklar; canlı fiyat veya evrensel kazanan iddiası yoktur."
       },
       "guidingQuestion": {
         "en": "Where should this workload run, and under which assumptions?",

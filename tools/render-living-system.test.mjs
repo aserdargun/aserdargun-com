@@ -28,7 +28,7 @@ async function readFixtureData() {
   const phaseOneFields = [
     "statusLabel", "languages", "researchCutoff", "lastVerified", "lastReleased", "releaseSha",
     "sourceCount", "claimCount", "evidencePolicy", "upstreamApps", "downstreamApps", "tracks",
-    "entityIds", "portfolioLayer", "focusState", "parentApp", "diagramLabel",
+    "entityIds", "portfolioLayer", "focusState", "parentApp", "sharedParentApps", "diagramLabel",
   ];
   for (const application of data.applications) {
     for (const field of phaseOneFields) delete application[field];

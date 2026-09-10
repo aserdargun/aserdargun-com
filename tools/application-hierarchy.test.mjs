@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { applicationHierarchy } from "./application-hierarchy.mjs";
+import { applicationHierarchy, applicationParents } from "./application-hierarchy.mjs";
 import { learningDiagramLayout } from "./learning-diagram.mjs";
 import { validateLivingSystemData } from "./living-system-data.mjs";
 import { renderApplicationMap, renderSystemFocus } from "./render-living-system.mjs";
@@ -83,7 +83,7 @@ test("all diagram boxes are disjoint, children are smaller and enclosed with the
 
 test("every arrow and connector avoids box interiors and other routes; shared bus joins are explicit", () => {
   const { nodes, edges } = learningDiagramLayout(data.applications);
-  const paths = [...edges, { id: "decision-bus", path: "M 550 884 V 956" }];
+  const paths = [...edges, { id: "decision-bus", path: "M 550 870 V 956" }];
   const lines = paths.flatMap((edge) => segments(edge.path).map(([a, b]) => ({ id: edge.id, a, b })));
   for (const [index, { id, a, b }] of lines.entries()) {
     for (const node of nodes) {
@@ -106,5 +106,52 @@ test("every arrow and connector avoids box interiors and other routes; shared bu
         assert.ok(!touches || junction, `${id} crosses or touches ${other.id}`);
       }
     }
+  }
+});
+
+
+test("DCL has two equal owners and one visible entry in each portfolio view", () => {
+  const dcl = data.applications.find((app) => app.code === "dcl");
+  assert.deepEqual(applicationParents(dcl), ["cld", "lcl"]);
+  const rows = applicationHierarchy(data.applications);
+  const position = rows.findIndex(({ application }) => application.code === "dcl");
+  assert.equal(rows[position].depth, 1);
+  for (const code of applicationParents(dcl)) assert.ok(rows.findIndex(({ application }) => application.code === code) < position);
+  for (const locale of ["en", "tr"]) {
+    const ownership = locale === "tr" ? "CLD + LCL ortak laboratuvarı" : "Shared laboratory of CLD + LCL";
+    for (const [html, attribute] of [[renderApplicationMap({ locale, data, today }), "data-app-code"], [renderSystemFocus({ locale, data }), "data-focus-app"]]) {
+      assert.equal(html.split(`${attribute}="dcl"`).length - 1, 1);
+      assert.ok(html.includes('data-app-parents="cld lcl"'));
+      assert.ok(html.includes(ownership));
+    }
+  }
+  const { nodes, families, edges } = learningDiagramLayout(data.applications);
+  const family = families.find((item) => item.code === "cld-lcl");
+  assert.ok(family);
+  for (const code of ["cld", "lcl", "dcl"]) {
+    const node = nodes.find(({ app }) => app.code === code);
+    assert.ok(node.x > family.x && node.x + node.width < family.x + family.width && node.y > family.y && node.y + node.height < family.y + family.height);
+  }
+  for (const code of applicationParents(dcl)) assert.equal(edges.find((edge) => edge.id === `${code}-to-dcl`).kind, "child");
+  const lab = nodes.find(({ app }) => app.code === "dcl");
+  assert.ok(nodes.filter(({ app }) => applicationParents(dcl).includes(app.code)).every((parent) => lab.width < parent.width && lab.height < parent.height));
+});
+
+test("shared ownership validates both parents and detects cycles through either branch", () => {
+  for (const [mutate, expected] of [
+    [(apps) => { apps.find((app) => app.code === "dcl").sharedParentApps = ["cld", "zzz"]; }, "relationship-unresolved"],
+    [(apps) => { apps.find((app) => app.code === "dcl").sharedParentApps = ["cld", "cld"]; }, "invalid-shared-parents"],
+    [(apps) => { apps.find((app) => app.code === "dcl").sharedParentApps = null; }, "invalid-shared-parents"],
+    [(apps) => { apps.find((app) => app.code === "dcl").parentApp = "cld"; }, "invalid-shared-parents"],
+    ...["cld", "lcl"].flatMap((code) => [
+      [(apps) => { apps.find((app) => app.code === code).parentApp = "dcl"; }, "hierarchy-cycle"],
+      [(apps) => { apps.find((app) => app.code === code).downstreamApps = []; }, "hierarchy-relationship"],
+      [(apps) => { apps.find((app) => app.code === code).portfolioLayer = "foundation"; }, "hierarchy-layer"],
+    ]),
+  ]) {
+    const changed = structuredClone(data);
+    mutate(changed.applications);
+    const result = validateLivingSystemData(changed, { today });
+    assert.ok(result.errors.some((error) => error.code === expected), JSON.stringify(result.errors));
   }
 });
