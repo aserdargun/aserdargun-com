@@ -3,6 +3,7 @@ import { readFile, realpath, stat } from "node:fs/promises";
 import { createServer } from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { isPublicFile } from "./public-files.mjs";
 
 import {
   CONTROL_HEADER,
@@ -41,6 +42,8 @@ const mimeTypes = new Map([
   [".svg", "image/svg+xml"],
   [".txt", "text/plain; charset=utf-8"],
   [".webp", "image/webp"],
+  [".woff", "font/woff"],
+  [".woff2", "font/woff2"],
   [".xml", "application/xml; charset=utf-8"],
 ]);
 
@@ -102,6 +105,7 @@ function configuredRoute(pathname) {
 }
 
 const server = createServer(async (request, response) => {
+  for (const [name, value] of Object.entries(staticConfig.globalHeaders ?? {})) response.setHeader(name, value);
   let pathname;
   try {
     pathname = requestPathname(request.url);
@@ -156,12 +160,23 @@ const server = createServer(async (request, response) => {
     return;
   }
 
+  if (routeRule?.redirect) {
+    response.writeHead(routeRule.statusCode ?? 302, { Location: routeRule.redirect, "Cache-Control": "no-store", "Content-Length": "0" });
+    response.end();
+    return;
+  }
+
   try {
     filePath = await resolveExistingPath(filePath);
     let fileStats = await stat(filePath);
     if (fileStats.isDirectory()) {
       filePath = await resolveExistingPath(path.join(filePath, "index.html"));
       fileStats = await stat(filePath);
+    }
+
+    if (!isPublicFile(path.relative(canonicalRoot, filePath).split(path.sep).join("/"))) {
+      sendText(response, 403, "Forbidden");
+      return;
     }
 
     if (!fileStats.isFile()) {

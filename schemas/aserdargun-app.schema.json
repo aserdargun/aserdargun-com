@@ -65,15 +65,15 @@
     },
     "languages": {
       "type": "array",
-      "prefixItems": [
-        {
-          "const": "tr"
-        },
-        {
-          "const": "en"
-        }
-      ],
-      "items": false
+      "enum": [
+        [
+          "tr",
+          "en"
+        ],
+        [
+          "en"
+        ]
+      ]
     },
     "productionUrl": {
       "type": "string",

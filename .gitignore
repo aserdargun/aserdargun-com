@@ -1,4 +1,5 @@
 .worktrees/
+.site-dist/
 .mimosa/
 .DS_Store
 **/.DS_Store

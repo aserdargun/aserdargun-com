@@ -27,6 +27,7 @@ function storeLanguage(language) {
 function initializeLanguageSwitch() {
   document.querySelectorAll("[data-language-link]").forEach((link) => {
     link.addEventListener("click", (event) => {
+      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button > 0) return;
       const language = link.getAttribute("data-language-link");
       if (language !== "tr" && language !== "en") return;
 
@@ -68,16 +69,30 @@ function initializeMobileNav() {
 
   const openLabel = toggle.getAttribute("data-open-label") || toggle.getAttribute("aria-label") || "Open menu";
   const closeLabel = toggle.getAttribute("data-close-label") || "Close menu";
+  const background = [...document.body.children].filter((element) =>
+    !element.contains(toggle) && element !== backdrop && !["SCRIPT", "STYLE"].includes(element.tagName));
+  const previousInert = new Map();
   const applyOpen = (open) => {
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
     toggle.setAttribute("aria-label", open ? closeLabel : openLabel);
     panel.classList.toggle("is-open", open);
     if (backdrop) backdrop.classList.toggle("is-open", open);
     document.body.classList.toggle("nav-open", open);
+    for (const element of background) {
+      if (open) {
+        if (!previousInert.has(element)) previousInert.set(element, element.inert);
+        element.inert = true;
+      } else if (previousInert.has(element)) {
+        element.inert = previousInert.get(element);
+        previousInert.delete(element);
+      }
+    }
     if (open) {
       const firstLink = panel.querySelector("a");
       if (firstLink && typeof firstLink.focus === "function") {
-        requestAnimationFrame(() => firstLink.focus({ preventScroll: true }));
+        requestAnimationFrame(() => {
+          if (state.isOpen()) firstLink.focus({ preventScroll: true });
+        });
       }
     }
   };
@@ -98,6 +113,14 @@ function initializeMobileNav() {
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && state.isOpen()) state.onEscape();
+    if (event.key !== "Tab" || !state.isOpen()) return;
+    const focusable = [toggle, ...panel.querySelectorAll('a[href], button, input, select, [tabindex="0"]')]
+      .filter((element) => element.getClientRects().length && !element.disabled);
+    const index = focusable.indexOf(document.activeElement);
+    if (index < 0 || (event.shiftKey && index === 0) || (!event.shiftKey && index === focusable.length - 1)) {
+      event.preventDefault();
+      focusable[event.shiftKey ? focusable.length - 1 : 0]?.focus();
+    }
   });
 
   const mq = window.matchMedia("(min-width: 901px)");

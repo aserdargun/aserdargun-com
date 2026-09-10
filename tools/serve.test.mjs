@@ -147,10 +147,29 @@ test("serves the Turkish directory index and retires the /en/ duplicate", async 
   assert.equal(trResponse.statusCode, 200);
   assert.match(trResponse.body, /<html lang="tr"/);
 
-  // /en/ is retired by a 301 on Azure; the local static server has no
-  // redirect layer, so the retired directory must simply be absent.
-  const enResponse = await request("/en/");
-  assert.equal(enResponse.statusCode, 404);
+  for (const pathname of ["/en", "/en/", "/en/old-page/"]) {
+    const enResponse = await request(pathname);
+    assert.equal(enResponse.statusCode, 301);
+    assert.equal(enResponse.headers.location, "/");
+  }
+});
+
+test("serves public manifests but rejects repository internals", async () => {
+  for (const pathname of ["/.git/config", "/package.json", "/tools/serve.mjs", "/data/private-applications.json", "/data/living-system.json", "/CLAUDE.md", "/.site-dist/index.html"]) {
+    const response = await request(pathname);
+    assert.ok([403, 404].includes(response.statusCode), pathname);
+  }
+  assert.equal((await request('/portfolio.json')).statusCode, 200);
+  assert.equal((await request('/schemas/aserdargun-app.schema.json')).statusCode, 200);
+});
+
+test("emulates security headers and font MIME types", async () => {
+  for (const pathname of ['/', '/missing-page', '/en/']) {
+    const response = await request(pathname);
+    assert.equal(response.headers['x-content-type-options'], 'nosniff');
+    assert.equal(response.headers['x-frame-options'], 'DENY');
+  }
+  assert.equal((await request('/fonts/inter-var-latin.woff2')).headers['content-type'], 'font/woff2');
 });
 
 test("supports HEAD requests with asset metadata and no body", async () => {

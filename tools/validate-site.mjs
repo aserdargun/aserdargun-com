@@ -9,6 +9,7 @@ import {
   summarizeApplications,
 } from "./living-system-data.mjs";
 import { applicationHierarchy } from "./application-hierarchy.mjs";
+import { isPublicFile } from "./public-files.mjs";
 import { scanPublicHtmlFiles } from "./render-living-system.mjs";
 import {
   discoverPublicIndexDocuments,
@@ -77,8 +78,8 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "learning"];
-const expectedAssetVersion = "20260909-mobile-gestures";
-const expectedStylesheetHref = "/styles.css?v=20260909-mobile-gestures";
+const expectedAssetVersion = "20260910-system-audit";
+const expectedStylesheetHref = "/styles.css?v=20260910-system-audit";
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
   { code: "aia", repository: "aia-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/aia-aserdargun-com", productUrl: "https://aia.aserdargun.com/", productLabel: "aia.aserdargun.com" },
@@ -917,10 +918,9 @@ const validatedPublicIndexPaths = [];
 for (const document of publicIndexDocuments) {
   const html = await readFile(document.absolutePath, "utf8");
   validatedPublicIndexPaths.push(document.relativePath);
-  // The stage-1-frontend-foundations exercises are part of the current site
-  // (see projects/stage-1-frontend-foundations/). Earlier validator revisions
-  // flagged them as retired; allow them to remain in the public index set.
-  check(true, `Public index document accepted: ${document.relativePath}`);
+  check(isPublicFile(document.relativePath), `Public index is outside the deployment allowlist: ${document.relativePath}`);
+  check(html.includes(`href="${expectedStylesheetHref}"`), `${document.relativePath}: stylesheet cache version is stale`);
+  check(html.includes(`src="${expectedScriptSrc}"`), `${document.relativePath}: script cache version is stale`);
   for (const diagnostic of validatePublicAccessibilityDocument({ html, relativePath: document.relativePath })) {
     failures.push(`Public HTML accessibility validation failed: file=${diagnostic.relativePath} code=${diagnostic.code} ${diagnostic.message}`);
   }

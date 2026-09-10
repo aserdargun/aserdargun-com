@@ -3,6 +3,7 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import test from "node:test";
+import { buildPublicSite, publicFiles } from "./public-files.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const workflowsDirectory = path.join(root, ".github/workflows");
@@ -22,6 +23,7 @@ const staticConfig = JSON.parse(
 );
 
 test("Azure deployment root contains every public route and shared asset", async () => {
+  await buildPublicSite(root);
   const appLocation = setting(targetWorkflow, "app_location");
   assert.ok(appLocation, "Azure upload job must define app_location");
 
@@ -103,6 +105,7 @@ test("production deployment validates the exact checkout before upload", () => {
   assert.match(targetWorkflow, /run:\s*npm ci\b/);
   assert.match(targetWorkflow, /run:\s*npm test\b/);
   assert.match(targetWorkflow, /run:\s*npm run test:server\b/);
+  assert.match(targetWorkflow, /run:\s*npm run build:site\b/);
   assert.match(
     targetWorkflow,
     /Azure\/static-web-apps-deploy@4d27395796ac319302594769cfe812bd207490b1\b/,
@@ -194,4 +197,13 @@ test("main pushes trigger exactly one Azure Static Web Apps deployment", async (
     ["azure-static-web-apps-red-tree-06630f303.yml"],
     "main must deploy only the red-tree production app",
   );
+});
+
+test('deployment artifact contains only allowlisted public files', async () => {
+  const artifact = await buildPublicSite(root);
+  assert.equal(setting(targetWorkflow, 'app_location'), '/.site-dist');
+  assert.deepEqual(await publicFiles(artifact.output), artifact.files);
+  for (const file of ['.git/config', '.github/workflows/azure-static-web-apps-red-tree-06630f303.yml', 'data/private-applications.json', 'data/living-system.json', 'tools/serve.mjs', 'package.json', 'CLAUDE.md']) {
+    await assert.rejects(stat(path.join(artifact.output, file)), {code: 'ENOENT'});
+  }
 });

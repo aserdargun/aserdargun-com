@@ -123,6 +123,18 @@ The per-application public manifest contract is documented as JSON Schema in
 copied into the registry or Knowledge pages; only explicitly authored public
 records in the canonical source are renderable.
 
+## Public deployment artifact
+
+`npm run build:site` produces `.site-dist/` from the shared public-file allowlist.
+Azure uploads this directory after validation. Repository configuration, tooling,
+source data, local worktrees, and private application records are excluded.
+The preview uses the same boundary, applies configured redirects and security
+headers, and serves self-hosted fonts with their correct MIME type.
+
+Mobile navigation supports Tab / Shift+Tab, Escape, and focus restoration.
+Without JavaScript, the navigation remains visible. The interactive learning
+map exposes its application links as a labelled group to assistive technology.
+
 ## Assets
 
 - **Fonts:** self-hosted Inter variable subsets in `fonts/` (latin +

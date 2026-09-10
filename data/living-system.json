@@ -612,11 +612,11 @@
       "visibility": "public",
       "status": "active",
       "statusLabel": { "en": "Horizon · active research", "tr": "Ufuk · aktif araştırma" },
-      "languages": ["tr", "en"],
+      "languages": ["en"],
       "title": { "en": "Open Humanoid Engineering", "tr": "Open Humanoid Engineering" },
       "summary": {
-        "en": "A live manifesto for project-based, AI-native humanoid engineering education and the long-term embodied horizon the learning system serves.",
-        "tr": "Proje tabanlı, yapay zekâ temelli insansı robot mühendisliği eğitimi için canlı manifesto ve öğrenme sisteminin hizmet ettiği uzun vadeli bedenlenmiş ufuk."
+        "en": "An English-only, proposed curriculum for AI-native humanoid engineering education. Its four-year spine, AI lab pipeline, and dated 2026 frontier signals define the manifesto; HEX is its interactive companion. No degree or completed physical robot is claimed.",
+        "tr": "Yapay zekâ temelli insansı robot mühendisliği eğitimi için İngilizce müfredat önerisi. Dört yıllık omurga, yapay zekâ laboratuvar akışı ve tarihli 2026 araştırma sinyalleri manifestonun temelidir; HEX etkileşimli eşlikçisidir. Diploma veya tamamlanmış fiziksel robot iddiası taşımaz."
       },
       "repository": "https://github.com/aserdargun/eng-aserdargun-com",
       "address": "https://eng.aserdargun.com/",
@@ -630,7 +630,7 @@
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": ["itl"],
       "downstreamApps": ["hex"],
-      "tracks": ["humanoids", "education", "physical-ai"],
+      "tracks": ["humanoids", "education", "physical-ai", "four-year-spine", "ai-lab-pipeline", "frontier-2026"],
       "entityIds": ["entity:humanoid-robotics"],
       "portfolioLayer": "physical-ai",
       "focusState": "horizon",
@@ -849,8 +849,8 @@
         "timeframe": "week",
         "title": { "en": "Closing the learning loop", "tr": "Öğrenme döngüsünü kapatmak" },
         "summary": {
-          "en": "I am connecting 16 applications into one learning system, from foundations and agent engineering to physical AI. SWI is live as the collective-intelligence research platform; its ANT and BEE laboratories make pheromone trails, dance communication, and collective foraging observable through reproducible experiments. This week’s focus is connecting the research to experiments with clear relationships and dated evidence.",
-          "tr": "Temellerden ajan mühendisliğine ve fiziksel yapay zekâya uzanan 16 uygulamayı tek bir öğrenme sisteminde birleştiriyorum. Kolektif zekâ araştırma platformu SWI yayında; onun altındaki ANT ve BEE laboratuvarları feromon izlerini, dansla iletişimi ve ortak besin aramayı tekrarlanabilir deneylerle gözlemlenebilir kılıyor. Bu haftanın odağı, araştırmayı açık ilişkiler ve tarihli kanıtlarla deneylere bağlamak."
+          "en": "I am connecting the portfolio applications into one learning system, from foundations and agent engineering to physical AI. SWI is live as the collective-intelligence research platform; its ANT and BEE laboratories make pheromone trails, dance communication, and collective foraging observable through reproducible experiments. This week’s focus is connecting the research to experiments with clear relationships and dated evidence.",
+          "tr": "Temellerden ajan mühendisliğine ve fiziksel yapay zekâya uzanan uygulamaları tek bir öğrenme sisteminde birleştiriyorum. Kolektif zekâ araştırma platformu SWI yayında; onun altındaki ANT ve BEE laboratuvarları feromon izlerini, dansla iletişimi ve ortak besin aramayı tekrarlanabilir deneylerle gözlemlenebilir kılıyor. Bu haftanın odağı, araştırmayı açık ilişkiler ve tarihli kanıtlarla deneylere bağlamak."
         },
         "tags": [
           { "en": "System topology", "tr": "Sistem topolojisi" },

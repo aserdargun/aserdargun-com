@@ -838,3 +838,29 @@ test("mobile navigation styles preserve touch size, focus, zoom scrolling, and r
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.career-transition\s*\{[\s\S]*?display:\s*none;/);
   assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.status-dot\s*\{[\s\S]*?animation:\s*none;/);
 });
+
+test('language links retain browser modifiers while normal clicks preserve the section', async () => {
+  const source = await readFile(path.join(rootDir, 'scripts.js'), 'utf8');
+  let click;
+  const assignments=[];
+  const stored=[];
+  const context={URL, localStorage:{setItem:(...args)=>stored.push(args)}, window:{location:{pathname:'/about/',origin:'https://aserdargun.com',hash:'#approach',assign:url=>assignments.push(url)},addEventListener(){}}, document:{documentElement:{classList:{add(){}}},addEventListener(){},querySelectorAll:()=>[{href:'https://aserdargun.com/tr/about/',getAttribute:()=> 'tr',addEventListener:(_,fn)=>{click=fn;}}]}};
+  vm.runInNewContext(`${source}\ninitializeLanguageSwitch();`,context);
+  for (const modifier of ['metaKey','ctrlKey','shiftKey','altKey','defaultPrevented']) {
+    click({[modifier]:true,preventDefault(){assert.fail('modified links must use the browser default');}});
+  }
+  assert.equal(assignments.length,0);
+  let prevented=false;
+  click({button:0,preventDefault(){prevented=true;}});
+  assert.ok(prevented);
+  assert.deepEqual(assignments,['https://aserdargun.com/tr/about/#approach']);
+  assert.equal(stored[0][1],'tr');
+});
+
+test('interactive SVG maps expose links as a labelled group instead of an atomic image', async () => {
+  for (const filename of ['index.html','tr/index.html']) {
+    const html=await readFile(path.join(rootDir,filename),'utf8');
+    assert.match(html, /<svg[^>]+role="group"[^>]+aria-labelledby="ld-title"[^>]+aria-describedby="ld-desc"/);
+    assert.doesNotMatch(html, /<svg[^>]+role="img"/);
+  }
+});

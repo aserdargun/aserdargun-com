@@ -10,7 +10,7 @@ Personal portfolio website for Serdar Gündoğdu — Industrial AI Engineer. The
 
 ## Development Commands
 
-There is no production build step. npm provides the shared development command surface without installing runtime or development packages.
+There is no compilation step. `npm run build:site` stages the public-only `.site-dist/` artifact. npm provides the shared development command surface without installing runtime or development packages.
 
 - **Setup:** `npm ci`
 - **Local development:** `npm run dev` (serves `http://127.0.0.1:4173` by default)
@@ -40,7 +40,7 @@ There is no production build step. npm provides the shared development command s
 - Five-layer overview precedes `#learning`: foundations, agent systems, assurance, deployment, and physical AI
 - `#learning` learning system - an orthogonal SVG relationship map with guiding questions and an accessible mobile equivalent; parallel GPU/USL foundations feed LLM and HNS, followed by CTX/SEC/EVL and parallel LCL/CLD deployment choices
 - WFM and SWI form parallel research bridges into ITL and the long-term ENG horizon; ANT and BEE branch from SWI as independent colony experiment labs
-- `#apps` application map - 16 canonical applications with localized search, layer filters, and expandable evidence; each is keyed by a three-letter code
+- `#apps` application map - canonical applications with localized search, layer filters, and expandable evidence; each is keyed by a three-letter code
 - `/now/` and `/tr/now/` - dated current work with frozen weekly archives
 - `/memory/` and `/tr/memory/` - five or more explicitly authored public Knowledge notes with sources and related applications
 - `#approach` working principles, `#about` + verified credentials, contact
@@ -69,5 +69,5 @@ The old `projects/stage-1-frontend-foundations/` exercise tree is also retired. 
 
 Azure Static Web Apps via GitHub Actions (`.github/workflows/azure-static-web-apps-red-tree-06630f303.yml`):
 - Triggers on push to `main` or PR events
-- No build step required - serves static files directly
+- No compilation required - uploads the allowlisted `.site-dist/` artifact
 - PR branches get automatic staging environments

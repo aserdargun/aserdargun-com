@@ -105,7 +105,7 @@ export function renderLearningDiagram({ locale, data }) {
     '      <figure class="learning-diagram-wrap">',
     `        <p class="mobile-map-hint" id="diagram-scroll-hint">${localized(locale, "Pinch with two fingers to zoom. Drag to explore the enlarged map.", "İki parmağınla açıp kapatarak boyutu ayarla. Büyüttüğün haritada parmağınla gezin.")}</p>`,
     `        <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="${localized(locale, "Application connection map", "Uygulama bağlantı haritası")}">`,
-    `        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1430" role="img" aria-labelledby="ld-title ld-desc" class="ld-svg">`,
+    `        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1430" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">`,
     `          <title id="ld-title">${localized(locale, "Connected applications and their sub-applications", "Bağlı üst uygulamalar ve alt uygulamaları")}</title>`,
     `          <desc id="ld-desc">${escape(description)}</desc>`,
     '          <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#c8ff36"/></marker></defs>',

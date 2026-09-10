@@ -9,7 +9,7 @@
     "dev": "node tools/serve.mjs",
     "stop": "node tools/stop.mjs",
     "check:js": "node --check scripts.js",
-    "test:deployment": "node --test tools/deployment.test.mjs",
+    "test:deployment": "node --test tools/deployment.test.mjs tools/public-files.test.mjs",
     "test:environment": "node --test tools/environment.test.mjs",
     "test:portrait": "node --test tools/validate-portrait-canvas.mjs",
     "test:data": "node --test tools/living-system-data.test.mjs tools/portfolio-phase-one.test.mjs tools/application-hierarchy.test.mjs",
@@ -26,6 +26,7 @@
     "test:stop": "node --test tools/preview-control.test.mjs tools/preview-stop.test.mjs",
     "validate:site": "node tools/validate-site.mjs",
     "validate:codex": "npm test",
-    "test": "npm run check:js && npm run test:deployment && npm run test:environment && npm run test:portrait && npm run test:stop && npm run test:data && npm run test:archive && npm run test:render && npm run check:generated && npm run test:navigation && npm run validate:site"
+    "test": "npm run check:js && npm run test:deployment && npm run test:environment && npm run test:portrait && npm run test:stop && npm run test:data && npm run test:archive && npm run test:render && npm run check:generated && npm run test:navigation && npm run validate:site",
+    "build:site": "node tools/public-files.mjs"
   }
 }
