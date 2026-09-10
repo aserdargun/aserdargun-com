@@ -65,15 +65,14 @@
     },
     "languages": {
       "type": "array",
-      "prefixItems": [
-        {
-          "const": "tr"
-        },
-        {
-          "const": "en"
-        }
-      ],
-      "items": false
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "tr",
+          "en"
+        ]
+      }
     },
     "productionUrl": {
       "type": "string",
