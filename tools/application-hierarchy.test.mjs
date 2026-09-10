@@ -7,7 +7,7 @@ import { validateLivingSystemData } from "./living-system-data.mjs";
 import { renderApplicationMap, renderSystemFocus } from "./render-living-system.mjs";
 
 const data = JSON.parse(await readFile(new URL("../data/living-system.json", import.meta.url), "utf8"));
-const today = new Date("2026-09-09T12:00:00Z");
+const today = new Date("2026-09-10T12:00:00Z");
 
 test("new parents, children and grandchildren group by ownership regardless of input order or kind", () => {
   const apps = [
@@ -83,7 +83,7 @@ test("all diagram boxes are disjoint, children are smaller and enclosed with the
 
 test("every arrow and connector avoids box interiors and other routes; shared bus joins are explicit", () => {
   const { nodes, edges } = learningDiagramLayout(data.applications);
-  const paths = [...edges, { id: "local-bus", path: "M 375 774 V 806 H 550 V 846" }, { id: "cloud-bus", path: "M 725 774 V 806 H 550" }];
+  const paths = [...edges, { id: "decision-bus", path: "M 550 884 V 956" }];
   const lines = paths.flatMap((edge) => segments(edge.path).map(([a, b]) => ({ id: edge.id, a, b })));
   for (const [index, { id, a, b }] of lines.entries()) {
     for (const node of nodes) {
@@ -102,7 +102,7 @@ test("every arrow and connector avoids box interiors and other routes; shared bu
         const [v1, v2, h1, h2] = a.x === b.x ? [a, b, c, d] : [c, d, a, b];
         const touches = v1.x >= Math.min(h1.x, h2.x) && v1.x <= Math.max(h1.x, h2.x)
           && h1.y >= Math.min(v1.y, v2.y) && h1.y <= Math.max(v1.y, v2.y);
-        const junction = v1.x === 550 && [806, 846].includes(h1.y);
+        const junction = v1.x === 550 && [956].includes(h1.y);
         assert.ok(!touches || junction, `${id} crosses or touches ${other.id}`);
       }
     }

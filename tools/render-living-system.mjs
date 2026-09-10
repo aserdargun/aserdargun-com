@@ -26,6 +26,11 @@ const GENERATED_BLOCKS = new Set([
   "learning-diagram",
   "swarm-labs",
   "practice-labs",
+  "gpu-practice",
+  "usl-practice",
+  "llm-practice",
+  "hns-practice",
+  "deployment-lab",
   "now-content",
   "public-memory",
   "journey-evidence",
@@ -441,12 +446,12 @@ export function renderSystemFocus({ locale, data }) {
     {
       key: "foundation",
       title: label(locale, "Foundation", "Temel"),
-      description: label(locale, "Ecosystem, compute, runtime, and model-building foundations, with GEX for hands-on GPU execution.", "Ekosistem, hesaplama, çalışma ortamı ve model geliştirme temelleri; GEX ile uygulamalı GPU yürütme."),
+      description: label(locale, "Ecosystem, compute, runtime and adaptation foundations; experiment with GEX, TFL and ADP.", "Ekosistem, hesaplama, çalışma ortamı ve uyarlama temelleri; GEX, TFL ve ADP ile deneyler."),
     },
     {
       key: "agent-system",
       title: label(locale, "Agent system", "Ajan sistemi"),
-      description: label(locale, "Harness and context layers that turn model capability into an operating system.", "Model yeteneğini çalışan bir sisteme dönüştüren harness ve bağlam katmanları."),
+      description: label(locale, "Harness and context layers, with ARL to inspect tool use, evidence and approval during a simulated run.", "Harness ve bağlam katmanları; ARL ile simülasyonda araç kullanımı, kanıt ve onay sınırlarını incele."),
     },
     {
       key: "assurance",
@@ -456,7 +461,7 @@ export function renderSystemFocus({ locale, data }) {
     {
       key: "deployment",
       title: label(locale, "Deployment", "Dağıtım"),
-      description: label(locale, "Local and cloud decisions grounded in workload, control, and cost.", "İş yükü, kontrol ve maliyete dayanan lokal ve bulut kararları."),
+      description: label(locale, "Study local and cloud options in LCL and CLD; test workload, memory, privacy and cost assumptions in DCL.", "LCL ve CLD ile yerel ve bulut seçeneklerini öğren; DCL ile iş yükü, bellek, gizlilik ve maliyet varsayımlarını sına."),
     },
     {
       key: "physical-ai",
@@ -534,6 +539,23 @@ export function renderPracticeLabs({ locale, data }) {
     "        </div>",
     "      </section>",
   ].join("\n");
+}
+
+export function renderCompanionLinks({ locale, data, parentCode }) {
+  const labs = data.applications.filter((app) => app.parentApp === parentCode);
+  return labs.map((app) => `<p class="learning-companion" data-companion-of="${parentCode}"><strong>${label(locale, "Try the companion lab", "Eşlikçi laboratuvarı dene")}</strong> · <a href="${escapeHtml(app.address)}" target="_blank" rel="noreferrer">${app.code.toUpperCase()} ↗</a><br>${escapeHtml(app.guidingQuestion[locale])}</p>`).join("\n");
+}
+
+export function renderDeploymentLab({ locale, data }) {
+  const app = data.applications.find(({ code }) => code === "dcl");
+  if (!app) return "";
+  return `<aside class="learning-node learning-decision-lab" data-deployment-lab="dcl" aria-labelledby="deployment-lab-${locale}">
+    <p class="learning-track-app">LCL + CLD → DCL</p>
+    <h3 id="deployment-lab-${locale}">${escapeHtml(app.title[locale])}</h3>
+    <p class="learning-question learning-decision-question">${escapeHtml(app.guidingQuestion[locale])}</p>
+    <p>${escapeHtml(app.summary[locale])}</p>
+    <a class="learning-horizon-link" href="${escapeHtml(app.address)}" target="_blank" rel="noreferrer">${label(locale, "Compare deployment choices", "Dağıtım seçeneklerini karşılaştır")} ↗</a>
+  </aside>`;
 }
 
 export function renderSwarmLabs({ locale, data }) {
@@ -808,6 +830,8 @@ export function renderDocument({ html, page, locale, data, today, archiveLinks =
     "system-focus": () => renderSystemFocus({ locale, data }),
     "swarm-labs": () => renderSwarmLabs({ locale, data }),
     "practice-labs": () => renderPracticeLabs({ locale, data }),
+    ...Object.fromEntries(["gpu", "usl", "llm", "hns"].map((parentCode) => [`${parentCode}-practice`, () => renderCompanionLinks({ locale, data, parentCode })])),
+    "deployment-lab": () => renderDeploymentLab({ locale, data }),
     "learning-diagram": () => renderLearningDiagram({ locale, data }),
     "now-content": () => renderNowContent({ locale, data, today, archiveLinks }),
     "public-memory": () => renderPublicMemory({ locale, data }),

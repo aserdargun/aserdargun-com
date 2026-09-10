@@ -19,7 +19,7 @@ import {
 
 const expectedPublicApplicationCodes = [
   "aia", "llm", "hns", "sec", "ctx", "evl", "usl", "gpu", "cld", "lcl",
-  "wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng", "gex", "wml", "tfl", "arl", "adp",
+  "wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng", "gex", "wml", "dcl", "tfl", "arl", "adp",
 ].sort();
 const expectedPrivateApplicationCodes = ["nxt", "stk", "inf"].sort();
 
@@ -105,6 +105,7 @@ const expectedApplicationRows = [
   { code: "tfl", repository: "tfl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/tfl-aserdargun-com", productUrl: "https://tfl.aserdargun.com/", productLabel: "tfl.aserdargun.com" },
   { code: "arl", repository: "arl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/arl-aserdargun-com", productUrl: "https://arl.aserdargun.com/", productLabel: "arl.aserdargun.com" },
   { code: "adp", repository: "adp-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/adp-aserdargun-com", productUrl: "https://adp.aserdargun.com/", productLabel: "adp.aserdargun.com" },
+  { code: "dcl", repository: "dcl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/dcl-aserdargun-com", productUrl: "https://dcl.aserdargun.com/", productLabel: "dcl.aserdargun.com" },
 ].map((row) => ({
   code: row.code,
   repository: row.repository,
@@ -388,6 +389,7 @@ function validateLearningSystem(locale, html) {
       "tfl:practice-lab",
       "arl:practice-lab",
       "adp:practice-lab",
+      "dcl:decision-lab",
     ].sort()),
     `${locale}: learning diagram node roles differ from the application content model`,
   );
@@ -408,6 +410,8 @@ function validateLearningSystem(locale, html) {
       "sec-to-cld",
       "evl-to-cld",
       "ctx-to-lcl",
+      "lcl-to-dcl",
+      "cld-to-dcl",
       "deployment-to-wfm",
       "deployment-to-swi",
       "wfm-to-itl",
@@ -427,7 +431,7 @@ function validateLearningSystem(locale, html) {
   );
   const deploymentConnectors = matches(diagram, /<path data-learning-connector="([^"]+)"/g);
   check(
-    JSON.stringify(deploymentConnectors) === JSON.stringify(["lcl-to-stage-07", "cld-to-stage-07"]),
+    JSON.stringify(deploymentConnectors) === JSON.stringify(["dcl-to-stage-07"]),
     `${locale}: deployment paths must merge before branching once to WFM and SWI`,
   );
   check(
@@ -1270,7 +1274,7 @@ for (const url of [
   "https://aserdargun.com/tr/now/",
 ]) {
   const entry = sitemap.match(new RegExp(`<url>\\s*<loc>${url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}<\\/loc>[\\s\\S]*?<\\/url>`))?.[0] ?? "";
-  const expectedModified = ["https://aserdargun.com/", "https://aserdargun.com/tr/"].includes(url) ? "2026-09-07" : livingSystem.now.updatedAt;
+  const expectedModified = ["https://aserdargun.com/", "https://aserdargun.com/tr/"].includes(url) ? [livingSystem.now.updatedAt, ...livingSystem.applications.map((app) => app.updatedAt)].sort().at(-1) : livingSystem.now.updatedAt;
   check(entry.includes(`<lastmod>${expectedModified}</lastmod>`), `Sitemap current-content lastmod differs: ${url}`);
 }
 const publicMemoryUrls = {

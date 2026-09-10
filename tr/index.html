@@ -145,7 +145,7 @@
         <article class="system-focus-card system-focus-card--foundation">
           <p class="system-focus-card__index">01</p>
           <h2>Temel</h2>
-          <p>Ekosistem, hesaplama, çalışma ortamı ve model geliştirme temelleri; GEX ile uygulamalı GPU yürütme.</p>
+          <p>Ekosistem, hesaplama, çalışma ortamı ve uyarlama temelleri; GEX, TFL ve ADP ile deneyler.</p>
           <ul aria-label="Temel uygulamaları">
             <li data-focus-app="aia"><a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer"><code>aia</code><span>AI Ecosystem Atlas</span> <span class="sr-only">yeni sekmede açılır</span></a></li>
             <li data-focus-app="llm"><a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer"><code>llm</code><span>LLM Runtime &amp; Serving Atlas</span> <span class="sr-only">yeni sekmede açılır</span></a><ul class="system-focus-children" aria-label="LLM alt uygulamaları">            <li data-focus-app="tfl" data-app-parent="llm"><a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer"><code>tfl</code><span>TFL — Token Akışı Laboratuvarı<span class="sr-only app-ownership">LLM alt uygulaması.</span></span> <span class="sr-only">yeni sekmede açılır</span></a></li></ul></li>
@@ -156,7 +156,7 @@
         <article class="system-focus-card system-focus-card--agent-system">
           <p class="system-focus-card__index">02</p>
           <h2>Ajan sistemi</h2>
-          <p>Model yeteneğini çalışan bir sisteme dönüştüren harness ve bağlam katmanları.</p>
+          <p>Harness ve bağlam katmanları; ARL ile simülasyonda araç kullanımı, kanıt ve onay sınırlarını incele.</p>
           <ul aria-label="Ajan sistemi uygulamaları">
             <li data-focus-app="hns"><a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><code>hns</code><span>Harness Engineering Observatory</span> <span class="sr-only">yeni sekmede açılır</span></a><ul class="system-focus-children" aria-label="HNS alt uygulamaları">            <li data-focus-app="arl" data-app-parent="hns"><a href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer"><code>arl</code><span>ARL — Ajan Çalışma Zamanı Laboratuvarı<span class="sr-only app-ownership">HNS alt uygulaması.</span></span> <span class="sr-only">yeni sekmede açılır</span></a></li></ul></li>
             <li data-focus-app="ctx"><a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer"><code>ctx</code><span>Bağlam ve Bilgi Mühendisliği</span> <span class="sr-only">yeni sekmede açılır</span></a></li>
@@ -174,10 +174,11 @@
         <article class="system-focus-card system-focus-card--deployment">
           <p class="system-focus-card__index">04</p>
           <h2>Dağıtım</h2>
-          <p>İş yükü, kontrol ve maliyete dayanan lokal ve bulut kararları.</p>
+          <p>LCL ve CLD ile yerel ve bulut seçeneklerini öğren; DCL ile iş yükü, bellek, gizlilik ve maliyet varsayımlarını sına.</p>
           <ul aria-label="Dağıtım uygulamaları">
             <li data-focus-app="cld"><a href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer"><code>cld</code><span>Bulut Sağlayıcı Maliyet Karşılaştırması</span> <span class="sr-only">yeni sekmede açılır</span></a></li>
             <li data-focus-app="lcl"><a href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer"><code>lcl</code><span>Local Compute Lab</span> <span class="sr-only">yeni sekmede açılır</span></a></li>
+            <li data-focus-app="dcl"><a href="https://dcl.aserdargun.com/" target="_blank" rel="noreferrer"><code>dcl</code><span>Dağıtım Karar Laboratuvarı</span> <span class="sr-only">yeni sekmede açılır</span></a></li>
           </ul>
         </article>
         <article class="system-focus-card system-focus-card--physical-ai">
@@ -210,9 +211,9 @@
       <figure class="learning-diagram-wrap">
         <p class="mobile-map-hint" id="diagram-scroll-hint">İki parmağınla açıp kapatarak boyutu ayarla. Büyüttüğün haritada parmağınla gezin.</p>
         <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="Uygulama bağlantı haritası">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1430" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1540" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">
           <title id="ld-title">Bağlı üst uygulamalar ve alt uygulamaları</title>
-          <desc id="ld-desc">Büyük kutular birbirine bağlı üst uygulamaları gösterir. Küçük kutular alt uygulamalardır; üst uygulamalarıyla ortak çerçeve içindedir. AIA, GPU ve USL üzerinden LLM, HNS, CTX, SEC ve EVL’ye bağlanır. CTX, LLM’ye geri bildirim verir. Güvence katmanı paralel LCL ve CLD dağıtımına, bunlar WFM ve SWI’ye, ardından ITL ve ENG’ye bağlanır. GPU altında GEX, WFM altında WML, SWI altında ANT ve BEE, ITL altında PDT, ENG altında HEX bulunur. Nokta, ortak dağıtım bağlantısını gösterir.</desc>
+          <desc id="ld-desc">Büyük kutular birbirine bağlı üst uygulamaları gösterir. Küçük kutular alt uygulamalardır; üst uygulamalarıyla ortak çerçeve içindedir. AIA, GPU ve USL üzerinden LLM, HNS, CTX, SEC ve EVL’ye bağlanır. CTX, LLM’ye geri bildirim verir. Güvence katmanı paralel LCL ve CLD dağıtımına, DCL bu seçeneklerin iş yükü kısıtlarını karşılaştırır; akış WFM ve SWI’ye, ardından ITL ve ENG’ye bağlanır. USL altında ADP, LLM altında TFL, HNS altında ARL, GPU altında GEX, WFM altında WML, SWI altında ANT ve BEE, ITL altında PDT, ENG altında HEX bulunur. Nokta, ortak fiziksel AI bağlantısını gösterir.</desc>
           <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#c8ff36"/></marker></defs>
           <g class="ld-stage-index" aria-hidden="true">
             <text x="12" y="62">01 · YÖN BUL</text>
@@ -221,23 +222,22 @@
             <text x="12" y="472">04 · AJAN SİSTEMİ</text>
             <text x="12" y="592">05 · KALİTE DÖNGÜSÜ</text>
             <text x="12" y="742">06 · DAĞITIM</text>
-            <text x="12" y="912">07 · FİZİKSEL AI</text>
-            <text x="12" y="1152">08 · ENDÜSTRİYEL İKİZ</text>
-            <text x="12" y="1302">09 · BEDENLENMİŞ AI</text>
+            <text x="12" y="1022">07 · FİZİKSEL AI</text>
+            <text x="12" y="1262">08 · ENDÜSTRİYEL İKİZ</text>
+            <text x="12" y="1412">09 · BEDENLENMİŞ AI</text>
           </g>
           <g class="ld-families" aria-hidden="true">
-            <g data-learning-family="gpu"><rect x="194" y="120" width="212" height="186" rx="15"/><text x="396" y="320">GPU + alt uygulamalar</text></g>
-            <g data-learning-family="llm"><rect x="439" y="310" width="387" height="100" rx="15"/><text x="816" y="424">LLM + alt uygulamalar</text></g>
-            <g data-learning-family="usl"><rect x="694" y="120" width="377" height="100" rx="15"/><text x="1061" y="234">USL + alt uygulamalar</text></g>
-            <g data-learning-family="hns"><rect x="424" y="420" width="417" height="100" rx="15"/><text x="831" y="534">HNS + alt uygulamalar</text></g>
-            <g data-learning-family="wfm"><rect x="179" y="860" width="242" height="186" rx="15"/><text x="411" y="1060">WFM + alt uygulamalar</text></g>
-            <g data-learning-family="swi"><rect x="624" y="860" width="352" height="186" rx="15"/><text x="966" y="1060">SWI + alt uygulamalar</text></g>
-            <g data-learning-family="itl"><rect x="424" y="1100" width="417" height="100" rx="15"/><text x="831" y="1214">ITL + alt uygulamalar</text></g>
-            <g data-learning-family="eng"><rect x="424" y="1250" width="417" height="100" rx="15"/><text x="831" y="1364">ENG + alt uygulamalar</text></g>
+            <g data-learning-family="gpu"><rect x="194" y="120" width="212" height="186" rx="15"/><text x="396" y="133">GPU + alt uygulamalar</text></g>
+            <g data-learning-family="llm"><rect x="439" y="310" width="387" height="100" rx="15"/><text x="816" y="323">LLM + alt uygulamalar</text></g>
+            <g data-learning-family="usl"><rect x="694" y="120" width="377" height="100" rx="15"/><text x="1061" y="133">USL + alt uygulamalar</text></g>
+            <g data-learning-family="hns"><rect x="424" y="420" width="417" height="100" rx="15"/><text x="831" y="433">HNS + alt uygulamalar</text></g>
+            <g data-learning-family="wfm"><rect x="179" y="970" width="242" height="186" rx="15"/><text x="411" y="983">WFM + alt uygulamalar</text></g>
+            <g data-learning-family="swi"><rect x="624" y="970" width="352" height="186" rx="15"/><text x="966" y="983">SWI + alt uygulamalar</text></g>
+            <g data-learning-family="itl"><rect x="424" y="1210" width="417" height="100" rx="15"/><text x="831" y="1223">ITL + alt uygulamalar</text></g>
+            <g data-learning-family="eng"><rect x="424" y="1360" width="417" height="100" rx="15"/><text x="831" y="1373">ENG + alt uygulamalar</text></g>
           </g>
           <g class="ld-links" aria-hidden="true">
-            <path data-learning-connector="lcl-to-stage-07" class="ld-edge-horizon" d="M 375 774 V 806 H 550 V 846"/>
-            <path data-learning-connector="cld-to-stage-07" class="ld-edge-horizon" d="M 725 774 V 806 H 550"/>
+            <path data-learning-connector="dcl-to-stage-07" class="ld-edge-horizon" d="M 550 884 V 956"/>
             <path data-learning-edge="aia-to-gpu" class="ld-edge-primary" d="M 510 94 V 112 H 300 V 140" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="aia-to-llm" class="ld-edge-primary" d="M 550 94 V 330" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="aia-to-usl" class="ld-edge-primary" d="M 590 94 V 112 H 800 V 140" marker-end="url(#ld-arrow)"/>
@@ -252,21 +252,23 @@
             <path data-learning-edge="sec-to-cld" class="ld-edge-decision" d="M 590 624 V 652 H 725 V 710" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="evl-to-cld" class="ld-edge-context" d="M 820 624 V 675 H 765 V 710" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="ctx-to-lcl" class="ld-edge-context" d="M 280 624 V 675 H 335 V 710" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="deployment-to-wfm" class="ld-edge-horizon" d="M 550 846 H 300 V 880" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="deployment-to-swi" class="ld-edge-horizon" d="M 550 846 H 800 V 880" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 405 912 H 470 V 1090 H 510 V 1120" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="swi-to-itl" class="ld-edge-horizon" d="M 685 912 H 610 V 1090 H 590 V 1120" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 550 1184 V 1270" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="lcl-to-dcl" class="ld-edge-decision" d="M 375 774 V 802 H 510 V 820" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="cld-to-dcl" class="ld-edge-decision" d="M 725 774 V 802 H 590 V 820" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="deployment-to-wfm" class="ld-edge-horizon" d="M 550 956 H 300 V 990" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="deployment-to-swi" class="ld-edge-horizon" d="M 550 956 H 800 V 990" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 405 1022 H 470 V 1200 H 510 V 1230" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="swi-to-itl" class="ld-edge-horizon" d="M 685 1022 H 610 V 1200 H 590 V 1230" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 550 1294 V 1380" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="gpu-to-gex" class="ld-edge-child" d="M 300 204 V 222 H 300 V 240" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="llm-to-tfl" class="ld-edge-child" d="M 645 362 H 660 V 362" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="usl-to-adp" class="ld-edge-child" d="M 890 172 H 905 V 172" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-arl" class="ld-edge-child" d="M 660 472 H 675 V 472" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="wfm-to-wml" class="ld-edge-child" d="M 300 944 V 962 H 300 V 980" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="swi-to-ant" class="ld-edge-child" d="M 765 944 V 962 H 715 V 980" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="swi-to-bee" class="ld-edge-child" d="M 835 944 V 962 H 885 V 980" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="itl-to-pdt" class="ld-edge-child" d="M 660 1152 H 675 V 1152" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="eng-to-hex" class="ld-edge-child" d="M 660 1302 H 675 V 1302" marker-end="url(#ld-arrow)"/>
-            <circle class="ld-junction" cx="550" cy="806" r="3"/><circle class="ld-junction" cx="550" cy="846" r="3"/>
+            <path data-learning-edge="wfm-to-wml" class="ld-edge-child" d="M 300 1054 V 1072 H 300 V 1090" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="swi-to-ant" class="ld-edge-child" d="M 765 1054 V 1072 H 715 V 1090" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="swi-to-bee" class="ld-edge-child" d="M 835 1054 V 1072 H 885 V 1090" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="itl-to-pdt" class="ld-edge-child" d="M 660 1262 H 675 V 1262" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="eng-to-hex" class="ld-edge-child" d="M 660 1412 H 675 V 1412" marker-end="url(#ld-arrow)"/>
+            <circle class="ld-junction" cx="550" cy="956" r="3"/>
           </g>
           <g class="ld-nodes">
             <a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent ld-node-aia" data-learning-app="aia" data-learning-role="map" aria-label="AIA AI Ecosystem Atlas. Yapay zekâ ürünlerini ve geliştirici ekosistemlerini kanıtlarıyla karşılaştıran araştırma konsolu." aria-describedby="ld-new-tab-aia-tr">
@@ -293,7 +295,7 @@
               <text x="550" y="357" class="ld-code">LLM</text>
               <text x="550" y="378" class="ld-label">Çalıştırma · sunum</text>
             </a>
-            <a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="tfl" data-learning-role="practice-lab" data-learning-parent="llm" aria-label="TFL TFL — Token Akışı Laboratuvarı. LLM alt uygulaması. Kuyruklama, kabul, parçalı önyükleme, KV durumu, yinelemeli kod çözme, örnekleme ve token teslimatı boyunca bireysel LLM isteklerini izleyen; rekabet eden istek ömürlerini, temkinli bellek rezervasyonlarını, statik ve sürekli toplu işlemeyi ve gecikme/verim ticaretlerini keşfeden deterministik, iki dilli eğitim laboratuvarı." aria-describedby="ld-new-tab-tfl-tr">
+            <a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="tfl" data-learning-role="practice-lab" data-learning-parent="llm" aria-label="TFL TFL — Token Akışı Laboratuvarı. LLM alt uygulaması. Simüle edilen bir isteği kuyruk, prefill, KV önbelleği, decode ve token üretimi boyunca izle. Zamanlama ve toplu işleme tercihlerini karşılaştır; süreler ve çıktılar gerçek çıkarım ölçümleri değildir." aria-describedby="ld-new-tab-tfl-tr">
               <title id="ld-new-tab-tfl-tr">Yeni sekmede açılır</title>
               <rect x="660" y="337" width="150" height="50" rx="7"/>
               <text x="735" y="358" class="ld-code">TFL</text>
@@ -305,11 +307,11 @@
               <text x="800" y="167" class="ld-code">USL</text>
               <text x="800" y="188" class="ld-label">Model eğitimi</text>
             </a>
-            <a href="https://adp.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="adp" data-learning-role="practice-lab" data-learning-parent="usl" aria-label="ADP ADP — Model Adaptasyon Laboratuvarı. USL alt uygulaması. Full FT, LoRA ve QLoRA için iki dilli, tarayıcıda çalışan eğitim laboratuvarı. USL&apos;in kavramsal eşlikçisi: USL adaptasyon manzarasını öğretir; ADP etkileşimli parametre ve bellek ayak izleri üzerinden ticaretleri incelenebilir kılar." aria-describedby="ld-new-tab-adp-tr">
+            <a href="https://adp.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="adp" data-learning-role="practice-lab" data-learning-parent="usl" aria-label="ADP ADP — Model Adaptasyon Laboratuvarı. USL alt uygulaması. Full FT, LoRA ve QLoRA yöntemlerini parametre sayıları, bellek tahminleri, veri hazırlığı ve sentetik eğitim/değerlendirme deneyleriyle keşfet. USL uyarlamanın temelini sunar; gerçek bir model eğitilmez." aria-describedby="ld-new-tab-adp-tr">
               <title id="ld-new-tab-adp-tr">Yeni sekmede açılır</title>
               <rect x="905" y="147" width="150" height="50" rx="7"/>
               <text x="980" y="168" class="ld-code">ADP</text>
-              <text x="980" y="186" class="ld-label">Model adaptasyonu</text>
+              <text x="980" y="186" class="ld-label">Model uyarlama</text>
             </a>
             <a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="hns" data-learning-role="harness" aria-label="HNS Harness Engineering Observatory. Model yeteneğini güvenilir ajan sistemlerine dönüştüren harness, çalıştırma, orkestrasyon, yürütme, doğrulama ve gözlemlenebilirlik katmanlarını karşılaştıran iki dilli, kaynaklı gözlemevi." aria-describedby="ld-new-tab-hns-tr">
               <title id="ld-new-tab-hns-tr">Yeni sekmede açılır</title>
@@ -317,7 +319,7 @@
               <text x="550" y="467" class="ld-code">HNS</text>
               <text x="550" y="488" class="ld-label">Harness mühendisliği</text>
             </a>
-            <a href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="arl" data-learning-role="practice-lab" data-learning-parent="hns" aria-label="ARL ARL — Ajan Çalışma Zamanı Laboratuvarı. HNS alt uygulaması. HNS (Harness), CTX (Bağlam), SEC (Güvenlik) ve EVL (Değerlendirme) üzerinden tek bir gelir güncelleme yürütmesini inceleyen deterministik, iki dilli eğitim amaçlı ajan çalışma zamanı. Tüm model kararları komut dosyası tabanlıdır; LLM API&apos;si, canlı veri veya uzak telemetri yoktur." aria-describedby="ld-new-tab-arl-tr">
+            <a href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="arl" data-learning-role="practice-lab" data-learning-parent="hns" aria-label="ARL ARL — Ajan Çalışma Zamanı Laboratuvarı. HNS alt uygulaması. Deterministik bir ajan yürütmesini harness, bağlam, güvenlik ve değerlendirme açısından incele. Araç kullanımını, kanıtları ve tek kullanımlık onayı keşfet; tüm eylemler simülasyon içinde kalır." aria-describedby="ld-new-tab-arl-tr">
               <title id="ld-new-tab-arl-tr">Yeni sekmede açılır</title>
               <rect x="675" y="447" width="150" height="50" rx="7"/>
               <text x="750" y="468" class="ld-code">ARL</text>
@@ -353,65 +355,71 @@
               <text x="725" y="737" class="ld-code">CLD</text>
               <text x="725" y="758" class="ld-label">Bulut dağıtımı</text>
             </a>
+            <a href="https://dcl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="dcl" data-learning-role="decision-lab" aria-label="DCL Dağıtım Karar Laboratuvarı. Yerel donanım, bulut GPU, yönetilen çıkarım ve token API seçeneklerini iş yükü, bellek, gizlilik ve maliyet varsayımlarıyla karşılaştır. Kesin kısıtlar ve eğitim amaçlı tahminler koşullu kararları açıklar; canlı fiyat veya evrensel kazanan iddiası yoktur." aria-describedby="ld-new-tab-dcl-tr">
+              <title id="ld-new-tab-dcl-tr">Yeni sekmede açılır</title>
+              <rect x="440" y="820" width="220" height="64" rx="10"/>
+              <text x="550" y="847" class="ld-code">DCL</text>
+              <text x="550" y="868" class="ld-label">Dağıtım kararları</text>
+            </a>
             <a href="https://wfm.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="wfm" data-learning-role="world" aria-label="WFM World Models Atlas. Dünya modellerinin algı, tahmin, planlama ve eylem arasındaki rolünü birincil kaynaklar üzerinden izleyen yaşayan bir araştırma atlası." aria-describedby="ld-new-tab-wfm-tr">
               <title id="ld-new-tab-wfm-tr">Yeni sekmede açılır</title>
-              <rect x="195" y="880" width="210" height="64" rx="10"/>
-              <text x="300" y="907" class="ld-code">WFM</text>
-              <text x="300" y="928" class="ld-label">Dünya modelleri</text>
+              <rect x="195" y="990" width="210" height="64" rx="10"/>
+              <text x="300" y="1017" class="ld-code">WFM</text>
+              <text x="300" y="1038" class="ld-label">Dünya modelleri</text>
             </a>
             <a href="https://wml.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="wml" data-learning-role="practice-lab" data-learning-parent="wfm" aria-label="WML Dünya Modeli Laboratuvarı. WFM alt uygulaması. WFM’nin deney laboratuvarında gözlemi, inancı, tahmini, planlamayı ve alternatif eylem dallarını keşfet. Elle tanımlanmış üç tahmin modelini simüle edilen dünyayla karşılaştır; bunlar eğitilmiş temel modeller değildir." aria-describedby="ld-new-tab-wml-tr">
               <title id="ld-new-tab-wml-tr">Yeni sekmede açılır</title>
-              <rect x="225" y="980" width="150" height="50" rx="7"/>
-              <text x="300" y="1001" class="ld-code">WML</text>
-              <text x="300" y="1019" class="ld-label">Tahmin deneyleri</text>
+              <rect x="225" y="1090" width="150" height="50" rx="7"/>
+              <text x="300" y="1111" class="ld-code">WML</text>
+              <text x="300" y="1129" class="ld-label">Tahmin deneyleri</text>
             </a>
             <a href="https://swi.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="swi" data-learning-role="collective" aria-label="SWI SWI — Sürü Zekâsı. Biyolojik mekanizmaları, kaynaklı araştırmaları ve ajan deney reçetelerini birleştiren iki dilli araştırma platformu. ANT ve BEE, kolektif zekâ araştırmasını etkileşimli koloni laboratuvarlarına taşır." aria-describedby="ld-new-tab-swi-tr">
               <title id="ld-new-tab-swi-tr">Yeni sekmede açılır</title>
-              <rect x="685" y="880" width="230" height="64" rx="10"/>
-              <text x="800" y="907" class="ld-code">SWI</text>
-              <text x="800" y="928" class="ld-label">Sürü zekâsı</text>
+              <rect x="685" y="990" width="230" height="64" rx="10"/>
+              <text x="800" y="1017" class="ld-code">SWI</text>
+              <text x="800" y="1038" class="ld-label">Sürü zekâsı</text>
             </a>
             <a href="https://ant.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="ant" data-learning-role="colony-lab" data-learning-parent="swi" aria-label="ANT ANT — Karınca Kolonisi Zekâ Laboratuvarı. SWI alt uygulaması. SWI araştırma ailesinde bir koloni deney laboratuvarı. Yerel kuralların, feromon izlerinin, buharlaşmanın ve keşfin ortak besin arama davranışını nasıl oluşturduğunu tekrarlanabilir simülasyonlarla incele." aria-describedby="ld-new-tab-ant-tr">
               <title id="ld-new-tab-ant-tr">Yeni sekmede açılır</title>
-              <rect x="640" y="980" width="150" height="50" rx="7"/>
-              <text x="715" y="1001" class="ld-code">ANT</text>
-              <text x="715" y="1019" class="ld-label">Feromon izleri</text>
+              <rect x="640" y="1090" width="150" height="50" rx="7"/>
+              <text x="715" y="1111" class="ld-code">ANT</text>
+              <text x="715" y="1129" class="ld-label">Feromon izleri</text>
             </a>
             <a href="https://bee.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="bee" data-learning-role="colony-lab" data-learning-parent="swi" aria-label="BEE BEE — Bal Arısı Kolektif Zekâ Laboratuvarı. SWI alt uygulaması. SWI araştırma ailesinde bir koloni deney laboratuvarı. Bal arılarında keşfi, sallanma dansıyla katılımı ve kaynak paylaşımını, dans iletişimi kapalı eşzamanlı bir kontrol kolonisiyle karşılaştırarak incele." aria-describedby="ld-new-tab-bee-tr">
               <title id="ld-new-tab-bee-tr">Yeni sekmede açılır</title>
-              <rect x="810" y="980" width="150" height="50" rx="7"/>
-              <text x="885" y="1001" class="ld-code">BEE</text>
-              <text x="885" y="1019" class="ld-label">Dans iletişimi</text>
+              <rect x="810" y="1090" width="150" height="50" rx="7"/>
+              <text x="885" y="1111" class="ld-code">BEE</text>
+              <text x="885" y="1129" class="ld-label">Dans iletişimi</text>
             </a>
             <a href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="itl" data-learning-role="twin" aria-label="ITL Industrial Twin Lab. Dijital ikizlerde izole ve tekrarlanabilir endüstriyel makine zekâsı deneyleri için kamusal araştırma yayını ve deterministik kavram gösterimi." aria-describedby="ld-new-tab-itl-tr">
               <title id="ld-new-tab-itl-tr">Yeni sekmede açılır</title>
-              <rect x="440" y="1120" width="220" height="64" rx="10"/>
-              <text x="550" y="1147" class="ld-code">ITL</text>
-              <text x="550" y="1168" class="ld-label">Endüstriyel ikizler</text>
+              <rect x="440" y="1230" width="220" height="64" rx="10"/>
+              <text x="550" y="1257" class="ld-code">ITL</text>
+              <text x="550" y="1278" class="ld-label">Endüstriyel ikizler</text>
             </a>
             <a href="https://pdt.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="pdt" data-learning-role="practice-lab" data-learning-parent="itl" aria-label="PDT P-101 Etkileşimli Dijital İkiz. ITL alt uygulaması. Industrial Twin Lab öğrenme örneğinde santrifüj pompayı, bileşenlerini ve durum senaryolarını incele. Geometri sadeleştirilmiştir; tüm durum sinyalleri sentetiktir." aria-describedby="ld-new-tab-pdt-tr">
               <title id="ld-new-tab-pdt-tr">Yeni sekmede açılır</title>
-              <rect x="675" y="1127" width="150" height="50" rx="7"/>
-              <text x="750" y="1148" class="ld-code">PDT</text>
-              <text x="750" y="1166" class="ld-label">Pompa dijital ikizi</text>
+              <rect x="675" y="1237" width="150" height="50" rx="7"/>
+              <text x="750" y="1258" class="ld-code">PDT</text>
+              <text x="750" y="1276" class="ld-label">Pompa dijital ikizi</text>
             </a>
             <a href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="eng" data-learning-role="horizon" aria-label="ENG Open Humanoid Engineering. Yapay zekâ temelli insansı robot mühendisliği eğitimi için İngilizce manifesto. Dört yıllık müfredat omurgası, AI laboratuvar akışı ve tarihli 2026 sınır araştırması sinyalleri temel doğruluk kaynaklarıdır; HEX keşif eşlikçisidir." aria-describedby="ld-new-tab-eng-tr">
               <title id="ld-new-tab-eng-tr">Yeni sekmede açılır</title>
-              <rect x="440" y="1270" width="220" height="64" rx="10"/>
-              <text x="550" y="1297" class="ld-code">ENG</text>
-              <text x="550" y="1318" class="ld-label">İnsansı robot mühendisliği</text>
+              <rect x="440" y="1380" width="220" height="64" rx="10"/>
+              <text x="550" y="1407" class="ld-code">ENG</text>
+              <text x="550" y="1428" class="ld-label">İnsansı robot mühendisliği</text>
             </a>
             <a href="https://hex.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="hex" data-learning-role="practice-lab" data-learning-parent="eng" aria-label="HEX İnsansı Robot Mühendisliği Gezgini. ENG alt uygulaması. ENG’nin etkileşimli 3B öğrenme uygulamasında insansı robot yapısını, eklemleri, eyleyicileri, sensörleri ve güç/veri yollarını keşfet. Hareketler kinematik öğretim örnekleridir; dinamik veya donanım performansı iddiası taşımaz." aria-describedby="ld-new-tab-hex-tr">
               <title id="ld-new-tab-hex-tr">Yeni sekmede açılır</title>
-              <rect x="675" y="1277" width="150" height="50" rx="7"/>
-              <text x="750" y="1298" class="ld-code">HEX</text>
-              <text x="750" y="1316" class="ld-label">İnsansı robot keşfi</text>
+              <rect x="675" y="1387" width="150" height="50" rx="7"/>
+              <text x="750" y="1408" class="ld-code">HEX</text>
+              <text x="750" y="1426" class="ld-label">İnsansı robot keşfi</text>
             </a>
           </g>
           <g class="ld-legend" aria-hidden="true">
-            <path d="M 200 1400 H 232"/><text x="244" y="1404">Üst uygulama akışı</text>
-            <path class="ld-legend-context" d="M 455 1400 H 487"/><text x="499" y="1404">Bağlam / karar</text>
-            <path class="ld-legend-child" d="M 710 1400 H 742"/><text x="754" y="1404">Alt uygulama</text>
+            <path d="M 200 1510 H 232"/><text x="244" y="1514">Üst uygulama akışı</text>
+            <path class="ld-legend-context" d="M 455 1510 H 487"/><text x="499" y="1514">Bağlam / karar</text>
+            <path class="ld-legend-child" d="M 710 1510 H 742"/><text x="754" y="1514">Alt uygulama</text>
           </g>
         </svg>
         </div>
@@ -434,21 +442,21 @@
           <article class="swarm-lab" data-practice-lab="tfl" data-learning-parent="llm">
             <p class="swarm-lab__identity"><code>LLM → TFL</code><span>Yayında</span></p>
             <h4>Bir istek nasıl bir tokena dönüşür?</h4>
-            <p>Kuyruklama, kabul, parçalı önyükleme, KV durumu, yinelemeli kod çözme, örnekleme ve token teslimatı boyunca bireysel LLM isteklerini izleyen; rekabet eden istek ömürlerini, temkinli bellek rezervasyonlarını, statik ve sürekli toplu işlemeyi ve gecikme/verim ticaretlerini keşfeden deterministik, iki dilli eğitim laboratuvarı.</p>
+            <p>Simüle edilen bir isteği kuyruk, prefill, KV önbelleği, decode ve token üretimi boyunca izle. Zamanlama ve toplu işleme tercihlerini karşılaştır; süreler ve çıktılar gerçek çıkarım ölçümleri değildir.</p>
             <a class="learning-horizon-link" href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer">Araştırma · LLM ↗ <span class="sr-only">yeni sekmede açılır</span></a>
             <a class="learning-horizon-link" href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer">Keşfet · TFL ↗ <span class="sr-only">yeni sekmede açılır</span></a>
           </article>
           <article class="swarm-lab" data-practice-lab="arl" data-learning-parent="hns">
             <p class="swarm-lab__identity"><code>HNS → ARL</code><span>Yayında</span></p>
             <h4>Niyet ile eylem arasında ne olur?</h4>
-            <p>HNS (Harness), CTX (Bağlam), SEC (Güvenlik) ve EVL (Değerlendirme) üzerinden tek bir gelir güncelleme yürütmesini inceleyen deterministik, iki dilli eğitim amaçlı ajan çalışma zamanı. Tüm model kararları komut dosyası tabanlıdır; LLM API&apos;si, canlı veri veya uzak telemetri yoktur.</p>
+            <p>Deterministik bir ajan yürütmesini harness, bağlam, güvenlik ve değerlendirme açısından incele. Araç kullanımını, kanıtları ve tek kullanımlık onayı keşfet; tüm eylemler simülasyon içinde kalır.</p>
             <a class="learning-horizon-link" href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer">Araştırma · HNS ↗ <span class="sr-only">yeni sekmede açılır</span></a>
             <a class="learning-horizon-link" href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer">Keşfet · ARL ↗ <span class="sr-only">yeni sekmede açılır</span></a>
           </article>
           <article class="swarm-lab" data-practice-lab="adp" data-learning-parent="usl">
             <p class="swarm-lab__identity"><code>USL → ADP</code><span>Yayında</span></p>
             <h4>Temel model bir göreve nasıl uyarlanır?</h4>
-            <p>Full FT, LoRA ve QLoRA için iki dilli, tarayıcıda çalışan eğitim laboratuvarı. USL&apos;in kavramsal eşlikçisi: USL adaptasyon manzarasını öğretir; ADP etkileşimli parametre ve bellek ayak izleri üzerinden ticaretleri incelenebilir kılar.</p>
+            <p>Full FT, LoRA ve QLoRA yöntemlerini parametre sayıları, bellek tahminleri, veri hazırlığı ve sentetik eğitim/değerlendirme deneyleriyle keşfet. USL uyarlamanın temelini sunar; gerçek bir model eğitilmez.</p>
             <a class="learning-horizon-link" href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer">Araştırma · USL ↗ <span class="sr-only">yeni sekmede açılır</span></a>
             <a class="learning-horizon-link" href="https://adp.aserdargun.com/" target="_blank" rel="noreferrer">Keşfet · ADP ↗ <span class="sr-only">yeni sekmede açılır</span></a>
           </article>

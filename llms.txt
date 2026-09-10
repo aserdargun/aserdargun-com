@@ -21,3 +21,9 @@ Research cutoffs, verification dates, release dates, and release SHAs describe d
 - [WML — World Model Laboratory](https://wml.aserdargun.com/): WFM companion for observation, prediction, planning, and simulated counterfactual experiments.
 - [PDT — P-101 Interactive Digital Twin](https://pdt.aserdargun.com/): ITL companion with simplified pump geometry and synthetic condition signals.
 - [HEX — Humanoid Engineering Explorer](https://hex.aserdargun.com/): ENG companion for humanoid anatomy, joints, sensors, and illustrative kinematics.
+
+## Adaptation, serving, agents and deployment
+- [ADP — Model Adaptation Laboratory](https://adp.aserdargun.com/): USL companion for Full FT, LoRA, QLoRA, memory estimates and synthetic training/evaluation; it does not train a real model.
+- [TFL — Token Flow Laboratory](https://tfl.aserdargun.com/): LLM companion for simulated queueing, prefill, KV cache, decode and scheduling; metrics are educational, not benchmarks.
+- [ARL — Agent Runtime Laboratory](https://arl.aserdargun.com/): HNS companion connecting context, security, evaluation and one-use approval inside a deterministic agent simulation.
+- [DCL — Deployment Choice Laboratory](https://dcl.aserdargun.com/): Independent deployment lab following LCL and CLD; compare workload constraints and explicit memory, privacy and cost assumptions. No live prices or universal winner are claimed.

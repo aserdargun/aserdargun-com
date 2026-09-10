@@ -108,7 +108,7 @@ test("production deployment validates the exact checkout before upload", () => {
   assert.match(targetWorkflow, /run:\s*npm run build:site\b/);
   assert.match(
     targetWorkflow,
-    /Azure\/static-web-apps-deploy@4d27395796ac319302594769cfe812bd207490b1\b/,
+    /Azure\/static-web-apps-deploy@1a947af9992250f3bc2e68ad0754c0b0c11566c9\b/,
   );
   assert.doesNotMatch(
     targetWorkflow,

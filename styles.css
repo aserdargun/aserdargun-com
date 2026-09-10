@@ -4557,3 +4557,13 @@ body:has(main.memory-page) {
     -webkit-backdrop-filter: none;
   }
 }
+
+.learning-companion {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-dark);
+}
+.learning-companion strong,
+.learning-companion a { color: var(--lime); }
+.learning-companion a { text-decoration: underline; text-underline-offset: 3px; }
+.learning-decision-lab { margin-top: 22px; }

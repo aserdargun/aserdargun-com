@@ -348,14 +348,26 @@
     {
       "code": "cld",
       "parentApp": null,
-      "diagramLabel": {"en": "Cloud deployment", "tr": "Bulut dağıtımı"},
+      "diagramLabel": {
+        "en": "Cloud deployment",
+        "tr": "Bulut dağıtımı"
+      },
       "kind": "tool",
       "systemRole": "core-learning",
       "visibility": "public",
       "status": "live",
-      "statusLabel": { "en": "Live", "tr": "Yayında" },
-      "languages": ["tr", "en"],
-      "title": { "en": "Cloud Provider Cost Comparison", "tr": "Bulut Sağlayıcı Maliyet Karşılaştırması" },
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "Cloud Provider Cost Comparison",
+        "tr": "Bulut Sağlayıcı Maliyet Karşılaştırması"
+      },
       "summary": {
         "en": "A source-backed decision tool comparing pre-tax USD costs for cloud services available from Türkiye.",
         "tr": "Türkiye’den erişilebilen bulut servislerini kaynaklı, vergiler hariç USD maliyetleriyle karşılaştıran karar destek aracı."
@@ -370,25 +382,52 @@
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
-      "upstreamApps": ["sec", "evl"],
-      "downstreamApps": ["wfm", "swi"],
-      "tracks": ["cloud", "cost", "deployment"],
-      "entityIds": ["entity:azure"],
+      "upstreamApps": [
+        "sec",
+        "evl"
+      ],
+      "downstreamApps": [
+        "wfm",
+        "swi",
+        "dcl"
+      ],
+      "tracks": [
+        "cloud",
+        "cost",
+        "deployment"
+      ],
+      "entityIds": [
+        "entity:azure"
+      ],
       "portfolioLayer": "deployment",
       "focusState": "active",
-      "relatedMemoryIds": ["local-ai-vs-cloud-ai"]
+      "relatedMemoryIds": [
+        "local-ai-vs-cloud-ai"
+      ]
     },
     {
       "code": "lcl",
       "parentApp": null,
-      "diagramLabel": {"en": "Local compute", "tr": "Lokal hesaplama"},
+      "diagramLabel": {
+        "en": "Local compute",
+        "tr": "Lokal hesaplama"
+      },
       "kind": "lab",
       "systemRole": "core-learning",
       "visibility": "public",
       "status": "live",
-      "statusLabel": { "en": "Live", "tr": "Yayında" },
-      "languages": ["tr", "en"],
-      "title": { "en": "Local Compute Lab", "tr": "Local Compute Lab" },
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "Local Compute Lab",
+        "tr": "Local Compute Lab"
+      },
       "summary": {
         "en": "A source-backed decision workbench matching open-weight model requirements with NVIDIA, AMD, and Apple devices for a local AI lab.",
         "tr": "Açık ağırlıklı model gereksinimlerini özel bir yerel yapay zekâ laboratuvarı için NVIDIA, AMD ve Apple cihazlarıyla eşleştiren kaynaklı karar çalışma alanı."
@@ -403,13 +442,29 @@
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
-      "upstreamApps": ["ctx", "sec"],
-      "downstreamApps": ["wfm", "swi"],
-      "tracks": ["hardware", "models", "runtime", "local-ai"],
-      "entityIds": ["entity:local-inference"],
+      "upstreamApps": [
+        "ctx",
+        "sec"
+      ],
+      "downstreamApps": [
+        "wfm",
+        "swi",
+        "dcl"
+      ],
+      "tracks": [
+        "hardware",
+        "models",
+        "runtime",
+        "local-ai"
+      ],
+      "entityIds": [
+        "entity:local-inference"
+      ],
       "portfolioLayer": "deployment",
       "focusState": "active",
-      "relatedMemoryIds": ["local-ai-vs-cloud-ai"]
+      "relatedMemoryIds": [
+        "local-ai-vs-cloud-ai"
+      ]
     },
     {
       "code": "wfm",
@@ -691,7 +746,10 @@
     {
       "code": "tfl",
       "parentApp": "llm",
-      "diagramLabel": {"en": "Token serving", "tr": "Token sunumu"},
+      "diagramLabel": {
+        "en": "Token serving",
+        "tr": "Token sunumu"
+      },
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
@@ -709,8 +767,8 @@
         "tr": "TFL — Token Akışı Laboratuvarı"
       },
       "summary": {
-        "en": "A deterministic, bilingual educational laboratory that follows individual LLM requests through queueing, admission, chunked prefill, KV state, iterative decode, sampling, and token delivery, exploring competing request lifetimes, conservative memory reservations, static versus continuous batching, and latency/throughput trade-offs.",
-        "tr": "Kuyruklama, kabul, parçalı önyükleme, KV durumu, yinelemeli kod çözme, örnekleme ve token teslimatı boyunca bireysel LLM isteklerini izleyen; rekabet eden istek ömürlerini, temkinli bellek rezervasyonlarını, statik ve sürekli toplu işlemeyi ve gecikme/verim ticaretlerini keşfeden deterministik, iki dilli eğitim laboratuvarı."
+        "en": "Follow a simulated request through queueing, prefill, KV cache, decode and token delivery. Compare scheduling and batching trade-offs; timings and outputs are illustrative, not measured inference.",
+        "tr": "Simüle edilen bir isteği kuyruk, prefill, KV önbelleği, decode ve token üretimi boyunca izle. Zamanlama ve toplu işleme tercihlerini karşılaştır; süreler ve çıktılar gerçek çıkarım ölçümleri değildir."
       },
       "guidingQuestion": {
         "en": "How does a request become a token?",
@@ -718,10 +776,10 @@
       },
       "repository": "https://github.com/aserdargun/tfl-aserdargun-com",
       "address": "https://tfl.aserdargun.com/",
-      "updatedAt": "2026-09-09",
-      "lastVerified": "2026-09-09",
-      "lastReleased": "2026-09-09",
-      "releaseSha": "2ae6ddcc227ac472335b1599baedff4e13054d8f",
+      "updatedAt": "2026-09-10",
+      "lastVerified": "2026-09-10",
+      "lastReleased": "2026-09-10",
+      "releaseSha": "942277523ef94496cb14af86d516676053dcd7b2",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -745,7 +803,10 @@
     {
       "code": "arl",
       "parentApp": "hns",
-      "diagramLabel": {"en": "Agent runtime", "tr": "Ajan çalışma zamanı"},
+      "diagramLabel": {
+        "en": "Agent runtime",
+        "tr": "Ajan çalışma zamanı"
+      },
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
@@ -763,8 +824,8 @@
         "tr": "ARL — Ajan Çalışma Zamanı Laboratuvarı"
       },
       "summary": {
-        "en": "A deterministic, bilingual educational agent runtime that inspects a single revenue-update execution across HNS (Harness), CTX (Context), SEC (Security), and EVL (Evaluation). All model decisions are scripted; no LLM API, no live data, no remote telemetry.",
-        "tr": "HNS (Harness), CTX (Bağlam), SEC (Güvenlik) ve EVL (Değerlendirme) üzerinden tek bir gelir güncelleme yürütmesini inceleyen deterministik, iki dilli eğitim amaçlı ajan çalışma zamanı. Tüm model kararları komut dosyası tabanlıdır; LLM API'si, canlı veri veya uzak telemetri yoktur."
+        "en": "Inspect a deterministic agent run through harness, context, security and evaluation lenses. Explore tool use, evidence and one-use approval; all actions remain inside the simulation.",
+        "tr": "Deterministik bir ajan yürütmesini harness, bağlam, güvenlik ve değerlendirme açısından incele. Araç kullanımını, kanıtları ve tek kullanımlık onayı keşfet; tüm eylemler simülasyon içinde kalır."
       },
       "guidingQuestion": {
         "en": "What happens between intent and action?",
@@ -772,10 +833,10 @@
       },
       "repository": "https://github.com/aserdargun/arl-aserdargun-com",
       "address": "https://arl.aserdargun.com/",
-      "updatedAt": "2026-09-09",
-      "lastVerified": "2026-09-09",
-      "lastReleased": "2026-09-09",
-      "releaseSha": "3d8474e8c9028909205014de290651be6fa12b54",
+      "updatedAt": "2026-09-10",
+      "lastVerified": "2026-09-10",
+      "lastReleased": "2026-09-10",
+      "releaseSha": "074c4cc7c6083fae745b8ed21d521f5da3605c5d",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -798,7 +859,10 @@
     {
       "code": "adp",
       "parentApp": "usl",
-      "diagramLabel": {"en": "Model adaptation", "tr": "Model adaptasyonu"},
+      "diagramLabel": {
+        "en": "Model adaptation",
+        "tr": "Model uyarlama"
+      },
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
@@ -816,8 +880,8 @@
         "tr": "ADP — Model Adaptasyon Laboratuvarı"
       },
       "summary": {
-        "en": "A bilingual, browser-only educational laboratory for Full FT, LoRA and QLoRA. The conceptual companion to USL: USL teaches the adaptation landscape; ADP makes the trade-offs inspectable through interactive parameter and memory footprints.",
-        "tr": "Full FT, LoRA ve QLoRA için iki dilli, tarayıcıda çalışan eğitim laboratuvarı. USL'in kavramsal eşlikçisi: USL adaptasyon manzarasını öğretir; ADP etkileşimli parametre ve bellek ayak izleri üzerinden ticaretleri incelenebilir kılar."
+        "en": "Explore Full FT, LoRA and QLoRA through parameter counts, memory estimates, data preparation and synthetic training/evaluation experiments. USL provides the adaptation foundation; no real model is trained.",
+        "tr": "Full FT, LoRA ve QLoRA yöntemlerini parametre sayıları, bellek tahminleri, veri hazırlığı ve sentetik eğitim/değerlendirme deneyleriyle keşfet. USL uyarlamanın temelini sunar; gerçek bir model eğitilmez."
       },
       "guidingQuestion": {
         "en": "How does a base model become adapted to a task?",
@@ -825,10 +889,10 @@
       },
       "repository": "https://github.com/aserdargun/adp-aserdargun-com",
       "address": "https://adp.aserdargun.com/",
-      "updatedAt": "2026-09-09",
-      "lastVerified": "2026-09-09",
-      "lastReleased": "2026-09-09",
-      "releaseSha": "00bde3fd42af0d68643867e46a69057089e97ce6",
+      "updatedAt": "2026-09-10",
+      "lastVerified": "2026-09-10",
+      "lastReleased": "2026-09-10",
+      "releaseSha": "71632c48be32e69232c8a0f01386e904e603163b",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -999,6 +1063,63 @@
       "focusState": "active",
       "relatedMemoryIds": [],
       "releaseSha": "67c6020431ac47b35e1dbc91b6526f8ab6468b75"
+    },
+    {
+      "code": "dcl",
+      "parentApp": null,
+      "diagramLabel": {
+        "en": "Deployment choices",
+        "tr": "Dağıtım kararları"
+      },
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "Deployment Choice Laboratory",
+        "tr": "Dağıtım Karar Laboratuvarı"
+      },
+      "summary": {
+        "en": "Compare local hardware, cloud GPUs, managed inference and token APIs against workload, memory, privacy and cost assumptions. Hard constraints and educational estimates explain conditional choices; no live pricing or universal winner is claimed.",
+        "tr": "Yerel donanım, bulut GPU, yönetilen çıkarım ve token API seçeneklerini iş yükü, bellek, gizlilik ve maliyet varsayımlarıyla karşılaştır. Kesin kısıtlar ve eğitim amaçlı tahminler koşullu kararları açıklar; canlı fiyat veya evrensel kazanan iddiası yoktur."
+      },
+      "guidingQuestion": {
+        "en": "Where should this workload run, and under which assumptions?",
+        "tr": "Bu iş yükü nerede ve hangi varsayımlarla çalışmalı?"
+      },
+      "repository": "https://github.com/aserdargun/dcl-aserdargun-com",
+      "address": "https://dcl.aserdargun.com/",
+      "updatedAt": "2026-09-10",
+      "lastVerified": "2026-09-10",
+      "lastReleased": "2026-09-10",
+      "releaseSha": "bc6ee484eb5de5f2b20cc5db81f1f3be0aabce77",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "lcl",
+        "cld"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "deployment",
+        "memory",
+        "privacy",
+        "cost",
+        "constraints"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "deployment",
+      "focusState": "active",
+      "relatedMemoryIds": []
     }
   ],
   "now": {

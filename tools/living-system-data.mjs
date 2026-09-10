@@ -923,8 +923,8 @@ export function summarizeApplications(applications) {
   for (const application of applications) {
     if (counts[application.systemRole] !== undefined) counts[application.systemRole] += 1;
   }
-  const englishNumber = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
-  const turkishNumber = ["sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz", "on"];
+  const englishNumber = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven"];
+  const turkishNumber = ["sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz", "on", "on bir"];
   const number = (values, count) => values[count] ?? String(count);
   const sentenceNumber = (values, count) => {
     const value = number(values, count);

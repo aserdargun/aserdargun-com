@@ -491,7 +491,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.equal(harnessCard.includes(expectedQuestion), true);
     assert.deepEqual(
       anchors(harnessCard).map(({ openingTag }) => attribute(openingTag, "href")),
-      ["https://hns.aserdargun.com/"],
+      ["https://hns.aserdargun.com/", "https://arl.aserdargun.com/"],
     );
     assert.ok(
       (learning ?? "").indexOf(harnessCard) < (learning ?? "").indexOf('class="learning-deployment-paths"'),
@@ -565,13 +565,14 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://tfl.aserdargun.com/", "TFL"],
       ["https://arl.aserdargun.com/", "ARL"],
       ["https://adp.aserdargun.com/", "ADP"],
+      ["https://dcl.aserdargun.com/", "DCL"],
     ];
 
     assert.ok(svg, "learning diagram SVG must remain a closed source scope");
     assert.equal(extraSvgScopes.length, 0);
     assert.doesNotMatch(svg, /<(?:span|foreignObject)\b/i, "HTML must never be inserted into SVG");
     const svgBlankAnchors = anchors(svg).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
-    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all twenty-three diagram nodes must remain inside SVG");
+    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all twenty-four diagram nodes must remain inside SVG");
 
     assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")).sort(), expectedNodes.map(([href]) => href).sort());
     for (const [index, anchor] of svgBlankAnchors.entries()) {
@@ -601,13 +602,13 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.match(svg, /class="ld-legend"/, "primary, supporting, and horizon relationships need a legend");
 
     const edges = Array.from(svg.matchAll(/<path data-learning-edge="([^"]+)"[^>]*d="([^"]+)"[^>]*marker-end="url\(#ld-arrow\)"\/>/g));
-    assert.equal(edges.length, 28, "every directed relationship must terminate with an arrow marker");
+    assert.equal(edges.length, 30, "every directed relationship must terminate with an arrow marker");
     assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-wfm")).length, 1, "WFM must receive one arrow");
     assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-swi")).length, 1, "SWI must receive one arrow");
     const deploymentConnectors = Array.from(svg.matchAll(/<path data-learning-connector="([^"]+)"[^>]*d="([^"]+)"\/>/g));
     assert.deepEqual(
       deploymentConnectors.map(([, connectorName]) => connectorName),
-      ["lcl-to-stage-07", "cld-to-stage-07"],
+      ["dcl-to-stage-07"],
       "local and cloud paths must merge into the shared stage-07 bus",
     );
     for (const [, connectorName, route] of deploymentConnectors) {

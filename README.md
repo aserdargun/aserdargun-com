@@ -12,7 +12,7 @@ learning-loop video button has been removed.
 - `/about/` and `/tr/about/` contain the personal introduction, interactive
   ASCII/pixel portraits, eight-stage career journey, working principles,
   credentials, and future direction.
-- `/journey/` and `/tr/journey/` contain the learning path, six detailed learning stages, and the physical AI horizon, colony labs, and companion GEX / WML / PDT / HEX learning experiences.
+- `/journey/` and `/tr/journey/` contain the learning path, six detailed learning stages, and the physical AI horizon, colony labs, and companion GEX / ADP / TFL / ARL / WML / PDT / HEX learning experiences. DCL follows the LCL / CLD deployment choices with explicit workload assumptions.
 - `/applications/` and `/tr/applications/` contain the complete application map,
   localized search, layer filters, and expandable evidence and knowledge links.
 - `/now/` and `/tr/now/` retain dated current work; the historical snapshots keep
@@ -49,6 +49,12 @@ checks for box intersections, arrow crossings, and overlapping boxes. Extend
 the layout if a growing family needs more space; never hide an application to
 make it fit. Regenerate with `npm run generate:site` and verify both languages.
 The detailed learning path remains in the Journey pages.
+
+The public catalog currently contains 24 applications. ADP belongs to USL, TFL
+to LLM, and ARL to HNS. DCL is an independent deployment decision laboratory
+that builds on both LCL and CLD; it is not owned by either one. These relationships
+appear in both languages on the homepage, diagram, Journey and application map.
+The ILS package repository is shared infrastructure, not a deployed application.
 
 ## Development
 

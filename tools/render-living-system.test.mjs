@@ -21,7 +21,7 @@ import {
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rendererPath = path.join(rootDir, "tools", "render-living-system.mjs");
-const today = new Date("2026-09-09T12:00:00Z");
+const today = new Date("2026-09-10T12:00:00Z");
 
 async function readFixtureData() {
   const data = JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -865,7 +865,7 @@ test("renders the application-map summary from semantic roles", async () => {
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /Ten core learning applications, ten standalone labs, two horizon bridges, and one long-term horizon\./);
+  assert.match(rendered, /Ten core learning applications, eleven standalone labs, two horizon bridges, and one long-term horizon\./);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
 });
 
@@ -1671,7 +1671,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const generate = spawnSync(process.execPath, [rendererPath], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-09" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-10" },
   });
   assert.equal(generate.status, 0, generate.stderr);
 
@@ -1686,7 +1686,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const check = spawnSync(process.execPath, [rendererPath, "--check"], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-09" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-10" },
   });
   const after = Object.fromEntries(await Promise.all(paths.map(async (relativePath) => [
     relativePath,

@@ -14,10 +14,11 @@ const PARENTS = {
   evl: { cx: 800, y: 560, width: 180, role: "evaluation" },
   lcl: { cx: 375, y: 710, width: 190, role: "deployment" },
   cld: { cx: 725, y: 710, width: 190, role: "deployment" },
-  wfm: { cx: 300, y: 880, width: 210, role: "world" },
-  swi: { cx: 800, y: 880, width: 230, role: "collective" },
-  itl: { cx: 550, y: 1120, width: 220, role: "twin", side: true },
-  eng: { cx: 550, y: 1270, width: 220, role: "horizon", side: true },
+  dcl: { cx: 550, y: 820, width: 220, role: "decision-lab" },
+  wfm: { cx: 300, y: 990, width: 210, role: "world" },
+  swi: { cx: 800, y: 990, width: 230, role: "collective" },
+  itl: { cx: 550, y: 1230, width: 220, role: "twin", side: true },
+  eng: { cx: 550, y: 1380, width: 220, role: "horizon", side: true },
 };
 
 const ROUTES = [
@@ -35,11 +36,13 @@ const ROUTES = [
   ["sec-to-cld", "M 590 624 V 652 H 725 V 710", "decision"],
   ["evl-to-cld", "M 820 624 V 675 H 765 V 710", "context"],
   ["ctx-to-lcl", "M 280 624 V 675 H 335 V 710", "context"],
-  ["deployment-to-wfm", "M 550 846 H 300 V 880", "horizon"],
-  ["deployment-to-swi", "M 550 846 H 800 V 880", "horizon"],
-  ["wfm-to-itl", "M 405 912 H 470 V 1090 H 510 V 1120", "horizon"],
-  ["swi-to-itl", "M 685 912 H 610 V 1090 H 590 V 1120", "horizon"],
-  ["itl-to-eng", "M 550 1184 V 1270", "horizon"],
+  ["lcl-to-dcl", "M 375 774 V 802 H 510 V 820", "decision"],
+  ["cld-to-dcl", "M 725 774 V 802 H 590 V 820", "decision"],
+  ["deployment-to-wfm", "M 550 956 H 300 V 990", "horizon"],
+  ["deployment-to-swi", "M 550 956 H 800 V 990", "horizon"],
+  ["wfm-to-itl", "M 405 1022 H 470 V 1200 H 510 V 1230", "horizon"],
+  ["swi-to-itl", "M 685 1022 H 610 V 1200 H 590 V 1230", "horizon"],
+  ["itl-to-eng", "M 550 1294 V 1380", "horizon"],
 ];
 
 export function learningDiagramLayout(applications) {
@@ -87,12 +90,12 @@ export function renderLearningDiagram({ locale, data }) {
     [62, "01 · ORIENT", "01 · YÖN BUL"], [172, "02 · FOUNDATIONS", "02 · TEMELLER"],
     [362, "03 · RUNTIME", "03 · ÇALIŞTIRMA"], [472, "04 · AGENT SYSTEM", "04 · AJAN SİSTEMİ"],
     [592, "05 · QUALITY LOOP", "05 · KALİTE DÖNGÜSÜ"], [742, "06 · DEPLOY", "06 · DAĞITIM"],
-    [912, "07 · PHYSICAL AI", "07 · FİZİKSEL AI"], [1152, "08 · INDUSTRIAL TWIN", "08 · ENDÜSTRİYEL İKİZ"],
-    [1302, "09 · EMBODIED AI", "09 · BEDENLENMİŞ AI"],
+    [1022, "07 · PHYSICAL AI", "07 · FİZİKSEL AI"], [1262, "08 · INDUSTRIAL TWIN", "08 · ENDÜSTRİYEL İKİZ"],
+    [1412, "09 · EMBODIED AI", "09 · BEDENLENMİŞ AI"],
   ];
   const description = localized(locale,
-    "Large boxes show the connected main applications. Smaller boxes are sub-applications, enclosed with their parent in a shared frame. AIA connects GPU and USL to LLM, then HNS, CTX, SEC and EVL. CTX feeds back to LLM. Assurance informs parallel LCL and CLD deployment; both connect to WFM and SWI, then ITL and ENG. GPU owns GEX, WFM owns WML, SWI owns ANT and BEE, ITL owns PDT, and ENG owns HEX. A dot marks the shared deployment junction.",
-    "Büyük kutular birbirine bağlı üst uygulamaları gösterir. Küçük kutular alt uygulamalardır; üst uygulamalarıyla ortak çerçeve içindedir. AIA, GPU ve USL üzerinden LLM, HNS, CTX, SEC ve EVL’ye bağlanır. CTX, LLM’ye geri bildirim verir. Güvence katmanı paralel LCL ve CLD dağıtımına, bunlar WFM ve SWI’ye, ardından ITL ve ENG’ye bağlanır. GPU altında GEX, WFM altında WML, SWI altında ANT ve BEE, ITL altında PDT, ENG altında HEX bulunur. Nokta, ortak dağıtım bağlantısını gösterir.");
+    "Large boxes show the connected main applications. Smaller boxes are sub-applications, enclosed with their parent in a shared frame. AIA connects GPU and USL to LLM, then HNS, CTX, SEC and EVL. CTX feeds back to LLM. Assurance informs parallel LCL and CLD deployment; DCL compares their workload constraints before the path reaches WFM and SWI, then ITL and ENG. USL owns ADP, LLM owns TFL, HNS owns ARL, GPU owns GEX, WFM owns WML, SWI owns ANT and BEE, ITL owns PDT, and ENG owns HEX. A dot marks the shared physical-AI junction.",
+    "Büyük kutular birbirine bağlı üst uygulamaları gösterir. Küçük kutular alt uygulamalardır; üst uygulamalarıyla ortak çerçeve içindedir. AIA, GPU ve USL üzerinden LLM, HNS, CTX, SEC ve EVL’ye bağlanır. CTX, LLM’ye geri bildirim verir. Güvence katmanı paralel LCL ve CLD dağıtımına, DCL bu seçeneklerin iş yükü kısıtlarını karşılaştırır; akış WFM ve SWI’ye, ardından ITL ve ENG’ye bağlanır. USL altında ADP, LLM altında TFL, HNS altında ARL, GPU altında GEX, WFM altında WML, SWI altında ANT ve BEE, ITL altında PDT, ENG altında HEX bulunur. Nokta, ortak fiziksel AI bağlantısını gösterir.");
   const renderNode = ({ app, x, y, width, height, cx, role }) => {
     const parentLabel = app.parentApp ? localized(locale, `Sub-application of ${app.parentApp.toUpperCase()}. `, `${app.parentApp.toUpperCase()} alt uygulaması. `) : "";
     return `            <a href="${escape(app.address)}" target="_blank" rel="noreferrer" class="ld-node ${app.parentApp ? "ld-node-child" : "ld-node-parent"}${app.code === "aia" ? " ld-node-aia" : ""}" data-learning-app="${app.code}" data-learning-role="${role}"${role === "deployment" ? ' data-learning-plane="deployment"' : ""}${app.parentApp ? ` data-learning-parent="${app.parentApp}"` : ""} aria-label="${escape(`${app.code.toUpperCase()} ${app.title[locale]}. ${parentLabel}${app.summary[locale]}`)}">
@@ -105,7 +108,7 @@ export function renderLearningDiagram({ locale, data }) {
     '      <figure class="learning-diagram-wrap">',
     `        <p class="mobile-map-hint" id="diagram-scroll-hint">${localized(locale, "Pinch with two fingers to zoom. Drag to explore the enlarged map.", "İki parmağınla açıp kapatarak boyutu ayarla. Büyüttüğün haritada parmağınla gezin.")}</p>`,
     `        <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="${localized(locale, "Application connection map", "Uygulama bağlantı haritası")}">`,
-    `        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1430" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">`,
+    `        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1540" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">`,
     `          <title id="ld-title">${localized(locale, "Connected applications and their sub-applications", "Bağlı üst uygulamalar ve alt uygulamaları")}</title>`,
     `          <desc id="ld-desc">${escape(description)}</desc>`,
     '          <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#c8ff36"/></marker></defs>',
@@ -113,21 +116,20 @@ export function renderLearningDiagram({ locale, data }) {
     ...stages.map(([y, en, tr]) => `            <text x="12" y="${y}">${escape(localized(locale, en, tr))}</text>`),
     '          </g>',
     '          <g class="ld-families" aria-hidden="true">',
-    ...families.map((family) => `            <g data-learning-family="${family.code}"><rect x="${family.x}" y="${family.y}" width="${family.width}" height="${family.height}" rx="15"/><text x="${family.x + family.width - 10}" y="${family.y + family.height + 14}">${localized(locale, `${family.code.toUpperCase()} + sub-applications`, `${family.code.toUpperCase()} + alt uygulamalar`)}</text></g>`),
+    ...families.map((family) => `            <g data-learning-family="${family.code}"><rect x="${family.x}" y="${family.y}" width="${family.width}" height="${family.height}" rx="15"/><text x="${family.x + family.width - 10}" y="${family.y + 13}">${localized(locale, `${family.code.toUpperCase()} + sub-applications`, `${family.code.toUpperCase()} + alt uygulamalar`)}</text></g>`),
     '          </g>',
     '          <g class="ld-links" aria-hidden="true">',
-    '            <path data-learning-connector="lcl-to-stage-07" class="ld-edge-horizon" d="M 375 774 V 806 H 550 V 846"/>',
-    '            <path data-learning-connector="cld-to-stage-07" class="ld-edge-horizon" d="M 725 774 V 806 H 550"/>',
+    '            <path data-learning-connector="dcl-to-stage-07" class="ld-edge-horizon" d="M 550 884 V 956"/>',
     ...edges.map(({ id, path, kind }) => `            <path data-learning-edge="${id}" class="ld-edge-${kind}" d="${path}" marker-end="url(#ld-arrow)"/>`),
-    '            <circle class="ld-junction" cx="550" cy="806" r="3"/><circle class="ld-junction" cx="550" cy="846" r="3"/>',
+    '            <circle class="ld-junction" cx="550" cy="956" r="3"/>',
     '          </g>',
     '          <g class="ld-nodes">',
     ...nodes.map(renderNode),
     '          </g>',
     '          <g class="ld-legend" aria-hidden="true">',
-    `            <path d="M 200 1400 H 232"/><text x="244" y="1404">${localized(locale, "Main application flow", "Üst uygulama akışı")}</text>`,
-    `            <path class="ld-legend-context" d="M 455 1400 H 487"/><text x="499" y="1404">${localized(locale, "Context / decision", "Bağlam / karar")}</text>`,
-    `            <path class="ld-legend-child" d="M 710 1400 H 742"/><text x="754" y="1404">${localized(locale, "Sub-application", "Alt uygulama")}</text>`,
+    `            <path d="M 200 1510 H 232"/><text x="244" y="1514">${localized(locale, "Main application flow", "Üst uygulama akışı")}</text>`,
+    `            <path class="ld-legend-context" d="M 455 1510 H 487"/><text x="499" y="1514">${localized(locale, "Context / decision", "Bağlam / karar")}</text>`,
+    `            <path class="ld-legend-child" d="M 710 1510 H 742"/><text x="754" y="1514">${localized(locale, "Sub-application", "Alt uygulama")}</text>`,
     '          </g>',
     '        </svg>',
     '        </div>',

@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-09-09T12:00:00Z");
+const today = new Date("2026-09-10T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -20,7 +20,7 @@ async function readData() {
 test("the public application contract keeps verification, research, and release facts separate", async () => {
   const data = await readData();
 
-  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex", "tfl", "arl", "adp"].includes(code))) {
+  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex", "tfl", "arl", "adp", "dcl"].includes(code))) {
     assert.match(application.researchCutoff, /^2026-\d{2}-\d{2}$/, `${application.code} research cutoff`);
     assert.equal(application.lastVerified, "2026-09-04", `${application.code} verification date`);
     assert.match(application.lastReleased, /^2026-\d{2}-\d{2}$/, `${application.code} release date`);
@@ -53,7 +53,7 @@ test("the portfolio registry is a deterministic public projection of application
 
   assert.equal(registry.schemaVersion, 1);
   assert.equal(registry.generatedAt, "2026-09-04");
-  assert.equal(registry.applications.length, 23);
+  assert.equal(registry.applications.length, 24);
   assert.deepEqual(registry.applications.map(({ code }) => code), data.applications.map(({ code }) => code));
   assert.deepEqual(
     registry.applications.find(({ code }) => code === "ctx"),
@@ -222,5 +222,32 @@ test("companion learning apps connect to their research parents across both loca
       const edges = renderLearningDiagram({ locale, data });
       assert.ok(edges.includes(`data-learning-edge="${parentCode}-to-${code}"`));
     }
+  }
+});
+
+test('adaptation, serving and agent companions retain ownership while DCL bridges both deployment choices', async () => {
+  const data = await readData();
+  const {renderCompanionLinks, renderDeploymentLab} = await import('./render-living-system.mjs');
+  for (const [code, parentCode, layer] of [['adp','usl','foundation'],['tfl','llm','foundation'],['arl','hns','agent-system']]) {
+    const app=data.applications.find(app=>app.code===code);
+    assert.equal(app.parentApp,parentCode);
+    assert.equal(app.portfolioLayer,layer);
+    assert.ok(app.upstreamApps.includes(parentCode));
+    assert.ok(data.applications.find(app=>app.code===parentCode).downstreamApps.includes(code));
+    for(const locale of ['en','tr']) assert.ok(renderCompanionLinks({locale,data,parentCode}).includes(app.address));
+  }
+  const dcl=data.applications.find(app=>app.code==='dcl');
+  assert.equal(dcl.parentApp,null);
+  assert.equal(dcl.portfolioLayer,'deployment');
+  assert.deepEqual(dcl.upstreamApps,['lcl','cld']);
+  assert.equal(dcl.researchCutoff,undefined);
+  for(const parent of dcl.upstreamApps) assert.ok(data.applications.find(app=>app.code===parent).downstreamApps.includes('dcl'));
+  for(const locale of ['en','tr']) {
+    const card=renderDeploymentLab({locale,data});
+    assert.ok(card.includes(dcl.address));
+    assert.ok(card.includes(dcl.summary[locale]));
+    const journey=await readFile(path.join(rootDir,locale==='tr'?'tr/journey/index.html':'journey/index.html'),'utf8');
+    assert.ok(journey.indexOf('data-deployment-lab="dcl"')>journey.indexOf('class="learning-deployment-paths"'));
+    assert.ok(journey.indexOf('data-deployment-lab="dcl"')<journey.indexOf('id="horizon"'));
   }
 });
