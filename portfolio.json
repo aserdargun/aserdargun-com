@@ -88,7 +88,8 @@
         "ctx"
       ],
       "downstreamApps": [
-        "hns"
+        "hns",
+        "tfl"
       ],
       "tracks": [
         "runtime",
@@ -138,7 +139,8 @@
       "downstreamApps": [
         "ctx",
         "sec",
-        "evl"
+        "evl",
+        "arl"
       ],
       "tracks": [
         "harness",
@@ -334,7 +336,8 @@
         "aia"
       ],
       "downstreamApps": [
-        "llm"
+        "llm",
+        "adp"
       ],
       "tracks": [
         "training",
@@ -756,14 +759,14 @@
       },
       "shortName": "ENG",
       "description": {
-        "en": "An English-only, proposed curriculum for AI-native humanoid engineering education. Its four-year spine, AI lab pipeline, and dated 2026 frontier signals define the manifesto; HEX is its interactive companion. No degree or completed physical robot is claimed.",
-        "tr": "Yapay zekâ temelli insansı robot mühendisliği eğitimi için İngilizce müfredat önerisi. Dört yıllık omurga, yapay zekâ laboratuvar akışı ve tarihli 2026 araştırma sinyalleri manifestonun temelidir; HEX etkileşimli eşlikçisidir. Diploma veya tamamlanmış fiziksel robot iddiası taşımaz."
+        "en": "An English manifesto for AI-native humanoid engineering education. The four-year spine, AI lab pipeline, and dated 2026 frontier signals define its primary sources of truth; HEX provides a companion exploration.",
+        "tr": "Yapay zekâ temelli insansı robot mühendisliği eğitimi için İngilizce manifesto. Dört yıllık müfredat omurgası, AI laboratuvar akışı ve tarihli 2026 sınır araştırması sinyalleri temel doğruluk kaynaklarıdır; HEX keşif eşlikçisidir."
       },
       "type": "horizon",
       "status": "active",
       "statusLabel": {
-        "en": "Horizon · active research",
-        "tr": "Ufuk · aktif araştırma"
+        "en": "Horizon · English manifesto",
+        "tr": "Ufuk · İngilizce manifesto"
       },
       "languages": [
         "en"
@@ -773,7 +776,7 @@
       "researchCutoff": "2026-09-04",
       "lastVerified": "2026-09-04",
       "lastReleased": "2026-09-04",
-      "releaseSha": "1833a85ed1ad6a8e1dcfbfb4fbd8556662254389",
+      "releaseSha": "0aabc20b55677e74df8d35f50beb42de75a65810",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -786,10 +789,7 @@
       "tracks": [
         "humanoids",
         "education",
-        "physical-ai",
-        "four-year-spine",
-        "ai-lab-pipeline",
-        "frontier-2026"
+        "physical-ai"
       ],
       "entityIds": [
         "entity:humanoid-robotics"
@@ -829,12 +829,150 @@
       "upstreamApps": [
         "gpu"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "tfl"
+      ],
       "tracks": [
         "gpu",
         "cuda",
         "kernels",
         "memory"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "foundation",
+      "focusState": "active"
+    },
+    {
+      "code": "tfl",
+      "parentApp": "llm",
+      "name": {
+        "en": "TFL — Token Flow Laboratory",
+        "tr": "TFL — Token Akışı Laboratuvarı"
+      },
+      "shortName": "TFL",
+      "description": {
+        "en": "A deterministic, bilingual educational laboratory that follows individual LLM requests through queueing, admission, chunked prefill, KV state, iterative decode, sampling, and token delivery, exploring competing request lifetimes, conservative memory reservations, static versus continuous batching, and latency/throughput trade-offs.",
+        "tr": "Kuyruklama, kabul, parçalı önyükleme, KV durumu, yinelemeli kod çözme, örnekleme ve token teslimatı boyunca bireysel LLM isteklerini izleyen; rekabet eden istek ömürlerini, temkinli bellek rezervasyonlarını, statik ve sürekli toplu işlemeyi ve gecikme/verim ticaretlerini keşfeden deterministik, iki dilli eğitim laboratuvarı."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://tfl.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/tfl-aserdargun-com",
+      "lastVerified": "2026-09-09",
+      "lastReleased": "2026-09-09",
+      "releaseSha": "2ae6ddcc227ac472335b1599baedff4e13054d8f",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "llm",
+        "gex"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "serving",
+        "batching",
+        "prefill",
+        "decode",
+        "scheduling"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "foundation",
+      "focusState": "active"
+    },
+    {
+      "code": "arl",
+      "parentApp": "hns",
+      "name": {
+        "en": "ARL — Agent Runtime Laboratory",
+        "tr": "ARL — Ajan Çalışma Zamanı Laboratuvarı"
+      },
+      "shortName": "ARL",
+      "description": {
+        "en": "A deterministic, bilingual educational agent runtime that inspects a single revenue-update execution across HNS (Harness), CTX (Context), SEC (Security), and EVL (Evaluation). All model decisions are scripted; no LLM API, no live data, no remote telemetry.",
+        "tr": "HNS (Harness), CTX (Bağlam), SEC (Güvenlik) ve EVL (Değerlendirme) üzerinden tek bir gelir güncelleme yürütmesini inceleyen deterministik, iki dilli eğitim amaçlı ajan çalışma zamanı. Tüm model kararları komut dosyası tabanlıdır; LLM API'si, canlı veri veya uzak telemetri yoktur."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://arl.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/arl-aserdargun-com",
+      "lastVerified": "2026-09-09",
+      "lastReleased": "2026-09-09",
+      "releaseSha": "3d8474e8c9028909205014de290651be6fa12b54",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "hns"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "agent",
+        "runtime",
+        "execution",
+        "tool-use",
+        "evaluation"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "agent-system",
+      "focusState": "active"
+    },
+    {
+      "code": "adp",
+      "parentApp": "usl",
+      "name": {
+        "en": "ADP — Model Adaptation Laboratory",
+        "tr": "ADP — Model Adaptasyon Laboratuvarı"
+      },
+      "shortName": "ADP",
+      "description": {
+        "en": "A bilingual, browser-only educational laboratory for Full FT, LoRA and QLoRA. The conceptual companion to USL: USL teaches the adaptation landscape; ADP makes the trade-offs inspectable through interactive parameter and memory footprints.",
+        "tr": "Full FT, LoRA ve QLoRA için iki dilli, tarayıcıda çalışan eğitim laboratuvarı. USL'in kavramsal eşlikçisi: USL adaptasyon manzarasını öğretir; ADP etkileşimli parametre ve bellek ayak izleri üzerinden ticaretleri incelenebilir kılar."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://adp.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/adp-aserdargun-com",
+      "lastVerified": "2026-09-09",
+      "lastReleased": "2026-09-09",
+      "releaseSha": "00bde3fd42af0d68643867e46a69057089e97ce6",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "usl"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "adaptation",
+        "fine-tuning",
+        "lora",
+        "qlora",
+        "training"
       ],
       "entityIds": [],
       "portfolioLayer": "foundation",

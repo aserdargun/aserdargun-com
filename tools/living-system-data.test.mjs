@@ -587,7 +587,7 @@ test("loads and validates the committed canonical manifest", async () => {
   const data = await loadLivingSystemData(filePath);
   const canonicalToday = new Date("2026-09-09T12:00:00+03:00");
 
-  assert.equal(data.applications.length, 20);
+  assert.equal(data.applications.length, 23);
   const expectedCanonicalApplications = {
     hns: ["observatory", "Harness Engineering Observatory", "https://hns.aserdargun.com/"],
     ctx: ["observatory", "Context & Knowledge Engineering", "https://ctx.aserdargun.com/"],
@@ -703,4 +703,17 @@ test("loads and validates the committed private manifest", async () => {
   }
   assert.deepEqual(validatePrivateApplicationsData(data, { today: canonicalToday }).errors, []);
   assert.strictEqual(assertValidPrivateApplicationsData(data, { today: canonicalToday }), data);
+});
+
+test('site languages can be English-only without losing bilingual registry metadata', () => {
+  for (const languages of [['en'], ['tr'], ['tr', 'en']]) {
+    const data = validData();
+    data.applications[0].languages = languages;
+    assert.equal(validateLivingSystemData(data, { today: testToday }).errors.length, 0);
+  }
+  for (const languages of [[], ['en', 'en'], ['de'], 'en']) {
+    const data = validData();
+    data.applications[0].languages = languages;
+    assert.ok(validateLivingSystemData(data, { today: testToday }).errors.some(error => error.code === 'invalid-languages'));
+  }
 });

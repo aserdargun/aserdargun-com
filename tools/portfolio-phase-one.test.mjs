@@ -20,7 +20,7 @@ async function readData() {
 test("the public application contract keeps verification, research, and release facts separate", async () => {
   const data = await readData();
 
-  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex"].includes(code))) {
+  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex", "tfl", "arl", "adp"].includes(code))) {
     assert.match(application.researchCutoff, /^2026-\d{2}-\d{2}$/, `${application.code} research cutoff`);
     assert.equal(application.lastVerified, "2026-09-04", `${application.code} verification date`);
     assert.match(application.lastReleased, /^2026-\d{2}-\d{2}$/, `${application.code} release date`);
@@ -34,8 +34,8 @@ test("the public application contract keeps verification, research, and release 
 
   const eng = data.applications.find((application) => application.code === "eng");
   assert.equal(eng.status, "active");
-  assert.equal(eng.statusLabel.en, "Horizon · active research");
-  assert.equal(eng.statusLabel.tr, "Ufuk · aktif araştırma");
+  assert.equal(eng.statusLabel.en, "Horizon · English manifesto");
+  assert.equal(eng.statusLabel.tr, "Ufuk · İngilizce manifesto");
 });
 
 test("the portfolio registry is a deterministic public projection of application manifests", async () => {
@@ -53,7 +53,7 @@ test("the portfolio registry is a deterministic public projection of application
 
   assert.equal(registry.schemaVersion, 1);
   assert.equal(registry.generatedAt, "2026-09-04");
-  assert.equal(registry.applications.length, 20);
+  assert.equal(registry.applications.length, 23);
   assert.deepEqual(registry.applications.map(({ code }) => code), data.applications.map(({ code }) => code));
   assert.deepEqual(
     registry.applications.find(({ code }) => code === "ctx"),
@@ -94,8 +94,8 @@ test("the application map exposes distinct research, verification, and release e
   assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-08-24">2026-08-24<\/time><\/dd>/);
   assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-09-04">2026-09-04<\/time><\/dd>/);
   assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-06">2026-09-06<\/time><code>59bac5f1<\/code><\/dd>/);
-  assert.match(english, /<dt>Status<\/dt><dd>Horizon · active research<\/dd>/);
-  assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · aktif araştırma<\/dd>/);
+  assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
+  assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
 });
 
 test("the system focus model names five layers without percentage theater", async () => {
