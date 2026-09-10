@@ -759,17 +759,16 @@
       },
       "shortName": "ENG",
       "description": {
-        "en": "A live manifesto for project-based, AI-native humanoid engineering education and the long-term embodied horizon the learning system serves.",
-        "tr": "Proje tabanlı, yapay zekâ temelli insansı robot mühendisliği eğitimi için canlı manifesto ve öğrenme sisteminin hizmet ettiği uzun vadeli bedenlenmiş ufuk."
+        "en": "An English manifesto for AI-native humanoid engineering education. The four-year spine, AI lab pipeline, and dated 2026 frontier signals define its primary sources of truth; HEX provides a companion exploration.",
+        "tr": "Yapay zekâ temelli insansı robot mühendisliği eğitimi için İngilizce manifesto. Dört yıllık müfredat omurgası, AI laboratuvar akışı ve tarihli 2026 sınır araştırması sinyalleri temel doğruluk kaynaklarıdır; HEX keşif eşlikçisidir."
       },
       "type": "horizon",
       "status": "active",
       "statusLabel": {
-        "en": "Horizon · active research",
-        "tr": "Ufuk · aktif araştırma"
+        "en": "Horizon · English manifesto",
+        "tr": "Ufuk · İngilizce manifesto"
       },
       "languages": [
-        "tr",
         "en"
       ],
       "productionUrl": "https://eng.aserdargun.com/",

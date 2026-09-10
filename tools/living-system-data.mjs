@@ -41,6 +41,9 @@ const PUBLIC_MEMORY_KEYS = new Set([
 const PUBLIC_MEMORY_SOURCE_KEYS = new Set(["label", "url", "verifiedAt"]);
 const JOURNEY_EVIDENCE_KEYS = new Set(["stage", "period", "decision", "evidenceUrls", "relatedApplicationCodes"]);
 
+const validLanguages = (value) => Array.isArray(value) && value.length > 0
+  && new Set(value).size === value.length && value.every((language) => ["tr", "en"].includes(language));
+
 const isPlainObject = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
 
 const addError = (errors, path, code, message) => errors.push({ path, code, message });
@@ -376,7 +379,7 @@ function isStructurallyValidPublicApplication(application, today) {
     && isCanonicalHttpsUrl(application.address)
     && validUpdate
     && (application.statusLabel === undefined || isCompleteLocalized(application.statusLabel))
-    && (application.languages === undefined || JSON.stringify(application.languages) === JSON.stringify(["tr", "en"]))
+    && (application.languages === undefined || validLanguages(application.languages))
     && (application.researchCutoff === undefined || isValidDateOnOrBefore(application.researchCutoff, today))
     && (application.lastVerified === undefined || isValidDateOnOrBefore(application.lastVerified, today))
     && (application.lastReleased === undefined || isValidDateOnOrBefore(application.lastReleased, today))
@@ -502,8 +505,8 @@ function validateApplications(applications, errors, today, trustedApplicationCod
     }
 
     if (application.languages !== undefined
-      && JSON.stringify(application.languages) !== JSON.stringify(["tr", "en"])) {
-      addError(errors, `${label}.languages`, "invalid-languages", `${label}.languages must be exactly ["tr", "en"].`);
+      && !validLanguages(application.languages)) {
+      addError(errors, `${label}.languages`, "invalid-languages", `${label}.languages must be a nonempty unique list of supported languages (tr, en).`);
     }
     validateOptionalDate(application.researchCutoff, `${label}.researchCutoff`, errors, today);
     validateOptionalDate(application.lastVerified, `${label}.lastVerified`, errors, today);
