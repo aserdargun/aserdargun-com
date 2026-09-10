@@ -413,7 +413,7 @@ export function renderApplicationMap({ locale, data, today, page }) {
       nextDirection,
       relatedMemory,
     ].filter(Boolean).join("\n");
-    return `              <tr${rowClass}><th scope="row"><code>${escapeHtml(application.code)}</code></th><td>${ownership}<strong>${title}</strong><span>${applicationSummary}</span>${status}\n<details class="app-evidence"><summary>${label(locale, "Evidence & related knowledge", "Kanıt ve ilgili bilgi")}</summary>${applicationDetails}</details></td><td><a href="${repository}" target="_blank" rel="noreferrer"><code>${repositoryName}</code> <span aria-hidden="true">↗</span></a></td><td><a href="${address}" target="_blank" rel="noreferrer">${domain} <span aria-hidden="true">↗</span></a></td></tr>`;
+    return `              <tr${rowClass}><th scope="row">${application.code === "dcl" ? '<span class="app-child-marker" aria-hidden="true">|-</span>' : ""}<code>${escapeHtml(application.code)}</code></th><td>${ownership}<strong>${title}</strong><span>${applicationSummary}</span>${status}\n<details class="app-evidence"><summary>${label(locale, "Evidence & related knowledge", "Kanıt ve ilgili bilgi")}</summary>${applicationDetails}</details></td><td><a href="${repository}" target="_blank" rel="noreferrer"><code>${repositoryName}</code> <span aria-hidden="true">↗</span></a></td><td><a href="${address}" target="_blank" rel="noreferrer">${domain} <span aria-hidden="true">↗</span></a></td></tr>`;
   });
 
   return [

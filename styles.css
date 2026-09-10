@@ -4444,6 +4444,14 @@ body:has(main.memory-page) {
   left: calc(2px + var(--app-depth) * 20px);
   color: var(--lime);
 }
+.app-map [data-app-code="dcl"] th::before { content: none; }
+.app-map .app-child-marker {
+  position: absolute;
+  left: calc(2px + var(--app-depth) * 20px);
+  color: var(--lime);
+  font-family: monospace;
+  font-size: .8rem;
+}
 .app-map .app-parent-label {
   display: block;
   margin-bottom: 6px;

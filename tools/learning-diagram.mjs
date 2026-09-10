@@ -16,7 +16,7 @@ const PARENTS = {
   evl: { cx: 800, y: 560, width: 180, role: "evaluation" },
   lcl: { cx: 375, y: 710, width: 190, role: "deployment" },
   cld: { cx: 725, y: 710, width: 190, role: "deployment" },
-  dcl: { cx: 550, y: 820, width: 180, role: "decision-lab" },
+  dcl: { cx: 940, y: 717, width: 180, role: "decision-lab" },
   wfm: { cx: 300, y: 990, width: 210, role: "world" },
   swi: { cx: 800, y: 990, width: 230, role: "collective" },
   itl: { cx: 550, y: 1230, width: 220, role: "twin", side: true },
@@ -38,8 +38,8 @@ const ROUTES = [
   ["sec-to-cld", "M 590 624 V 652 H 725 V 710", "decision"],
   ["evl-to-cld", "M 820 624 V 675 H 765 V 710", "context"],
   ["ctx-to-lcl", "M 280 624 V 675 H 335 V 710", "context"],
-  ["lcl-to-dcl", "M 375 774 V 802 H 510 V 820", "child"],
-  ["cld-to-dcl", "M 725 774 V 802 H 590 V 820", "child"],
+  ["lcl-to-dcl", "M 375 774 V 794 H 875 V 767", "child"],
+  ["cld-to-dcl", "M 820 742 H 850", "child"],
   ["deployment-to-wfm", "M 550 956 H 300 V 990", "horizon"],
   ["deployment-to-swi", "M 550 956 H 800 V 990", "horizon"],
   ["wfm-to-itl", "M 405 1022 H 470 V 1200 H 510 V 1230", "horizon"],
@@ -86,7 +86,7 @@ export function learningDiagramLayout(applications) {
     const members = [node, ...node.app.sharedParentApps.map((code) => nodes.find(({ app }) => app.code === code))];
     const x = Math.min(...members.map((member) => member.x)) - 16;
     const y = Math.min(...members.map((member) => member.y)) - 20;
-    families.push({ code: node.app.sharedParentApps.join("-"), parents: node.app.sharedParentApps, x, y, width: Math.max(...members.map((member) => member.x + member.width)) + 16 - x, height: Math.max(...members.map((member) => member.y + member.height)) + 16 - y });
+    families.push({ code: node.app.sharedParentApps.join("-"), parents: node.app.sharedParentApps, x, y, width: Math.max(...members.map((member) => member.x + member.width)) + 16 - x, height: Math.max(...members.map((member) => member.y + member.height)) + 36 - y });
   }
   if (nodes.length !== applications.length) throw new Error("Every application needs a visible diagram node; extend the layout for deeper hierarchies.");
   return { nodes, edges, families };
@@ -128,7 +128,7 @@ export function renderLearningDiagram({ locale, data }) {
     ...families.map((family) => `            <g data-learning-family="${family.code}"><rect x="${family.x}" y="${family.y}" width="${family.width}" height="${family.height}" rx="15"/><text x="${family.x + family.width - 10}" y="${family.y + 13}">${family.parents ? localized(locale, `${family.parents.join(" + ").toUpperCase()} · shared laboratory`, `${family.parents.join(" + ").toUpperCase()} · ortak laboratuvar`) : localized(locale, `${family.code.toUpperCase()} + sub-applications`, `${family.code.toUpperCase()} + alt uygulamalar`)}</text></g>`),
     '          </g>',
     '          <g class="ld-links" aria-hidden="true">',
-    '            <path data-learning-connector="dcl-to-stage-07" class="ld-edge-horizon" d="M 550 870 V 956"/>',
+    '            <path data-learning-connector="dcl-to-stage-07" class="ld-edge-horizon" d="M 940 767 V 900 H 550 V 956"/>',
     ...edges.map(({ id, path, kind }) => `            <path data-learning-edge="${id}" class="ld-edge-${kind}" d="${path}" marker-end="url(#ld-arrow)"/>`),
     '            <circle class="ld-junction" cx="550" cy="956" r="3"/>',
     '          </g>',

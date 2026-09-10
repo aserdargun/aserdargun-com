@@ -83,7 +83,7 @@ test("all diagram boxes are disjoint, children are smaller and enclosed with the
 
 test("every arrow and connector avoids box interiors and other routes; shared bus joins are explicit", () => {
   const { nodes, edges } = learningDiagramLayout(data.applications);
-  const paths = [...edges, { id: "decision-bus", path: "M 550 870 V 956" }];
+  const paths = [...edges, { id: "decision-bus", path: "M 940 767 V 900 H 550 V 956" }];
   const lines = paths.flatMap((edge) => segments(edge.path).map(([a, b]) => ({ id: edge.id, a, b })));
   for (const [index, { id, a, b }] of lines.entries()) {
     for (const node of nodes) {
@@ -134,6 +134,7 @@ test("DCL has two equal owners and one visible entry in each portfolio view", ()
   }
   for (const code of applicationParents(dcl)) assert.equal(edges.find((edge) => edge.id === `${code}-to-dcl`).kind, "child");
   const lab = nodes.find(({ app }) => app.code === "dcl");
+  assert.ok(nodes.filter(({ app }) => applicationParents(dcl).includes(app.code)).every((parent) => lab.x > parent.x + parent.width));
   assert.ok(nodes.filter(({ app }) => applicationParents(dcl).includes(app.code)).every((parent) => lab.width < parent.width && lab.height < parent.height));
 });
 
