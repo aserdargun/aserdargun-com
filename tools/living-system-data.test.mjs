@@ -587,7 +587,7 @@ test("loads and validates the committed canonical manifest", async () => {
   const data = await loadLivingSystemData(filePath);
   const canonicalToday = new Date("2026-09-09T12:00:00+03:00");
 
-  assert.equal(data.applications.length, 22);
+  assert.equal(data.applications.length, 23);
   const expectedCanonicalApplications = {
     hns: ["observatory", "Harness Engineering Observatory", "https://hns.aserdargun.com/"],
     ctx: ["observatory", "Context & Knowledge Engineering", "https://ctx.aserdargun.com/"],

@@ -7,7 +7,7 @@ const PARENTS = {
   aia: { cx: 550, y: 30, width: 180, role: "map" },
   gpu: { cx: 300, y: 140, width: 180, role: "foundation" },
   llm: { cx: 550, y: 330, width: 190, role: "hub", side: true },
-  usl: { cx: 800, y: 140, width: 180, role: "adapt" },
+  usl: { cx: 800, y: 140, width: 180, role: "adapt", side: true },
   hns: { cx: 550, y: 440, width: 220, role: "harness", side: true },
   ctx: { cx: 300, y: 560, width: 180, role: "context" },
   sec: { cx: 550, y: 560, width: 180, role: "security" },
@@ -58,13 +58,13 @@ export function learningDiagramLayout(applications) {
     const children = applications.filter((child) => child.parentApp === code);
     const childNodes = children.map((child, index) => {
       const width = 150;
-      const cx = layout.side ? 840 : layout.cx + (index - (children.length - 1) / 2) * 170;
+      const cx = layout.side ? parent.x + parent.width + 15 + width / 2 : layout.cx + (index - (children.length - 1) / 2) * 170;
       const y = layout.side ? layout.y + 7 + index * 72 : layout.y + 100;
       const node = { app: child, cx, x: cx - width / 2, y, width, height: 50, role: code === "swi" ? "colony-lab" : "practice-lab" };
       const sourceX = layout.side ? parent.x + parent.width : layout.cx + (index - (children.length - 1) / 2) * 70;
       const sourceY = layout.side ? parent.y + 32 + index * 8 : parent.y + parent.height;
       const path = layout.side
-        ? `M ${sourceX} ${sourceY} H ${710 + index * 16} V ${y + 25} H ${node.x}`
+        ? `M ${sourceX} ${sourceY} H ${node.x} V ${y + 25}`
         : `M ${sourceX} ${sourceY} V ${y - 18} H ${cx} V ${y}`;
       edges.push({ id: `${code}-to-${child.code}`, path, kind: "child" });
       return node;

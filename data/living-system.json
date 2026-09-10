@@ -305,7 +305,7 @@
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": ["aia"],
-      "downstreamApps": ["llm"],
+      "downstreamApps": ["llm", "adp"],
       "tracks": ["training", "lora", "qlora", "datasets"],
       "entityIds": ["entity:unsloth"],
       "portfolioLayer": "foundation",
@@ -792,6 +792,59 @@
       ],
       "entityIds": [],
       "portfolioLayer": "agent-system",
+      "focusState": "active",
+      "relatedMemoryIds": []
+    },
+    {
+      "code": "adp",
+      "parentApp": "usl",
+      "diagramLabel": {"en": "Model adaptation", "tr": "Model adaptasyonu"},
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "ADP — Model Adaptation Laboratory",
+        "tr": "ADP — Model Adaptasyon Laboratuvarı"
+      },
+      "summary": {
+        "en": "A bilingual, browser-only educational laboratory for Full FT, LoRA and QLoRA. The conceptual companion to USL: USL teaches the adaptation landscape; ADP makes the trade-offs inspectable through interactive parameter and memory footprints.",
+        "tr": "Full FT, LoRA ve QLoRA için iki dilli, tarayıcıda çalışan eğitim laboratuvarı. USL'in kavramsal eşlikçisi: USL adaptasyon manzarasını öğretir; ADP etkileşimli parametre ve bellek ayak izleri üzerinden ticaretleri incelenebilir kılar."
+      },
+      "guidingQuestion": {
+        "en": "How does a base model become adapted to a task?",
+        "tr": "Temel model bir göreve nasıl uyarlanır?"
+      },
+      "repository": "https://github.com/aserdargun/adp-aserdargun-com",
+      "address": "https://adp.aserdargun.com/",
+      "updatedAt": "2026-09-09",
+      "lastVerified": "2026-09-09",
+      "lastReleased": "2026-09-09",
+      "releaseSha": "00bde3fd42af0d68643867e46a69057089e97ce6",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "usl"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "adaptation",
+        "fine-tuning",
+        "lora",
+        "qlora",
+        "training"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "foundation",
       "focusState": "active",
       "relatedMemoryIds": []
     },
