@@ -1671,7 +1671,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const generate = spawnSync(process.execPath, [rendererPath], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-10" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: today.toISOString().slice(0, 10) },
   });
   assert.equal(generate.status, 0, generate.stderr);
 
@@ -1686,7 +1686,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const check = spawnSync(process.execPath, [rendererPath, "--check"], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-10" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: today.toISOString().slice(0, 10) },
   });
   const after = Object.fromEntries(await Promise.all(paths.map(async (relativePath) => [
     relativePath,
