@@ -3,6 +3,10 @@ import { applicationParents, applicationOwnership } from "./application-hierarch
 const escape = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");
 const localized = (locale, en, tr) => locale === "tr" ? tr : en;
 
+// Edges that must not terminate with an arrow marker so the deployment trunk
+// reads as one solid path and the lcl-to-dcl split-gap stays a continuation.
+const NO_ARROW_EDGE_IDS = new Set(["lcl-to-dcl", "lcl-to-merge", "cld-to-merge", "deployment-trunk"]);
+
 // Coordinates are shared by both locales. Only top-level applications need a
 // place in the learning flow; child nodes and ownership frames derive from data.
 const PARENTS = {
@@ -38,11 +42,11 @@ const ROUTES = [
   ["sec-to-cld", "M 590 624 V 652 H 725 V 710", "decision"],
   ["evl-to-cld", "M 820 624 V 675 H 765 V 710", "context"],
   ["ctx-to-lcl", "M 280 624 V 675 H 335 V 710", "context"],
-  ["lcl-to-dcl", "M 375 774 V 794 H 810", "child"],
-  ["lcl-to-dcl-jump", "M 830 794 H 875 V 767", "child"],
+  ["lcl-to-dcl", "M 415 774 V 794 H 715", "child"],
+  ["lcl-to-dcl-jump", "M 735 794 H 875 V 767", "child"],
   ["cld-to-dcl", "M 820 742 H 850", "child"],
-  ["lcl-to-merge", "M 280 774 V 850 H 550", "horizon"],
-  ["cld-to-merge", "M 820 774 V 850 H 550", "horizon"],
+  ["lcl-to-merge", "M 375 774 V 850 H 550", "horizon"],
+  ["cld-to-merge", "M 725 774 V 850 H 550", "horizon"],
   ["deployment-trunk", "M 550 850 V 956", "horizon"],
   ["deployment-to-wfm", "M 550 956 H 300 V 990", "horizon"],
   ["deployment-to-swi", "M 550 956 H 800 V 990", "horizon"],
@@ -133,7 +137,7 @@ export function renderLearningDiagram({ locale, data }) {
     '          </g>',
     '          <g class="ld-links" aria-hidden="true">',
     ...edges.map(({ id, path, kind }) => {
-      const markerEnd = id === "lcl-to-dcl" ? "" : "marker-end=\"url(#ld-arrow)\"";
+      const markerEnd = NO_ARROW_EDGE_IDS.has(id) ? "" : "marker-end=\"url(#ld-arrow)\"";
       return `            <path data-learning-edge="${id}" class="ld-edge-${kind}" d="${path}" ${markerEnd}/>`;
     }),
     '            <circle class="ld-junction" cx="550" cy="956" r="3"/>',

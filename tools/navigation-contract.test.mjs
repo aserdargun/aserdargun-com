@@ -602,7 +602,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.match(svg, /class="ld-legend"/, "primary, supporting, and horizon relationships need a legend");
 
     const edges = Array.from(svg.matchAll(/<path data-learning-edge="([^"]+)"[^>]*d="([^"]+)"[^>]*marker-end="url\(#ld-arrow\)"\/>/g));
-        assert.equal(edges.length, 33, "every directed relationship must terminate with an arrow marker, except the split-gap lcl-to-dcl leg");
+        assert.equal(edges.length, 30, "every directed relationship except the centered solid trunk must terminate with an arrow marker (the three trunk segments lcl-to-merge, cld-to-merge, and deployment-trunk share one solid connector with no arrow markers)");
         assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-wfm")).length, 1, "WFM must receive one arrow");
         assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-swi")).length, 1, "SWI must receive one arrow");
         const splitChildLegs = Array.from(svg.matchAll(/<path data-learning-edge="(lcl-to-dcl|lcl-to-dcl-jump)" class="[^"]*" d="([^"]+)"([^>]*)\/>/g));
@@ -613,16 +613,106 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
         assert.ok(lclToDclJumpLeg, "the trailing lcl-to-dcl-jump leg must be present");
         assert.doesNotMatch(lclToDclLeg[3], /marker-end="url\(#ld-arrow\)"/, "the gap-ending lcl-to-dcl leg must not carry an arrow marker");
         assert.match(lclToDclJumpLeg[3], /marker-end="url\(#ld-arrow\)"/, "the DCL-ending lcl-to-dcl-jump leg must keep its arrow marker");
+
+        const allEdgePaths = Array.from(svg.matchAll(/<path data-learning-edge="([^"]+)"([^>]*)\sd="([^"]+)"([^>]*)\/>/g));
+        const parseRoute = (route) => {
+          const tokens = Array.from(route.matchAll(/([MHV])\s*([\d.]+)(?:\s+([\d.]+))?/g));
+          const points = [];
+          let current = null;
+          for (const [, command, first, second] of tokens) {
+            if (command === "M") current = { x: Number(first), y: Number(second) };
+            if (command === "H") current = { x: Number(first), y: current.y };
+            if (command === "V") current = { x: current.x, y: Number(first) };
+            points.push(current);
+          }
+          return points;
+        };
+        const joinAttrs = (match) => match[2] + match[4];
+        const centeredConnectors = ["lcl-to-merge", "cld-to-merge", "deployment-trunk"];
+        for (const connectorId of centeredConnectors) {
+          const match = allEdgePaths.find(([, name]) => name === connectorId);
+          assert.ok(match, `${connectorId} must be present as a directed edge in the deployment trunk`);
+          const attrs = joinAttrs(match);
+          const route = match[3];
+          assert.match(attrs, /class="ld-edge-horizon"/, `${connectorId} must use the solid horizon style`);
+          assert.doesNotMatch(attrs, /marker-end="url\(#ld-arrow\)"/, `${connectorId} must not carry an arrow marker so the trunk stays solid and the junction reads as one node`);
+          const points = parseRoute(route);
+          assert.ok(points.length >= 2, `${connectorId} needs a complete route`);
+        }
+        const lclToMerge = allEdgePaths.find(([, name]) => name === "lcl-to-merge");
+        const cldToMerge = allEdgePaths.find(([, name]) => name === "cld-to-merge");
+        const trunk = allEdgePaths.find(([, name]) => name === "deployment-trunk");
+        const lclToMergePoints = parseRoute(lclToMerge[3]);
+        const cldToMergePoints = parseRoute(cldToMerge[3]);
+        const trunkPoints = parseRoute(trunk[3]);
+        assert.equal(lclToMergePoints[0].x, 375, "lcl-to-merge must originate at the LCL box bottom midpoint (375)");
+        assert.equal(lclToMergePoints[0].y, 774, "lcl-to-merge must originate at the LCL box bottom edge (y=774)");
+        assert.equal(cldToMergePoints[0].x, 725, "cld-to-merge must originate at the CLD box bottom midpoint (725)");
+        assert.equal(cldToMergePoints[0].y, 774, "cld-to-merge must originate at the CLD box bottom edge (y=774)");
+        assert.equal(lclToMergePoints.at(-1).x, 550, "lcl-to-merge must terminate on the shared trunk x=550");
+        assert.equal(lclToMergePoints.at(-1).y, 850, "lcl-to-merge must terminate at the trunk junction y=850");
+        assert.equal(cldToMergePoints.at(-1).x, 550, "cld-to-merge must terminate on the shared trunk x=550");
+        assert.equal(cldToMergePoints.at(-1).y, 850, "cld-to-merge must terminate at the trunk junction y=850");
+        assert.equal(trunkPoints[0].x, 550, "deployment-trunk must originate at the junction x=550");
+        assert.equal(trunkPoints[0].y, 850, "deployment-trunk must originate at the merge junction y=850");
+        assert.equal(trunkPoints.at(-1).x, 550, "deployment-trunk must end exactly on the existing WFM/SWI junction x=550");
+        assert.equal(trunkPoints.at(-1).y, 956, "deployment-trunk must end exactly on the existing WFM/SWI junction y=956");
+        const assertSolidContinuous = (route) => {
+          const points = parseRoute(route);
+          for (let index = 1; index < points.length; index += 1) {
+            const prev = points[index - 1];
+            const curr = points[index];
+            assert.ok(
+              prev.x === curr.x || prev.y === curr.y,
+              `trunk segment from (${prev.x},${prev.y}) to (${curr.x},${curr.y}) must remain orthogonal`,
+            );
+          }
+        };
+        assertSolidContinuous(lclToMerge[3]);
+        assertSolidContinuous(cldToMerge[3]);
+        assertSolidContinuous(trunk[3]);
+
+        assert.notEqual(
+          parseRoute(lclToDclLeg[2])[0].x,
+          375,
+          "the DCL child leg must not start at the LCL bottom midpoint where the new centered trunk originates",
+        );
+        const cldRect = nodeRects.get("cld");
+        assert.ok(cldRect, "CLD node rect must be discoverable for DCL separation assertions");
+        const lclRect = nodeRects.get("lcl");
+        assert.ok(lclRect, "LCL node rect must be discoverable for the child source assertion");
+        const lclChildSourceX = parseRoute(lclToDclLeg[2])[0].x;
+        assert.ok(
+          lclChildSourceX >= lclRect.x && lclChildSourceX <= lclRect.x + lclRect.width,
+          "the DCL child link must draw from the LCL bottom edge, not from outside it",
+        );
+        assert.notEqual(
+          lclChildSourceX,
+          lclToMergePoints[0].x,
+          "the DCL child link must draw from a distinct bottom-edge source on LCL, never overlapping the centered trunk source",
+        );
+        const dclLegPoints = parseRoute(lclToDclLeg[2]);
+        assert.equal(dclLegPoints.at(-1).y, 794, "the leading lcl-to-dcl leg must end at the gap corridor y=794");
+        assert.equal(dclLegPoints.at(-1).x, 715, "the leading lcl-to-dcl leg must end at the gap left side x=715, leaving a 20px gap straddling the solid CLD stem at x=725");
+        const jumpPoints = parseRoute(lclToDclJumpLeg[2]);
+        assert.equal(jumpPoints[0].x, 735, "the trailing lcl-to-dcl-jump leg must start at the gap right side x=735, keeping the 20px gap centered on x=725");
+        assert.equal(jumpPoints[0].y, 794, "the trailing lcl-to-dcl-jump leg must share the gap corridor y=794 with the leading leg");
+        assert.equal(jumpPoints.at(-1).x, 875, "the lcl-to-dcl-jump leg must land at the DCL box bottom edge x=875 (inside the box)");
+        assert.equal(jumpPoints.at(-1).y, 767, "the lcl-to-dcl-jump leg must land at the DCL box bottom edge y=767");
+        const dclRect = nodeRects.get("dcl");
+        assert.ok(dclRect, "DCL node rect must be discoverable for the split-gap assertion");
+        const cldToDclEdge = allEdgePaths.find(([, name]) => name === "cld-to-dcl");
+        assert.ok(cldToDclEdge, "cld-to-dcl must remain present");
+        const cldToDclPoints = parseRoute(cldToDclEdge[3]);
+        assert.equal(cldToDclPoints.at(-1).x, dclRect.x, "cld-to-dcl must land at the DCL box left edge x=850, not the right edge");
+        assert.equal(cldToDclPoints.at(-1).y, 742, "cld-to-dcl must land at the DCL midline y=742");
+        assert.ok(cldToDclPoints.at(-1).y < 956, "cld-to-dcl must terminate above the WFM/SWI junction line so DCL stays a side laboratory");
         const deploymentConnectors = Array.from(svg.matchAll(/<path data-learning-connector="([^"]+)"[^>]*d="([^"]+)"/g));
         assert.deepEqual(
           deploymentConnectors.map(([, connectorName]) => connectorName),
           [],
           "no legacy dcl-to-stage-07 connector should remain once deployment paths merge via directed edges",
         );
-    for (const [, connectorName, route] of deploymentConnectors) {
-      assert.doesNotMatch(route, /[CLQAST]/, `${connectorName} must use an orthogonal route`);
-    }
-
     const segmentCrossesInterior = (start, end, rect) => {
       const right = rect.x + rect.width;
       const bottom = rect.y + rect.height;
@@ -639,7 +729,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       return true;
     };
 
-    for (const [, edgeName, route] of edges) {
+    for (const [, edgeName, , route] of allEdgePaths) {
       assert.doesNotMatch(route, /[CLQAST]/, `${edgeName} must use an orthogonal route`);
       const tokens = Array.from(route.matchAll(/([MHV])\s*([\d.]+)(?:\s+([\d.]+))?/g));
       assert.ok(tokens.length >= 2, `${edgeName} needs a complete route`);
@@ -720,6 +810,29 @@ test("the learning horizon heading stays legible on its dark surface", async () 
   assert.match(
     css,
     /\.learning-horizon h3\s*\{[^}]*color:\s*var\(--white\);/s,
+  );
+});
+
+test("the system-focus inner padding stays bounded on wide viewports", async () => {
+  const css = await readFile(path.join(rootDir, "styles.css"), "utf8");
+  const rulePattern = /\.system-focus-inner\s*\{[^}]*padding-inline:\s*([^;}]+);[^}]*\}/gs;
+
+  const matches = Array.from(css.matchAll(rulePattern));
+  assert.ok(matches.length >= 2, "expected at least one desktop .system-focus-inner rule exposing padding-inline");
+
+  const paddingRules = matches.map((match) => match[1].trim());
+  const desktopPadding = paddingRules.find((value) => /clamp\s*\(|max\s*\(/.test(value) && !/20px\s*\}/.test(value));
+  assert.ok(desktopPadding, "expected a non-mobile padding-inline rule that uses clamp() or max()");
+
+  assert.doesNotMatch(
+    desktopPadding,
+    /\bmax\s*\(\s*20px\s*,\s*calc\s*\(\s*\(100%\s*-\s*1200px\s*\)\s*\/\s*2\s*\)\s*\)/,
+    "desktop padding-inline must not use an unbounded max() that keeps growing after the container clamps",
+  );
+  assert.match(
+    desktopPadding,
+    /clamp\s*\(\s*20px\s*,\s*calc\s*\(\s*\(100%\s*-\s*1200px\s*\)\s*\/\s*2\s*\)\s*,\s*120px\s*\)/,
+    "desktop padding-inline must bound the calc() expression with a 120px ceiling via clamp()",
   );
 });
 

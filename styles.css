@@ -4191,7 +4191,7 @@ body:has(main.memory-page) {
 
 .system-focus-inner {
   padding-block: 64px;
-  padding-inline: max(20px, calc((100% - 1200px) / 2));
+  padding-inline: clamp(20px, calc((100% - 1200px) / 2), 120px);
 }
 .system-focus__intro h1 { font-size: clamp(2.2rem, 4.2vw, 3.5rem); line-height: 1.08; }
 .system-focus-card > p:not(.system-focus-card__index) { font-size: .85rem; color: #bcc2b0; }

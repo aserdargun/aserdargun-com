@@ -166,8 +166,13 @@ test("LCL and CLD outputs merge into a single trunk line that reaches WFM and SW
 });
 
 
-test("the LCL-to-DCL child link visually jumps over the CLD main trunk at x820 y794", () => {
-  const { edges } = learningDiagramLayout(data.applications);
+test("the LCL-to-DCL child link visually jumps over the CLD main trunk centered at the CLD node x725 y794", () => {
+  const { nodes, edges } = learningDiagramLayout(data.applications);
+  const cldNode = nodes.find((item) => item.app.code === "cld");
+  assert.ok(cldNode, "learning diagram must expose a CLD node");
+  const cldCenter = cldNode.x + cldNode.width / 2;
+  const gapLeft = cldCenter - 10;
+  const gapRight = cldCenter + 10;
   const lclLink = edges.find((edge) => edge.id === "lcl-to-dcl");
   const lclJump = edges.find((edge) => edge.id === "lcl-to-dcl-jump");
   assert.ok(lclLink, "lcl-to-dcl must remain a visible edge");
@@ -176,10 +181,10 @@ test("the LCL-to-DCL child link visually jumps over the CLD main trunk at x820 y
   assert.deepEqual(lclJump.kind, "child", "the trailing leg is part of the LCL child link");
   const linkSegments = segments(lclLink.path);
   const jumpSegments = segments(lclJump.path);
-  const spansX820 = [...linkSegments, ...jumpSegments].filter(([a, b]) => a.y === b.y && a.y === 794 && Math.min(a.x, b.x) < 820 && Math.max(a.x, b.x) > 820);
-  assert.equal(spansX820.length, 0, "the LCL-to-DCL path must not cross the CLD main trunk at x820 y794");
+  const spansGap = [...linkSegments, ...jumpSegments].filter(([a, b]) => a.y === b.y && a.y === 794 && Math.min(a.x, b.x) < gapRight && Math.max(a.x, b.x) > gapLeft);
+  assert.equal(spansGap.length, 0, `the LCL-to-DCL path must not cross the CLD main trunk at x${cldCenter} y794 (gap ${gapLeft}..${gapRight})`);
   const mainSegments = segments(edges.find((edge) => edge.id === "cld-to-merge").path);
-  assert.ok(mainSegments.some(([a, b]) => a.x === b.x && a.x === 820 && a.y === 774 && b.y === 850), "the CLD main trunk must travel at x820 from y774 down to y850 so the LCL link can jump across at y794");
+  assert.ok(mainSegments.some(([a, b]) => a.x === b.x && a.x === cldCenter && a.y === 774 && b.y === 850), `the CLD main trunk must travel at x${cldCenter} from y774 down to y850 so the LCL link can jump across at y794`);
   for (const locale of ["en", "tr"]) {
     const diagram = renderLearningDiagram({ locale, data });
     const linkTag = diagram.match(/<path data-learning-edge="lcl-to-dcl"[^>]*\/>/)?.[0] ?? "";
