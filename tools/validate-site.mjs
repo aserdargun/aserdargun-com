@@ -411,7 +411,11 @@ function validateLearningSystem(locale, html) {
       "evl-to-cld",
       "ctx-to-lcl",
       "lcl-to-dcl",
+      "lcl-to-dcl-jump",
       "cld-to-dcl",
+      "lcl-to-merge",
+      "cld-to-merge",
+      "deployment-trunk",
       "deployment-to-wfm",
       "deployment-to-swi",
       "wfm-to-itl",
@@ -431,8 +435,8 @@ function validateLearningSystem(locale, html) {
   );
   const deploymentConnectors = matches(diagram, /<path data-learning-connector="([^"]+)"/g);
   check(
-    JSON.stringify(deploymentConnectors) === JSON.stringify(["dcl-to-stage-07"]),
-    `${locale}: deployment paths must merge before branching once to WFM and SWI`,
+    JSON.stringify(deploymentConnectors) === JSON.stringify([]),
+    `${locale}: deployment paths must merge via directed edges and never expose a leftover dcl-to-stage-07 connector`,
   );
   check(
     learningEdges.filter((edge) => edge.endsWith("-to-wfm")).length === 1

@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { applicationHierarchy, applicationParents } from "./application-hierarchy.mjs";
-import { learningDiagramLayout } from "./learning-diagram.mjs";
+import { learningDiagramLayout, renderLearningDiagram } from "./learning-diagram.mjs";
 import { validateLivingSystemData } from "./living-system-data.mjs";
 import { renderApplicationMap, renderSystemFocus } from "./render-living-system.mjs";
 
@@ -54,8 +54,12 @@ function segments(path) {
   let current;
   const result = [];
   for (const [, command, first, second] of path.matchAll(/([MHV])\s*([\d.]+)(?:\s+([\d.]+))?/g)) {
-    const next = command === "M" ? { x: +first, y: +second } : command === "H" ? { x: +first, y: current.y } : { x: current.x, y: +first };
-    if (current && (current.x !== next.x || current.y !== next.y)) result.push([current, next]);
+    if (command === "M") {
+      current = { x: +first, y: +second };
+      continue;
+    }
+    const next = command === "H" ? { x: +first, y: current.y } : { x: current.x, y: +first };
+    if (current.x !== next.x || current.y !== next.y) result.push([current, next]);
     current = next;
   }
   return result;
@@ -83,7 +87,7 @@ test("all diagram boxes are disjoint, children are smaller and enclosed with the
 
 test("every arrow and connector avoids box interiors and other routes; shared bus joins are explicit", () => {
   const { nodes, edges } = learningDiagramLayout(data.applications);
-  const paths = [...edges, { id: "decision-bus", path: "M 940 767 V 900 H 550 V 956" }];
+  const paths = edges;
   const lines = paths.flatMap((edge) => segments(edge.path).map(([a, b]) => ({ id: edge.id, a, b })));
   for (const [index, { id, a, b }] of lines.entries()) {
     for (const node of nodes) {
@@ -102,10 +106,88 @@ test("every arrow and connector avoids box interiors and other routes; shared bu
         const [v1, v2, h1, h2] = a.x === b.x ? [a, b, c, d] : [c, d, a, b];
         const touches = v1.x >= Math.min(h1.x, h2.x) && v1.x <= Math.max(h1.x, h2.x)
           && h1.y >= Math.min(v1.y, v2.y) && h1.y <= Math.max(v1.y, v2.y);
-        const junction = v1.x === 550 && [956].includes(h1.y);
+        const junction = v1.x === 550 && [956, 850].includes(h1.y);
         assert.ok(!touches || junction, `${id} crosses or touches ${other.id}`);
       }
     }
+  }
+});
+
+
+test("LCL and CLD outputs merge into a single trunk line that reaches WFM and SWI, independent of DCL", () => {
+  const { edges } = learningDiagramLayout(data.applications);
+  const findEdge = (id) => {
+    const edge = edges.find((candidate) => candidate.id === id);
+    assert.ok(edge, `learning diagram must expose the ${id} edge`);
+    return edge;
+  };
+  const lastHorizontalEndpoint = (path) => {
+    const points = [];
+    let current = null;
+    for (const [, command, first, second] of path.matchAll(/([MHV])\s*([\d.]+)(?:\s+([\d.]+))?/g)) {
+      if (command === "M") current = { x: Number(first), y: Number(second) };
+      if (command === "H") current = { x: Number(first), y: current.y };
+      if (command === "V") current = { x: current.x, y: Number(first) };
+      points.push(current);
+    }
+    const last = points.at(-1);
+    const previous = points.at(-2);
+    assert.ok(last && previous && last.y === previous.y, `${path} must terminate on a horizontal segment`);
+    return last;
+  };
+  const firstVerticalStart = (path) => {
+    const points = [];
+    let current = null;
+    for (const [, command, first, second] of path.matchAll(/([MHV])\s*([\d.]+)(?:\s+([\d.]+))?/g)) {
+      if (command === "M") current = { x: Number(first), y: Number(second) };
+      if (command === "H") current = { x: Number(first), y: current.y };
+      if (command === "V") current = { x: current.x, y: Number(first) };
+      points.push(current);
+    }
+    assert.ok(points.length >= 2 && points[0].x === points[1].x, `${path} must begin with a vertical segment`);
+    return points[0];
+  };
+  const lclMerge = findEdge("lcl-to-merge");
+  const cldMerge = findEdge("cld-to-merge");
+  const trunk = findEdge("deployment-trunk");
+  assert.deepEqual(lastHorizontalEndpoint(lclMerge.path), { x: 550, y: 850 }, "LCL must terminate at the merge point");
+  assert.deepEqual(lastHorizontalEndpoint(cldMerge.path), { x: 550, y: 850 }, "CLD must terminate at the merge point");
+  assert.deepEqual(firstVerticalStart(trunk.path), { x: 550, y: 850 }, "Trunk must start at the merge point");
+  const wfmEdge = findEdge("deployment-to-wfm");
+  const swiEdge = findEdge("deployment-to-swi");
+  assert.ok(wfmEdge.path.includes("M 550 956"), "WFM arrow must originate from the WFM/SWI junction");
+  assert.ok(swiEdge.path.includes("M 550 956"), "SWI arrow must originate from the WFM/SWI junction");
+  for (const id of ["dcl-to-stage-07", "dcl-to-trunk", "dcl-to-merge", "dcl-to-deployment", "dcl-to-junction"]) {
+    assert.equal(edges.find((edge) => edge.id === id), undefined, `DCL must not contribute a main-continuation edge (${id})`);
+  }
+  for (const code of ["lcl", "cld"]) {
+    assert.equal(findEdge(`${code}-to-dcl`).kind, "child", `${code.toUpperCase()}-to-DCL must remain a child edge`);
+  }
+});
+
+
+test("the LCL-to-DCL child link visually jumps over the CLD main trunk at x820 y794", () => {
+  const { edges } = learningDiagramLayout(data.applications);
+  const lclLink = edges.find((edge) => edge.id === "lcl-to-dcl");
+  const lclJump = edges.find((edge) => edge.id === "lcl-to-dcl-jump");
+  assert.ok(lclLink, "lcl-to-dcl must remain a visible edge");
+  assert.ok(lclJump, "lcl-to-dcl must split into two paths to skip the CLD trunk");
+  assert.deepEqual(lclLink.kind, "child", "the leading leg is part of the LCL child link");
+  assert.deepEqual(lclJump.kind, "child", "the trailing leg is part of the LCL child link");
+  const linkSegments = segments(lclLink.path);
+  const jumpSegments = segments(lclJump.path);
+  const spansX820 = [...linkSegments, ...jumpSegments].filter(([a, b]) => a.y === b.y && a.y === 794 && Math.min(a.x, b.x) < 820 && Math.max(a.x, b.x) > 820);
+  assert.equal(spansX820.length, 0, "the LCL-to-DCL path must not cross the CLD main trunk at x820 y794");
+  const mainSegments = segments(edges.find((edge) => edge.id === "cld-to-merge").path);
+  assert.ok(mainSegments.some(([a, b]) => a.x === b.x && a.x === 820 && a.y === 774 && b.y === 850), "the CLD main trunk must travel at x820 from y774 down to y850 so the LCL link can jump across at y794");
+  for (const locale of ["en", "tr"]) {
+    const diagram = renderLearningDiagram({ locale, data });
+    const linkTag = diagram.match(/<path data-learning-edge="lcl-to-dcl"[^>]*\/>/)?.[0] ?? "";
+    const jumpTag = diagram.match(/<path data-learning-edge="lcl-to-dcl-jump"[^>]*\/>/)?.[0] ?? "";
+    assert.ok(linkTag, `${locale}: lcl-to-dcl leg must be rendered`);
+    assert.ok(jumpTag, `${locale}: lcl-to-dcl-jump leg must be rendered`);
+    assert.doesNotMatch(linkTag, /marker-end="url\(#ld-arrow\)"/, `${locale}: the gap-ending lcl-to-dcl leg must not carry an arrow marker`);
+    assert.match(jumpTag, /marker-end="url\(#ld-arrow\)"/, `${locale}: the DCL-ending lcl-to-dcl-jump leg must keep its arrow marker`);
   }
 });
 

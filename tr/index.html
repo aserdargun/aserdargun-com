@@ -213,7 +213,7 @@
         <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="Uygulama bağlantı haritası">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1540" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">
           <title id="ld-title">Bağlı üst uygulamalar ve alt uygulamaları</title>
-          <desc id="ld-desc">Büyük kutular birbirine bağlı üst uygulamaları gösterir. Küçük kutular alt uygulamalardır; üst uygulamalarıyla ortak çerçeve içindedir. AIA, GPU ve USL üzerinden LLM, HNS, CTX, SEC ve EVL’ye bağlanır. CTX, LLM’ye geri bildirim verir. Güvence katmanı paralel LCL ve CLD dağıtımına, CLD ve LCL’nin ortak laboratuvarı DCL bu seçeneklerin iş yükü kısıtlarını karşılaştırır; akış WFM ve SWI’ye, ardından ITL ve ENG’ye bağlanır. USL altında ADP, LLM altında TFL, HNS altında ARL, GPU altında GEX, WFM altında WML, SWI altında ANT ve BEE, ITL altında PDT, ENG altında HEX bulunur. Nokta, ortak fiziksel AI bağlantısını gösterir.</desc>
+          <desc id="ld-desc">Büyük kutular birbirine bağlı üst uygulamaları gösterir. Küçük kutular alt uygulamalardır; üst uygulamalarıyla ortak çerçeve içindedir. AIA, GPU ve USL üzerinden LLM, HNS, CTX, SEC ve EVL’ye bağlanır. CTX, LLM’ye geri bildirim verir. Güvence katmanı paralel LCL ve CLD dağıtımına bilgi verir; LCL ve CLD çıktıları dağıtım satırının altında tek bir hatta birleşir ve WFM ile SWI’ye, ardından ITL ve ENG’ye ulaşır. DCL, ana akıştan ayrı olarak LCL ve CLD’nin ortak karar laboratuvarı olmaya devam eder. USL altında ADP, LLM altında TFL, HNS altında ARL, GPU altında GEX, WFM altında WML, SWI altında ANT ve BEE, ITL altında PDT, ENG altında HEX bulunur. Nokta, ortak fiziksel AI bağlantısını gösterir.</desc>
           <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#c8ff36"/></marker></defs>
           <g class="ld-stage-index" aria-hidden="true">
             <text x="12" y="62">01 · YÖN BUL</text>
@@ -238,7 +238,6 @@
             <g data-learning-family="cld-lcl"><rect x="264" y="690" width="782" height="120" rx="15"/><text x="1036" y="703">CLD + LCL · ortak laboratuvar</text></g>
           </g>
           <g class="ld-links" aria-hidden="true">
-            <path data-learning-connector="dcl-to-stage-07" class="ld-edge-horizon" d="M 940 767 V 900 H 550 V 956"/>
             <path data-learning-edge="aia-to-gpu" class="ld-edge-primary" d="M 510 94 V 112 H 300 V 140" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="aia-to-llm" class="ld-edge-primary" d="M 550 94 V 330" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="aia-to-usl" class="ld-edge-primary" d="M 590 94 V 112 H 800 V 140" marker-end="url(#ld-arrow)"/>
@@ -253,8 +252,12 @@
             <path data-learning-edge="sec-to-cld" class="ld-edge-decision" d="M 590 624 V 652 H 725 V 710" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="evl-to-cld" class="ld-edge-context" d="M 820 624 V 675 H 765 V 710" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="ctx-to-lcl" class="ld-edge-context" d="M 280 624 V 675 H 335 V 710" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="lcl-to-dcl" class="ld-edge-child" d="M 375 774 V 794 H 875 V 767" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="lcl-to-dcl" class="ld-edge-child" d="M 375 774 V 794 H 810" />
+            <path data-learning-edge="lcl-to-dcl-jump" class="ld-edge-child" d="M 830 794 H 875 V 767" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="cld-to-dcl" class="ld-edge-child" d="M 820 742 H 850" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="lcl-to-merge" class="ld-edge-horizon" d="M 280 774 V 850 H 550" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="cld-to-merge" class="ld-edge-horizon" d="M 820 774 V 850 H 550" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="deployment-trunk" class="ld-edge-horizon" d="M 550 850 V 956" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="deployment-to-wfm" class="ld-edge-horizon" d="M 550 956 H 300 V 990" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="deployment-to-swi" class="ld-edge-horizon" d="M 550 956 H 800 V 990" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 405 1022 H 470 V 1200 H 510 V 1230" marker-end="url(#ld-arrow)"/>
@@ -270,6 +273,7 @@
             <path data-learning-edge="itl-to-pdt" class="ld-edge-child" d="M 660 1262 H 675 V 1262" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="eng-to-hex" class="ld-edge-child" d="M 660 1412 H 675 V 1412" marker-end="url(#ld-arrow)"/>
             <circle class="ld-junction" cx="550" cy="956" r="3"/>
+            <circle class="ld-junction" cx="550" cy="850" r="3"/>
           </g>
           <g class="ld-nodes">
             <a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent ld-node-aia" data-learning-app="aia" data-learning-role="map" aria-label="AIA AI Ecosystem Atlas. Yapay zekâ ürünlerini ve geliştirici ekosistemlerini kanıtlarıyla karşılaştıran araştırma konsolu." aria-describedby="ld-new-tab-aia-tr">
@@ -424,7 +428,7 @@
           </g>
         </svg>
         </div>
-        <figcaption>Üst uygulamalar arasındaki okları takip et. Küçük kutular, bağlı oldukları üst uygulamayla aynı çerçevededir. DCL, CLD ve LCL’nin ortak laboratuvarıdır.</figcaption>
+        <figcaption>Üst uygulamalar arasındaki okları takip et. Küçük kutular, bağlı oldukları üst uygulamayla aynı çerçevededir. DCL, CLD ve LCL’nin ortak laboratuvarıdır ve WFM ile SWI’ye giden birleşik hattın yanında durur.</figcaption>
       </figure>
 <!-- GENERATED:learning-diagram:end -->
 <!-- GENERATED:practice-labs:start -->

@@ -602,15 +602,23 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.match(svg, /class="ld-legend"/, "primary, supporting, and horizon relationships need a legend");
 
     const edges = Array.from(svg.matchAll(/<path data-learning-edge="([^"]+)"[^>]*d="([^"]+)"[^>]*marker-end="url\(#ld-arrow\)"\/>/g));
-    assert.equal(edges.length, 30, "every directed relationship must terminate with an arrow marker");
-    assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-wfm")).length, 1, "WFM must receive one arrow");
-    assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-swi")).length, 1, "SWI must receive one arrow");
-    const deploymentConnectors = Array.from(svg.matchAll(/<path data-learning-connector="([^"]+)"[^>]*d="([^"]+)"\/>/g));
-    assert.deepEqual(
-      deploymentConnectors.map(([, connectorName]) => connectorName),
-      ["dcl-to-stage-07"],
-      "local and cloud paths must merge into the shared stage-07 bus",
-    );
+        assert.equal(edges.length, 33, "every directed relationship must terminate with an arrow marker, except the split-gap lcl-to-dcl leg");
+        assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-wfm")).length, 1, "WFM must receive one arrow");
+        assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-swi")).length, 1, "SWI must receive one arrow");
+        const splitChildLegs = Array.from(svg.matchAll(/<path data-learning-edge="(lcl-to-dcl|lcl-to-dcl-jump)" class="[^"]*" d="([^"]+)"([^>]*)\/>/g));
+        assert.equal(splitChildLegs.length, 2, "the LCL-to-DCL child link must render as two split paths");
+        const lclToDclLeg = splitChildLegs.find(([, edgeName]) => edgeName === "lcl-to-dcl");
+        const lclToDclJumpLeg = splitChildLegs.find(([, edgeName]) => edgeName === "lcl-to-dcl-jump");
+        assert.ok(lclToDclLeg, "the leading lcl-to-dcl leg must be present");
+        assert.ok(lclToDclJumpLeg, "the trailing lcl-to-dcl-jump leg must be present");
+        assert.doesNotMatch(lclToDclLeg[3], /marker-end="url\(#ld-arrow\)"/, "the gap-ending lcl-to-dcl leg must not carry an arrow marker");
+        assert.match(lclToDclJumpLeg[3], /marker-end="url\(#ld-arrow\)"/, "the DCL-ending lcl-to-dcl-jump leg must keep its arrow marker");
+        const deploymentConnectors = Array.from(svg.matchAll(/<path data-learning-connector="([^"]+)"[^>]*d="([^"]+)"/g));
+        assert.deepEqual(
+          deploymentConnectors.map(([, connectorName]) => connectorName),
+          [],
+          "no legacy dcl-to-stage-07 connector should remain once deployment paths merge via directed edges",
+        );
     for (const [, connectorName, route] of deploymentConnectors) {
       assert.doesNotMatch(route, /[CLQAST]/, `${connectorName} must use an orthogonal route`);
     }

@@ -38,8 +38,12 @@ const ROUTES = [
   ["sec-to-cld", "M 590 624 V 652 H 725 V 710", "decision"],
   ["evl-to-cld", "M 820 624 V 675 H 765 V 710", "context"],
   ["ctx-to-lcl", "M 280 624 V 675 H 335 V 710", "context"],
-  ["lcl-to-dcl", "M 375 774 V 794 H 875 V 767", "child"],
+  ["lcl-to-dcl", "M 375 774 V 794 H 810", "child"],
+  ["lcl-to-dcl-jump", "M 830 794 H 875 V 767", "child"],
   ["cld-to-dcl", "M 820 742 H 850", "child"],
+  ["lcl-to-merge", "M 280 774 V 850 H 550", "horizon"],
+  ["cld-to-merge", "M 820 774 V 850 H 550", "horizon"],
+  ["deployment-trunk", "M 550 850 V 956", "horizon"],
   ["deployment-to-wfm", "M 550 956 H 300 V 990", "horizon"],
   ["deployment-to-swi", "M 550 956 H 800 V 990", "horizon"],
   ["wfm-to-itl", "M 405 1022 H 470 V 1200 H 510 V 1230", "horizon"],
@@ -102,8 +106,8 @@ export function renderLearningDiagram({ locale, data }) {
     [1412, "09 · EMBODIED AI", "09 · BEDENLENMİŞ AI"],
   ];
   const description = localized(locale,
-    "Large boxes show the connected main applications. Smaller boxes are sub-applications, enclosed with their parent in a shared frame. AIA connects GPU and USL to LLM, then HNS, CTX, SEC and EVL. CTX feeds back to LLM. Assurance informs parallel LCL and CLD deployment; their shared laboratory DCL compares workload constraints before the path reaches WFM and SWI, then ITL and ENG. USL owns ADP, LLM owns TFL, HNS owns ARL, GPU owns GEX, WFM owns WML, SWI owns ANT and BEE, ITL owns PDT, and ENG owns HEX. A dot marks the shared physical-AI junction.",
-    "Büyük kutular birbirine bağlı üst uygulamaları gösterir. Küçük kutular alt uygulamalardır; üst uygulamalarıyla ortak çerçeve içindedir. AIA, GPU ve USL üzerinden LLM, HNS, CTX, SEC ve EVL’ye bağlanır. CTX, LLM’ye geri bildirim verir. Güvence katmanı paralel LCL ve CLD dağıtımına, CLD ve LCL’nin ortak laboratuvarı DCL bu seçeneklerin iş yükü kısıtlarını karşılaştırır; akış WFM ve SWI’ye, ardından ITL ve ENG’ye bağlanır. USL altında ADP, LLM altında TFL, HNS altında ARL, GPU altında GEX, WFM altında WML, SWI altında ANT ve BEE, ITL altında PDT, ENG altında HEX bulunur. Nokta, ortak fiziksel AI bağlantısını gösterir.");
+    "Large boxes show the connected main applications. Smaller boxes are sub-applications, enclosed with their parent in a shared frame. AIA connects GPU and USL to LLM, then HNS, CTX, SEC and EVL. CTX feeds back to LLM. Assurance informs parallel LCL and CLD deployment; their outputs join below the deployment row into a single trunk line that continues to WFM and SWI, then ITL and ENG. DCL remains their shared decision laboratory, separate from the main flow. USL owns ADP, LLM owns TFL, HNS owns ARL, GPU owns GEX, WFM owns WML, SWI owns ANT and BEE, ITL owns PDT, and ENG owns HEX. A dot marks the shared physical-AI junction.",
+    "Büyük kutular birbirine bağlı üst uygulamaları gösterir. Küçük kutular alt uygulamalardır; üst uygulamalarıyla ortak çerçeve içindedir. AIA, GPU ve USL üzerinden LLM, HNS, CTX, SEC ve EVL’ye bağlanır. CTX, LLM’ye geri bildirim verir. Güvence katmanı paralel LCL ve CLD dağıtımına bilgi verir; LCL ve CLD çıktıları dağıtım satırının altında tek bir hatta birleşir ve WFM ile SWI’ye, ardından ITL ve ENG’ye ulaşır. DCL, ana akıştan ayrı olarak LCL ve CLD’nin ortak karar laboratuvarı olmaya devam eder. USL altında ADP, LLM altında TFL, HNS altında ARL, GPU altında GEX, WFM altında WML, SWI altında ANT ve BEE, ITL altında PDT, ENG altında HEX bulunur. Nokta, ortak fiziksel AI bağlantısını gösterir.");
   const renderNode = ({ app, x, y, width, height, cx, role }) => {
     const isChild = applicationParents(app).length > 0;
     const parentLabel = isChild ? `${applicationOwnership(app, locale)}. ` : "";
@@ -128,9 +132,12 @@ export function renderLearningDiagram({ locale, data }) {
     ...families.map((family) => `            <g data-learning-family="${family.code}"><rect x="${family.x}" y="${family.y}" width="${family.width}" height="${family.height}" rx="15"/><text x="${family.x + family.width - 10}" y="${family.y + 13}">${family.parents ? localized(locale, `${family.parents.join(" + ").toUpperCase()} · shared laboratory`, `${family.parents.join(" + ").toUpperCase()} · ortak laboratuvar`) : localized(locale, `${family.code.toUpperCase()} + sub-applications`, `${family.code.toUpperCase()} + alt uygulamalar`)}</text></g>`),
     '          </g>',
     '          <g class="ld-links" aria-hidden="true">',
-    '            <path data-learning-connector="dcl-to-stage-07" class="ld-edge-horizon" d="M 940 767 V 900 H 550 V 956"/>',
-    ...edges.map(({ id, path, kind }) => `            <path data-learning-edge="${id}" class="ld-edge-${kind}" d="${path}" marker-end="url(#ld-arrow)"/>`),
+    ...edges.map(({ id, path, kind }) => {
+      const markerEnd = id === "lcl-to-dcl" ? "" : "marker-end=\"url(#ld-arrow)\"";
+      return `            <path data-learning-edge="${id}" class="ld-edge-${kind}" d="${path}" ${markerEnd}/>`;
+    }),
     '            <circle class="ld-junction" cx="550" cy="956" r="3"/>',
+    '            <circle class="ld-junction" cx="550" cy="850" r="3"/>',
     '          </g>',
     '          <g class="ld-nodes">',
     ...nodes.map(renderNode),
@@ -142,7 +149,7 @@ export function renderLearningDiagram({ locale, data }) {
     '          </g>',
     '        </svg>',
     '        </div>',
-    `        <figcaption>${localized(locale, "Follow the arrows between main applications. The smaller boxes share a frame with their parent application. DCL is the shared laboratory of CLD and LCL.", "Üst uygulamalar arasındaki okları takip et. Küçük kutular, bağlı oldukları üst uygulamayla aynı çerçevededir. DCL, CLD ve LCL’nin ortak laboratuvarıdır.")}</figcaption>`,
+    `        <figcaption>${localized(locale, "Follow the arrows between main applications. The smaller boxes share a frame with their parent application. DCL is the shared laboratory of CLD and LCL and sits beside their merged path to WFM and SWI.", "Üst uygulamalar arasındaki okları takip et. Küçük kutular, bağlı oldukları üst uygulamayla aynı çerçevededir. DCL, CLD ve LCL’nin ortak laboratuvarıdır ve WFM ile SWI’ye giden birleşik hattın yanında durur.")}</figcaption>`,
     '      </figure>',
   ].join("\n");
 }
