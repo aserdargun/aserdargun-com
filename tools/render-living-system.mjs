@@ -446,7 +446,7 @@ export function renderSystemFocus({ locale, data }) {
     {
       key: "foundation",
       title: label(locale, "Foundation", "Temel"),
-      description: label(locale, "Ecosystem, compute, runtime and adaptation foundations; experiment with GEX, TFL and ADP.", "Ekosistem, hesaplama, çalışma ortamı ve uyarlama temelleri; GEX, TFL ve ADP ile deneyler."),
+      description: label(locale, "Ecosystem, compute, runtime and adaptation foundations; explore programming foundations in POL and experiment with GEX, TFL and ADP.", "Ekosistem, hesaplama, çalışma ortamı ve uyarlama temelleri; POL ile programlama temelleri, GEX, TFL ve ADP ile deneyler."),
     },
     {
       key: "agent-system",
@@ -547,7 +547,7 @@ export function renderPracticeLabs({ locale, data }) {
 
 export function renderCompanionLinks({ locale, data, parentCode }) {
   const labs = data.applications.filter((app) => applicationParents(app).includes(parentCode));
-  return labs.map((app) => `<p class="learning-companion" data-companion-of="${parentCode}"><strong>${label(locale, "Try the companion lab", "Eşlikçi laboratuvarı dene")}</strong> · <a href="${escapeHtml(app.address)}" target="_blank" rel="noreferrer">${app.code.toUpperCase()} ↗</a><br>${escapeHtml(app.guidingQuestion[locale])}</p>`).join("\n");
+  return labs.map((app) => `<p class="learning-companion" data-companion-of="${parentCode}"><strong>${label(locale, app.kind === "tool" ? "Explore the companion learning tool" : "Try the companion lab", app.kind === "tool" ? "Eşlikçi öğrenme aracını keşfet" : "Eşlikçi laboratuvarı dene")}</strong> · <a href="${escapeHtml(app.address)}" target="_blank" rel="noreferrer">${app.code.toUpperCase()} ↗</a><br>${escapeHtml(app.guidingQuestion[locale])}${app.kind === "tool" ? `<br>${escapeHtml(app.summary[locale])}` : ""}</p>`).join("\n");
 }
 
 export function renderDeploymentLab({ locale, data }) {

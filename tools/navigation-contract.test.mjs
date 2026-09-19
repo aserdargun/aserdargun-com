@@ -558,6 +558,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://bee.aserdargun.com/", "BEE"],
       ["https://itl.aserdargun.com/", "ITL"],
       ["https://eng.aserdargun.com/", "ENG"],
+      ["https://pol.aserdargun.com/", "POL"],
       ["https://gex.aserdargun.com/", "GEX"],
       ["https://wml.aserdargun.com/", "WML"],
       ["https://pdt.aserdargun.com/", "PDT"],
@@ -572,7 +573,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.equal(extraSvgScopes.length, 0);
     assert.doesNotMatch(svg, /<(?:span|foreignObject)\b/i, "HTML must never be inserted into SVG");
     const svgBlankAnchors = anchors(svg).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
-    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all twenty-four diagram nodes must remain inside SVG");
+    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all twenty-five diagram nodes must remain inside SVG");
 
     assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")).sort(), expectedNodes.map(([href]) => href).sort());
     for (const [index, anchor] of svgBlankAnchors.entries()) {
@@ -602,7 +603,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.match(svg, /class="ld-legend"/, "primary, supporting, and horizon relationships need a legend");
 
     const edges = Array.from(svg.matchAll(/<path data-learning-edge="([^"]+)"[^>]*d="([^"]+)"[^>]*marker-end="url\(#ld-arrow\)"\/>/g));
-        assert.equal(edges.length, 30, "every directed relationship except the centered solid trunk must terminate with an arrow marker (the three trunk segments lcl-to-merge, cld-to-merge, and deployment-trunk share one solid connector with no arrow markers)");
+        assert.equal(edges.length, 31, "every directed relationship except the centered solid trunk must terminate with an arrow marker (the three trunk segments lcl-to-merge, cld-to-merge, and deployment-trunk share one solid connector with no arrow markers)");
         assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-wfm")).length, 1, "WFM must receive one arrow");
         assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-swi")).length, 1, "SWI must receive one arrow");
         const splitChildLegs = Array.from(svg.matchAll(/<path data-learning-edge="(lcl-to-dcl|lcl-to-dcl-jump)" class="[^"]*" d="([^"]+)"([^>]*)\/>/g));

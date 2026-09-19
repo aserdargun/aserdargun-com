@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-10",
+  "generatedAt": "2026-09-19",
   "applications": [
     {
       "code": "aia",
@@ -387,6 +387,7 @@
       ],
       "downstreamApps": [
         "llm",
+        "pol",
         "gex"
       ],
       "tracks": [
@@ -398,6 +399,43 @@
       "entityIds": [
         "entity:cuda"
       ],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation"
+    },
+    {
+      "code": "pol",
+      "parentApp": "gpu",
+      "name": {
+        "en": "POL — Programming Languages",
+        "tr": "POL — Programlama Dilleri"
+      },
+      "shortName": "POL",
+      "description": {
+        "en": "English-only comparisons of the same tasks across programming languages: types, memory, paradigms and concurrency. Programming foundations that support GPU learning, but are not limited to GPU. Executed examples and hand-reviewed examples remain distinct.",
+        "tr": "İngilizce arayüzle aynı görevleri programlama dilleri arasında karşılaştır: tipler, bellek, paradigmalar ve eşzamanlılık. GPU öğrenimini destekleyen programlama temelleri; kapsamı GPU ile sınırlı değil. Çalıştırılan örnekler ile elle incelenen örnekler ayrı tutulur."
+      },
+      "type": "tool",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live · English only",
+        "tr": "Yayında · İngilizce"
+      },
+      "languages": [
+        "en"
+      ],
+      "productionUrl": "https://pol.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/pol-aserdargun-com",
+      "upstreamApps": [
+        "gpu"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "programming-languages",
+        "types",
+        "memory",
+        "concurrency"
+      ],
+      "entityIds": [],
       "portfolioLayer": "foundation",
       "focusState": "foundation"
     },

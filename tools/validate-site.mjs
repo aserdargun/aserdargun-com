@@ -18,7 +18,7 @@ import {
 } from "./public-html-contract.mjs";
 
 const expectedPublicApplicationCodes = [
-  "aia", "llm", "hns", "sec", "ctx", "evl", "usl", "gpu", "cld", "lcl",
+  "aia", "llm", "hns", "sec", "ctx", "evl", "usl", "gpu", "pol", "cld", "lcl",
   "wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng", "gex", "wml", "dcl", "tfl", "arl", "adp",
 ].sort();
 const expectedPrivateApplicationCodes = ["nxt", "stk", "inf"].sort();
@@ -82,6 +82,7 @@ const expectedAssetVersion = "20260911-center-board";
 const expectedStylesheetHref = "/styles.css?v=20260911-center-board";
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
+  { code: "pol", repository: "pol-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/pol-aserdargun-com", productUrl: "https://pol.aserdargun.com/", productLabel: "pol.aserdargun.com" },
   { code: "aia", repository: "aia-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/aia-aserdargun-com", productUrl: "https://aia.aserdargun.com/", productLabel: "aia.aserdargun.com" },
   { code: "llm", repository: "llm-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/llm-aserdargun-com", productUrl: "https://llm.aserdargun.com/", productLabel: "llm.aserdargun.com" },
   { code: "hns", repository: "hns-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/hns-aserdargun-com", productUrl: "https://hns.aserdargun.com/", productLabel: "hns.aserdargun.com" },
@@ -382,6 +383,7 @@ function validateLearningSystem(locale, html) {
       "bee:colony-lab",
       "itl:twin",
       "eng:horizon",
+      "pol:learning-tool",
       "gex:practice-lab",
       "wml:practice-lab",
       "pdt:practice-lab",
@@ -423,6 +425,7 @@ function validateLearningSystem(locale, html) {
       "swi-to-ant",
       "swi-to-bee",
       "itl-to-eng",
+      "gpu-to-pol",
       "gpu-to-gex",
       "wfm-to-wml",
       "itl-to-pdt",

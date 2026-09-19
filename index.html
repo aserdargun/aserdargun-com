@@ -145,12 +145,13 @@
         <article class="system-focus-card system-focus-card--foundation">
           <p class="system-focus-card__index">01</p>
           <h2>Foundation</h2>
-          <p>Ecosystem, compute, runtime and adaptation foundations; experiment with GEX, TFL and ADP.</p>
+          <p>Ecosystem, compute, runtime and adaptation foundations; explore programming foundations in POL and experiment with GEX, TFL and ADP.</p>
           <ul aria-label="Foundation applications">
             <li data-focus-app="aia"><a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer"><code>aia</code><span>AI Ecosystem Atlas</span> <span class="sr-only">opens in a new tab</span></a></li>
             <li data-focus-app="llm"><a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer"><code>llm</code><span>LLM Runtime &amp; Serving Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="LLM sub-applications">            <li data-focus-app="tfl" data-app-parent="llm"><a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer"><code>tfl</code><span>TFL — Token Flow Laboratory<span class="sr-only app-ownership">Sub-application of LLM.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
             <li data-focus-app="usl"><a href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer"><code>usl</code><span>Unsloth Studio Learning Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="USL sub-applications">            <li data-focus-app="adp" data-app-parent="usl"><a href="https://adp.aserdargun.com/" target="_blank" rel="noreferrer"><code>adp</code><span>ADP — Model Adaptation Laboratory<span class="sr-only app-ownership">Sub-application of USL.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-            <li data-focus-app="gpu"><a href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer"><code>gpu</code><span>GPU Kernel Engineering — Kernel Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="GPU sub-applications">            <li data-focus-app="gex" data-app-parent="gpu"><a href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer"><code>gex</code><span>GPU Execution Explorer<span class="sr-only app-ownership">Sub-application of GPU.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
+            <li data-focus-app="gpu"><a href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer"><code>gpu</code><span>GPU Kernel Engineering — Kernel Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="GPU sub-applications">            <li data-focus-app="pol" data-app-parent="gpu"><a href="https://pol.aserdargun.com/" target="_blank" rel="noreferrer"><code>pol</code><span>POL — Programming Languages<span class="sr-only app-ownership">Sub-application of GPU.</span></span> <span class="sr-only">opens in a new tab</span></a></li>
+            <li data-focus-app="gex" data-app-parent="gpu"><a href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer"><code>gex</code><span>GPU Execution Explorer<span class="sr-only app-ownership">Sub-application of GPU.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
           </ul>
         </article>
         <article class="system-focus-card system-focus-card--agent-system">
@@ -213,7 +214,7 @@
         <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="Application connection map">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1540" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">
           <title id="ld-title">Connected applications and their sub-applications</title>
-          <desc id="ld-desc">Large boxes show the connected main applications. Smaller boxes are sub-applications, enclosed with their parent in a shared frame. AIA connects GPU and USL to LLM, then HNS, CTX, SEC and EVL. CTX feeds back to LLM. Assurance informs parallel LCL and CLD deployment; their outputs join below the deployment row into a single trunk line that continues to WFM and SWI, then ITL and ENG. DCL remains their shared decision laboratory, separate from the main flow. USL owns ADP, LLM owns TFL, HNS owns ARL, GPU owns GEX, WFM owns WML, SWI owns ANT and BEE, ITL owns PDT, and ENG owns HEX. A dot marks the shared physical-AI junction.</desc>
+          <desc id="ld-desc">Large boxes show the connected main applications. Smaller boxes are sub-applications, enclosed with their parent in a shared frame. AIA connects GPU and USL to LLM, then HNS, CTX, SEC and EVL. CTX feeds back to LLM. Assurance informs parallel LCL and CLD deployment; their outputs join below the deployment row into a single trunk line that continues to WFM and SWI, then ITL and ENG. DCL remains their shared decision laboratory, separate from the main flow. USL owns ADP, LLM owns TFL, HNS owns ARL, GPU owns POL for programming foundations and GEX for educational kernel execution, WFM owns WML, SWI owns ANT and BEE, ITL owns PDT, and ENG owns HEX. A dot marks the shared physical-AI junction.</desc>
           <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#c8ff36"/></marker></defs>
           <g class="ld-stage-index" aria-hidden="true">
             <text x="12" y="62">01 · ORIENT</text>
@@ -227,7 +228,7 @@
             <text x="12" y="1412">09 · EMBODIED AI</text>
           </g>
           <g class="ld-families" aria-hidden="true">
-            <g data-learning-family="gpu"><rect x="194" y="120" width="212" height="186" rx="15"/><text x="396" y="133">GPU + sub-applications</text></g>
+            <g data-learning-family="gpu"><rect x="124" y="120" width="352" height="186" rx="15"/><text x="466" y="133">GPU + sub-applications</text></g>
             <g data-learning-family="llm"><rect x="439" y="310" width="387" height="100" rx="15"/><text x="816" y="323">LLM + sub-applications</text></g>
             <g data-learning-family="usl"><rect x="694" y="120" width="377" height="100" rx="15"/><text x="1061" y="133">USL + sub-applications</text></g>
             <g data-learning-family="hns"><rect x="424" y="420" width="417" height="100" rx="15"/><text x="831" y="433">HNS + sub-applications</text></g>
@@ -263,7 +264,8 @@
             <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 405 1022 H 470 V 1200 H 510 V 1230" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="swi-to-itl" class="ld-edge-horizon" d="M 685 1022 H 610 V 1200 H 590 V 1230" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 550 1294 V 1380" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="gpu-to-gex" class="ld-edge-child" d="M 300 204 V 222 H 300 V 240" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="gpu-to-pol" class="ld-edge-child" d="M 265 204 V 222 H 215 V 240" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="gpu-to-gex" class="ld-edge-child" d="M 335 204 V 222 H 385 V 240" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="llm-to-tfl" class="ld-edge-child" d="M 645 362 H 660 V 362" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="usl-to-adp" class="ld-edge-child" d="M 890 172 H 905 V 172" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-arl" class="ld-edge-child" d="M 660 472 H 675 V 472" marker-end="url(#ld-arrow)"/>
@@ -288,11 +290,17 @@
               <text x="300" y="167" class="ld-code">GPU</text>
               <text x="300" y="188" class="ld-label">GPU kernels</text>
             </a>
+            <a href="https://pol.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="pol" data-learning-role="learning-tool" data-learning-parent="gpu" aria-label="POL POL — Programming Languages. Sub-application of GPU. English-only comparisons of the same tasks across programming languages: types, memory, paradigms and concurrency. Programming foundations that support GPU learning, but are not limited to GPU. Executed examples and hand-reviewed examples remain distinct." aria-describedby="ld-new-tab-pol-en">
+              <title id="ld-new-tab-pol-en">Opens in a new tab</title>
+              <rect x="140" y="240" width="150" height="50" rx="7"/>
+              <text x="215" y="261" class="ld-code">POL</text>
+              <text x="215" y="279" class="ld-label">Programming basics</text>
+            </a>
             <a href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="gex" data-learning-role="practice-lab" data-learning-parent="gpu" aria-label="GEX GPU Execution Explorer. Sub-application of GPU. Trace GPU anatomy, kernel launches, warp masks, memory access, and matrix tiles through six interactive lessons. Results come from an educational execution model, not profiler measurements." aria-describedby="ld-new-tab-gex-en">
               <title id="ld-new-tab-gex-en">Opens in a new tab</title>
-              <rect x="225" y="240" width="150" height="50" rx="7"/>
-              <text x="300" y="261" class="ld-code">GEX</text>
-              <text x="300" y="279" class="ld-label">Kernel execution</text>
+              <rect x="310" y="240" width="150" height="50" rx="7"/>
+              <text x="385" y="261" class="ld-code">GEX</text>
+              <text x="385" y="279" class="ld-label">Kernel execution</text>
             </a>
             <a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="llm" data-learning-role="hub" aria-label="LLM LLM Runtime &amp; Serving Atlas. A source-backed field guide to LLM runtimes and serving engines across seven architectural layers, with an interactive learning layer." aria-describedby="ld-new-tab-llm-en">
               <title id="ld-new-tab-llm-en">Opens in a new tab</title>
@@ -437,6 +445,13 @@
         <h3 id="practice-title-en">Explore an idea. Run an experiment.</h3>
         <p>Follow each research application into its companion learning experience. These links describe learning relationships; each application runs independently.</p>
         <div class="swarm-labs__grid">
+          <article class="swarm-lab" data-practice-lab="pol" data-learning-parent="gpu">
+            <p class="swarm-lab__identity"><code>GPU → POL</code><span>Live · English only</span></p>
+            <h4>How do languages express the same program differently?</h4>
+            <p>English-only comparisons of the same tasks across programming languages: types, memory, paradigms and concurrency. Programming foundations that support GPU learning, but are not limited to GPU. Executed examples and hand-reviewed examples remain distinct.</p>
+            <a class="learning-horizon-link" href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer">Research · GPU ↗ <span class="sr-only">opens in a new tab</span></a>
+            <a class="learning-horizon-link" href="https://pol.aserdargun.com/" target="_blank" rel="noreferrer">Explore · POL ↗ <span class="sr-only">opens in a new tab</span></a>
+          </article>
           <article class="swarm-lab" data-practice-lab="gex" data-learning-parent="gpu">
             <p class="swarm-lab__identity"><code>GPU → GEX</code><span>Live</span></p>
             <h4>How does a kernel become hardware execution?</h4>
