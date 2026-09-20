@@ -12,7 +12,7 @@
     "test:deployment": "node --test tools/deployment.test.mjs tools/public-files.test.mjs",
     "test:environment": "node --test tools/environment.test.mjs",
     "test:portrait": "node --test tools/validate-portrait-canvas.mjs",
-    "test:data": "node --test tools/living-system-data.test.mjs tools/portfolio-phase-one.test.mjs tools/application-hierarchy.test.mjs",
+    "test:data": "node --test tools/living-system-data.test.mjs tools/portfolio-phase-one.test.mjs tools/application-hierarchy.test.mjs tools/pol-integration.test.mjs tools/pol-companion.test.mjs",
     "generate:portfolio": "node tools/portfolio-registry.mjs",
     "check:portfolio": "node tools/portfolio-registry.mjs --check",
     "generate:site": "node tools/portfolio-registry.mjs && node tools/render-living-system.mjs",

@@ -558,6 +558,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://bee.aserdargun.com/", "BEE"],
       ["https://itl.aserdargun.com/", "ITL"],
       ["https://eng.aserdargun.com/", "ENG"],
+      ["https://pol.aserdargun.com/", "POL"],
       ["https://gex.aserdargun.com/", "GEX"],
       ["https://wml.aserdargun.com/", "WML"],
       ["https://pdt.aserdargun.com/", "PDT"],
@@ -572,7 +573,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.equal(extraSvgScopes.length, 0);
     assert.doesNotMatch(svg, /<(?:span|foreignObject)\b/i, "HTML must never be inserted into SVG");
     const svgBlankAnchors = anchors(svg).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
-    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all twenty-four diagram nodes must remain inside SVG");
+    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all twenty-five linked diagram nodes must remain inside SVG");
 
     assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")).sort(), expectedNodes.map(([href]) => href).sort());
     for (const [index, anchor] of svgBlankAnchors.entries()) {
@@ -867,4 +868,27 @@ test('interactive SVG maps expose links as a labelled group instead of an atomic
     assert.match(html, /<svg[^>]+role="group"[^>]+aria-labelledby="ld-title"[^>]+aria-describedby="ld-desc"/);
     assert.doesNotMatch(html, /<svg[^>]+role="img"/);
   }
+});
+
+test("the system-focus inner padding stays bounded on wide viewports", async () => {
+  const css = await readFile(path.join(rootDir, "styles.css"), "utf8");
+  const rulePattern = /\.system-focus-inner\s*\{[^}]*padding-inline:\s*([^;}]+);[^}]*\}/gs;
+
+  const matches = Array.from(css.matchAll(rulePattern));
+  assert.ok(matches.length >= 2, "expected at least one desktop .system-focus-inner rule exposing padding-inline");
+
+  const paddingRules = matches.map((match) => match[1].trim());
+  const desktopPadding = paddingRules.find((value) => /clamp\s*\(|max\s*\(/.test(value) && !/20px\s*\}/.test(value));
+  assert.ok(desktopPadding, "expected a non-mobile padding-inline rule that uses clamp() or max()");
+
+  assert.doesNotMatch(
+    desktopPadding,
+    /\bmax\s*\(\s*20px\s*,\s*calc\s*\(\s*\(100%\s*-\s*1200px\s*\)\s*\/\s*2\s*\)\s*\)/,
+    "desktop padding-inline must not use an unbounded max() that keeps growing after the container clamps",
+  );
+  assert.match(
+    desktopPadding,
+    /clamp\s*\(\s*20px\s*,\s*calc\s*\(\s*\(100%\s*-\s*1200px\s*\)\s*\/\s*2\s*\)\s*,\s*120px\s*\)/,
+    "desktop padding-inline must bound the calc() expression with a 120px ceiling via clamp()",
+  );
 });

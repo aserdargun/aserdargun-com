@@ -1,19 +1,6 @@
 {
   "additionalApplications": [
     {
-      "code": "pol",
-      "parentApp": "gpu",
-      "before": "gex",
-      "title": {
-        "en": "POL — Programming Languages",
-        "tr": "POL — Programlama Dilleri"
-      },
-      "diagramLabel": {
-        "en": "Programming basics",
-        "tr": "Programlama temelleri"
-      }
-    },
-    {
       "code": "dpl",
       "parentApp": "hns",
       "title": {

@@ -31,6 +31,8 @@ async function readFixtureData() {
     "entityIds", "portfolioLayer", "focusState", "parentApp", "sharedParentApps", "diagramLabel",
   ];
   for (const application of data.applications) {
+    // Freeze source updates at this historical synthetic fixture's reference date.
+    if (application.updatedAt > "2026-09-10") application.updatedAt = "2026-09-10";
     for (const field of phaseOneFields) delete application[field];
     application.relatedMemoryIds = [];
     if (application.code === "eng") application.status = "live";
@@ -122,7 +124,12 @@ async function createSiteFixture() {
   await mkdir(path.join(fixtureDir, "tr", "memory"), { recursive: true });
   await mkdir(path.join(fixtureDir, "tr", "now"), { recursive: true });
   await mkdir(path.join(fixtureDir, "now"));
-  await writeFile(path.join(fixtureDir, "data", "living-system.json"), await readFile(path.join(rootDir, "data", "living-system.json")));
+  const fixtureData = JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
+// This CLI fixture uses the same frozen date as the historical renderer tests.
+for (const application of fixtureData.applications) {
+  if (application.updatedAt > "2026-09-10") application.updatedAt = "2026-09-10";
+}
+await writeFile(path.join(fixtureDir, "data", "living-system.json"), JSON.stringify(fixtureData));
   await writeFile(path.join(fixtureDir, "index.html"), homeDocument());
   await writeFile(path.join(fixtureDir, "tr", "index.html"), homeDocument());
   await writeFile(path.join(fixtureDir, "now", "index.html"), nowDocument());
@@ -865,7 +872,7 @@ test("renders the application-map summary from semantic roles", async () => {
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /Ten core learning applications, eleven standalone labs, two horizon bridges, and one long-term horizon\./);
+  assert.match(rendered, /Eleven core learning applications, eleven standalone labs, two horizon bridges, and one long-term horizon\./);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
 });
 

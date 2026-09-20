@@ -34,10 +34,11 @@ and `portfolio.json` from that source. Every new application must declare its
 layer and keep research, verification, and release dates separate.
 
 The September 20 table revision is staged separately in `data/system-focus.json`:
-POL under GPU; DPL, CUL and AOS under HNS; MEM under CTX; and DTR under ITL.
+DPL, CUL and AOS under HNS; MEM under CTX; and DTR under ITL. POL is already
+registered under GPU in the canonical catalog.
 `tools/system-focus.mjs` merges these entries into the homepage table and diagram,
-including bilingual subtitles and POL's position before GEX. Both views contain
-30 entries; the registered catalog retains 24 applications with release evidence.
+including bilingual subtitles. Both views contain
+30 entries; the registered catalog retains 25 applications with release evidence.
 Additional entries have no invented URLs
 or release status. When a code is registered in `data/living-system.json`, its
 canonical record takes precedence; remove its table-only entry at that point.
@@ -61,7 +62,7 @@ Extend the layout if a growing family needs more space; never hide an applicatio
 to make it fit. Regenerate with `npm run generate:site` and verify both languages.
 The detailed learning path remains in the Journey pages.
 
-The public catalog currently contains 24 applications. ADP belongs to USL, TFL
+The public catalog currently contains 25 applications. ADP belongs to USL, TFL
 to LLM, and ARL to HNS. DCL is an independent deployment decision laboratory
 that builds on both LCL and CLD; it is not owned by either one. These relationships
 appear in both languages on the homepage, diagram, Journey and application map.

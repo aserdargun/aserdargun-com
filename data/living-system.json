@@ -338,12 +338,46 @@
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": ["aia"],
-      "downstreamApps": ["llm", "gex"],
+      "downstreamApps": ["llm", "pol", "gex"],
       "tracks": ["cuda", "triton", "kernels", "profiling"],
       "entityIds": ["entity:cuda"],
       "portfolioLayer": "foundation",
       "focusState": "foundation",
       "relatedMemoryIds": []
+    },
+    {
+      "code": "pol",
+      "parentApp": "gpu",
+      "diagramLabel": {"en": "Programming basics", "tr": "Programlama temeli"},
+      "kind": "tool",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {"en": "Live · English only", "tr": "Yayında · İngilizce"},
+      "languages": ["en"],
+      "title": {"en": "POL — Programming Languages", "tr": "POL — Programlama Dilleri"},
+      "summary": {
+        "en": "English-only comparisons of the same tasks across programming languages: types, memory, paradigms and concurrency. Programming foundations that support GPU learning, but are not limited to GPU. Executed examples and hand-reviewed examples remain distinct.",
+        "tr": "İngilizce arayüzle aynı görevleri programlama dilleri arasında karşılaştır: tipler, bellek, paradigmalar ve eşzamanlılık. GPU öğrenimini destekleyen programlama temelleri; kapsamı GPU ile sınırlı değil. Çalıştırılan örnekler ile elle incelenen örnekler ayrı tutulur."
+      },
+      "guidingQuestion": {
+        "en": "How do languages express the same program differently?",
+        "tr": "Diller aynı programı nasıl farklı ifade eder?"
+      },
+      "repository": "https://github.com/aserdargun/pol-aserdargun-com",
+      "address": "https://pol.aserdargun.com/",
+      "updatedAt": "2026-09-19",
+      "upstreamApps": ["gpu"],
+      "downstreamApps": [],
+      "tracks": ["programming-languages", "types", "memory", "concurrency"],
+      "entityIds": [],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation",
+      "relatedMemoryIds": [],
+      "nextDirection": {
+        "en": "Use programming foundations before GPU kernel study; this is not a GPU execution simulator.",
+        "tr": "GPU kernel çalışmasından önce programlama temellerini kullan; bu bir GPU yürütme simülatörü değildir."
+      }
     },
     {
       "code": "cld",

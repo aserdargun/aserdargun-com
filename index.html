@@ -150,7 +150,7 @@
             <li data-focus-app="aia"><a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer"><code>aia</code><span>AI Ecosystem Atlas</span> <span class="sr-only">opens in a new tab</span></a></li>
             <li data-focus-app="llm"><a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer"><code>llm</code><span>LLM Runtime &amp; Serving Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="LLM sub-applications">            <li data-focus-app="tfl" data-app-parent="llm"><a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer"><code>tfl</code><span>TFL — Token Flow Laboratory<span class="sr-only app-ownership">Sub-application of LLM.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
             <li data-focus-app="usl"><a href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer"><code>usl</code><span>Unsloth Studio Learning Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="USL sub-applications">            <li data-focus-app="adp" data-app-parent="usl"><a href="https://adp.aserdargun.com/" target="_blank" rel="noreferrer"><code>adp</code><span>ADP — Model Adaptation Laboratory<span class="sr-only app-ownership">Sub-application of USL.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-            <li data-focus-app="gpu"><a href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer"><code>gpu</code><span>GPU Kernel Engineering — Kernel Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="GPU sub-applications">            <li data-focus-app="pol" data-app-parent="gpu"><span class="system-focus-entry"><code>pol</code><span>POL — Programming Languages<span class="sr-only app-ownership">Sub-application of GPU.</span></span></span></li>
+            <li data-focus-app="gpu"><a href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer"><code>gpu</code><span>GPU Kernel Engineering — Kernel Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="GPU sub-applications">            <li data-focus-app="pol" data-app-parent="gpu"><a href="https://pol.aserdargun.com/" target="_blank" rel="noreferrer"><code>pol</code><span>POL — Programming Languages<span class="sr-only app-ownership">Sub-application of GPU.</span></span> <span class="sr-only">opens in a new tab</span></a></li>
             <li data-focus-app="gex" data-app-parent="gpu"><a href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer"><code>gex</code><span>GPU Execution Explorer<span class="sr-only app-ownership">Sub-application of GPU.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
           </ul>
         </article>
@@ -308,11 +308,12 @@
               <text x="439" y="128" class="ld-code">GPU</text>
               <text x="439" y="147" class="ld-label"><tspan x="439" dy="0">GPU kernels</tspan></text>
             </a>
-            <g role="group" class="ld-node ld-node-child" data-learning-app="pol" data-learning-role="practice-lab" data-learning-parent="gpu" aria-label="POL POL — Programming Languages. Sub-application of GPU. Programming basics">
+            <a href="https://pol.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="pol" data-learning-role="learning-tool" data-learning-parent="gpu" aria-label="POL POL — Programming Languages. Sub-application of GPU. English-only comparisons of the same tasks across programming languages: types, memory, paradigms and concurrency. Programming foundations that support GPU learning, but are not limited to GPU. Executed examples and hand-reviewed examples remain distinct." aria-describedby="ld-new-tab-pol-en">
+              <title id="ld-new-tab-pol-en">Opens in a new tab</title>
               <rect x="310" y="164" width="131" height="49" rx="7"/>
               <text x="375.5" y="185.5" class="ld-code">POL</text>
               <text x="375.5" y="204.5" class="ld-label"><tspan x="375.5" dy="0">Programming basics</tspan></text>
-            </g>
+            </a>
             <a href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="gex" data-learning-role="practice-lab" data-learning-parent="gpu" aria-label="GEX GPU Execution Explorer. Sub-application of GPU. Trace GPU anatomy, kernel launches, warp masks, memory access, and matrix tiles through six interactive lessons. Results come from an educational execution model, not profiler measurements." aria-describedby="ld-new-tab-gex-en">
               <title id="ld-new-tab-gex-en">Opens in a new tab</title>
               <rect x="450" y="164" width="118" height="49" rx="7"/>
@@ -493,6 +494,13 @@
         <h3 id="practice-title-en">Explore an idea. Run an experiment.</h3>
         <p>Follow each research application into its companion learning experience. These links describe learning relationships; each application runs independently.</p>
         <div class="swarm-labs__grid">
+          <article class="swarm-lab" data-practice-lab="pol" data-learning-parent="gpu">
+            <p class="swarm-lab__identity"><code>GPU → POL</code><span>Live · English only</span></p>
+            <h4>How do languages express the same program differently?</h4>
+            <p>English-only comparisons of the same tasks across programming languages: types, memory, paradigms and concurrency. Programming foundations that support GPU learning, but are not limited to GPU. Executed examples and hand-reviewed examples remain distinct.</p>
+            <a class="learning-horizon-link" href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer">Research · GPU ↗ <span class="sr-only">opens in a new tab</span></a>
+            <a class="learning-horizon-link" href="https://pol.aserdargun.com/" target="_blank" rel="noreferrer">Explore · POL ↗ <span class="sr-only">opens in a new tab</span></a>
+          </article>
           <article class="swarm-lab" data-practice-lab="gex" data-learning-parent="gpu">
             <p class="swarm-lab__identity"><code>GPU → GEX</code><span>Live</span></p>
             <h4>How does a kernel become hardware execution?</h4>

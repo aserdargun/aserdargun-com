@@ -63,7 +63,7 @@ const CONNECTORS = [
   ["evl-to-deployment", "M 922 647 V 680"],
   ["dcl-to-stage-06", "M 683 765 V 784"],
 ];
-const ROLES = { aia: "map", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
+const ROLES = { pol: "learning-tool", aia: "map", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
 
 export function learningDiagramLayout(applications) {
   const diagramApplications = systemFocusApplications(applications);
