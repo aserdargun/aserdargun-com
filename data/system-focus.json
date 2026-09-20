@@ -1,0 +1,89 @@
+{
+  "additionalApplications": [
+    {
+      "code": "pol",
+      "parentApp": "gpu",
+      "before": "gex",
+      "title": {
+        "en": "POL — Programming Languages",
+        "tr": "POL — Programlama Dilleri"
+      },
+      "diagramLabel": {
+        "en": "Programming basics",
+        "tr": "Programlama temelleri"
+      }
+    },
+    {
+      "code": "dpl",
+      "parentApp": "hns",
+      "title": {
+        "en": "DPL — Decision Plane Laboratory",
+        "tr": "DPL — Karar Düzlemi Laboratuvarı"
+      },
+      "subtitle": {
+        "en": "System One ↔ System Two",
+        "tr": "Sistem Bir ↔ Sistem İki"
+      },
+      "diagramLabel": {
+        "en": "Decision plane",
+        "tr": "Karar düzlemi"
+      }
+    },
+    {
+      "code": "cul",
+      "parentApp": "hns",
+      "title": {
+        "en": "CUL — Computer Use Laboratory",
+        "tr": "CUL — Bilgisayar Kullanımı Laboratuvarı"
+      },
+      "diagramLabel": {
+        "en": "Computer use",
+        "tr": "Bilgisayar kullanımı"
+      }
+    },
+    {
+      "code": "aos",
+      "parentApp": "hns",
+      "title": {
+        "en": "Agent Operating System",
+        "tr": "Ajan İşletim Sistemi"
+      },
+      "subtitle": {
+        "en": "Open-source agent runtime",
+        "tr": "Açık kaynaklı ajan çalışma ortamı"
+      },
+      "diagramLabel": {
+        "en": "Agent operating system",
+        "tr": "Ajan işletim sistemi"
+      }
+    },
+    {
+      "code": "mem",
+      "parentApp": "ctx",
+      "title": {
+        "en": "MEM — Agent Memory Laboratory",
+        "tr": "MEM — Ajan Belleği Laboratuvarı"
+      },
+      "diagramLabel": {
+        "en": "Agent memory",
+        "tr": "Ajan belleği"
+      }
+    },
+    {
+      "code": "dtr",
+      "parentApp": "itl",
+      "title": {
+        "en": "DTR — Digital Triplet Laboratory",
+        "tr": "DTR — Dijital Üçüz Laboratuvarı"
+      },
+      "subtitle": {
+        "en": "Physical ↔ Twin ↔ Intelligence",
+        "tr": "Fiziksel ↔ İkiz ↔ Zekâ"
+      },
+      "diagramLabel": {
+        "en": "Digital triplet",
+        "tr": "Dijital üçüz"
+      }
+    }
+  ]
+}

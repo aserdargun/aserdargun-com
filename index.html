@@ -33,8 +33,8 @@
   <meta name="twitter:description" content="A public AI learning system by Serdar Gündoğdu: explore five connected layers, current projects, research notes, and working experiments.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260910-dcl-layout">
-  <script src="/scripts.js?v=20260910-dcl-layout" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260920-eight-stage-diagram">
+  <script src="/scripts.js?v=20260920-eight-stage-diagram" defer></script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -145,21 +145,25 @@
         <article class="system-focus-card system-focus-card--foundation">
           <p class="system-focus-card__index">01</p>
           <h2>Foundation</h2>
-          <p>Ecosystem, compute, runtime and adaptation foundations; experiment with GEX, TFL and ADP.</p>
+          <p>Ecosystem, compute, runtime and adaptation foundations; explore programming foundations in POL and experiment with GEX, TFL and ADP.</p>
           <ul aria-label="Foundation applications">
             <li data-focus-app="aia"><a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer"><code>aia</code><span>AI Ecosystem Atlas</span> <span class="sr-only">opens in a new tab</span></a></li>
             <li data-focus-app="llm"><a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer"><code>llm</code><span>LLM Runtime &amp; Serving Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="LLM sub-applications">            <li data-focus-app="tfl" data-app-parent="llm"><a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer"><code>tfl</code><span>TFL — Token Flow Laboratory<span class="sr-only app-ownership">Sub-application of LLM.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
             <li data-focus-app="usl"><a href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer"><code>usl</code><span>Unsloth Studio Learning Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="USL sub-applications">            <li data-focus-app="adp" data-app-parent="usl"><a href="https://adp.aserdargun.com/" target="_blank" rel="noreferrer"><code>adp</code><span>ADP — Model Adaptation Laboratory<span class="sr-only app-ownership">Sub-application of USL.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-            <li data-focus-app="gpu"><a href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer"><code>gpu</code><span>GPU Kernel Engineering — Kernel Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="GPU sub-applications">            <li data-focus-app="gex" data-app-parent="gpu"><a href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer"><code>gex</code><span>GPU Execution Explorer<span class="sr-only app-ownership">Sub-application of GPU.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
+            <li data-focus-app="gpu"><a href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer"><code>gpu</code><span>GPU Kernel Engineering — Kernel Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="GPU sub-applications">            <li data-focus-app="pol" data-app-parent="gpu"><span class="system-focus-entry"><code>pol</code><span>POL — Programming Languages<span class="sr-only app-ownership">Sub-application of GPU.</span></span></span></li>
+            <li data-focus-app="gex" data-app-parent="gpu"><a href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer"><code>gex</code><span>GPU Execution Explorer<span class="sr-only app-ownership">Sub-application of GPU.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
           </ul>
         </article>
         <article class="system-focus-card system-focus-card--agent-system">
           <p class="system-focus-card__index">02</p>
           <h2>Agent system</h2>
-          <p>Harness and context layers, with ARL to inspect tool use, evidence and approval during a simulated run.</p>
+          <p>Study how agents reason, use context, tools and computer environments; turn research into open-source runtimes and reusable components.</p>
           <ul aria-label="Agent system applications">
-            <li data-focus-app="hns"><a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><code>hns</code><span>Harness Engineering Observatory</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="HNS sub-applications">            <li data-focus-app="arl" data-app-parent="hns"><a href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer"><code>arl</code><span>ARL — Agent Runtime Laboratory<span class="sr-only app-ownership">Sub-application of HNS.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-            <li data-focus-app="ctx"><a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer"><code>ctx</code><span>Context &amp; Knowledge Engineering</span> <span class="sr-only">opens in a new tab</span></a></li>
+            <li data-focus-app="hns"><a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><code>hns</code><span>Harness Engineering Observatory</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="HNS sub-applications">            <li data-focus-app="arl" data-app-parent="hns"><a href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer"><code>arl</code><span>ARL — Agent Runtime Laboratory<span class="sr-only app-ownership">Sub-application of HNS.</span></span> <span class="sr-only">opens in a new tab</span></a></li>
+            <li data-focus-app="dpl" data-app-parent="hns"><span class="system-focus-entry"><code>dpl</code><span>DPL — Decision Plane Laboratory<small class="system-focus-entry__subtitle">System One ↔ System Two</small><span class="sr-only app-ownership">Sub-application of HNS.</span></span></span></li>
+            <li data-focus-app="cul" data-app-parent="hns"><span class="system-focus-entry"><code>cul</code><span>CUL — Computer Use Laboratory<span class="sr-only app-ownership">Sub-application of HNS.</span></span></span></li>
+            <li data-focus-app="aos" data-app-parent="hns"><span class="system-focus-entry"><code>aos</code><span>Agent Operating System<small class="system-focus-entry__subtitle">Open-source agent runtime</small><span class="sr-only app-ownership">Sub-application of HNS.</span></span></span></li></ul></li>
+            <li data-focus-app="ctx"><a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer"><code>ctx</code><span>Context &amp; Knowledge Engineering</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="CTX sub-applications">            <li data-focus-app="mem" data-app-parent="ctx"><span class="system-focus-entry"><code>mem</code><span>MEM — Agent Memory Laboratory<span class="sr-only app-ownership">Sub-application of CTX.</span></span></span></li></ul></li>
           </ul>
         </article>
         <article class="system-focus-card system-focus-card--assurance">
@@ -184,12 +188,13 @@
         <article class="system-focus-card system-focus-card--physical-ai">
           <p class="system-focus-card__index">05</p>
           <h2>Physical AI</h2>
-          <p>World models and swarm research meet WML and ANT / BEE experiments, PDT pump twins, and HEX humanoid exploration.</p>
+          <p>World models and swarm research meet WML and ANT / BEE experiments, PDT pump twins, digital triplets, and humanoid exploration.</p>
           <ul aria-label="Physical AI applications">
             <li data-focus-app="wfm"><a href="https://wfm.aserdargun.com/" target="_blank" rel="noreferrer"><code>wfm</code><span>World Models Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="WFM sub-applications">            <li data-focus-app="wml" data-app-parent="wfm"><a href="https://wml.aserdargun.com/" target="_blank" rel="noreferrer"><code>wml</code><span>World Model Laboratory<span class="sr-only app-ownership">Sub-application of WFM.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
             <li data-focus-app="swi"><a href="https://swi.aserdargun.com/" target="_blank" rel="noreferrer"><code>swi</code><span>SWI — Swarm Intelligence</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="SWI sub-applications">            <li data-focus-app="ant" data-app-parent="swi"><a href="https://ant.aserdargun.com/" target="_blank" rel="noreferrer"><code>ant</code><span>ANT — Ant Colony Intelligence Laboratory<span class="sr-only app-ownership">Sub-application of SWI.</span></span> <span class="sr-only">opens in a new tab</span></a></li>
             <li data-focus-app="bee" data-app-parent="swi"><a href="https://bee.aserdargun.com/" target="_blank" rel="noreferrer"><code>bee</code><span>BEE — Honey Bee Collective Intelligence Laboratory<span class="sr-only app-ownership">Sub-application of SWI.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-            <li data-focus-app="itl"><a href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer"><code>itl</code><span>Industrial Twin Lab</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="ITL sub-applications">            <li data-focus-app="pdt" data-app-parent="itl"><a href="https://pdt.aserdargun.com/" target="_blank" rel="noreferrer"><code>pdt</code><span>P-101 Interactive Digital Twin<span class="sr-only app-ownership">Sub-application of ITL.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
+            <li data-focus-app="itl"><a href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer"><code>itl</code><span>Industrial Twin Lab</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="ITL sub-applications">            <li data-focus-app="pdt" data-app-parent="itl"><a href="https://pdt.aserdargun.com/" target="_blank" rel="noreferrer"><code>pdt</code><span>P-101 Interactive Digital Twin<span class="sr-only app-ownership">Sub-application of ITL.</span></span> <span class="sr-only">opens in a new tab</span></a></li>
+            <li data-focus-app="dtr" data-app-parent="itl"><span class="system-focus-entry"><code>dtr</code><span>DTR — Digital Triplet Laboratory<small class="system-focus-entry__subtitle">Physical ↔ Twin ↔ Intelligence</small><span class="sr-only app-ownership">Sub-application of ITL.</span></span></span></li></ul></li>
             <li data-focus-app="eng"><a href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer"><code>eng</code><span>Open Humanoid Engineering</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="ENG sub-applications">            <li data-focus-app="hex" data-app-parent="eng"><a href="https://hex.aserdargun.com/" target="_blank" rel="noreferrer"><code>hex</code><span>Humanoid Engineering Explorer<span class="sr-only app-ownership">Sub-application of ENG.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
           </ul>
         </article>
@@ -211,220 +216,275 @@
       <figure class="learning-diagram-wrap">
         <p class="mobile-map-hint" id="diagram-scroll-hint">Pinch with two fingers to zoom. Drag to explore the enlarged map.</p>
         <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="Application connection map">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1540" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1224 1285" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">
           <title id="ld-title">Connected applications and their sub-applications</title>
-          <desc id="ld-desc">Large boxes show the connected main applications. Smaller boxes are sub-applications, enclosed with their parent in a shared frame. AIA connects GPU and USL to LLM, then HNS, CTX, SEC and EVL. CTX feeds back to LLM. Assurance informs parallel LCL and CLD deployment; their shared laboratory DCL compares workload constraints before the path reaches WFM and SWI, then ITL and ENG. USL owns ADP, LLM owns TFL, HNS owns ARL, GPU owns GEX, WFM owns WML, SWI owns ANT and BEE, ITL owns PDT, and ENG owns HEX. A dot marks the shared physical-AI junction.</desc>
-          <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#c8ff36"/></marker></defs>
-          <g class="ld-stage-index" aria-hidden="true">
-            <text x="12" y="62">01 · ORIENT</text>
-            <text x="12" y="172">02 · FOUNDATIONS</text>
-            <text x="12" y="362">03 · RUNTIME</text>
-            <text x="12" y="472">04 · AGENT SYSTEM</text>
-            <text x="12" y="592">05 · QUALITY LOOP</text>
-            <text x="12" y="742">06 · DEPLOY</text>
-            <text x="12" y="1022">07 · PHYSICAL AI</text>
-            <text x="12" y="1262">08 · INDUSTRIAL TWIN</text>
-            <text x="12" y="1412">09 · EMBODIED AI</text>
+          <desc id="ld-desc">Eight stages connect foundations, runtime, agent systems, assurance, deployment, physical AI, industrial twins and embodied AI. Frames group GPU with POL and GEX; USL with ADP; LLM with TFL; HNS with ARL, DPL, CUL and AOS; CTX with MEM; WFM with WML; SWI with ANT and BEE; and ITL with PDT and DTR. SEC and EVL exchange feedback. LCL and CLD connect bidirectionally through their shared laboratory DCL. ENG leads to HEX. Arrows describe learning relationships, not runtime integrations.</desc>
+          <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#b7f45d"/></marker></defs>
+          <g class="ld-stage-index">
+            <path class="ld-stage-rule" d="M 258 22 V 1205 M 30 1205 H 1192"/>
+            <path class="ld-stage-rule" d="M 30 22 H 1192"/>
+            <text x="33" y="55" class="ld-stage-title"><tspan class="ld-stage-number">01</tspan><tspan dx="12">· FOUNDATION</tspan></text>
+            <text x="33" y="81" class="ld-stage-copy"><tspan x="33" dy="0">Ecosystem, compute, runtime</tspan><tspan x="33" dy="19">and adaptation foundations;</tspan><tspan x="33" dy="19">explore programming</tspan><tspan x="33" dy="19">foundations in POL and</tspan><tspan x="33" dy="19">experiment with GEX, TFL and</tspan><tspan x="33" dy="19">ADP.</tspan></text>
+            <path class="ld-stage-rule" d="M 30 230 H 1192"/>
+            <text x="33" y="263" class="ld-stage-title"><tspan class="ld-stage-number">02</tspan><tspan dx="12">· RUNTIME</tspan></text>
+            <text x="33" y="289" class="ld-stage-copy"><tspan x="33" dy="0">Model runtime and serving</tspan><tspan x="33" dy="15">layer; support multiple</tspan><tspan x="33" dy="15">providers and hardware</tspan><tspan x="33" dy="15">backends.</tspan></text>
+            <path class="ld-stage-rule" d="M 30 345 H 1192"/>
+            <text x="33" y="378" class="ld-stage-title"><tspan class="ld-stage-number">03</tspan><tspan dx="12">· AGENT SYSTEM</tspan></text>
+            <text x="33" y="404" class="ld-stage-copy"><tspan x="33" dy="0">Agents reason, use context,</tspan><tspan x="33" dy="19">tools and computer</tspan><tspan x="33" dy="19">environments; turn research</tspan><tspan x="33" dy="19">into open-source runtimes and</tspan><tspan x="33" dy="19">reusable components.</tspan></text>
+            <path class="ld-stage-rule" d="M 30 534 H 1192"/>
+            <text x="33" y="567" class="ld-stage-title"><tspan class="ld-stage-number">04</tspan><tspan dx="12">· ASSURANCE</tspan></text>
+            <text x="33" y="593" class="ld-stage-copy"><tspan x="33" dy="0">Security and evaluation</tspan><tspan x="33" dy="19">contracts for bounded,</tspan><tspan x="33" dy="19">reviewable behavior.</tspan></text>
+            <path class="ld-stage-rule" d="M 30 680 H 1192"/>
+            <text x="33" y="713" class="ld-stage-title"><tspan class="ld-stage-number">05</tspan><tspan dx="12">· DEPLOYMENT</tspan></text>
+            <text x="33" y="739" class="ld-stage-copy"><tspan x="33" dy="0">Local and cloud deployment</tspan><tspan x="33" dy="18">options; test workload,</tspan><tspan x="33" dy="18">memory, privacy and cost</tspan><tspan x="33" dy="18">assumptions.</tspan></text>
+            <path class="ld-stage-rule" d="M 30 804 H 1192"/>
+            <text x="33" y="837" class="ld-stage-title"><tspan class="ld-stage-number">06</tspan><tspan dx="12">· PHYSICAL AI</tspan></text>
+            <text x="33" y="863" class="ld-stage-copy"><tspan x="33" dy="0">World models and swarm</tspan><tspan x="33" dy="19">intelligence; connect to</tspan><tspan x="33" dy="19">industrial twins and humanoid</tspan><tspan x="33" dy="19">systems.</tspan></text>
+            <path class="ld-stage-rule" d="M 30 948 H 1192"/>
+            <text x="33" y="981" class="ld-stage-title"><tspan class="ld-stage-number">07</tspan><tspan dx="12">· INDUSTRIAL TWIN</tspan></text>
+            <text x="33" y="1007" class="ld-stage-copy"><tspan x="33" dy="0">Digital twins and digital</tspan><tspan x="33" dy="19">triplets for industrial</tspan><tspan x="33" dy="19">systems and real-world</tspan><tspan x="33" dy="19">research.</tspan></text>
+            <path class="ld-stage-rule" d="M 30 1110 H 1192"/>
+            <text x="33" y="1143" class="ld-stage-title"><tspan class="ld-stage-number">08</tspan><tspan dx="12">· EMBODIED AI</tspan></text>
+            <text x="33" y="1169" class="ld-stage-copy"><tspan x="33" dy="0">Humanoid and embodied</tspan><tspan x="33" dy="19">intelligence research.</tspan></text>
           </g>
           <g class="ld-families" aria-hidden="true">
-            <g data-learning-family="gpu"><rect x="194" y="120" width="212" height="186" rx="15"/><text x="396" y="133">GPU + sub-applications</text></g>
-            <g data-learning-family="llm"><rect x="439" y="310" width="387" height="100" rx="15"/><text x="816" y="323">LLM + sub-applications</text></g>
-            <g data-learning-family="usl"><rect x="694" y="120" width="377" height="100" rx="15"/><text x="1061" y="133">USL + sub-applications</text></g>
-            <g data-learning-family="hns"><rect x="424" y="420" width="417" height="100" rx="15"/><text x="831" y="433">HNS + sub-applications</text></g>
-            <g data-learning-family="wfm"><rect x="179" y="970" width="242" height="186" rx="15"/><text x="411" y="983">WFM + sub-applications</text></g>
-            <g data-learning-family="swi"><rect x="624" y="970" width="352" height="186" rx="15"/><text x="966" y="983">SWI + sub-applications</text></g>
-            <g data-learning-family="itl"><rect x="424" y="1210" width="417" height="100" rx="15"/><text x="831" y="1223">ITL + sub-applications</text></g>
-            <g data-learning-family="eng"><rect x="424" y="1360" width="417" height="100" rx="15"/><text x="831" y="1373">ENG + sub-applications</text></g>
-            <g data-learning-family="cld-lcl"><rect x="264" y="690" width="782" height="120" rx="15"/><text x="1036" y="703">CLD + LCL · shared laboratory</text></g>
+            <g data-learning-family="gpu"><rect x="300" y="92" width="279" height="130" rx="12"/></g>
+            <g data-learning-family="usl"><rect x="716" y="92" width="440" height="82" rx="12"/></g>
+            <g data-learning-family="llm"><rect x="519" y="247" width="447" height="79" rx="12"/></g>
+            <g data-learning-family="hns"><rect x="364" y="356" width="712" height="164" rx="12"/></g>
+            <g data-learning-family="ctx"><rect x="282" y="547" width="228" height="123" rx="12"/></g>
+            <g data-learning-family="wfm"><rect x="335" y="813" width="288" height="122" rx="12"/></g>
+            <g data-learning-family="swi"><rect x="754" y="813" width="316" height="122" rx="12"/></g>
+            <g data-learning-family="itl"><rect x="502" y="961" width="355" height="138" rx="12"/></g>
           </g>
           <g class="ld-links" aria-hidden="true">
-            <path data-learning-connector="dcl-to-stage-07" class="ld-edge-horizon" d="M 940 767 V 900 H 550 V 956"/>
-            <path data-learning-edge="aia-to-gpu" class="ld-edge-primary" d="M 510 94 V 112 H 300 V 140" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="aia-to-llm" class="ld-edge-primary" d="M 550 94 V 330" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="aia-to-usl" class="ld-edge-primary" d="M 590 94 V 112 H 800 V 140" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="gpu-to-llm" class="ld-edge-primary" d="M 390 172 H 470 V 304 H 510 V 330" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="usl-to-llm" class="ld-edge-primary" d="M 800 204 V 304 H 590 V 330" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="llm-to-hns" class="ld-edge-primary" d="M 550 394 V 440" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="hns-to-ctx" class="ld-edge-primary" d="M 500 504 V 532 H 300 V 560" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="hns-to-sec" class="ld-edge-primary" d="M 550 504 V 560" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="hns-to-evl" class="ld-edge-primary" d="M 600 504 V 532 H 800 V 560" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="ctx-to-llm" class="ld-edge-context" d="M 210 592 H 170 V 362 H 455" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="sec-to-lcl" class="ld-edge-decision" d="M 510 624 V 652 H 375 V 710" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="sec-to-cld" class="ld-edge-decision" d="M 590 624 V 652 H 725 V 710" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="evl-to-cld" class="ld-edge-context" d="M 820 624 V 675 H 765 V 710" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="ctx-to-lcl" class="ld-edge-context" d="M 280 624 V 675 H 335 V 710" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="lcl-to-dcl" class="ld-edge-child" d="M 375 774 V 794 H 875 V 767" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="cld-to-dcl" class="ld-edge-child" d="M 820 742 H 850" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="deployment-to-wfm" class="ld-edge-horizon" d="M 550 956 H 300 V 990" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="deployment-to-swi" class="ld-edge-horizon" d="M 550 956 H 800 V 990" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 405 1022 H 470 V 1200 H 510 V 1230" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="swi-to-itl" class="ld-edge-horizon" d="M 685 1022 H 610 V 1200 H 590 V 1230" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 550 1294 V 1380" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="gpu-to-gex" class="ld-edge-child" d="M 300 204 V 222 H 300 V 240" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="llm-to-tfl" class="ld-edge-child" d="M 645 362 H 660 V 362" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="usl-to-adp" class="ld-edge-child" d="M 890 172 H 905 V 172" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="hns-to-arl" class="ld-edge-child" d="M 660 472 H 675 V 472" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="wfm-to-wml" class="ld-edge-child" d="M 300 1054 V 1072 H 300 V 1090" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="swi-to-ant" class="ld-edge-child" d="M 765 1054 V 1072 H 715 V 1090" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="swi-to-bee" class="ld-edge-child" d="M 835 1054 V 1072 H 885 V 1090" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="itl-to-pdt" class="ld-edge-child" d="M 660 1262 H 675 V 1262" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="eng-to-hex" class="ld-edge-child" d="M 660 1412 H 675 V 1412" marker-end="url(#ld-arrow)"/>
-            <circle class="ld-junction" cx="550" cy="956" r="3"/>
+            <path data-learning-connector="assurance-bus" d="M 416 680 H 962"/>
+            <path data-learning-connector="sec-to-deployment" d="M 638 647 V 680"/>
+            <path data-learning-connector="evl-to-deployment" d="M 922 647 V 680"/>
+            <path data-learning-connector="dcl-to-stage-06" d="M 683 765 V 784"/>
+            <path data-learning-edge="aia-to-gpu" class="ld-edge-primary" d="M 570 69 H 418 V 102" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-usl" class="ld-edge-primary" d="M 746 69 H 827 V 103" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-llm" class="ld-edge-primary" d="M 645 85 V 258" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="gpu-to-llm" class="ld-edge-primary" d="M 558 222 V 258" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="usl-to-llm" class="ld-edge-primary" d="M 826 174 V 224 H 714 V 258" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="usl-to-adp" class="ld-edge-child" d="M 927 133 H 967" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="llm-to-tfl" class="ld-edge-child" d="M 740 287 H 778" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="llm-to-hns" class="ld-edge-primary" d="M 641 326 V 366" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-arl" class="ld-edge-child" d="M 453.5 419 V 440" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-dpl" class="ld-edge-child" d="M 627 419 V 440" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-cul" class="ld-edge-child" d="M 799.5 419 V 440" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-aos" class="ld-edge-child" d="M 976 419 V 440" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-ctx" class="ld-edge-primary" d="M 408 520 V 557" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-sec" class="ld-edge-primary" d="M 629 520 V 587" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="hns-to-evl" class="ld-edge-primary" d="M 923 520 V 587" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="ctx-to-sec" class="ld-edge-primary" d="M 510 617 H 550" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="sec-to-evl" class="ld-edge-decision" d="M 730 617 H 827" marker-start="url(#ld-arrow)" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="assurance-to-lcl" class="ld-edge-decision" d="M 416 680 V 707" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="assurance-to-dcl" class="ld-edge-decision" d="M 683 680 V 707" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="assurance-to-cld" class="ld-edge-decision" d="M 962 680 V 707" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="lcl-to-dcl" class="ld-edge-child" d="M 522 735 H 576" marker-start="url(#ld-arrow)" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="cld-to-dcl" class="ld-edge-child" d="M 849 735 H 788" marker-start="url(#ld-arrow)" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="deployment-to-wfm" class="ld-edge-horizon" d="M 683 784 H 466 V 821" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="deployment-to-swi" class="ld-edge-horizon" d="M 683 784 H 922 V 821" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 445 935 V 994 H 512" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="swi-to-itl" class="ld-edge-horizon" d="M 920 935 V 994 H 847" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 680 1099 V 1126" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="eng-to-hex" class="ld-edge-child" d="M 788 1154 H 846" marker-end="url(#ld-arrow)"/>
+            <circle class="ld-junction" cx="638" cy="680" r="2.2"/>
+            <circle class="ld-junction" cx="683" cy="680" r="2.2"/>
+            <circle class="ld-junction" cx="922" cy="680" r="2.2"/>
+            <circle class="ld-junction" cx="683" cy="784" r="2.2"/>
           </g>
           <g class="ld-nodes">
             <a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent ld-node-aia" data-learning-app="aia" data-learning-role="map" aria-label="AIA AI Ecosystem Atlas. An evidence-backed research console for comparing AI products and developer ecosystems." aria-describedby="ld-new-tab-aia-en">
               <title id="ld-new-tab-aia-en">Opens in a new tab</title>
-              <rect x="460" y="30" width="180" height="64" rx="10"/>
-              <text x="550" y="57" class="ld-code">AIA</text>
-              <text x="550" y="78" class="ld-label">AI ecosystem</text>
+              <rect x="570" y="27" width="176" height="58" rx="7"/>
+              <text x="658" y="55" class="ld-code">AIA</text>
+              <text x="658" y="74" class="ld-label"><tspan x="658" dy="0">AI ecosystem</tspan></text>
             </a>
             <a href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="gpu" data-learning-role="foundation" aria-label="GPU GPU Kernel Engineering — Kernel Atlas. A bilingual 12-week interactive atlas for CUDA, Triton, GPU memory, LLM operators, correctness, profiling, inference, and multi-GPU systems." aria-describedby="ld-new-tab-gpu-en">
               <title id="ld-new-tab-gpu-en">Opens in a new tab</title>
-              <rect x="210" y="140" width="180" height="64" rx="10"/>
-              <text x="300" y="167" class="ld-code">GPU</text>
-              <text x="300" y="188" class="ld-label">GPU kernels</text>
+              <rect x="310" y="102" width="258" height="54" rx="7"/>
+              <text x="439" y="128" class="ld-code">GPU</text>
+              <text x="439" y="147" class="ld-label"><tspan x="439" dy="0">GPU kernels</tspan></text>
             </a>
+            <g role="group" class="ld-node ld-node-child" data-learning-app="pol" data-learning-role="practice-lab" data-learning-parent="gpu" aria-label="POL POL — Programming Languages. Sub-application of GPU. Programming basics">
+              <rect x="310" y="164" width="131" height="49" rx="7"/>
+              <text x="375.5" y="185.5" class="ld-code">POL</text>
+              <text x="375.5" y="204.5" class="ld-label"><tspan x="375.5" dy="0">Programming basics</tspan></text>
+            </g>
             <a href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="gex" data-learning-role="practice-lab" data-learning-parent="gpu" aria-label="GEX GPU Execution Explorer. Sub-application of GPU. Trace GPU anatomy, kernel launches, warp masks, memory access, and matrix tiles through six interactive lessons. Results come from an educational execution model, not profiler measurements." aria-describedby="ld-new-tab-gex-en">
               <title id="ld-new-tab-gex-en">Opens in a new tab</title>
-              <rect x="225" y="240" width="150" height="50" rx="7"/>
-              <text x="300" y="261" class="ld-code">GEX</text>
-              <text x="300" y="279" class="ld-label">Kernel execution</text>
-            </a>
-            <a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="llm" data-learning-role="hub" aria-label="LLM LLM Runtime &amp; Serving Atlas. A source-backed field guide to LLM runtimes and serving engines across seven architectural layers, with an interactive learning layer." aria-describedby="ld-new-tab-llm-en">
-              <title id="ld-new-tab-llm-en">Opens in a new tab</title>
-              <rect x="455" y="330" width="190" height="64" rx="10"/>
-              <text x="550" y="357" class="ld-code">LLM</text>
-              <text x="550" y="378" class="ld-label">Runtime · serving</text>
-            </a>
-            <a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="tfl" data-learning-role="practice-lab" data-learning-parent="llm" aria-label="TFL TFL — Token Flow Laboratory. Sub-application of LLM. Follow a simulated request through queueing, prefill, KV cache, decode and token delivery. Compare scheduling and batching trade-offs; timings and outputs are illustrative, not measured inference." aria-describedby="ld-new-tab-tfl-en">
-              <title id="ld-new-tab-tfl-en">Opens in a new tab</title>
-              <rect x="660" y="337" width="150" height="50" rx="7"/>
-              <text x="735" y="358" class="ld-code">TFL</text>
-              <text x="735" y="376" class="ld-label">Token serving</text>
+              <rect x="450" y="164" width="118" height="49" rx="7"/>
+              <text x="509" y="185.5" class="ld-code">GEX</text>
+              <text x="509" y="204.5" class="ld-label"><tspan x="509" dy="0">Kernel execution</tspan></text>
             </a>
             <a href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="usl" data-learning-role="adapt" aria-label="USL Unsloth Studio Learning Atlas. A bilingual, evidence-aware learning atlas for Unsloth Studio, LoRA, QLoRA, dataset engineering, evaluation, and local model deployment." aria-describedby="ld-new-tab-usl-en">
               <title id="ld-new-tab-usl-en">Opens in a new tab</title>
-              <rect x="710" y="140" width="180" height="64" rx="10"/>
-              <text x="800" y="167" class="ld-code">USL</text>
-              <text x="800" y="188" class="ld-label">Model training</text>
+              <rect x="727" y="103" width="200" height="59" rx="7"/>
+              <text x="827" y="131.5" class="ld-code">USL</text>
+              <text x="827" y="150.5" class="ld-label"><tspan x="827" dy="0">Model training</tspan></text>
             </a>
             <a href="https://adp.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="adp" data-learning-role="practice-lab" data-learning-parent="usl" aria-label="ADP ADP — Model Adaptation Laboratory. Sub-application of USL. Explore Full FT, LoRA and QLoRA through parameter counts, memory estimates, data preparation and synthetic training/evaluation experiments. USL provides the adaptation foundation; no real model is trained." aria-describedby="ld-new-tab-adp-en">
               <title id="ld-new-tab-adp-en">Opens in a new tab</title>
-              <rect x="905" y="147" width="150" height="50" rx="7"/>
-              <text x="980" y="168" class="ld-code">ADP</text>
-              <text x="980" y="186" class="ld-label">Model adaptation</text>
+              <rect x="967" y="104" width="178" height="58" rx="7"/>
+              <text x="1056" y="130" class="ld-code">ADP</text>
+              <text x="1056" y="149" class="ld-label"><tspan x="1056" dy="0">Model adaptation</tspan></text>
+            </a>
+            <a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="llm" data-learning-role="hub" aria-label="LLM LLM Runtime &amp; Serving Atlas. A source-backed field guide to LLM runtimes and serving engines across seven architectural layers, with an interactive learning layer." aria-describedby="ld-new-tab-llm-en">
+              <title id="ld-new-tab-llm-en">Opens in a new tab</title>
+              <rect x="530" y="258" width="210" height="58" rx="7"/>
+              <text x="635" y="286" class="ld-code">LLM</text>
+              <text x="635" y="305" class="ld-label"><tspan x="635" dy="0">Runtime · serving</tspan></text>
+            </a>
+            <a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="tfl" data-learning-role="practice-lab" data-learning-parent="llm" aria-label="TFL TFL — Token Flow Laboratory. Sub-application of LLM. Follow a simulated request through queueing, prefill, KV cache, decode and token delivery. Compare scheduling and batching trade-offs; timings and outputs are illustrative, not measured inference." aria-describedby="ld-new-tab-tfl-en">
+              <title id="ld-new-tab-tfl-en">Opens in a new tab</title>
+              <rect x="778" y="258" width="177" height="58" rx="7"/>
+              <text x="866.5" y="284" class="ld-code">TFL</text>
+              <text x="866.5" y="303" class="ld-label"><tspan x="866.5" dy="0">Token serving</tspan></text>
             </a>
             <a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="hns" data-learning-role="harness" aria-label="HNS Harness Engineering Observatory. A bilingual, source-backed observatory for comparing the harnesses, runtimes, orchestration, execution, verification, and observability layers that turn model capability into reliable agent systems." aria-describedby="ld-new-tab-hns-en">
               <title id="ld-new-tab-hns-en">Opens in a new tab</title>
-              <rect x="440" y="440" width="220" height="64" rx="10"/>
-              <text x="550" y="467" class="ld-code">HNS</text>
-              <text x="550" y="488" class="ld-label">Harness engineering</text>
+              <rect x="374" y="366" width="692" height="53" rx="7"/>
+              <text x="720" y="391.5" class="ld-code">HNS</text>
+              <text x="720" y="410.5" class="ld-label"><tspan x="720" dy="0">Harness engineering</tspan></text>
             </a>
             <a href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="arl" data-learning-role="practice-lab" data-learning-parent="hns" aria-label="ARL ARL — Agent Runtime Laboratory. Sub-application of HNS. Inspect a deterministic agent run through harness, context, security and evaluation lenses. Explore tool use, evidence and one-use approval; all actions remain inside the simulation." aria-describedby="ld-new-tab-arl-en">
               <title id="ld-new-tab-arl-en">Opens in a new tab</title>
-              <rect x="675" y="447" width="150" height="50" rx="7"/>
-              <text x="750" y="468" class="ld-code">ARL</text>
-              <text x="750" y="486" class="ld-label">Agent runtime</text>
+              <rect x="374" y="440" width="159" height="68" rx="7"/>
+              <text x="453.5" y="471" class="ld-code">ARL</text>
+              <text x="453.5" y="490" class="ld-label"><tspan x="453.5" dy="0">Agent runtime</tspan></text>
             </a>
+            <g role="group" class="ld-node ld-node-child" data-learning-app="dpl" data-learning-role="practice-lab" data-learning-parent="hns" aria-label="DPL DPL — Decision Plane Laboratory. Sub-application of HNS. Decision plane. System One ↔ System Two">
+              <rect x="541" y="440" width="172" height="68" rx="7"/>
+              <text x="627" y="463.5" class="ld-code">DPL</text>
+              <text x="627" y="482.5" class="ld-label"><tspan x="627" dy="0">Decision plane</tspan></text>
+              <text x="627" y="497.5" class="ld-subtitle">System One ↔ System Two</text>
+            </g>
+            <g role="group" class="ld-node ld-node-child" data-learning-app="cul" data-learning-role="practice-lab" data-learning-parent="hns" aria-label="CUL CUL — Computer Use Laboratory. Sub-application of HNS. Computer use">
+              <rect x="721" y="440" width="157" height="68" rx="7"/>
+              <text x="799.5" y="471" class="ld-code">CUL</text>
+              <text x="799.5" y="490" class="ld-label"><tspan x="799.5" dy="0">Computer use</tspan></text>
+            </g>
+            <g role="group" class="ld-node ld-node-child" data-learning-app="aos" data-learning-role="practice-lab" data-learning-parent="hns" aria-label="AOS Agent Operating System. Sub-application of HNS. Agent operating system. Open-source agent runtime">
+              <rect x="886" y="440" width="180" height="68" rx="7"/>
+              <text x="976" y="463.5" class="ld-code">AOS</text>
+              <text x="976" y="482.5" class="ld-label"><tspan x="976" dy="0">Agent operating system</tspan></text>
+              <text x="976" y="497.5" class="ld-subtitle">Open-source agent runtime</text>
+            </g>
             <a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="ctx" data-learning-role="context" aria-label="CTX Context &amp; Knowledge Engineering. A bilingual, source-backed field guide to the information system that runs before a model answers, from ingestion and retrieval through citation, caching, and memory." aria-describedby="ld-new-tab-ctx-en">
               <title id="ld-new-tab-ctx-en">Opens in a new tab</title>
-              <rect x="210" y="560" width="180" height="64" rx="10"/>
-              <text x="300" y="587" class="ld-code">CTX</text>
-              <text x="300" y="608" class="ld-label">Context · knowledge</text>
+              <rect x="293" y="557" width="206" height="46" rx="7"/>
+              <text x="396" y="579" class="ld-code">CTX</text>
+              <text x="396" y="598" class="ld-label"><tspan x="396" dy="0">Context · knowledge</tspan></text>
             </a>
+            <g role="group" class="ld-node ld-node-child" data-learning-app="mem" data-learning-role="practice-lab" data-learning-parent="ctx" aria-label="MEM MEM — Agent Memory Laboratory. Sub-application of CTX. Agent memory">
+              <rect x="295" y="613" width="202" height="49" rx="7"/>
+              <text x="396" y="634.5" class="ld-code">MEM</text>
+              <text x="396" y="653.5" class="ld-label"><tspan x="396" dy="0">Agent memory</tspan></text>
+            </g>
             <a href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="sec" data-learning-role="security" aria-label="SEC AI Systems Security Observatory. A bilingual, evidence-aware observatory for tracing AI-agent trust from model intent through identity, authorization, constrained action, audit, and incident recovery." aria-describedby="ld-new-tab-sec-en">
               <title id="ld-new-tab-sec-en">Opens in a new tab</title>
-              <rect x="460" y="560" width="180" height="64" rx="10"/>
-              <text x="550" y="587" class="ld-code">SEC</text>
-              <text x="550" y="608" class="ld-label">Trust · security</text>
+              <rect x="550" y="587" width="180" height="60" rx="7"/>
+              <text x="640" y="616" class="ld-code">SEC</text>
+              <text x="640" y="635" class="ld-label"><tspan x="640" dy="0">Trust · security</tspan></text>
             </a>
             <a href="https://evl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="evl" data-learning-role="evaluation" aria-label="EVL AI Evaluation &amp; Reliability Lab. A bilingual, evidence-aware workbench for evaluation contracts and deterministic AI release decisions across output, trajectory, outcome, robustness, safety, and operations." aria-describedby="ld-new-tab-evl-en">
               <title id="ld-new-tab-evl-en">Opens in a new tab</title>
-              <rect x="710" y="560" width="180" height="64" rx="10"/>
-              <text x="800" y="587" class="ld-code">EVL</text>
-              <text x="800" y="608" class="ld-label">Evaluation</text>
+              <rect x="827" y="587" width="194" height="60" rx="7"/>
+              <text x="924" y="616" class="ld-code">EVL</text>
+              <text x="924" y="635" class="ld-label"><tspan x="924" dy="0">Evaluation</tspan></text>
             </a>
             <a href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="lcl" data-learning-role="deployment" data-learning-plane="deployment" aria-label="LCL Local Compute Lab. A source-backed decision workbench matching open-weight model requirements with NVIDIA, AMD, and Apple devices for a local AI lab." aria-describedby="ld-new-tab-lcl-en">
               <title id="ld-new-tab-lcl-en">Opens in a new tab</title>
-              <rect x="280" y="710" width="190" height="64" rx="10"/>
-              <text x="375" y="737" class="ld-code">LCL</text>
-              <text x="375" y="758" class="ld-label">Local compute</text>
-            </a>
-            <a href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="cld" data-learning-role="deployment" data-learning-plane="deployment" aria-label="CLD Cloud Provider Cost Comparison. A source-backed decision tool comparing pre-tax USD costs for cloud services available from Türkiye." aria-describedby="ld-new-tab-cld-en">
-              <title id="ld-new-tab-cld-en">Opens in a new tab</title>
-              <rect x="630" y="710" width="190" height="64" rx="10"/>
-              <text x="725" y="737" class="ld-code">CLD</text>
-              <text x="725" y="758" class="ld-label">Cloud deployment</text>
+              <rect x="319" y="707" width="203" height="57" rx="7"/>
+              <text x="420.5" y="734.5" class="ld-code">LCL</text>
+              <text x="420.5" y="753.5" class="ld-label"><tspan x="420.5" dy="0">Local compute</tspan></text>
             </a>
             <a href="https://dcl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="dcl" data-learning-role="decision-lab" data-learning-parents="cld lcl" aria-label="DCL Deployment Choice Laboratory. Shared laboratory of CLD + LCL. The shared laboratory of CLD and LCL. Compare local hardware, cloud GPUs, managed inference and token APIs against workload, memory, privacy and cost assumptions. Hard constraints and educational estimates explain conditional choices; no live pricing or universal winner is claimed." aria-describedby="ld-new-tab-dcl-en">
               <title id="ld-new-tab-dcl-en">Opens in a new tab</title>
-              <rect x="850" y="717" width="180" height="50" rx="7"/>
-              <text x="940" y="738" class="ld-code">DCL</text>
-              <text x="940" y="756" class="ld-label">Shared deployment lab</text>
+              <rect x="576" y="707" width="212" height="58" rx="7"/>
+              <text x="682" y="733" class="ld-code">DCL</text>
+              <text x="682" y="752" class="ld-label"><tspan x="682" dy="0">Shared lab</tspan></text>
+            </a>
+            <a href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="cld" data-learning-role="deployment" data-learning-plane="deployment" aria-label="CLD Cloud Provider Cost Comparison. A source-backed decision tool comparing pre-tax USD costs for cloud services available from Türkiye." aria-describedby="ld-new-tab-cld-en">
+              <title id="ld-new-tab-cld-en">Opens in a new tab</title>
+              <rect x="849" y="707" width="222" height="57" rx="7"/>
+              <text x="960" y="734.5" class="ld-code">CLD</text>
+              <text x="960" y="753.5" class="ld-label"><tspan x="960" dy="0">Cloud deployment</tspan></text>
             </a>
             <a href="https://wfm.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="wfm" data-learning-role="world" aria-label="WFM World Models Atlas. A living research atlas tracing how world models connect perception, prediction, planning, and action through primary sources." aria-describedby="ld-new-tab-wfm-en">
               <title id="ld-new-tab-wfm-en">Opens in a new tab</title>
-              <rect x="195" y="990" width="210" height="64" rx="10"/>
-              <text x="300" y="1017" class="ld-code">WFM</text>
-              <text x="300" y="1038" class="ld-label">World models</text>
+              <rect x="347" y="821" width="264" height="47" rx="7"/>
+              <text x="479" y="843.5" class="ld-code">WFM</text>
+              <text x="479" y="862.5" class="ld-label"><tspan x="479" dy="0">World models</tspan></text>
             </a>
             <a href="https://wml.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="wml" data-learning-role="practice-lab" data-learning-parent="wfm" aria-label="WML World Model Laboratory. Sub-application of WFM. Explore observation, belief, prediction, planning, and counterfactual branches in WFM’s experiment laboratory. Compare three hand-coded predictors against a simulated world; these are not trained foundation models." aria-describedby="ld-new-tab-wml-en">
               <title id="ld-new-tab-wml-en">Opens in a new tab</title>
-              <rect x="225" y="1090" width="150" height="50" rx="7"/>
-              <text x="300" y="1111" class="ld-code">WML</text>
-              <text x="300" y="1129" class="ld-label">Prediction experiments</text>
+              <rect x="349" y="876" width="260" height="50" rx="7"/>
+              <text x="479" y="898" class="ld-code">WML</text>
+              <text x="479" y="917" class="ld-label"><tspan x="479" dy="0">World model laboratory</tspan></text>
             </a>
             <a href="https://swi.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="swi" data-learning-role="collective" aria-label="SWI SWI — Swarm Intelligence. A bilingual research platform connecting biological mechanisms, source-backed studies, and agent experiment recipes. ANT and BEE extend its collective-intelligence research into interactive colony laboratories." aria-describedby="ld-new-tab-swi-en">
               <title id="ld-new-tab-swi-en">Opens in a new tab</title>
-              <rect x="685" y="990" width="230" height="64" rx="10"/>
-              <text x="800" y="1017" class="ld-code">SWI</text>
-              <text x="800" y="1038" class="ld-label">Swarm intelligence</text>
+              <rect x="766" y="821" width="293" height="47" rx="7"/>
+              <text x="912.5" y="843.5" class="ld-code">SWI</text>
+              <text x="912.5" y="862.5" class="ld-label"><tspan x="912.5" dy="0">Swarm intelligence</tspan></text>
             </a>
             <a href="https://ant.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="ant" data-learning-role="colony-lab" data-learning-parent="swi" aria-label="ANT ANT — Ant Colony Intelligence Laboratory. Sub-application of SWI. A colony experiment lab within SWI’s research family. Explore how local rules, pheromone trails, evaporation, and exploration produce collective foraging through reproducible simulations." aria-describedby="ld-new-tab-ant-en">
               <title id="ld-new-tab-ant-en">Opens in a new tab</title>
-              <rect x="640" y="1090" width="150" height="50" rx="7"/>
-              <text x="715" y="1111" class="ld-code">ANT</text>
-              <text x="715" y="1129" class="ld-label">Pheromone trails</text>
+              <rect x="767" y="876" width="144" height="50" rx="7"/>
+              <text x="839" y="898" class="ld-code">ANT</text>
+              <text x="839" y="917" class="ld-label"><tspan x="839" dy="0">Ant colony</tspan></text>
             </a>
             <a href="https://bee.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="bee" data-learning-role="colony-lab" data-learning-parent="swi" aria-label="BEE BEE — Honey Bee Collective Intelligence Laboratory. Sub-application of SWI. A colony experiment lab within SWI’s research family. Study honey bee discovery, waggle-dance recruitment, and resource allocation, including a paired control colony with dance communication disabled." aria-describedby="ld-new-tab-bee-en">
               <title id="ld-new-tab-bee-en">Opens in a new tab</title>
-              <rect x="810" y="1090" width="150" height="50" rx="7"/>
-              <text x="885" y="1111" class="ld-code">BEE</text>
-              <text x="885" y="1129" class="ld-label">Dance communication</text>
+              <rect x="919" y="876" width="140" height="50" rx="7"/>
+              <text x="989" y="898" class="ld-code">BEE</text>
+              <text x="989" y="917" class="ld-label"><tspan x="989" dy="0">Honey bee</tspan></text>
             </a>
             <a href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="itl" data-learning-role="twin" aria-label="ITL Industrial Twin Lab. A public research publication and deterministic concept demonstrator for isolated, reproducible industrial machine-intelligence experiments in digital twins." aria-describedby="ld-new-tab-itl-en">
               <title id="ld-new-tab-itl-en">Opens in a new tab</title>
-              <rect x="440" y="1230" width="220" height="64" rx="10"/>
-              <text x="550" y="1257" class="ld-code">ITL</text>
-              <text x="550" y="1278" class="ld-label">Industrial twins</text>
+              <rect x="512" y="971" width="335" height="47" rx="7"/>
+              <text x="679.5" y="993.5" class="ld-code">ITL</text>
+              <text x="679.5" y="1012.5" class="ld-label"><tspan x="679.5" dy="0">Industrial twin lab</tspan></text>
             </a>
             <a href="https://pdt.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="pdt" data-learning-role="practice-lab" data-learning-parent="itl" aria-label="PDT P-101 Interactive Digital Twin. Sub-application of ITL. Inspect a centrifugal pump, its components, and condition scenarios as an Industrial Twin Lab teaching exhibit. Geometry is simplified and all condition signals are synthetic." aria-describedby="ld-new-tab-pdt-en">
               <title id="ld-new-tab-pdt-en">Opens in a new tab</title>
-              <rect x="675" y="1237" width="150" height="50" rx="7"/>
-              <text x="750" y="1258" class="ld-code">PDT</text>
-              <text x="750" y="1276" class="ld-label">Pump digital twin</text>
+              <rect x="512" y="1026" width="163" height="64" rx="7"/>
+              <text x="593.5" y="1047.5" class="ld-code">PDT</text>
+              <text x="593.5" y="1066.5" class="ld-label"><tspan x="593.5" dy="0">P-101 interactive</tspan><tspan x="593.5" dy="15">digital twin</tspan></text>
             </a>
+            <g role="group" class="ld-node ld-node-child" data-learning-app="dtr" data-learning-role="practice-lab" data-learning-parent="itl" aria-label="DTR DTR — Digital Triplet Laboratory. Sub-application of ITL. Digital triplet. Physical ↔ Twin ↔ Intelligence">
+              <rect x="684" y="1026" width="163" height="64" rx="7"/>
+              <text x="765.5" y="1047.5" class="ld-code">DTR</text>
+              <text x="765.5" y="1066.5" class="ld-label"><tspan x="765.5" dy="0">Digital triplet</tspan></text>
+              <text x="765.5" y="1081.5" class="ld-subtitle">Physical ↔ Twin ↔ Intelligence</text>
+            </g>
             <a href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="eng" data-learning-role="horizon" aria-label="ENG Open Humanoid Engineering. An English manifesto for AI-native humanoid engineering education. The four-year spine, AI lab pipeline, and dated 2026 frontier signals define its primary sources of truth; HEX provides a companion exploration." aria-describedby="ld-new-tab-eng-en">
               <title id="ld-new-tab-eng-en">Opens in a new tab</title>
-              <rect x="440" y="1380" width="220" height="64" rx="10"/>
-              <text x="550" y="1407" class="ld-code">ENG</text>
-              <text x="550" y="1428" class="ld-label">Humanoid engineering</text>
+              <rect x="572" y="1126" width="216" height="57" rx="7"/>
+              <text x="680" y="1153.5" class="ld-code">ENG</text>
+              <text x="680" y="1172.5" class="ld-label"><tspan x="680" dy="0">Humanoid engineering</tspan></text>
             </a>
             <a href="https://hex.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="hex" data-learning-role="practice-lab" data-learning-parent="eng" aria-label="HEX Humanoid Engineering Explorer. Sub-application of ENG. Explore humanoid structure, joints, actuation, sensors, and power/data paths through ENG’s interactive 3D learning object. Movements are kinematic teaching aids, with no asserted dynamics or hardware performance." aria-describedby="ld-new-tab-hex-en">
               <title id="ld-new-tab-hex-en">Opens in a new tab</title>
-              <rect x="675" y="1387" width="150" height="50" rx="7"/>
-              <text x="750" y="1408" class="ld-code">HEX</text>
-              <text x="750" y="1426" class="ld-label">Humanoid exploration</text>
+              <rect x="846" y="1126" width="179" height="57" rx="7"/>
+              <text x="935.5" y="1151.5" class="ld-code">HEX</text>
+              <text x="935.5" y="1170.5" class="ld-label"><tspan x="935.5" dy="0">Humanoid exploration</tspan></text>
             </a>
           </g>
           <g class="ld-legend" aria-hidden="true">
-            <path d="M 200 1510 H 232"/><text x="244" y="1514">Main application flow</text>
-            <path class="ld-legend-context" d="M 455 1510 H 487"/><text x="499" y="1514">Context / decision</text>
-            <path class="ld-legend-child" d="M 710 1510 H 742"/><text x="754" y="1514">Sub-application</text>
+            <path d="M 33 1240 H 58" marker-end="url(#ld-arrow)"/>
+            <text x="68" y="1244">Learning flow</text>
+            <rect x="240" y="1231" width="28" height="18" rx="4"/>
+            <text x="278" y="1244">Application family</text>
           </g>
+          <text x="1192" y="1240" class="ld-brand">ASERDARGUN.COM</text>
+          <text x="1192" y="1258" class="ld-brand-subtitle">AI Learning System</text>
         </svg>
         </div>
-        <figcaption>Follow the arrows between main applications. The smaller boxes share a frame with their parent application. DCL is the shared laboratory of CLD and LCL.</figcaption>
+        <figcaption>Frames group applications with their sub-applications. Double-headed arrows show reciprocal learning relationships. DCL is the shared laboratory of CLD and LCL; ENG connects to HEX. These paths describe learning relationships, not runtime integrations.</figcaption>
       </figure>
 <!-- GENERATED:learning-diagram:end -->
 <!-- GENERATED:practice-labs:start -->

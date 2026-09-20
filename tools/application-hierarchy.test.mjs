@@ -64,7 +64,7 @@ function segments(path) {
 const overlap = (a, b, c, d) => Math.min(Math.max(a, b), Math.max(c, d)) > Math.max(Math.min(a, b), Math.min(c, d));
 const inside = (value, a, b) => value > Math.min(a, b) && value < Math.max(a, b);
 
-test("all diagram boxes are disjoint, children are smaller and enclosed with their parent", () => {
+test("all diagram boxes are disjoint; framed children stay inside their owning family", () => {
   const { nodes, families } = learningDiagramLayout(data.applications);
   for (const [i, node] of nodes.entries()) {
     for (const other of nodes.slice(i + 1)) {
@@ -73,7 +73,12 @@ test("all diagram boxes are disjoint, children are smaller and enclosed with the
     if (node.app.parentApp) {
       const parent = nodes.find((item) => item.app.code === node.app.parentApp);
       const family = families.find((item) => item.code === node.app.parentApp);
-      assert.ok(node.width < parent.width && node.height < parent.height);
+      assert.ok(node.width < parent.width, `${node.app.code} should be narrower than its parent`);
+      if (node.app.parentApp === "eng") {
+        assert.equal(family, undefined, "ENG connects to HEX outside a family frame in the approved reference");
+        continue;
+      }
+      assert.ok(family);
       for (const member of [node, parent]) {
         assert.ok(member.x > family.x && member.x + member.width < family.x + family.width && member.y > family.y && member.y + member.height < family.y + family.height);
       }
@@ -82,8 +87,8 @@ test("all diagram boxes are disjoint, children are smaller and enclosed with the
 });
 
 test("every arrow and connector avoids box interiors and other routes; shared bus joins are explicit", () => {
-  const { nodes, edges } = learningDiagramLayout(data.applications);
-  const paths = [...edges, { id: "decision-bus", path: "M 940 767 V 900 H 550 V 956" }];
+  const { nodes, families, edges, connectors, junctions } = learningDiagramLayout(data.applications);
+  const paths = [...edges, ...connectors];
   const lines = paths.flatMap((edge) => segments(edge.path).map(([a, b]) => ({ id: edge.id, a, b })));
   for (const [index, { id, a, b }] of lines.entries()) {
     for (const node of nodes) {
@@ -91,6 +96,15 @@ test("every arrow and connector avoids box interiors and other routes; shared bu
         ? inside(a.x, node.x, node.x + node.width) && overlap(a.y, b.y, node.y, node.y + node.height)
         : inside(a.y, node.y, node.y + node.height) && overlap(a.x, b.x, node.x, node.x + node.width);
       assert.ok(!crosses, `${id} crosses ${node.app.code}`);
+    }
+    for (const family of families) {
+      const endpoints = id.split("-to-");
+      const belongs = endpoints.some((code) => code === family.code || nodes.find(({app}) => app.code === code)?.app.parentApp === family.code);
+      if (belongs) continue;
+      const crosses = a.x === b.x
+        ? inside(a.x, family.x, family.x + family.width) && overlap(a.y, b.y, family.y, family.y + family.height)
+        : inside(a.y, family.y, family.y + family.height) && overlap(a.x, b.x, family.x, family.x + family.width);
+      assert.ok(!crosses, `${id} crosses unrelated ${family.code} frame`);
     }
     for (const other of lines.slice(index + 1)) {
       if (id === other.id) continue;
@@ -102,7 +116,7 @@ test("every arrow and connector avoids box interiors and other routes; shared bu
         const [v1, v2, h1, h2] = a.x === b.x ? [a, b, c, d] : [c, d, a, b];
         const touches = v1.x >= Math.min(h1.x, h2.x) && v1.x <= Math.max(h1.x, h2.x)
           && h1.y >= Math.min(v1.y, v2.y) && h1.y <= Math.max(v1.y, v2.y);
-        const junction = v1.x === 550 && [956].includes(h1.y);
+        const junction = junctions.some(({ x, y }) => x === v1.x && y === h1.y);
         assert.ok(!touches || junction, `${id} crosses or touches ${other.id}`);
       }
     }
@@ -126,16 +140,15 @@ test("DCL has two equal owners and one visible entry in each portfolio view", ()
     }
   }
   const { nodes, families, edges } = learningDiagramLayout(data.applications);
-  const family = families.find((item) => item.code === "cld-lcl");
-  assert.ok(family);
-  for (const code of ["cld", "lcl", "dcl"]) {
-    const node = nodes.find(({ app }) => app.code === code);
-    assert.ok(node.x > family.x && node.x + node.width < family.x + family.width && node.y > family.y && node.y + node.height < family.y + family.height);
+  assert.ok(!families.some((item) => item.code === "cld-lcl"), "deployment uses reciprocal arrows, not an enclosing frame");
+  const byCode = (code) => nodes.find(({ app }) => app.code === code);
+  assert.ok(byCode("lcl").x + byCode("lcl").width < byCode("dcl").x);
+  assert.ok(byCode("dcl").x + byCode("dcl").width < byCode("cld").x);
+  for (const code of applicationParents(dcl)) {
+    const edge = edges.find((edge) => edge.id === `${code}-to-dcl`);
+    assert.equal(edge.kind, "child");
+    assert.equal(edge.bidirectional, true);
   }
-  for (const code of applicationParents(dcl)) assert.equal(edges.find((edge) => edge.id === `${code}-to-dcl`).kind, "child");
-  const lab = nodes.find(({ app }) => app.code === "dcl");
-  assert.ok(nodes.filter(({ app }) => applicationParents(dcl).includes(app.code)).every((parent) => lab.x > parent.x + parent.width));
-  assert.ok(nodes.filter(({ app }) => applicationParents(dcl).includes(app.code)).every((parent) => lab.width < parent.width && lab.height < parent.height));
 });
 
 test("shared ownership validates both parents and detects cycles through either branch", () => {
@@ -154,5 +167,32 @@ test("shared ownership validates both parents and detects cycles through either 
     mutate(changed.applications);
     const result = validateLivingSystemData(changed, { today });
     assert.ok(result.errors.some((error) => error.code === expected), JSON.stringify(result.errors));
+  }
+});
+
+
+test("the approved diagram has 30 unique nodes and eight non-overlapping ownership frames", () => {
+  const { nodes, families, edges } = learningDiagramLayout(data.applications);
+  assert.equal(nodes.length, 30);
+  assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 30);
+  assert.deepEqual(families.map(({ code }) => code), ["gpu", "usl", "llm", "hns", "ctx", "wfm", "swi", "itl"]);
+  for (const [i, frame] of families.entries()) {
+    for (const other of families.slice(i + 1)) {
+      assert.ok(!(overlap(frame.x, frame.x + frame.width, other.x, other.x + other.width) && overlap(frame.y, frame.y + frame.height, other.y, other.y + other.height)), `${frame.code} overlaps ${other.code}`);
+    }
+    for (const node of nodes) {
+      if (node.app.code === frame.code || node.app.parentApp === frame.code) continue;
+      assert.ok(!(overlap(frame.x, frame.x + frame.width, node.x, node.x + node.width) && overlap(frame.y, frame.y + frame.height, node.y, node.y + node.height)), `${frame.code} encloses unrelated ${node.app.code}`);
+    }
+  }
+  assert.deepEqual(edges.filter(({bidirectional}) => bidirectional).map(({id}) => id), ["sec-to-evl", "lcl-to-dcl", "cld-to-dcl"]);
+  // Every arrow tip lands on the target rectangle, rather than stopping short
+  // or pointing into a label. Frame containment expresses the other children.
+  for (const edge of edges) {
+    const target = nodes.find(({app}) => app.code === edge.id.split("-to-")[1]);
+    assert.ok(target, edge.id);
+    const point = segments(edge.path).at(-1)[1];
+    assert.ok(((point.x === target.x || point.x === target.x + target.width) && point.y >= target.y && point.y <= target.y + target.height)
+      || ((point.y === target.y || point.y === target.y + target.height) && point.x >= target.x && point.x <= target.x + target.width), `${edge.id} misses target boundary`);
   }
 });

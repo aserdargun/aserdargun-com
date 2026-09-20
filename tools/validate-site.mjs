@@ -9,6 +9,7 @@ import {
   summarizeApplications,
 } from "./living-system-data.mjs";
 import { applicationHierarchy } from "./application-hierarchy.mjs";
+import { systemFocusApplications } from "./system-focus.mjs";
 import { isPublicFile } from "./public-files.mjs";
 import { scanPublicHtmlFiles } from "./render-living-system.mjs";
 import {
@@ -78,8 +79,8 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "learning"];
-const expectedAssetVersion = "20260910-dcl-layout";
-const expectedStylesheetHref = "/styles.css?v=20260910-dcl-layout";
+const expectedAssetVersion = "20260920-eight-stage-diagram";
+const expectedStylesheetHref = "/styles.css?v=20260920-eight-stage-diagram";
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
   { code: "aia", repository: "aia-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/aia-aserdargun-com", productUrl: "https://aia.aserdargun.com/", productLabel: "aia.aserdargun.com" },
@@ -396,44 +397,22 @@ function validateLearningSystem(locale, html) {
   const learningEdges = matches(diagram, /<path data-learning-edge="([^"]+)"/g);
   check(
     JSON.stringify([...learningEdges].sort()) === JSON.stringify([
-      "aia-to-gpu",
-      "aia-to-llm",
-      "aia-to-usl",
-      "gpu-to-llm",
-      "usl-to-llm",
-      "llm-to-hns",
-      "hns-to-ctx",
-      "hns-to-sec",
-      "hns-to-evl",
-      "ctx-to-llm",
-      "sec-to-lcl",
-      "sec-to-cld",
-      "evl-to-cld",
-      "ctx-to-lcl",
-      "lcl-to-dcl",
-      "cld-to-dcl",
-      "deployment-to-wfm",
-      "deployment-to-swi",
-      "wfm-to-itl",
-      "swi-to-itl",
-      "swi-to-ant",
-      "swi-to-bee",
-      "itl-to-eng",
-      "gpu-to-gex",
-      "wfm-to-wml",
-      "itl-to-pdt",
-      "eng-to-hex",
-      "llm-to-tfl",
-      "hns-to-arl",
-      "usl-to-adp",
+      "aia-to-gpu", "aia-to-llm", "aia-to-usl", "gpu-to-llm", "usl-to-llm",
+      "llm-to-hns", "hns-to-ctx", "hns-to-sec", "hns-to-evl", "ctx-to-sec", "sec-to-evl",
+      "assurance-to-lcl", "assurance-to-dcl", "assurance-to-cld", "lcl-to-dcl", "cld-to-dcl",
+      "deployment-to-wfm", "deployment-to-swi", "wfm-to-itl", "swi-to-itl", "itl-to-eng",
+      "eng-to-hex", "llm-to-tfl", "hns-to-arl", "hns-to-dpl", "hns-to-cul", "hns-to-aos", "usl-to-adp",
     ].sort()),
-    `${locale}: learning diagram edges differ from the application content model`,
+    `${locale}: learning diagram edges differ from the approved eight-stage flow`,
   );
   const deploymentConnectors = matches(diagram, /<path data-learning-connector="([^"]+)"/g);
   check(
-    JSON.stringify(deploymentConnectors) === JSON.stringify(["dcl-to-stage-07"]),
-    `${locale}: deployment paths must merge before branching once to WFM and SWI`,
+    JSON.stringify(deploymentConnectors) === JSON.stringify(["assurance-bus", "sec-to-deployment", "evl-to-deployment", "dcl-to-stage-06"]),
+    `${locale}: assurance must feed deployment and DCL must branch once to WFM and SWI`,
   );
+  check(matches(diagram, /data-learning-app="([a-z]{3})"/g).length === 30, `${locale}: all 30 approved applications must appear in the diagram`);
+  check(matches(diagram, /data-learning-family="([a-z]{3})"/g).join(" ") === "gpu usl llm hns ctx wfm swi itl", `${locale}: diagram family frames differ`);
+  check(matches(diagram, /marker-start="url\(#ld-arrow\)"/g).length === 3, `${locale}: diagram requires three reciprocal connections`);
   check(
     learningEdges.filter((edge) => edge.endsWith("-to-wfm")).length === 1
       && learningEdges.filter((edge) => edge.endsWith("-to-swi")).length === 1,
@@ -611,7 +590,7 @@ function validateSystemFocus(locale, html) {
     ["physical-ai", "Physical AI", ["wfm", "swi", "ant", "bee", "itl", "eng", "wml", "pdt", "hex"]],
   ];
   for (const [layer, heading] of expected) {
-    const expectedCodes = applicationHierarchy(livingSystem.applications.filter((app) => app.portfolioLayer === layer)).map(({ application }) => application.code);
+    const expectedCodes = applicationHierarchy(systemFocusApplications(livingSystem.applications).filter((app) => app.portfolioLayer === layer)).map(({ application }) => application.code);
     const card = section.match(new RegExp(`<article class="system-focus-card system-focus-card--${layer}">[\\s\\S]*?<\\/article>`))?.[0] ?? "";
     check(card.includes(`<h2>${heading}</h2>`), `${locale}: ${layer} system focus heading differs`);
     check(JSON.stringify(matches(card, /<code>([a-z]{3})<\/code>/g)) === JSON.stringify(expectedCodes), `${locale}: ${layer} system focus applications differ`);

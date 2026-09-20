@@ -1301,7 +1301,7 @@ function initializeMobileMaps() {
   viewport.addEventListener("focusin", (event) => {
     const node = event.target.closest(".ld-node");
     if (node && mobile.matches && node.getBoundingClientRect().height < 44) {
-      renderZoom(1100 / viewport.clientWidth);
+      renderZoom(viewport.querySelector(".ld-svg").viewBox.baseVal.width / viewport.clientWidth);
       node.scrollIntoView({ block: "nearest", inline: "nearest" });
     }
   });

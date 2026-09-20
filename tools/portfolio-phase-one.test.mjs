@@ -220,7 +220,8 @@ test("companion learning apps connect to their research parents across both loca
       assert.ok(cards.includes(`href="${app.address}"`));
       assert.ok(cards.includes(`href="${parent.address}"`));
       const edges = renderLearningDiagram({ locale, data });
-      assert.ok(edges.includes(`data-learning-edge="${parentCode}-to-${code}"`));
+      assert.ok(edges.includes(`data-learning-parent="${parentCode}"`));
+      assert.ok(edges.includes(parentCode === "eng" ? `data-learning-edge="eng-to-hex"` : `data-learning-family="${parentCode}"`));
     }
   }
 });
