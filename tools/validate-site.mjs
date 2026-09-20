@@ -393,6 +393,11 @@ function validateLearningSystem(locale, html) {
       "arl:practice-lab",
       "adp:practice-lab",
       "dcl:decision-lab",
+      "dpl:practice-lab",
+      "cul:practice-lab",
+      "aos:practice-lab",
+      "mem:practice-lab",
+      "dtr:practice-lab",
     ].sort()),
     `${locale}: learning diagram node roles differ from the application content model`,
   );

@@ -3,7 +3,8 @@ import { readFileSync } from "node:fs";
 const focus = JSON.parse(readFileSync(new URL("../data/system-focus.json", import.meta.url), "utf8"));
 
 // The table and diagram share approved additions to the registered catalog. Entries
-// have no URL or release status until they are registered in living-system.json.
+// may include verified public addresses before their full release metadata is
+// registered in living-system.json. Canonical catalog entries take precedence.
 export function systemFocusApplications(applications) {
   const result = applications.map((app) => ({ ...app }));
   for (const addition of focus.additionalApplications) {

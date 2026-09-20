@@ -39,8 +39,9 @@ registered under GPU in the canonical catalog.
 `tools/system-focus.mjs` merges these entries into the homepage table and diagram,
 including bilingual subtitles. Both views contain
 30 entries; the registered catalog retains 25 applications with release evidence.
-Additional entries have no invented URLs
-or release status. When a code is registered in `data/living-system.json`, its
+The five additional entries link to their verified public application addresses
+in both homepage views; full release metadata remains in the registered catalog.
+When a code is registered in `data/living-system.json`, its
 canonical record takes precedence; remove its table-only entry at that point.
 
 Every application explicitly declares `parentApp`: `null` for a top-level
