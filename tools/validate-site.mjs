@@ -924,7 +924,7 @@ for (const [locale, html] of Object.entries(pages)) {
   validateLearningSystem(locale, html);
   validateLearningPath(locale, routePages[locale].journey);
   validateLearningHorizon(locale, routePages[locale].journey);
-  validateLivingSystem(locale, about);
+  check(!about.includes('class="living-system"'), `${locale}/about: removed navigation cards must not return`);
   validateSystemFocus(locale, html);
 
   const appMapIntro = applications.match(/<div class="app-map-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
