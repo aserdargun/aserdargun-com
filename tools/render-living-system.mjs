@@ -586,7 +586,7 @@ export function renderSwarmLabs({ locale, data }) {
       "            </article>",
     ].join("\n")),
     "          </div>",
-    `          <p class="swarm-labs__note">${label(locale, "These are educational models: the results describe the simulation and are not biological field measurements.", "Bunlar eğitim modelleridir: sonuçlar simülasyonu açıklar; biyolojik saha ölçümü değildir.")}</p>`,
+    `          <p class="swarm-labs__note">${label(locale, "ANT and BEE own these educational simulations. Their results are model observations, not biological field measurements or evidence that an SWI agent recipe works. SWI exports experiment plans; it does not run agents or automatically import laboratory results.", "Bu eğitim simülasyonları ANT ve BEE’ye aittir. Sonuçlar model gözlemleridir; biyolojik saha ölçümü veya SWI ajan reçetesinin başarısına kanıt değildir. SWI deney planlarını dışa aktarır; ajan çalıştırmaz ve laboratuvar sonuçlarını otomatik almaz.")}</p>`,
     "        </div>",
   ].join("\n");
 }

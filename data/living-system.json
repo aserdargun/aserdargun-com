@@ -577,16 +577,16 @@
         "tr": "SWI — Sürü Zekâsı"
       },
       "summary": {
-        "en": "A bilingual research platform connecting biological mechanisms, source-backed studies, and agent experiment recipes. ANT and BEE extend its collective-intelligence research into interactive colony laboratories.",
-        "tr": "Biyolojik mekanizmaları, kaynaklı araştırmaları ve ajan deney reçetelerini birleştiren iki dilli araştırma platformu. ANT ve BEE, kolektif zekâ araştırmasını etkileşimli koloni laboratuvarlarına taşır."
+        "en": "A bilingual swarm-intelligence atlas with eight biology dossiers, 21 selected studies and eight static agent experiment templates. SWI observes and explains; ANT and BEE own the colony simulations. Recipes export Markdown/JSON without running agents; the agenda stays in the browser.",
+        "tr": "Sekiz biyoloji dosyası, seçilmiş 21 çalışma ve sekiz statik ajan deney şablonu sunan iki dilli sürü zekâsı atlası. SWI gözlemler ve açıklar; koloni simülasyonları ANT ve BEE’ye aittir. Reçeteler ajan çalıştırmadan Markdown/JSON üretir; gündem tarayıcıda kalır."
       },
       "repository": "https://github.com/aserdargun/swi-aserdargun-com",
       "address": "https://swi.aserdargun.com/",
-      "updatedAt": "2026-09-06",
+      "updatedAt": "2026-09-21",
       "researchCutoff": "2026-09-06",
-      "lastVerified": "2026-09-06",
-      "lastReleased": "2026-09-06",
-      "releaseSha": "347acfe0ebb0ccb70f474b5a4bb25bf8cb189e91",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "98d984cee587df6a8d890114ed64d2c87f6ac560",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
