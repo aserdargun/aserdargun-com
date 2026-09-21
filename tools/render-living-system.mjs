@@ -192,6 +192,10 @@ export function renderPrimaryNavigation({ locale, page }) {
     '  <div class="nav-links__primary">',
     ...concepts.map((concept) => `    <a class="nav-links__primary-link" href="${concept.href}"${concept.key === page ? ' aria-current="page"' : ""}>${concept.label}</a>`),
     "  </div>",
+    `  <div class="nav-links__group" data-nav-group="personal" role="group" aria-label="${label(locale, "Personal tools", "Kişisel araçlar")}">`,
+    `    <span class="nav-links__section">${label(locale, "Personal tools", "Kişisel araçlar")}</span>`,
+    ...["inf", "nxt", "stk"].map((code) => `    <a class="nav-links__external" href="https://${code}.aserdargun.com/" target="_blank" rel="noreferrer">${code.toUpperCase()} <span aria-hidden="true">↗</span> <span class="sr-only">${label(locale, "opens in a new tab", "yeni sekmede açılır")}</span></a>`),
+    "  </div>",
     "  </nav>",
   ].join("\n");
 }
@@ -324,6 +328,13 @@ export function renderLivingSystem({ locale }) {
   ].join("\n");
 }
 
+function applicationLinkIcon(kind) {
+  const content = kind === "github"
+    ? '<path fill="currentColor" d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.64 1.22 3.28.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.09 1.15a10.77 10.77 0 0 1 5.62 0c2.14-1.45 3.09-1.15 3.09-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.33-2.63 5.29-5.14 5.57.4.35.76 1.03.76 2.08v3.09c0 .3.21.65.78.54A11.25 11.25 0 0 0 12 .75Z"/>'
+    : '<g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6.5h14M5 17.5h14"/></g>';
+  return `<svg class="app-link-icon app-link-icon--${kind}" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${content}</svg>`;
+}
+
 export function renderApplicationMap({ locale, data, today, page }) {
   const applications = systemFocusApplications(data.applications);
   const summary = label(locale,
@@ -351,7 +362,7 @@ export function renderApplicationMap({ locale, data, today, page }) {
   const publicMemory = new Map(data.publicMemory.map((memory) => [memory.id, memory]));
   const rows = applicationHierarchy(registry.applications).map(({ application, depth }) => {
     const sourceApplication = sourceApplications.get(application.code);
-    const freshnessDate = application.lastVerified ?? (application.status === "live" ? sourceApplication.updatedAt : null);
+    const freshnessDate = sourceApplication.updatedAt ?? application.lastVerified;
     const status = freshnessDate
       ? renderFreshness({ locale, dateOnly: freshnessDate, today })
       : `<span class="app-updated app-updated-horizon"><span class="app-horizon-dot" aria-hidden="true"></span>${escapeHtml(application.statusLabel?.[locale] ?? statusLabels[application.status])}</span>`;
@@ -397,7 +408,7 @@ export function renderApplicationMap({ locale, data, today, page }) {
       nextDirection,
       relatedMemory,
     ].filter(Boolean).join("\n");
-    return `              <tr${rowClass}><th scope="row">${application.code === "dcl" ? '<span class="app-child-marker" aria-hidden="true">|-</span>' : ""}<code>${escapeHtml(application.code)}</code></th><td>${ownership}<strong>${title}</strong><span>${applicationSummary}</span>${status}\n<details class="app-evidence"><summary>${label(locale, "Evidence & related knowledge", "Kanıt ve ilgili bilgi")}</summary>${applicationDetails}</details></td><td><a href="${repository}" target="_blank" rel="noreferrer"><code>${repositoryName}</code> <span aria-hidden="true">↗</span></a></td><td><a href="${address}" target="_blank" rel="noreferrer">${domain} <span aria-hidden="true">↗</span></a></td></tr>`;
+    return `              <tr${rowClass}><th scope="row">${application.code === "dcl" ? '<span class="app-child-marker" aria-hidden="true">|-</span>' : ""}<code>${escapeHtml(application.code)}</code></th><td>${ownership}<strong>${title}</strong><span>${applicationSummary}</span>${status}\n<details class="app-evidence"><summary>${label(locale, "Evidence & related knowledge", "Kanıt ve ilgili bilgi")}</summary>${applicationDetails}</details></td><td><a href="${repository}" target="_blank" rel="noreferrer">${applicationLinkIcon("github")}<code>${repositoryName}</code> <span aria-hidden="true">↗</span></a></td><td><a href="${address}" target="_blank" rel="noreferrer">${applicationLinkIcon("web")}${domain} <span aria-hidden="true">↗</span></a></td></tr>`;
   });
 
   return [
@@ -1436,10 +1447,15 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
     "removed secondary Learning link remains",
   );
 
+  const personalGroups = archiveElements(primaryNavigation[0]).filter((node) => archiveAttribute(node, "data-nav-group") === "personal");
+  const personalLinks = personalGroups.length === 1 ? archiveElementsByTag(personalGroups[0], "a") : [];
   assertArchiveNavigation(
-    archiveElementsByTag(primaryNavigation[0], "a").length === 3
-      && !archiveElements(primaryNavigation[0]).some((node) => archiveHasAttribute(node, "data-nav-group")),
-    week, locale, "primary navigation contains removed groups or extra links",
+    archiveElementsByTag(primaryNavigation[0], "a").length === 6
+      && personalGroups.length === 1
+      && archiveAttribute(personalGroups[0], "aria-label") === label(locale, "Personal tools", "Kişisel araçlar")
+      && JSON.stringify(personalLinks.map((node) => archiveAttribute(node, "href"))) === JSON.stringify(["inf", "nxt", "stk"].map((code) => `https://${code}.aserdargun.com/`))
+      && personalLinks.every((node) => archiveAttribute(node, "target") === "_blank"),
+    week, locale, "personal navigation links differ",
   );
 
   const languageLinks = archiveElementsByTag(languageNavigation[0], "a")
@@ -1478,8 +1494,8 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
   );
 
   assertArchiveNavigation(
-    archiveElementsByTag(header, "a").every((node) => !/^https?:/.test(archiveAttribute(node, "href") ?? "")),
-    week, locale, "removed external navigation destination remains",
+    archiveElementsByTag(header, "a").every((node) => !/^https?:/.test(archiveAttribute(node, "href") ?? "") || personalLinks.includes(node)),
+    week, locale, "unexpected external navigation destination",
   );
 
   const ids = archiveElements(documentTree, { activeOnly: false })

@@ -26,7 +26,8 @@ for (const locale of ['en', 'tr']) {
   test(`${locale}: generated diagram, catalog and experiment links preserve the selected language`, async () => {
     const prefix = locale === 'tr' ? 'tr/' : '';
     for (const path of [`${prefix}index.html`, `${prefix}applications/index.html`]) {
-      const html = await readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+      const source = await readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+      const html = source.match(/<main\b[\s\S]*?<\/main>/)?.[0] ?? "";
       const links = [...html.matchAll(/href="(https:\/\/([a-z]{3})\.aserdargun\.com[^\"]*)"/g)];
       assert.ok(links.length >= 30);
       for (const [, href, code] of links) assert.equal(href, applicationUrl(applications.find(app => app.code === code), locale), `${path}: ${code}`);

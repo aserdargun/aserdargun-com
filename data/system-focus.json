@@ -2,6 +2,7 @@
   "additionalApplications": [
     {
       "code": "dpl",
+      "updatedAt": "2026-09-21",
       "address": "https://dpl.aserdargun.com/",
       "parentApp": "hns",
       "title": {
@@ -30,6 +31,7 @@
     },
     {
       "code": "cul",
+      "updatedAt": "2026-09-21",
       "address": "https://cul.aserdargun.com/",
       "parentApp": "hns",
       "title": {
@@ -58,6 +60,7 @@
     },
     {
       "code": "aos",
+      "updatedAt": "2026-09-21",
       "address": "https://aos.aserdargun.com/",
       "parentApp": "hns",
       "title": {
@@ -86,6 +89,7 @@
     },
     {
       "code": "mem",
+      "updatedAt": "2026-09-21",
       "address": "https://mem.aserdargun.com/",
       "parentApp": "ctx",
       "title": {

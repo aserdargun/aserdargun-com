@@ -21,7 +21,7 @@ import {
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rendererPath = path.join(rootDir, "tools", "render-living-system.mjs");
-const today = new Date("2026-09-10T12:00:00Z");
+const today = new Date("2026-09-21T12:00:00Z");
 
 async function readFixtureData() {
   const data = JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -32,7 +32,7 @@ async function readFixtureData() {
   ];
   for (const application of data.applications) {
     // Freeze source updates at this historical synthetic fixture's reference date.
-    if (application.updatedAt > "2026-09-10") application.updatedAt = "2026-09-10";
+    if (application.updatedAt > today.toISOString().slice(0, 10)) application.updatedAt = today.toISOString().slice(0, 10);
     for (const field of phaseOneFields) delete application[field];
     application.relatedMemoryIds = [];
     if (application.code === "eng") application.status = "live";
@@ -193,15 +193,17 @@ function livingSystemCards(html) {
   );
 }
 
-test("renders only Home, Applications, About in order with the current page marked", () => {
+test("renders primary pages and personal tools with the current page marked", () => {
   for (const locale of ["en", "tr"]) {
     const root = locale === "tr" ? "/tr/" : "/";
     const labels = locale === "tr" ? ["Ana Sayfa", "Uygulamalar", "Hakkımda"] : ["Home", "Applications", "About"];
     for (const page of ["home", "applications", "about", "now", "memory", "journey", "archive"]) {
       const html = renderPrimaryNavigation({ locale, page });
       assert.deepEqual(primaryLinks(html), ["home", "applications", "about"].map((key, i) => ({ href: key === "home" ? root : `${root}${key}/`, label: labels[i], current: key === page })));
-      assert.equal((html.match(/<a /g) ?? []).length, 3);
-      assert.doesNotMatch(html, /data-nav-group|nav-links__external/);
+      assert.equal((html.match(/<a /g) ?? []).length, 6);
+      assert.match(html, /data-nav-group="personal"/);
+      const personalLinks = [...html.matchAll(/class="nav-links__external" href="([^"]+)" target="_blank" rel="noreferrer"/g)].map((match) => match[1]);
+      assert.deepEqual(personalLinks, ["inf", "nxt", "stk"].map((code) => `https://${code}.aserdargun.com/`));
     }
   }
 });
@@ -750,13 +752,15 @@ test("application enrichment and journey evidence have responsive style contract
   assert.match(styles, /@media \(max-width:\s*900px\)[\s\S]*?\.journey-evidence-list\s*\{[^}]*grid-template-columns:\s*1fr;/);
 });
 
-test("renders absolute application freshness with an accessible, derived current state", async () => {
+test("renders absolute application freshness from the update date rather than old verification evidence", async () => {
   const data = await readFixtureData();
+  data.applications[0].updatedAt = "2026-09-18";
+  data.applications[0].lastVerified = "2026-09-01";
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
   assert.match(
     rendered,
-    /<span class="freshness freshness--current" data-freshness-date="2026-09-03" data-freshness-state="current">[\s\S]*?<time datetime="2026-09-03">2026-09-03<\/time>[\s\S]*?<\/span>/,
+    /<span class="freshness freshness--current" data-freshness-date="2026-09-18" data-freshness-state="current">[\s\S]*?<time datetime="2026-09-18">2026-09-18<\/time>[\s\S]*?<\/span>/,
   );
   assert.match(rendered, /<span class="freshness-label">Current<\/span>/);
   assert.equal(rendered.includes("today"), false);

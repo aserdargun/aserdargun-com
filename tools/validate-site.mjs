@@ -80,8 +80,8 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "learning"];
-const expectedAssetVersion = "20260921-diagram-page-scroll";
-const expectedStylesheetHref = "/styles.css?v=20260921-diagram-page-scroll";
+const expectedAssetVersion = "20260921-personal-tools-final";
+const expectedStylesheetHref = "/styles.css?v=20260921-personal-tools-final";
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
   ...["dpl", "cul", "aos", "mem"].map((code) => ({ code, repository: `${code}-aserdargun-com`, repositoryUrl: `https://github.com/aserdargun/${code}-aserdargun-com`, productUrl: `https://${code}.aserdargun.com/`, productLabel: `${code}.aserdargun.com` })),
@@ -208,9 +208,9 @@ function parseApplicationMapRows(html) {
     const cells = Array.from(row.matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi), (cell) => cell[1]);
     const repositoryAnchor = cells.length === 3 ? onlyAnchor(cells[1]) : null;
     const productAnchor = cells.length === 3 ? onlyAnchor(cells[2]) : null;
-    const repositoryPresentation = parseMarkerContent(repositoryAnchor?.content ?? "");
+    const repositoryPresentation = parseMarkerContent((repositoryAnchor?.content ?? "").replace(/^<svg\b[^>]*class="app-link-icon app-link-icon--github"[^>]*>[\s\S]*?<\/svg>/, ""));
     const repository = repositoryPresentation?.label.match(/^<code>([^<]+)<\/code>$/)?.[1] ?? null;
-    const productPresentation = parseMarkerContent(productAnchor?.content ?? "");
+    const productPresentation = parseMarkerContent((productAnchor?.content ?? "").replace(/^<svg\b[^>]*class="app-link-icon app-link-icon--web"[^>]*>[\s\S]*?<\/svg>/, ""));
     const productLabel = productPresentation && !/[<>]/.test(productPresentation.label)
       ? productPresentation.label
       : null;
@@ -499,11 +499,13 @@ function validatePrimaryNavigation(locale, page, html) {
   const nav = html.match(/<nav class="nav-links"[\s\S]*?<\/nav>/)?.[0] ?? "";
   const links = Array.from(nav.matchAll(/<a class="nav-links__primary-link" href="([^"]+)"(?: aria-current="page")?>([^<]+)<\/a>/g), (match) => [match[2], match[1]]);
   check(JSON.stringify(links) === JSON.stringify(expectedPrimaryNavigation[locale]), `${locale}/${page}: primary navigation differs`);
-  check((nav.match(/<a /g) ?? []).length === 3, `${locale}/${page}: only three navigation links are allowed`);
+  check((nav.match(/<a /g) ?? []).length === 6, `${locale}/${page}: three primary links and three personal tools are required`);
   const current = Array.from(nav.matchAll(/<a class="nav-links__primary-link"[^>]*aria-current="page"[^>]*>([^<]+)<\/a>/g), (match) => match[1]);
   const index = ["home", "applications", "about"].indexOf(page);
   check(JSON.stringify(current) === JSON.stringify(index < 0 ? [] : [expectedPrimaryNavigation[locale][index][0]]), `${locale}/${page}: current page differs`);
-  check(!nav.includes("data-nav-group"), `${locale}/${page}: removed navigation groups remain`);
+  const personal = nav.match(/<div class="nav-links__group" data-nav-group="personal"[\s\S]*?<\/div>/)?.[0] ?? "";
+  check(personal.includes(locale === "tr" ? "Kişisel araçlar" : "Personal tools"), `${locale}/${page}: personal tools label is missing`);
+  check(JSON.stringify(matches(personal, /href="(https:[^"]+)"/g)) === JSON.stringify(["inf", "nxt", "stk"].map((code) => `https://${code}.aserdargun.com/`)), `${locale}/${page}: personal tool destinations differ`);
 }
 
 function validateLivingSystem(locale, html) {

@@ -324,6 +324,8 @@ ul {
   gap: 10px;
 }
 
+.nav-links__group[data-nav-group="personal"] { grid-column: 1 / -1; justify-content: center; }
+
 .nav-links__secondary-link {
   color: rgba(255, 253, 247, 0.68);
 }
@@ -812,6 +814,8 @@ ul {
   font-weight: 700;
   white-space: nowrap;
 }
+
+.app-map .app-link-icon { flex: 0 0 16px; align-self: center; color: var(--lime); }
 
 .app-map a span {
   color: var(--lime);
