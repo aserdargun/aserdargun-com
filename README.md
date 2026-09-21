@@ -13,7 +13,7 @@ experiments continue below the diagram.
 - `/about/` and `/tr/about/` contain the personal introduction, interactive
   ASCII/pixel portraits, eight-stage career journey, working principles,
   credentials, and future direction.
-- `/journey/` and `/tr/journey/` contain the learning path, six detailed learning stages, and the physical AI horizon, colony labs, and companion GEX / ADP / TFL / ARL / WML / PDT / DTR / HEX learning experiences. DCL follows the LCL / CLD deployment choices with explicit workload assumptions.
+- `/journey/` and `/tr/journey/` contain the learning path, six detailed learning stages, and the physical AI horizon, colony labs, and companion GEX / ADP / TFL / ARL / WML / PDT / DTR / HEX / DPL / CUL / AOS / MEM learning experiences. DCL follows the LCL / CLD deployment choices with explicit workload assumptions.
 - `/applications/` and `/tr/applications/` contain the complete application map,
   localized search, layer filters, and expandable evidence and knowledge links.
 - `/now/` and `/tr/now/` retain dated current work; the historical snapshots keep
@@ -34,16 +34,12 @@ The generator builds the homepage introduction, diagram, discovery sections, app
 and `portfolio.json` from that source. Every new application must declare its
 layer and keep research, verification, and release dates separate.
 
-The September 20 diagram additions are staged separately in `data/system-focus.json`:
-DPL, CUL and AOS under HNS; MEM under CTX. POL is registered under GPU;
-DTR is registered under ITL alongside PDT in the canonical catalog.
-`tools/system-focus.mjs` merges these entries into the homepage diagram,
-including bilingual subtitles. The diagram contains
-30 entries; the registered catalog contains 26 applications with available evidence metadata.
-The four additional entries link to their verified public application addresses
-in the homepage diagram; full release metadata remains in the registered catalog.
-When a code is registered in `data/living-system.json`, its
-canonical record takes precedence; remove its diagram-only entry at that point.
+`data/system-focus.json` stages approved additions that are not yet registered in
+the canonical catalog. `tools/system-focus.mjs` merges them into the homepage
+diagram with bilingual subtitles, and a canonical record always takes precedence.
+That staged list is currently **empty**: DPL, CUL and AOS are registered under HNS,
+MEM under CTX, POL under GPU, and DTR under ITL alongside PDT. The registered
+catalog and the diagram both contain 30 applications.
 
 Every application explicitly declares `parentApp`: `null` for a top-level
 application, or the three-letter code of its owner for a sub-application.
@@ -64,8 +60,8 @@ Extend the layout if a growing family needs more space; never hide an applicatio
 to make it fit. Regenerate with `npm run generate:site` and verify both languages.
 The detailed learning path remains in the Journey pages.
 
-The public catalog currently contains 26 applications. ADP belongs to USL, TFL
-to LLM, and ARL to HNS. DCL is an independent deployment decision laboratory
+The public catalog currently contains 30 applications. ADP belongs to USL, TFL
+to LLM, and ARL, DPL, CUL and AOS to HNS; MEM belongs to CTX. DCL is an independent deployment decision laboratory
 that builds on both LCL and CLD; it is not owned by either one. These relationships
 appear in both languages on the homepage, diagram, Journey and application map.
 The ILS package repository is shared infrastructure, not a deployed application.
@@ -75,7 +71,46 @@ captured semantic-handoff catalogs. A public listing alone does not establish
 ILS adoption or an implemented context receiver.
 AOS's homepage subtitle describes its target agent architecture. Its public site
 presents an architectural design; publication does not establish a running
-agent runtime or a verified open-source application release.
+agent runtime or a verified open-source application release. DPL, CUL and MEM
+are deterministic browser simulations with synthetic inputs, and AOS documents a
+design rather than a shipped runtime.
+
+## Verification and freshness
+
+`lastVerified` records the date the public identity and cited scope of an
+application were last checked, `lastReleased` and `releaseSha` record the newest
+confirmed deployment, and `researchCutoff` records a research review. They are
+different events and a deployment never renews a research cutoff.
+
+Re-run the verification pass over the whole catalog:
+
+```bash
+npm run verify:applications            # addresses, releases, staleness
+npm run verify:applications:offline    # staleness only, no network
+npm run verify:applications -- --json verify-report.json
+```
+
+The command reads `data/living-system.json` and checks, for every registered
+application, that the published address answers 200 and still serves its own
+identity, and that the newest successful deployment workflow run of its
+repository matches the recorded `releaseSha`. It reports what it observed and
+never rewrites the catalog; renewing a date stays a human decision. Repository
+correlation needs a GitHub token with read access to the application
+repositories (`gh auth login` locally); without one those checks are reported as
+unavailable instead of failing.
+
+The weekly `Verify published applications` workflow runs the same command with a
+30-day staleness window and uploads `verify-report.json`. A red scheduled run
+means a public address, a release record or a verification date needs attention.
+
+## Public copy and agent surface
+
+Homepage descriptions in both locales must state the current application count,
+and `llms.txt` must list every registered application with its address. The site
+validator enforces both and rejects the retired five-layer overview copy, so
+structure changes cannot leave stale meta descriptions behind. `portfolio.json`
+and `schemas/aserdargun-app.schema.json` remain the machine-readable surfaces
+the reading guide points at.
 
 ## Development
 
@@ -119,6 +154,10 @@ npm run test:server
 npm run test:stop
 npm run validate:site
 ```
+
+`npm run verify:applications` is the network-backed freshness pass over the
+published catalog. It never writes to `data/living-system.json` and is not part
+of `npm test`; the weekly `Verify published applications` workflow runs it.
 
 `tools/validate-site.mjs` also encodes the list of retired project URLs
 (Stackfolio, PIPolars, PIWebAPI, SWAPP, SCADA Nerve, Industry-Learn,

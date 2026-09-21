@@ -1,12 +1,12 @@
 # AI Learning System — Serdar Gündoğdu
 
-> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence.
+> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence. The overview is one eight-stage learning map with 30 applications.
 
 ## Start here
-- [System overview](https://aserdargun.com/): Five layers and their learning relationships.
+- [System overview](https://aserdargun.com/): The eight-stage learning map, its families and their learning relationships.
 - [About Serdar](https://aserdargun.com/about/): Professional identity, career journey, working principles, and public contact links.
 - [Journey](https://aserdargun.com/journey/): Learning path, six detailed stages, and the physical AI horizon with colony, world-model, pump-twin, digital-triplet, and humanoid learning laboratories.
-- [Application Map](https://aserdargun.com/applications/): Search projects by topic and layer; inspect release and research evidence.
+- [Application Map](https://aserdargun.com/applications/): Search 30 applications by topic and layer; inspect research, verification and release evidence.
 - [Now](https://aserdargun.com/now/): Dated work and planned direction. Read its date before describing an item as current.
 - [Knowledge](https://aserdargun.com/memory/): Authored public research notes and decisions with sources.
 - [Portfolio registry](https://aserdargun.com/portfolio.json): Structured public application identities and relationships.
@@ -16,15 +16,44 @@
 ## Reading the evidence
 Research cutoffs, verification dates, release dates, and release SHAs describe different events. A missing value means unknown. Planned directions are not completed products. Diagram relationships describe how topics inform each other; they do not establish runtime integration. Private systems are linked as separate applications; their private records are not part of this public source.
 
-## Companion learning applications
+`npm run verify:applications` re-checks every application address and its newest successful deployment run, and reports staleness instead of rewriting it. A weekly scheduled workflow runs the same check.
+
+## Foundations
+- [AIA — AI Ecosystem Atlas](https://aia.aserdargun.com/): Evidence-backed console for comparing AI products and developer ecosystems.
+- [GPU — GPU Kernel Engineering](https://gpu.aserdargun.com/): Kernel atlas for execution, memory and profiling behaviour.
+- [POL — Programming Languages](https://pol.aserdargun.com/): English-only reference for programming-language fundamentals and their trade-offs.
+- [USL — Unsloth Studio Learning Atlas](https://usl.aserdargun.com/): Adaptation, fine-tuning and dataset practice with memory estimates.
 - [GEX — GPU Execution Explorer](https://gex.aserdargun.com/): GPU Atlas companion for educational kernel, warp, memory, and matrix execution.
+- [ADP — Model Adaptation Laboratory](https://adp.aserdargun.com/): USL companion for Full FT, LoRA, QLoRA, memory estimates and synthetic training/evaluation; it does not train a real model.
+
+## Model runtime and agent systems
+- [LLM — LLM Runtime & Serving Atlas](https://llm.aserdargun.com/): Source-backed guide to model runtimes and serving engines.
+- [TFL — Token Flow Laboratory](https://tfl.aserdargun.com/): LLM companion for simulated queueing, prefill, KV cache, decode and scheduling; metrics are educational, not benchmarks.
+- [HNS — Harness Engineering Observatory](https://hns.aserdargun.com/): Comparison of the layers that turn model capability into a reliable agent system.
+- [ARL — Agent Runtime Laboratory](https://arl.aserdargun.com/): HNS companion connecting context, security, evaluation and one-use approval inside a deterministic agent simulation.
+- [DPL — Decision Plane Laboratory](https://dpl.aserdargun.com/): HNS companion exploring when an agent decides, asks for evidence, waits for approval, abstains or blocks an action.
+- [CUL — Computer Use Laboratory](https://cul.aserdargun.com/): HNS companion for synthetic computer-use scenarios with targeting, approval and result verification.
+- [AOS — Agent Operating System](https://aos.aserdargun.com/): A public guide to a target agent operating-system architecture; it is a design, not a running operating system.
+- [CTX — Context & Knowledge Engineering](https://ctx.aserdargun.com/): Field guide to the information system that runs before a model answers.
+- [MEM — Agent Memory Laboratory](https://mem.aserdargun.com/): CTX companion for memory lifecycle experiments with synthetic persistence.
+
+## Assurance
+- [SEC — AI Systems Security Observatory](https://sec.aserdargun.com/): Identity, authorization, audit and recovery boundaries for agent systems.
+- [EVL — AI Evaluation & Reliability Lab](https://evl.aserdargun.com/): Evaluation contracts for release decisions.
+
+## Deployment
+- [LCL — Local Compute Lab](https://lcl.aserdargun.com/): Local inference and hardware planning for real workloads.
+- [CLD — Cloud Provider Cost Comparison](https://cld.aserdargun.com/): Bilingual cloud provider and cost comparison.
+- [DCL — Deployment Choice Laboratory](https://dcl.aserdargun.com/): Independent deployment lab following LCL and CLD; compare workload constraints and explicit memory, privacy and cost assumptions. No live prices or universal winner are claimed.
+
+## Physical AI horizon
+- [WFM — World Models Atlas](https://wfm.aserdargun.com/): Research bridge from learned prediction to planning.
 - [WML — World Model Laboratory](https://wml.aserdargun.com/): WFM companion for observation, prediction, planning, and simulated counterfactual experiments.
+- [SWI — Swarm Intelligence](https://swi.aserdargun.com/): Collective-intelligence research platform with reproducible colony experiments.
+- [ANT — Ant Colony Intelligence Laboratory](https://ant.aserdargun.com/): SWI companion for pheromone-trail and foraging simulations.
+- [BEE — Honey Bee Collective Intelligence Laboratory](https://bee.aserdargun.com/): SWI companion for waggle-dance recruitment and collective foraging simulations.
+- [ITL — Industrial Twin Lab](https://itl.aserdargun.com/): Industrial digital-twin practice with synthetic condition signals.
 - [PDT — P-101 Interactive Digital Twin](https://pdt.aserdargun.com/): ITL companion with simplified pump geometry and synthetic condition signals.
 - [DTR — Digital Triplet Laboratory](https://dtr.aserdargun.com/): ITL companion with six synthetic pumping scenarios, independent twin experiments, human approval, prediction–outcome comparison and JSON records. Browser-only rules; no LLM, field telemetry or machine control.
+- [ENG — Open Humanoid Engineering](https://eng.aserdargun.com/): English manifesto for the long-term humanoid engineering direction.
 - [HEX — Humanoid Engineering Explorer](https://hex.aserdargun.com/): ENG companion for humanoid anatomy, joints, sensors, and illustrative kinematics.
-
-## Adaptation, serving, agents and deployment
-- [ADP — Model Adaptation Laboratory](https://adp.aserdargun.com/): USL companion for Full FT, LoRA, QLoRA, memory estimates and synthetic training/evaluation; it does not train a real model.
-- [TFL — Token Flow Laboratory](https://tfl.aserdargun.com/): LLM companion for simulated queueing, prefill, KV cache, decode and scheduling; metrics are educational, not benchmarks.
-- [ARL — Agent Runtime Laboratory](https://arl.aserdargun.com/): HNS companion connecting context, security, evaluation and one-use approval inside a deterministic agent simulation.
-- [DCL — Deployment Choice Laboratory](https://dcl.aserdargun.com/): Independent deployment lab following LCL and CLD; compare workload constraints and explicit memory, privacy and cost assumptions. No live prices or universal winner are claimed.

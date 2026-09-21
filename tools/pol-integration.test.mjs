@@ -30,10 +30,12 @@ test("POL is one public canonical record parented under gpu with truthful metada
   assert.equal(pol.visibility, "public");
   assert.equal(pol.repository, "https://github.com/aserdargun/pol-aserdargun-com");
   assert.equal(pol.address, "https://pol.aserdargun.com/");
-  assert.equal(pol.lastVerified, undefined, "POL must not invent a verification date");
-  assert.equal(pol.lastReleased, undefined, "POL must not invent a release date");
-  assert.equal(pol.releaseSha, undefined, "POL must not invent a release SHA");
-  assert.equal(pol.researchCutoff, undefined, "POL must not invent a research cutoff");
+  // Confirmed deployment: aserdargun/pol-aserdargun-com/actions/runs/35617752543,
+  // reproduced by `npm run verify:applications`.
+  assert.equal(pol.lastVerified, "2026-09-21", "POL verification date records the reproduced public identity check");
+  assert.equal(pol.lastReleased, "2026-09-21", "POL release date records its newest successful deployment run");
+  assert.equal(pol.releaseSha, "f6669347a327c53a7bfa18c1b2a8786f2429cc5a", "POL release SHA must match the deployed commit");
+  assert.equal(pol.researchCutoff, undefined, "a deployment is not a research cutoff");
 });
 
 test("POL localized titles and summaries describe English-only scope honestly", async () => {

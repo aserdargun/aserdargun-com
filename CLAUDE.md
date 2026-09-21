@@ -37,7 +37,7 @@ There is no compilation step. `npm run build:site` stages the public-only `.site
 
 ### Pages and sections (both locales, keep in parity)
 - Hero + reverse-chronological eight-stage career timeline (`08 AI Engineer` → `01 Mechanical Engineering`)
-- Five-layer overview precedes `#learning`: foundations, agent systems, assurance, deployment, and physical AI
+- The homepage introduction leads straight into the eight-stage `#learning` diagram; the duplicate application table was removed and the five-layer card overview was retired
 - `#learning` learning system - an orthogonal SVG relationship map with guiding questions and an accessible mobile equivalent; parallel GPU/USL foundations feed LLM and HNS, followed by CTX/SEC/EVL and parallel LCL/CLD deployment choices
 - WFM and SWI form parallel research bridges into ITL and the long-term ENG horizon; ANT and BEE branch from SWI as independent colony experiment labs
 - `#apps` application map - canonical applications with localized search, layer filters, and expandable evidence; each is keyed by a three-letter code
@@ -47,7 +47,11 @@ There is no compilation step. `npm run build:site` stages the public-only `.site
 
 ### Application identities and evidence
 
-Read identities, roles, lifecycle status, dates, and relationships from `data/living-system.json`; do not maintain a second product inventory here. Every application belongs in the registry, application map, system overview, and corresponding learning relationship. A public link does not establish verified production status. SWI, ANT, and BEE are live with dated verification and release evidence. ANT and BEE have no asserted research cutoff; their educational models are distinct from biological field measurements. Preserve missing evidence instead of fabricating dates or SHAs.
+Read identities, roles, lifecycle status, dates, and relationships from `data/living-system.json`; do not maintain a second product inventory here. `data/system-focus.json` only stages additions that are not registered yet and is currently empty.
+
+`tools/verify-applications.mjs` (`npm run verify:applications`) re-checks every published address and recorded release; it reports staleness and never renews a date by itself. Homepage descriptions must state the current application count, and `llms.txt` must list every registered application; `tools/validate-site.mjs` rejects retired five-layer copy.
+
+Every application belongs in the registry, application map, system overview, and corresponding learning relationship. A public link does not establish verified production status. SWI, ANT, and BEE are live with dated verification and release evidence. ANT and BEE have no asserted research cutoff; their educational models are distinct from biological field measurements. Preserve missing evidence instead of fabricating dates or SHAs.
 
 Knowledge renders only the explicitly authored public records in the canonical source. Private NXT content must never be inferred or copied into public pages or the registry. Historical Now content retains its original dates.
 

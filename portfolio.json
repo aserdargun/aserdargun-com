@@ -27,9 +27,9 @@
       "productionUrl": "https://aia.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/aia-aserdargun-com",
       "researchCutoff": "2026-08-24",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-06",
-      "releaseSha": "59bac5f1cdc14cef09237e696134d5a434fc60c4",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "841834b625ea881044241a343cb9da6600d19b7f",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -75,9 +75,9 @@
       "productionUrl": "https://llm.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/llm-aserdargun-com",
       "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-03",
-      "releaseSha": "1dcffa15cc2c5504f0f0c97b5dd0717ff9322a86",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "b7560b7524748fa7465c380ee58cac0b765a69c0",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -140,7 +140,10 @@
         "ctx",
         "sec",
         "evl",
-        "arl"
+        "arl",
+        "dpl",
+        "cul",
+        "aos"
       ],
       "tracks": [
         "harness",
@@ -149,6 +152,144 @@
       ],
       "entityIds": [
         "entity:agent-harness"
+      ],
+      "portfolioLayer": "agent-system",
+      "focusState": "active"
+    },
+    {
+      "code": "dpl",
+      "parentApp": "hns",
+      "name": {
+        "en": "DPL — Decision Plane Laboratory",
+        "tr": "DPL — Karar Düzlemi Laboratuvarı"
+      },
+      "shortName": "DPL",
+      "description": {
+        "en": "An independent deterministic simulation for the decision plane: take a short path, evaluate further, ask for evidence, wait for approval, abstain or block an action.",
+        "tr": "Karar düzlemi için bağımsız, deterministik simülasyon: kısa yolu seç, ek değerlendirme yap, kanıt iste, onay bekle, çekimser kal veya eylemi engelle."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live · Synthetic simulation",
+        "tr": "Yayında · Sentetik simülasyon"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://dpl.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/dpl-aserdargun-com",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "044a5bfa67b09f7865ae8704db7318430c6d59bd",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "hns"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "decision-plane",
+        "policy",
+        "approval",
+        "simulation"
+      ],
+      "entityIds": [
+        "entity:decision-plane"
+      ],
+      "portfolioLayer": "agent-system",
+      "focusState": "active"
+    },
+    {
+      "code": "cul",
+      "parentApp": "hns",
+      "name": {
+        "en": "CUL — Computer Use Laboratory",
+        "tr": "CUL — Bilgisayar Kullanımı Laboratuvarı"
+      },
+      "shortName": "CUL",
+      "description": {
+        "en": "Observe, act, verify: synthetic computer-use scenarios that keep targeting, approval and result checking inside one controlled browser environment.",
+        "tr": "Gözlemle, eyleme geç, doğrula: hedefleme, onay ve sonuç denetimini tek bir kontrollü tarayıcı ortamında tutan sentetik bilgisayar kullanımı senaryoları."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live · Synthetic simulation",
+        "tr": "Yayında · Sentetik simülasyon"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://cul.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/cul-aserdargun-com",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "7bc1e265cb54b5ddd6e1ad59249a8aa4725dcb6b",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "hns"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "computer-use",
+        "observation",
+        "verification",
+        "simulation"
+      ],
+      "entityIds": [
+        "entity:computer-use"
+      ],
+      "portfolioLayer": "agent-system",
+      "focusState": "active"
+    },
+    {
+      "code": "aos",
+      "parentApp": "hns",
+      "name": {
+        "en": "Agent Operating System",
+        "tr": "Ajan İşletim Sistemi"
+      },
+      "shortName": "AOS",
+      "description": {
+        "en": "A public guide to a target agent operating-system architecture: local models, an isolated computer, an open state and human control.",
+        "tr": "Hedef ajan işletim sistemi mimarisini anlatan kamusal rehber: yerel modeller, izole bir bilgisayar, açık durum ve insan kontrolü."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live · Target architecture",
+        "tr": "Yayında · Hedef mimari"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://aos.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/aos-aserdargun-com",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "b286cebd63961ee9a96fb21f73a53a1058f9d041",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "hns"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "agent-operating-system",
+        "architecture",
+        "human-control",
+        "design"
+      ],
+      "entityIds": [
+        "entity:agent-operating-system"
       ],
       "portfolioLayer": "agent-system",
       "focusState": "active"
@@ -228,9 +369,9 @@
       "productionUrl": "https://ctx.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/ctx-aserdargun-com",
       "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-04",
-      "releaseSha": "49eee95c8030428af8136594d01600c126249740",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "78a305dab2033e3f7125a9a5c27c86e8592af895",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -239,7 +380,8 @@
       ],
       "downstreamApps": [
         "llm",
-        "lcl"
+        "lcl",
+        "mem"
       ],
       "tracks": [
         "context",
@@ -249,6 +391,52 @@
       ],
       "entityIds": [
         "entity:mcp"
+      ],
+      "portfolioLayer": "agent-system",
+      "focusState": "active"
+    },
+    {
+      "code": "mem",
+      "parentApp": "ctx",
+      "name": {
+        "en": "MEM — Agent Memory Laboratory",
+        "tr": "MEM — Ajan Belleği Laboratuvarı"
+      },
+      "shortName": "MEM",
+      "description": {
+        "en": "Explore agent memory across six synthetic scenarios and three memory policies: recall, source and version links, correction, expiry, deletion and JSON export.",
+        "tr": "Ajan belleğini altı sentetik senaryo ve üç bellek politikasında keşfet: geri çağırma, kaynak ve sürüm bağları, düzeltme, süre sonu, silme ve JSON dışa aktarımı."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live · Synthetic simulation",
+        "tr": "Yayında · Sentetik simülasyon"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://mem.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/mem-aserdargun-com",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "8da7dac613605cb5ce02e83e85fa972eb6fffc0b",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "ctx"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "agent-memory",
+        "lifecycle",
+        "retrieval",
+        "simulation"
+      ],
+      "entityIds": [
+        "entity:agent-memory"
       ],
       "portfolioLayer": "agent-system",
       "focusState": "active"
@@ -278,9 +466,9 @@
       "productionUrl": "https://evl.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/evl-aserdargun-com",
       "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-04",
-      "releaseSha": "8b4e89876bafa447d19094c09d2d316e3ec94174",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "0b3f45de8529100f4b4dcda20627c734fff2ff80",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -376,9 +564,9 @@
       "productionUrl": "https://gpu.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/gpu-aserdargun-com",
       "researchCutoff": "2026-08-29",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-03",
-      "releaseSha": "d6cd2540c321b6fbe1aec15f404687a5fbfc59e0",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "509a811c175773691534fcaf5f4098a1b0d79067",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -425,6 +613,9 @@
       ],
       "productionUrl": "https://pol.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/pol-aserdargun-com",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "f6669347a327c53a7bfa18c1b2a8786f2429cc5a",
       "upstreamApps": [
         "gpu"
       ],
@@ -464,7 +655,7 @@
       "productionUrl": "https://cld.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/cld-aserdargun-com",
       "researchCutoff": "2026-08-14",
-      "lastVerified": "2026-09-04",
+      "lastVerified": "2026-09-21",
       "lastReleased": "2026-09-21",
       "releaseSha": "c1652a902be75570025f75dc8db89a59b7b3c12e",
       "sourceCount": null,
@@ -567,9 +758,9 @@
       "productionUrl": "https://wfm.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/wfm-aserdargun-com",
       "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-04",
-      "releaseSha": "3e29ae5dc3139c55edfb52458703bceed8ca39f8",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "984cab880a364b5bb227d65035a0051bcf7e5a18",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -670,7 +861,7 @@
       "repositoryUrl": "https://github.com/aserdargun/ant-aserdargun-com",
       "lastVerified": "2026-09-21",
       "lastReleased": "2026-09-21",
-      "releaseSha": "317378118d3599a2cbff1e32a5e3a8e888bf6444",
+      "releaseSha": "8a2a680e991aa17c91f1331ec056311776a24d71",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -863,8 +1054,9 @@
       ],
       "productionUrl": "https://gex.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/gex-aserdargun-com",
-      "lastVerified": "2026-09-09",
-      "releaseSha": "24ba9288f4dba1ffe49dfc4a185c107d71099b74",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "64bfc04ddc9580898f21a0d322c16a0eda2785b2",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -954,9 +1146,9 @@
       ],
       "productionUrl": "https://arl.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/arl-aserdargun-com",
-      "lastVerified": "2026-09-10",
-      "lastReleased": "2026-09-10",
-      "releaseSha": "074c4cc7c6083fae745b8ed21d521f5da3605c5d",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "f1f1e7ad18b0eb1afa5cfb13825f3d04ff9bba5e",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1044,8 +1236,9 @@
       ],
       "productionUrl": "https://wml.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/wml-aserdargun-com",
-      "lastVerified": "2026-09-09",
-      "releaseSha": "a4129857a671b01a5e4d07f3d39e71525416ca4d",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "d2b8751f4bba40a814a15057cfe5b18f681b8c0c",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1174,8 +1367,9 @@
       ],
       "productionUrl": "https://hex.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/hex-aserdargun-com",
-      "lastVerified": "2026-09-09",
-      "releaseSha": "67c6020431ac47b35e1dbc91b6526f8ab6468b75",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "94fb766cacfaa0f4b21ae5212569f3ad1df967ae",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1221,9 +1415,9 @@
       ],
       "productionUrl": "https://dcl.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/dcl-aserdargun-com",
-      "lastVerified": "2026-09-10",
-      "lastReleased": "2026-09-10",
-      "releaseSha": "bc6ee484eb5de5f2b20cc5db81f1f3be0aabce77",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "533b43809bcbb83992a64a9f62bf2d6ee4e8e725",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",

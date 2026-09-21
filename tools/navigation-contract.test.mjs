@@ -490,9 +490,17 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
 
     assert.ok(harnessCard, "the detailed learning flow must expose the HNS harness card");
     assert.equal(harnessCard.includes(expectedQuestion), true);
+    // The card links the observatory itself and every lab registered under it,
+    // in canonical catalog order: DPL, CUL, AOS, then ARL.
     assert.deepEqual(
       anchors(harnessCard).map(({ openingTag }) => attribute(openingTag, "href")),
-      ["https://hns.aserdargun.com/", "https://arl.aserdargun.com/"],
+      [
+        "https://hns.aserdargun.com/",
+        "https://dpl.aserdargun.com/",
+        "https://cul.aserdargun.com/",
+        "https://aos.aserdargun.com/",
+        "https://arl.aserdargun.com/",
+      ],
     );
     assert.ok(
       (learning ?? "").indexOf(harnessCard) < (learning ?? "").indexOf('class="learning-deployment-paths"'),

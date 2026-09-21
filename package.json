@@ -24,6 +24,8 @@
     "test:navigation": "node --test tools/navigation-contract.test.mjs tools/site-structure.test.mjs tools/application-links.test.mjs",
     "test:server": "node --test tools/serve.test.mjs",
     "test:stop": "node --test tools/preview-control.test.mjs tools/preview-stop.test.mjs",
+    "verify:applications": "node tools/verify-applications.mjs",
+    "verify:applications:offline": "node tools/verify-applications.mjs --offline",
     "validate:site": "node tools/validate-site.mjs",
     "validate:codex": "npm test",
     "test": "npm run check:js && npm run test:deployment && npm run test:environment && npm run test:portrait && npm run test:stop && npm run test:data && npm run test:archive && npm run test:render && npm run check:generated && npm run test:navigation && npm run validate:site",

@@ -4,7 +4,9 @@ const focus = JSON.parse(readFileSync(new URL("../data/system-focus.json", impor
 
 // The diagram includes approved additions to the registered catalog. Entries may
 // have verified public addresses before full release metadata is registered in
-// living-system.json. Canonical catalog entries take precedence.
+// living-system.json. Canonical catalog entries take precedence, so a staged
+// entry is removed once the application is registered. The staged list is
+// currently empty: DPL, CUL, AOS and MEM are registered in the catalog.
 export function systemFocusApplications(applications) {
   const result = applications.map((app) => ({ ...app }));
   for (const addition of focus.additionalApplications) {

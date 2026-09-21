@@ -20,7 +20,8 @@ async function readData() {
 test("the public application contract keeps verification, research, and release facts separate", async () => {
   const data = await readData();
 
-  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex", "tfl", "arl", "adp", "dcl", "pol", "dtr"].includes(code))) {
+  // Educational and design applications assert no research cutoff of their own.
+  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex", "tfl", "arl", "adp", "dcl", "pol", "dtr", "dpl", "cul", "aos", "mem"].includes(code))) {
     assert.match(application.researchCutoff, /^2026-\d{2}-\d{2}$/, `${application.code} research cutoff`);
     assert.match(application.lastVerified, /^2026-\d{2}-\d{2}$/, `${application.code} verification date`);
     assert.ok(new Date(application.lastVerified) <= today, `${application.code} verification must not be in the future`);
@@ -54,7 +55,7 @@ test("the portfolio registry is a deterministic public projection of application
 
   assert.equal(registry.schemaVersion, 1);
   assert.equal(registry.generatedAt, "2026-09-04");
-  assert.equal(registry.applications.length, 26);
+  assert.equal(registry.applications.length, 30);
   assert.deepEqual(registry.applications.map(({ code }) => code), data.applications.map(({ code }) => code));
   assert.deepEqual(
     registry.applications.find(({ code }) => code === "ctx"),
@@ -71,14 +72,16 @@ test("the portfolio registry is a deterministic public projection of application
       productionUrl: "https://ctx.aserdargun.com/",
       repositoryUrl: "https://github.com/aserdargun/ctx-aserdargun-com",
       researchCutoff: "2026-09-04",
-      lastVerified: "2026-09-04",
-      lastReleased: "2026-09-04",
-      releaseSha: "49eee95c8030428af8136594d01600c126249740",
+      // Verification and deployment renewed by `npm run verify:applications`;
+      // deployment confirmed by aserdargun/ctx-aserdargun-com/actions/runs/35616563458.
+      lastVerified: "2026-09-21",
+      lastReleased: "2026-09-21",
+      releaseSha: "78a305dab2033e3f7125a9a5c27c86e8592af895",
       sourceCount: null,
       claimCount: null,
       evidencePolicy: "primary-source-backed",
       upstreamApps: ["hns"],
-      downstreamApps: ["llm", "lcl"],
+      downstreamApps: ["llm", "lcl", "mem"],
       tracks: ["context", "knowledge", "retrieval", "memory"],
       entityIds: ["entity:mcp"],
       portfolioLayer: "agent-system",
@@ -93,8 +96,9 @@ test("the application map exposes distinct research, verification, and release e
   const turkish = renderApplicationMap({ locale: "tr", data, today });
 
   assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-08-24">2026-08-24<\/time><\/dd>/);
-  assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-09-04">2026-09-04<\/time><\/dd>/);
-  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-06">2026-09-06<\/time><code>59bac5f1<\/code><\/dd>/);
+  assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-09-21">2026-09-21<\/time><\/dd>/);
+  // AIA deployment confirmed by aserdargun/aia-aserdargun-com/actions/runs/35617907453.
+  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-21">2026-09-21<\/time><code>841834b6<\/code><\/dd>/);
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
 });
@@ -176,10 +180,10 @@ test("SWI colony labs preserve their relationship and show release evidence with
   }
 });
 
-test("homepage and application map cover the catalog and four approved additions", async () => {
+test("homepage and application map cover the registered catalog", async () => {
   const data = await readData();
-  const expected = data.applications.map(({ code }) => code).sort();
-  const homepageCodes = [...expected, "dpl", "cul", "aos", "mem"].sort();
+  const homepageCodes = data.applications.map(({ code }) => code).sort();
+  assert.deepEqual(homepageCodes, [...homepageCodes].sort(), "the registered catalog is the single source of homepage codes");
   for (const file of ["index.html", "tr/index.html"]) {
     const html = await readFile(path.join(rootDir, file), "utf8");
     const svg = html.match(/<g class="ld-nodes">([\s\S]*?)<\/svg>/)?.[1] ?? "";
@@ -206,13 +210,18 @@ test("companion learning apps connect to their research parents across both loca
     assert.equal(app.portfolioLayer, layer);
     assert.equal(app.systemRole, "lab");
     assert.equal(app.researchCutoff, undefined, "educational applications do not imply a research cutoff");
-    if (app.code === "pdt") {
-      // Confirmed deployment: aserdargun/pdt-aserdargun-com/actions/runs/35618120812.
-      assert.equal(app.lastReleased, "2026-09-21");
-      assert.equal(app.releaseSha, "9889ab379930b114f97bc449a6219070fd2175c9");
-    } else {
-      assert.equal(app.lastReleased, undefined, "build timestamps do not establish release dates");
-    }
+    // Confirmed deployments: gex/actions/runs/35616514487, wml/actions/runs/35617052809,
+    // hex/actions/runs/35618035223, pdt/actions/runs/35618120812. A build timestamp
+    // alone still does not establish a release date.
+    const confirmedDeployments = {
+      gex: ["2026-09-21", "64bfc04ddc9580898f21a0d322c16a0eda2785b2"],
+      wml: ["2026-09-21", "d2b8751f4bba40a814a15057cfe5b18f681b8c0c"],
+      hex: ["2026-09-21", "94fb766cacfaa0f4b21ae5212569f3ad1df967ae"],
+      pdt: ["2026-09-21", "9889ab379930b114f97bc449a6219070fd2175c9"],
+    };
+    const [releasedOn, releaseSha] = confirmedDeployments[code];
+    assert.equal(app.lastReleased, releasedOn, "only a confirmed deployment run establishes a release date");
+    assert.equal(app.releaseSha, releaseSha, "the release SHA must match the deployed commit");
     for (const locale of ["en", "tr"]) {
       const cards = renderPracticeLabs({ locale, data });
       assert.ok(cards.includes(`data-practice-lab="${code}" data-learning-parent="${parentCode}"`));

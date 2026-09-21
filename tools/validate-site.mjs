@@ -20,9 +20,12 @@ import {
 } from "./public-html-contract.mjs";
 
 const expectedPublicApplicationCodes = [
-  "aia", "llm", "hns", "sec", "ctx", "evl", "usl", "gpu", "pol", "cld", "lcl",
-  "wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng", "gex", "wml", "dcl", "tfl", "arl", "adp", "dtr",
+  "aia", "llm", "hns", "dpl", "cul", "aos", "sec", "ctx", "mem", "evl", "usl", "gpu",
+  "pol", "cld", "lcl", "wfm", "swi", "ant", "bee", "itl", "eng", "gex", "tfl", "arl",
+  "adp", "wml", "dtr", "pdt", "hex", "dcl",
 ].sort();
+// Copy that describes a structure the site no longer has must not come back.
+const retiredOverviewCopy = /five connected layers|five\s*[—-]\s*layer|beş katman/i;
 const expectedPrivateApplicationCodes = ["nxt", "stk", "inf"].sort();
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -150,6 +153,43 @@ function check(condition, message) {
 
 function matches(source, pattern) {
   return Array.from(source.matchAll(pattern), (match) => match[1]);
+}
+
+// The homepage description, social metadata and structured data must describe
+// the current eight-stage overview and the registered application count.
+function validateHomepageOverviewCopy(locale, html, applicationCount) {
+  const descriptions = [
+    html.match(/<meta name="description" content="([^"]*)">/)?.[1] ?? "",
+    html.match(/<meta property="og:description" content="([^"]*)">/)?.[1] ?? "",
+    html.match(/<meta name="twitter:description" content="([^"]*)">/)?.[1] ?? "",
+    html.match(/"description": "([^"]*)"/)?.[1] ?? "",
+  ];
+  check(descriptions.every((description) => description.trim().length > 0), `${locale}: homepage description metadata is incomplete`);
+  check(!retiredOverviewCopy.test(html), `${locale}: homepage keeps copy from the retired five-layer overview`);
+  for (const description of descriptions) {
+    check(description.includes(String(applicationCount)), `${locale}: homepage description must state the current application count (${applicationCount})`);
+  }
+}
+
+// The agent-facing reading guide and registry must cover the whole catalog.
+async function validateAgentSurface(livingSystem) {
+  const applications = systemFocusApplications(livingSystem.applications);
+  const llms = await readFile(path.join(root, "llms.txt"), "utf8").catch(() => "");
+  check(llms.trim().length > 0, "llms.txt is missing from the public root");
+  check(!retiredOverviewCopy.test(llms), "llms.txt keeps copy from the retired five-layer overview");
+  check(llms.includes(String(applications.length)), `llms.txt must state the current application count (${applications.length})`);
+  for (const application of applications) {
+    const code = application.code.toUpperCase();
+    check(new RegExp(`\\b${code}\\b`).test(llms), `llms.txt must list ${code}`);
+    check(llms.includes(application.address), `llms.txt must link ${application.address}`);
+  }
+  check(llms.includes("https://aserdargun.com/portfolio.json"), "llms.txt must point agents at portfolio.json");
+  check(llms.includes("https://aserdargun.com/schemas/aserdargun-app.schema.json"), "llms.txt must point agents at the application schema");
+  const registry = JSON.parse(await readFile(path.join(root, "portfolio.json"), "utf8"));
+  check(
+    registry.applications.length === applications.length,
+    `portfolio.json must project all ${applications.length} registered applications`,
+  );
 }
 
 function tokenizeAttributes(source) {
@@ -858,12 +898,15 @@ for (const document of publicIndexDocuments) {
 for (const diagnostic of validatePublicIndexCoverage(publicIndexDocuments, validatedPublicIndexPaths)) {
   failures.push(`Public HTML accessibility coverage failed: file=${diagnostic.relativePath} code=${diagnostic.code} ${diagnostic.message}`);
 }
-const applicationSummaries = { en: "30 applications,", tr: "uzanan 30 uygulama." };
+const publicApplicationCount = systemFocusApplications(livingSystem.applications).length;
+const applicationSummaries = { en: `${publicApplicationCount} applications,`, tr: `uzanan ${publicApplicationCount} uygulama.` };
+await validateAgentSurface(livingSystem);
 
 for (const [locale, html] of Object.entries(pages)) {
   const about = routePages[locale].about;
   const applications = routePages[locale].applications;
   const expectedCanonical = locale === "tr" ? "https://aserdargun.com/tr/" : "https://aserdargun.com/";
+  validateHomepageOverviewCopy(locale, html, publicApplicationCount);
   check(html.includes(`<html lang="${locale}" data-locale="${locale}">`), `${locale}: html language marker is missing`);
   check(html.includes(`<link rel="canonical" href="${expectedCanonical}">`), `${locale}: canonical URL is incorrect`);
   check(!html.includes("https://aserdargun.com/en/"), `${locale}: retired /en/ URL remains`);
