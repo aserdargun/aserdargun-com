@@ -26,7 +26,7 @@ test("the public application contract keeps verification, research, and release 
     assert.ok(new Date(application.lastVerified) <= today, `${application.code} verification must not be in the future`);
     assert.match(application.lastReleased, /^2026-\d{2}-\d{2}$/, `${application.code} release date`);
     assert.match(application.releaseSha, /^[a-f0-9]{40}$/, `${application.code} release SHA`);
-    assert.deepEqual(application.languages, application.code === "eng" ? ["en"] : ["tr", "en"], `${application.code} language contract`);
+    assert.deepEqual(application.languages, ["eng", "itl"].includes(application.code) ? ["en"] : ["tr", "en"], `${application.code} language contract`);
     assert.ok(Array.isArray(application.upstreamApps), `${application.code} upstream relationships`);
     assert.ok(Array.isArray(application.downstreamApps), `${application.code} downstream relationships`);
     assert.ok(Array.isArray(application.tracks), `${application.code} tracks`);
