@@ -600,19 +600,19 @@
       "languages": ["tr", "en"],
       "title": { "en": "ANT — Ant Colony Intelligence Laboratory", "tr": "ANT — Karınca Kolonisi Zekâ Laboratuvarı" },
       "summary": {
-        "en": "A colony experiment lab within SWI’s research family. Explore how local rules, pheromone trails, evaporation, and exploration produce collective foraging through reproducible simulations.",
-        "tr": "SWI araştırma ailesinde bir koloni deney laboratuvarı. Yerel kuralların, feromon izlerinin, buharlaşmanın ve keşfin ortak besin arama davranışını nasıl oluşturduğunu tekrarlanabilir simülasyonlarla incele."
+        "en": "SWI’s companion ant-colony lab: one reproducible experiment, three guided exercises and run replay. Explore local rules, food-pheromone trails and evaporation. Home chemical is observational; returning ants use idealized path integration. No species calibration or guaranteed shortest path; synchronized A/B is future work.",
+        "tr": "SWI’ye eşlik eden karınca kolonisi laboratuvarı: bir tekrarlanabilir deney, üç rehberli çalışma ve deney kaydı tekrarı. Yerel kuralları, besin feromonu izlerini ve sönümü incele. Yuva kimyasalı gözlem içindir; dönen karıncalar idealize yol bütünlemesi kullanır. Türe kalibrasyon veya en kısa yol garantisi yoktur; eşzamanlı A/B ileriki aşamadır."
       },
       "guidingQuestion": {
-        "en": "How does a colony find a shared trail without a central plan?",
-        "tr": "Bir koloni merkezi bir plan olmadan ortak yolu nasıl bulur?"
+        "en": "How can local chemical traces coordinate foraging without a central plan?",
+        "tr": "Yerel kimyasal izler merkezi bir plan olmadan besin aramayı nasıl koordine edebilir?"
       },
       "repository": "https://github.com/aserdargun/ant-aserdargun-com",
       "address": "https://ant.aserdargun.com/",
-      "updatedAt": "2026-09-06",
-      "lastVerified": "2026-09-06",
-      "lastReleased": "2026-09-06",
-      "releaseSha": "a08e44f9a8f4d9a41fac934834008e5ad998542c",
+      "updatedAt": "2026-09-21",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "317378118d3599a2cbff1e32a5e3a8e888bf6444",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
