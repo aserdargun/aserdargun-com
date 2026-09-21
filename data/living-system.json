@@ -1130,8 +1130,8 @@
         "tr": "P-101 Etkileşimli Dijital İkiz"
       },
       "summary": {
-        "en": "Inspect a centrifugal pump, its components, and condition scenarios as an Industrial Twin Lab teaching exhibit. Geometry is simplified and all condition signals are synthetic.",
-        "tr": "Industrial Twin Lab öğrenme örneğinde santrifüj pompayı, bileşenlerini ve durum senaryolarını incele. Geometri sadeleştirilmiştir; tüm durum sinyalleri sentetiktir."
+        "en": "Explore P-101 through four views, nine components, eight sensor locations and five authored pump conditions. Compare qualitative synthetic signals; this ITL teaching companion has no live telemetry or shared experiment state.",
+        "tr": "P-101’i dört görünüm, dokuz bileşen, sekiz sensör konumu ve beş kurgulanmış pompa durumuyla keşfet. Nitel sentetik sinyalleri karşılaştır; bu ITL eğitim uygulaması canlı telemetri veya ortak deney durumu içermez."
       },
       "guidingQuestion": {
         "en": "How do pump components relate to operating conditions?",
@@ -1139,8 +1139,9 @@
       },
       "repository": "https://github.com/aserdargun/pdt-aserdargun-com",
       "address": "https://pdt.aserdargun.com/",
-      "updatedAt": "2026-09-09",
-      "lastVerified": "2026-09-09",
+      "updatedAt": "2026-09-21",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1157,7 +1158,7 @@
       "portfolioLayer": "physical-ai",
       "focusState": "active",
       "relatedMemoryIds": [],
-      "releaseSha": "488bc4fa0500bcd3d56e5966dd7769043a433d20"
+      "releaseSha": "9889ab379930b114f97bc449a6219070fd2175c9"
     },
     {
       "code": "hex",

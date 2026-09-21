@@ -217,7 +217,13 @@ test("companion learning apps connect to their research parents across both loca
     assert.equal(app.portfolioLayer, layer);
     assert.equal(app.systemRole, "lab");
     assert.equal(app.researchCutoff, undefined, "educational applications do not imply a research cutoff");
-    assert.equal(app.lastReleased, undefined, "build timestamps do not establish release dates");
+    if (app.code === "pdt") {
+      // Confirmed deployment: aserdargun/pdt-aserdargun-com/actions/runs/35618120812.
+      assert.equal(app.lastReleased, "2026-09-21");
+      assert.equal(app.releaseSha, "9889ab379930b114f97bc449a6219070fd2175c9");
+    } else {
+      assert.equal(app.lastReleased, undefined, "build timestamps do not establish release dates");
+    }
     for (const locale of ["en", "tr"]) {
       const cards = renderPracticeLabs({ locale, data });
       assert.ok(cards.includes(`data-practice-lab="${code}" data-learning-parent="${parentCode}"`));
