@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-19",
+  "generatedAt": "2026-09-21",
   "applications": [
     {
       "code": "aia",
@@ -891,8 +891,8 @@
       },
       "shortName": "TFL",
       "description": {
-        "en": "Follow a simulated request through queueing, prefill, KV cache, decode and token delivery. Compare scheduling and batching trade-offs; timings and outputs are illustrative, not measured inference.",
-        "tr": "Simüle edilen bir isteği kuyruk, prefill, KV önbelleği, decode ve token üretimi boyunca izle. Zamanlama ve toplu işleme tercihlerini karşılaştır; süreler ve çıktılar gerçek çıkarım ölçümleri değildir."
+        "en": "Explore nine deterministic serving experiments and ten guided checkpoints: queueing, prefill, KV reservations, decode and token delivery. Compare scheduling, latency and throughput; token text is scripted and timings are synthetic, with no model execution or hardware benchmark.",
+        "tr": "Dokuz deterministik sunum deneyi ve on rehberli kontrol noktasıyla kuyruk, ön doldurma, KV rezervasyonları, çözümleme ve token iletimini keşfet. Zamanlama, gecikme ve verimi karşılaştır; token metni hazırlanmıştır, süreler sentetiktir. Gerçek model veya donanım kıyaslaması çalışmaz."
       },
       "type": "lab",
       "status": "live",
@@ -906,9 +906,9 @@
       ],
       "productionUrl": "https://tfl.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/tfl-aserdargun-com",
-      "lastVerified": "2026-09-10",
-      "lastReleased": "2026-09-10",
-      "releaseSha": "942277523ef94496cb14af86d516676053dcd7b2",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "aedb5931315243ebf2fc20ef7f9de923a5eeba7d",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
