@@ -39,8 +39,8 @@
         "tr": "Ajan İşletim Sistemi"
       },
       "subtitle": {
-        "en": "Open-source agent runtime",
-        "tr": "Açık kaynaklı ajan çalışma ortamı"
+        "en": "Target agent architecture",
+        "tr": "Hedef ajan mimarisi"
       },
       "diagramLabel": {
         "en": "Agent operating system",

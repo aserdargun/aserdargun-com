@@ -68,6 +68,9 @@ to LLM, and ARL to HNS. DCL is an independent deployment decision laboratory
 that builds on both LCL and CLD; it is not owned by either one. These relationships
 appear in both languages on the homepage, diagram, Journey and application map.
 The ILS package repository is shared infrastructure, not a deployed application.
+AOS's homepage subtitle describes its target agent architecture. Its public site
+presents an architectural design; publication does not establish a running
+agent runtime or a verified open-source application release.
 
 ## Development
 
