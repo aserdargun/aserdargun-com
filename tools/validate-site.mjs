@@ -330,19 +330,12 @@ function validateLearningSystem(locale, html) {
   check(section.length > 0, `${locale}: learning system section is missing`);
   if (section.length === 0) return;
   check(section.includes('id="learning"'), `${locale}: learning system anchor is missing`);
-  check(section.includes('aria-labelledby="learning-title"'), `${locale}: learning system heading relationship is missing`);
-  check(section.includes('aria-describedby="learning-description"'), `${locale}: learning system description relationship is missing`);
-  const intro = section.match(/<div class="learning-intro">([\s\S]*?)<\/div>/)?.[1] ?? "";
-  const expectedKicker = isTurkish
-    ? "Öğrenme sistemi · AI Learning System"
-    : "AI Learning System · connected paths";
-  const expectedHeading = isTurkish
-    ? "Sistem nasıl bağlanıyor?"
-    : "How the system connects.";
-  check(intro.includes(expectedKicker), `${locale}: learning system kicker is missing`);
-  check(intro.includes(expectedHeading), `${locale}: learning system heading is missing`);
-  const description = intro.match(/<p id="learning-description">([\s\S]*?)<\/p>/)?.[1] ?? "";
-  check(description.trim().length > 0, `${locale}: learning system description is missing`);
+  const headingId = `system-focus-title-${isTurkish ? "tr" : "en"}`;
+  check(section.includes(`aria-labelledby="${headingId}"`), `${locale}: diagram must reference the main homepage heading`);
+  check(section.includes('aria-describedby="learning-description"'), `${locale}: diagram description relationship is missing`);
+  const description = html.match(/<p id="learning-description">([\s\S]*?)<\/p>/)?.[1] ?? "";
+  check(description.trim().length > 0, `${locale}: short diagram description is missing`);
+  check(!section.includes('class="learning-intro"'), `${locale}: duplicate diagram introduction must not return`);
   check(
     section.includes('<figure class="learning-diagram-wrap">')
       && section.includes('class="ld-svg"'),

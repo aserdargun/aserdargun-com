@@ -450,7 +450,7 @@ export function renderSystemFocus({ locale }) {
     '        <div class="system-focus__intro">',
     '          <p class="system-focus__kicker">AI Learning System</p>',
     `          <h1 id="system-focus-title-${locale}">${label(locale, "Learn AI. Put it to work.", "Yapay zekâyı öğren. Uygulamaya geçir.")}</h1>`,
-    `          <p>${label(locale, "Explore how AI systems work through research, applications, and hands-on experiments. Follow the learning diagram, connect ideas, and put what you learn into practice.", "Araştırmalar, uygulamalar ve deneylerle yapay zekâ sistemlerinin nasıl çalıştığını keşfet. Öğrenme diyagramını takip et, fikirler arasında bağ kur ve öğrendiklerini uygulamaya geçir.")}</p>`,
+    `          <p id="learning-description">${label(locale, "Explore a learning map from AI foundations and agents to digital twins and humanoid robots. Open an application, follow the connections, and put ideas into practice through experiments.", "Yapay zekânın temellerinden ajanlara, dijital ikizlerden insansı robotlara uzanan öğrenme haritasını keşfet. Uygulamalara gir, bağlantıları takip et ve öğrendiklerini deneylerle pekiştir.")}</p>`,
     "        </div>",
     "      </div>",
     "    </section>",

@@ -1,3 +1,9 @@
+/* A short introduction leads directly into the unchanged diagram. */
+.system-home .system-focus-inner { padding-bottom: 28px; }
+.system-home .learning-system { border-top: 0; background: var(--ink); }
+.system-home .learning-system-inner { padding-top: 0; }
+.system-home .learning-diagram-wrap { margin-top: 0; }
+
 /* Homepage discovery below the learning diagram. */
 .home-discovery {
   --discovery-muted: #bcc4b5;
