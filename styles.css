@@ -210,10 +210,11 @@ ul {
   grid-template-columns: minmax(190px, 1fr) auto minmax(210px, 1fr);
   align-items: center;
   width: 100%;
-  max-width: var(--content);
+  max-width: none;
   margin: 0 auto;
   padding: 24px 40px;
   color: var(--white);
+  border-bottom: 1px solid var(--line-dark);
 }
 
 .nav-toggle {
@@ -2227,7 +2228,6 @@ footer a {
     grid-template-columns: 1fr auto;
     gap: 12px;
     align-items: center;
-    border-bottom: 1px solid var(--line-dark);
     padding: 16px 20px;
     background: rgba(18, 19, 16, 0.92);
     backdrop-filter: blur(10px);
@@ -3560,7 +3560,6 @@ body:has(main.memory-page) {
   position: relative;
   background: var(--ink);
   color: var(--white);
-  border-bottom: 1px solid var(--line-dark);
 }
 
 .memory-page {
@@ -4399,7 +4398,7 @@ body:has(main.memory-page) {
 .journey-page .learning-intro h1 { font-size: clamp(2.6rem, 5vw, 4.8rem); line-height: 1.06; margin-block: 16px 24px; }
 
 @media (min-width: 1181px) {
-  .site-header-page { padding-inline: max(40px, calc((100% - var(--content)) / 2 + 40px)); }
+  .site-header { padding-inline: max(40px, calc((100% - var(--content)) / 2 + 40px)); }
   .site-header {
     grid-template-columns: minmax(190px, 280px) auto minmax(210px, 280px);
   }
