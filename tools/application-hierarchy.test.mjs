@@ -74,10 +74,6 @@ test("all diagram boxes are disjoint; framed children stay inside their owning f
       const parent = nodes.find((item) => item.app.code === node.app.parentApp);
       const family = families.find((item) => item.code === node.app.parentApp);
       assert.ok(node.width < parent.width, `${node.app.code} should be narrower than its parent`);
-      if (node.app.parentApp === "eng") {
-        assert.equal(family, undefined, "ENG connects to HEX outside a family frame in the approved reference");
-        continue;
-      }
       assert.ok(family);
       for (const member of [node, parent]) {
         assert.ok(member.x > family.x && member.x + member.width < family.x + family.width && member.y > family.y && member.y + member.height < family.y + family.height);
@@ -99,7 +95,7 @@ test("every arrow and connector avoids box interiors and other routes; shared bu
     }
     for (const family of families) {
       const endpoints = id.split("-to-");
-      const belongs = endpoints.some((code) => code === family.code || nodes.find(({app}) => app.code === code)?.app.parentApp === family.code);
+      const belongs = endpoints.some((code) => code === family.code || family.members.includes(code));
       if (belongs) continue;
       const crosses = a.x === b.x
         ? inside(a.x, family.x, family.x + family.width) && overlap(a.y, b.y, family.y, family.y + family.height)
@@ -140,14 +136,20 @@ test("DCL has two equal owners and one visible entry in each portfolio view", ()
     }
   }
   const { nodes, families, edges } = learningDiagramLayout(data.applications);
-  assert.ok(!families.some((item) => item.code === "cld-lcl"), "deployment uses reciprocal arrows, not an enclosing frame");
+  const family = families.find(({ code }) => code === "deployment");
+  assert.deepEqual([...family.members].sort(), ["cld", "dcl", "lcl"]);
   const byCode = (code) => nodes.find(({ app }) => app.code === code);
-  assert.ok(byCode("lcl").x + byCode("lcl").width < byCode("dcl").x);
-  assert.ok(byCode("dcl").x + byCode("dcl").width < byCode("cld").x);
+  assert.ok(byCode("lcl").x + byCode("lcl").width < byCode("cld").x);
+  assert.equal(byCode("lcl").y, byCode("cld").y);
+  assert.equal(byCode("dcl").cx, family.x + family.width / 2);
+  for (const code of family.members) {
+    const node = byCode(code);
+    assert.ok(node.x > family.x && node.x + node.width < family.x + family.width);
+    assert.ok(node.y > family.y && node.y + node.height < family.y + family.height);
+  }
   for (const code of applicationParents(dcl)) {
-    const edge = edges.find((edge) => edge.id === `${code}-to-dcl`);
-    assert.equal(edge.kind, "child");
-    assert.equal(edge.bidirectional, true);
+    assert.ok(byCode(code).y + byCode(code).height < byCode("dcl").y);
+    assert.ok(!edges.some((edge) => edge.id === `${code}-to-dcl`), "shared ownership is expressed by containment");
   }
 });
 
@@ -171,27 +173,55 @@ test("shared ownership validates both parents and detects cycles through either 
 });
 
 
-test("the approved diagram has 30 unique nodes and eight non-overlapping ownership frames", () => {
+test("the approved diagram has 30 unique nodes and ten non-overlapping ownership frames", () => {
   const { nodes, families, edges } = learningDiagramLayout(data.applications);
   assert.equal(nodes.length, 30);
   assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 30);
-  assert.deepEqual(families.map(({ code }) => code), ["gpu", "usl", "llm", "hns", "ctx", "wfm", "swi", "itl"]);
+  assert.deepEqual(families.map(({ code }) => code), ["gpu", "usl", "llm", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"]);
   for (const [i, frame] of families.entries()) {
     for (const other of families.slice(i + 1)) {
       assert.ok(!(overlap(frame.x, frame.x + frame.width, other.x, other.x + other.width) && overlap(frame.y, frame.y + frame.height, other.y, other.y + other.height)), `${frame.code} overlaps ${other.code}`);
     }
     for (const node of nodes) {
-      if (node.app.code === frame.code || node.app.parentApp === frame.code) continue;
+      if (frame.members.includes(node.app.code)) continue;
       assert.ok(!(overlap(frame.x, frame.x + frame.width, node.x, node.x + node.width) && overlap(frame.y, frame.y + frame.height, node.y, node.y + node.height)), `${frame.code} encloses unrelated ${node.app.code}`);
     }
   }
-  assert.deepEqual(edges.filter(({bidirectional}) => bidirectional).map(({id}) => id), ["sec-to-evl", "lcl-to-dcl", "cld-to-dcl"]);
-  // Every arrow tip lands on the target rectangle, rather than stopping short
-  // or pointing into a label. Frame containment expresses the other children.
+  assert.deepEqual(edges.filter(({bidirectional}) => bidirectional).map(({id}) => id), ["ctx-to-sec", "ctx-to-evl"]);
+  const branchLengths = ["deployment-to-wfm", "deployment-to-swi"].map((id) => {
+    const [start, end] = segments(edges.find((edge) => edge.id === id).path)[0];
+    return Math.abs(end.x - start.x);
+  });
+  assert.equal(branchLengths[0], branchLengths[1], "physical-AI branches have equal horizontal lengths");
+  // Incoming routes to grouped applications land on their family frames.
+  // Other arrow tips land on the application rectangle.
   for (const edge of edges) {
-    const target = nodes.find(({app}) => app.code === edge.id.split("-to-")[1]);
+    const foundationBranch = ["aia-to-gpu", "aia-to-usl"].includes(edge.id);
+    const targetCode = edge.id.split("-to-")[1];
+    const target = foundationBranch || ["llm", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"].includes(targetCode)
+      ? families.find(({code}) => code === targetCode)
+      : nodes.find(({app}) => app.code === targetCode);
     assert.ok(target, edge.id);
     const point = segments(edge.path).at(-1)[1];
+    if (foundationBranch) assert.deepEqual(point, { x: target.x + target.width / 2, y: target.y }, `${edge.id} misses frame midpoint`);
+    if (targetCode === "itl") {
+      const source = families.find(({code}) => code === edge.id.split("-to-")[0]);
+      assert.deepEqual(segments(edge.path)[0][0], { x: source.x + source.width / 2, y: source.y + source.height });
+      assert.deepEqual(point, { x: edge.id === "wfm-to-itl" ? target.x : target.x + target.width, y: target.y + target.height / 2 });
+    } else if (edge.id === "ctx-to-deployment") {
+      const ctx = families.find(({code}) => code === "ctx");
+      assert.deepEqual(segments(edge.path)[0][0], { x: ctx.x + ctx.width / 2, y: ctx.y + ctx.height });
+      assert.deepEqual(point, { x: target.x + target.width / 2, y: target.y });
+      assert.equal(segments(edge.path).length, 1, "context connects vertically to deployment");
+    } else if (edge.id === "gpu-to-llm") {
+      const gpuFrame = families.find(({code}) => code === "gpu");
+      assert.deepEqual(segments(edge.path)[0][0], { x: gpuFrame.x + gpuFrame.width / 2, y: gpuFrame.y + gpuFrame.height });
+      assert.deepEqual(point, { x: target.x, y: target.y + target.height / 2 });
+    } else if (edge.id === "usl-to-llm") {
+      assert.deepEqual(point, { x: target.x + target.width, y: target.y + target.height / 2 });
+    } else if (["llm", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"].includes(targetCode)) {
+      assert.deepEqual(point, { x: target.x + target.width / 2, y: target.y }, `${edge.id} must touch the top midpoint of its target frame`);
+    }
     assert.ok(((point.x === target.x || point.x === target.x + target.width) && point.y >= target.y && point.y <= target.y + target.height)
       || ((point.y === target.y || point.y === target.y + target.height) && point.x >= target.x && point.x <= target.x + target.width), `${edge.id} misses target boundary`);
   }

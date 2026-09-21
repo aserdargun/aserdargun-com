@@ -605,17 +605,17 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     );
 
     assert.match(svg, /class="ld-stage-index"/, "the complete system needs a visible stage rail");
-    assert.match(svg, /class="ld-legend"/, "primary, supporting, and horizon relationships need a legend");
+    assert.doesNotMatch(svg, /class="ld-legend"/, "the diagram presents its hierarchy without a legend");
 
     const edges = Array.from(svg.matchAll(/<path data-learning-edge="([^"]+)"[^>]*d="([^"]+)"[^>]*marker-end="url\(#ld-arrow\)"\/>/g));
-    assert.equal(edges.length, 28, "every directed relationship must terminate with an arrow marker");
+    assert.equal(edges.length, 17, "inter-group relationships terminate with arrows; family containment expresses internal ownership");
     assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-wfm")).length, 1, "WFM must receive one arrow");
     assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-swi")).length, 1, "SWI must receive one arrow");
     const deploymentConnectors = Array.from(svg.matchAll(/<path data-learning-connector="([^"]+)"[^>]*d="([^"]+)"\/>/g));
     assert.deepEqual(
       deploymentConnectors.map(([, connectorName]) => connectorName),
-      ["assurance-bus", "sec-to-deployment", "evl-to-deployment", "dcl-to-stage-06"],
-      "assurance feeds deployment; DCL feeds the shared physical-AI bus",
+      ["deployment-to-stage-06"],
+      "the deployment frame feeds the shared physical-AI bus",
     );
     for (const [, connectorName, route] of deploymentConnectors) {
       assert.doesNotMatch(route, /[CLQAST]/, `${connectorName} must use an orthogonal route`);
