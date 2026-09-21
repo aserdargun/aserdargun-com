@@ -124,12 +124,9 @@ async function createSiteFixture() {
   await mkdir(path.join(fixtureDir, "tr", "memory"), { recursive: true });
   await mkdir(path.join(fixtureDir, "tr", "now"), { recursive: true });
   await mkdir(path.join(fixtureDir, "now"));
-  const fixtureData = JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
-// This CLI fixture uses the same frozen date as the historical renderer tests.
-for (const application of fixtureData.applications) {
-  if (application.updatedAt > "2026-09-10") application.updatedAt = "2026-09-10";
-}
-await writeFile(path.join(fixtureDir, "data", "living-system.json"), JSON.stringify(fixtureData));
+  // Use the same historical data boundary as the renderer fixtures.
+  const fixtureData = await readFixtureData();
+  await writeFile(path.join(fixtureDir, "data", "living-system.json"), JSON.stringify(fixtureData));
   await writeFile(path.join(fixtureDir, "index.html"), homeDocument());
   await writeFile(path.join(fixtureDir, "tr", "index.html"), homeDocument());
   await writeFile(path.join(fixtureDir, "now", "index.html"), nowDocument());

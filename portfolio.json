@@ -978,12 +978,12 @@
       "parentApp": "usl",
       "name": {
         "en": "ADP — Model Adaptation Laboratory",
-        "tr": "ADP — Model Adaptasyon Laboratuvarı"
+        "tr": "ADP — Model Uyarlama Laboratuvarı"
       },
       "shortName": "ADP",
       "description": {
-        "en": "Explore Full FT, LoRA and QLoRA through parameter counts, memory estimates, data preparation and synthetic training/evaluation experiments. USL provides the adaptation foundation; no real model is trained.",
-        "tr": "Full FT, LoRA ve QLoRA yöntemlerini parametre sayıları, bellek tahminleri, veri hazırlığı ve sentetik eğitim/değerlendirme deneyleriyle keşfet. USL uyarlamanın temelini sunar; gerçek bir model eğitilmez."
+        "en": "Explore Full FT, LoRA and QLoRA through parameter counts, memory estimates, data preparation and synthetic training/evaluation experiments. USL provides the adaptation foundation; an optional DCL handoff carries educational workload metadata into deployment planning. No real model is trained or deployed.",
+        "tr": "Full FT, LoRA ve QLoRA yöntemlerini parametre sayıları, bellek tahminleri, veri hazırlığı ve sentetik eğitim/değerlendirme deneyleriyle keşfet. USL uyarlamanın temelini sunar; isteğe bağlı DCL aktarımı eğitim amaçlı iş yükü bilgilerini dağıtım planlamasına taşır. Gerçek model eğitilmez veya yayına alınmaz."
       },
       "type": "lab",
       "status": "live",
@@ -997,9 +997,9 @@
       ],
       "productionUrl": "https://adp.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/adp-aserdargun-com",
-      "lastVerified": "2026-09-10",
-      "lastReleased": "2026-09-10",
-      "releaseSha": "71632c48be32e69232c8a0f01386e904e603163b",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "ca27a60baec2ee36264b6f058c2a3720f9fd6fd8",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
