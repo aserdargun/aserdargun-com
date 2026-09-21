@@ -9,7 +9,6 @@ import {
   summarizeApplications,
 } from "./living-system-data.mjs";
 import { applicationHierarchy } from "./application-hierarchy.mjs";
-import { systemFocusApplications } from "./system-focus.mjs";
 import { isPublicFile } from "./public-files.mjs";
 import { scanPublicHtmlFiles } from "./render-living-system.mjs";
 import {
@@ -79,8 +78,8 @@ const expectedTurkishBridges = [
   "Madde ve mekanik",
 ];
 const expectedAnchors = ["top", "learning"];
-const expectedAssetVersion = "20260921-symmetric-diagram-hover";
-const expectedStylesheetHref = "/styles.css?v=20260921-symmetric-diagram-hover";
+const expectedAssetVersion = "20260921-diagram-page-scroll";
+const expectedStylesheetHref = "/styles.css?v=20260921-diagram-page-scroll";
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
   { code: "pol", repository: "pol-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/pol-aserdargun-com", productUrl: "https://pol.aserdargun.com/", productLabel: "pol.aserdargun.com" },
@@ -583,26 +582,8 @@ function validateSystemFocus(locale, html) {
   check(section.length > 0, `${locale}: system focus section is missing`);
   if (section.length === 0) return;
 
-  const expected = locale === "tr" ? [
-    ["foundation", "Temel", ["aia", "llm", "usl", "gpu", "gex"]],
-    ["agent-system", "Ajan sistemi", ["hns", "ctx"]],
-    ["assurance", "Güvence", ["sec", "evl"]],
-    ["deployment", "Dağıtım", ["cld", "lcl"]],
-    ["physical-ai", "Fiziksel AI", ["wfm", "swi", "ant", "bee", "itl", "eng", "wml", "pdt", "hex"]],
-  ] : [
-    ["foundation", "Foundation", ["aia", "llm", "usl", "gpu", "gex"]],
-    ["agent-system", "Agent system", ["hns", "ctx"]],
-    ["assurance", "Assurance", ["sec", "evl"]],
-    ["deployment", "Deployment", ["cld", "lcl"]],
-    ["physical-ai", "Physical AI", ["wfm", "swi", "ant", "bee", "itl", "eng", "wml", "pdt", "hex"]],
-  ];
-  for (const [layer, heading] of expected) {
-    const expectedCodes = applicationHierarchy(systemFocusApplications(livingSystem.applications).filter((app) => app.portfolioLayer === layer)).map(({ application }) => application.code);
-    const card = section.match(new RegExp(`<article class="system-focus-card system-focus-card--${layer}">[\\s\\S]*?<\\/article>`))?.[0] ?? "";
-    check(card.includes(`<h2>${heading}</h2>`), `${locale}: ${layer} system focus heading differs`);
-    check(JSON.stringify(matches(card, /<code>([a-z]{3})<\/code>/g)) === JSON.stringify(expectedCodes), `${locale}: ${layer} system focus applications differ`);
-  }
-  check(!/%|flex-basis|depth allocation|derinlik dağılımı/i.test(section), `${locale}: system focus must not expose false percentage precision`);
+  check(!/system-focus__grid|system-focus-card|data-focus-app=/.test(section), `${locale}: the removed homepage table must not return`);
+  check(/<h1[^>]*>[^<]+<\/h1>/.test(section), `${locale}: homepage introduction requires its main heading`);
 }
 
 function stripCssComments(source) {

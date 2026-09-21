@@ -99,25 +99,16 @@ test("the application map exposes distinct research, verification, and release e
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
 });
 
-test("the system focus model names five layers without percentage theater", async () => {
-  let rendererModule = {};
-  try {
-    rendererModule = await import("./render-living-system.mjs");
-  } catch {}
-  assert.equal(typeof rendererModule.renderSystemFocus, "function");
-
+test("the homepage introduction leaves the application overview to the diagram", async () => {
+  const { renderSystemFocus } = await import("./render-living-system.mjs");
+  const { renderLearningDiagram } = await import("./learning-diagram.mjs");
   const data = await readData();
-  const english = rendererModule.renderSystemFocus({ locale: "en", data });
-  const turkish = rendererModule.renderSystemFocus({ locale: "tr", data });
-
-  for (const heading of ["Foundation", "Agent system", "Assurance", "Deployment", "Physical AI"]) {
-    assert.match(english, new RegExp(`<h2>${heading}<\\/h2>`));
+  for (const locale of ["en", "tr"]) {
+    const intro = renderSystemFocus({ locale, data });
+    assert.match(intro, /<h1[^>]*>[^<]+<\/h1>/);
+    assert.doesNotMatch(intro, /system-focus__grid|system-focus-card|data-focus-app=|focus-scroll-hint/);
+    assert.doesNotMatch(renderLearningDiagram({ locale, data }), /<figcaption>/);
   }
-  for (const heading of ["Temel", "Ajan sistemi", "Güvence", "Dağıtım", "Fiziksel AI"]) {
-    assert.match(turkish, new RegExp(`<h2>${heading}<\\/h2>`));
-  }
-  assert.doesNotMatch(english, /\d+%|flex-basis|depth allocation/i);
-  assert.doesNotMatch(turkish, /%\d+|flex-basis|derinlik dağılımı/i);
 });
 
 test("approved knowledge records render content, limitations, sources, apps, and entities", async () => {
@@ -194,9 +185,7 @@ test("homepage links cover the catalog and four published additions while the ap
     const svg = html.match(/<g class="ld-nodes">([\s\S]*?)<\/svg>/)?.[1] ?? "";
     const diagram = [...svg.matchAll(/href="https:\/\/([a-z]{3})\.aserdargun\.com\/"/g)].map((match) => match[1]).sort();
     assert.deepEqual(diagram, homepageCodes);
-    const focusLinks = [...html.matchAll(/<li[^>]*data-focus-app="([a-z]{3})"[^>]*>(?:<small[^>]*>[^<]*<\/small>)?<a href="https:\/\/([a-z]{3})\.aserdargun\.com\/"/g)];
-    assert.deepEqual(focusLinks.map((match) => match[1]).sort(), homepageCodes);
-    for (const match of focusLinks) assert.equal(match[1], match[2], "each entry opens its own application");
+    assert.doesNotMatch(html, /data-focus-app=|system-focus__grid|system-focus-board-track/);
     const applicationMap = await readFile(path.join(rootDir, file.replace("index.html", "applications/index.html")), "utf8");
     const map = [...applicationMap.matchAll(/data-app-code="([a-z]{3})"/g)].map((match) => match[1]).sort();
     assert.deepEqual(map, expected);

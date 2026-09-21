@@ -539,7 +539,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
 for (const document of routes.filter(({ route }) => route === "/" || route === "/tr/")) {
   test(`${document.route} keeps all learning-diagram links valid, named SVG children`, async () => {
     const html = await readFile(path.join(rootDir, document.file), "utf8");
-    const [svg, ...extraSvgScopes] = scopedElements(html, "svg");
+    const [svg, ...extraSvgScopes] = scopedElements(html, "svg").filter((scope) => /^<svg\b[^>]*\bclass="ld-svg"/.test(scope));
     const expectedTitle = document.locale === "tr" ? "Yeni sekmede açılır" : "Opens in a new tab";
     const expectedNodes = [
       ["https://aia.aserdargun.com/", "AIA"],
@@ -695,7 +695,7 @@ test("mobile keeps the homepage graph readable and the journey alternate accessi
   assert.match(css, /\.learning-study-link\s*\{[\s\S]*?display:\s*none;/);
   assert.match(css, /\.learning-study-link\s*\{[\s\S]*?display:\s*flex;[\s\S]*?min-height:\s*44px;/);
   assert.match(css, /\.system-home \.learning-diagram-wrap\s*\{[^}]*display: flex;/);
-  assert.match(css, /\.system-home \.learning-diagram-viewport\s*\{[^}]*overflow: auto;/);
+  assert.match(css, /\.system-home \.learning-diagram-viewport\s*\{[^}]*overflow-x: auto;[^}]*overflow-y: hidden;[^}]*height: auto;[^}]*max-height: none;/);
   assert.match(css, /\.system-home \.learning-diagram-viewport \.ld-svg\s*\{[^}]*min-width: 100%;/);
 });
 

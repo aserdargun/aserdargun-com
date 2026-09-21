@@ -1214,31 +1214,9 @@ function initializeHiddenFilm() {
 }
 
 function initializeMobileMaps() {
-  const board = document.querySelector(".system-focus__grid");
-  const track = document.querySelector(".system-focus-board-track");
   const viewport = document.querySelector(".system-home .learning-diagram-viewport");
-  if (!board || !track || !viewport) return;
+  if (!viewport) return;
   const mobile = window.matchMedia("(max-width: 900px)");
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let frame = 0;
-  const updateBoard = () => {
-    frame = 0;
-    if (!track.hasAttribute("data-scroll-linked")) return;
-    const travel = board.scrollWidth - board.clientWidth;
-    board.scrollLeft = Math.max(0, Math.min(travel, 96 - track.getBoundingClientRect().top));
-  };
-  const measureBoard = () => {
-    const enabled = mobile.matches && !reduced.matches;
-    track.toggleAttribute("data-scroll-linked", enabled);
-    track.style.setProperty("--board-height", `${board.offsetHeight}px`);
-    track.style.setProperty("--board-travel", `${Math.max(0, board.scrollWidth - board.clientWidth)}px`);
-    updateBoard();
-  };
-  window.addEventListener("scroll", () => {
-    if (!frame) frame = requestAnimationFrame(updateBoard);
-  }, { passive: true });
-  new ResizeObserver(measureBoard).observe(board);
-  reduced.addEventListener("change", measureBoard);
 
   let zoom = 1;
   let gesture = null;
@@ -1248,12 +1226,12 @@ function initializeMobileMaps() {
     const x = anchor?.x ?? viewport.clientWidth / 2;
     const y = anchor?.y ?? 0;
     const contentX = anchor?.contentX ?? (viewport.scrollLeft + x) / oldWidth;
-    const contentY = anchor?.contentY ?? (viewport.scrollTop + y) / oldWidth;
+    const contentY = anchor?.contentY ?? y / oldWidth;
     zoom = Math.max(1, Math.min(5, value));
     viewport.style.setProperty("--map-width", mobile.matches ? `${viewport.clientWidth * zoom}px` : "100%");
     const width = viewport.scrollWidth;
     viewport.scrollLeft = zoom === 1 ? 0 : contentX * width - x;
-    viewport.scrollTop = zoom === 1 ? 0 : contentY * width - y;
+    if (anchor) window.scrollBy(0, contentY * width - y);
   };
   const pair = (touches) => {
     const [a, b] = touches;
@@ -1268,7 +1246,7 @@ function initializeMobileMaps() {
     const point = pair(event.touches);
     gesture = { ...point, zoom,
       contentX: (viewport.scrollLeft + point.x) / viewport.scrollWidth,
-      contentY: (viewport.scrollTop + point.y) / viewport.scrollWidth };
+      contentY: point.y / viewport.scrollWidth };
   };
   viewport.addEventListener("touchstart", beginPinch, { passive: false });
   viewport.addEventListener("touchmove", (event) => {
@@ -1309,8 +1287,7 @@ function initializeMobileMaps() {
   new ResizeObserver(() => {
     if (viewport.clientWidth !== lastWidth) { lastWidth = viewport.clientWidth; renderZoom(zoom); }
   }).observe(viewport);
-  mobile.addEventListener("change", () => { measureBoard(); renderZoom(1); });
-  measureBoard();
+  mobile.addEventListener("change", () => renderZoom(1));
   renderZoom(1);
 }
 

@@ -33,8 +33,9 @@
   <meta name="twitter:description" content="A public AI learning system by Serdar Gündoğdu: explore five connected layers, current projects, research notes, and working experiments.">
   <meta name="twitter:image" content="https://aserdargun.com/images/og-ascii.jpg">
   <link rel="preload" href="/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20260921-symmetric-diagram-hover">
-  <script src="/scripts.js?v=20260921-symmetric-diagram-hover" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=20260921-diagram-page-scroll">
+  <link rel="stylesheet" href="/home-discovery.css?v=20260921-diagram">
+  <script src="/scripts.js?v=20260921-diagram-page-scroll" defer></script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -137,70 +138,8 @@
         <div class="system-focus__intro">
           <p class="system-focus__kicker">AI Learning System</p>
           <h1 id="system-focus-title-en">Learn AI. Put it to work.</h1>
-          <p>Explore how AI systems work through research, applications, and hands-on experiments. Follow five connected layers from compute and models to agents, deployment, and physical AI. Connect ideas, test what you learn, and use it to build your next project.</p>
+          <p>Explore how AI systems work through research, applications, and hands-on experiments. Follow the learning diagram, connect ideas, and put what you learn into practice.</p>
         </div>
-        <p class="mobile-map-hint" id="focus-scroll-hint">Scroll down to explore the five layers →</p>
-        <div class="system-focus-board-track">
-        <div class="system-focus__grid" tabindex="0" role="region" aria-label="Five application layers">
-        <article class="system-focus-card system-focus-card--foundation">
-          <p class="system-focus-card__index">01</p>
-          <h2>Foundation</h2>
-          <p>Ecosystem, compute, runtime and adaptation foundations; explore programming foundations in POL and experiment with GEX, TFL and ADP.</p>
-          <ul aria-label="Foundation applications">
-            <li data-focus-app="aia"><a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer"><code>aia</code><span>AI Ecosystem Atlas</span> <span class="sr-only">opens in a new tab</span></a></li>
-            <li data-focus-app="llm"><a href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer"><code>llm</code><span>LLM Runtime &amp; Serving Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="LLM sub-applications">            <li data-focus-app="tfl" data-app-parent="llm"><a href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer"><code>tfl</code><span>TFL — Token Flow Laboratory<span class="sr-only app-ownership">Sub-application of LLM.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-            <li data-focus-app="usl"><a href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer"><code>usl</code><span>Unsloth Studio Learning Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="USL sub-applications">            <li data-focus-app="adp" data-app-parent="usl"><a href="https://adp.aserdargun.com/" target="_blank" rel="noreferrer"><code>adp</code><span>ADP — Model Adaptation Laboratory<span class="sr-only app-ownership">Sub-application of USL.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-            <li data-focus-app="gpu"><a href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer"><code>gpu</code><span>GPU Kernel Engineering — Kernel Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="GPU sub-applications">            <li data-focus-app="pol" data-app-parent="gpu"><a href="https://pol.aserdargun.com/" target="_blank" rel="noreferrer"><code>pol</code><span>POL — Programming Languages<span class="sr-only app-ownership">Sub-application of GPU.</span></span> <span class="sr-only">opens in a new tab</span></a></li>
-            <li data-focus-app="gex" data-app-parent="gpu"><a href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer"><code>gex</code><span>GPU Execution Explorer<span class="sr-only app-ownership">Sub-application of GPU.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-          </ul>
-        </article>
-        <article class="system-focus-card system-focus-card--agent-system">
-          <p class="system-focus-card__index">02</p>
-          <h2>Agent system</h2>
-          <p>Study how agents reason, use context, tools and computer environments; turn research into open-source runtimes and reusable components.</p>
-          <ul aria-label="Agent system applications">
-            <li data-focus-app="hns"><a href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><code>hns</code><span>Harness Engineering Observatory</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="HNS sub-applications">            <li data-focus-app="arl" data-app-parent="hns"><a href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer"><code>arl</code><span>ARL — Agent Runtime Laboratory<span class="sr-only app-ownership">Sub-application of HNS.</span></span> <span class="sr-only">opens in a new tab</span></a></li>
-            <li data-focus-app="dpl" data-app-parent="hns"><a href="https://dpl.aserdargun.com/" target="_blank" rel="noreferrer"><code>dpl</code><span>DPL — Decision Plane Laboratory<small class="system-focus-entry__subtitle">System One ↔ System Two</small><span class="sr-only app-ownership">Sub-application of HNS.</span></span> <span class="sr-only">opens in a new tab</span></a></li>
-            <li data-focus-app="cul" data-app-parent="hns"><a href="https://cul.aserdargun.com/" target="_blank" rel="noreferrer"><code>cul</code><span>CUL — Computer Use Laboratory<small class="system-focus-entry__subtitle">Synthetic simulation</small><span class="sr-only app-ownership">Sub-application of HNS.</span></span> <span class="sr-only">opens in a new tab</span></a></li>
-            <li data-focus-app="aos" data-app-parent="hns"><a href="https://aos.aserdargun.com/" target="_blank" rel="noreferrer"><code>aos</code><span>Agent Operating System<small class="system-focus-entry__subtitle">Target agent architecture</small><span class="sr-only app-ownership">Sub-application of HNS.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-            <li data-focus-app="ctx"><a href="https://ctx.aserdargun.com/" target="_blank" rel="noreferrer"><code>ctx</code><span>Context &amp; Knowledge Engineering</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="CTX sub-applications">            <li data-focus-app="mem" data-app-parent="ctx"><a href="https://mem.aserdargun.com/" target="_blank" rel="noreferrer"><code>mem</code><span>MEM — Agent Memory Laboratory<span class="sr-only app-ownership">Sub-application of CTX.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-          </ul>
-        </article>
-        <article class="system-focus-card system-focus-card--assurance">
-          <p class="system-focus-card__index">03</p>
-          <h2>Assurance</h2>
-          <p>Security and evaluation contracts for bounded, reviewable behavior.</p>
-          <ul aria-label="Assurance applications">
-            <li data-focus-app="sec"><a href="https://sec.aserdargun.com/" target="_blank" rel="noreferrer"><code>sec</code><span>AI Systems Security Observatory</span> <span class="sr-only">opens in a new tab</span></a></li>
-            <li data-focus-app="evl"><a href="https://evl.aserdargun.com/" target="_blank" rel="noreferrer"><code>evl</code><span>AI Evaluation &amp; Reliability Lab</span> <span class="sr-only">opens in a new tab</span></a></li>
-          </ul>
-        </article>
-        <article class="system-focus-card system-focus-card--deployment">
-          <p class="system-focus-card__index">04</p>
-          <h2>Deployment</h2>
-          <p>Study local and cloud options in LCL and CLD; test workload, memory, privacy and cost assumptions in DCL.</p>
-          <ul aria-label="Deployment applications">
-            <li data-focus-app="cld"><a href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer"><code>cld</code><span>Cloud Provider Cost Comparison</span> <span class="sr-only">opens in a new tab</span></a></li>
-            <li data-focus-app="lcl"><a href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer"><code>lcl</code><span>Local Compute Lab</span> <span class="sr-only">opens in a new tab</span></a></li>
-            <li class="system-focus-shared" data-focus-app="dcl" data-app-parents="cld lcl"><small class="app-parent-label">Shared laboratory of CLD + LCL</small><a href="https://dcl.aserdargun.com/" target="_blank" rel="noreferrer"><code>dcl</code><span>Deployment Choice Laboratory</span> <span class="sr-only">opens in a new tab</span></a></li>
-          </ul>
-        </article>
-        <article class="system-focus-card system-focus-card--physical-ai">
-          <p class="system-focus-card__index">05</p>
-          <h2>Physical AI</h2>
-          <p>World models and swarm research meet WML and ANT / BEE experiments, PDT pump twins, digital triplets, and humanoid exploration.</p>
-          <ul aria-label="Physical AI applications">
-            <li data-focus-app="wfm"><a href="https://wfm.aserdargun.com/" target="_blank" rel="noreferrer"><code>wfm</code><span>World Models Atlas</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="WFM sub-applications">            <li data-focus-app="wml" data-app-parent="wfm"><a href="https://wml.aserdargun.com/" target="_blank" rel="noreferrer"><code>wml</code><span>World Model Laboratory<span class="sr-only app-ownership">Sub-application of WFM.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-            <li data-focus-app="swi"><a href="https://swi.aserdargun.com/" target="_blank" rel="noreferrer"><code>swi</code><span>SWI — Swarm Intelligence</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="SWI sub-applications">            <li data-focus-app="ant" data-app-parent="swi"><a href="https://ant.aserdargun.com/" target="_blank" rel="noreferrer"><code>ant</code><span>ANT — Ant Colony Intelligence Laboratory<span class="sr-only app-ownership">Sub-application of SWI.</span></span> <span class="sr-only">opens in a new tab</span></a></li>
-            <li data-focus-app="bee" data-app-parent="swi"><a href="https://bee.aserdargun.com/" target="_blank" rel="noreferrer"><code>bee</code><span>BEE — Honey Bee Collective Intelligence Laboratory<span class="sr-only app-ownership">Sub-application of SWI.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-            <li data-focus-app="itl"><a href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer"><code>itl</code><span>Industrial Twin Lab</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="ITL sub-applications">            <li data-focus-app="dtr" data-app-parent="itl"><a href="https://dtr.aserdargun.com/" target="_blank" rel="noreferrer"><code>dtr</code><span>DTR — Digital Triplet Laboratory<span class="sr-only app-ownership">Sub-application of ITL.</span></span> <span class="sr-only">opens in a new tab</span></a></li>
-            <li data-focus-app="pdt" data-app-parent="itl"><a href="https://pdt.aserdargun.com/" target="_blank" rel="noreferrer"><code>pdt</code><span>P-101 Interactive Digital Twin<span class="sr-only app-ownership">Sub-application of ITL.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-            <li data-focus-app="eng"><a href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer"><code>eng</code><span>Open Humanoid Engineering</span> <span class="sr-only">opens in a new tab</span></a><ul class="system-focus-children" aria-label="ENG sub-applications">            <li data-focus-app="hex" data-app-parent="eng"><a href="https://hex.aserdargun.com/" target="_blank" rel="noreferrer"><code>hex</code><span>Humanoid Engineering Explorer<span class="sr-only app-ownership">Sub-application of ENG.</span></span> <span class="sr-only">opens in a new tab</span></a></li></ul></li>
-          </ul>
-        </article>
-        </div>
-        </div>
-      <p class="system-focus__hierarchy-note">Indented applications belong to the application above them.</p>
       </div>
     </section>
 <!-- GENERATED:system-focus:end -->
@@ -469,90 +408,122 @@
           <text x="1192" y="1438" class="ld-brand-subtitle">AI Learning System</text>
         </svg>
         </div>
-        <figcaption>Frames group applications with their sub-applications. Double-headed arrows show reciprocal learning relationships. LCL and CLD share a frame with their joint laboratory DCL below them; HEX sits below ENG within their shared frame. CTX/MEM exchanges feedback with security and evaluation, and carries context and memory requirements into the shared deployment group. These paths describe learning relationships, not runtime integrations.</figcaption>
       </figure>
 <!-- GENERATED:learning-diagram:end -->
-<!-- GENERATED:practice-labs:start -->
-      <section class="learning-horizon practice-labs" aria-labelledby="practice-title-en">
-        <p class="learning-horizon-kicker">From research to hands-on learning</p>
-        <h3 id="practice-title-en">Explore an idea. Run an experiment.</h3>
-        <p>Follow each research application into its companion learning experience. These links describe learning relationships; each application runs independently.</p>
-        <div class="swarm-labs__grid">
-          <article class="swarm-lab" data-practice-lab="pol" data-learning-parent="gpu">
-            <p class="swarm-lab__identity"><code>GPU → POL</code><span>Live · English only</span></p>
-            <h4>How do languages express the same program differently?</h4>
-            <p>English-only comparisons of the same tasks across programming languages: types, memory, paradigms and concurrency. Programming foundations that support GPU learning, but are not limited to GPU. Executed examples and hand-reviewed examples remain distinct.</p>
-            <a class="learning-horizon-link" href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer">Research · GPU ↗ <span class="sr-only">opens in a new tab</span></a>
-            <a class="learning-horizon-link" href="https://pol.aserdargun.com/" target="_blank" rel="noreferrer">Explore · POL ↗ <span class="sr-only">opens in a new tab</span></a>
-          </article>
-          <article class="swarm-lab" data-practice-lab="gex" data-learning-parent="gpu">
-            <p class="swarm-lab__identity"><code>GPU → GEX</code><span>Live</span></p>
-            <h4>How does a kernel become hardware execution?</h4>
-            <p>Trace GPU anatomy, kernel launches, warp masks, memory access, and matrix tiles through six interactive lessons. Results come from an educational execution model, not profiler measurements.</p>
-            <a class="learning-horizon-link" href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer">Research · GPU ↗ <span class="sr-only">opens in a new tab</span></a>
-            <a class="learning-horizon-link" href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer">Explore · GEX ↗ <span class="sr-only">opens in a new tab</span></a>
-          </article>
-          <article class="swarm-lab" data-practice-lab="tfl" data-learning-parent="llm">
-            <p class="swarm-lab__identity"><code>LLM → TFL</code><span>Live</span></p>
-            <h4>How do finite serving resources shape a request’s path to its next token?</h4>
-            <p>Explore nine deterministic serving experiments and ten guided checkpoints: queueing, prefill, KV reservations, decode and token delivery. Compare scheduling, latency and throughput; token text is scripted and timings are synthetic, with no model execution or hardware benchmark.</p>
-            <a class="learning-horizon-link" href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer">Research · LLM ↗ <span class="sr-only">opens in a new tab</span></a>
-            <a class="learning-horizon-link" href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer">Explore · TFL ↗ <span class="sr-only">opens in a new tab</span></a>
-          </article>
-          <article class="swarm-lab" data-practice-lab="arl" data-learning-parent="hns">
-            <p class="swarm-lab__identity"><code>HNS → ARL</code><span>Live</span></p>
-            <h4>What happens between intent and action?</h4>
-            <p>Inspect a deterministic agent run through harness, context, security and evaluation lenses. Explore tool use, evidence and one-use approval; all actions remain inside the simulation.</p>
-            <a class="learning-horizon-link" href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer">Research · HNS ↗ <span class="sr-only">opens in a new tab</span></a>
-            <a class="learning-horizon-link" href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer">Explore · ARL ↗ <span class="sr-only">opens in a new tab</span></a>
-          </article>
-          <article class="swarm-lab" data-practice-lab="adp" data-learning-parent="usl">
-            <p class="swarm-lab__identity"><code>USL → ADP</code><span>Live</span></p>
-            <h4>How does a base model become adapted to a task?</h4>
-            <p>Explore Full FT, LoRA and QLoRA through parameter counts, memory estimates, data preparation and synthetic training/evaluation experiments. USL provides the adaptation foundation; an optional DCL handoff carries educational workload metadata into deployment planning. No real model is trained or deployed.</p>
-            <a class="learning-horizon-link" href="https://usl.aserdargun.com/" target="_blank" rel="noreferrer">Research · USL ↗ <span class="sr-only">opens in a new tab</span></a>
-            <a class="learning-horizon-link" href="https://adp.aserdargun.com/" target="_blank" rel="noreferrer">Explore · ADP ↗ <span class="sr-only">opens in a new tab</span></a>
-          </article>
-          <article class="swarm-lab" data-practice-lab="wml" data-learning-parent="wfm">
-            <p class="swarm-lab__identity"><code>WFM → WML</code><span>Live</span></p>
-            <h4>How does a prediction change when beliefs or actions change?</h4>
-            <p>Explore observation, belief, prediction, planning, and counterfactual branches in WFM’s experiment laboratory. Compare three hand-coded predictors against a simulated world; these are not trained foundation models.</p>
-            <a class="learning-horizon-link" href="https://wfm.aserdargun.com/" target="_blank" rel="noreferrer">Research · WFM ↗ <span class="sr-only">opens in a new tab</span></a>
-            <a class="learning-horizon-link" href="https://wml.aserdargun.com/" target="_blank" rel="noreferrer">Explore · WML ↗ <span class="sr-only">opens in a new tab</span></a>
-          </article>
-          <article class="swarm-lab" data-practice-lab="dtr" data-learning-parent="itl">
-            <p class="swarm-lab__identity"><code>ITL → DTR</code><span>Live · Synthetic simulation</span></p>
-            <h4>When does a twin prediction support a decision, and what does the outcome reveal?</h4>
-            <p>Explore six synthetic pumping scenarios with an independent twin, three 60-second alternatives, explicit human approval, prediction–outcome comparison and JSON experiment records. Runs entirely in the browser with explainable rules; no LLM, field telemetry or machine commands.</p>
-            <a class="learning-horizon-link" href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer">Research · ITL ↗ <span class="sr-only">opens in a new tab</span></a>
-            <a class="learning-horizon-link" href="https://dtr.aserdargun.com/" target="_blank" rel="noreferrer">Explore · DTR ↗ <span class="sr-only">opens in a new tab</span></a>
-          </article>
-          <article class="swarm-lab" data-practice-lab="pdt" data-learning-parent="itl">
-            <p class="swarm-lab__identity"><code>ITL → PDT</code><span>Live</span></p>
-            <h4>How do pump components relate to operating conditions?</h4>
-            <p>Explore P-101 through four views, nine components, eight sensor locations and five authored pump conditions. Compare qualitative synthetic signals; this ITL teaching companion has no live telemetry or shared experiment state.</p>
-            <a class="learning-horizon-link" href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer">Research · ITL ↗ <span class="sr-only">opens in a new tab</span></a>
-            <a class="learning-horizon-link" href="https://pdt.aserdargun.com/" target="_blank" rel="noreferrer">Explore · PDT ↗ <span class="sr-only">opens in a new tab</span></a>
-          </article>
-          <article class="swarm-lab" data-practice-lab="hex" data-learning-parent="eng">
-            <p class="swarm-lab__identity"><code>ENG → HEX</code><span>Live</span></p>
-            <h4>How do body, joints, sensing, and control work together?</h4>
-            <p>Explore humanoid structure, joints, actuation, sensors, and power/data paths through ENG’s interactive 3D learning object. Movements are kinematic teaching aids, with no asserted dynamics or hardware performance.</p>
-            <a class="learning-horizon-link" href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer">Research · ENG ↗ <span class="sr-only">opens in a new tab</span></a>
-            <a class="learning-horizon-link" href="https://hex.aserdargun.com/" target="_blank" rel="noreferrer">Explore · HEX ↗ <span class="sr-only">opens in a new tab</span></a>
-          </article>
-          <article class="swarm-lab" data-practice-lab="dcl" data-learning-parents="cld lcl">
-            <p class="swarm-lab__identity"><code>CLD + LCL → DCL</code><span>Live</span></p>
-            <h4>Where should this workload run, and under which assumptions?</h4>
-            <p>The shared laboratory of CLD and LCL. Compare local hardware, cloud GPUs, managed inference and token APIs against workload, memory, privacy and cost assumptions. Hard constraints and educational estimates explain conditional choices; no live pricing or universal winner is claimed.</p>
-            <a class="learning-horizon-link" href="https://cld.aserdargun.com/" target="_blank" rel="noreferrer">Research · CLD ↗ <span class="sr-only">opens in a new tab</span></a>
-            <a class="learning-horizon-link" href="https://lcl.aserdargun.com/" target="_blank" rel="noreferrer">Research · LCL ↗ <span class="sr-only">opens in a new tab</span></a>
-            <a class="learning-horizon-link" href="https://dcl.aserdargun.com/" target="_blank" rel="noreferrer">Explore · DCL ↗ <span class="sr-only">opens in a new tab</span></a>
-          </article>
+<!-- GENERATED:home-discovery:start -->
+      <div class="home-discovery" id="explore">
+      <section class="discovery-start" aria-labelledby="discovery-start-en">
+        <h2 id="discovery-start-en">What would you like to explore?</h2>
+        <p class="home-discovery__intro">Start with a question. Take it further with an experiment.</p>
+        <div class="discovery-routes"><article class="discovery-route">
+          <span class="discovery-route__number" aria-hidden="true">01</span>
+          <h3>Understand models</h3>
+          <p>Explore how a request becomes tokens and how serving resources affect the wait.</p>
+          <p class="discovery-route__path">LLM → TFL</p>
+          <a class="home-discovery__link" href="#experiment-tfl">Start with token flow <svg class="home-discovery__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+<article class="discovery-route">
+          <span class="discovery-route__number" aria-hidden="true">02</span>
+          <h3>Explore agents</h3>
+          <p>Inspect tool use, execution steps, and the points where an agent needs human approval.</p>
+          <p class="discovery-route__path">HNS → ARL</p>
+          <a class="home-discovery__link" href="#experiment-arl">Start with agent execution <svg class="home-discovery__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article>
+<article class="discovery-route">
+          <span class="discovery-route__number" aria-hidden="true">03</span>
+          <h3>Explore the physical world</h3>
+          <p>Get to know pump components, then compare predictions and outcomes in a digital triplet.</p>
+          <p class="discovery-route__path">PDT → DTR</p>
+          <a class="home-discovery__link" href="#experiment-pdt">Start with pump anatomy <svg class="home-discovery__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </article></div>
+      </section>
+      <section class="discovery-experiments" aria-labelledby="practice-title-en">
+        <h2 id="practice-title-en">Explore an idea. Run an experiment.</h2>
+        <p class="home-discovery__intro">Six starting experiments. Pick a question, explore the variables, interpret the outcome.</p>
+        <div class="discovery-grid"><article class="discovery-experiment" id="experiment-tfl" tabindex="-1" aria-labelledby="experiment-tfl-title-en" data-featured-experiment="tfl">
+          <div class="discovery-experiment__visual"><svg class="discovery-illustration" viewBox="0 0 320 140" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="discovery-muted" d="M30 66h270"/><rect x="24" y="45" width="48" height="42" rx="5"/><rect x="94" y="45" width="48" height="42" rx="5"/><rect x="164" y="45" width="48" height="42" rx="5"/><rect class="discovery-accent-fill" x="234" y="45" width="48" height="42" rx="5"/><path d="m42 58-8 8 8 8m12-16 8 8-8 8m57-5h14m-14 6h10m60-6h14m-14 6h10"/><path class="discovery-dark" d="M249 61h18m-18 8h12"/><path class="discovery-muted" d="M48 101v8m70-8v8m70-8v8m70-8v8"/></svg></div>
+          <div class="discovery-experiment__body">
+            <h3 id="experiment-tfl-title-en">Why does a token wait?</h3>
+            <p class="discovery-experiment__kind"><code>TFL</code><span aria-hidden="true"> · </span>Synthetic simulation</p>
+            <p class="discovery-experiment__description">Explore queuing, prefill, and decoding; compare how serving conditions affect latency.</p>
+            <div class="discovery-experiment__actions">
+              <a class="home-discovery__link" href="https://tfl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Explore the experiment<span class="sr-only"> · TFL</span> <svg class="home-discovery__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="home-discovery__secondary" href="https://llm.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Read the foundations<span class="sr-only"> · LLM</span></a>
+            </div>
+          </div>
+        </article>
+<article class="discovery-experiment" id="experiment-gex" tabindex="-1" aria-labelledby="experiment-gex-title-en" data-featured-experiment="gex">
+          <div class="discovery-experiment__visual"><svg class="discovery-illustration" viewBox="0 0 320 140" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="26" y="42" width="58" height="48" rx="5"/><path d="m43 57-8 9 8 9m24-18 8 9-8 9m-15-21-5 24M88 66h30m-7-6 7 6-7 6"/><rect class="discovery-muted" x="132" y="19" width="157" height="96" rx="5"/><rect class="discovery-accent-fill" x="143" y="30" width="15" height="14" rx="1"/><rect class="discovery-muted" x="166" y="30" width="15" height="14" rx="1"/><rect class="discovery-muted" x="189" y="30" width="15" height="14" rx="1"/><rect class="discovery-muted" x="212" y="30" width="15" height="14" rx="1"/><rect class="discovery-muted" x="235" y="30" width="15" height="14" rx="1"/><rect class="discovery-muted" x="258" y="30" width="15" height="14" rx="1"/><rect class="discovery-muted" x="143" y="51" width="15" height="14" rx="1"/><rect class="discovery-accent-fill" x="166" y="51" width="15" height="14" rx="1"/><rect class="discovery-muted" x="189" y="51" width="15" height="14" rx="1"/><rect class="discovery-muted" x="212" y="51" width="15" height="14" rx="1"/><rect class="discovery-accent-fill" x="235" y="51" width="15" height="14" rx="1"/><rect class="discovery-muted" x="258" y="51" width="15" height="14" rx="1"/><rect class="discovery-muted" x="143" y="72" width="15" height="14" rx="1"/><rect class="discovery-muted" x="166" y="72" width="15" height="14" rx="1"/><rect class="discovery-accent-fill" x="189" y="72" width="15" height="14" rx="1"/><rect class="discovery-muted" x="212" y="72" width="15" height="14" rx="1"/><rect class="discovery-muted" x="235" y="72" width="15" height="14" rx="1"/><rect class="discovery-muted" x="258" y="72" width="15" height="14" rx="1"/><rect class="discovery-muted" x="143" y="93" width="15" height="14" rx="1"/><rect class="discovery-muted" x="166" y="93" width="15" height="14" rx="1"/><rect class="discovery-muted" x="189" y="93" width="15" height="14" rx="1"/><rect class="discovery-accent-fill" x="212" y="93" width="15" height="14" rx="1"/><rect class="discovery-muted" x="235" y="93" width="15" height="14" rx="1"/><rect class="discovery-muted" x="258" y="93" width="15" height="14" rx="1"/></svg></div>
+          <div class="discovery-experiment__body">
+            <h3 id="experiment-gex-title-en">How does a kernel run on a GPU?</h3>
+            <p class="discovery-experiment__kind"><code>GEX</code><span aria-hidden="true"> · </span>Educational model</p>
+            <p class="discovery-experiment__description">Explore warp masks and memory access. Follow parallel execution in an educational model.</p>
+            <div class="discovery-experiment__actions">
+              <a class="home-discovery__link" href="https://gex.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Explore the experiment<span class="sr-only"> · GEX</span> <svg class="home-discovery__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="home-discovery__secondary" href="https://gpu.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Read the foundations<span class="sr-only"> · GPU</span></a>
+            </div>
+          </div>
+        </article>
+<article class="discovery-experiment" id="experiment-arl" tabindex="-1" aria-labelledby="experiment-arl-title-en" data-featured-experiment="arl">
+          <div class="discovery-experiment__visual"><svg class="discovery-illustration" viewBox="0 0 320 140" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="discovery-muted" d="M24 65h62m42 0h36m48 0h68m-92 24v32h92"/><rect x="23" y="45" width="58" height="40" rx="5"/><path d="m43 65 6 6 13-13"/><rect x="99" y="45" width="39" height="40" rx="5"/><path d="M109 58h18m-18 8h18m-18 8h10"/><path class="discovery-accent" d="m188 37 28 28-28 28-28-28Z"/><circle class="discovery-accent" cx="188" cy="61" r="3"/><path class="discovery-accent" d="M188 68v8"/><rect x="251" y="41" width="46" height="48" rx="5"/><circle cx="274" cy="56" r="6"/><path d="M263 78v-4a11 11 0 0 1 22 0v4m-14 37 9 6-9 6"/></svg></div>
+          <div class="discovery-experiment__body">
+            <h3 id="experiment-arl-title-en">When does an agent need approval?</h3>
+            <p class="discovery-experiment__kind"><code>ARL</code><span aria-hidden="true"> · </span>Agent simulation</p>
+            <p class="discovery-experiment__description">Inspect tool use, execution evidence, and single-use human approval step by step.</p>
+            <div class="discovery-experiment__actions">
+              <a class="home-discovery__link" href="https://arl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Explore the experiment<span class="sr-only"> · ARL</span> <svg class="home-discovery__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="home-discovery__secondary" href="https://hns.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Read the foundations<span class="sr-only"> · HNS</span></a>
+            </div>
+          </div>
+        </article>
+<article class="discovery-experiment" id="experiment-pdt" tabindex="-1" aria-labelledby="experiment-pdt-title-en" data-featured-experiment="pdt">
+          <div class="discovery-experiment__visual"><svg class="discovery-illustration" viewBox="0 0 320 140" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="discovery-muted" d="M23 73h70m145 0h66m-18-6 9 6-9 6M119 113h113"/><path d="M86 60h31v27H86zM155 25h28v26m-39 65V99m52 17V96M197 59h42v29h-42"/><circle cx="160" cy="73" r="39"/><circle class="discovery-accent" cx="160" cy="73" r="25"/><circle cx="160" cy="73" r="7"/><path class="discovery-accent" d="M160 66c-14-3-20-10-16-17m23 24c8-10 17-12 22-7m-28 14c7 11 6 20-1 25m-7-28c-13 5-21 1-24-5"/><path d="M167 73h97M253 60h15v26h-15"/></svg></div>
+          <div class="discovery-experiment__body">
+            <h3 id="experiment-pdt-title-en">What is inside a pump?</h3>
+            <p class="discovery-experiment__kind"><code>PDT</code><span aria-hidden="true"> · </span>3D learning experience</p>
+            <p class="discovery-experiment__description">Explore P-101 components and sensor locations; compare illustrative operating conditions.</p>
+            <div class="discovery-experiment__actions">
+              <a class="home-discovery__link" href="https://pdt.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Explore the experiment<span class="sr-only"> · PDT</span> <svg class="home-discovery__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="home-discovery__secondary" href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Read the foundations<span class="sr-only"> · ITL</span></a>
+            </div>
+          </div>
+        </article>
+<article class="discovery-experiment" id="experiment-dtr" tabindex="-1" aria-labelledby="experiment-dtr-title-en" data-featured-experiment="dtr">
+          <div class="discovery-experiment__visual"><svg class="discovery-illustration" viewBox="0 0 320 140" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path class="discovery-muted" d="M37 23v92h252"/><path stroke-dasharray="5 6" d="M38 107C70 107 70 37 114 39s53 65 95 45 50-20 78-15"/><path class="discovery-accent" d="M38 107C79 111 79 57 113 58s55 52 91 37 55-16 83-6"/><path class="discovery-muted" d="M113 39v19m96 26v8"/><circle class="discovery-accent-fill" cx="113" cy="58" r="3"/><circle class="discovery-accent-fill" cx="209" cy="93" r="3"/></svg></div>
+          <div class="discovery-experiment__body">
+            <h3 id="experiment-dtr-title-en">Why do predictions and outcomes differ?</h3>
+            <p class="discovery-experiment__kind"><code>DTR</code><span aria-hidden="true"> · </span>Synthetic simulation</p>
+            <p class="discovery-experiment__description">Compare pumping alternatives, approve a decision, and inspect its prediction alongside the simulated outcome.</p>
+            <div class="discovery-experiment__actions">
+              <a class="home-discovery__link" href="https://dtr.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Explore the experiment<span class="sr-only"> · DTR</span> <svg class="home-discovery__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="home-discovery__secondary" href="https://itl.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Read the foundations<span class="sr-only"> · ITL</span></a>
+            </div>
+          </div>
+        </article>
+<article class="discovery-experiment" id="experiment-hex" tabindex="-1" aria-labelledby="experiment-hex-title-en" data-featured-experiment="hex">
+          <div class="discovery-experiment__visual"><svg class="discovery-illustration" viewBox="0 0 320 140" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M45 116h91v7H45zM69 116V95a20 20 0 0 1 40 0v21M98 79l38-39m-23 56 38-43m7-18 59-12m-57 26 59-13"/><circle cx="89" cy="95" r="13"/><circle class="discovery-accent" cx="149" cy="39" r="13"/><circle class="discovery-accent" cx="230" cy="26" r="13"/><circle cx="89" cy="95" r="5"/><circle cx="149" cy="39" r="5"/><circle cx="230" cy="26" r="5"/><path class="discovery-muted" stroke-dasharray="4 6" d="M253 31q41 25 40 66"/><path d="m288 90 5 9 7-8"/><circle class="discovery-accent-fill" cx="293" cy="108" r="3"/></svg></div>
+          <div class="discovery-experiment__body">
+            <h3 id="experiment-hex-title-en">How does a robot move?</h3>
+            <p class="discovery-experiment__kind"><code>HEX</code><span aria-hidden="true"> · </span>Kinematic learning model</p>
+            <p class="discovery-experiment__description">Explore humanoid joints, actuators, and sensors; inspect examples of kinematic motion.</p>
+            <div class="discovery-experiment__actions">
+              <a class="home-discovery__link" href="https://hex.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Explore the experiment<span class="sr-only"> · HEX</span> <svg class="home-discovery__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="home-discovery__secondary" href="https://eng.aserdargun.com/" target="_blank" rel="noreferrer"><span class="sr-only">opens in a new tab</span>Read the foundations<span class="sr-only"> · ENG</span></a>
+            </div>
+          </div>
+        </article></div>
+        <p class="home-discovery__scope">Illustrations represent the topics. Experiments are educational; applications run independently.</p>
+      </section>
+      <section class="discovery-next" aria-labelledby="discovery-next-en">
+        <h2 id="discovery-next-en">Choose your next step.</h2>
+        <p class="home-discovery__intro">Follow a guided sequence or explore another application that sparks your curiosity.</p>
+        <div class="discovery-next__actions">
+          <a class="home-discovery__link" href="/journey/">Open the learning path <svg class="home-discovery__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="home-discovery__secondary" href="/applications/">View all applications <svg class="home-discovery__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </section>
-<!-- GENERATED:practice-labs:end -->
-      <p class="system-actions"><a href="/journey/">Explore the journey <span aria-hidden="true">→</span></a></p>
+      </div>
+<!-- GENERATED:home-discovery:end -->
       </div>
     </section>
 

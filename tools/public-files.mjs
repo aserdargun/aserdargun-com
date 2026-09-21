@@ -2,7 +2,7 @@ import { copyFile, mkdir, readdir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const rootFiles = new Set(['index.html', 'styles.css', 'scripts.js', 'portfolio.json', 'llms.txt', 'robots.txt', 'sitemap.xml', 'staticwebapp.config.json']);
+const rootFiles = new Set(['index.html', 'styles.css', 'home-discovery.css', 'scripts.js', 'portfolio.json', 'llms.txt', 'robots.txt', 'sitemap.xml', 'staticwebapp.config.json']);
 const assetExtensions = {
   fonts: new Set(['.woff', '.woff2']),
   images: new Set(['.avif', '.webp', '.png', '.jpg', '.jpeg', '.svg']),

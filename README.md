@@ -3,11 +3,12 @@
 A bilingual public learning system by Serdar Gündoğdu. English starts at `/`
 and Turkish at `/tr/`; the retired `/en/` duplicate permanently redirects to `/`.
 
-The homepage opens with **Learn AI. Put it to work.** Five connected layers
-show top-level applications with indented sub-applications. The generated SVG
-connects the main applications and groups smaller child boxes with their parent,
-using orthogonal routes. Accessible mobile links remain available; the
-learning-loop video button has been removed.
+The homepage opens with **Learn AI. Put it to work.** The eight-stage SVG
+is the application overview; the duplicate table has been removed. Its parent
+frames, child applications and learning relationships remain intact. On mobile,
+the diagram grows to its content height with page scrolling and supports zoom
+and horizontal navigation. Three starting routes and six illustrated learning
+experiments continue below the diagram.
 
 - `/about/` and `/tr/about/` contain the personal introduction, interactive
   ASCII/pixel portraits, eight-stage career journey, working principles,
@@ -29,20 +30,20 @@ current page. Existing application names remain their canonical product names;
 ## Extending the learning system
 
 Add public applications and reciprocal relationships in `data/living-system.json`.
-The generator builds the Five Layers cards, application rows, search metadata,
+The generator builds the homepage introduction, diagram, discovery sections, application rows, search metadata,
 and `portfolio.json` from that source. Every new application must declare its
 layer and keep research, verification, and release dates separate.
 
-The September 20 table revision is staged separately in `data/system-focus.json`:
+The September 20 diagram additions are staged separately in `data/system-focus.json`:
 DPL, CUL and AOS under HNS; MEM under CTX. POL is registered under GPU;
 DTR is registered under ITL alongside PDT in the canonical catalog.
-`tools/system-focus.mjs` merges these entries into the homepage table and diagram,
-including bilingual subtitles. Both views contain
+`tools/system-focus.mjs` merges these entries into the homepage diagram,
+including bilingual subtitles. The diagram contains
 30 entries; the registered catalog contains 26 applications with available evidence metadata.
 The four additional entries link to their verified public application addresses
-in both homepage views; full release metadata remains in the registered catalog.
+in the homepage diagram; full release metadata remains in the registered catalog.
 When a code is registered in `data/living-system.json`, its
-canonical record takes precedence; remove its table-only entry at that point.
+canonical record takes precedence; remove its diagram-only entry at that point.
 
 Every application explicitly declares `parentApp`: `null` for a top-level
 application, or the three-letter code of its owner for a sub-application.

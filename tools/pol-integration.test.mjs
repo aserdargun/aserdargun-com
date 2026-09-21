@@ -6,7 +6,6 @@ import { fileURLToPath } from "node:url";
 
 import {
   renderApplicationMap,
-  renderSystemFocus,
 } from "./render-living-system.mjs";
 import { renderLearningDiagram, learningDiagramLayout } from "./learning-diagram.mjs";
 import { applicationHierarchy } from "./application-hierarchy.mjs";
@@ -108,7 +107,7 @@ test("POL learning diagram node is wired under gpu with learning-tool role along
   assert.ok(disjoint(pol, gex), "pol and gex sibling rectangles must not overlap");
 });
 
-test("Every locale rendering exposes the gpu→pol wiring across diagram, focus, and application map", async () => {
+test("Every locale rendering exposes the gpu→pol wiring across diagram and application map", async () => {
   const data = await readData();
   for (const locale of ["en", "tr"]) {
     const diagramHtml = renderLearningDiagram({ locale, data });
@@ -117,11 +116,6 @@ test("Every locale rendering exposes the gpu→pol wiring across diagram, focus,
     assert.ok(polDiagramTag.length > 0, `${locale}: must extract exact pol opening tag`);
     assert.match(polDiagramTag, /data-learning-parent="gpu"/, `${locale}: pol tag must declare parent gpu`);
     assert.match(polDiagramTag, /role="learning-tool"/, `${locale}: pol tag must declare learning-tool role`);
-
-    const focusHtml = renderSystemFocus({ locale, data });
-    const polFocusTag = focusHtml.match(/<li\b[^>]*data-focus-app="pol"[^>]*>/)?.[0] ?? "";
-    assert.ok(polFocusTag.length > 0, `${locale}: must extract exact pol focus tag`);
-    assert.match(polFocusTag, /data-app-parent="gpu"/, `${locale}: pol focus tag must declare gpu parent`);
 
     const mapHtml = renderApplicationMap({ locale, data, today });
     const polRow = mapHtml.match(/<tr[^>]*data-app-code="pol"[^>]*>[\s\S]*?<\/tr>/)?.[0] ?? "";

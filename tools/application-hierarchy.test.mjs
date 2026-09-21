@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { applicationHierarchy, applicationParents } from "./application-hierarchy.mjs";
 import { learningDiagramLayout } from "./learning-diagram.mjs";
 import { validateLivingSystemData } from "./living-system-data.mjs";
-import { renderApplicationMap, renderSystemFocus } from "./render-living-system.mjs";
+import { renderApplicationMap } from "./render-living-system.mjs";
 
 const data = JSON.parse(await readFile(new URL("../data/living-system.json", import.meta.url), "utf8"));
 const today = new Date("2026-09-21T12:00:00Z");
@@ -21,12 +21,10 @@ test("new parents, children and grandchildren group by ownership regardless of i
   ]);
 });
 
-test("new sub-applications automatically get localized ownership and adjacent rows in both views", () => {
+test("new sub-applications automatically get localized ownership and adjacent rows in the application map", () => {
   const extended = structuredClone(data);
   extended.applications.unshift({ ...structuredClone(data.applications.find((app) => app.code === "gex")), code: "xyz", parentApp: "gpu", kind: "atlas", address: "https://xyz.aserdargun.com/", repository: "https://github.com/aserdargun/xyz-aserdargun-com" });
   for (const locale of ["en", "tr"]) {
-    const grid = renderSystemFocus({ locale, data: extended });
-    assert.match(grid, /data-focus-app="gpu"[\s\S]*class="system-focus-children"[\s\S]*data-focus-app="xyz" data-app-parent="gpu"/);
     const map = renderApplicationMap({ locale, data: extended, today });
     assert.match(map, /data-app-code="xyz"[^>]*data-app-depth="1"[^>]*data-app-parent="gpu"/);
     const rowOrder = [...map.matchAll(/data-app-code="([a-z]+)"/g)].map((match) => match[1]);
@@ -129,7 +127,7 @@ test("DCL has two equal owners and one visible entry in each portfolio view", ()
   for (const code of applicationParents(dcl)) assert.ok(rows.findIndex(({ application }) => application.code === code) < position);
   for (const locale of ["en", "tr"]) {
     const ownership = locale === "tr" ? "CLD + LCL ortak laboratuvarı" : "Shared laboratory of CLD + LCL";
-    for (const [html, attribute] of [[renderApplicationMap({ locale, data, today }), "data-app-code"], [renderSystemFocus({ locale, data }), "data-focus-app"]]) {
+    for (const [html, attribute] of [[renderApplicationMap({ locale, data, today }), "data-app-code"]]) {
       assert.equal(html.split(`${attribute}="dcl"`).length - 1, 1);
       assert.ok(html.includes('data-app-parents="cld lcl"'));
       assert.ok(html.includes(ownership));

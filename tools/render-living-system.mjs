@@ -10,7 +10,7 @@ import {
 import { buildPortfolioRegistry } from "./portfolio-registry.mjs";
 import { applicationHierarchy, applicationParents, applicationOwnership } from "./application-hierarchy.mjs";
 import { renderLearningDiagram } from "./learning-diagram.mjs";
-import { systemFocusApplications } from "./system-focus.mjs";
+import { renderHomeDiscovery } from "./home-discovery.mjs";
 import {
   directText as activeDirectText,
   isActive as isActiveHtmlNode,
@@ -27,6 +27,7 @@ const GENERATED_BLOCKS = new Set([
   "learning-diagram",
   "swarm-labs",
   "practice-labs",
+  "home-discovery",
   "gpu-practice",
   "usl-practice",
   "llm-practice",
@@ -442,83 +443,18 @@ export function renderApplicationMap({ locale, data, today, page }) {
   ].join("\n");
 }
 
-export function renderSystemFocus({ locale, data }) {
-  const layers = [
-    {
-      key: "foundation",
-      title: label(locale, "Foundation", "Temel"),
-      description: label(locale, "Ecosystem, compute, runtime and adaptation foundations; explore programming foundations in POL and experiment with GEX, TFL and ADP.", "Ekosistem, hesaplama, çalışma ortamı ve uyarlama temelleri; POL ile programlama temellerini keşfet, GEX, TFL ve ADP ile deneyler yap."),
-    },
-    {
-      key: "agent-system",
-      title: label(locale, "Agent system", "Ajan sistemi"),
-      description: label(locale, "Study how agents reason, use context, tools and computer environments; turn research into open-source runtimes and reusable components.", "Ajanların nasıl akıl yürüttüğünü, bağlamı, araçları ve bilgisayar ortamlarını nasıl kullandığını incele; araştırmayı açık kaynaklı çalışma ortamlarına ve yeniden kullanılabilir bileşenlere dönüştür."),
-    },
-    {
-      key: "assurance",
-      title: label(locale, "Assurance", "Güvence"),
-      description: label(locale, "Security and evaluation contracts for bounded, reviewable behavior.", "Sınırlı ve incelenebilir davranış için güvenlik ve değerlendirme sözleşmeleri."),
-    },
-    {
-      key: "deployment",
-      title: label(locale, "Deployment", "Dağıtım"),
-      description: label(locale, "Study local and cloud options in LCL and CLD; test workload, memory, privacy and cost assumptions in DCL.", "LCL ve CLD ile yerel ve bulut seçeneklerini öğren; DCL ile iş yükü, bellek, gizlilik ve maliyet varsayımlarını sına."),
-    },
-    {
-      key: "physical-ai",
-      title: label(locale, "Physical AI", "Fiziksel AI"),
-      description: label(locale, "World models and swarm research meet WML and ANT / BEE experiments, PDT pump twins, digital triplets, and humanoid exploration.", "Dünya modelleri ve sürü araştırmaları; WML ve ANT / BEE deneyleri, PDT pompa ikizleri, dijital üçüzler ve insansı robot keşfiyle buluşur."),
-    },
-  ];
-  const focusApplications = systemFocusApplications(data.applications);
-  const cards = layers.map((layer, index) => {
-    const applications = focusApplications.filter((application) => application.portfolioLayer === layer.key);
-    return [
-      `        <article class="system-focus-card system-focus-card--${layer.key}">`,
-      `          <p class="system-focus-card__index">${String(index + 1).padStart(2, "0")}</p>`,
-      `          <h2>${layer.title}</h2>`,
-      `          <p>${layer.description}</p>`,
-      `          <ul aria-label="${escapeHtml(label(locale, `${layer.title} applications`, `${layer.title} uygulamaları`))}">`,
-      renderFocusApplications(applications, locale),
-      "          </ul>",
-      "        </article>",
-    ].join("\n");
-  });
-
+export function renderSystemFocus({ locale }) {
   return [
     `    <section class="system-focus" id="top" aria-labelledby="system-focus-title-${locale}">`,
     '      <div class="system-focus-inner">',
     '        <div class="system-focus__intro">',
-    `          <p class="system-focus__kicker">${label(locale, "AI Learning System", "AI Learning System")}</p>`,
+    '          <p class="system-focus__kicker">AI Learning System</p>',
     `          <h1 id="system-focus-title-${locale}">${label(locale, "Learn AI. Put it to work.", "Yapay zekâyı öğren. Uygulamaya geçir.")}</h1>`,
-    `          <p>${label(locale, "Explore how AI systems work through research, applications, and hands-on experiments. Follow five connected layers from compute and models to agents, deployment, and physical AI. Connect ideas, test what you learn, and use it to build your next project.", "Araştırmalar, uygulamalar ve deneylerle yapay zekâ sistemlerinin nasıl çalıştığını keşfet. Hesaplama altyapısı ve modellerden ajanlara, dağıtıma ve fiziksel yapay zekâya uzanan beş katmanda ilerle. Fikirler arasında bağ kur, öğrendiklerini test et ve yeni projelere taşı.")}</p>`,
+    `          <p>${label(locale, "Explore how AI systems work through research, applications, and hands-on experiments. Follow the learning diagram, connect ideas, and put what you learn into practice.", "Araştırmalar, uygulamalar ve deneylerle yapay zekâ sistemlerinin nasıl çalıştığını keşfet. Öğrenme diyagramını takip et, fikirler arasında bağ kur ve öğrendiklerini uygulamaya geçir.")}</p>`,
     "        </div>",
-    `        <p class="mobile-map-hint" id="focus-scroll-hint">${label(locale, "Scroll down to explore the five layers →", "Aşağı kaydır, beş katmanı sırayla keşfet →")}</p>`,
-    '        <div class="system-focus-board-track">',
-    `        <div class="system-focus__grid" tabindex="0" role="region" aria-label="${label(locale, "Five application layers", "Beş uygulama katmanı")}">`,
-    ...cards,
-    "        </div>",
-    "        </div>",
-    `      <p class="system-focus__hierarchy-note">${label(locale, "Indented applications belong to the application above them.", "Girintili uygulamalar, üstlerinde yer alan uygulamaya bağlıdır.")}</p>`,
     "      </div>",
     "    </section>",
   ].join("\n");
-}
-
-function renderFocusApplications(applications, locale, parentApp = null) {
-  const main = applications.filter((app) => !app.sharedParentApps && (app.parentApp ?? null) === parentApp).map((app) => {
-    const children = applications.filter((child) => child.parentApp === app.code);
-    const ownership = parentApp ? `<span class="sr-only app-ownership">${label(locale, `Sub-application of ${parentApp.toUpperCase()}.`, `${parentApp.toUpperCase()} alt uygulaması.`)}</span>` : "";
-    const subtitle = app.subtitle ? `<small class="system-focus-entry__subtitle">${escapeHtml(app.subtitle[locale])}</small>` : "";
-    const content = `<code>${app.code}</code><span>${escapeHtml(app.title[locale])}${subtitle}${ownership}</span>`;
-    const entry = app.address
-      ? `<a href="${escapeHtml(app.address)}" target="_blank" rel="noreferrer">${content}</a>`
-      : `<span class="system-focus-entry">${content}</span>`;
-    return `            <li data-focus-app="${app.code}"${parentApp ? ` data-app-parent="${parentApp}"` : ""}>${entry}${children.length ? `<ul class="system-focus-children" aria-label="${label(locale, `${app.code.toUpperCase()} sub-applications`, `${app.code.toUpperCase()} alt uygulamaları`)}">${renderFocusApplications(applications, locale, app.code)}</ul>` : ""}</li>`;
-  }).join("\n");
-  const shared = parentApp === null ? applications.filter((app) => app.sharedParentApps).map((app) => `
-            <li class="system-focus-shared" data-focus-app="${app.code}" data-app-parents="${app.sharedParentApps.join(" ")}"><small class="app-parent-label">${escapeHtml(applicationOwnership(app, locale))}</small><a href="${escapeHtml(app.address)}" target="_blank" rel="noreferrer"><code>${app.code}</code><span>${escapeHtml(app.title[locale])}</span></a></li>`).join("\n") : "";
-  return main + shared;
 }
 
 function practiceApplications(data) {
@@ -839,6 +775,7 @@ export function renderDocument({ html, page, locale, data, today, archiveLinks =
     "system-focus": () => renderSystemFocus({ locale, data }),
     "swarm-labs": () => renderSwarmLabs({ locale, data }),
     "practice-labs": () => renderPracticeLabs({ locale, data }),
+    "home-discovery": () => renderHomeDiscovery({ locale, data }),
     ...Object.fromEntries(["gpu", "usl", "llm", "hns"].map((parentCode) => [`${parentCode}-practice`, () => renderCompanionLinks({ locale, data, parentCode })])),
     "deployment-lab": () => renderDeploymentLab({ locale, data }),
     "learning-diagram": () => renderLearningDiagram({ locale, data }),

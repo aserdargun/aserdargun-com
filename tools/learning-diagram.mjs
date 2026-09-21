@@ -157,7 +157,6 @@ export function renderLearningDiagram({ locale, data }) {
     '          <text x="1192" y="1420" class="ld-brand">ASERDARGUN.COM</text>',
     '          <text x="1192" y="1438" class="ld-brand-subtitle">AI Learning System</text>',
     '        </svg>', '        </div>',
-    `        <figcaption>${localized(locale, "Frames group applications with their sub-applications. Double-headed arrows show reciprocal learning relationships. LCL and CLD share a frame with their joint laboratory DCL below them; HEX sits below ENG within their shared frame. CTX/MEM exchanges feedback with security and evaluation, and carries context and memory requirements into the shared deployment group. These paths describe learning relationships, not runtime integrations.", "Dış çerçeveler üst uygulamaları alt uygulamalarıyla gruplar. Çift yönlü oklar karşılıklı öğrenme ilişkilerini gösterir. LCL ve CLD aynı dış çerçevede, ortak laboratuvarları DCL ise ikisinin altında yer alır; HEX, ENG’nin altında aynı dış çerçevede yer alır. CTX/MEM, güvenlik ve değerlendirmeyle karşılıklı geri bildirim paylaşır; bağlam ve bellek gereksinimlerini ortak dağıtım grubuna taşır. Bu yollar öğrenme ilişkileridir; çalışma zamanı entegrasyonu değildir.")}</figcaption>`,
     '      </figure>',
   ].join("\n");
 }

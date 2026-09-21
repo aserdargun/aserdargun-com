@@ -35,6 +35,7 @@ test("Azure deployment root contains every public route and shared asset", async
     "index.html",
     "tr/index.html",
     "styles.css",
+    "home-discovery.css",
     "scripts.js",
     "staticwebapp.config.json",
     "fonts/inter-var-latin.woff2",

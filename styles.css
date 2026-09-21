@@ -4537,8 +4537,10 @@ body:has(main.memory-page) {
   .system-home .learning-diagram-wrap { display: flex; padding: 16px 0; }
   .system-home .learning-diagram-wrap .mobile-map-hint { margin: 0 16px 14px; }
   .system-home .learning-diagram-viewport {
-    overflow: auto;
-    max-height: 70svh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: auto;
+    max-height: none;
     scrollbar-color: #84936d #20271b;
   }
   .system-home .learning-diagram-viewport .ld-svg {
