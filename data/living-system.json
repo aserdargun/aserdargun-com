@@ -636,19 +636,19 @@
       "languages": ["tr", "en"],
       "title": { "en": "BEE — Honey Bee Collective Intelligence Laboratory", "tr": "BEE — Bal Arısı Kolektif Zekâ Laboratuvarı" },
       "summary": {
-        "en": "A colony experiment lab within SWI’s research family. Study honey bee discovery, waggle-dance recruitment, and resource allocation, including a paired control colony with dance communication disabled.",
-        "tr": "SWI araştırma ailesinde bir koloni deney laboratuvarı. Bal arılarında keşfi, sallanma dansıyla katılımı ve kaynak paylaşımını, dans iletişimi kapalı eşzamanlı bir kontrol kolonisiyle karşılaştırarak incele."
+        "en": "Four deterministic, bilingual experiments within SWI’s research family: explore local discovery, private memory, dance recruitment and resource allocation with a same-seed dance-off control, guided lessons and JSON replay. An Apis mellifera-inspired educational model; results use model units, not field measurements or biological predictions.",
+        "tr": "SWI araştırma ailesinde dört deterministik, iki dilli deney: yerel keşfi, bireysel hafızayı, dansla katılımı ve kaynak dağılımını aynı seed ile dansı kapalı kontrol, rehberli dersler ve JSON yeniden oynatma ile incele. Apis mellifera esinli eğitim modelidir; sonuçlar model birimleridir, saha ölçümü veya biyolojik tahmin değildir."
       },
       "guidingQuestion": {
-        "en": "How does dance communication change a colony’s foraging choices?",
-        "tr": "Dansla iletişim koloninin besin arama tercihlerini nasıl değiştirir?"
+        "en": "How do private memory and local dance signals shape collective foraging in this model?",
+        "tr": "Bu modelde bireysel hafıza ve yerel dans sinyalleri ortak besin aramayı nasıl şekillendirir?"
       },
       "repository": "https://github.com/aserdargun/bee-aserdargun-com",
       "address": "https://bee.aserdargun.com/",
-      "updatedAt": "2026-09-06",
-      "lastVerified": "2026-09-06",
-      "lastReleased": "2026-09-06",
-      "releaseSha": "121f40eb56b8a447e36c932cc9ed163e12263dba",
+      "updatedAt": "2026-09-21",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "42fb4bb9af90b7d7026ba2a866e304a4549a2a53",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
