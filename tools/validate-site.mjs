@@ -20,7 +20,7 @@ import {
 
 const expectedPublicApplicationCodes = [
   "aia", "llm", "hns", "sec", "ctx", "evl", "usl", "gpu", "pol", "cld", "lcl",
-  "wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng", "gex", "wml", "dcl", "tfl", "arl", "adp",
+  "wfm", "swi", "ant", "bee", "itl", "pdt", "hex", "eng", "gex", "wml", "dcl", "tfl", "arl", "adp", "dtr",
 ].sort();
 const expectedPrivateApplicationCodes = ["nxt", "stk", "inf"].sort();
 
@@ -99,6 +99,7 @@ const expectedApplicationRows = [
   { code: "ant", repository: "ant-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/ant-aserdargun-com", productUrl: "https://ant.aserdargun.com/", productLabel: "ant.aserdargun.com" },
   { code: "bee", repository: "bee-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/bee-aserdargun-com", productUrl: "https://bee.aserdargun.com/", productLabel: "bee.aserdargun.com" },
   { code: "itl", repository: "itl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/itl-aserdargun-com", productUrl: "https://itl.aserdargun.com/", productLabel: "itl.aserdargun.com" },
+  { code: "dtr", repository: "dtr-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/dtr-aserdargun-com", productUrl: "https://dtr.aserdargun.com/", productLabel: "dtr.aserdargun.com" },
   { code: "pdt", repository: "pdt-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/pdt-aserdargun-com", productUrl: "https://pdt.aserdargun.com/", productLabel: "pdt.aserdargun.com" },
   { code: "hex", repository: "hex-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/hex-aserdargun-com", productUrl: "https://hex.aserdargun.com/", productLabel: "hex.aserdargun.com" },
   { code: "eng", repository: "eng-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/eng-aserdargun-com", productUrl: "https://eng.aserdargun.com/", productLabel: "eng.aserdargun.com" },

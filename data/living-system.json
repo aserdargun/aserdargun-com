@@ -686,7 +686,7 @@
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": ["wfm", "swi"],
-      "downstreamApps": ["eng", "pdt"],
+      "downstreamApps": ["eng", "pdt", "dtr"],
       "tracks": ["digital-twins", "simulation", "industrial-ai"],
       "entityIds": ["entity:openusd"],
       "portfolioLayer": "physical-ai",
@@ -1026,6 +1026,65 @@
       "focusState": "active",
       "relatedMemoryIds": [],
       "releaseSha": "a4129857a671b01a5e4d07f3d39e71525416ca4d"
+    },
+    {
+      "code": "dtr",
+      "parentApp": "itl",
+      "diagramLabel": {
+        "en": "Digital triplet",
+        "tr": "Dijital üçüz"
+      },
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live · Synthetic simulation",
+        "tr": "Yayında · Sentetik simülasyon"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "DTR — Digital Triplet Laboratory",
+        "tr": "DTR — Dijital Üçüz Laboratuvarı"
+      },
+      "summary": {
+        "en": "Explore six synthetic pumping scenarios with an independent twin, three 60-second alternatives, explicit human approval, prediction–outcome comparison and JSON experiment records. Runs entirely in the browser with explainable rules; no LLM, field telemetry or machine commands.",
+        "tr": "Altı sentetik pompalama senaryosunda bağımsız ikizi, 60 saniyelik üç alternatifi, açık insan onayını, tahmin–sonuç karşılaştırmasını ve JSON deney kaydını incele. Açıklanabilir kurallarla tamamen tarayıcıda çalışır; LLM, saha telemetrisi veya makine komutu yoktur."
+      },
+      "guidingQuestion": {
+        "en": "When does a twin prediction support a decision, and what does the outcome reveal?",
+        "tr": "İkiz tahmini bir kararı ne zaman destekler; gerçekleşen sonuç neyi gösterir?"
+      },
+      "repository": "https://github.com/aserdargun/dtr-aserdargun-com",
+      "address": "https://dtr.aserdargun.com/",
+      "updatedAt": "2026-09-21",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "38e78c7d36daa84d0bb99b0469a62957a85b45ed",
+      "sourceCount": 5,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "itl"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "digital-triplets",
+        "pumps",
+        "synthetic-experiments",
+        "human-approval"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "physical-ai",
+      "focusState": "active",
+      "relatedMemoryIds": [],
+      "nextDirection": {
+        "en": "Compare model assumptions with computed outcomes; a better fit and browser approval do not establish field validation or control authority.",
+        "tr": "Model varsayımlarını hesaplanmış sonuçlarla karşılaştır; daha iyi uyum ve tarayıcı onayı saha geçerlemesi veya kontrol yetkisi oluşturmaz."
+      }
     },
     {
       "code": "pdt",

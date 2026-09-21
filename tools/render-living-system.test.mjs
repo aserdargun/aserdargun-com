@@ -869,7 +869,7 @@ test("renders the application-map summary from semantic roles", async () => {
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /Eleven core learning applications, eleven standalone labs, two horizon bridges, and one long-term horizon\./);
+  assert.match(rendered, /Eleven core learning applications, 12 standalone labs, two horizon bridges, and one long-term horizon\./);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
 });
 

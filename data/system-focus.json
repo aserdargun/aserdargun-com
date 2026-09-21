@@ -63,23 +63,6 @@
         "en": "Agent memory",
         "tr": "Ajan belleği"
       }
-    },
-    {
-      "code": "dtr",
-      "address": "https://dtr.aserdargun.com/",
-      "parentApp": "itl",
-      "title": {
-        "en": "DTR — Digital Triplet Laboratory",
-        "tr": "DTR — Dijital Üçüz Laboratuvarı"
-      },
-      "subtitle": {
-        "en": "Physical ↔ Twin ↔ Intelligence",
-        "tr": "Fiziksel ↔ İkiz ↔ Zekâ"
-      },
-      "diagramLabel": {
-        "en": "Digital triplet",
-        "tr": "Dijital üçüz"
-      }
     }
   ]
 }

@@ -12,7 +12,7 @@ learning-loop video button has been removed.
 - `/about/` and `/tr/about/` contain the personal introduction, interactive
   ASCII/pixel portraits, eight-stage career journey, working principles,
   credentials, and future direction.
-- `/journey/` and `/tr/journey/` contain the learning path, six detailed learning stages, and the physical AI horizon, colony labs, and companion GEX / ADP / TFL / ARL / WML / PDT / HEX learning experiences. DCL follows the LCL / CLD deployment choices with explicit workload assumptions.
+- `/journey/` and `/tr/journey/` contain the learning path, six detailed learning stages, and the physical AI horizon, colony labs, and companion GEX / ADP / TFL / ARL / WML / PDT / DTR / HEX learning experiences. DCL follows the LCL / CLD deployment choices with explicit workload assumptions.
 - `/applications/` and `/tr/applications/` contain the complete application map,
   localized search, layer filters, and expandable evidence and knowledge links.
 - `/now/` and `/tr/now/` retain dated current work; the historical snapshots keep
@@ -34,12 +34,12 @@ and `portfolio.json` from that source. Every new application must declare its
 layer and keep research, verification, and release dates separate.
 
 The September 20 table revision is staged separately in `data/system-focus.json`:
-DPL, CUL and AOS under HNS; MEM under CTX; and DTR under ITL. POL is already
-registered under GPU in the canonical catalog.
+DPL, CUL and AOS under HNS; MEM under CTX. POL is registered under GPU;
+DTR is registered under ITL alongside PDT in the canonical catalog.
 `tools/system-focus.mjs` merges these entries into the homepage table and diagram,
 including bilingual subtitles. Both views contain
-30 entries; the registered catalog retains 25 applications with release evidence.
-The five additional entries link to their verified public application addresses
+30 entries; the registered catalog contains 26 applications with available evidence metadata.
+The four additional entries link to their verified public application addresses
 in both homepage views; full release metadata remains in the registered catalog.
 When a code is registered in `data/living-system.json`, its
 canonical record takes precedence; remove its table-only entry at that point.
@@ -63,7 +63,7 @@ Extend the layout if a growing family needs more space; never hide an applicatio
 to make it fit. Regenerate with `npm run generate:site` and verify both languages.
 The detailed learning path remains in the Journey pages.
 
-The public catalog currently contains 25 applications. ADP belongs to USL, TFL
+The public catalog currently contains 26 applications. ADP belongs to USL, TFL
 to LLM, and ARL to HNS. DCL is an independent deployment decision laboratory
 that builds on both LCL and CLD; it is not owned by either one. These relationships
 appear in both languages on the homepage, diagram, Journey and application map.
@@ -169,3 +169,10 @@ map exposes its application links as a labelled group to assistive technology.
   (640×800, ≤250 KB) in `images/career/`.
 - **Open Graph:** 1200×630 JPEG (≤400 KB) at `images/og-ascii.jpg` and
   `images/og-ascii-tr.jpg`.
+
+DTR appears in the application map, Journey companion labs, homepage and registry.
+Its six synthetic scenarios, independent twin, explicit human approval and JSON
+records are browser-only learning tools. ITL ownership and the PDT relationship
+describe learning context, not shared state, field connectivity or ILS adoption.
+DTR release metadata records the September 21 successful deployment and matching
+public release manifest, asset hashes and production browser tests.

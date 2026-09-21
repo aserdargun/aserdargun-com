@@ -20,7 +20,7 @@ async function readData() {
 test("the public application contract keeps verification, research, and release facts separate", async () => {
   const data = await readData();
 
-  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex", "tfl", "arl", "adp", "dcl", "pol"].includes(code))) {
+  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex", "tfl", "arl", "adp", "dcl", "pol", "dtr"].includes(code))) {
     assert.match(application.researchCutoff, /^2026-\d{2}-\d{2}$/, `${application.code} research cutoff`);
     assert.equal(application.lastVerified, application.code === "eng" ? "2026-09-21" : "2026-09-04", `${application.code} verification date`);
     assert.match(application.lastReleased, /^2026-\d{2}-\d{2}$/, `${application.code} release date`);
@@ -53,7 +53,7 @@ test("the portfolio registry is a deterministic public projection of application
 
   assert.equal(registry.schemaVersion, 1);
   assert.equal(registry.generatedAt, "2026-09-04");
-  assert.equal(registry.applications.length, 25);
+  assert.equal(registry.applications.length, 26);
   assert.deepEqual(registry.applications.map(({ code }) => code), data.applications.map(({ code }) => code));
   assert.deepEqual(
     registry.applications.find(({ code }) => code === "ctx"),
@@ -184,10 +184,10 @@ test("SWI colony labs preserve their relationship and show release evidence with
   }
 });
 
-test("homepage links cover the catalog and five published additions while the application map retains registered metadata", async () => {
+test("homepage links cover the catalog and four published additions while the application map retains registered metadata", async () => {
   const data = await readData();
   const expected = data.applications.map(({ code }) => code).sort();
-  const homepageCodes = [...expected, "dpl", "cul", "aos", "mem", "dtr"].sort();
+  const homepageCodes = [...expected, "dpl", "cul", "aos", "mem"].sort();
   for (const file of ["index.html", "tr/index.html"]) {
     const html = await readFile(path.join(rootDir, file), "utf8");
     const svg = html.match(/<g class="ld-nodes">([\s\S]*?)<\/svg>/)?.[1] ?? "";
@@ -256,5 +256,37 @@ test('adaptation, serving and agent companions retain ownership while DCL bridge
     const journey=await readFile(path.join(rootDir,locale==='tr'?'tr/journey/index.html':'journey/index.html'),'utf8');
     assert.ok(journey.indexOf('data-deployment-lab="dcl"')>journey.indexOf('class="learning-deployment-paths"'));
     assert.ok(journey.indexOf('data-deployment-lab="dcl"')<journey.indexOf('id="horizon"'));
+  }
+});
+
+
+test("DTR is registered once under ITL across the registry, catalog and learning path", async () => {
+  const data = await readData();
+  const dtr = data.applications.filter(({ code }) => code === "dtr");
+  assert.equal(dtr.length, 1);
+  const app = dtr[0];
+  assert.equal(app.parentApp, "itl");
+  assert.deepEqual(app.upstreamApps, ["itl"]);
+  assert.ok(data.applications.find(({ code }) => code === "itl").downstreamApps.includes("dtr"));
+  assert.equal(app.portfolioLayer, "physical-ai");
+  assert.deepEqual(app.languages, ["tr", "en"]);
+  assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
+  assert.equal(app.lastVerified, "2026-09-21");
+  assert.equal(app.lastReleased, "2026-09-21");
+  assert.equal(app.releaseSha, "38e78c7d36daa84d0bb99b0469a62957a85b45ed");
+  assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
+  const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
+  assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);
+  const registry = JSON.parse(await readFile(path.join(rootDir, "portfolio.json"), "utf8"));
+  assert.equal(registry.applications.filter(({ code }) => code === "dtr").length, 1);
+  for (const locale of ["en", "tr"]) {
+    const prefix = locale === "tr" ? "tr/" : "";
+    const map = await readFile(path.join(rootDir, prefix, "applications/index.html"), "utf8");
+    const row = map.match(/<tr[^>]*data-app-code="dtr"[^>]*>[\s\S]*?<\/tr>/)?.[0] ?? "";
+    assert.match(row, /data-app-parent="itl"/);
+    assert.ok(row.includes(app.summary[locale]));
+    const journey = await readFile(path.join(rootDir, prefix, "journey/index.html"), "utf8");
+    assert.match(journey, /data-practice-lab="dtr" data-learning-parent="itl"/);
+    assert.ok(journey.includes(app.guidingQuestion[locale]));
   }
 });

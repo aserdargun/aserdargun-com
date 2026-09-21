@@ -777,7 +777,8 @@
       ],
       "downstreamApps": [
         "eng",
-        "pdt"
+        "pdt",
+        "dtr"
       ],
       "tracks": [
         "digital-twins",
@@ -1058,6 +1059,50 @@
         "prediction",
         "planning",
         "simulation"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "physical-ai",
+      "focusState": "active"
+    },
+    {
+      "code": "dtr",
+      "parentApp": "itl",
+      "name": {
+        "en": "DTR — Digital Triplet Laboratory",
+        "tr": "DTR — Dijital Üçüz Laboratuvarı"
+      },
+      "shortName": "DTR",
+      "description": {
+        "en": "Explore six synthetic pumping scenarios with an independent twin, three 60-second alternatives, explicit human approval, prediction–outcome comparison and JSON experiment records. Runs entirely in the browser with explainable rules; no LLM, field telemetry or machine commands.",
+        "tr": "Altı sentetik pompalama senaryosunda bağımsız ikizi, 60 saniyelik üç alternatifi, açık insan onayını, tahmin–sonuç karşılaştırmasını ve JSON deney kaydını incele. Açıklanabilir kurallarla tamamen tarayıcıda çalışır; LLM, saha telemetrisi veya makine komutu yoktur."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live · Synthetic simulation",
+        "tr": "Yayında · Sentetik simülasyon"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://dtr.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/dtr-aserdargun-com",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "38e78c7d36daa84d0bb99b0469a62957a85b45ed",
+      "sourceCount": 5,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-educational-model",
+      "upstreamApps": [
+        "itl"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "digital-triplets",
+        "pumps",
+        "synthetic-experiments",
+        "human-approval"
       ],
       "entityIds": [],
       "portfolioLayer": "physical-ai",
