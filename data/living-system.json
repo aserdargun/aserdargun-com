@@ -443,7 +443,7 @@
       "parentApp": null,
       "diagramLabel": {
         "en": "Local compute",
-        "tr": "Lokal hesaplama"
+        "tr": "Yerel hesaplama"
       },
       "kind": "lab",
       "systemRole": "core-learning",
@@ -462,18 +462,18 @@
         "tr": "Local Compute Lab"
       },
       "summary": {
-        "en": "A source-backed decision workbench matching open-weight model requirements with NVIDIA, AMD, and Apple devices for a local AI lab.",
-        "tr": "Açık ağırlıklı model gereksinimlerini özel bir yerel yapay zekâ laboratuvarı için NVIDIA, AMD ve Apple cihazlarıyla eşleştiren kaynaklı karar çalışma alanı."
+        "en": "A bilingual, source-backed workbench matching open-weight model requirements to NVIDIA, AMD, and Apple devices. Explore dated market observations, memory assumptions, compatibility evidence, and concept cards; compare local and cloud deployment assumptions in the shared DCL lab.",
+        "tr": "Açık ağırlıklı model gereksinimlerini NVIDIA, AMD ve Apple cihazlarıyla eşleştiren iki dilli, kaynaklı çalışma alanı. Tarihli fiyat gözlemlerini, bellek varsayımlarını, uyumluluk kanıtlarını ve kavram kartlarını incele; ortak DCL laboratuvarında yerel ve bulut dağıtım varsayımlarını karşılaştır."
       },
       "repository": "https://github.com/aserdargun/lcl-aserdargun-com",
       "address": "https://lcl.aserdargun.com/",
-      "updatedAt": "2026-09-03",
+      "updatedAt": "2026-09-21",
       "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-03",
-      "releaseSha": "0b52f9534ed9559d6e5dd7169a7987a6a007a1b9",
-      "sourceCount": null,
-      "claimCount": null,
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "f1d3d98c3582251b0425a8ac18327b4a7b25c17e",
+      "sourceCount": 18,
+      "claimCount": 17,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "ctx",
