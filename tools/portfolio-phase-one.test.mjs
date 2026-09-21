@@ -26,7 +26,7 @@ test("the public application contract keeps verification, research, and release 
     assert.ok(new Date(application.lastVerified) <= today, `${application.code} verification must not be in the future`);
     assert.match(application.lastReleased, /^2026-\d{2}-\d{2}$/, `${application.code} release date`);
     assert.match(application.releaseSha, /^[a-f0-9]{40}$/, `${application.code} release SHA`);
-    assert.deepEqual(application.languages, application.code === "cld" ? ["tr"] : ["eng", "itl"].includes(application.code) ? ["en"] : ["tr", "en"], `${application.code} language contract`);
+    assert.deepEqual(application.languages, ["eng", "itl"].includes(application.code) ? ["en"] : ["tr", "en"], `${application.code} language contract`);
     assert.ok(Array.isArray(application.upstreamApps), `${application.code} upstream relationships`);
     assert.ok(Array.isArray(application.downstreamApps), `${application.code} downstream relationships`);
     assert.ok(Array.isArray(application.tracks), `${application.code} tracks`);
@@ -176,19 +176,19 @@ test("SWI colony labs preserve their relationship and show release evidence with
   }
 });
 
-test("homepage links cover the catalog and four published additions while the application map retains registered metadata", async () => {
+test("homepage and application map cover the catalog and four approved additions", async () => {
   const data = await readData();
   const expected = data.applications.map(({ code }) => code).sort();
   const homepageCodes = [...expected, "dpl", "cul", "aos", "mem"].sort();
   for (const file of ["index.html", "tr/index.html"]) {
     const html = await readFile(path.join(rootDir, file), "utf8");
     const svg = html.match(/<g class="ld-nodes">([\s\S]*?)<\/svg>/)?.[1] ?? "";
-    const diagram = [...svg.matchAll(/href="https:\/\/([a-z]{3})\.aserdargun\.com\/"/g)].map((match) => match[1]).sort();
+    const diagram = [...svg.matchAll(/href="https:\/\/([a-z]{3})\.aserdargun\.com\/[^\"]*"/g)].map((match) => match[1]).sort();
     assert.deepEqual(diagram, homepageCodes);
     assert.doesNotMatch(html, /data-focus-app=|system-focus__grid|system-focus-board-track/);
     const applicationMap = await readFile(path.join(rootDir, file.replace("index.html", "applications/index.html")), "utf8");
     const map = [...applicationMap.matchAll(/data-app-code="([a-z]{3})"/g)].map((match) => match[1]).sort();
-    assert.deepEqual(map, expected);
+    assert.deepEqual(map, homepageCodes);
     assert.ok(html.indexOf('class="system-focus"') < html.indexOf('class="learning-system"'));
     assert.equal(html.includes('class="app-map"'), false, "the full application table belongs on its dedicated page");
   }
@@ -269,7 +269,7 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
   assert.equal(app.lastVerified, "2026-09-21");
   assert.equal(app.lastReleased, "2026-09-21");
-  assert.equal(app.releaseSha, "38e78c7d36daa84d0bb99b0469a62957a85b45ed");
+  assert.equal(app.releaseSha, "0bbe272262106dcc1945955c428600bec684d191");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
   const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
   assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);

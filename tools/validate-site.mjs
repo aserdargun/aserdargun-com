@@ -1,3 +1,5 @@
+import { applicationUrl, applicationLocaleRoutes } from "./application-links.mjs";
+import { systemFocusApplications } from "./system-focus.mjs";
 import { readFile, readdir, stat } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -82,6 +84,7 @@ const expectedAssetVersion = "20260921-diagram-page-scroll";
 const expectedStylesheetHref = "/styles.css?v=20260921-diagram-page-scroll";
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
+  ...["dpl", "cul", "aos", "mem"].map((code) => ({ code, repository: `${code}-aserdargun-com`, repositoryUrl: `https://github.com/aserdargun/${code}-aserdargun-com`, productUrl: `https://${code}.aserdargun.com/`, productLabel: `${code}.aserdargun.com` })),
   { code: "pol", repository: "pol-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/pol-aserdargun-com", productUrl: "https://pol.aserdargun.com/", productLabel: "pol.aserdargun.com" },
   { code: "aia", repository: "aia-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/aia-aserdargun-com", productUrl: "https://aia.aserdargun.com/", productLabel: "aia.aserdargun.com" },
   { code: "llm", repository: "llm-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/llm-aserdargun-com", productUrl: "https://llm.aserdargun.com/", productLabel: "llm.aserdargun.com" },
@@ -98,7 +101,6 @@ const expectedApplicationRows = [
   { code: "ant", repository: "ant-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/ant-aserdargun-com", productUrl: "https://ant.aserdargun.com/", productLabel: "ant.aserdargun.com" },
   { code: "bee", repository: "bee-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/bee-aserdargun-com", productUrl: "https://bee.aserdargun.com/", productLabel: "bee.aserdargun.com" },
   { code: "itl", repository: "itl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/itl-aserdargun-com", productUrl: "https://itl.aserdargun.com/", productLabel: "itl.aserdargun.com" },
-  { code: "dtr", repository: "dtr-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/dtr-aserdargun-com", productUrl: "https://dtr.aserdargun.com/", productLabel: "dtr.aserdargun.com" },
   { code: "pdt", repository: "pdt-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/pdt-aserdargun-com", productUrl: "https://pdt.aserdargun.com/", productLabel: "pdt.aserdargun.com" },
   { code: "hex", repository: "hex-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/hex-aserdargun-com", productUrl: "https://hex.aserdargun.com/", productLabel: "hex.aserdargun.com" },
   { code: "eng", repository: "eng-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/eng-aserdargun-com", productUrl: "https://eng.aserdargun.com/", productLabel: "eng.aserdargun.com" },
@@ -108,6 +110,7 @@ const expectedApplicationRows = [
   { code: "arl", repository: "arl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/arl-aserdargun-com", productUrl: "https://arl.aserdargun.com/", productLabel: "arl.aserdargun.com" },
   { code: "adp", repository: "adp-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/adp-aserdargun-com", productUrl: "https://adp.aserdargun.com/", productLabel: "adp.aserdargun.com" },
   { code: "dcl", repository: "dcl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/dcl-aserdargun-com", productUrl: "https://dcl.aserdargun.com/", productLabel: "dcl.aserdargun.com" },
+  { code: "dtr", repository: "dtr-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/dtr-aserdargun-com", productUrl: "https://dtr.aserdargun.com/", productLabel: "dtr.aserdargun.com" },
 ].map((row) => ({
   code: row.code,
   repository: row.repository,
@@ -232,7 +235,7 @@ function parseApplicationMapRows(html) {
 function validateApplicationMapRows(locale, html) {
   const rows = parseApplicationMapRows(html);
   check(rows.length === expectedApplicationRows.length, `${locale}: application map row count differs`);
-  const orderedRows = applicationHierarchy(livingSystem.applications).map(({ application }) => expectedApplicationRows.find((row) => row.code === application.code));
+  const orderedRows = applicationHierarchy(systemFocusApplications(livingSystem.applications)).map(({ application }) => ({...expectedApplicationRows.find((row) => row.code === application.code), productUrl: applicationUrl(application, locale === "tr" ? "tr" : "en")}));
   check(
     JSON.stringify(rows) === JSON.stringify(orderedRows),
     `${locale}: application map row tuples or order differ`,
@@ -344,7 +347,7 @@ function validateLearningSystem(locale, html) {
   const diagram = section.match(/<svg\b[^>]*class="ld-svg"[\s\S]*?<\/svg>/)?.[0] ?? "";
   check(diagram.includes("AIA") && diagram.includes("HNS") && diagram.includes("SEC") && diagram.includes("CLD") && diagram.includes("LCL") && diagram.includes("WFM") && diagram.includes("SWI") && diagram.includes("ITL") && diagram.includes("ENG"), `${locale}: learning system diagram endpoints are missing`);
   const deploymentNodes = Array.from(
-    diagram.matchAll(/<a href="https:\/\/(lcl|cld)\.aserdargun\.com\/"[^>]*data-learning-plane="deployment"[^>]*>[\s\S]*?<rect x="[0-9]+" y="([0-9]+)"/g),
+    diagram.matchAll(/<a href="https:\/\/(lcl|cld)\.aserdargun\.com\/[^\"]*"[^>]*data-learning-plane="deployment"[^>]*>[\s\S]*?<rect x="[0-9]+" y="([0-9]+)"/g),
     (match) => ({ code: match[1], y: match[2] }),
   );
   check(
@@ -356,7 +359,7 @@ function validateLearningSystem(locale, html) {
     `${locale}: LCL must be parallel to CLD in the learning diagram`,
   );
   const nodeRoles = Array.from(
-    diagram.matchAll(/<a href="https:\/\/([a-z]{3})\.aserdargun\.com\/"[^>]*data-learning-role="([^"]+)"[^>]*>/g),
+    diagram.matchAll(/<a href="https:\/\/([a-z]{3})\.aserdargun\.com\/[^\"]*"[^>]*data-learning-role="([^"]+)"[^>]*>/g),
     (match) => `${match[1]}:${match[2]}`,
   );
   check(
@@ -488,67 +491,19 @@ function validateLearningHorizon(locale, html) {
 }
 
 const expectedPrimaryNavigation = {
-  en: [
-    ["Journey", "/journey/"],
-    ["Now", "/now/"],
-    ["Applications", "/applications/"],
-    ["Knowledge", "/memory/"],
-    ["About", "/about/"],
-  ],
-  tr: [
-    ["Yolculuk", "/tr/journey/"],
-    ["Şimdi", "/tr/now/"],
-    ["Uygulamalar", "/tr/applications/"],
-    ["Bilgi", "/tr/memory/"],
-    ["Hakkımda", "/tr/about/"],
-  ],
+  en: [["Home", "/"], ["Applications", "/applications/"], ["About", "/about/"]],
+  tr: [["Ana Sayfa", "/tr/"], ["Uygulamalar", "/tr/applications/"], ["Hakkımda", "/tr/about/"]],
 };
 
 function validatePrimaryNavigation(locale, page, html) {
   const nav = html.match(/<nav class="nav-links"[\s\S]*?<\/nav>/)?.[0] ?? "";
-  check(nav.length > 0, `${locale}/${page}: primary navigation is missing`);
-  if (nav.length === 0) return;
-  const primaryLinks = Array.from(
-    nav.matchAll(/<a class="nav-links__primary-link" href="([^"]+)"(?: aria-current="page")?>([^<]+)<\/a>/g),
-    (match) => [match[2], match[1]],
-  );
-  check(
-    JSON.stringify(primaryLinks) === JSON.stringify(expectedPrimaryNavigation[locale]),
-    `${locale}/${page}: primary concepts, destinations, count, or order differ`,
-  );
-  for (const [concept] of expectedPrimaryNavigation[locale]) {
-    check(primaryLinks.filter(([label]) => label === concept).length === 1, `${locale}/${page}: primary concept must appear exactly once: ${concept}`);
-  }
-  const currentLinks = Array.from(nav.matchAll(/<a class="nav-links__primary-link"[^>]*aria-current="page"[^>]*>([^<]+)<\/a>/g), (match) => match[1]);
-  const expectedCurrent = page === "memory"
-    ? [locale === "tr" ? "Bilgi" : "Knowledge"]
-    : ["now", "archive"].includes(page) ? [locale === "tr" ? "Şimdi" : "Now"] : page === "journey" ? [locale === "tr" ? "Yolculuk" : "Journey"] : page === "about" ? [locale === "tr" ? "Hakkımda" : "About"] : page === "applications" ? [locale === "tr" ? "Uygulamalar" : "Applications"] : [];
-  check(JSON.stringify(currentLinks) === JSON.stringify(expectedCurrent), `${locale}/${page}: routed primary current state differs`);
-  const learningLabel = locale === "tr" ? "Öğrenme" : "Learning";
-  const localeRoot = locale === "tr" ? "/tr/" : "/";
-  check(!nav.includes('class="nav-links__secondary-link"'), `${locale}/${page}: removed Learning link remains`);
-  check(!primaryLinks.some(([concept]) => concept === learningLabel), `${locale}/${page}: Learning must not remain a primary concept`);
-  check(!primaryLinks.some(([concept]) => ["Approach", "Yaklaşım"].includes(concept)), `${locale}/${page}: Approach remains in top-level navigation`);
-
-  const groupExpectations = [
-    ["horizon", locale === "tr" ? "Ufuk" : "The horizon", ["wfm", "swi", "itl", "eng"]],
-    ["private", locale === "tr" ? "Özel sistemler" : "Private systems", ["stk", "inf", "nxt"]],
-  ];
-  for (const [groupName, groupLabel, expectedCodes] of groupExpectations) {
-    const group = nav.match(new RegExp(`<div class="nav-links__group" data-nav-group="${groupName}"[\\s\\S]*?<\\/div>`))?.[0] ?? "";
-    check(group.length > 0, `${locale}/${page}: ${groupName} navigation group is missing`);
-    if (!group) continue;
-    const expectedLabelId = `nav-${groupName}-label-${locale}`;
-    const groupOpening = group.match(/^<div\b[^>]*>/)?.[0] ?? "";
-    check(groupOpening.includes('role="group"'), `${locale}/${page}: ${groupName} navigation container must expose a group role`);
-    check(groupOpening.includes(`aria-labelledby="${expectedLabelId}"`), `${locale}/${page}: ${groupName} navigation group is not named by its visible label`);
-    const labelElement = group.match(/<span class="nav-links__section"[^>]*>([^<]+)<\/span>/)?.[0] ?? "";
-    check(labelElement.includes(`>${groupLabel}<`), `${locale}/${page}: ${groupName} navigation label differs`);
-    check(labelElement.includes(`id="${expectedLabelId}"`), `${locale}/${page}: ${groupName} visible label id does not match its group name reference`);
-    check(!labelElement.includes('aria-hidden="true"'), `${locale}/${page}: ${groupName} navigation label is hidden from assistive technology`);
-    const codes = matches(group, /href="https:\/\/([a-z]{3})\.aserdargun\.com\/"/g);
-    check(JSON.stringify(codes) === JSON.stringify(expectedCodes), `${locale}/${page}: ${groupName} navigation destinations differ`);
-  }
+  const links = Array.from(nav.matchAll(/<a class="nav-links__primary-link" href="([^"]+)"(?: aria-current="page")?>([^<]+)<\/a>/g), (match) => [match[2], match[1]]);
+  check(JSON.stringify(links) === JSON.stringify(expectedPrimaryNavigation[locale]), `${locale}/${page}: primary navigation differs`);
+  check((nav.match(/<a /g) ?? []).length === 3, `${locale}/${page}: only three navigation links are allowed`);
+  const current = Array.from(nav.matchAll(/<a class="nav-links__primary-link"[^>]*aria-current="page"[^>]*>([^<]+)<\/a>/g), (match) => match[1]);
+  const index = ["home", "applications", "about"].indexOf(page);
+  check(JSON.stringify(current) === JSON.stringify(index < 0 ? [] : [expectedPrimaryNavigation[locale][index][0]]), `${locale}/${page}: current page differs`);
+  check(!nav.includes("data-nav-group"), `${locale}/${page}: removed navigation groups remain`);
 }
 
 function validateLivingSystem(locale, html) {
@@ -901,7 +856,7 @@ for (const document of publicIndexDocuments) {
 for (const diagnostic of validatePublicIndexCoverage(publicIndexDocuments, validatedPublicIndexPaths)) {
   failures.push(`Public HTML accessibility coverage failed: file=${diagnostic.relativePath} code=${diagnostic.code} ${diagnostic.message}`);
 }
-const applicationSummaries = summarizeApplications(livingSystem.applications);
+const applicationSummaries = { en: "30 applications,", tr: "uzanan 30 uygulama." };
 
 for (const [locale, html] of Object.entries(pages)) {
   const about = routePages[locale].about;
@@ -991,8 +946,6 @@ for (const [locale, html] of Object.entries(pages)) {
   check(!html.includes("Stackfolio"), `${locale}: Stackfolio product content remains`);
   check(!html.includes("stk-aserdargun-com"), `${locale}: Stackfolio repository name remains`);
   check(!html.includes("https://github.com/aserdargun/stk-aserdargun-com"), `${locale}: Stackfolio repository URL remains`);
-  check(html.includes('href="https://stk.aserdargun.com/"'), `${locale}: private system stk link is missing from primary navigation`);
-  check(html.includes('href="https://inf.aserdargun.com/"'), `${locale}: private system inf link is missing from primary navigation`);
   for (const retiredUrl of retiredProjectUrls) {
     check(!html.includes(`href="${retiredUrl}"`), `${locale}: retired project URL remains: ${retiredUrl}`);
   }
@@ -1132,8 +1085,9 @@ for (const destination of localDestinations) {
 }
 
 const externalAnchorPattern = /<a[^>]+href="(https:\/\/[^"#]+)"/g;
-const enExternalLinks = matches(pages.en, externalAnchorPattern).sort();
-const trExternalLinks = matches(pages.tr, externalAnchorPattern).sort();
+const normalizeDestination = (href) => { const url = new URL(href); return applicationLocaleRoutes[url.hostname.split(".")[0]] && url.hostname.endsWith(".aserdargun.com") ? url.origin : href; };
+const enExternalLinks = matches(pages.en, externalAnchorPattern).map(normalizeDestination).sort();
+const trExternalLinks = matches(pages.tr, externalAnchorPattern).map(normalizeDestination).sort();
 check(JSON.stringify(enExternalLinks) === JSON.stringify(trExternalLinks), "TR/EN external links differ");
 
 check(pages.en.includes("https://aserdargun.com/images/og-ascii.jpg"), "English Open Graph image is incorrect");
@@ -1218,8 +1172,6 @@ check(!/\b(?:05 live|Five live applications)\b/i.test(rootAppMapIntro), "Root st
 check(!rootAbout.includes("Stackfolio"), "Root Stackfolio product content remains");
 check(!rootAbout.includes("stk-aserdargun-com"), "Root Stackfolio repository name remains");
 check(!rootAbout.includes("https://github.com/aserdargun/stk-aserdargun-com"), "Root Stackfolio repository URL remains");
-check(rootAbout.includes('href="https://stk.aserdargun.com/"'), "Root private system stk link is missing from primary navigation");
-check(rootAbout.includes('href="https://inf.aserdargun.com/"'), "Root private system inf link is missing from primary navigation");
 check(rootAbout.includes("<h3>AI Engineer</h3>") && !rootAbout.includes("<h3>GPU Kernel Engineer"), "Root AI Engineer career content is incorrect");
 check(!rootAbout.includes("current-stage-link"), "Root current-stage Explore buttons must be removed");
 

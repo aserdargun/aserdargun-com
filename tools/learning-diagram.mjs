@@ -1,3 +1,4 @@
+import { applicationUrl } from "./application-links.mjs";
 import { applicationParents, applicationOwnership } from "./application-hierarchy.mjs";
 import { systemFocusApplications } from "./system-focus.mjs";
 
@@ -112,7 +113,7 @@ export function renderLearningDiagram({ locale, data }) {
     const isChild = applicationParents(app).length > 0;
     const parentLabel = isChild ? `${applicationOwnership(app, locale)}. ` : "";
     const tag = app.address ? "a" : "g";
-    const link = app.address ? ` href="${escape(app.address)}" target="_blank" rel="noreferrer"` : ' role="group"';
+    const link = app.address ? ` href="${escape(applicationUrl(app, locale))}" target="_blank" rel="noreferrer"` : ' role="group"';
     const label = LABELS[app.code] ? localized(locale, ...LABELS[app.code]) : app.diagramLabel?.[locale] ?? app.title[locale];
     const lines = wrap(label, Math.floor((width - 16) / 6));
     const subtitle = app.subtitle?.[locale];

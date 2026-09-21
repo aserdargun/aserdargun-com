@@ -1,3 +1,4 @@
+import { applicationUrl } from "./application-links.mjs";
 import { readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -10,6 +11,7 @@ import {
 import { buildPortfolioRegistry } from "./portfolio-registry.mjs";
 import { applicationHierarchy, applicationParents, applicationOwnership } from "./application-hierarchy.mjs";
 import { renderLearningDiagram } from "./learning-diagram.mjs";
+import { systemFocusApplications } from "./system-focus.mjs";
 import { renderHomeDiscovery } from "./home-discovery.mjs";
 import {
   directText as activeDirectText,
@@ -180,38 +182,15 @@ export function replaceGeneratedBlock(html, blockName, renderedHtml) {
 
 export function renderPrimaryNavigation({ locale, page }) {
   const root = locale === "tr" ? "/tr/" : "/";
-  const routeFor = (suffix) => `${root}${suffix}`;
   const concepts = [
-    { key: "journey", label: label(locale, "Journey", "Yolculuk"), href: `${root}journey/` },
-    { key: "now", label: label(locale, "Now", "Şimdi"), href: routeFor("now/") },
+    { key: "home", label: label(locale, "Home", "Ana Sayfa"), href: root },
     { key: "applications", label: label(locale, "Applications", "Uygulamalar"), href: `${root}applications/` },
-    { key: "memory", label: label(locale, "Knowledge", "Bilgi"), href: routeFor("memory/") },
     { key: "about", label: label(locale, "About", "Hakkımda"), href: `${root}about/` },
   ];
-  const currentKey = ["about", "applications", "journey"].includes(page) ? page : page === "memory" ? "memory" : ["now", "archive"].includes(page) ? "now" : null;
-  const primaryLinks = concepts.map((concept) => {
-    const current = concept.key === currentKey ? ' aria-current="page"' : "";
-    return `    <a class="nav-links__primary-link" href="${concept.href}"${current}>${concept.label}</a>`;
-  });
-  const externalLink = (code) => `      <a class="nav-links__external" href="https://${code}.aserdargun.com/" target="_blank" rel="noreferrer">${code} <span aria-hidden="true">↗</span> <span class="sr-only">${label(locale, "opens in a new tab", "yeni sekmede açılır")}</span></a>`;
-
   return [
     `  <nav class="nav-links" aria-label="${label(locale, "Primary navigation", "Ana navigasyon")}">`,
     '  <div class="nav-links__primary">',
-    ...primaryLinks,
-    "  </div>",
-    `  <div class="nav-links__group" data-nav-group="horizon" role="group" aria-labelledby="nav-horizon-label-${locale}">`,
-    `    <span class="nav-links__section" id="nav-horizon-label-${locale}">${label(locale, "The horizon", "Ufuk")}</span>`,
-    externalLink("wfm"),
-    externalLink("swi"),
-    externalLink("itl"),
-    externalLink("eng"),
-    "  </div>",
-    `  <div class="nav-links__group" data-nav-group="private" role="group" aria-labelledby="nav-private-label-${locale}">`,
-    `    <span class="nav-links__section" id="nav-private-label-${locale}">${label(locale, "Private systems", "Özel sistemler")}</span>`,
-    externalLink("stk"),
-    externalLink("inf"),
-    externalLink("nxt"),
+    ...concepts.map((concept) => `    <a class="nav-links__primary-link" href="${concept.href}"${concept.key === page ? ' aria-current="page"' : ""}>${concept.label}</a>`),
     "  </div>",
     "  </nav>",
   ].join("\n");
@@ -281,7 +260,7 @@ function addNewTabAccessibilityText(html, locale) {
     if (namespace === "svg") {
       content = content.replace(/\s*<span\s+class=["']sr-only["']>[\s\S]*?<\/span>\s*/gi, "\n");
       const href = attributes.match(/\bhref\s*=\s*["']([^"']+)["']/i)?.[1] ?? "";
-      const code = href.match(/^https:\/\/([a-z]{3})\.aserdargun\.com\/$/i)?.[1]?.toLowerCase() ?? String(anchorIndex);
+      const code = href.match(/^https:\/\/([a-z]{3})\.aserdargun\.com\//i)?.[1]?.toLowerCase() ?? String(anchorIndex);
       const titleId = `ld-new-tab-${code}-${locale}`;
       const visibleName = Array.from(content.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/gi), (match) => match[1].replace(/<[^>]+>/g, "").trim()).filter(Boolean).join(" ");
       if (!/\baria-(?:label|labelledby)\s*=/i.test(attributes) && visibleName) {
@@ -346,9 +325,12 @@ export function renderLivingSystem({ locale }) {
 }
 
 export function renderApplicationMap({ locale, data, today, page }) {
-  const summary = summarizeApplications(data.applications)[locale];
-  const registry = buildPortfolioRegistry({ applications: data.applications, generatedAt: data.now.updatedAt });
-  const sourceApplications = new Map(data.applications.map((application) => [application.code, application]));
+  const applications = systemFocusApplications(data.applications);
+  const summary = label(locale,
+    `${applications.length} applications, from AI foundations and agent systems to digital twins and humanoid robotics. Explore the parent applications and their labs below.`,
+    `Yapay zekâ temellerinden ajan sistemlerine, dijital ikizlerden insansı robotlara uzanan ${applications.length} uygulama. Ana uygulamaları ve onlara bağlı laboratuvarları keşfet.`);
+  const registry = buildPortfolioRegistry({ applications, generatedAt: data.now.updatedAt });
+  const sourceApplications = new Map(applications.map((application) => [application.code, application]));
   const root = locale === "tr" ? "/tr/" : "/";
   const kindLabels = {
     atlas: label(locale, "Atlas", "Atlas"),
@@ -380,7 +362,7 @@ export function renderApplicationMap({ locale, data, today, page }) {
     const applicationSummary = escapeHtml(application.description[locale]);
     const repository = escapeHtml(application.repositoryUrl);
     const repositoryName = escapeHtml(repositoryLabel(application.repositoryUrl));
-    const address = escapeHtml(application.productionUrl);
+    const address = escapeHtml(applicationUrl(sourceApplication, locale));
     const domain = escapeHtml(addressLabel(application.productionUrl));
     const guidingQuestion = sourceApplication.guidingQuestion === undefined ? "" : `<p class="app-guiding-question"><strong>${label(locale, "Guiding question", "Yönlendirici soru")}</strong>${escapeHtml(sourceApplication.guidingQuestion[locale])}</p>`;
     const nextDirection = sourceApplication.nextDirection === undefined ? "" : `<p class="app-next-direction"><strong>${label(locale, "Next direction", "Sonraki yön")}</strong>${escapeHtml(sourceApplication.nextDirection[locale])}</p>`;
@@ -1434,10 +1416,8 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
       current: archiveAttribute(node, "aria-current"),
     }));
   const expectedPrimaryLinks = [
-    { href: `${root}journey/`, text: label(locale, "Journey", "Yolculuk"), current: null },
-    { href: currentPath, text: label(locale, "Now", "Şimdi"), current: "page" },
+    { href: root, text: label(locale, "Home", "Ana Sayfa"), current: null },
     { href: `${root}applications/`, text: label(locale, "Applications", "Uygulamalar"), current: null },
-    { href: `${root}memory/`, text: label(locale, "Knowledge", "Bilgi"), current: null },
     { href: `${root}about/`, text: label(locale, "About", "Hakkımda"), current: null },
   ];
   assertArchiveNavigation(
@@ -1456,40 +1436,11 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
     "removed secondary Learning link remains",
   );
 
-  const groupElements = primaryNavigation[0].children
-    .filter((node) => node.type === "element" && archiveHasAttribute(node, "data-nav-group"));
-  const expectedGroups = [
-    { key: "horizon", text: label(locale, "The horizon", "Ufuk"), codes: ["wfm", "swi", "itl", "eng"] },
-    { key: "private", text: label(locale, "Private systems", "Özel sistemler"), codes: ["stk", "inf", "nxt"] },
-  ];
-  const scopedGroupAnchors = [];
-  assertArchiveNavigation(groupElements.length === expectedGroups.length, week, locale, "group count differs");
-  for (const [index, expectedGroup] of expectedGroups.entries()) {
-    const group = groupElements[index];
-    const expectedLabelId = `nav-${expectedGroup.key}-label-${locale}`;
-    const sectionSpans = archiveElementsByTag(group, "span")
-      .filter((node) => archiveHasClass(node, "nav-links__section"));
-    const matchingLabels = sectionSpans.filter((node) => archiveAttribute(node, "id") === expectedLabelId);
-    const groupLinks = archiveElementsByTag(group, "a")
-      .filter((node) => archiveHasClass(node, "nav-links__external"));
-    const expectedGroupHrefs = expectedGroup.codes.map((code) => `https://${code}.aserdargun.com/`);
-    assertArchiveNavigation(
-      archiveHasClass(group, "nav-links__group")
-        && archiveAttribute(group, "data-nav-group") === expectedGroup.key
-        && archiveAttribute(group, "role") === "group"
-        && archiveAttribute(group, "aria-labelledby") === expectedLabelId
-        && matchingLabels.length === 1
-        && matchingLabels[0].parent === group
-        && archiveDirectText(matchingLabels[0]) === expectedGroup.text
-        && !archiveHasAttribute(matchingLabels[0], "aria-hidden")
-        && groupLinks.every((anchor) => anchor.parent === group)
-        && JSON.stringify(groupLinks.map((anchor) => archiveAttribute(anchor, "href"))) === JSON.stringify(expectedGroupHrefs),
-      week,
-      locale,
-      `group ${expectedGroup.key} ARIA relationship or scoped link membership differs`,
-    );
-    scopedGroupAnchors.push(...groupLinks);
-  }
+  assertArchiveNavigation(
+    archiveElementsByTag(primaryNavigation[0], "a").length === 3
+      && !archiveElements(primaryNavigation[0]).some((node) => archiveHasAttribute(node, "data-nav-group")),
+    week, locale, "primary navigation contains removed groups or extra links",
+  );
 
   const languageLinks = archiveElementsByTag(languageNavigation[0], "a")
     .filter((node) => archiveHasAttribute(node, "data-language-link"))
@@ -1526,49 +1477,10 @@ function validateArchiveNavigation({ html, tree, skeleton, locale, week }) {
     "language link set, order, accessible name, or current state differs",
   );
 
-  const headerExternalAnchors = archiveElementsByTag(header, "a")
-    .filter((node) => archiveHasClass(node, "nav-links__external"));
-  const panelExternalAnchors = archiveElementsByTag(panel, "a")
-    .filter((node) => archiveHasClass(node, "nav-links__external"));
-  const primaryExternalAnchors = archiveElementsByTag(primaryNavigation[0], "a")
-    .filter((node) => archiveHasClass(node, "nav-links__external"));
-  const expectedNewTabHrefs = ["wfm", "swi", "itl", "eng", "stk", "inf", "nxt"]
-    .map((code) => `https://${code}.aserdargun.com/`);
-  const allActiveAnchors = archiveElementsByTag(documentTree, "a");
-  const destinationMatches = expectedNewTabHrefs.map((href) => (
-    allActiveAnchors.filter((anchor) => archiveAttribute(anchor, "href") === href)
-  ));
   assertArchiveNavigation(
-    destinationMatches.every((matches) => matches.length === 1),
-    week,
-    locale,
-    "external destinations must each resolve to exactly one active document anchor",
+    archiveElementsByTag(header, "a").every((node) => !/^https?:/.test(archiveAttribute(node, "href") ?? "")),
+    week, locale, "removed external navigation destination remains",
   );
-  const destinationAnchors = destinationMatches.map(([anchor]) => anchor);
-  assertArchiveNavigation(
-    sameArchiveNodes(destinationAnchors, headerExternalAnchors)
-      && sameArchiveNodes(destinationAnchors, panelExternalAnchors)
-      && sameArchiveNodes(destinationAnchors, primaryExternalAnchors)
-      && sameArchiveNodes(destinationAnchors, scopedGroupAnchors),
-    week,
-    locale,
-    "external destination set, order, or node scope differs",
-  );
-  const expectedNewTabText = label(locale, "opens in a new tab", "yeni sekmede açılır");
-  for (const anchor of headerExternalAnchors) {
-    const relTokens = (archiveAttribute(anchor, "rel") ?? "").toLowerCase().split(/\s+/);
-    const assistiveText = archiveElementsByTag(anchor, "span")
-      .filter((node) => archiveHasClass(node, "sr-only"));
-    assertArchiveNavigation(
-      archiveAttribute(anchor, "target") === "_blank"
-        && relTokens.includes("noreferrer")
-        && assistiveText.length === 1
-        && archiveDirectText(assistiveText[0]) === expectedNewTabText,
-      week,
-      locale,
-      "new-tab link lacks noreferrer or localized assistive text",
-    );
-  }
 
   const ids = archiveElements(documentTree, { activeOnly: false })
     .filter((node) => archiveHasAttribute(node, "id"))

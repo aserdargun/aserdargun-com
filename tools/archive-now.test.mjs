@@ -161,7 +161,8 @@ function assertCompleteNavigation(html, locale) {
   assert.equal((html.match(/data-nav-panel/g) ?? []).length, 1);
   assert.equal((html.match(/data-nav-backdrop/g) ?? []).length, 1);
   assert.match(html, new RegExp(`<nav class="nav-links" aria-label="${expectedPrimaryLabel}">`));
-  assert.match(html, /<a class="nav-links__primary-link" href="\/(?:tr\/)?now\/" aria-current="page">/);
+  assert.equal((html.match(/class="nav-links__primary-link"/g) ?? []).length, 3);
+  assert.doesNotMatch(html, /class="nav-links__primary-link"[^>]*aria-current/);
 
   const ids = Array.from(html.matchAll(/\sid="([^"]+)"/g), (match) => match[1]);
   assert.equal(new Set(ids).size, ids.length, "archive document IDs must be unique");

@@ -1,3 +1,4 @@
+import { applicationUrl } from "./application-links.mjs";
 // Homepage editorial selection. Addresses and research parents come from the registry.
 const copy = {
   tr: {
@@ -8,8 +9,8 @@ const copy = {
     scope: 'Görseller konuları temsil eder. Deneyler eğitim amaçlıdır; uygulamalar bağımsız çalışır.',
     explore: 'Deneyi keşfet', research: 'Temeli oku',
     next: 'Bir sonraki adımını seç.',
-    nextIntro: 'Rehberli bir sırayla ilerle veya merak ettiğin başka bir uygulamaya geç.',
-    journey: 'Öğrenme yolunu aç', all: 'Tüm uygulamaları gör',
+    nextIntro: 'Merak ettiğin başka bir uygulamaya geç.',
+    all: 'Tüm uygulamaları gör',
     routes: [
       ['Modelleri anla', 'Bir isteğin tokenlara nasıl dönüştüğünü ve sunum kaynaklarının beklemeyi nasıl etkilediğini incele.', 'LLM → TFL', 'Token akışından başla', 'tfl'],
       ['Ajanları keşfet', 'Bir ajanın araç kullanımını, yürütme adımlarını ve insan onayına ihtiyaç duyduğu noktaları keşfet.', 'HNS → ARL', 'Ajan yürütmesinden başla', 'arl'],
@@ -24,8 +25,8 @@ const copy = {
     scope: 'Illustrations represent the topics. Experiments are educational; applications run independently.',
     explore: 'Explore the experiment', research: 'Read the foundations',
     next: 'Choose your next step.',
-    nextIntro: 'Follow a guided sequence or explore another application that sparks your curiosity.',
-    journey: 'Open the learning path', all: 'View all applications',
+    nextIntro: 'Explore another application that sparks your curiosity.',
+    all: 'View all applications',
     routes: [
       ['Understand models', 'Explore how a request becomes tokens and how serving resources affect the wait.', 'LLM → TFL', 'Start with token flow', 'tfl'],
       ['Explore agents', 'Inspect tool use, execution steps, and the points where an agent needs human approval.', 'HNS → ARL', 'Start with agent execution', 'arl'],
@@ -83,7 +84,7 @@ export function renderHomeDiscovery({locale, data}) {
     if (!app?.address) throw new Error(`Homepage discovery needs a registered address for ${code}`);
     return app;
   };
-  const external = (app, content, className) => `<a class="${className}" href="${escape(app.address)}" target="_blank" rel="noreferrer"><span class="sr-only">${locale === 'tr' ? 'yeni sekmede açılır' : 'opens in a new tab'}</span>${content}</a>`;
+  const external = (app, content, className) => `<a class="${className}" href="${escape(applicationUrl(app, locale))}" target="_blank" rel="noreferrer"><span class="sr-only">${locale === 'tr' ? 'yeni sekmede açılır' : 'opens in a new tab'}</span>${content}</a>`;
   const routes = text.routes.map(([title, description, path, action, code], index) => `<article class="discovery-route">
           <span class="discovery-route__number" aria-hidden="true">0${index + 1}</span>
           <h3>${escape(title)}</h3>
@@ -123,8 +124,7 @@ export function renderHomeDiscovery({locale, data}) {
         <h2 id="discovery-next-${locale}">${escape(text.next)}</h2>
         <p class="home-discovery__intro">${escape(text.nextIntro)}</p>
         <div class="discovery-next__actions">
-          <a class="home-discovery__link" href="${root}journey/">${escape(text.journey)} ${arrow}</a>
-          <a class="home-discovery__secondary" href="${root}applications/">${escape(text.all)} ${arrow}</a>
+          <a class="home-discovery__link" href="${root}applications/">${escape(text.all)} ${arrow}</a>
         </div>
       </section>
       </div>`;

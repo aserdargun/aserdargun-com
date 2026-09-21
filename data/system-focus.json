@@ -15,7 +15,18 @@
       "diagramLabel": {
         "en": "Decision plane",
         "tr": "Karar düzlemi"
-      }
+      },
+      "repository": "https://github.com/aserdargun/dpl-aserdargun-com",
+      "summary": {
+        "en": "Decision-plane experiments connecting System One and System Two.",
+        "tr": "Sistem Bir ile Sistem İki arasındaki karar düzlemini inceleyen deneyler."
+      },
+      "kind": "lab",
+      "statusLabel": {
+        "en": "Public website",
+        "tr": "Kamusal site"
+      },
+      "relatedMemoryIds": []
     },
     {
       "code": "cul",
@@ -32,7 +43,18 @@
       "diagramLabel": {
         "en": "Computer use",
         "tr": "Bilgisayar kullanımı"
-      }
+      },
+      "repository": "https://github.com/aserdargun/cul-aserdargun-com",
+      "summary": {
+        "en": "Educational computer-use experiments with synthetic simulations.",
+        "tr": "Sentetik simülasyonlarla bilgisayar kullanımını inceleyen eğitim deneyleri."
+      },
+      "kind": "lab",
+      "statusLabel": {
+        "en": "Public website",
+        "tr": "Kamusal site"
+      },
+      "relatedMemoryIds": []
     },
     {
       "code": "aos",
@@ -49,7 +71,18 @@
       "diagramLabel": {
         "en": "Agent operating system",
         "tr": "Ajan işletim sistemi"
-      }
+      },
+      "repository": "https://github.com/aserdargun/aos-aserdargun-com",
+      "summary": {
+        "en": "A public guide to a target agent operating-system architecture.",
+        "tr": "Hedef ajan işletim sistemi mimarisini anlatan kamusal rehber."
+      },
+      "kind": "lab",
+      "statusLabel": {
+        "en": "Public website",
+        "tr": "Kamusal site"
+      },
+      "relatedMemoryIds": []
     },
     {
       "code": "mem",
@@ -62,7 +95,18 @@
       "diagramLabel": {
         "en": "Agent memory",
         "tr": "Ajan belleği"
-      }
+      },
+      "repository": "https://github.com/aserdargun/mem-aserdargun-com",
+      "summary": {
+        "en": "Explore memory mechanisms for agent systems.",
+        "tr": "Ajan sistemlerindeki bellek mekanizmalarını keşfet."
+      },
+      "kind": "lab",
+      "statusLabel": {
+        "en": "Public website",
+        "tr": "Kamusal site"
+      },
+      "relatedMemoryIds": []
     }
   ]
 }

@@ -1,3 +1,4 @@
+import { applicationUrl } from "./application-links.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
@@ -413,7 +414,7 @@ for (const document of routes) {
     const htmlOnly = svgScopes.reduce((source, svg) => source.replace(svg, ""), html);
     const blankAnchors = anchors(htmlOnly).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
 
-    assert.ok(blankAnchors.length > 0, "fixture must exercise at least one new-tab link");
+    if (document.route.includes("applications/")) assert.ok(blankAnchors.length > 0, "application catalog must exercise new-tab links");
     for (const anchor of blankAnchors) {
       const relTokens = (attribute(anchor.openingTag, "rel") ?? "").toLowerCase().split(/\s+/);
       assert.ok(relTokens.includes("noreferrer"), `${anchor.openingTag} needs noreferrer`);
@@ -580,7 +581,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     const svgBlankAnchors = anchors(svg).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
     assert.equal(svgBlankAnchors.length, expectedNodes.length, "all thirty linked diagram nodes must remain inside SVG");
 
-    assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")).sort(), expectedNodes.map(([href]) => href).sort());
+    assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")).sort(), expectedNodes.map(([address, code]) => applicationUrl({code: code.toLowerCase(), address}, document.locale)).sort());
     for (const [index, anchor] of svgBlankAnchors.entries()) {
       const code = attribute(anchor.openingTag, "href").match(/https:\/\/([a-z]{3})\./)[1];
       const titleId = `ld-new-tab-${code}-${document.locale}`;

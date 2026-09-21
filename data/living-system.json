@@ -419,7 +419,8 @@
         "tr": "Yayında"
       },
       "languages": [
-        "tr"
+        "tr",
+        "en"
       ],
       "title": {
         "en": "Cloud Provider Cost Comparison",
@@ -434,8 +435,8 @@
       "updatedAt": "2026-09-03",
       "researchCutoff": "2026-08-14",
       "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-04",
-      "releaseSha": "af3014138ff753c9591635f8e75a7c29d21299ce",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "c1652a902be75570025f75dc8db89a59b7b3c12e",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -1086,7 +1087,7 @@
       "updatedAt": "2026-09-21",
       "lastVerified": "2026-09-21",
       "lastReleased": "2026-09-21",
-      "releaseSha": "38e78c7d36daa84d0bb99b0469a62957a85b45ed",
+      "releaseSha": "0bbe272262106dcc1945955c428600bec684d191",
       "sourceCount": 5,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",

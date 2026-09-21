@@ -177,3 +177,10 @@ records are browser-only learning tools. ITL ownership and the PDT relationship
 describe learning context, not shared state, field connectivity or ILS adoption.
 DTR release metadata records the September 21 successful deployment and matching
 public release manifest, asset hashes and production browser tests.
+
+## Navigation and application language
+
+The primary navigation contains Home, Applications and About. Home is the entry
+page and links to the full 30-application catalog. Application entry URLs are
+centralized in `tools/application-links.mjs`, using each app’s supported locale
+path or query parameter. CLD supports both Turkish and English.

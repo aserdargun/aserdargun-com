@@ -124,7 +124,7 @@ async function createSiteFixture() {
   await mkdir(path.join(fixtureDir, "tr", "memory"), { recursive: true });
   await mkdir(path.join(fixtureDir, "tr", "now"), { recursive: true });
   await mkdir(path.join(fixtureDir, "now"));
-  // Use the same historical data boundary as the renderer fixtures.
+  // Reuse the historical fixture normalization, including evidence and relationships.
   const fixtureData = await readFixtureData();
   await writeFile(path.join(fixtureDir, "data", "living-system.json"), JSON.stringify(fixtureData));
   await writeFile(path.join(fixtureDir, "index.html"), homeDocument());
@@ -193,83 +193,17 @@ function livingSystemCards(html) {
   );
 }
 
-test("renders the exact five localized primary concepts and page-aware destinations", () => {
-  const english = renderPrimaryNavigation({ locale: "en", page: "home" });
-  const turkish = renderPrimaryNavigation({ locale: "tr", page: "home" });
-
-  assert.deepEqual(primaryLinks(english), [
-    { href: "/journey/", label: "Journey", current: false },
-    { href: "/now/", label: "Now", current: false },
-    { href: "/applications/", label: "Applications", current: false },
-    { href: "/memory/", label: "Knowledge", current: false },
-    { href: "/about/", label: "About", current: false },
-  ]);
-  assert.deepEqual(primaryLinks(turkish), [
-    { href: "/tr/journey/", label: "Yolculuk", current: false },
-    { href: "/tr/now/", label: "Şimdi", current: false },
-    { href: "/tr/applications/", label: "Uygulamalar", current: false },
-    { href: "/tr/memory/", label: "Bilgi", current: false },
-    { href: "/tr/about/", label: "Hakkımda", current: false },
-  ]);
-});
-
-test("marks only routed primary concepts current and omits Learning", () => {
-  const now = renderPrimaryNavigation({ locale: "en", page: "now" });
-  const memory = renderPrimaryNavigation({ locale: "tr", page: "memory" });
-  const archive = renderPrimaryNavigation({ locale: "en", page: "archive" });
-
-  assert.deepEqual(primaryLinks(now).filter((link) => link.current), [
-    { href: "/now/", label: "Now", current: true },
-  ]);
-  assert.deepEqual(primaryLinks(memory).filter((link) => link.current), [
-    { href: "/tr/memory/", label: "Bilgi", current: true },
-  ]);
-  assert.deepEqual(primaryLinks(archive).filter((link) => link.current), [
-    { href: "/now/", label: "Now", current: true },
-  ]);
-  assert.doesNotMatch(now, /class="nav-links__secondary-link"/);
-  assert.equal(primaryLinks(now).some((link) => link.label === "Learning"), false);
-});
-
-test("renders assistive-technology-visible horizon and private-system groups", () => {
-  const english = renderPrimaryNavigation({ locale: "en", page: "home" });
-  const turkish = renderPrimaryNavigation({ locale: "tr", page: "home" });
-
-  assert.match(english, /<span class="nav-links__section" id="nav-horizon-label-en">The horizon<\/span>/);
-  assert.match(turkish, /<span class="nav-links__section" id="nav-horizon-label-tr">Ufuk<\/span>/);
-  assert.match(english, /<span class="nav-links__section" id="nav-private-label-en">Private systems<\/span>/);
-  assert.match(turkish, /<span class="nav-links__section" id="nav-private-label-tr">Özel sistemler<\/span>/);
-  assert.equal(/nav-links__section[^>]*aria-hidden="true"/.test(english), false);
-  assert.deepEqual(
-    Array.from(english.matchAll(/data-nav-group="horizon"[\s\S]*?<\/div>/g), (group) => Array.from(group[0].matchAll(/https:\/\/([a-z]{3})\.aserdargun\.com\//g), (match) => match[1])).flat(),
-    ["wfm", "swi", "itl", "eng"],
-  );
-  assert.deepEqual(
-    Array.from(english.matchAll(/data-nav-group="private"[\s\S]*?<\/div>/g), (group) => Array.from(group[0].matchAll(/https:\/\/([a-z]{3})\.aserdargun\.com\//g), (match) => match[1])).flat(),
-    ["stk", "inf", "nxt"],
-  );
-});
-
-test("gives each localized navigation group a nameable group role tied to its visible label", () => {
-  const english = renderPrimaryNavigation({ locale: "en", page: "home" });
-  const turkish = renderPrimaryNavigation({ locale: "tr", page: "home" });
-
-  assert.match(
-    english,
-    /<div class="nav-links__group" data-nav-group="horizon" role="group" aria-labelledby="nav-horizon-label-en">\s*<span class="nav-links__section" id="nav-horizon-label-en">The horizon<\/span>/,
-  );
-  assert.match(
-    english,
-    /<div class="nav-links__group" data-nav-group="private" role="group" aria-labelledby="nav-private-label-en">\s*<span class="nav-links__section" id="nav-private-label-en">Private systems<\/span>/,
-  );
-  assert.match(
-    turkish,
-    /<div class="nav-links__group" data-nav-group="horizon" role="group" aria-labelledby="nav-horizon-label-tr">\s*<span class="nav-links__section" id="nav-horizon-label-tr">Ufuk<\/span>/,
-  );
-  assert.match(
-    turkish,
-    /<div class="nav-links__group" data-nav-group="private" role="group" aria-labelledby="nav-private-label-tr">\s*<span class="nav-links__section" id="nav-private-label-tr">Özel sistemler<\/span>/,
-  );
+test("renders only Home, Applications, About in order with the current page marked", () => {
+  for (const locale of ["en", "tr"]) {
+    const root = locale === "tr" ? "/tr/" : "/";
+    const labels = locale === "tr" ? ["Ana Sayfa", "Uygulamalar", "Hakkımda"] : ["Home", "Applications", "About"];
+    for (const page of ["home", "applications", "about", "now", "memory", "journey", "archive"]) {
+      const html = renderPrimaryNavigation({ locale, page });
+      assert.deepEqual(primaryLinks(html), ["home", "applications", "about"].map((key, i) => ({ href: key === "home" ? root : `${root}${key}/`, label: labels[i], current: key === page })));
+      assert.equal((html.match(/<a /g) ?? []).length, 3);
+      assert.doesNotMatch(html, /data-nav-group|nav-links__external/);
+    }
+  }
 });
 
 test("renders five localized living-system links in chronological meaning order", () => {
@@ -309,12 +243,8 @@ test("renders honest localized empty public-memory routes with Knowledge current
   assert.match(turkish, /Henüz onaylanmış kamusal hafıza kaydı yok\./);
   assert.doesNotMatch(english, /<(?:base|form|input)\b/i);
   assert.doesNotMatch(turkish, /<(?:base|form|input)\b/i);
-  assert.deepEqual(primaryLinks(english).filter((link) => link.current), [
-    { href: "/memory/", label: "Knowledge", current: true },
-  ]);
-  assert.deepEqual(primaryLinks(turkish).filter((link) => link.current), [
-    { href: "/tr/memory/", label: "Bilgi", current: true },
-  ]);
+  assert.deepEqual(primaryLinks(english).filter((link) => link.current), []);
+  assert.deepEqual(primaryLinks(turkish).filter((link) => link.current), []);
 });
 
 test("renders populated public-memory allowlist cards with localized evidence and absolute dates", async () => {
@@ -865,11 +795,11 @@ test("renders Now freshness from its canonical date at current and needs-refresh
   );
 });
 
-test("renders the application-map summary from semantic roles", async () => {
+test("renders the application-map summary including approved additions", async () => {
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /Eleven core learning applications, 12 standalone labs, two horizon bridges, and one long-term horizon\./);
+  assert.match(rendered, /30 applications, from AI foundations/);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
 });
 
@@ -1027,7 +957,7 @@ test("filesystem archive discovery rejects the wrong expected sitemap update dat
 test("filesystem archive discovery rejects an incomplete shared header and Now navigation contract", async (t) => {
   const fixtureDir = await createArchiveFilesystemFixture(t);
   await mutateFixture(fixtureDir, "tr/now/archive/2026-W34/index.html", (html) => (
-    html.replace(' href="/tr/now/" aria-current="page"', ' href="/tr/now/"')
+    html.replace('href="/tr/applications/"', 'href="/tr/applications/" aria-current="page"')
   ));
 
   await assert.rejects(
@@ -1079,13 +1009,11 @@ test("filesystem archive discovery rejects review gap: a visible update time tha
 });
 
 test("filesystem archive discovery rejects every shared header accessibility contract mutation", async (t) => {
-  const englishJourney = '    <a class="nav-links__primary-link" href="/journey/">Journey</a>';
-  const englishNow = '    <a class="nav-links__primary-link" href="/now/" aria-current="page">Now</a>';
+  const englishJourney = '    <a class="nav-links__primary-link" href="/">Home</a>';
+  const englishNow = '    <a class="nav-links__primary-link" href="/applications/">Applications</a>';
   const mutations = [
     ["missing language navigation accessible name", (html) => html.replace(' aria-label="Language selection"', "")],
     ["wrong primary link order", (html) => html.replace(`${englishJourney}\n${englishNow}`, `${englishNow}\n${englishJourney}`)],
-    ["broken group label relationship", (html) => html.replace('aria-labelledby="nav-horizon-label-en"', 'aria-labelledby="missing-group-label"')],
-    ["missing new-tab noreferrer", (html) => html.replace('target="_blank" rel="noreferrer"', 'target="_blank" rel="noopener"')],
     ["missing toggle accessible name", (html) => html.replace(' aria-label="Open menu"', "")],
     ["missing current-language state", (html) => html.replace(' aria-label="EN — Current language" aria-current="page"', ' aria-label="EN — Current language"')],
   ];
@@ -1142,27 +1070,6 @@ test("filesystem archive discovery rejects structural scope gap: toggle outside 
   );
 });
 
-test("filesystem archive discovery rejects future-week group scope gaps", async (t) => {
-  const cases = [
-    ["horizon links moved outside horizon group", "horizon"],
-    ["private links moved outside private group", "private"],
-  ];
-
-  for (const [name, groupName] of cases) {
-    await t.test(name, async (caseTest) => {
-      const fixtureDir = await createArchiveFilesystemFixture(caseTest, { week: "2026-W35" });
-      await mutateFixture(fixtureDir, "now/archive/2026-W35/index.html", (html) => (
-        moveNavigationGroupLinksOutside(html, groupName)
-      ));
-
-      await assert.rejects(
-        readArchiveLinks(fixtureDir, { expectedCardCount: 3 }),
-        /navigation|group|horizon|private|scope/i,
-      );
-    });
-  }
-});
-
 test("filesystem archive discovery rejects panel tags hidden inside HTML comments", async (t) => {
   const fixtureDir = await createArchiveFilesystemFixture(t);
   await mutateFixture(fixtureDir, "now/archive/2026-W34/index.html", (html) => {
@@ -1203,27 +1110,6 @@ test("filesystem archive discovery rejects navigation hidden in an inert templat
   );
 });
 
-test("filesystem archive discovery rejects group tags hidden inside HTML comments", async (t) => {
-  const fixtureDir = await createArchiveFilesystemFixture(t);
-  await mutateFixture(fixtureDir, "now/archive/2026-W34/index.html", (html) => {
-    let replacements = 0;
-    const mutated = html.replace(
-      /  (<div class="nav-links__group" data-nav-group="(?:horizon|private)"[^>]*>)([\s\S]*?)  <\/div>/g,
-      (_group, openingTag, content) => {
-        replacements += 1;
-        return `  <!-- ${openingTag} -->${content}  <!-- </div> -->`;
-      },
-    );
-    assert.equal(replacements, 2, "fixture must hide both group boundary pairs inside comments");
-    return mutated;
-  });
-
-  await assert.rejects(
-    readArchiveLinks(fixtureDir, { expectedCardCount: 3 }),
-    /navigation|group|comment|structure/i,
-  );
-});
-
 test("filesystem archive discovery rejects an unclosed navigation toggle button", async (t) => {
   const fixtureDir = await createArchiveFilesystemFixture(t);
   await mutateFixture(fixtureDir, "now/archive/2026-W34/index.html", (html) => {
@@ -1253,32 +1139,6 @@ test("filesystem archive discovery rejects an ambiguously self-closed non-void t
   await assert.rejects(
     readArchiveLinks(fixtureDir, { expectedCardCount: 3 }),
     /malformed|non-void|self-closing|structure/i,
-  );
-});
-
-test("filesystem archive discovery rejects external links laundered by valid group-external copies", async (t) => {
-  const fixtureDir = await createArchiveFilesystemFixture(t);
-  await mutateFixture(fixtureDir, "now/archive/2026-W34/index.html", (html) => {
-    const externalAnchors = Array.from(
-      html.matchAll(/      <a class="nav-links__external"[^\n]+<\/a>/g),
-      (match) => match[0],
-    );
-    assert.equal(externalAnchors.length, 7, "fixture must copy all seven external navigation anchors");
-    let mutated = html;
-    for (const anchor of externalAnchors) {
-      mutated = mutated.replace(anchor, anchor.replace('target="_blank"', 'target="_self"'));
-    }
-    mutated = mutated.replace(
-      '  </nav>\n<!-- GENERATED:primary-navigation:end -->',
-      `  </nav>\n${externalAnchors.join("\n")}\n<!-- GENERATED:primary-navigation:end -->`,
-    );
-    assert.notEqual(mutated, html, "fixture must separate group membership from valid new-tab attributes");
-    return mutated;
-  });
-
-  await assert.rejects(
-    readArchiveLinks(fixtureDir, { expectedCardCount: 3 }),
-    /navigation|group|new-tab|external|scope/i,
   );
 });
 
@@ -1333,38 +1193,6 @@ test("filesystem archive discovery rejects back-link text laundered through temp
   await assert.rejects(
     readArchiveLinks(fixtureDir, { expectedCardCount: 3 }),
     /back|current|text|template|structure/i,
-  );
-});
-
-test("filesystem archive discovery rejects assistive text laundered through templates", async (t) => {
-  const fixtureDir = await createArchiveFilesystemFixture(t);
-  await mutateFixture(fixtureDir, "now/archive/2026-W34/index.html", (html) => {
-    const literal = '<span class="sr-only">opens in a new tab</span>';
-    assert.equal(html.split(literal).length - 1, 7, "expected seven localized assistive labels");
-    return html.replaceAll(
-      literal,
-      '<span class="sr-only"><template>opens in a new tab</template></span>',
-    );
-  });
-
-  await assert.rejects(
-    readArchiveLinks(fixtureDir, { expectedCardCount: 3 }),
-    /new-tab|assistive|text|template|navigation|structure/i,
-  );
-});
-
-test("filesystem archive discovery rejects a classless duplicate external destination", async (t) => {
-  const fixtureDir = await createArchiveFilesystemFixture(t);
-  await mutateFixture(fixtureDir, "now/archive/2026-W34/index.html", (html) => {
-    const duplicate = '  <a href="https://eng.aserdargun.com/">duplicate eng destination</a>\n';
-    const mutated = html.replace("</body>", `${duplicate}</body>`);
-    assert.notEqual(mutated, html, "fixture must add an active classless duplicate href");
-    return mutated;
-  });
-
-  await assert.rejects(
-    readArchiveLinks(fixtureDir, { expectedCardCount: 3 }),
-    /external|destination|duplicate|unique|navigation|structure/i,
   );
 });
 
@@ -1431,12 +1259,8 @@ test("filesystem archive discovery rejects hidden or inert required content", as
       '<section class="now-contact" inert>',
     )],
     ["primary navigation label hidden on its anchor", (html) => html.replace(
-      '<a class="nav-links__primary-link" href="/journey/">Journey</a>',
-      '<a class="nav-links__primary-link" href="/journey/" hidden>Journey</a>',
-    )],
-    ["group label inside a hidden group", (html) => html.replace(
-      'data-nav-group="horizon" role="group"',
-      'data-nav-group="horizon" role="group" hidden',
+      '<a class="nav-links__primary-link" href="/">Home</a>',
+      '<a class="nav-links__primary-link" href="/" hidden>Home</a>',
     )],
     ["required card hidden on its node", (html) => html.replace(
       '<article class="now-card now-card-this">',
@@ -1572,31 +1396,6 @@ test("filesystem archive discovery rejects visible time text inside raw or inert
   }
 });
 
-test("filesystem archive discovery rejects duplicate external hrefs in nearby active scopes", async (t) => {
-  const cases = [
-    ["header", (html) => html.replace(
-      "  </header>",
-      '    <a href="https://eng.aserdargun.com/">duplicate header destination</a>\n  </header>',
-    )],
-    ["wrong group", (html) => html.replace(
-      '<span class="nav-links__section" id="nav-private-label-en">Private systems</span>',
-      '<span class="nav-links__section" id="nav-private-label-en">Private systems</span>\n      <a href="https://eng.aserdargun.com/">duplicate wrong-group destination</a>',
-    )],
-  ];
-
-  for (const [scope, mutation] of cases) {
-    await t.test(scope, async (caseTest) => {
-      const fixtureDir = await createArchiveFilesystemFixture(caseTest);
-      await mutateFixture(fixtureDir, "now/archive/2026-W34/index.html", mutation);
-
-      await assert.rejects(
-        readArchiveLinks(fixtureDir, { expectedCardCount: 3 }),
-        /external|destination|duplicate|unique|navigation|structure/i,
-      );
-    });
-  }
-});
-
 test("filesystem archive discovery rejects duplicate active document skeleton elements", async (t) => {
   const cases = [
     ["html", (html) => html.replace("</body>", '<html lang="en" data-locale="en"></html>\n</body>')],
@@ -1675,7 +1474,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const generate = spawnSync(process.execPath, [rendererPath], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-21" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: today.toISOString().slice(0, 10) },
   });
   assert.equal(generate.status, 0, generate.stderr);
 
@@ -1690,7 +1489,7 @@ test("check mode reports stale files without writing the fixture", async () => {
   const check = spawnSync(process.execPath, [rendererPath, "--check"], {
     cwd: fixtureDir,
     encoding: "utf8",
-    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: "2026-09-21" },
+    env: { ...process.env, NODE_ENV: "test", LIVING_SYSTEM_TODAY: today.toISOString().slice(0, 10) },
   });
   const after = Object.fromEntries(await Promise.all(paths.map(async (relativePath) => [
     relativePath,
@@ -1700,4 +1499,10 @@ test("check mode reports stale files without writing the fixture", async () => {
   assert.equal(check.status, 1, check.stderr);
   assert.match(check.stdout, /index\.html/);
   assert.deepEqual(after, before);
+});
+
+ test("archive headers reject removed external navigation links", async (t) => {
+  const fixtureDir = await createArchiveFilesystemFixture(t);
+  await mutateFixture(fixtureDir, "now/archive/2026-W34/index.html", (html) => html.replace("  </header>", '<a href="https://eng.aserdargun.com/">Removed destination</a></header>'));
+  await assert.rejects(readArchiveLinks(fixtureDir, { expectedCardCount: 3 }), /external navigation/);
 });

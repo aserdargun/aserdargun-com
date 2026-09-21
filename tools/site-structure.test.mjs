@@ -1,3 +1,4 @@
+import { systemFocusApplications } from "./system-focus.mjs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -18,11 +19,11 @@ for (const locale of ["en", "tr"]) {
     assert.doesNotMatch(home, /class="(?:learning-study|learning-flow|learning-horizon)"/);
     assert.equal((journey.match(/class="learning-stage-label"/g) ?? []).length, 6);
     assert.ok(journey.includes('id="horizon"'));
-    assert.ok(home.includes(`href="/${root}journey/"`));
+    assert.ok(!home.includes(`href="/${root}journey/"`));
     assert.equal((about.match(/data-timeline-step /g) ?? []).length, 8);
     for (const id of ["journey", "about", "approach"]) assert.ok(about.includes(`id="${id}"`));
     assert.doesNotMatch(about, /class="(?:learning-system|app-map)"/);
-    assert.equal((applications.match(/data-app-code=/g) ?? []).length, data.applications.length);
+    assert.equal((applications.match(/data-app-code=/g) ?? []).length, systemFocusApplications(data.applications).length);
     assert.doesNotMatch(applications, /class="(?:journey-shell|learning-system)"/);
     for (const html of [home, about, applications]) {
       assert.ok(html.includes(`href="/${root}applications/"`));
