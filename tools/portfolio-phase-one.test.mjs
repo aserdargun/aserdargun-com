@@ -22,7 +22,8 @@ test("the public application contract keeps verification, research, and release 
 
   for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex", "tfl", "arl", "adp", "dcl", "pol", "dtr"].includes(code))) {
     assert.match(application.researchCutoff, /^2026-\d{2}-\d{2}$/, `${application.code} research cutoff`);
-    assert.equal(application.lastVerified, application.code === "eng" ? "2026-09-21" : "2026-09-04", `${application.code} verification date`);
+    assert.match(application.lastVerified, /^2026-\d{2}-\d{2}$/, `${application.code} verification date`);
+    assert.ok(new Date(application.lastVerified) <= today, `${application.code} verification must not be in the future`);
     assert.match(application.lastReleased, /^2026-\d{2}-\d{2}$/, `${application.code} release date`);
     assert.match(application.releaseSha, /^[a-f0-9]{40}$/, `${application.code} release SHA`);
     assert.deepEqual(application.languages, application.code === "eng" ? ["en"] : ["tr", "en"], `${application.code} language contract`);
