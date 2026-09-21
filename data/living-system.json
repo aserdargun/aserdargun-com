@@ -696,35 +696,65 @@
     {
       "code": "eng",
       "parentApp": null,
-      "diagramLabel": {"en": "Humanoid engineering", "tr": "İnsansı robot mühendisliği"},
+      "diagramLabel": {
+        "en": "Humanoid engineering",
+        "tr": "İnsansı robot mühendisliği"
+      },
       "kind": "horizon",
       "systemRole": "horizon",
       "visibility": "public",
       "status": "active",
-      "statusLabel": { "en": "Horizon · English manifesto", "tr": "Ufuk · İngilizce manifesto" },
-      "languages": ["en"],
-      "title": { "en": "Open Humanoid Engineering", "tr": "Open Humanoid Engineering" },
+      "statusLabel": {
+        "en": "Horizon · English manifesto",
+        "tr": "Ufuk · İngilizce manifesto"
+      },
+      "languages": [
+        "en"
+      ],
+      "title": {
+        "en": "Open Humanoid Engineering",
+        "tr": "Open Humanoid Engineering"
+      },
       "summary": {
-        "en": "An English manifesto for AI-native humanoid engineering education. The four-year spine, AI lab pipeline, and dated 2026 frontier signals define its primary sources of truth; HEX provides a companion exploration.",
-        "tr": "Yapay zekâ temelli insansı robot mühendisliği eğitimi için İngilizce manifesto. Dört yıllık müfredat omurgası, AI laboratuvar akışı ve tarihli 2026 sınır araştırması sinyalleri temel doğruluk kaynaklarıdır; HEX keşif eşlikçisidir."
+        "en": "The learning system’s humanoid engineering horizon: an English manifesto following ITL, with HEX as its exploration companion. The proposed four-year spine, AI lab pipeline, and dated 2026 frontier signals are primary sources of truth. Seven specializations lead to portfolios; no degree, running AI laboratory, or completed physical robot is claimed.",
+        "tr": "Öğrenme sisteminin insansı robot mühendisliği ufku: ITL’den ilerleyen, HEX’in keşifle eşlik ettiği İngilizce manifesto. Önerilen dört yıllık omurga, AI laboratuvar akışı ve tarihli 2026 araştırma sinyalleri temel doğruluk kaynaklarıdır. Yedi uzmanlık portföye yönelir; diploma, çalışan AI laboratuvarı veya tamamlanmış fiziksel robot iddiası yoktur."
       },
       "repository": "https://github.com/aserdargun/eng-aserdargun-com",
       "address": "https://eng.aserdargun.com/",
-      "updatedAt": "2026-09-10",
-      "researchCutoff": "2026-09-10",
-      "lastVerified": "2026-09-10",
-      "lastReleased": "2026-09-10",
-      "releaseSha": "0aabc20b55677e74df8d35f50beb42de75a65810",
+      "updatedAt": "2026-09-21",
+      "researchCutoff": "2026-09-21",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "9592d5abe3cd68f34ad9c8b089ecd2cd6579127f",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
-      "upstreamApps": ["itl"],
-      "downstreamApps": ["hex"],
-      "tracks": ["humanoids", "education", "physical-ai"],
-      "entityIds": ["entity:humanoid-robotics"],
+      "upstreamApps": [
+        "itl"
+      ],
+      "downstreamApps": [
+        "hex"
+      ],
+      "tracks": [
+        "humanoids",
+        "education",
+        "physical-ai",
+        "project-based-learning",
+        "evidence"
+      ],
+      "entityIds": [
+        "entity:humanoid-robotics"
+      ],
       "portfolioLayer": "physical-ai",
       "focusState": "horizon",
-      "relatedMemoryIds": ["world-models-to-digital-twins", "human-control-authority-ladder"]
+      "relatedMemoryIds": [
+        "world-models-to-digital-twins",
+        "human-control-authority-ladder"
+      ],
+      "guidingQuestion": {
+        "en": "How can an AI-native team turn a digital humanoid design into evidence for human review?",
+        "tr": "Yapay zekâyla çalışan bir ekip, dijital insansı robot tasarımını insan incelemesine sunulacak kanıta nasıl dönüştürebilir?"
+      }
     },
     {
       "code": "gex",

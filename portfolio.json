@@ -799,8 +799,8 @@
       },
       "shortName": "ENG",
       "description": {
-        "en": "An English manifesto for AI-native humanoid engineering education. The four-year spine, AI lab pipeline, and dated 2026 frontier signals define its primary sources of truth; HEX provides a companion exploration.",
-        "tr": "Yapay zekâ temelli insansı robot mühendisliği eğitimi için İngilizce manifesto. Dört yıllık müfredat omurgası, AI laboratuvar akışı ve tarihli 2026 sınır araştırması sinyalleri temel doğruluk kaynaklarıdır; HEX keşif eşlikçisidir."
+        "en": "The learning system’s humanoid engineering horizon: an English manifesto following ITL, with HEX as its exploration companion. The proposed four-year spine, AI lab pipeline, and dated 2026 frontier signals are primary sources of truth. Seven specializations lead to portfolios; no degree, running AI laboratory, or completed physical robot is claimed.",
+        "tr": "Öğrenme sisteminin insansı robot mühendisliği ufku: ITL’den ilerleyen, HEX’in keşifle eşlik ettiği İngilizce manifesto. Önerilen dört yıllık omurga, AI laboratuvar akışı ve tarihli 2026 araştırma sinyalleri temel doğruluk kaynaklarıdır. Yedi uzmanlık portföye yönelir; diploma, çalışan AI laboratuvarı veya tamamlanmış fiziksel robot iddiası yoktur."
       },
       "type": "horizon",
       "status": "active",
@@ -813,10 +813,10 @@
       ],
       "productionUrl": "https://eng.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/eng-aserdargun-com",
-      "researchCutoff": "2026-09-10",
-      "lastVerified": "2026-09-10",
-      "lastReleased": "2026-09-10",
-      "releaseSha": "0aabc20b55677e74df8d35f50beb42de75a65810",
+      "researchCutoff": "2026-09-21",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "9592d5abe3cd68f34ad9c8b089ecd2cd6579127f",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -829,7 +829,9 @@
       "tracks": [
         "humanoids",
         "education",
-        "physical-ai"
+        "physical-ai",
+        "project-based-learning",
+        "evidence"
       ],
       "entityIds": [
         "entity:humanoid-robotics"
