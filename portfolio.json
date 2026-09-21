@@ -111,8 +111,8 @@
       },
       "shortName": "HNS",
       "description": {
-        "en": "A bilingual, source-backed observatory for comparing the harnesses, runtimes, orchestration, execution, verification, and observability layers that turn model capability into reliable agent systems.",
-        "tr": "Model yeteneğini güvenilir ajan sistemlerine dönüştüren harness, çalıştırma, orkestrasyon, yürütme, doğrulama ve gözlemlenebilirlik katmanlarını karşılaştıran iki dilli, kaynaklı gözlemevi."
+        "en": "A bilingual, source-backed observatory comparing seven agent-system layers: execution, tools, context, lifecycle, observability, verification, and governance. Evidence and editorial interpretation remain separate; no universal ranking.",
+        "tr": "Çalıştırma, araçlar, bağlam, yaşam döngüsü, gözlemlenebilirlik, doğrulama ve yönetişimden oluşan yedi ajan sistemi katmanını karşılaştıran iki dilli, kaynaklı gözlemevi. Kanıt ve editoryal yorum ayrıdır; evrensel sıralama üretmez."
       },
       "type": "observatory",
       "status": "live",
@@ -126,12 +126,12 @@
       ],
       "productionUrl": "https://hns.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/hns-aserdargun-com",
-      "researchCutoff": "2026-09-02",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-04",
-      "releaseSha": "c8dc99e23ce7931583b8de47424a7ee525566db7",
-      "sourceCount": null,
-      "claimCount": null,
+      "researchCutoff": "2026-09-21",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "a1f1e50b7d4474205c0a9904424236309aa32eef",
+      "sourceCount": 46,
+      "claimCount": 79,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "llm"
