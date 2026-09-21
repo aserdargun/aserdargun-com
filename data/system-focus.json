@@ -25,6 +25,10 @@
         "en": "CUL — Computer Use Laboratory",
         "tr": "CUL — Bilgisayar Kullanımı Laboratuvarı"
       },
+      "subtitle": {
+        "en": "Synthetic simulation",
+        "tr": "Sentetik simülasyon"
+      },
       "diagramLabel": {
         "en": "Computer use",
         "tr": "Bilgisayar kullanımı"
