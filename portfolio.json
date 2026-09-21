@@ -458,8 +458,7 @@
         "tr": "Yayında"
       },
       "languages": [
-        "tr",
-        "en"
+        "tr"
       ],
       "productionUrl": "https://cld.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/cld-aserdargun-com",
