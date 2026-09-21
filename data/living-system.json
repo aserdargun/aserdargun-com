@@ -282,32 +282,56 @@
     {
       "code": "usl",
       "parentApp": null,
-      "diagramLabel": {"en": "Model training", "tr": "Model eğitimi"},
+      "diagramLabel": {
+        "en": "Model adaptation",
+        "tr": "Model uyarlama"
+      },
       "kind": "atlas",
       "systemRole": "core-learning",
       "visibility": "public",
       "status": "live",
-      "statusLabel": { "en": "Live", "tr": "Yayında" },
-      "languages": ["tr", "en"],
-      "title": { "en": "Unsloth Studio Learning Atlas", "tr": "Unsloth Studio Learning Atlas" },
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "Unsloth Studio Learning Atlas",
+        "tr": "Unsloth Studio Learning Atlas"
+      },
       "summary": {
-        "en": "A bilingual, evidence-aware learning atlas for Unsloth Studio, LoRA, QLoRA, dataset engineering, evaluation, and local model deployment.",
-        "tr": "Unsloth Studio, LoRA, QLoRA, veri seti mühendisliği, değerlendirme ve yerel model dağıtımı için iki dilli, kanıt duyarlı öğrenme atlası."
+        "en": "A bilingual learning atlas with eight lessons, a 12-week roadmap, teaching labs and historical experiment evidence for LoRA/QLoRA, datasets, evaluation and local deployment. No live GPU or training; ADP extends adaptation practice with synthetic experiments.",
+        "tr": "LoRA/QLoRA, veri setleri, değerlendirme ve yerel dağıtım için sekiz ders, 12 haftalık yol, öğretici laboratuvarlar ve geçmiş deney kanıtları sunan iki dilli atlas. Canlı GPU veya eğitim yoktur; ADP, uyarlama pratiğini sentetik deneylerle genişletir."
       },
       "repository": "https://github.com/aserdargun/usl-aserdargun-com",
       "address": "https://usl.aserdargun.com/",
-      "updatedAt": "2026-09-04",
+      "updatedAt": "2026-09-21",
       "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-09-04",
-      "lastReleased": "2026-09-04",
-      "releaseSha": "04bdc5e0658f58a4316b0be4518e8589051364a5",
+      "lastVerified": "2026-09-21",
+      "lastReleased": "2026-09-21",
+      "releaseSha": "f9c11a1bb4d4db612f592cb2b134e319a984091b",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
-      "upstreamApps": ["aia"],
-      "downstreamApps": ["llm", "adp"],
-      "tracks": ["training", "lora", "qlora", "datasets"],
-      "entityIds": ["entity:unsloth"],
+      "upstreamApps": [
+        "aia"
+      ],
+      "downstreamApps": [
+        "llm",
+        "adp"
+      ],
+      "tracks": [
+        "training",
+        "lora",
+        "qlora",
+        "datasets"
+      ],
+      "entityIds": [
+        "entity:unsloth"
+      ],
       "portfolioLayer": "foundation",
       "focusState": "foundation",
       "relatedMemoryIds": []
