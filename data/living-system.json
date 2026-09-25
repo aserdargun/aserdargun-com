@@ -1795,24 +1795,24 @@
     }
   ],
   "now": {
-    "updatedAt": "2026-09-06",
-    "week": "2026-W36",
+    "updatedAt": "2026-09-21",
+    "week": "2026-W39",
     "items": [
       {
         "id": "week",
         "timeframe": "week",
         "title": {
-          "en": "Closing the learning loop",
-          "tr": "Öğrenme döngüsünü kapatmak"
+          "en": "Closing the portfolio evidence loop",
+          "tr": "Portföy kanıt döngüsünü kapatmak"
         },
         "summary": {
-          "en": "I am connecting the portfolio applications into one learning system, from foundations and agent engineering to physical AI. SWI is live as the collective-intelligence research platform; its ANT and BEE laboratories make pheromone trails, dance communication, and collective foraging observable through reproducible experiments. This week’s focus is connecting the research to experiments with clear relationships and dated evidence.",
-          "tr": "Temellerden ajan mühendisliğine ve fiziksel yapay zekâya uzanan uygulamaları tek bir öğrenme sisteminde birleştiriyorum. Kolektif zekâ araştırma platformu SWI yayında; onun altındaki ANT ve BEE laboratuvarları feromon izlerini, dansla iletişimi ve ortak besin aramayı tekrarlanabilir deneylerle gözlemlenebilir kılıyor. Bu haftanın odağı, araştırmayı açık ilişkiler ve tarihli kanıtlarla deneylere bağlamak."
+          "en": "On 21 September I refreshed all thirty portfolio applications in a single pass — atlas audits for AIA evidence and LLM vLLM upstream, bilingual parity for GPU, USL, LCL and POL, research-source refreshes for HNS, CTX, SEC and EVL, and clarified collective-intelligence scope across SWI, ANT and BEE. This week I am turning that release wave into the public operating map: dated evidence on every application, accessible topology on the homepage, and freshness badges that tell visitors when a page needs a refresh.",
+          "tr": "21 Eylül’de otuz alt uygulamanın hepsini tek geçişte yeniledim — AIA kanıt ve LLM vLLM upstream atlas denetimleri, GPU, USL, LCL ve POL için dil eşliği, HNS, CTX, SEC ve EVL için kaynak tazeleme ve SWI, ANT, BEE genelinde kolektif zekâ kapsamının netleştirilmesi. Bu hafta o yayın dalgasını kamusal işletim haritasına dönüştürüyorum: her uygulamada tarihli kanıt, ana sayfada erişilebilir topoloji ve bir sayfanın ne zaman yenilenmesi gerektiğini ziyaretçiye söyleyen tazelik rozeti."
         },
         "tags": [
           {
-            "en": "System topology",
-            "tr": "Sistem topolojisi"
+            "en": "Portfolio refresh",
+            "tr": "Portföy tazeleme"
           },
           {
             "en": "Bilingual parity",
@@ -1823,8 +1823,8 @@
             "tr": "Kanıt döngüsü"
           },
           {
-            "en": "Deployment paths",
-            "tr": "Dağıtım yolları"
+            "en": "Freshness signals",
+            "tr": "Tazelik sinyalleri"
           }
         ]
       },
