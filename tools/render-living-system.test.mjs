@@ -23,6 +23,13 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const rendererPath = path.join(rootDir, "tools", "render-living-system.mjs");
 const today = new Date("2026-09-21T12:00:00Z");
 
+const htmlEscape = (value) => value
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&#39;");
+
 async function readFixtureData() {
   const data = JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
   const phaseOneFields = [
@@ -38,6 +45,10 @@ async function readFixtureData() {
     if (application.code === "eng") application.status = "live";
   }
   data.publicMemory = [];
+  // Journey evidence arrived after this fixture's phase-one projection and requires
+  // #journey-stage-NN anchors that the hand-built synthetic documents do not carry.
+  // Tests that exercise it assign their own records after this call.
+  data.journeyEvidence = [];
   return data;
 }
 
@@ -579,6 +590,40 @@ test("attaches supplied journey evidence to an existing stage without deriving m
   const minimalHtml = renderDocument({ html: homeDocumentWithJourneyStage(), page: "home", locale: "en", data: minimal, today });
   assert.match(minimalHtml, /Verified decision\./);
   assert.doesNotMatch(minimalHtml, /journey-evidence-card__(?:period|evidence|applications)/);
+});
+
+test("the committed canonical journey evidence renders against the real About documents", async () => {
+  const data = await readFile(path.join(rootDir, "data", "living-system.json"), "utf8")
+    .then((contents) => JSON.parse(contents));
+  assert.ok(data.journeyEvidence.length > 0, "canonical journey evidence must not be empty");
+
+  for (const [locale, relativePath] of [["en", "about/index.html"], ["tr", "tr/about/index.html"]]) {
+    const documentHtml = await readFile(path.join(rootDir, relativePath), "utf8");
+    const rendered = renderJourneyEvidence({ locale, data, documentHtml });
+
+    assert.equal(
+      (rendered.match(/class="journey-evidence-card"/g) || []).length,
+      data.journeyEvidence.length,
+      `${locale} must render one card per canonical journey record`,
+    );
+
+    for (const evidence of data.journeyEvidence) {
+      const targetId = `journey-stage-${evidence.stage}`;
+      assert.equal(
+        (documentHtml.match(new RegExp(`id="${targetId}"`, "g")) || []).length,
+        1,
+        `${relativePath} must expose exactly one ${targetId} anchor`,
+      );
+      assert.ok(
+        rendered.includes(`href="#${targetId}"`),
+        `${locale} card for stage ${evidence.stage} must link to ${targetId}`,
+      );
+      assert.ok(
+        rendered.includes(htmlEscape(evidence.decision[locale])),
+        `${locale} card for stage ${evidence.stage} must carry its canonical decision`,
+      );
+    }
+  }
 });
 
 test("attaches approved journey evidence through the actual bilingual About documents", async () => {

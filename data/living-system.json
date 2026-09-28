@@ -2513,5 +2513,86 @@
       "evidenceUrls": []
     }
   ],
-  "journeyEvidence": []
+  "journeyEvidence": [
+    {
+      "stage": "01",
+      "period": null,
+      "decision": {
+        "en": "Matter and mechanics",
+        "tr": "Madde ve mekanik"
+      },
+      "evidenceUrls": [],
+      "relatedApplicationCodes": []
+    },
+    {
+      "stage": "02",
+      "period": null,
+      "decision": {
+        "en": "Systems and flow",
+        "tr": "Sistemler ve akış"
+      },
+      "evidenceUrls": [],
+      "relatedApplicationCodes": []
+    },
+    {
+      "stage": "03",
+      "period": null,
+      "decision": {
+        "en": "From materials to evidence",
+        "tr": "Malzemeden kanıta"
+      },
+      "evidenceUrls": [],
+      "relatedApplicationCodes": []
+    },
+    {
+      "stage": "04",
+      "period": null,
+      "decision": {
+        "en": "Making production measurable",
+        "tr": "Üretimi ölçülebilir kılmak"
+      },
+      "evidenceUrls": [],
+      "relatedApplicationCodes": []
+    },
+    {
+      "stage": "05",
+      "period": null,
+      "decision": {
+        "en": "From operations to data",
+        "tr": "Operasyondan veriye"
+      },
+      "evidenceUrls": [],
+      "relatedApplicationCodes": []
+    },
+    {
+      "stage": "06",
+      "period": null,
+      "decision": {
+        "en": "From data to models",
+        "tr": "Veriden modellere"
+      },
+      "evidenceUrls": [],
+      "relatedApplicationCodes": []
+    },
+    {
+      "stage": "07",
+      "period": null,
+      "decision": {
+        "en": "From models to products",
+        "tr": "Modellerden ürünlere"
+      },
+      "evidenceUrls": [],
+      "relatedApplicationCodes": []
+    },
+    {
+      "stage": "08",
+      "period": null,
+      "decision": {
+        "en": "Turning intelligence into working systems",
+        "tr": "Zekâyı çalışan sistemlere dönüştürmek"
+      },
+      "evidenceUrls": [],
+      "relatedApplicationCodes": []
+    }
+  ]
 }
