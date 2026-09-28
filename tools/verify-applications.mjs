@@ -85,9 +85,15 @@ function pageIdentity({ application, html }) {
 async function latestSuccessfulDeployment(slug) {
   const { stdout } = await execFileAsync("gh", [
     "api",
-    `repos/${slug}/actions/runs?branch=main&status=success&per_page=10`,
+    `repos/${slug}/actions/runs?branch=main&status=success&per_page=30`,
     "--jq",
-    "[.workflow_runs[] | {head_sha, updated_at, name}] | sort_by(.updated_at) | last",
+    // Only a deploy workflow publishes. A validation or quality workflow on the
+    // same branch is not a release, so it must not be reported as one. Fall back
+    // to the newest successful run if a repository names none of its workflows
+    // with "deploy", so an unusual naming convention cannot orphan it.
+    "[.workflow_runs[] | select(.name | test(\"deploy\"; \"i\"))] as $deploys "
+    + "| (if ($deploys | length) > 0 then $deploys else .workflow_runs end) "
+    + "| [.[] | {head_sha, updated_at, name}] | sort_by(.updated_at) | last",
   ], { timeout: 30000 });
   const run = JSON.parse(stdout);
   return run && run.head_sha ? run : null;
