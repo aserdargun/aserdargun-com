@@ -21,7 +21,7 @@ import {
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rendererPath = path.join(rootDir, "tools", "render-living-system.mjs");
-const today = new Date("2026-09-21T12:00:00Z");
+const today = new Date("2026-09-28T12:00:00Z");
 
 const htmlEscape = (value) => value
   .replaceAll("&", "&amp;")
@@ -799,13 +799,13 @@ test("application enrichment and journey evidence have responsive style contract
 
 test("renders absolute application freshness from the update date rather than old verification evidence", async () => {
   const data = await readFixtureData();
-  data.applications[0].updatedAt = "2026-09-18";
+  data.applications[0].updatedAt = "2026-09-25";
   data.applications[0].lastVerified = "2026-09-01";
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
   assert.match(
     rendered,
-    /<span class="freshness freshness--current" data-freshness-date="2026-09-18" data-freshness-state="current">[\s\S]*?<time datetime="2026-09-18">2026-09-18<\/time>[\s\S]*?<\/span>/,
+    /<span class="freshness freshness--current" data-freshness-date="2026-09-25" data-freshness-state="current">[\s\S]*?<time datetime="2026-09-25">2026-09-25<\/time>[\s\S]*?<\/span>/,
   );
   assert.match(rendered, /<span class="freshness-label">Current<\/span>/);
   assert.equal(rendered.includes("today"), false);

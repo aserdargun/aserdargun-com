@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-09-21T12:00:00Z");
+const today = new Date("2026-09-28T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -75,8 +75,8 @@ test("the portfolio registry is a deterministic public projection of application
       // Verification and deployment renewed by `npm run verify:applications`;
       // deployment confirmed by aserdargun/ctx-aserdargun-com/actions/runs/35616563458.
       lastVerified: "2026-09-21",
-      lastReleased: "2026-09-21",
-      releaseSha: "78a305dab2033e3f7125a9a5c27c86e8592af895",
+      lastReleased: "2026-09-28",
+      releaseSha: "bd942206c7ff8a7b36d3d9930f7e36214cb9566f",
       sourceCount: null,
       claimCount: null,
       evidencePolicy: "primary-source-backed",
@@ -98,7 +98,7 @@ test("the application map exposes distinct research, verification, and release e
   assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-08-24">2026-08-24<\/time><\/dd>/);
   assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-09-21">2026-09-21<\/time><\/dd>/);
   // AIA deployment confirmed by aserdargun/aia-aserdargun-com/actions/runs/35617907453.
-  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-21">2026-09-21<\/time><code>841834b6<\/code><\/dd>/);
+  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-28">2026-09-28<\/time><code>bc02f10c<\/code><\/dd>/);
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
 });
@@ -214,10 +214,10 @@ test("companion learning apps connect to their research parents across both loca
     // hex/actions/runs/35618035223, pdt/actions/runs/35618120812. A build timestamp
     // alone still does not establish a release date.
     const confirmedDeployments = {
-      gex: ["2026-09-21", "64bfc04ddc9580898f21a0d322c16a0eda2785b2"],
-      wml: ["2026-09-21", "d2b8751f4bba40a814a15057cfe5b18f681b8c0c"],
-      hex: ["2026-09-21", "94fb766cacfaa0f4b21ae5212569f3ad1df967ae"],
-      pdt: ["2026-09-21", "9889ab379930b114f97bc449a6219070fd2175c9"],
+      gex: ["2026-09-28", "ae6f123fbad8e71a26a15dbf595e52f46cc6eec5"],
+      wml: ["2026-09-28", "2b4985731b3727791a1a40127117ebc7323efe56"],
+      hex: ["2026-09-28", "e23eeef2533f065e1c0ab23cfa5580cf451b0151"],
+      pdt: ["2026-09-28", "004bfeeb8a368827951f2b2ae22d5952b1654b97"],
     };
     const [releasedOn, releaseSha] = confirmedDeployments[code];
     assert.equal(app.lastReleased, releasedOn, "only a confirmed deployment run establishes a release date");
@@ -277,8 +277,8 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.deepEqual(app.languages, ["tr", "en"]);
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
   assert.equal(app.lastVerified, "2026-09-21");
-  assert.equal(app.lastReleased, "2026-09-21");
-  assert.equal(app.releaseSha, "0bbe272262106dcc1945955c428600bec684d191");
+  assert.equal(app.lastReleased, "2026-09-28");
+  assert.equal(app.releaseSha, "b49ceab0df1fbfc6ddafbb06eaee0277ba1e6150");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
   const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
   assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);
