@@ -215,7 +215,7 @@ test("companion learning apps connect to their research parents across both loca
     // alone still does not establish a release date.
     const confirmedDeployments = {
       gex: ["2026-09-29", "fd9763cdc9dde3ac8fe5b7d86d24fd9e74d94bd1"],
-      wml: ["2026-09-29", "94b724f2154c1ed9788b61b47e080c2e244b0701"],
+      wml: ["2026-09-29", "82787b487a2efbc9bd202bbc4ddc3cf22659d401"],
       hex: ["2026-09-29", "2a614df48ef74889fa952aa0c829dffd04a06aec"],
       pdt: ["2026-09-29", "c4070b097f861fbaeb6963f9fa76df299d754bb1"],
     };
