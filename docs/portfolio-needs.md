@@ -3,7 +3,7 @@
 **Son denetim:** 29 Eylül 2026
 **Kapsam:** 30/30 uygulama
 **Yöntem:** İki geçişli denetim — Geçiş 1 hızlı tarama (30/30), Geçiş 2 tam kapı koşusu (11 uygulama)
-**Durum:** Salt-okunur denetim. Hiçbir uygulama reposunda kod, veri, yapılandırma veya CI değişikliği yapılmadı.
+**Durum:** Denetim **salt-okunur yapıldı**; 30 uygulamanın tamamı değişiklik yapılmadan tarandı. Ardından denetimde çıkan sorunlar giderildi ve 11 uygulama ile bu kayıt defteri değiştirildi. Değişikliklerin tamamı aşağıdaki "Düzeltme kaydı" bölümünde listelidir.
 
 > Bu dosya `aserdargun-com/docs/` altındadır ve `.site-dist/` çıktısına **dahil değildir** — yayına çıkmaz.
 
@@ -87,7 +87,7 @@ Tüm 30 uygulama **canlı ve 200 dönüyor**. Sorun yoklukta değil, tutarlılı
 | **Varsayılan dil, 9 uygulama** | ✅ **ÇÖZÜLDÜ** | `cld, cul, dtr, llm, lcl, mem, bee, aos, dpl` — canlıda 9/9 `<html lang="en">` ile doğrulandı; `gpu` tasarımı gereği zaten doğruymuş |
 | **CSP, 12 uygulama** | ✅ **ÇÖZÜLDÜ** | `aia, mem, gpu, cld, eng, gex, arl, wml, pdt, hex, dpl, pol` — her biri kendi tarayıcı testiyle doğrulandı (gpu 242, dpl 22, gex/arl/pdt/wml/cld e2e). Canlıda 12/12 `content-security-policy` + `x-frame-options: DENY` + `nosniff` doğrulandı |
 | **ESLint, 7 uygulama** | ✅ **ÇÖZÜLDÜ** | `hex, cul, mem, dtr, pdt, aos, eng` — kuruldu, kapının ilk adımı yapıldı, 19 ihlal düzeltildi, 7/7 CI yeşil ve yayınlandı |
-| **lint toplamı** | ✅ **11/11** | portföyde lint kapısı olmayan uygulama kalmadı |
+| **lint toplamı** | ✅ **30/30** | `bee`, `pol`, `tfl`, `adp`, `dcl` de son anda eklendi. `tfl`/`adp`/`dcl`'in `lint` script'i aslında `tsc --noEmit` idi — tip kontrolü lint yerine geçiyordu. Artık 26 uygulama ESLint, 4 uygulama oxlint kullanıyor |
 | **oxlint, 4 uygulama (TS 7)** | ✅ **ÇÖZÜLDÜ** | `dpl, wfm, arl, wml` — `typescript-eslint` TS 7 desteklemiyor; `oxlint` kullanıldı, 14 bulgu düzeltildi. Bkz. S3 |
 | **aos P1 "8 gündür deploy edilmedi"** | ❌ **YANLIŞ POZİTİF — geri alındı** | `HEAD = origin/main = son deploy = b286ceb`. Yayınlanmamış commit yok; sadece 8 gündür değişiklik yok |
 | **gpu "CI'da test adımı görünmüyor"** | ✅ **DOĞRULANDI, kök neden bulundu** | CI'da `npm test` **var** (`validate.yml:43-44`). Asıl sorun: `playwright.config.ts` içinde `webServer` bloğu **yok**, `test:e2e` elle başlatılan dev sunucusunu (5173) bekliyor. Bu yüzden tarayıcı testi hiçbir otomatik akışta çalışmıyor |
@@ -214,12 +214,18 @@ Bu tek satır `cld`'de 113 düşen birim iddiasını kurtardı. `cul` ve `dtr` y
 - `aos` kök adresi Türkçe açılıyor, `<title>` "Genel bakış — AOS".
 - `cld` kök adresi 929 bayt — ince bir kabuk, karşılaştırma arayüzü JavaScript ile yükleniyor.
 
-### S8 — Yerel port yönetimi eksik (P3)
-`bee`nin Playwright config'i `reuseExistingServer: false` kullanıyor ve 4017 portunu sabit. Yerelde unutulmuş bir `node scripts/serve.mjs` süreci (PID 2718) portu tuttuğunda kapı şu mesajla düşüyor:
+### S8 — Yerel port yönetimi eksik (P3) — ölçüldü, kalıcı çözüm yok
+`bee`nin Playwright config'i `reuseExistingServer: false` kullanıyor ve 4017 portunu sabit. Port doluysa kapı şu mesajla düşüyor:
 
 ```
 Error: http://127.0.0.1:4017 is already used, make sure that nothing is running on the port/url
 ```
+
+**29 Eylül'de ölçüldü:** engelleyen süreç, unutulmuş bir kullanıcı süreci değil, **test koşusunun kendisinin bıraktığı bir yetimdi** (39 saniye yaşındaydı). Playwright normalde temizliyor; yarım kalan ya da zorla kesilen koşular yetim bırakıyor ve sonraki koşuyu yanlış sebeple düşürüyor. CI temiz runner kullandığı için orada görünmüyor.
+
+**Daha sinsi bir varyant:** `cul` ve `dtr` `reuseExistingServer: true` kullanıyor ve **başka bir checkout'tan gelen bayat sunucu** testlere eski kodu servis etti. `bee`deki gibi hata fırlatmak yerine testler **yanlış ürünü doğrulayarak yeşil** göründü.
+
+**Kapanmayan kısım:** üç uygulamada da `webServer` bloğu, çalışan sunucunun bu checkout'a ait olduğunu doğrulamıyor. Bekleyen yanıtta bu checkout'un benzersiz bir işareti aransa, bu sınıf hata bir daha oluşmaz — ama henüz eklenmedi.
 
 Bu bir ürün hatası değil (CI temiz runner kullanıyor) ama geliştirici deneyimini bozuyor ve hata mesajı yanıltıcı. `aserdargun-com/docs/superpowers/agent-team/capability-matrix.md` ve önceki denetim notunda da port çakışması riski işaretlenmişti.
 
@@ -582,6 +588,16 @@ Ek doğrulama: cld'de `npm run lint` **PASS** (exit 0) ve `npm run test` **PASS*
 **Sıfır değişiklik kanıtı.** Denetim sonunda 30/30 repo `git status --porcelain` ile **temiz** (build çıktıları `.gitignore` kapsamında). `aserdargun-com` yalnızca denetim öncesinden mevcut olan `node_modules/` ve `pnpm-lock.yaml` untracked girdilerini taşıyor; bu dosyaya dokunulmadı.
 
 ---
+
+## Kalan iş ve gerekçeleri
+
+| İş | Durum | Gerekçe |
+|---|---|---|
+| **P1 — `researchCutoff` doğrulanabilirliği** | ⏸ **beklemede, karar gerekiyor** | 14 araştırma uygulamasının 11'inde bu alan yalnızca kayıt defterinde bir iddia; depoda yeniden türetilebilir kayıt yok. İleriletmek araştırma işidir. `cld` bu yolu izleyerek 51 kaydı doğruladı — aynı yol `aia` için 445 kayıt demek. |
+| **P1 — `cld` veri tazelik penceresi** | ⏸ **beklemede, politika kararı gerekiyor** | 30 günlük pencere korundu ve kayıtlar doğrulandı, ancak pencere 30 Eylül'de yeniden açıldı. Aynı kapı önümüzdeki dört haftada yeniden kapanacak. `llm` 180 gün, `dcl` 30/90 gün ile çalışıyor; tek bir politika belirlenmeli. |
+| **P1 — aia / gpu araştırma kesim tarihi** | ⏸ **beklemede** | `aia` 36 gün (445 doğrulanabilir kayıt), `gpu` 31 gün (depoda hiç doğrulama tarihi alanı yok). |
+| **P3 — yerel sunucu doğrulaması** | ⏸ **beklemede** | `bee`, `cul`, `dtr` web sunucusu bu checkout'a ait mi diye bakmıyor. Bkz. S8. |
+| **P3 — varsayılan dil kalıbının kalanı** | ✅ karar verildi, uygulandı | `gpu` dışındaki 9 uygulama İngilizce açılıyor; `gpu` tarayıcı diline göre çözüyor ve bu bilinçli. |
 
 ## Çözülmemiş kararlar
 
