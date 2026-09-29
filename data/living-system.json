@@ -222,7 +222,7 @@
       "updatedAt": "2026-09-21",
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-28",
-      "releaseSha": "2460f8ab9f1f3c3bc0c919dd5f698d8c5070a4cb",
+      "releaseSha": "ff98f93b9f1f3c3bc0c919dd5f698d8c5070a4cb",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -933,7 +933,7 @@
       "researchCutoff": "2026-09-04",
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-28",
-      "releaseSha": "891fbf5f5b8be2a4edb200e48d736124996eaed8",
+      "releaseSha": "8e812aaf5b8be2a4edb200e48d736124996eaed8",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -1419,7 +1419,7 @@
       "updatedAt": "2026-09-21",
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-28",
-      "releaseSha": "d4ff5806101471f1270dfaa3ae0d2e40c527ee47",
+      "releaseSha": "cdd33bf6101471f1270dfaa3ae0d2e40c527ee47",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1553,7 +1553,7 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "94b724f2154c1ed9788b61b47e080c2e244b0701",
+      "releaseSha": "82787b487a2efbc9bd202bbc4ddc3cf22659d401",
       "lastReleased": "2026-09-29"
     },
     {
