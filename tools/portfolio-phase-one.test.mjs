@@ -98,7 +98,7 @@ test("the application map exposes distinct research, verification, and release e
   assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-08-24">2026-08-24<\/time><\/dd>/);
   assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-09-29">2026-09-29<\/time><\/dd>/);
   // AIA deployment confirmed by aserdargun/aia-aserdargun-com/actions/runs/35617907453.
-  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-28">2026-09-28<\/time><code>bc02f10c<\/code><\/dd>/);
+  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-28">2026-09-28<\/time><code>49696ecf<\/code><\/dd>/);
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
 });
@@ -217,7 +217,7 @@ test("companion learning apps connect to their research parents across both loca
       gex: ["2026-09-29", "fd9763cdc9dde3ac8fe5b7d86d24fd9e74d94bd1"],
       wml: ["2026-09-29", "82787b487a2efbc9bd202bbc4ddc3cf22659d401"],
       hex: ["2026-09-29", "2a614df48ef74889fa952aa0c829dffd04a06aec"],
-      pdt: ["2026-09-29", "c4070b097f861fbaeb6963f9fa76df299d754bb1"],
+      pdt: ["2026-09-29", "8085efbad56c8d1186c92213dfd7b41ac8264b8c"],
     };
     const [releasedOn, releaseSha] = confirmedDeployments[code];
     assert.equal(app.lastReleased, releasedOn, "only a confirmed deployment run establishes a release date");
@@ -278,7 +278,7 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
   assert.equal(app.lastVerified, "2026-09-29");
   assert.equal(app.lastReleased, "2026-09-28");
-  assert.equal(app.releaseSha, "b49ceab0df1fbfc6ddafbb06eaee0277ba1e6150");
+  assert.equal(app.releaseSha, "03e33ba7056c4cb74cb1d3cf32c20fb15450f51f");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
   const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
   assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);
