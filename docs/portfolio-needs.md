@@ -111,6 +111,7 @@ Check out canonical release registry   (aserdargun/aserdargun-com)
 2. `aos` ve `mem` gibi **tek satırlık kompakt JSON**'da çok satırlı kalıba göre düzenleme yapmak girintiyi bozuyor; `dpl` ve `wml`de oldu, ikisi de düzeltildi.
 3. `gex`in kök adresi `302` yönlendirdiği için `curl -I` **yönlendirme yanıtının** başlıklarını verir; CSP'yi `/gex/anatomy` üzerinde doğrulamak gerekiyor. Aksi halde yanlış negatif üretiyor.
 4. **`git checkout package.json` ile bir script'i geri almak, kurulumun eklediği devDependencies'i de siler.** `hex`te `typecheck`'i geri alırken ESLint bağımlılıkları manifestten düştü. Yerel `node_modules` durduğu için yerel kapı **geçti**, CI'da `sh: 1: eslint: not found` oldu. Bir `package.json`'ı `npm install -D` sonrasında hiçbir koşulda toptan geri alma; alan bazlı düzelt.
+5. **Deploy sonrası canlı doğrulama yayılma yarışına açık.** `dpl` ("Verify live release and asset hashes") ve `dtr` ("Verify live commit and asset hashes") ilk koşuda düştü, ikincisinde de `dpl`in canlı kullanıcı akış testi zaman aşımına uğradı. Her ikisinde de **deploy adımı başarılıydı ve canlı site yeni içerikti**; yeniden koşuda tüm adımlar geçti. Yani bu, ürün hatası değil; doğrulama, CDN yeni sürümü görmeden önce çalışıyor. Kapı kendi kendini kapatıyor ama yanlış sebeple.
 
 > 4. madde, bu turda iki kez karşılaşılan asıl riski özetliyor: **yerelde geçen bir şeyin CI'da geçeceğini varsaymak.** Bu portföyde kapı zincirleri çok katmanlı ve her katman farklı bir ortam koşuluna bağlı.
 
