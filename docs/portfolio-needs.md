@@ -84,13 +84,28 @@ Tüm 30 uygulama **canlı ve 200 dönüyor**. Sorun yoklukta değil, tutarlılı
 | **cld P0 — veri tazelik kapısı** | ✅ **ÇÖZÜLDÜ** | 51 kayıt resmî kaynaktan yeniden doğrulandı, `Run release checks` → `Deploy prebuilt static artifact` → success. Canlı: OG 0→7, "Son doğrulama: 2026-09-29" |
 | **X-Frame-Options, 9 uygulama** | ✅ **ÇÖZÜLDÜ** | `dpl, aos, mem, gex, tfl, arl, wml, dtr, pol` — canlıda `x-frame-options: DENY` doğrulandı |
 | **pol `staticwebapp.config.json`** | ✅ **ÇÖZÜLDÜ** | Tek istisna kapatıldı: güvenlik başlığı, önbellek ve mime tanımı |
-| **CSP, 12 uygulama** | ✅ **ÇÖZÜLDÜ** | `aia, mem, gpu, cld, eng, gex, arl, wml, pdt, hex, dpl, pol` — her biri kendi tarayıcı testiyle doğrulandı (gpu 242, dpl 22, gex/arl/pdt/wml/cld e2e) |
+| **CSP, 12 uygulama** | ✅ **ÇÖZÜLDÜ** | `aia, mem, gpu, cld, eng, gex, arl, wml, pdt, hex, dpl, pol` — her biri kendi tarayıcı testiyle doğrulandı (gpu 242, dpl 22, gex/arl/pdt/wml/cld e2e). Canlıda 12/12 `content-security-policy` + `x-frame-options: DENY` + `nosniff` doğrulandı |
 | **aos P1 "8 gündür deploy edilmedi"** | ❌ **YANLIŞ POZİTİF — geri alındı** | `HEAD = origin/main = son deploy = b286ceb`. Yayınlanmamış commit yok; sadece 8 gündür değişiklik yok |
 | **gpu "CI'da test adımı görünmüyor"** | ✅ **DOĞRULANDI, kök neden bulundu** | CI'da `npm test` **var** (`validate.yml:43-44`). Asıl sorun: `playwright.config.ts` içinde `webServer` bloğu **yok**, `test:e2e` elle başlatılan dev sunucusunu (5173) bekliyor. Bu yüzden tarayıcı testi hiçbir otomatik akışta çalışmıyor |
 
-**Düzeltme sırasında çıkan iki kalıp hata (tekrar edilmesin):**
+### Yeni keşfedilen kapı — yayın kayıt defteri (P1)
+
+Denetimin ilk turunda kaçırıldı, düzeltme sırasında ortaya çıktı. **`eng`, `hex` ve `nxt`** kendi commit'lerinin SHA'sı `aserdargun-com/data/living-system.json` içine yazılmadan **yayın yapmıyor**:
+
+```
+Check out canonical release registry   (aserdargun/aserdargun-com)
+  → Verify registered release identity
+  → Deploy prebuilt artifact
+```
+
+`eng` bu yüzden ilk deploy denemesinde düştü. `releaseSha` kayıt defterine yazılıp `gh run rerun` ile yeniden tetiklenince geçti. `hex` aynı kapıya rağmen geçti — tetiklenme koşulu bu iki uygulamada farklı işliyor, ayrı incelenmeli.
+
+`aserdargun-com/tools/portfolio-phase-one.test.mjs` gex/wml/hex/pdt için doğrulanmış deploy koşu kimliklerini sabit kodluyor ("only a confirmed deployment run establishes a release date"). Yeniden deploy edilen bir uygulamanın kaydını güncellemek, o testin tablosunu da güncellemeyi gerektiriyor.
+
+**Düzeltme sırasında çıkan üç kalıp hata (tekrar edilmesin):**
 1. `staticwebapp.config.json` içinde **`globalHeaders` bloğu zaten varsa** yeni blok eklemek yedek anahtar yaratıyor; JSON.parse son kazanır, eklenen CSP görünmez oluyor. `gex`te bu oldu. Her eklemeden sonra blok sayısını say.
 2. `aos` ve `mem` gibi **tek satırlık kompakt JSON**'da çok satırlı kalıba göre düzenleme yapmak girintiyi bozuyor; `dpl` ve `wml`de oldu, ikisi de düzeltildi.
+3. `gex`in kök adresi `302` yönlendirdiği için `curl -I` **yönlendirme yanıtının** başlıklarını verir; CSP'yi `/gex/anatomy` üzerinde doğrulamak gerekiyor. Aksi halde yanlış negatif üretiyor.
 
 ---
 
