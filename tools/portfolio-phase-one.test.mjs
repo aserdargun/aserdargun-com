@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-09-28T12:00:00Z");
+const today = new Date("2026-09-29T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -74,7 +74,7 @@ test("the portfolio registry is a deterministic public projection of application
       researchCutoff: "2026-09-04",
       // Verification and deployment renewed by `npm run verify:applications`;
       // deployment confirmed by aserdargun/ctx-aserdargun-com/actions/runs/35616563458.
-      lastVerified: "2026-09-21",
+      lastVerified: "2026-09-29",
       lastReleased: "2026-09-28",
       releaseSha: "bd942206c7ff8a7b36d3d9930f7e36214cb9566f",
       sourceCount: null,
@@ -96,7 +96,7 @@ test("the application map exposes distinct research, verification, and release e
   const turkish = renderApplicationMap({ locale: "tr", data, today });
 
   assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-08-24">2026-08-24<\/time><\/dd>/);
-  assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-09-21">2026-09-21<\/time><\/dd>/);
+  assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-09-29">2026-09-29<\/time><\/dd>/);
   // AIA deployment confirmed by aserdargun/aia-aserdargun-com/actions/runs/35617907453.
   assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-28">2026-09-28<\/time><code>bc02f10c<\/code><\/dd>/);
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
@@ -276,7 +276,7 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.equal(app.portfolioLayer, "physical-ai");
   assert.deepEqual(app.languages, ["tr", "en"]);
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
-  assert.equal(app.lastVerified, "2026-09-21");
+  assert.equal(app.lastVerified, "2026-09-29");
   assert.equal(app.lastReleased, "2026-09-28");
   assert.equal(app.releaseSha, "b49ceab0df1fbfc6ddafbb06eaee0277ba1e6150");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
