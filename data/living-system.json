@@ -811,8 +811,8 @@
       "updatedAt": "2026-09-21",
       "researchCutoff": "2026-08-14",
       "lastVerified": "2026-09-29",
-      "lastReleased": "2026-09-21",
-      "releaseSha": "c1652a902be75570025f75dc8db89a59b7b3c12e",
+      "lastReleased": "2026-09-29",
+      "releaseSha": "0ea5d98193f2cf777fc897aa6a517494431f2aca",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -1233,8 +1233,8 @@
       "updatedAt": "2026-09-21",
       "researchCutoff": "2026-09-21",
       "lastVerified": "2026-09-29",
-      "lastReleased": "2026-09-28",
-      "releaseSha": "0eb332871e1e99c32410712223bf51ba3798341a",
+      "lastReleased": "2026-09-29",
+      "releaseSha": "fe49b067b253a3e1f3bc62ece9618f6afb5407d1",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -1321,8 +1321,8 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "ae6f123fbad8e71a26a15dbf595e52f46cc6eec5",
-      "lastReleased": "2026-09-28"
+      "releaseSha": "fd9763cdc9dde3ac8fe5b7d86d24fd9e74d94bd1",
+      "lastReleased": "2026-09-29"
     },
     {
       "code": "tfl",
@@ -1553,8 +1553,8 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "2b4985731b3727791a1a40127117ebc7323efe56",
-      "lastReleased": "2026-09-28"
+      "releaseSha": "94b724f2154c1ed9788b61b47e080c2e244b0701",
+      "lastReleased": "2026-09-29"
     },
     {
       "code": "dtr",
@@ -1652,7 +1652,7 @@
       "address": "https://pdt.aserdargun.com/",
       "updatedAt": "2026-09-21",
       "lastVerified": "2026-09-29",
-      "lastReleased": "2026-09-28",
+      "lastReleased": "2026-09-29",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1671,7 +1671,7 @@
       "relatedMemoryIds": [
         "twins-and-deployment-choices"
       ],
-      "releaseSha": "004bfeeb8a368827951f2b2ae22d5952b1654b97"
+      "releaseSha": "c4070b097f861fbaeb6963f9fa76df299d754bb1"
     },
     {
       "code": "hex",
@@ -1727,8 +1727,8 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "e23eeef2533f065e1c0ab23cfa5580cf451b0151",
-      "lastReleased": "2026-09-28"
+      "releaseSha": "3a035130a0fad8b94d2a74531099df82c7dabcf4",
+      "lastReleased": "2026-09-29"
     },
     {
       "code": "dcl",

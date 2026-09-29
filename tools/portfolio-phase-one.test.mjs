@@ -210,14 +210,14 @@ test("companion learning apps connect to their research parents across both loca
     assert.equal(app.portfolioLayer, layer);
     assert.equal(app.systemRole, "lab");
     assert.equal(app.researchCutoff, undefined, "educational applications do not imply a research cutoff");
-    // Confirmed deployments: gex/actions/runs/35616514487, wml/actions/runs/35617052809,
-    // hex/actions/runs/35618035223, pdt/actions/runs/35618120812. A build timestamp
+    // Confirmed deployments: gex/actions/runs/36575160780, wml/actions/runs/36575169079,
+    // hex/actions/runs/36575177684, pdt/actions/runs/36575173520. A build timestamp
     // alone still does not establish a release date.
     const confirmedDeployments = {
-      gex: ["2026-09-28", "ae6f123fbad8e71a26a15dbf595e52f46cc6eec5"],
-      wml: ["2026-09-28", "2b4985731b3727791a1a40127117ebc7323efe56"],
-      hex: ["2026-09-28", "e23eeef2533f065e1c0ab23cfa5580cf451b0151"],
-      pdt: ["2026-09-28", "004bfeeb8a368827951f2b2ae22d5952b1654b97"],
+      gex: ["2026-09-29", "fd9763cdc9dde3ac8fe5b7d86d24fd9e74d94bd1"],
+      wml: ["2026-09-29", "94b724f2154c1ed9788b61b47e080c2e244b0701"],
+      hex: ["2026-09-29", "3a035130a0fad8b94d2a74531099df82c7dabcf4"],
+      pdt: ["2026-09-29", "c4070b097f861fbaeb6963f9fa76df299d754bb1"],
     };
     const [releasedOn, releaseSha] = confirmedDeployments[code];
     assert.equal(app.lastReleased, releasedOn, "only a confirmed deployment run establishes a release date");
