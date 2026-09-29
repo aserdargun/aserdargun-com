@@ -86,7 +86,8 @@ Tüm 30 uygulama **canlı ve 200 dönüyor**. Sorun yoklukta değil, tutarlılı
 | **pol `staticwebapp.config.json`** | ✅ **ÇÖZÜLDÜ** | Tek istisna kapatıldı: güvenlik başlığı, önbellek ve mime tanımı |
 | **CSP, 12 uygulama** | ✅ **ÇÖZÜLDÜ** | `aia, mem, gpu, cld, eng, gex, arl, wml, pdt, hex, dpl, pol` — her biri kendi tarayıcı testiyle doğrulandı (gpu 242, dpl 22, gex/arl/pdt/wml/cld e2e). Canlıda 12/12 `content-security-policy` + `x-frame-options: DENY` + `nosniff` doğrulandı |
 | **ESLint, 7 uygulama** | ✅ **ÇÖZÜLDÜ** | `hex, cul, mem, dtr, pdt, aos, eng` — kuruldu, kapının ilk adımı yapıldı, 19 ihlal düzeltildi, 7/7 CI yeşil ve yayınlandı |
-| **ESLint, 4 uygulama** | ⛔ **ENGELLİ** | `dpl, wfm, arl, wml` — TS 7.0.2, `typescript-eslint@8` TS `<6.1.0` istiyor. Bkz. S3 |
+| **lint toplamı** | ✅ **11/11** | portföyde lint kapısı olmayan uygulama kalmadı |
+| **oxlint, 4 uygulama (TS 7)** | ✅ **ÇÖZÜLDÜ** | `dpl, wfm, arl, wml` — `typescript-eslint` TS 7 desteklemiyor; `oxlint` kullanıldı, 14 bulgu düzeltildi. Bkz. S3 |
 | **aos P1 "8 gündür deploy edilmedi"** | ❌ **YANLIŞ POZİTİF — geri alındı** | `HEAD = origin/main = son deploy = b286ceb`. Yayınlanmamış commit yok; sadece 8 gündür değişiklik yok |
 | **gpu "CI'da test adımı görünmüyor"** | ✅ **DOĞRULANDI, kök neden bulundu** | CI'da `npm test` **var** (`validate.yml:43-44`). Asıl sorun: `playwright.config.ts` içinde `webServer` bloğu **yok**, `test:e2e` elle başlatılan dev sunucusunu (5173) bekliyor. Bu yüzden tarayıcı testi hiçbir otomatik akışta çalışmıyor |
 
@@ -139,14 +140,25 @@ Kalan gerçek boşluk: `aos` ve `eng` — tsconfig'i olmayan vanilla JS siteleri
 
 > Bu madde, statik taramada "script yok" ile "kontrol yok" ayrımının yapılmamasından doğdu. Aynı tuzak `lint` için de geçerliydi ama orada sonuç ters çıktı (aşağıya bakın).
 
-### S3 — `lint` kapısı 11 uygulamada yok (P2) — 7'si 29 Eylül'de kapatıldı
+### S3 — `lint` kapısı 11 uygulamada yok (P2) — ✅ **29 Eylül'de 11/11 kapatıldı (iki araç, tek politika)**
 Eksik olanlar: `dpl, cul, aos, mem, wfm, eng, arl, wml, dtr, pdt, hex`.
 
-**✅ Çözülen (7):** `hex, cul, mem, dtr, pdt, aos, eng` — ESLint kuruldu, `lint` kapının ilk adımı yapıldı, çıkan **19 ihlalin tamamı** önemsizdi (kullanılmayan import/binding, iki gereksiz regex kaçışı, boş `catch` blokları) ve düzeltildi. 7/7 CI yeşil, 7/7 yayınlandı.
+**TypeScript sürümü ikiye bölüyordu.** Yedi uygulama TS 5.9/6 ve standart ESLint + `typescript-eslint` alıyor. Dördü (`dpl, wfm, arl, wml`) **TS 7.0.2** kullanıyor ve `typescript-eslint@8.71.0` yalnızca `typescript >=4.8.4 <6.1.0` destekliyor. `--legacy-peer-deps` ile kurulabilirdi ama tip-farkındalıklı kurallar sessizce atlatılırdı — yani **görünür ama işe yaramayan bir kapı**. Bu yüzden dördü **`oxlint`** kullanıyor: TypeScript 7 için tasarlanmış, `oxlint-tsgolint` eşlikçisiyle tip-farkındalıklı çalışıyor ve gerçekten kırılan şeyleri buluyor (denendi: kasıtlı bir ihlal bırakıldığında yakaladı).
 
-**⛔ Engellenen (4):** `dpl, wfm, arl, wml` — dördü de **TypeScript 7.0.2** kullanıyor, `typescript-eslint@8.71.0` ise `typescript >=4.8.4 <6.1.0` istiyor. `--legacy-peer-deps` ile kurulabilir ama tip-farkındalıklı kurallar sessizce atlatılır; yani **görünür ama işe yaramayan bir kapı** olur. TypeScript'ı düşürmek kabul edilemez. Karar: `typescript-eslint`'in TS 7 desteğini beklemek ya da ESLint 10 + yeni plugin setine geçmek.
+**Kural seti farkında değil, politikada tutarlılık hedeflendi.** oxlint'in varsayılanı `typescript-eslint`'in `recommended`'ından daha katı. Kapatılan kurallar ve gerekçeleri:
 
-Portföyde hâlihazırda lint kullanan uygulamalar da bölünmüş: `aia` ESLint 9 + TS 5.9, `hns`/`sec` ESLint 10 + TS 6. Tek bir kalıp yok.
+| Kural | Neden kapalı |
+|---|---|
+| `no-await-in-loop` | Testlerde ve sıralı simülasyonda kasıtlı bekliyor (19 bulgu) |
+| `typescript/no-unsafe-type-assertion`, `no-unnecessary-type-assertion` | Derleyicinin daraltamadığı ama çalışma zamanında sağlam desenleri işaretliyor — `e.target.value as PolicyId` gibi. Diğer yedi uygulama da bu kuralları açmıyor |
+| `consistent-return` | React effect temizliği: temizlenecek şey yokken `return;` doğru |
+| `unicorn/no-array-reverse` | `.slice()` kopyasında `reverse()` güvenli |
+| `oxc/no-map-spread` | Değişmez (immutable) `map` kalıbı için gürültü |
+| `typescript/require-array-sort-compare` | ISO tarih dizilerinde varsayılan sıralama zaten kronolojik |
+
+**Gerçekten düzeltilen 14 bulgu:** 10 × `no-shadow` (değişken gölgesi), 1 × kullanılmayan import, 1 × gereksiz regex kaçışı, 1 × `!!` yerine açık `?? false`, 1 × bağlanmamış metot referansı.
+
+> Dört uygulamada iki araç kullanılıyor ama **uygulanan politika aynı.** Bu, tek bir araç zorlamak yerine kapının ne anlama geldiğini sabitlemeyi tercih etti.
 
 ### S4 — Ajan sözleşmesi 10 uygulamada yok (P2)
 `AGENTS.md` olmayanlar: `dpl, cul, aos, mem, pol, tfl, arl, adp, dtr, dcl`.
