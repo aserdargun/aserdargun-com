@@ -159,8 +159,30 @@ Portföyde hâlihazırda lint kullanan uygulamalar da bölünmüş: `aia` ESLint
 - `nosniff` **30/30 var** · HSTS **30/30 canlıda var**
 - `hns` ve `swi` referans kalıp (DENY + CSP + immutable cache).
 
-### S6 — Varsayılan dil politikası yok (P2)
+### S6a — `researchCutoff` bir **beyan**; 11 uygulamada doğrulanamaz (P1) — yeni bulgu
+
+Denetimde "kesim tarihi bayat" diye kaydedilen P1 kalemi, ölçüm sonrası **çerçevesi değişti.** `researchCutoff` `data/living-system.json` içinde tek bir alan; her uygulamanın kendi deposunda bu tarihi *yeniden türetilebilir* kılan bir kanıt izi var mı, ona bakıldı:
+
+| Uygulama | Depodaki doğrulama izi | Durum |
+|---|---|---|
+| `cld` | 65 kaydın `verifiedAt` + kaynak `accessedAt` | ✅ **yeniden doğrulanabilir** — 29 Eylül'de yapıldı |
+| `aia` | **445** `verifiedAt` (en eski 2026-08-11) | ✅ yeniden doğrulanabilir ama **büyük bir araştırma işi** |
+| `llm` | 30 `verifiedAt` | ✅ yeniden doğrulanabilir, ölçek makul |
+| `evl` | 9 | ✅ küçük |
+| `swi` | tek bir `<time dateTime="2026-09-06">` — "Initial collection" | ⚠️ toplama tarihi, kayıt başına kanıt değil |
+| `ctx, wfm, hns, sec, itl` | tarihler var ama **içerik tarihleri** (makale yılı, olay tarihi) | ⚠️ doğrulama tarihi değil |
+| `usl, lcl` | 2026 tarihleri var, nitelikleri belirsiz | ⚠️ doğrulanamadı |
+| `gpu, eng` | **hiç tarih alanı yok** | ❌ doğrulanamaz |
+
+**Sonuç:** 14 araştırma uygulamasının 11'inde `researchCutoff` yalnızca kayıt defterindeki bir iddia. Onu ilerletmek, o uygulamanın araştırmasını gerçekten yeniden okumak demek — ve bugün için ucuz bir yol yok. Bu, "tarihleri tazele" listesinden "11 uygulamada doğrulanabilir bir kanıt izi kur" işine dönüşüyor.
+
+**Öneri (karar gerekli):** ya bu izi kur (`cld` ve `aia`ın yaptığı gibi kayıt başına `verifiedAt`), ya da `researchCutoff` alanının "beyan mı kanıt mı" olduğunu kayıt defterinde açıkça belirt. Şu an ikisinin arasında bir yerde duruyor ve bu, sessizce bayatlayan bir iddiaya davet çıkarıyor.
+### S6 — Varsayılan dil politikası yok (P2) — ⏸ uygulama denendi, durduruldu
 20 uygulama `/` adresinde İngilizce, 10 uygulama Türkçe açılıyor. `sec, ctx, evl, wfm` `/ → /en` yönlendirmesiyle İngilizce'yi zorunlu kılarken `llm, dpl, cul, aos, mem, gpu, cld, lcl, bee, dtr` sessizce Türkçe açılıyor. `aserdargun.com` ana portföyde `/` İngilizce, `/tr/` Türkçe — subdomain'ler bu kalıbı tutmuyor.
+
+**29 Eylül denemesi ve sonucu.** `dpl` üzerinde varsayılan çevrildi (kaynak kod 1 satır) ve kapı düştü: **22 tarayıcı testinden 10'u**, hepsi `page.goto("/")` sonrası Türkçe bir buton adı beklediği için. Yani testlerin tabanı "kök adres Türkçe açılır" varsayımına dayanıyor. Bu değişiklik kaynak kodda tek satır, ama her uygulamanın test tabanının yeniden kurulması ve `lang`/`hreflang`/`og:locale` tutarlılığının korunması demek. `dpl`'deki deneme geri alındı, ağaç temiz bırakıldı.
+
+> Diğer 9 uygulamanın testleri farklı bir kalıp kullanıyor (çoğu `page.goto("/")` yerine taban yol ve tıklama ile geçiyor), yani etki uygulama başına ayrı ölçülmeli. Tek kalıp varsaymak bu turda iki kez yanlış çıktı.
 
 ### S7 — Kullanıcıya görünen davranış farkı (P3)
 - `gex` kök adresi `302 → /gex/anatomy` yapıyor (bilinçli, `staticwebapp.config.json` `routes` bloğunda tanımlı — çalışma mantığı doğru ama kök sayfa "boş" kalıyor).
