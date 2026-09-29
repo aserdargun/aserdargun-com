@@ -225,7 +225,9 @@ Error: http://127.0.0.1:4017 is already used, make sure that nothing is running 
 
 **Daha sinsi bir varyant:** `cul` ve `dtr` `reuseExistingServer: true` kullanıyor ve **başka bir checkout'tan gelen bayat sunucu** testlere eski kodu servis etti. `bee`deki gibi hata fırlatmak yerine testler **yanlış ürünü doğrulayarak yeşil** göründü.
 
-**Kapanmayan kısım:** üç uygulamada da `webServer` bloğu, çalışan sunucunun bu checkout'a ait olduğunu doğrulamıyor. Bekleyen yanıtta bu checkout'un benzersiz bir işareti aransa, bu sınıf hata bir daha oluşmaz — ama henüz eklenmedi.
+**29 Eylül'de kapatılan kısım:** `cul` ve `dtr`'de `reuseExistingServer` **kapalı** yapıldı. Artık başka bir checkout'un sunucusu portu tutsa kapı port mesajıyla **gürültülü biçimde düşüyor**; daha önce sessizce yanlış ürünü doğrulayıp yeşil görünüyordu. Kapı yerel geliştirmede artık daha sıkı ama dürüst.
+
+**Kapanmayan kısım:** üç uygulamada da `webServer` bloğu, çalışan sunucunun bu checkout'a ait olduğunu **doğrulamıyor**; yalnızca portun dolu olmadığına bakıyor. Bekleyen yanıtta bu checkout'un benzersiz bir işareti aransa (ör. çalıştırma başına üretilen bir belirteç) doğrulama yapılabilir. Bu, yerel geliştirme ergonomisini etkileyen P3 bir iş; kapı artık yanlış yeşil vermiyor, dolayısıyla doğruluğu etkilemiyor.
 
 Bu bir ürün hatası değil (CI temiz runner kullanıyor) ama geliştirici deneyimini bozuyor ve hata mesajı yanıltıcı. `aserdargun-com/docs/superpowers/agent-team/capability-matrix.md` ve önceki denetim notunda da port çakışması riski işaretlenmişti.
 
@@ -596,7 +598,7 @@ Ek doğrulama: cld'de `npm run lint` **PASS** (exit 0) ve `npm run test` **PASS*
 | **P1 — `researchCutoff` doğrulanabilirliği** | ⏸ **beklemede, karar gerekiyor** | 14 araştırma uygulamasının 11'inde bu alan yalnızca kayıt defterinde bir iddia; depoda yeniden türetilebilir kayıt yok. İleriletmek araştırma işidir. `cld` bu yolu izleyerek 51 kaydı doğruladı — aynı yol `aia` için 445 kayıt demek. |
 | **P1 — `cld` veri tazelik penceresi** | ⏸ **beklemede, politika kararı gerekiyor** | 30 günlük pencere korundu ve kayıtlar doğrulandı, ancak pencere 30 Eylül'de yeniden açıldı. Aynı kapı önümüzdeki dört haftada yeniden kapanacak. `llm` 180 gün, `dcl` 30/90 gün ile çalışıyor; tek bir politika belirlenmeli. |
 | **P1 — aia / gpu araştırma kesim tarihi** | ⏸ **beklemede** | `aia` 36 gün (445 doğrulanabilir kayıt), `gpu` 31 gün (depoda hiç doğrulama tarihi alanı yok). |
-| **P3 — yerel sunucu doğrulaması** | ⏸ **beklemede** | `bee`, `cul`, `dtr` web sunucusu bu checkout'a ait mi diye bakmıyor. Bkz. S8. |
+| **P3 — yerel sunucu sahiplik doğrulaması** | ⏸ **beklemede, düşük öncelik** | `bee`, `cul`, `dtr` web sunucusu bu checkout'a ait mi diye bakmıyor; ancak kapı artık yanlış yeşil vermiyor, bu yüzden doğruluk değil ergonomik eksik. Bkz. S8. |
 | **P3 — varsayılan dil kalıbının kalanı** | ✅ karar verildi, uygulandı | `gpu` dışındaki 9 uygulama İngilizce açılıyor; `gpu` tarayıcı diline göre çözüyor ve bu bilinçli. |
 
 ## Çözülmemiş kararlar
