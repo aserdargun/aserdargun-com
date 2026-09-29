@@ -177,12 +177,23 @@ Denetimde "kesim tarihi bayat" diye kaydedilen P1 kalemi, ölçüm sonrası **ç
 **Sonuç:** 14 araştırma uygulamasının 11'inde `researchCutoff` yalnızca kayıt defterindeki bir iddia. Onu ilerletmek, o uygulamanın araştırmasını gerçekten yeniden okumak demek — ve bugün için ucuz bir yol yok. Bu, "tarihleri tazele" listesinden "11 uygulamada doğrulanabilir bir kanıt izi kur" işine dönüşüyor.
 
 **Öneri (karar gerekli):** ya bu izi kur (`cld` ve `aia`ın yaptığı gibi kayıt başına `verifiedAt`), ya da `researchCutoff` alanının "beyan mı kanıt mı" olduğunu kayıt defterinde açıkça belirt. Şu an ikisinin arasında bir yerde duruyor ve bu, sessizce bayatlayan bir iddiaya davet çıkarıyor.
-### S6 — Varsayılan dil politikası yok (P2) — ⏸ uygulama denendi, durduruldu
-20 uygulama `/` adresinde İngilizce, 10 uygulama Türkçe açılıyor. `sec, ctx, evl, wfm` `/ → /en` yönlendirmesiyle İngilizce'yi zorunlu kılarken `llm, dpl, cul, aos, mem, gpu, cld, lcl, bee, dtr` sessizce Türkçe açılıyor. `aserdargun.com` ana portföyde `/` İngilizce, `/tr/` Türkçe — subdomain'ler bu kalıbı tutmuyor.
+### S6 — Varsayılan dil politikası yok (P2) — ✅ **29 Eylül'de kapatıldı (8 uygulama + 1 zaten doğru)**
+Başlangıçtaki durum: 20 uygulama `/` adresinde İngilizce, 10 uygulama Türkçe açılıyordu. `sec, ctx, evl, wfm` `/ → /en` yönlendirmesiyle İngilizce'yi zorunlu kılarken `llm, dpl, cul, aos, mem, gpu, cld, lcl, bee, dtr` sessizce Türkçe açılıyordu.
 
-**29 Eylül denemesi ve sonucu.** `dpl` üzerinde varsayılan çevrildi (kaynak kod 1 satır) ve kapı düştü: **22 tarayıcı testinden 10'u**, hepsi `page.goto("/")` sonrası Türkçe bir buton adı beklediği için. Yani testlerin tabanı "kök adres Türkçe açılır" varsayımına dayanıyor. Bu değişiklik kaynak kodda tek satır, ama her uygulamanın test tabanının yeniden kurulması ve `lang`/`hreflang`/`og:locale` tutarlılığının korunması demek. `dpl`'deki deneme geri alındı, ağaç temiz bırakıldı.
+**Çözülen ve yayınlanan (8):** `cld, cul, dtr, llm, lcl, mem, bee, aos` — hepsi artık `/` adresinde İngilizce açılıyor, Türkçe tek adım uzakta. Her biri kendi tam kapısıyla doğrulandı ve canlıda `<html lang="en">` ile teyit edildi.
 
-> Diğer 9 uygulamanın testleri farklı bir kalıp kullanıyor (çoğu `page.goto("/")` yerine taban yol ve tıklama ile geçiyor), yani etki uygulama başına ayrı ölçülmeli. Tek kalıp varsaymak bu turda iki kez yanlış çıktı.
+**Değişiklik zaten doğru olan — `gpu` (değiştirilmedi):** `gpu` ham HTML'de `lang="tr"` basıyor ama istemci tarafı `navigator.language`'ı okuyor ve **Türkçe değilse İngilizce seçiyor** (`app/atlas/state.mjs:25-27`). Depo sabitinde de niyet açıkça yazılı: *"the path is the production/static locale contract, so an unqualified root is always Turkish"* — yani sunucu tarafı Türkçe, ziyaretçinin diline göre düzeltilen tasarım bilinçli. Proxy'yi değiştirmek bu iki locale testini kırdı ve geri alındı. **Denetimdeki "gpu / = tr" gözlemi yanlış pozitifti**: ham HTML'e bakmak, istemci tarafı çözümlemeyi görmez.
+
+**Öğrenilen ilke — testler varsayılanı devralmasın.** İlk denemede (`dpl`) varsayılanı çevirince 22 tarayıcı testinden 10'u düştü ve iş "büyük" görünüyordu. Asıl mesele başkaydı: testler Türkçe yüzeyi iddia ediyor ama **dili beyan etmiyordu**. Çözüm iddiaları çevirmek değil, testlere dili açıkça vermekti:
+
+```ts
+// cld — src/test/setup.ts
+window.history.replaceState({}, '', '/?lang=tr')
+```
+
+Bu tek satır `cld`'de 113 düşen birim iddiasını kurtardı. `cul` ve `dtr` yalnızca birer `goto` değişikliğiyle geçti; `lcl` hiç test değişikliği istemedi. Her uygulamaya ayrıca **giriş davranışını iki yönlü kilitleyen** bir tarayıcı testi eklendi, böylece varsayılan bir daha sessizce kayamaz.
+
+> Bu ilke tek başına bir kodlama tercihi değil, bir doğrulama tercihi: *yazıldığı dili kapsamayan bir test, o dili kapsamıyormuş gibi yeşil kalır.*
 
 ### S7 — Kullanıcıya görünen davranış farkı (P3)
 - `gex` kök adresi `302 → /gex/anatomy` yapıyor (bilinçli, `staticwebapp.config.json` `routes` bloğunda tanımlı — çalışma mantığı doğru ama kök sayfa "boş" kalıyor).
