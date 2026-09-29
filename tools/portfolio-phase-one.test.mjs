@@ -278,7 +278,7 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
   assert.equal(app.lastVerified, "2026-09-29");
   assert.equal(app.lastReleased, "2026-09-28");
-  assert.equal(app.releaseSha, "03e33ba7056c4cb74cb1d3cf32c20fb15450f51f");
+  assert.equal(app.releaseSha, "9fbca6d79ec3c4aa70fa005a2f064e4386045430");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
   const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
   assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);
