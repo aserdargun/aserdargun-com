@@ -85,6 +85,8 @@ Tüm 30 uygulama **canlı ve 200 dönüyor**. Sorun yoklukta değil, tutarlılı
 | **X-Frame-Options, 9 uygulama** | ✅ **ÇÖZÜLDÜ** | `dpl, aos, mem, gex, tfl, arl, wml, dtr, pol` — canlıda `x-frame-options: DENY` doğrulandı |
 | **pol `staticwebapp.config.json`** | ✅ **ÇÖZÜLDÜ** | Tek istisna kapatıldı: güvenlik başlığı, önbellek ve mime tanımı |
 | **CSP, 12 uygulama** | ✅ **ÇÖZÜLDÜ** | `aia, mem, gpu, cld, eng, gex, arl, wml, pdt, hex, dpl, pol` — her biri kendi tarayıcı testiyle doğrulandı (gpu 242, dpl 22, gex/arl/pdt/wml/cld e2e). Canlıda 12/12 `content-security-policy` + `x-frame-options: DENY` + `nosniff` doğrulandı |
+| **ESLint, 7 uygulama** | ✅ **ÇÖZÜLDÜ** | `hex, cul, mem, dtr, pdt, aos, eng` — kuruldu, kapının ilk adımı yapıldı, 19 ihlal düzeltildi, 7/7 CI yeşil ve yayınlandı |
+| **ESLint, 4 uygulama** | ⛔ **ENGELLİ** | `dpl, wfm, arl, wml` — TS 7.0.2, `typescript-eslint@8` TS `<6.1.0` istiyor. Bkz. S3 |
 | **aos P1 "8 gündür deploy edilmedi"** | ❌ **YANLIŞ POZİTİF — geri alındı** | `HEAD = origin/main = son deploy = b286ceb`. Yayınlanmamış commit yok; sadece 8 gündür değişiklik yok |
 | **gpu "CI'da test adımı görünmüyor"** | ✅ **DOĞRULANDI, kök neden bulundu** | CI'da `npm test` **var** (`validate.yml:43-44`). Asıl sorun: `playwright.config.ts` içinde `webServer` bloğu **yok**, `test:e2e` elle başlatılan dev sunucusunu (5173) bekliyor. Bu yüzden tarayıcı testi hiçbir otomatik akışta çalışmıyor |
 
@@ -102,10 +104,13 @@ Check out canonical release registry   (aserdargun/aserdargun-com)
 
 `aserdargun-com/tools/portfolio-phase-one.test.mjs` gex/wml/hex/pdt için doğrulanmış deploy koşu kimliklerini sabit kodluyor ("only a confirmed deployment run establishes a release date"). Yeniden deploy edilen bir uygulamanın kaydını güncellemek, o testin tablosunu da güncellemeyi gerektiriyor.
 
-**Düzeltme sırasında çıkan üç kalıp hata (tekrar edilmesin):**
+**Düzeltme sırasında çıkan dört kalıp hata (tekrar edilmesin):**
 1. `staticwebapp.config.json` içinde **`globalHeaders` bloğu zaten varsa** yeni blok eklemek yedek anahtar yaratıyor; JSON.parse son kazanır, eklenen CSP görünmez oluyor. `gex`te bu oldu. Her eklemeden sonra blok sayısını say.
 2. `aos` ve `mem` gibi **tek satırlık kompakt JSON**'da çok satırlı kalıba göre düzenleme yapmak girintiyi bozuyor; `dpl` ve `wml`de oldu, ikisi de düzeltildi.
 3. `gex`in kök adresi `302` yönlendirdiği için `curl -I` **yönlendirme yanıtının** başlıklarını verir; CSP'yi `/gex/anatomy` üzerinde doğrulamak gerekiyor. Aksi halde yanlış negatif üretiyor.
+4. **`git checkout package.json` ile bir script'i geri almak, kurulumun eklediği devDependencies'i de siler.** `hex`te `typecheck`'i geri alırken ESLint bağımlılıkları manifestten düştü. Yerel `node_modules` durduğu için yerel kapı **geçti**, CI'da `sh: 1: eslint: not found` oldu. Bir `package.json`'ı `npm install -D` sonrasında hiçbir koşulda toptan geri alma; alan bazlı düzelt.
+
+> 4. madde, bu turda iki kez karşılaşılan asıl riski özetliyor: **yerelde geçen bir şeyin CI'da geçeceğini varsaymak.** Bu portföyde kapı zincirleri çok katmanlı ve her katman farklı bir ortam koşuluna bağlı.
 
 ---
 
@@ -125,12 +130,23 @@ Dört uygulamada tazelik mantığı var ama pencere ve davranış farklı:
 
 `cld` 30 günlük pencereyi CI kapısına bağladığı için tek başına yayını durdurabiliyor. Diğer üç uygulama aynı veri 90–180 gün boyunca "taze" sayabiliyor. **Karar gerekli:** tek bir politika mı (ör. 90 gün CURRENT + 180 gün STALE), yoksa kaynak-yoğunluk mu esas alınacak (fiyat/kur = kısa, mimari = uzun)?
 
-### S2 — `typecheck` kapısı 16 uygulamada yok (P2)
-Eksik: `dpl, cul, aos, mem, wfm, ant, eng, gex, tfl, arl, adp, wml, dtr, pdt, hex, cld`.
-`cld` özellikle dikkat çekici: TypeScript tabanlı, `tsc -b` çalıştırıyor (`build` script'i) ama bağımsız `typecheck` script'i ve CI adımı yok. Yani tip hatası ancak build sırasında yakalanıyor — `lint` ve `test` başarılı geçse bile kapı yine kırılabiliyor.
+### S2 — `typecheck` kapısı 16 uygulamada "yok" görünüyordu — ❌ **YANLIŞ POZİTİF, 29 Eylül'de düzeltildi**
+Eksik görünenler: `dpl, cul, aos, mem, wfm, ant, eng, gex, tfl, arl, adp, wml, dtr, pdt, hex, cld`.
 
-### S3 — `lint` kapısı 11 uygulamada yok (P2)
-Eksik: `dpl, cul, aos, mem, wfm, eng, arl, wml, dtr, pdt, hex`.
+**Gerçek durum:** 14 TypeScript uygulamanın **tamamı** `build` script'i içinde `tsc` çalıştırıyor (`tsc -b && vite build` ya da `tsc --noEmit && …`) ve 11 uygulamanın CI'ı o `build`'i koşuyor. Bağımsız `typecheck` script'i olmaması **kapsama boşluğu değil**, yalnızca erken-hızlı geri bildirim eksikliği. 14 script eklemek kapsama kazandırmadan CI süresini uzatırdı; **eklenmedi**.
+
+Kalan gerçek boşluk: `aos` ve `eng` — tsconfig'i olmayan vanilla JS siteleri, burada `typecheck` uygulanamaz (JSDoc tabanlı kontrol ayrı ve büyük bir karar).
+
+> Bu madde, statik taramada "script yok" ile "kontrol yok" ayrımının yapılmamasından doğdu. Aynı tuzak `lint` için de geçerliydi ama orada sonuç ters çıktı (aşağıya bakın).
+
+### S3 — `lint` kapısı 11 uygulamada yok (P2) — 7'si 29 Eylül'de kapatıldı
+Eksik olanlar: `dpl, cul, aos, mem, wfm, eng, arl, wml, dtr, pdt, hex`.
+
+**✅ Çözülen (7):** `hex, cul, mem, dtr, pdt, aos, eng` — ESLint kuruldu, `lint` kapının ilk adımı yapıldı, çıkan **19 ihlalin tamamı** önemsizdi (kullanılmayan import/binding, iki gereksiz regex kaçışı, boş `catch` blokları) ve düzeltildi. 7/7 CI yeşil, 7/7 yayınlandı.
+
+**⛔ Engellenen (4):** `dpl, wfm, arl, wml` — dördü de **TypeScript 7.0.2** kullanıyor, `typescript-eslint@8.71.0` ise `typescript >=4.8.4 <6.1.0` istiyor. `--legacy-peer-deps` ile kurulabilir ama tip-farkındalıklı kurallar sessizce atlatılır; yani **görünür ama işe yaramayan bir kapı** olur. TypeScript'ı düşürmek kabul edilemez. Karar: `typescript-eslint`'in TS 7 desteğini beklemek ya da ESLint 10 + yeni plugin setine geçmek.
+
+Portföyde hâlihazırda lint kullanan uygulamalar da bölünmüş: `aia` ESLint 9 + TS 5.9, `hns`/`sec` ESLint 10 + TS 6. Tek bir kalıp yok.
 
 ### S4 — Ajan sözleşmesi 10 uygulamada yok (P2)
 `AGENTS.md` olmayanlar: `dpl, cul, aos, mem, pol, tfl, arl, adp, dtr, dcl`.
