@@ -84,6 +84,7 @@ Tüm 30 uygulama **canlı ve 200 dönüyor**. Sorun yoklukta değil, tutarlılı
 | **cld P0 — veri tazelik kapısı** | ✅ **ÇÖZÜLDÜ** | 51 kayıt resmî kaynaktan yeniden doğrulandı, `Run release checks` → `Deploy prebuilt static artifact` → success. Canlı: OG 0→7, "Son doğrulama: 2026-09-29" |
 | **X-Frame-Options, 9 uygulama** | ✅ **ÇÖZÜLDÜ** | `dpl, aos, mem, gex, tfl, arl, wml, dtr, pol` — canlıda `x-frame-options: DENY` doğrulandı |
 | **pol `staticwebapp.config.json`** | ✅ **ÇÖZÜLDÜ** | Tek istisna kapatıldı: güvenlik başlığı, önbellek ve mime tanımı |
+| **Varsayılan dil, 9 uygulama** | ✅ **ÇÖZÜLDÜ** | `cld, cul, dtr, llm, lcl, mem, bee, aos, dpl` — canlıda 9/9 `<html lang="en">` ile doğrulandı; `gpu` tasarımı gereği zaten doğruymuş |
 | **CSP, 12 uygulama** | ✅ **ÇÖZÜLDÜ** | `aia, mem, gpu, cld, eng, gex, arl, wml, pdt, hex, dpl, pol` — her biri kendi tarayıcı testiyle doğrulandı (gpu 242, dpl 22, gex/arl/pdt/wml/cld e2e). Canlıda 12/12 `content-security-policy` + `x-frame-options: DENY` + `nosniff` doğrulandı |
 | **ESLint, 7 uygulama** | ✅ **ÇÖZÜLDÜ** | `hex, cul, mem, dtr, pdt, aos, eng` — kuruldu, kapının ilk adımı yapıldı, 19 ihlal düzeltildi, 7/7 CI yeşil ve yayınlandı |
 | **lint toplamı** | ✅ **11/11** | portföyde lint kapısı olmayan uygulama kalmadı |
@@ -192,7 +193,7 @@ Denetimde "kesim tarihi bayat" diye kaydedilen P1 kalemi, ölçüm sonrası **ç
 ### S6 — Varsayılan dil politikası yok (P2) — ✅ **29 Eylül'de kapatıldı (8 uygulama + 1 zaten doğru)**
 Başlangıçtaki durum: 20 uygulama `/` adresinde İngilizce, 10 uygulama Türkçe açılıyordu. `sec, ctx, evl, wfm` `/ → /en` yönlendirmesiyle İngilizce'yi zorunlu kılarken `llm, dpl, cul, aos, mem, gpu, cld, lcl, bee, dtr` sessizce Türkçe açılıyordu.
 
-**Çözülen ve yayınlanan (8):** `cld, cul, dtr, llm, lcl, mem, bee, aos` — hepsi artık `/` adresinde İngilizce açılıyor, Türkçe tek adım uzakta. Her biri kendi tam kapısıyla doğrulandı ve canlıda `<html lang="en">` ile teyit edildi.
+**Çözülen ve yayınlanan (9):** `cld, cul, dtr, llm, lcl, mem, bee, aos, dpl` — hepsi artık `/` adresinde İngilizce açılıyor, Türkçe tek adım uzakta. Her biri kendi tam kapısıyla doğrulandı ve canlıda `<html lang="en">` ile teyit edildi.
 
 **Değişiklik zaten doğru olan — `gpu` (değiştirilmedi):** `gpu` ham HTML'de `lang="tr"` basıyor ama istemci tarafı `navigator.language`'ı okuyor ve **Türkçe değilse İngilizce seçiyor** (`app/atlas/state.mjs:25-27`). Depo sabitinde de niyet açıkça yazılı: *"the path is the production/static locale contract, so an unqualified root is always Turkish"* — yani sunucu tarafı Türkçe, ziyaretçinin diline göre düzeltilen tasarım bilinçli. Proxy'yi değiştirmek bu iki locale testini kırdı ve geri alındı. **Denetimdeki "gpu / = tr" gözlemi yanlış pozitifti**: ham HTML'e bakmak, istemci tarafı çözümlemeyi görmez.
 
