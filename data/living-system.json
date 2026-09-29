@@ -1234,7 +1234,7 @@
       "researchCutoff": "2026-09-21",
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-29",
-      "releaseSha": "fe49b067b253a3e1f3bc62ece9618f6afb5407d1",
+      "releaseSha": "7ed45fba8fa562a57e042f7549523da6e8b843db",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -1727,7 +1727,7 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "3a035130a0fad8b94d2a74531099df82c7dabcf4",
+      "releaseSha": "888ec77a9c060534d2d7b87661cd300d6254e353",
       "lastReleased": "2026-09-29"
     },
     {

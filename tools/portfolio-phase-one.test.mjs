@@ -216,7 +216,7 @@ test("companion learning apps connect to their research parents across both loca
     const confirmedDeployments = {
       gex: ["2026-09-29", "fd9763cdc9dde3ac8fe5b7d86d24fd9e74d94bd1"],
       wml: ["2026-09-29", "94b724f2154c1ed9788b61b47e080c2e244b0701"],
-      hex: ["2026-09-29", "3a035130a0fad8b94d2a74531099df82c7dabcf4"],
+      hex: ["2026-09-29", "888ec77a9c060534d2d7b87661cd300d6254e353"],
       pdt: ["2026-09-29", "c4070b097f861fbaeb6963f9fa76df299d754bb1"],
     };
     const [releasedOn, releaseSha] = confirmedDeployments[code];
