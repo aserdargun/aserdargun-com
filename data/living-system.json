@@ -776,8 +776,8 @@
         "tr": "GPU kernel \u00e7al\u0131\u015fmas\u0131ndan \u00f6nce programlama temellerini kullan; bu bir GPU y\u00fcr\u00fctme sim\u00fclat\u00f6r\u00fc de\u011fildir."
       },
       "lastVerified": "2026-09-29",
-      "releaseSha": "5b4482c438783b981b66237a18d6323583f71b43",
-      "lastReleased": "2026-09-28"
+      "releaseSha": "b57bbd4983030647b391fb7336dff1fd8ee75011",
+      "lastReleased": "2026-09-30"
     },
     {
       "code": "cld",

@@ -614,8 +614,8 @@
       "productionUrl": "https://pol.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/pol-aserdargun-com",
       "lastVerified": "2026-09-29",
-      "lastReleased": "2026-09-28",
-      "releaseSha": "5b4482c438783b981b66237a18d6323583f71b43",
+      "lastReleased": "2026-09-30",
+      "releaseSha": "b57bbd4983030647b391fb7336dff1fd8ee75011",
       "upstreamApps": [
         "gpu"
       ],

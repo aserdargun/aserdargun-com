@@ -11,7 +11,7 @@ import { renderLearningDiagram, learningDiagramLayout } from "./learning-diagram
 import { applicationHierarchy } from "./application-hierarchy.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-09-29T12:00:00Z");
+const today = new Date("2026-09-30T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -30,11 +30,11 @@ test("POL is one public canonical record parented under gpu with truthful metada
   assert.equal(pol.visibility, "public");
   assert.equal(pol.repository, "https://github.com/aserdargun/pol-aserdargun-com");
   assert.equal(pol.address, "https://pol.aserdargun.com/");
-  // Confirmed deployment: aserdargun/pol-aserdargun-com/actions/runs/35617752543,
+  // Confirmed deployment: aserdargun/pol-aserdargun-com/actions/runs/36660448844,
   // reproduced by `npm run verify:applications`.
   assert.equal(pol.lastVerified, "2026-09-29", "POL verification date records the reproduced public identity check");
-  assert.equal(pol.lastReleased, "2026-09-28", "POL release date records its newest successful deployment run");
-  assert.equal(pol.releaseSha, "5b4482c438783b981b66237a18d6323583f71b43", "POL release SHA must match the deployed commit");
+  assert.equal(pol.lastReleased, "2026-09-30", "POL release date records its newest successful deployment run");
+  assert.equal(pol.releaseSha, "b57bbd4983030647b391fb7336dff1fd8ee75011", "POL release SHA must match the deployed commit");
   assert.equal(pol.researchCutoff, undefined, "a deployment is not a research cutoff");
 });
 
