@@ -73,10 +73,10 @@ test("the portfolio registry is a deterministic public projection of application
       repositoryUrl: "https://github.com/aserdargun/ctx-aserdargun-com",
       researchCutoff: "2026-09-04",
       // Verification and deployment renewed by `npm run verify:applications`;
-      // deployment confirmed by aserdargun/ctx-aserdargun-com/actions/runs/35616563458.
+      // deployment confirmed by aserdargun/ctx-aserdargun-com/actions/runs/36674758642.
       lastVerified: "2026-09-29",
-      lastReleased: "2026-09-28",
-      releaseSha: "bd942206c7ff8a7b36d3d9930f7e36214cb9566f",
+      lastReleased: "2026-09-30",
+      releaseSha: "49adfc1828e65ce6ce8848410aa00864bffbef02",
       sourceCount: null,
       claimCount: null,
       evidencePolicy: "primary-source-backed",
@@ -98,7 +98,7 @@ test("the application map exposes distinct research, verification, and release e
   assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-08-24">2026-08-24<\/time><\/dd>/);
   assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-09-29">2026-09-29<\/time><\/dd>/);
   // AIA deployment confirmed by aserdargun/aia-aserdargun-com/actions/runs/35617907453.
-  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-28">2026-09-28<\/time><code>49696ecf<\/code><\/dd>/);
+  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-30">2026-09-30<\/time><code>8140b3d9<\/code><\/dd>/);
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
 });
@@ -210,14 +210,14 @@ test("companion learning apps connect to their research parents across both loca
     assert.equal(app.portfolioLayer, layer);
     assert.equal(app.systemRole, "lab");
     assert.equal(app.researchCutoff, undefined, "educational applications do not imply a research cutoff");
-    // Confirmed deployments: gex/actions/runs/36575160780, wml/actions/runs/36575169079,
-    // hex/actions/runs/36575177684, pdt/actions/runs/36575173520. A build timestamp
+    // Confirmed deployments: gex/actions/runs/36674774958, wml/actions/runs/36674811072,
+    // hex/actions/runs/36674779721, pdt/actions/runs/36674790632. A build timestamp
     // alone still does not establish a release date.
     const confirmedDeployments = {
-      gex: ["2026-09-29", "fd9763cdc9dde3ac8fe5b7d86d24fd9e74d94bd1"],
-      wml: ["2026-09-29", "82787b487a2efbc9bd202bbc4ddc3cf22659d401"],
-      hex: ["2026-09-29", "2a614df48ef74889fa952aa0c829dffd04a06aec"],
-      pdt: ["2026-09-29", "8085efbad56c8d1186c92213dfd7b41ac8264b8c"],
+      gex: ["2026-09-30", "e154c6d216e2df768ce63b525f34bbd18011a692"],
+      wml: ["2026-09-30", "0607a5cebb7fbdb25702aaa1ec1064746422d355"],
+      hex: ["2026-09-30", "62f121d8955a5bebbe196394f0b4174e0e1d2f66"],
+      pdt: ["2026-09-30", "ea18c945a7d1d3ff621c831c57102c5d12e8059a"],
     };
     const [releasedOn, releaseSha] = confirmedDeployments[code];
     assert.equal(app.lastReleased, releasedOn, "only a confirmed deployment run establishes a release date");
@@ -277,8 +277,8 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.deepEqual(app.languages, ["tr", "en"]);
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
   assert.equal(app.lastVerified, "2026-09-29");
-  assert.equal(app.lastReleased, "2026-09-28");
-  assert.equal(app.releaseSha, "9fbca6d79ec3c4aa70fa005a2f064e4386045430");
+  assert.equal(app.lastReleased, "2026-09-30");
+  assert.equal(app.releaseSha, "bb357b89bdf9dae444c9b168164aff659acf25cf");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
   const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
   assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);

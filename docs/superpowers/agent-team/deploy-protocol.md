@@ -14,6 +14,38 @@
 7. Live URL doğrulama başarısız (3 deneme) → kullanıcıya bildirim
 ```
 
+## Kanonik eylem pinleri
+
+Her subdomain deposundaki GitHub eylemleri **fleet genelinde tek bir SHA kümesine**
+sabitlenir. Sürüm etiketi (`@v7`) kullanılmaz: etiket hareket eder, SHA etmez.
+
+| Eylem | SHA | Sürüm | Doğrulama |
+|---|---|---|---|
+| `actions/checkout` | `3d3c42e5aac5ba805825da76410c181273ba90b1` | v7.0.1 | 30 Eylül 2026 |
+| `actions/setup-node` | `820762786026740c76f36085b0efc47a31fe5020` | v7.0.0 | 30 Eylül 2026 |
+| `actions/upload-artifact` | `043fb46d1a93c77aae656e7c1c64a875d1fc6a0a` | v7.0.1 | 30 Eylül 2026 |
+| `Azure/static-web-apps-deploy` | `4d27395796ac319302594769cfe812bd207490b1` | `v1` dal başı | 30 Eylül 2026 |
+
+**Deploy eylemi neden `v1` etiketi değil.** `Azure/static-web-apps-deploy`
+ deposunda `v1` **etiketi** 2021'deki `1a947af9` commitine işaret ediyor ve
+ donmuş; `v1` **dalının başı** ise `4d273957` (11 Eylül 2024). İkisi arasındaki
+ fark saf ekleme: `action.yml` içinde 21 satır eklenmiş, hiçbir satır silinmemiş —
+ `config_file_location`, `skip_api_build`, `is_static_export`,
+ `data_api_location` ve `production_environment` girdileri ile daha yeni
+ konteyner çalışma zamanı. Bu yüzden fleet `v1` dal başını sabitler ve satır
+ yorumunda bunu açıkça yazar; `# v1` yorumu etiketi işaret ettiği için yanıltıcıdır.
+
+**Sapma tespiti.** Yeni bir subdomain kurulurken veya bir depo güncellenirken
+ şu komut tek satırda iki işi birden ayırır — hangi eylem, hangi SHA'da:
+
+```bash
+grep -rho "uses: *[A-Za-z0-9._/-]*@[^ ]*" */.github/workflows/*.yml \
+  | sed 's/uses: *//' | sort | uniq -c | sort -rn
+```
+
+Çıktıda tek bir satır her eylem görünmelidir. Aynı eylemin iki SHA'da
+ görünmesi **sürüm drift'idir** ve `main`'e alınmadan önce giderilir.
+
 ## GitHub check-runs API
 
 ```

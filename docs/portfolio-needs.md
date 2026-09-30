@@ -1,9 +1,10 @@
 # Portfolio Development Needs — 30 Uygulama
 
-**Son denetim:** 29 Eylül 2026
-**Kapsam:** 30/30 uygulama
+**Son denetim:** 30 Eylül 2026 (ikinci tur — eylem sabitlemesi, S11)
+**Kapsam:** 30/30 uygulama + 33 depo (30 kamu + `inf`, `nxt`, `stk`)
 **Yöntem:** İki geçişli denetim — Geçiş 1 hızlı tarama (30/30), Geçiş 2 tam kapı koşusu (11 uygulama)
 **Durum:** Denetim **salt-okunur yapıldı**; 30 uygulamanın tamamı değişiklik yapılmadan tarandı. Ardından denetimde çıkan sorunlar giderildi ve 11 uygulama ile bu kayıt defteri değiştirildi. Değişikliklerin tamamı aşağıdaki "Düzeltme kaydı" bölümünde listelidir.
+**30 Eylül turu:** S9'un "30/30 SHA sabitliyor" tespiti denetimde yanlış çıktı — fleet beş ayrı referans kullanıyordu. 33 deponun tamamı tek kanonik kümeye alındı, 5 uygulamanın bozulan sözleşme testleri düzeltildi, 30/30 yayın kimliği ilerletildi. Ayrıntı S11 ve "Düzeltme kaydı — 30 Eylül 2026".
 
 > Bu dosya `aserdargun-com/docs/` altındadır ve `.site-dist/` çıktısına **dahil değildir** — yayına çıkmaz.
 
@@ -92,6 +93,21 @@ Tüm 30 uygulama **canlı ve 200 dönüyor**. Sorun yoklukta değil, tutarlılı
 | **aos P1 "8 gündür deploy edilmedi"** | ❌ **YANLIŞ POZİTİF — geri alındı** | `HEAD = origin/main = son deploy = b286ceb`. Yayınlanmamış commit yok; sadece 8 gündür değişiklik yok |
 | **gpu "CI'da test adımı görünmüyor"** | ✅ **DOĞRULANDI, kök neden bulundu** | CI'da `npm test` **var** (`validate.yml:43-44`). Asıl sorun: `playwright.config.ts` içinde `webServer` bloğu **yok**, `test:e2e` elle başlatılan dev sunucusunu (5173) bekliyor. Bu yüzden tarayıcı testi hiçbir otomatik akışta çalışmıyor |
 
+### Düzeltme kaydı — 30 Eylül 2026 (ikinci tur: eylem sabitlemesi)
+
+Bu turun kapsamı 29 Eylül'de kapatılmış sayılan kalemlerden biriyle başladı: **S9, "30/30 workflow deploy eylemini SHA ile sabitliyor" diye kaydedilmiş, ama fiilen iki SHA kullanılıyordu.** Tam tur S11.
+
+| İş | Durum | Kanıt |
+|---|---|---|
+| **Eylem sabitlemesi, 33 depo** | ✅ **ÇÖZÜLDÜ** | 44 workflow dosyası tek kanonik kümeye alındı. `npm run verify:pins` → `PASS (5 distinct references)`. 30/30 uygulama yeniden yayınlandı |
+| **Test sözleşmeleri, 5 depo** | ✅ **ÇÖZÜLDÜ** | `gpu, eng, evl, itl, usl` — sabitleme değişimi kendi kapılarını kırmıştı; aşağıdaki 6. madde |
+| **Yayın kayıt defteri, 30 uygulama** | ✅ **ÇÖZÜLDÜ** | `releaseSha` + `lastReleased` 30/30 ilerletildi (2026-09-30). `npm run audit:releases` → 30/30 eşleşiyor |
+| **`eng` yayın kapısı** | ✅ **ÇÖZÜLDÜ** | İlk koşu `Release rejected: ENG releaseSha must be recorded` ile düştü — kapı tam da tasarlandığı gibi çalıştı. Kayıt defteri güncellenip yeniden tetiklendi |
+| **S9 doküman** | ✅ **ÇÖZÜLDÜ** | Tarihli dry-run belgesinin gövdesi korundu, başına geçersiz kılma notu eklendi; kanonik küse `deploy-protocol.md`'ye taşındı |
+| **Yeni kapı — `verify:pins`** | ✅ **EKLENDİ** | `tools/verify-action-pins.mjs`, 8 test, `npm test` içinde. Saptamayı sessizce geri dönemez hale getirir |
+
+**Düzeltme sırasında çıkan kalıp hatalar (tekrar edilmesin):**
+
 ### Yeni keşfedilen kapı — yayın kayıt defteri (P1)
 
 Denetimin ilk turunda kaçırıldı, düzeltme sırasında ortaya çıktı. **`eng`, `hex` ve `nxt`** kendi commit'lerinin SHA'sı `aserdargun-com/data/living-system.json` içine yazılmadan **yayın yapmıyor**:
@@ -106,14 +122,19 @@ Check out canonical release registry   (aserdargun/aserdargun-com)
 
 `aserdargun-com/tools/portfolio-phase-one.test.mjs` gex/wml/hex/pdt için doğrulanmış deploy koşu kimliklerini sabit kodluyor ("only a confirmed deployment run establishes a release date"). Yeniden deploy edilen bir uygulamanın kaydını güncellemek, o testin tablosunu da güncellemeyi gerektiriyor.
 
-**Düzeltme sırasında çıkan dört kalıp hata (tekrar edilmesin):**
+**Düzeltme sırasında çıkan kalıp hatalar (tekrar edilmesin):**
 1. `staticwebapp.config.json` içinde **`globalHeaders` bloğu zaten varsa** yeni blok eklemek yedek anahtar yaratıyor; JSON.parse son kazanır, eklenen CSP görünmez oluyor. `gex`te bu oldu. Her eklemeden sonra blok sayısını say.
 2. `aos` ve `mem` gibi **tek satırlık kompakt JSON**'da çok satırlı kalıba göre düzenleme yapmak girintiyi bozuyor; `dpl` ve `wml`de oldu, ikisi de düzeltildi.
 3. `gex`in kök adresi `302` yönlendirdiği için `curl -I` **yönlendirme yanıtının** başlıklarını verir; CSP'yi `/gex/anatomy` üzerinde doğrulamak gerekiyor. Aksi halde yanlış negatif üretiyor.
 4. **`git checkout package.json` ile bir script'i geri almak, kurulumun eklediği devDependencies'i de siler.** `hex`te `typecheck`'i geri alırken ESLint bağımlılıkları manifestten düştü. Yerel `node_modules` durduğu için yerel kapı **geçti**, CI'da `sh: 1: eslint: not found` oldu. Bir `package.json`'ı `npm install -D` sonrasında hiçbir koşulda toptan geri alma; alan bazlı düzelt.
 5. **Deploy sonrası canlı doğrulama yayılma yarışına açık.** `dpl` ("Verify live release and asset hashes") ve `dtr` ("Verify live commit and asset hashes") ilk koşuda düştü, ikincisinde de `dpl`in canlı kullanıcı akış testi zaman aşımına uğradı. Her ikisinde de **deploy adımı başarılıydı ve canlı site yeni içerikti**; yeniden koşuda tüm adımlar geçti. Yani bu, ürün hatası değil; doğrulama, CDN yeni sürümü görmeden önce çalışıyor. Kapı kendi kendini kapatıyor ama yanlış sebeple.
+6. **Eylem sabitlemesini değiştirmek, onu sözleşme olarak kullanan testleri kırar.** 30 Eylül turunda 33 depo tek SHA'ya alınınca **5 uygulamanın kapısı kırmızıya döndü** — ve üçü pilot (`hns`, `dtr`, `lcl`) yeşil olduğu için bu ikinci dalgada göründü. İki ayrı sınıf vardı:
+   - `gpu`, `eng`, `evl`, `itl` deploy SHA'sını **sabit kodluyordu**; değişince kırmızı.
+   - `usl` `uses:` satırlarını `/^\s+(?:- )?uses: ([^\s]+)$/gm` ile okuyordu. Bu desen **satır sonuna** bağlı olduğu için `uses:` satırına açıklayıcı bir `# sürüm` yorumu eklemek satırı eşleşmez hale getirdi ve yakalanan liste küçüldü. `lcl` aynı işi `[^\s#]+` ile zaten toleranslı yapıyordu.
 
-> 4. madde, bu turda iki kez karşılaşılan asıl riski özetliyor: **yerelde geçen bir şeyin CI'da geçeceğini varsaymak.** Bu portföyde kapı zincirleri çok katmanlı ve her katman farklı bir ortam koşuluna bağlı.
+   > **Öğrenilen ilke:** pilot yeşil demek "etki alanı dar" demek değildir. Değişikliğin dokunabileceği sözleşmeleri **önce** ara (`grep -rl "1a947af9\|@v[0-9]" --include="*.mjs" --include="*.ts"`), sonra pilotla. Bir de: *yorum eklemek* de bir davranış değişikliğidir — onu da kapıya sor.
+
+> 4. ve 6. maddeler bu turda karşılaşılan asıl riski özetliyor: **yerelde geçen bir şeyin CI'da geçeceğini varsaymak.** Bu portföyde kapı zincirleri çok katmanlı ve her katman farklı bir ortam koşuluna bağlı.
 
 ---
 
@@ -231,8 +252,33 @@ Error: http://127.0.0.1:4017 is already used, make sure that nothing is running 
 
 Bu bir ürün hatası değil (CI temiz runner kullanıyor) ama geliştirici deneyimini bozuyor ve hata mesajı yanıltıcı. `aserdargun-com/docs/superpowers/agent-team/capability-matrix.md` ve önceki denetim notunda da port çakışması riski işaretlenmişti.
 
-### S9 — Dokümantasyon tutarsızlığı (P3)
-`docs/superpowers/agent-team/repo-auditor-phase3-dryrun.md` (8 Eylül 2026) diyor ki *"16/16 `azure/static-web-apps/deploy@v1` kullanıyor"*. Bugün gerçek durum: **30/30 workflow deploy eylemini SHA ile sabitliyor** (`Azure/static-web-apps-deploy@1a947af9…`). Bu, sürüm etiketinden daha güçlü bir arz zinciri önlemi — doküman geride kalmış.
+### S9 — Dokümantasyon tutarsızlığı (P3) — ✅ **30 Eylül'de kapatıldı**
+`docs/superpowers/agent-team/repo-auditor-phase3-dryrun.md` (8 Eylül 2026) diyor ki *"16/16 `azure/static-web-apps/deploy@v1` kullanıyor"*.
+
+**30 Eylül'de fleet taraması bunu sandığından daha kötü buldu:** 30/30 workflow deploy eylemini SHA ile sabitliyordu ama **iki farklı SHA'ya**. Denetimin yazdığı `1a947af9…` yalnızca 14 uygulamada vardı; diğer 21'de `4d273957…` idi. Yani "sürüm drift'i yok" tespiti, tek bir SHA varmış gibi yazılmıştı.
+
+Doküman artık **tarihsel kayıt olarak** duruyor (gövdesi silinmedi) ve başına tarihli bir geçersiz kılma notu eklendi; kanonik küme `docs/superpowers/agent-team/deploy-protocol.md` §"Kanonik eylem pinleri" altında. Bkz. S11.
+
+### S11 — Eylem sabitlemesi fleet genelinde dört parçaydı (P2) — ✅ **30 Eylül'de kapatıldı**
+
+29 Eylül denetimi "30/30 SHA sabitliyor" diye yazıp geçti. Gerçek tablo beş ayrı referanstı:
+
+| Eylem | 29 Eylül'deki durum | Sonuç |
+|---|---|---|
+| `Azure/static-web-apps-deploy` | **14 depo** `1a947af9` (2021) · **21 depo** `4d273957` (2024) | iki ayrı commit |
+| `actions/checkout` | `dtr`, `gex`, `lcl` **v6.1.0**; geri kalan v7.0.1 | iki ayrı ana sürüm |
+| `actions/setup-node` | `dtr`, `gex`, `lcl` **v6.5.0**; geri kalan v7.0.0 | iki ayrı ana sürüm |
+| `hns` `ci.yml` | `actions/checkout@v7` + `actions/setup-node@v7` — **kayan etiket, SHA sabitlemesi yok** | politikaya aykırı |
+| `aserdargun-com` `verify-applications.yml` | `actions/upload-artifact@ea165f8` (**v4**, Mart 2025) | geride |
+
+**Neden deploy eylemi 2021'deydi.** Upstream deposunda `v1` **etiketi** 2021'deki `1a947af9`'a işaret ediyor ve donmuş; `v1` **dalının başı** ise `4d273957` (11 Eylül 2024). İkisi arasındaki fark saf ekleme: `action.yml` içinde **21 satır eklenmiş, hiçbir satır silinmemiş** — `config_file_location`, `skip_api_build`, `is_static_export`, `data_api_location` ve `production_environment` girdileri. Bu yüzden fleet dal başını sabitler ve satır yorumunda bunu yazar; `# v1` yorumu etiketi işaret ettiği için yanıltıcıdır.
+
+**Kapatılan:** 33 deponun 44 workflow dosyası tek kanonik kümeye alındı — `checkout` v7.0.1, `setup-node` v7.0.0, `upload-artifact` v7.0.1, `cache` v6.1.0, `static-web-apps-deploy` dal başı. Fleet taraması artık **5 referansın hepsinde tek SHA** gösteriyor.
+
+**Yeni kapı:** `tools/verify-action-pins.mjs` (`npm run verify:pins`) kardeş depoları tarar, tek satırda iki işi birden ayırır ve `uses:` referansları kanonik küme dışına çıktığında başarısız olur. Kayan etiket, yanlış commit ve yanıltıcı sürüm yorumu **ayrı ayrı** raporlanır. 8 testle kapsandı, `npm test` içine alındı. Bu, S9'daki kalıcı boşluğu kapatır: sapma bir kez oldu, artık sessizce geri dönemez.
+
+> **Kapsam notu:** bu bir yerel operatör aracı, CI adımı **değil**. `aserdargun-com`'un tek başına bir checkout'unda kardeş depolar bulunmaz; CI'da çalıştırmak "denetlenecek bir şey yok" diye sessizce geçerdi. Yeni bir subdomain kurulduğunda elle çalıştırılır.
+
 
 ### S10 — `pol` yönlendirme ve güvenlik yapılandırması eksik (P2)
 `pol-aserdargun-com` içinde `staticwebapp.config.json` **yok** (tek istisna). `app_location: "/"` ile doğrudan kökten yayın yapıyor; bu yüzden özel yönlendirme, önbellek ve güvenlik başlığı tanımı yok.
@@ -600,10 +646,13 @@ Ek doğrulama: cld'de `npm run lint` **PASS** (exit 0) ve `npm run test` **PASS*
 | **P1 — aia / gpu araştırma kesim tarihi** | ⏸ **beklemede** | `aia` 36 gün (445 doğrulanabilir kayıt), `gpu` 31 gün (depoda hiç doğrulama tarihi alanı yok). |
 | **P3 — yerel sunucu sahiplik doğrulaması** | ⏸ **beklemede, düşük öncelik** | `bee`, `cul`, `dtr` web sunucusu bu checkout'a ait mi diye bakmıyor; ancak kapı artık yanlış yeşil vermiyor, bu yüzden doğruluk değil ergonomik eksik. Bkz. S8. |
 | **P3 — varsayılan dil kalıbının kalanı** | ✅ karar verildi, uygulandı | `gpu` dışındaki 9 uygulama İngilizce açılıyor; `gpu` tarayıcı diline göre çözüyor ve bu bilinçli. |
+| **P3 — eylem sabitlemesi sapması** | ✅ karar verildi, uygulandı | S11. Tek kanonik küme + `npm run verify:pins` kapısı. Artık sessizce geri dönemez. |
+| **P3 — doküman geçersiz kılma** | ✅ karar verildi, uygulandı | S9. Tarihli denetim belgesinin gövdesi korunur, başına tarihli not gider; kanonik politika ayrı bir referans belgesinde durur. |
 
 ## Çözülmemiş kararlar
 
-1. **Tazelik penceresi politikası** — tek standart mı, yoksa kaynak türüne göre mi? (S1, düzeltme sırası #2)
-2. **Varsayılan dil** — tüm subdomain'ler İngilizce mi açılmalı, yoksa Türkçe açılış mevcut kural mı? (S6)
-3. **CSP kapsamı** — 12 uygulamada CSP yok. `unsafe-inline` gereken yerler olacak mı, yoksa sıkı politika mı uygulanacak? (S5)
-4. **Düzeltme turunun kapsamı** — P2'ler mekanik ve toplu; P1'ler içerik araştırması gerektiriyor. Hepsinin tek oturumda bitmesi beklenmiyor.
+1. **Tazelik penceresi politikası** — tek standart mı, yoksa kaynak türüne göre mü? (S1, düzeltme sırası #2)
+2. **`researchCutoff` beyan mı kanıt mı** — 11 uygulamada yeniden türetilebilir kayıt kur, yoksa kayıt defterinde "beyan" olduğunu açıkça yaz? (S6a)
+3. **Düzeltme turunun kapsamı** — P2'ler mekanik ve toplu; P1'ler içerik araştırması gerektiriyor. Hepsinin tek oturumda bitmesi beklenmiyor.
+
+> Kapatılan kararlar: varsayılan dil (S6, İngilizce varsayılan — `gpu` hariç istisna) ve CSP kapsamı (S5, 12 uygulamada eklendi ve tarayıcı testiyle doğrulandı).
