@@ -30,8 +30,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "8140b3d9092e220443c099894c224de05f6112b6",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 157,
+      "claimCount": 396,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [],
       "downstreamApps": [
@@ -78,7 +78,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "9285f5c1d1a122b6ca3e040099d4e4b5281a955a",
-      "sourceCount": null,
+      "sourceCount": 31,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
@@ -183,7 +183,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "871d6159d996af7d09723290cb82b6df517eb474",
-      "sourceCount": null,
+      "sourceCount": 2,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -229,7 +229,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "cf98941c12d90f6541ca4868f09e1ee610a8f4ea",
-      "sourceCount": null,
+      "sourceCount": 3,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -275,7 +275,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "5c151166b9af67a948d4504aae20b6ab16bec99d",
-      "sourceCount": null,
+      "sourceCount": 13,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -372,8 +372,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "49adfc1828e65ce6ce8848410aa00864bffbef02",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 16,
+      "claimCount": 19,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "hns"
@@ -422,7 +422,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "a19067944dd902d51c8be6ea4fe9eb5e8d4a6cf1",
-      "sourceCount": null,
+      "sourceCount": 3,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -469,7 +469,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "4cc4134169e9d980b04a00c1e68d91a3c2534bbc",
-      "sourceCount": null,
+      "sourceCount": 5,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
@@ -517,8 +517,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "6fb2a130ae9361de574736b86c9d65dc192b3ac3",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 6,
+      "claimCount": 8,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "aia"
@@ -567,8 +567,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "aa5e569ee1db76c62d8d5aae9d8063eb645aa93d",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 66,
+      "claimCount": 24,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "aia"
@@ -658,7 +658,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "61c930c3328fde628e96756d05f6708a07114aba",
-      "sourceCount": null,
+      "sourceCount": 66,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
@@ -761,8 +761,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "fb637181113170571dad9c0dbea35aa55e4991a7",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 20,
+      "claimCount": 26,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "lcl",
@@ -812,8 +812,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "8b619ed4c9128e0231ce6e2bfdba68c706d6f1be",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 4,
+      "claimCount": 6,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "lcl",
@@ -862,7 +862,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "6de6d3f64ff69553729c4a4b4427ec293a09dfee",
-      "sourceCount": null,
+      "sourceCount": 2,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -910,7 +910,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "14eceaa40227a47425eb2eeaae1a6f5a928ff8e9",
-      "sourceCount": null,
+      "sourceCount": 3,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -958,7 +958,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "7d13268f52782491c0440385d3bd3a8368979891",
-      "sourceCount": null,
+      "sourceCount": 7,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
@@ -1057,7 +1057,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "c845bc9bcdbfb4854685153a409aa67323b59bd0",
-      "sourceCount": null,
+      "sourceCount": 6,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -1370,7 +1370,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "62f121d8955a5bebbe196394f0b4174e0e1d2f66",
-      "sourceCount": null,
+      "sourceCount": 4,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [

@@ -77,8 +77,9 @@ test("the portfolio registry is a deterministic public projection of application
       lastVerified: "2026-09-29",
       lastReleased: "2026-09-30",
       releaseSha: "49adfc1828e65ce6ce8848410aa00864bffbef02",
-      sourceCount: null,
-      claimCount: null,
+      // Counted from the live ctx workspace: content/sources.json and content/claims.json.
+      sourceCount: 16,
+      claimCount: 19,
       evidencePolicy: "primary-source-backed",
       upstreamApps: ["hns"],
       downstreamApps: ["llm", "lcl", "mem"],

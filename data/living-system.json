@@ -16,7 +16,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -28,7 +28,7 @@
       },
       "summary": {
         "en": "An evidence-backed research console for comparing AI products and developer ecosystems.",
-        "tr": "Yapay zek\u00e2 \u00fcr\u00fcnlerini ve geli\u015ftirici ekosistemlerini kan\u0131tlar\u0131yla kar\u015f\u0131la\u015ft\u0131ran ara\u015ft\u0131rma konsolu."
+        "tr": "Yapay zekâ ürünlerini ve geliştirici ekosistemlerini kanıtlarıyla karşılaştıran araştırma konsolu."
       },
       "repository": "https://github.com/aserdargun/aia-aserdargun-com",
       "address": "https://aia.aserdargun.com/",
@@ -37,8 +37,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "8140b3d9092e220443c099894c224de05f6112b6",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 157,
+      "claimCount": 396,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [],
       "downstreamApps": [
@@ -64,8 +64,8 @@
       "code": "llm",
       "parentApp": null,
       "diagramLabel": {
-        "en": "Runtime \u00b7 serving",
-        "tr": "\u00c7al\u0131\u015ft\u0131rma \u00b7 sunum"
+        "en": "Runtime · serving",
+        "tr": "Çalıştırma · sunum"
       },
       "kind": "atlas",
       "systemRole": "core-learning",
@@ -73,7 +73,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -85,7 +85,7 @@
       },
       "summary": {
         "en": "A source-backed field guide to LLM runtimes and serving engines across seven architectural layers, with an interactive learning layer.",
-        "tr": "LLM \u00e7al\u0131\u015ft\u0131rma ortamlar\u0131n\u0131 ve sunma motorlar\u0131n\u0131 yedi mimari katmanda s\u0131n\u0131fland\u0131ran, etkile\u015fimli \u00f6\u011frenme katman\u0131na sahip kaynakl\u0131 alan rehberi."
+        "tr": "LLM çalıştırma ortamlarını ve sunma motorlarını yedi mimari katmanda sınıflandıran, etkileşimli öğrenme katmanına sahip kaynaklı alan rehberi."
       },
       "repository": "https://github.com/aserdargun/llm-aserdargun-com",
       "address": "https://llm.aserdargun.com/",
@@ -94,7 +94,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "9285f5c1d1a122b6ca3e040099d4e4b5281a955a",
-      "sourceCount": null,
+      "sourceCount": 31,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
@@ -126,7 +126,7 @@
       "parentApp": null,
       "diagramLabel": {
         "en": "Harness engineering",
-        "tr": "Harness m\u00fchendisli\u011fi"
+        "tr": "Harness mühendisliği"
       },
       "kind": "observatory",
       "systemRole": "core-learning",
@@ -134,7 +134,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -146,7 +146,7 @@
       },
       "summary": {
         "en": "A bilingual, source-backed observatory comparing seven agent-system layers: execution, tools, context, lifecycle, observability, verification, and governance. Evidence and editorial interpretation remain separate; no universal ranking.",
-        "tr": "\u00c7al\u0131\u015ft\u0131rma, ara\u00e7lar, ba\u011flam, ya\u015fam d\u00f6ng\u00fcs\u00fc, g\u00f6zlemlenebilirlik, do\u011frulama ve y\u00f6neti\u015fimden olu\u015fan yedi ajan sistemi katman\u0131n\u0131 kar\u015f\u0131la\u015ft\u0131ran iki dilli, kaynakl\u0131 g\u00f6zlemevi. Kan\u0131t ve editoryal yorum ayr\u0131d\u0131r; evrensel s\u0131ralama \u00fcretmez."
+        "tr": "Çalıştırma, araçlar, bağlam, yaşam döngüsü, gözlemlenebilirlik, doğrulama ve yönetişimden oluşan yedi ajan sistemi katmanını karşılaştıran iki dilli, kaynaklı gözlemevi. Kanıt ve editoryal yorum ayrıdır; evrensel sıralama üretmez."
       },
       "repository": "https://github.com/aserdargun/hns-aserdargun-com",
       "address": "https://hns.aserdargun.com/",
@@ -191,27 +191,27 @@
       "parentApp": "hns",
       "diagramLabel": {
         "en": "Decision plane",
-        "tr": "Karar d\u00fczlemi"
+        "tr": "Karar düzlemi"
       },
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
       "status": "live",
       "statusLabel": {
-        "en": "Live \u00b7 Synthetic simulation",
-        "tr": "Yay\u0131nda \u00b7 Sentetik sim\u00fclasyon"
+        "en": "Live · Synthetic simulation",
+        "tr": "Yayında · Sentetik simülasyon"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "DPL \u2014 Decision Plane Laboratory",
-        "tr": "DPL \u2014 Karar D\u00fczlemi Laboratuvar\u0131"
+        "en": "DPL — Decision Plane Laboratory",
+        "tr": "DPL — Karar Düzlemi Laboratuvarı"
       },
       "summary": {
         "en": "An independent deterministic simulation for the decision plane: take a short path, evaluate further, ask for evidence, wait for approval, abstain or block an action.",
-        "tr": "Karar d\u00fczlemi i\u00e7in ba\u011f\u0131ms\u0131z, deterministik sim\u00fclasyon: k\u0131sa yolu se\u00e7, ek de\u011ferlendirme yap, kan\u0131t iste, onay bekle, \u00e7ekimser kal veya eylemi engelle."
+        "tr": "Karar düzlemi için bağımsız, deterministik simülasyon: kısa yolu seç, ek değerlendirme yap, kanıt iste, onay bekle, çekimser kal veya eylemi engelle."
       },
       "guidingQuestion": {
         "en": "When should an agent decide, ask, wait, or stop?",
@@ -223,7 +223,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "871d6159d996af7d09723290cb82b6df517eb474",
-      "sourceCount": null,
+      "sourceCount": 2,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -250,31 +250,31 @@
       "parentApp": "hns",
       "diagramLabel": {
         "en": "Computer use",
-        "tr": "Bilgisayar kullan\u0131m\u0131"
+        "tr": "Bilgisayar kullanımı"
       },
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
       "status": "live",
       "statusLabel": {
-        "en": "Live \u00b7 Synthetic simulation",
-        "tr": "Yay\u0131nda \u00b7 Sentetik sim\u00fclasyon"
+        "en": "Live · Synthetic simulation",
+        "tr": "Yayında · Sentetik simülasyon"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "CUL \u2014 Computer Use Laboratory",
-        "tr": "CUL \u2014 Bilgisayar Kullan\u0131m\u0131 Laboratuvar\u0131"
+        "en": "CUL — Computer Use Laboratory",
+        "tr": "CUL — Bilgisayar Kullanımı Laboratuvarı"
       },
       "summary": {
         "en": "Observe, act, verify: synthetic computer-use scenarios that keep targeting, approval and result checking inside one controlled browser environment.",
-        "tr": "G\u00f6zlemle, eyleme ge\u00e7, do\u011frula: hedefleme, onay ve sonu\u00e7 denetimini tek bir kontroll\u00fc taray\u0131c\u0131 ortam\u0131nda tutan sentetik bilgisayar kullan\u0131m\u0131 senaryolar\u0131."
+        "tr": "Gözlemle, eyleme geç, doğrula: hedefleme, onay ve sonuç denetimini tek bir kontrollü tarayıcı ortamında tutan sentetik bilgisayar kullanımı senaryoları."
       },
       "guidingQuestion": {
         "en": "How does an agent act on a screen, and how is the result verified?",
-        "tr": "Bir ajan ekranda nas\u0131l eylemde bulunur ve sonu\u00e7 nas\u0131l do\u011frulan\u0131r?"
+        "tr": "Bir ajan ekranda nasıl eylemde bulunur ve sonuç nasıl doğrulanır?"
       },
       "repository": "https://github.com/aserdargun/cul-aserdargun-com",
       "address": "https://cul.aserdargun.com/",
@@ -282,7 +282,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "cf98941c12d90f6541ca4868f09e1ee610a8f4ea",
-      "sourceCount": null,
+      "sourceCount": 3,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -309,15 +309,15 @@
       "parentApp": "hns",
       "diagramLabel": {
         "en": "Agent operating system",
-        "tr": "Ajan i\u015fletim sistemi"
+        "tr": "Ajan işletim sistemi"
       },
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
       "status": "live",
       "statusLabel": {
-        "en": "Live \u00b7 Target architecture",
-        "tr": "Yay\u0131nda \u00b7 Hedef mimari"
+        "en": "Live · Target architecture",
+        "tr": "Yayında · Hedef mimari"
       },
       "languages": [
         "tr",
@@ -325,15 +325,15 @@
       ],
       "title": {
         "en": "Agent Operating System",
-        "tr": "Ajan \u0130\u015fletim Sistemi"
+        "tr": "Ajan İşletim Sistemi"
       },
       "summary": {
         "en": "A public guide to a target agent operating-system architecture: local models, an isolated computer, an open state and human control.",
-        "tr": "Hedef ajan i\u015fletim sistemi mimarisini anlatan kamusal rehber: yerel modeller, izole bir bilgisayar, a\u00e7\u0131k durum ve insan kontrol\u00fc."
+        "tr": "Hedef ajan işletim sistemi mimarisini anlatan kamusal rehber: yerel modeller, izole bir bilgisayar, açık durum ve insan kontrolü."
       },
       "guidingQuestion": {
         "en": "What would an agent operating system need to stay observable and human-controlled?",
-        "tr": "Bir ajan i\u015fletim sisteminin g\u00f6zlemlenebilir ve insan denetiminde kalmas\u0131 i\u00e7in neye ihtiyac\u0131 olur?"
+        "tr": "Bir ajan işletim sisteminin gözlemlenebilir ve insan denetiminde kalması için neye ihtiyacı olur?"
       },
       "repository": "https://github.com/aserdargun/aos-aserdargun-com",
       "address": "https://aos.aserdargun.com/",
@@ -341,7 +341,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "5c151166b9af67a948d4504aae20b6ab16bec99d",
-      "sourceCount": null,
+      "sourceCount": 13,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -367,8 +367,8 @@
       "code": "sec",
       "parentApp": null,
       "diagramLabel": {
-        "en": "Trust \u00b7 security",
-        "tr": "G\u00fcven \u00b7 g\u00fcvenlik"
+        "en": "Trust · security",
+        "tr": "Güven · güvenlik"
       },
       "kind": "observatory",
       "systemRole": "core-learning",
@@ -376,7 +376,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -384,11 +384,11 @@
       ],
       "title": {
         "en": "AI Systems Security Observatory",
-        "tr": "AI Sistemleri G\u00fcvenlik G\u00f6zlemevi"
+        "tr": "AI Sistemleri Güvenlik Gözlemevi"
       },
       "summary": {
         "en": "A bilingual, evidence-aware observatory for tracing AI-agent trust from model intent through identity, authorization, constrained action, audit, and incident recovery.",
-        "tr": "Model niyetinden kimli\u011fe, yetkilendirmeye, k\u0131s\u0131tl\u0131 eyleme, denetime ve olay sonras\u0131 toparlanmaya kadar AI ajanlar\u0131na duyulan g\u00fcveni izleyen iki dilli, kan\u0131t duyarl\u0131 g\u00f6zlemevi."
+        "tr": "Model niyetinden kimliğe, yetkilendirmeye, kısıtlı eyleme, denetime ve olay sonrası toparlanmaya kadar AI ajanlarına duyulan güveni izleyen iki dilli, kanıt duyarlı gözlemevi."
       },
       "repository": "https://github.com/aserdargun/sec-aserdargun-com",
       "address": "https://sec.aserdargun.com/",
@@ -428,8 +428,8 @@
       "code": "ctx",
       "parentApp": null,
       "diagramLabel": {
-        "en": "Context \u00b7 knowledge",
-        "tr": "Ba\u011flam \u00b7 bilgi"
+        "en": "Context · knowledge",
+        "tr": "Bağlam · bilgi"
       },
       "kind": "observatory",
       "systemRole": "core-learning",
@@ -437,7 +437,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -445,11 +445,11 @@
       ],
       "title": {
         "en": "Context & Knowledge Engineering",
-        "tr": "Ba\u011flam ve Bilgi M\u00fchendisli\u011fi"
+        "tr": "Bağlam ve Bilgi Mühendisliği"
       },
       "summary": {
         "en": "A bilingual, source-backed field guide to the information system that runs before a model answers, from ingestion and retrieval through citation, caching, and memory.",
-        "tr": "Model yan\u0131t\u0131ndan \u00f6nce \u00e7al\u0131\u015fan bilgi sistemini al\u0131m ve eri\u015fimden al\u0131nt\u0131lama, \u00f6nbellekleme ve belle\u011fe kadar tasarlamaya yarayan iki dilli, kaynakl\u0131 alan rehberi."
+        "tr": "Model yanıtından önce çalışan bilgi sistemini alım ve erişimden alıntılama, önbellekleme ve belleğe kadar tasarlamaya yarayan iki dilli, kaynaklı alan rehberi."
       },
       "repository": "https://github.com/aserdargun/ctx-aserdargun-com",
       "address": "https://ctx.aserdargun.com/",
@@ -458,8 +458,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "49adfc1828e65ce6ce8848410aa00864bffbef02",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 16,
+      "claimCount": 19,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "hns"
@@ -490,31 +490,31 @@
       "parentApp": "ctx",
       "diagramLabel": {
         "en": "Agent memory",
-        "tr": "Ajan belle\u011fi"
+        "tr": "Ajan belleği"
       },
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
       "status": "live",
       "statusLabel": {
-        "en": "Live \u00b7 Synthetic simulation",
-        "tr": "Yay\u0131nda \u00b7 Sentetik sim\u00fclasyon"
+        "en": "Live · Synthetic simulation",
+        "tr": "Yayında · Sentetik simülasyon"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "MEM \u2014 Agent Memory Laboratory",
-        "tr": "MEM \u2014 Ajan Belle\u011fi Laboratuvar\u0131"
+        "en": "MEM — Agent Memory Laboratory",
+        "tr": "MEM — Ajan Belleği Laboratuvarı"
       },
       "summary": {
         "en": "Explore agent memory across six synthetic scenarios and three memory policies: recall, source and version links, correction, expiry, deletion and JSON export.",
-        "tr": "Ajan belle\u011fini alt\u0131 sentetik senaryo ve \u00fc\u00e7 bellek politikas\u0131nda ke\u015ffet: geri \u00e7a\u011f\u0131rma, kaynak ve s\u00fcr\u00fcm ba\u011flar\u0131, d\u00fczeltme, s\u00fcre sonu, silme ve JSON d\u0131\u015fa aktar\u0131m\u0131."
+        "tr": "Ajan belleğini altı sentetik senaryo ve üç bellek politikasında keşfet: geri çağırma, kaynak ve sürüm bağları, düzeltme, süre sonu, silme ve JSON dışa aktarımı."
       },
       "guidingQuestion": {
         "en": "What should an agent remember, and when should it recheck?",
-        "tr": "Bir ajan neyi hat\u0131rlamal\u0131 ve ne zaman yeniden do\u011frulamal\u0131?"
+        "tr": "Bir ajan neyi hatırlamalı ve ne zaman yeniden doğrulamalı?"
       },
       "repository": "https://github.com/aserdargun/mem-aserdargun-com",
       "address": "https://mem.aserdargun.com/",
@@ -522,7 +522,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "a19067944dd902d51c8be6ea4fe9eb5e8d4a6cf1",
-      "sourceCount": null,
+      "sourceCount": 3,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -549,7 +549,7 @@
       "parentApp": null,
       "diagramLabel": {
         "en": "Evaluation",
-        "tr": "De\u011ferlendirme"
+        "tr": "Değerlendirme"
       },
       "kind": "lab",
       "systemRole": "core-learning",
@@ -557,7 +557,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -565,11 +565,11 @@
       ],
       "title": {
         "en": "AI Evaluation & Reliability Lab",
-        "tr": "AI De\u011ferlendirme ve G\u00fcvenilirlik Laboratuvar\u0131"
+        "tr": "AI Değerlendirme ve Güvenilirlik Laboratuvarı"
       },
       "summary": {
         "en": "A bilingual, evidence-aware workbench for evaluation contracts and deterministic AI release decisions across output, trajectory, outcome, robustness, safety, and operations.",
-        "tr": "\u00c7\u0131kt\u0131, izlenen yol, sonu\u00e7, sa\u011flaml\u0131k, g\u00fcvenlik ve operasyon katmanlar\u0131nda de\u011ferlendirme s\u00f6zle\u015fmeleriyle belirlenebilir AI s\u00fcr\u00fcm kararlar\u0131 \u00fcretmeye yarayan iki dilli, kan\u0131t duyarl\u0131 \u00e7al\u0131\u015fma alan\u0131."
+        "tr": "Çıktı, izlenen yol, sonuç, sağlamlık, güvenlik ve operasyon katmanlarında değerlendirme sözleşmeleriyle belirlenebilir AI sürüm kararları üretmeye yarayan iki dilli, kanıt duyarlı çalışma alanı."
       },
       "repository": "https://github.com/aserdargun/evl-aserdargun-com",
       "address": "https://evl.aserdargun.com/",
@@ -578,7 +578,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "4cc4134169e9d980b04a00c1e68d91a3c2534bbc",
-      "sourceCount": null,
+      "sourceCount": 5,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
@@ -616,7 +616,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -628,7 +628,7 @@
       },
       "summary": {
         "en": "A bilingual learning atlas with eight lessons, a 12-week roadmap, teaching labs and historical experiment evidence for LoRA/QLoRA, datasets, evaluation and local deployment. No live GPU or training; ADP extends adaptation practice with synthetic experiments.",
-        "tr": "LoRA/QLoRA, veri setleri, de\u011ferlendirme ve yerel da\u011f\u0131t\u0131m i\u00e7in sekiz ders, 12 haftal\u0131k yol, \u00f6\u011fretici laboratuvarlar ve ge\u00e7mi\u015f deney kan\u0131tlar\u0131 sunan iki dilli atlas. Canl\u0131 GPU veya e\u011fitim yoktur; ADP, uyarlama prati\u011fini sentetik deneylerle geni\u015fletir."
+        "tr": "LoRA/QLoRA, veri setleri, değerlendirme ve yerel dağıtım için sekiz ders, 12 haftalık yol, öğretici laboratuvarlar ve geçmiş deney kanıtları sunan iki dilli atlas. Canlı GPU veya eğitim yoktur; ADP, uyarlama pratiğini sentetik deneylerle genişletir."
       },
       "repository": "https://github.com/aserdargun/usl-aserdargun-com",
       "address": "https://usl.aserdargun.com/",
@@ -637,8 +637,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "6fb2a130ae9361de574736b86c9d65dc192b3ac3",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 6,
+      "claimCount": 8,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "aia"
@@ -675,19 +675,19 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "GPU Kernel Engineering \u2014 Kernel Atlas",
-        "tr": "GPU Kernel Engineering \u2014 Kernel Atlas"
+        "en": "GPU Kernel Engineering — Kernel Atlas",
+        "tr": "GPU Kernel Engineering — Kernel Atlas"
       },
       "summary": {
         "en": "A bilingual 12-week interactive atlas for CUDA, Triton, GPU memory, LLM operators, correctness, profiling, inference, and multi-GPU systems.",
-        "tr": "CUDA, Triton, GPU belle\u011fi, LLM i\u015fle\u00e7leri, do\u011fruluk, profil \u00e7\u0131karma, \u00e7\u0131kar\u0131m ve \u00e7oklu GPU sistemleri i\u00e7in iki dilli, etkile\u015fimli 12 haftal\u0131k atlas."
+        "tr": "CUDA, Triton, GPU belleği, LLM işleçleri, doğruluk, profil çıkarma, çıkarım ve çoklu GPU sistemleri için iki dilli, etkileşimli 12 haftalık atlas."
       },
       "repository": "https://github.com/aserdargun/gpu-aserdargun-com",
       "address": "https://gpu.aserdargun.com/",
@@ -696,8 +696,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "aa5e569ee1db76c62d8d5aae9d8063eb645aa93d",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 66,
+      "claimCount": 24,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "aia"
@@ -734,23 +734,23 @@
       "visibility": "public",
       "status": "live",
       "statusLabel": {
-        "en": "Live \u00b7 English only",
-        "tr": "Yay\u0131nda \u00b7 \u0130ngilizce"
+        "en": "Live · English only",
+        "tr": "Yayında · İngilizce"
       },
       "languages": [
         "en"
       ],
       "title": {
-        "en": "POL \u2014 Programming Languages",
-        "tr": "POL \u2014 Programlama Dilleri"
+        "en": "POL — Programming Languages",
+        "tr": "POL — Programlama Dilleri"
       },
       "summary": {
         "en": "English-only comparisons of the same tasks across programming languages: types, memory, paradigms and concurrency. Programming foundations that support GPU learning, but are not limited to GPU. Executed examples and hand-reviewed examples remain distinct.",
-        "tr": "\u0130ngilizce aray\u00fczle ayn\u0131 g\u00f6revleri programlama dilleri aras\u0131nda kar\u015f\u0131la\u015ft\u0131r: tipler, bellek, paradigmalar ve e\u015fzamanl\u0131l\u0131k. GPU \u00f6\u011frenimini destekleyen programlama temelleri; kapsam\u0131 GPU ile s\u0131n\u0131rl\u0131 de\u011fil. \u00c7al\u0131\u015ft\u0131r\u0131lan \u00f6rnekler ile elle incelenen \u00f6rnekler ayr\u0131 tutulur."
+        "tr": "İngilizce arayüzle aynı görevleri programlama dilleri arasında karşılaştır: tipler, bellek, paradigmalar ve eşzamanlılık. GPU öğrenimini destekleyen programlama temelleri; kapsamı GPU ile sınırlı değil. Çalıştırılan örnekler ile elle incelenen örnekler ayrı tutulur."
       },
       "guidingQuestion": {
         "en": "How do languages express the same program differently?",
-        "tr": "Diller ayn\u0131 program\u0131 nas\u0131l farkl\u0131 ifade eder?"
+        "tr": "Diller aynı programı nasıl farklı ifade eder?"
       },
       "repository": "https://github.com/aserdargun/pol-aserdargun-com",
       "address": "https://pol.aserdargun.com/",
@@ -773,7 +773,7 @@
       ],
       "nextDirection": {
         "en": "Use programming foundations before GPU kernel study; this is not a GPU execution simulator.",
-        "tr": "GPU kernel \u00e7al\u0131\u015fmas\u0131ndan \u00f6nce programlama temellerini kullan; bu bir GPU y\u00fcr\u00fctme sim\u00fclat\u00f6r\u00fc de\u011fildir."
+        "tr": "GPU kernel çalışmasından önce programlama temellerini kullan; bu bir GPU yürütme simülatörü değildir."
       },
       "lastVerified": "2026-09-29",
       "releaseSha": "8eb22d09c3b42bc4e10f04b7c91b26190e91f13f",
@@ -784,7 +784,7 @@
       "parentApp": null,
       "diagramLabel": {
         "en": "Cloud deployment",
-        "tr": "Bulut da\u011f\u0131t\u0131m\u0131"
+        "tr": "Bulut dağıtımı"
       },
       "kind": "tool",
       "systemRole": "core-learning",
@@ -792,7 +792,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -800,11 +800,11 @@
       ],
       "title": {
         "en": "Cloud Provider Cost Comparison",
-        "tr": "Bulut Sa\u011flay\u0131c\u0131 Maliyet Kar\u015f\u0131la\u015ft\u0131rmas\u0131"
+        "tr": "Bulut Sağlayıcı Maliyet Karşılaştırması"
       },
       "summary": {
-        "en": "A source-backed decision tool comparing pre-tax USD costs for cloud services available from T\u00fcrkiye.",
-        "tr": "T\u00fcrkiye\u2019den eri\u015filebilen bulut servislerini kaynakl\u0131, vergiler hari\u00e7 USD maliyetleriyle kar\u015f\u0131la\u015ft\u0131ran karar destek arac\u0131."
+        "en": "A source-backed decision tool comparing pre-tax USD costs for cloud services available from Türkiye.",
+        "tr": "Türkiye’den erişilebilen bulut servislerini kaynaklı, vergiler hariç USD maliyetleriyle karşılaştıran karar destek aracı."
       },
       "repository": "https://github.com/aserdargun/cld-aserdargun-com",
       "address": "https://cld.aserdargun.com/",
@@ -813,7 +813,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "61c930c3328fde628e96756d05f6708a07114aba",
-      "sourceCount": null,
+      "sourceCount": 66,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
@@ -852,7 +852,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -864,7 +864,7 @@
       },
       "summary": {
         "en": "A bilingual, source-backed workbench matching open-weight model requirements to NVIDIA, AMD, and Apple devices. Explore dated market observations, memory assumptions, compatibility evidence, and concept cards; compare local and cloud deployment assumptions in the shared DCL lab.",
-        "tr": "A\u00e7\u0131k a\u011f\u0131rl\u0131kl\u0131 model gereksinimlerini NVIDIA, AMD ve Apple cihazlar\u0131yla e\u015fle\u015ftiren iki dilli, kaynakl\u0131 \u00e7al\u0131\u015fma alan\u0131. Tarihli fiyat g\u00f6zlemlerini, bellek varsay\u0131mlar\u0131n\u0131, uyumluluk kan\u0131tlar\u0131n\u0131 ve kavram kartlar\u0131n\u0131 incele; ortak DCL laboratuvar\u0131nda yerel ve bulut da\u011f\u0131t\u0131m varsay\u0131mlar\u0131n\u0131 kar\u015f\u0131la\u015ft\u0131r."
+        "tr": "Açık ağırlıklı model gereksinimlerini NVIDIA, AMD ve Apple cihazlarıyla eşleştiren iki dilli, kaynaklı çalışma alanı. Tarihli fiyat gözlemlerini, bellek varsayımlarını, uyumluluk kanıtlarını ve kavram kartlarını incele; ortak DCL laboratuvarında yerel ve bulut dağıtım varsayımlarını karşılaştır."
       },
       "repository": "https://github.com/aserdargun/lcl-aserdargun-com",
       "address": "https://lcl.aserdargun.com/",
@@ -905,7 +905,7 @@
       "parentApp": null,
       "diagramLabel": {
         "en": "World models",
-        "tr": "D\u00fcnya modelleri"
+        "tr": "Dünya modelleri"
       },
       "kind": "atlas",
       "systemRole": "horizon-bridge",
@@ -913,7 +913,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -925,7 +925,7 @@
       },
       "summary": {
         "en": "A living research atlas tracing how world models connect perception, prediction, planning, and action through primary sources.",
-        "tr": "D\u00fcnya modellerinin alg\u0131, tahmin, planlama ve eylem aras\u0131ndaki rol\u00fcn\u00fc birincil kaynaklar \u00fczerinden izleyen ya\u015fayan bir ara\u015ft\u0131rma atlas\u0131."
+        "tr": "Dünya modellerinin algı, tahmin, planlama ve eylem arasındaki rolünü birincil kaynaklar üzerinden izleyen yaşayan bir araştırma atlası."
       },
       "repository": "https://github.com/aserdargun/wfm-aserdargun-com",
       "address": "https://wfm.aserdargun.com/",
@@ -934,8 +934,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "fb637181113170571dad9c0dbea35aa55e4991a7",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 20,
+      "claimCount": 26,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "lcl",
@@ -965,7 +965,7 @@
       "parentApp": null,
       "diagramLabel": {
         "en": "Swarm intelligence",
-        "tr": "S\u00fcr\u00fc zek\u00e2s\u0131"
+        "tr": "Sürü zekâsı"
       },
       "kind": "atlas",
       "systemRole": "horizon-bridge",
@@ -973,19 +973,19 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "SWI \u2014 Swarm Intelligence",
-        "tr": "SWI \u2014 S\u00fcr\u00fc Zek\u00e2s\u0131"
+        "en": "SWI — Swarm Intelligence",
+        "tr": "SWI — Sürü Zekâsı"
       },
       "summary": {
         "en": "A bilingual swarm-intelligence atlas with eight biology dossiers, 21 selected studies and eight static agent experiment templates. SWI observes and explains; ANT and BEE own the colony simulations. Recipes export Markdown/JSON without running agents; the agenda stays in the browser.",
-        "tr": "Sekiz biyoloji dosyas\u0131, se\u00e7ilmi\u015f 21 \u00e7al\u0131\u015fma ve sekiz statik ajan deney \u015fablonu sunan iki dilli s\u00fcr\u00fc zek\u00e2s\u0131 atlas\u0131. SWI g\u00f6zlemler ve a\u00e7\u0131klar; koloni sim\u00fclasyonlar\u0131 ANT ve BEE\u2019ye aittir. Re\u00e7eteler ajan \u00e7al\u0131\u015ft\u0131rmadan Markdown/JSON \u00fcretir; g\u00fcndem taray\u0131c\u0131da kal\u0131r."
+        "tr": "Sekiz biyoloji dosyası, seçilmiş 21 çalışma ve sekiz statik ajan deney şablonu sunan iki dilli sürü zekâsı atlası. SWI gözlemler ve açıklar; koloni simülasyonları ANT ve BEE’ye aittir. Reçeteler ajan çalıştırmadan Markdown/JSON üretir; gündem tarayıcıda kalır."
       },
       "repository": "https://github.com/aserdargun/swi-aserdargun-com",
       "address": "https://swi.aserdargun.com/",
@@ -994,8 +994,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "8b619ed4c9128e0231ce6e2bfdba68c706d6f1be",
-      "sourceCount": null,
-      "claimCount": null,
+      "sourceCount": 4,
+      "claimCount": 6,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "lcl",
@@ -1033,23 +1033,23 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "ANT \u2014 Ant Colony Intelligence Laboratory",
-        "tr": "ANT \u2014 Kar\u0131nca Kolonisi Zek\u00e2 Laboratuvar\u0131"
+        "en": "ANT — Ant Colony Intelligence Laboratory",
+        "tr": "ANT — Karınca Kolonisi Zekâ Laboratuvarı"
       },
       "summary": {
-        "en": "SWI\u2019s companion ant-colony lab: one reproducible experiment, three guided exercises and run replay. Explore local rules, food-pheromone trails and evaporation. Home chemical is observational; returning ants use idealized path integration. No species calibration or guaranteed shortest path; synchronized A/B is future work.",
-        "tr": "SWI\u2019ye e\u015flik eden kar\u0131nca kolonisi laboratuvar\u0131: bir tekrarlanabilir deney, \u00fc\u00e7 rehberli \u00e7al\u0131\u015fma ve deney kayd\u0131 tekrar\u0131. Yerel kurallar\u0131, besin feromonu izlerini ve s\u00f6n\u00fcm\u00fc incele. Yuva kimyasal\u0131 g\u00f6zlem i\u00e7indir; d\u00f6nen kar\u0131ncalar idealize yol b\u00fct\u00fcnlemesi kullan\u0131r. T\u00fcre kalibrasyon veya en k\u0131sa yol garantisi yoktur; e\u015fzamanl\u0131 A/B ileriki a\u015famad\u0131r."
+        "en": "SWI’s companion ant-colony lab: one reproducible experiment, three guided exercises and run replay. Explore local rules, food-pheromone trails and evaporation. Home chemical is observational; returning ants use idealized path integration. No species calibration or guaranteed shortest path; synchronized A/B is future work.",
+        "tr": "SWI’ye eşlik eden karınca kolonisi laboratuvarı: bir tekrarlanabilir deney, üç rehberli çalışma ve deney kaydı tekrarı. Yerel kuralları, besin feromonu izlerini ve sönümü incele. Yuva kimyasalı gözlem içindir; dönen karıncalar idealize yol bütünlemesi kullanır. Türe kalibrasyon veya en kısa yol garantisi yoktur; eşzamanlı A/B ileriki aşamadır."
       },
       "guidingQuestion": {
         "en": "How can local chemical traces coordinate foraging without a central plan?",
-        "tr": "Yerel kimyasal izler merkezi bir plan olmadan besin aramay\u0131 nas\u0131l koordine edebilir?"
+        "tr": "Yerel kimyasal izler merkezi bir plan olmadan besin aramayı nasıl koordine edebilir?"
       },
       "repository": "https://github.com/aserdargun/ant-aserdargun-com",
       "address": "https://ant.aserdargun.com/",
@@ -1057,7 +1057,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "6de6d3f64ff69553729c4a4b4427ec293a09dfee",
-      "sourceCount": null,
+      "sourceCount": 2,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -1086,7 +1086,7 @@
       "parentApp": "swi",
       "diagramLabel": {
         "en": "Dance communication",
-        "tr": "Dans ileti\u015fimi"
+        "tr": "Dans iletişimi"
       },
       "kind": "lab",
       "systemRole": "lab",
@@ -1094,23 +1094,23 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "BEE \u2014 Honey Bee Collective Intelligence Laboratory",
-        "tr": "BEE \u2014 Bal Ar\u0131s\u0131 Kolektif Zek\u00e2 Laboratuvar\u0131"
+        "en": "BEE — Honey Bee Collective Intelligence Laboratory",
+        "tr": "BEE — Bal Arısı Kolektif Zekâ Laboratuvarı"
       },
       "summary": {
-        "en": "Four deterministic, bilingual experiments within SWI\u2019s research family: explore local discovery, private memory, dance recruitment and resource allocation with a same-seed dance-off control, guided lessons and JSON replay. An Apis mellifera-inspired educational model; results use model units, not field measurements or biological predictions.",
-        "tr": "SWI ara\u015ft\u0131rma ailesinde d\u00f6rt deterministik, iki dilli deney: yerel ke\u015ffi, bireysel haf\u0131zay\u0131, dansla kat\u0131l\u0131m\u0131 ve kaynak da\u011f\u0131l\u0131m\u0131n\u0131 ayn\u0131 seed ile dans\u0131 kapal\u0131 kontrol, rehberli dersler ve JSON yeniden oynatma ile incele. Apis mellifera esinli e\u011fitim modelidir; sonu\u00e7lar model birimleridir, saha \u00f6l\u00e7\u00fcm\u00fc veya biyolojik tahmin de\u011fildir."
+        "en": "Four deterministic, bilingual experiments within SWI’s research family: explore local discovery, private memory, dance recruitment and resource allocation with a same-seed dance-off control, guided lessons and JSON replay. An Apis mellifera-inspired educational model; results use model units, not field measurements or biological predictions.",
+        "tr": "SWI araştırma ailesinde dört deterministik, iki dilli deney: yerel keşfi, bireysel hafızayı, dansla katılımı ve kaynak dağılımını aynı seed ile dansı kapalı kontrol, rehberli dersler ve JSON yeniden oynatma ile incele. Apis mellifera esinli eğitim modelidir; sonuçlar model birimleridir, saha ölçümü veya biyolojik tahmin değildir."
       },
       "guidingQuestion": {
         "en": "How do private memory and local dance signals shape collective foraging in this model?",
-        "tr": "Bu modelde bireysel haf\u0131za ve yerel dans sinyalleri ortak besin aramay\u0131 nas\u0131l \u015fekillendirir?"
+        "tr": "Bu modelde bireysel hafıza ve yerel dans sinyalleri ortak besin aramayı nasıl şekillendirir?"
       },
       "repository": "https://github.com/aserdargun/bee-aserdargun-com",
       "address": "https://bee.aserdargun.com/",
@@ -1118,7 +1118,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "14eceaa40227a47425eb2eeaae1a6f5a928ff8e9",
-      "sourceCount": null,
+      "sourceCount": 3,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -1147,7 +1147,7 @@
       "parentApp": null,
       "diagramLabel": {
         "en": "Industrial twins",
-        "tr": "End\u00fcstriyel ikizler"
+        "tr": "Endüstriyel ikizler"
       },
       "kind": "lab",
       "systemRole": "lab",
@@ -1155,7 +1155,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "en"
@@ -1166,7 +1166,7 @@
       },
       "summary": {
         "en": "An English research publication with authored deterministic P-101 evidence fixtures. Explore pump anatomy in PDT and computed synthetic decision experiments in DTR; each application has separate models and state, with no field connection or control authority.",
-        "tr": "Haz\u0131rlanm\u0131\u015f deterministik P-101 kan\u0131t \u00f6rnekleri sunan \u0130ngilizce ara\u015ft\u0131rma yay\u0131n\u0131. PDT pompa anatomisini, DTR hesaplanan sentetik karar deneylerini ke\u015ffettirir; uygulamalar\u0131n modelleri ve durumlar\u0131 ayr\u0131d\u0131r, saha ba\u011flant\u0131s\u0131 veya kontrol yetkisi yoktur."
+        "tr": "Hazırlanmış deterministik P-101 kanıt örnekleri sunan İngilizce araştırma yayını. PDT pompa anatomisini, DTR hesaplanan sentetik karar deneylerini keşfettirir; uygulamaların modelleri ve durumları ayrıdır, saha bağlantısı veya kontrol yetkisi yoktur."
       },
       "repository": "https://github.com/aserdargun/itl-aserdargun-com",
       "address": "https://itl.aserdargun.com/",
@@ -1175,7 +1175,7 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "7d13268f52782491c0440385d3bd3a8368979891",
-      "sourceCount": null,
+      "sourceCount": 7,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
@@ -1207,15 +1207,15 @@
       "parentApp": null,
       "diagramLabel": {
         "en": "Humanoid engineering",
-        "tr": "\u0130nsans\u0131 robot m\u00fchendisli\u011fi"
+        "tr": "İnsansı robot mühendisliği"
       },
       "kind": "horizon",
       "systemRole": "horizon",
       "visibility": "public",
       "status": "active",
       "statusLabel": {
-        "en": "Horizon \u00b7 English manifesto",
-        "tr": "Ufuk \u00b7 \u0130ngilizce manifesto"
+        "en": "Horizon · English manifesto",
+        "tr": "Ufuk · İngilizce manifesto"
       },
       "languages": [
         "en"
@@ -1225,8 +1225,8 @@
         "tr": "Open Humanoid Engineering"
       },
       "summary": {
-        "en": "The learning system\u2019s humanoid engineering horizon: an English manifesto following ITL, with HEX as its exploration companion. The proposed four-year spine, AI lab pipeline, and dated 2026 frontier signals are primary sources of truth. Seven specializations lead to portfolios; no degree, running AI laboratory, or completed physical robot is claimed.",
-        "tr": "\u00d6\u011frenme sisteminin insans\u0131 robot m\u00fchendisli\u011fi ufku: ITL\u2019den ilerleyen, HEX\u2019in ke\u015fifle e\u015flik etti\u011fi \u0130ngilizce manifesto. \u00d6nerilen d\u00f6rt y\u0131ll\u0131k omurga, AI laboratuvar ak\u0131\u015f\u0131 ve tarihli 2026 ara\u015ft\u0131rma sinyalleri temel do\u011fruluk kaynaklar\u0131d\u0131r. Yedi uzmanl\u0131k portf\u00f6ye y\u00f6nelir; diploma, \u00e7al\u0131\u015fan AI laboratuvar\u0131 veya tamamlanm\u0131\u015f fiziksel robot iddias\u0131 yoktur."
+        "en": "The learning system’s humanoid engineering horizon: an English manifesto following ITL, with HEX as its exploration companion. The proposed four-year spine, AI lab pipeline, and dated 2026 frontier signals are primary sources of truth. Seven specializations lead to portfolios; no degree, running AI laboratory, or completed physical robot is claimed.",
+        "tr": "Öğrenme sisteminin insansı robot mühendisliği ufku: ITL’den ilerleyen, HEX’in keşifle eşlik ettiği İngilizce manifesto. Önerilen dört yıllık omurga, AI laboratuvar akışı ve tarihli 2026 araştırma sinyalleri temel doğruluk kaynaklarıdır. Yedi uzmanlık portföye yönelir; diploma, çalışan AI laboratuvarı veya tamamlanmış fiziksel robot iddiası yoktur."
       },
       "repository": "https://github.com/aserdargun/eng-aserdargun-com",
       "address": "https://eng.aserdargun.com/",
@@ -1262,7 +1262,7 @@
       ],
       "guidingQuestion": {
         "en": "How can an AI-native team turn a digital humanoid design into evidence for human review?",
-        "tr": "Yapay zek\u00e2yla \u00e7al\u0131\u015fan bir ekip, dijital insans\u0131 robot tasar\u0131m\u0131n\u0131 insan incelemesine sunulacak kan\u0131ta nas\u0131l d\u00f6n\u00fc\u015ft\u00fcrebilir?"
+        "tr": "Yapay zekâyla çalışan bir ekip, dijital insansı robot tasarımını insan incelemesine sunulacak kanıta nasıl dönüştürebilir?"
       }
     },
     {
@@ -1270,7 +1270,7 @@
       "parentApp": "gpu",
       "diagramLabel": {
         "en": "Kernel execution",
-        "tr": "Kernel y\u00fcr\u00fctme"
+        "tr": "Kernel yürütme"
       },
       "kind": "lab",
       "systemRole": "lab",
@@ -1278,7 +1278,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -1286,21 +1286,21 @@
       ],
       "title": {
         "en": "GPU Execution Explorer",
-        "tr": "GPU Y\u00fcr\u00fctme Gezgini"
+        "tr": "GPU Yürütme Gezgini"
       },
       "summary": {
         "en": "Trace GPU anatomy, kernel launches, warp masks, memory access, and matrix tiles through six interactive lessons. Results come from an educational execution model, not profiler measurements.",
-        "tr": "Alt\u0131 etkile\u015fimli dersle GPU anatomisini, kernel ba\u015flatmay\u0131, warp maskelerini, bellek eri\u015fimini ve matris bloklar\u0131n\u0131 izle. Sonu\u00e7lar profil \u00f6l\u00e7\u00fcm\u00fcnden de\u011fil, e\u011fitim ama\u00e7l\u0131 y\u00fcr\u00fctme modelinden gelir."
+        "tr": "Altı etkileşimli dersle GPU anatomisini, kernel başlatmayı, warp maskelerini, bellek erişimini ve matris bloklarını izle. Sonuçlar profil ölçümünden değil, eğitim amaçlı yürütme modelinden gelir."
       },
       "guidingQuestion": {
         "en": "How does a kernel become hardware execution?",
-        "tr": "Bir kernel donan\u0131m \u00fczerinde nas\u0131l y\u00fcr\u00fct\u00fcl\u00fcr?"
+        "tr": "Bir kernel donanım üzerinde nasıl yürütülür?"
       },
       "repository": "https://github.com/aserdargun/gex-aserdargun-com",
       "address": "https://gex.aserdargun.com/",
       "updatedAt": "2026-09-21",
       "lastVerified": "2026-09-29",
-      "sourceCount": null,
+      "sourceCount": 6,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -1337,23 +1337,23 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "TFL \u2014 Token Flow Laboratory",
-        "tr": "TFL \u2014 Token Ak\u0131\u015f\u0131 Laboratuvar\u0131"
+        "en": "TFL — Token Flow Laboratory",
+        "tr": "TFL — Token Akışı Laboratuvarı"
       },
       "summary": {
         "en": "Explore nine deterministic serving experiments and ten guided checkpoints: queueing, prefill, KV reservations, decode and token delivery. Compare scheduling, latency and throughput; token text is scripted and timings are synthetic, with no model execution or hardware benchmark.",
-        "tr": "Dokuz deterministik sunum deneyi ve on rehberli kontrol noktas\u0131yla kuyruk, \u00f6n doldurma, KV rezervasyonlar\u0131, \u00e7\u00f6z\u00fcmleme ve token iletimini ke\u015ffet. Zamanlama, gecikme ve verimi kar\u015f\u0131la\u015ft\u0131r; token metni haz\u0131rlanm\u0131\u015ft\u0131r, s\u00fcreler sentetiktir. Ger\u00e7ek model veya donan\u0131m k\u0131yaslamas\u0131 \u00e7al\u0131\u015fmaz."
+        "tr": "Dokuz deterministik sunum deneyi ve on rehberli kontrol noktasıyla kuyruk, ön doldurma, KV rezervasyonları, çözümleme ve token iletimini keşfet. Zamanlama, gecikme ve verimi karşılaştır; token metni hazırlanmıştır, süreler sentetiktir. Gerçek model veya donanım kıyaslaması çalışmaz."
       },
       "guidingQuestion": {
-        "en": "How do finite serving resources shape a request\u2019s path to its next token?",
-        "tr": "Sonlu sunum kaynaklar\u0131 bir iste\u011fin sonraki tokena giden yolunu nas\u0131l \u015fekillendirir?"
+        "en": "How do finite serving resources shape a request’s path to its next token?",
+        "tr": "Sonlu sunum kaynakları bir isteğin sonraki tokena giden yolunu nasıl şekillendirir?"
       },
       "repository": "https://github.com/aserdargun/tfl-aserdargun-com",
       "address": "https://tfl.aserdargun.com/",
@@ -1388,7 +1388,7 @@
       "parentApp": "hns",
       "diagramLabel": {
         "en": "Agent runtime",
-        "tr": "Ajan \u00e7al\u0131\u015fma zaman\u0131"
+        "tr": "Ajan çalışma zamanı"
       },
       "kind": "lab",
       "systemRole": "lab",
@@ -1396,23 +1396,23 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "ARL \u2014 Agent Runtime Laboratory",
-        "tr": "ARL \u2014 Ajan \u00c7al\u0131\u015fma Zaman\u0131 Laboratuvar\u0131"
+        "en": "ARL — Agent Runtime Laboratory",
+        "tr": "ARL — Ajan Çalışma Zamanı Laboratuvarı"
       },
       "summary": {
         "en": "Inspect a deterministic agent run through harness, context, security and evaluation lenses. Explore tool use, evidence and one-use approval; all actions remain inside the simulation.",
-        "tr": "Deterministik bir ajan y\u00fcr\u00fctmesini harness, ba\u011flam, g\u00fcvenlik ve de\u011ferlendirme a\u00e7\u0131s\u0131ndan incele. Ara\u00e7 kullan\u0131m\u0131n\u0131, kan\u0131tlar\u0131 ve tek kullan\u0131ml\u0131k onay\u0131 ke\u015ffet; t\u00fcm eylemler sim\u00fclasyon i\u00e7inde kal\u0131r."
+        "tr": "Deterministik bir ajan yürütmesini harness, bağlam, güvenlik ve değerlendirme açısından incele. Araç kullanımını, kanıtları ve tek kullanımlık onayı keşfet; tüm eylemler simülasyon içinde kalır."
       },
       "guidingQuestion": {
         "en": "What happens between intent and action?",
-        "tr": "Niyet ile eylem aras\u0131nda ne olur?"
+        "tr": "Niyet ile eylem arasında ne olur?"
       },
       "repository": "https://github.com/aserdargun/arl-aserdargun-com",
       "address": "https://arl.aserdargun.com/",
@@ -1454,23 +1454,23 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "ADP \u2014 Model Adaptation Laboratory",
-        "tr": "ADP \u2014 Model Uyarlama Laboratuvar\u0131"
+        "en": "ADP — Model Adaptation Laboratory",
+        "tr": "ADP — Model Uyarlama Laboratuvarı"
       },
       "summary": {
         "en": "Explore Full FT, LoRA and QLoRA through parameter counts, memory estimates, data preparation and synthetic training/evaluation experiments. USL provides the adaptation foundation; an optional DCL handoff carries educational workload metadata into deployment planning. No real model is trained or deployed.",
-        "tr": "Full FT, LoRA ve QLoRA y\u00f6ntemlerini parametre say\u0131lar\u0131, bellek tahminleri, veri haz\u0131rl\u0131\u011f\u0131 ve sentetik e\u011fitim/de\u011ferlendirme deneyleriyle ke\u015ffet. USL uyarlaman\u0131n temelini sunar; iste\u011fe ba\u011fl\u0131 DCL aktar\u0131m\u0131 e\u011fitim ama\u00e7l\u0131 i\u015f y\u00fck\u00fc bilgilerini da\u011f\u0131t\u0131m planlamas\u0131na ta\u015f\u0131r. Ger\u00e7ek model e\u011fitilmez veya yay\u0131na al\u0131nmaz."
+        "tr": "Full FT, LoRA ve QLoRA yöntemlerini parametre sayıları, bellek tahminleri, veri hazırlığı ve sentetik eğitim/değerlendirme deneyleriyle keşfet. USL uyarlamanın temelini sunar; isteğe bağlı DCL aktarımı eğitim amaçlı iş yükü bilgilerini dağıtım planlamasına taşır. Gerçek model eğitilmez veya yayına alınmaz."
       },
       "guidingQuestion": {
         "en": "How does a base model become adapted to a task?",
-        "tr": "Temel model bir g\u00f6reve nas\u0131l uyarlan\u0131r?"
+        "tr": "Temel model bir göreve nasıl uyarlanır?"
       },
       "repository": "https://github.com/aserdargun/adp-aserdargun-com",
       "address": "https://adp.aserdargun.com/",
@@ -1512,7 +1512,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -1520,15 +1520,15 @@
       ],
       "title": {
         "en": "World Model Laboratory",
-        "tr": "D\u00fcnya Modeli Laboratuvar\u0131"
+        "tr": "Dünya Modeli Laboratuvarı"
       },
       "summary": {
-        "en": "Explore observation, belief, prediction, planning, and counterfactual branches in WFM\u2019s experiment laboratory. Compare three hand-coded predictors against a simulated world; these are not trained foundation models.",
-        "tr": "WFM\u2019nin deney laboratuvar\u0131nda g\u00f6zlemi, inanc\u0131, tahmini, planlamay\u0131 ve alternatif eylem dallar\u0131n\u0131 ke\u015ffet. Elle tan\u0131mlanm\u0131\u015f \u00fc\u00e7 tahmin modelini sim\u00fcle edilen d\u00fcnyayla kar\u015f\u0131la\u015ft\u0131r; bunlar e\u011fitilmi\u015f temel modeller de\u011fildir."
+        "en": "Explore observation, belief, prediction, planning, and counterfactual branches in WFM’s experiment laboratory. Compare three hand-coded predictors against a simulated world; these are not trained foundation models.",
+        "tr": "WFM’nin deney laboratuvarında gözlemi, inancı, tahmini, planlamayı ve alternatif eylem dallarını keşfet. Elle tanımlanmış üç tahmin modelini simüle edilen dünyayla karşılaştır; bunlar eğitilmiş temel modeller değildir."
       },
       "guidingQuestion": {
         "en": "How does a prediction change when beliefs or actions change?",
-        "tr": "\u0130nan\u00e7 veya eylem de\u011fi\u015fti\u011finde tahmin nas\u0131l de\u011fi\u015fir?"
+        "tr": "İnanç veya eylem değiştiğinde tahmin nasıl değişir?"
       },
       "repository": "https://github.com/aserdargun/wml-aserdargun-com",
       "address": "https://wml.aserdargun.com/",
@@ -1561,31 +1561,31 @@
       "parentApp": "itl",
       "diagramLabel": {
         "en": "Digital triplet",
-        "tr": "Dijital \u00fc\u00e7\u00fcz"
+        "tr": "Dijital üçüz"
       },
       "kind": "lab",
       "systemRole": "lab",
       "visibility": "public",
       "status": "live",
       "statusLabel": {
-        "en": "Live \u00b7 Synthetic simulation",
-        "tr": "Yay\u0131nda \u00b7 Sentetik sim\u00fclasyon"
+        "en": "Live · Synthetic simulation",
+        "tr": "Yayında · Sentetik simülasyon"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "DTR \u2014 Digital Triplet Laboratory",
-        "tr": "DTR \u2014 Dijital \u00dc\u00e7\u00fcz Laboratuvar\u0131"
+        "en": "DTR — Digital Triplet Laboratory",
+        "tr": "DTR — Dijital Üçüz Laboratuvarı"
       },
       "summary": {
-        "en": "Explore six synthetic pumping scenarios with an independent twin, three 60-second alternatives, explicit human approval, prediction\u2013outcome comparison and JSON experiment records. Runs entirely in the browser with explainable rules; no LLM, field telemetry or machine commands.",
-        "tr": "Alt\u0131 sentetik pompalama senaryosunda ba\u011f\u0131ms\u0131z ikizi, 60 saniyelik \u00fc\u00e7 alternatifi, a\u00e7\u0131k insan onay\u0131n\u0131, tahmin\u2013sonu\u00e7 kar\u015f\u0131la\u015ft\u0131rmas\u0131n\u0131 ve JSON deney kayd\u0131n\u0131 incele. A\u00e7\u0131klanabilir kurallarla tamamen taray\u0131c\u0131da \u00e7al\u0131\u015f\u0131r; LLM, saha telemetrisi veya makine komutu yoktur."
+        "en": "Explore six synthetic pumping scenarios with an independent twin, three 60-second alternatives, explicit human approval, prediction–outcome comparison and JSON experiment records. Runs entirely in the browser with explainable rules; no LLM, field telemetry or machine commands.",
+        "tr": "Altı sentetik pompalama senaryosunda bağımsız ikizi, 60 saniyelik üç alternatifi, açık insan onayını, tahmin–sonuç karşılaştırmasını ve JSON deney kaydını incele. Açıklanabilir kurallarla tamamen tarayıcıda çalışır; LLM, saha telemetrisi veya makine komutu yoktur."
       },
       "guidingQuestion": {
         "en": "When does a twin prediction support a decision, and what does the outcome reveal?",
-        "tr": "\u0130kiz tahmini bir karar\u0131 ne zaman destekler; ger\u00e7ekle\u015fen sonu\u00e7 neyi g\u00f6sterir?"
+        "tr": "İkiz tahmini bir kararı ne zaman destekler; gerçekleşen sonuç neyi gösterir?"
       },
       "repository": "https://github.com/aserdargun/dtr-aserdargun-com",
       "address": "https://dtr.aserdargun.com/",
@@ -1614,7 +1614,7 @@
       ],
       "nextDirection": {
         "en": "Compare model assumptions with computed outcomes; a better fit and browser approval do not establish field validation or control authority.",
-        "tr": "Model varsay\u0131mlar\u0131n\u0131 hesaplanm\u0131\u015f sonu\u00e7larla kar\u015f\u0131la\u015ft\u0131r; daha iyi uyum ve taray\u0131c\u0131 onay\u0131 saha ge\u00e7erlemesi veya kontrol yetkisi olu\u015fturmaz."
+        "tr": "Model varsayımlarını hesaplanmış sonuçlarla karşılaştır; daha iyi uyum ve tarayıcı onayı saha geçerlemesi veya kontrol yetkisi oluşturmaz."
       }
     },
     {
@@ -1630,7 +1630,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -1638,15 +1638,15 @@
       ],
       "title": {
         "en": "P-101 Interactive Digital Twin",
-        "tr": "P-101 Etkile\u015fimli Dijital \u0130kiz"
+        "tr": "P-101 Etkileşimli Dijital İkiz"
       },
       "summary": {
         "en": "Explore P-101 through four views, nine components, eight sensor locations and five authored pump conditions. Compare qualitative synthetic signals; this ITL teaching companion has no live telemetry or shared experiment state.",
-        "tr": "P-101\u2019i d\u00f6rt g\u00f6r\u00fcn\u00fcm, dokuz bile\u015fen, sekiz sens\u00f6r konumu ve be\u015f kurgulanm\u0131\u015f pompa durumuyla ke\u015ffet. Nitel sentetik sinyalleri kar\u015f\u0131la\u015ft\u0131r; bu ITL e\u011fitim uygulamas\u0131 canl\u0131 telemetri veya ortak deney durumu i\u00e7ermez."
+        "tr": "P-101’i dört görünüm, dokuz bileşen, sekiz sensör konumu ve beş kurgulanmış pompa durumuyla keşfet. Nitel sentetik sinyalleri karşılaştır; bu ITL eğitim uygulaması canlı telemetri veya ortak deney durumu içermez."
       },
       "guidingQuestion": {
         "en": "How do pump components relate to operating conditions?",
-        "tr": "Pompa bile\u015fenleri \u00e7al\u0131\u015fma ko\u015fullar\u0131yla nas\u0131l ili\u015fkilidir?"
+        "tr": "Pompa bileşenleri çalışma koşullarıyla nasıl ilişkilidir?"
       },
       "repository": "https://github.com/aserdargun/pdt-aserdargun-com",
       "address": "https://pdt.aserdargun.com/",
@@ -1678,7 +1678,7 @@
       "parentApp": "eng",
       "diagramLabel": {
         "en": "Humanoid exploration",
-        "tr": "\u0130nsans\u0131 robot ke\u015ffi"
+        "tr": "İnsansı robot keşfi"
       },
       "kind": "lab",
       "systemRole": "lab",
@@ -1686,7 +1686,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -1694,21 +1694,21 @@
       ],
       "title": {
         "en": "Humanoid Engineering Explorer",
-        "tr": "\u0130nsans\u0131 Robot M\u00fchendisli\u011fi Gezgini"
+        "tr": "İnsansı Robot Mühendisliği Gezgini"
       },
       "summary": {
-        "en": "Explore humanoid structure, joints, actuation, sensors, and power/data paths through ENG\u2019s interactive 3D learning object. Movements are kinematic teaching aids, with no asserted dynamics or hardware performance.",
-        "tr": "ENG\u2019nin etkile\u015fimli 3B \u00f6\u011frenme uygulamas\u0131nda insans\u0131 robot yap\u0131s\u0131n\u0131, eklemleri, eyleyicileri, sens\u00f6rleri ve g\u00fc\u00e7/veri yollar\u0131n\u0131 ke\u015ffet. Hareketler kinematik \u00f6\u011fretim \u00f6rnekleridir; dinamik veya donan\u0131m performans\u0131 iddias\u0131 ta\u015f\u0131maz."
+        "en": "Explore humanoid structure, joints, actuation, sensors, and power/data paths through ENG’s interactive 3D learning object. Movements are kinematic teaching aids, with no asserted dynamics or hardware performance.",
+        "tr": "ENG’nin etkileşimli 3B öğrenme uygulamasında insansı robot yapısını, eklemleri, eyleyicileri, sensörleri ve güç/veri yollarını keşfet. Hareketler kinematik öğretim örnekleridir; dinamik veya donanım performansı iddiası taşımaz."
       },
       "guidingQuestion": {
         "en": "How do body, joints, sensing, and control work together?",
-        "tr": "G\u00f6vde, eklemler, alg\u0131lama ve kontrol birlikte nas\u0131l \u00e7al\u0131\u015f\u0131r?"
+        "tr": "Gövde, eklemler, algılama ve kontrol birlikte nasıl çalışır?"
       },
       "repository": "https://github.com/aserdargun/hex-aserdargun-com",
       "address": "https://hex.aserdargun.com/",
       "updatedAt": "2026-09-21",
       "lastVerified": "2026-09-29",
-      "sourceCount": null,
+      "sourceCount": 4,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
@@ -1739,7 +1739,7 @@
       ],
       "diagramLabel": {
         "en": "Shared deployment lab",
-        "tr": "Ortak da\u011f\u0131t\u0131m lab\u0131"
+        "tr": "Ortak dağıtım labı"
       },
       "kind": "lab",
       "systemRole": "lab",
@@ -1747,7 +1747,7 @@
       "status": "live",
       "statusLabel": {
         "en": "Live",
-        "tr": "Yay\u0131nda"
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -1755,15 +1755,15 @@
       ],
       "title": {
         "en": "Deployment Choice Laboratory",
-        "tr": "Da\u011f\u0131t\u0131m Karar Laboratuvar\u0131"
+        "tr": "Dağıtım Karar Laboratuvarı"
       },
       "summary": {
         "en": "The shared laboratory of CLD and LCL. Compare local hardware, cloud GPUs, managed inference and token APIs against workload, memory, privacy and cost assumptions. Hard constraints and educational estimates explain conditional choices; no live pricing or universal winner is claimed.",
-        "tr": "CLD ve LCL\u2019nin ortak laboratuvar\u0131. Yerel donan\u0131m, bulut GPU, y\u00f6netilen \u00e7\u0131kar\u0131m ve token API se\u00e7eneklerini i\u015f y\u00fck\u00fc, bellek, gizlilik ve maliyet varsay\u0131mlar\u0131yla kar\u015f\u0131la\u015ft\u0131r. Kesin k\u0131s\u0131tlar ve e\u011fitim ama\u00e7l\u0131 tahminler ko\u015fullu kararlar\u0131 a\u00e7\u0131klar; canl\u0131 fiyat veya evrensel kazanan iddias\u0131 yoktur."
+        "tr": "CLD ve LCL’nin ortak laboratuvarı. Yerel donanım, bulut GPU, yönetilen çıkarım ve token API seçeneklerini iş yükü, bellek, gizlilik ve maliyet varsayımlarıyla karşılaştır. Kesin kısıtlar ve eğitim amaçlı tahminler koşullu kararları açıklar; canlı fiyat veya evrensel kazanan iddiası yoktur."
       },
       "guidingQuestion": {
         "en": "Where should this workload run, and under which assumptions?",
-        "tr": "Bu i\u015f y\u00fck\u00fc nerede ve hangi varsay\u0131mlarla \u00e7al\u0131\u015fmal\u0131?"
+        "tr": "Bu iş yükü nerede ve hangi varsayımlarla çalışmalı?"
       },
       "repository": "https://github.com/aserdargun/dcl-aserdargun-com",
       "address": "https://dcl.aserdargun.com/",
@@ -1803,24 +1803,24 @@
         "timeframe": "week",
         "title": {
           "en": "Closing the portfolio evidence loop",
-          "tr": "Portf\u00f6y kan\u0131t d\u00f6ng\u00fcs\u00fcn\u00fc kapatmak"
+          "tr": "Portföy kanıt döngüsünü kapatmak"
         },
         "summary": {
-          "en": "On 21 September I refreshed all thirty portfolio applications in a single pass \u2014 atlas audits for AIA evidence and LLM vLLM upstream, bilingual parity for GPU, USL, LCL and POL, research-source refreshes for HNS, CTX, SEC and EVL, and clarified collective-intelligence scope across SWI, ANT and BEE. This week I am turning that release wave into the public operating map: dated evidence on every application, accessible topology on the homepage, and freshness badges that tell visitors when a page needs a refresh.",
-          "tr": "21 Eyl\u00fcl\u2019de otuz alt uygulaman\u0131n hepsini tek ge\u00e7i\u015fte yeniledim \u2014 AIA kan\u0131t ve LLM vLLM upstream atlas denetimleri, GPU, USL, LCL ve POL i\u00e7in dil e\u015fli\u011fi, HNS, CTX, SEC ve EVL i\u00e7in kaynak tazeleme ve SWI, ANT, BEE genelinde kolektif zek\u00e2 kapsam\u0131n\u0131n netle\u015ftirilmesi. Bu hafta o yay\u0131n dalgas\u0131n\u0131 kamusal i\u015fletim haritas\u0131na d\u00f6n\u00fc\u015ft\u00fcr\u00fcyorum: her uygulamada tarihli kan\u0131t, ana sayfada eri\u015filebilir topoloji ve bir sayfan\u0131n ne zaman yenilenmesi gerekti\u011fini ziyaret\u00e7iye s\u00f6yleyen tazelik rozeti."
+          "en": "On 21 September I refreshed all thirty portfolio applications in a single pass — atlas audits for AIA evidence and LLM vLLM upstream, bilingual parity for GPU, USL, LCL and POL, research-source refreshes for HNS, CTX, SEC and EVL, and clarified collective-intelligence scope across SWI, ANT and BEE. This week I am turning that release wave into the public operating map: dated evidence on every application, accessible topology on the homepage, and freshness badges that tell visitors when a page needs a refresh.",
+          "tr": "21 Eylül’de otuz alt uygulamanın hepsini tek geçişte yeniledim — AIA kanıt ve LLM vLLM upstream atlas denetimleri, GPU, USL, LCL ve POL için dil eşliği, HNS, CTX, SEC ve EVL için kaynak tazeleme ve SWI, ANT, BEE genelinde kolektif zekâ kapsamının netleştirilmesi. Bu hafta o yayın dalgasını kamusal işletim haritasına dönüştürüyorum: her uygulamada tarihli kanıt, ana sayfada erişilebilir topoloji ve bir sayfanın ne zaman yenilenmesi gerektiğini ziyaretçiye söyleyen tazelik rozeti."
         },
         "tags": [
           {
             "en": "Portfolio refresh",
-            "tr": "Portf\u00f6y tazeleme"
+            "tr": "Portföy tazeleme"
           },
           {
             "en": "Bilingual parity",
-            "tr": "Dil e\u015fli\u011fi"
+            "tr": "Dil eşliği"
           },
           {
             "en": "Evidence loop",
-            "tr": "Kan\u0131t d\u00f6ng\u00fcs\u00fc"
+            "tr": "Kanıt döngüsü"
           },
           {
             "en": "Freshness signals",
@@ -1833,28 +1833,28 @@
         "timeframe": "month",
         "title": {
           "en": "Making the portfolio operate as one system",
-          "tr": "Portf\u00f6y\u00fc tek bir sistem gibi \u00e7al\u0131\u015ft\u0131rmak"
+          "tr": "Portföyü tek bir sistem gibi çalıştırmak"
         },
         "summary": {
           "en": "This month I am treating each atlas, lab, and observatory as part of one public operating map: verified identities, dated evidence, clear boundaries, and a release path that stays consistent from source to production.",
-          "tr": "Bu ay her atlas\u0131, laboratuvar\u0131 ve g\u00f6zlemevini tek bir kamusal i\u015fletim haritas\u0131n\u0131n par\u00e7as\u0131 olarak ele al\u0131yorum: do\u011frulanm\u0131\u015f kimlikler, tarihli kan\u0131tlar, a\u00e7\u0131k s\u0131n\u0131rlar ve kaynaktan \u00fcretime tutarl\u0131 kalan bir yay\u0131n yolu."
+          "tr": "Bu ay her atlası, laboratuvarı ve gözlemevini tek bir kamusal işletim haritasının parçası olarak ele alıyorum: doğrulanmış kimlikler, tarihli kanıtlar, açık sınırlar ve kaynaktan üretime tutarlı kalan bir yayın yolu."
         },
         "tags": [
           {
             "en": "Product consistency",
-            "tr": "\u00dcr\u00fcn tutarl\u0131l\u0131\u011f\u0131"
+            "tr": "Ürün tutarlılığı"
           },
           {
             "en": "Source freshness",
-            "tr": "Kaynak g\u00fcncelli\u011fi"
+            "tr": "Kaynak güncelliği"
           },
           {
             "en": "Responsive QA",
-            "tr": "Duyarl\u0131 aray\u00fcz kontrol\u00fc"
+            "tr": "Duyarlı arayüz kontrolü"
           },
           {
             "en": "Production evidence",
-            "tr": "\u00dcretim kan\u0131t\u0131"
+            "tr": "Üretim kanıtı"
           }
         ]
       },
@@ -1863,28 +1863,28 @@
         "timeframe": "long-term",
         "title": {
           "en": "Industrial AI that operators trust",
-          "tr": "Operat\u00f6r\u00fcn g\u00fcvendi\u011fi end\u00fcstriyel yapay zek\u00e2"
+          "tr": "Operatörün güvendiği endüstriyel yapay zekâ"
         },
         "summary": {
-          "en": "The through-line from mechanical engineering to AI engineering is simple: a real person must be able to understand, review, and act on the decision. Every atlas and lab should make industrial intelligence legible, traceable, and operable \u2014 not merely accurate.",
-          "tr": "Makine m\u00fchendisli\u011finden yapay zek\u00e2 m\u00fchendisli\u011fine uzanan ortak \u00e7izgi yal\u0131n: Karar\u0131 ger\u00e7ek bir ki\u015fi anlayabilmeli, inceleyebilmeli ve uygulayabilmeli. Her atlas ve laboratuvar, end\u00fcstriyel zek\u00e2y\u0131 yaln\u0131zca do\u011fru de\u011fil; okunabilir, izlenebilir ve i\u015fletilebilir k\u0131lmal\u0131."
+          "en": "The through-line from mechanical engineering to AI engineering is simple: a real person must be able to understand, review, and act on the decision. Every atlas and lab should make industrial intelligence legible, traceable, and operable — not merely accurate.",
+          "tr": "Makine mühendisliğinden yapay zekâ mühendisliğine uzanan ortak çizgi yalın: Kararı gerçek bir kişi anlayabilmeli, inceleyebilmeli ve uygulayabilmeli. Her atlas ve laboratuvar, endüstriyel zekâyı yalnızca doğru değil; okunabilir, izlenebilir ve işletilebilir kılmalı."
         },
         "tags": [
           {
             "en": "Traceability",
-            "tr": "\u0130zlenebilirlik"
+            "tr": "İzlenebilirlik"
           },
           {
             "en": "Human review",
-            "tr": "\u0130nsan incelemesi"
+            "tr": "İnsan incelemesi"
           },
           {
             "en": "Operational safety",
-            "tr": "Operasyonel g\u00fcvenlik"
+            "tr": "Operasyonel güvenlik"
           },
           {
             "en": "Operator first",
-            "tr": "\u00d6nce operat\u00f6r"
+            "tr": "Önce operatör"
           }
         ]
       }
@@ -1898,15 +1898,15 @@
       "status": "published",
       "title": {
         "en": "Multi-Agent Orchestration",
-        "tr": "\u00c7oklu Agent Orkestrasyonu"
+        "tr": "Çoklu Agent Orkestrasyonu"
       },
       "summary": {
         "en": "Hierarchical agent team for bounded, isolated, observable content sync.",
-        "tr": "Hiyerar\u015fik agent team ile s\u0131n\u0131rl\u0131, izole ve g\u00f6zlemlenebilir i\u00e7erik senkronizasyonu."
+        "tr": "Hiyerarşik agent team ile sınırlı, izole ve gözlemlenebilir içerik senkronizasyonu."
       },
       "content": {
         "en": "Phase 0 wraps every portfolio project in a root orchestrator that hands bounded slices of work to specialist agents and worker agents. Twenty-two agent records live under ~/.minimax/agents; each declares its own capability matrix (read-only workspace, scoped write paths, no file writes outside its boundary, sequential calls not parallel). Deploy-watch cron runs after every main push, validates the Azure Static Web Apps check run, and verifies the live URL before deleting itself. Private nxt, stk, and inf projects remain off-limits across the team.",
-        "tr": "Phase 0, her portfolyo projesini k\u00f6k orkestrat\u00f6rle sarar; s\u0131n\u0131rl\u0131 i\u015f dilimlerini uzman agent'lara ve worker agent'lara devreder. ~/.minimax/agents alt\u0131nda 22 agent kayd\u0131 ya\u015far; her biri kendi yetkinlik matrisini (salt okunur workspace, kapsaml\u0131 yazma yollar\u0131, s\u0131n\u0131r d\u0131\u015f\u0131na dosya yazma yok, s\u0131ral\u0131 \u00e7a\u011fr\u0131 paralel de\u011fil) beyan eder. Deploy-watch cron, her main push'tan sonra Azure Static Web Apps check run'unu do\u011frular, canl\u0131 URL'i onaylar ve kendini siler. \u00d6zel nxt, stk ve inf projeleri tak\u0131m genelinde yasakl\u0131 kal\u0131r."
+        "tr": "Phase 0, her portfolyo projesini kök orkestratörle sarar; sınırlı iş dilimlerini uzman agent'lara ve worker agent'lara devreder. ~/.minimax/agents altında 22 agent kaydı yaşar; her biri kendi yetkinlik matrisini (salt okunur workspace, kapsamlı yazma yolları, sınır dışına dosya yazma yok, sıralı çağrı paralel değil) beyan eder. Deploy-watch cron, her main push'tan sonra Azure Static Web Apps check run'unu doğrular, canlı URL'i onaylar ve kendini siler. Özel nxt, stk ve inf projeleri takım genelinde yasaklı kalır."
       },
       "createdAt": "2026-09-06",
       "verifiedAt": "2026-09-06",
@@ -1914,7 +1914,7 @@
       "updatedAt": "2026-09-06",
       "limitations": {
         "en": "Phase 0 is an internal process note, not a public harness benchmark; orchestration details may shift as the team grows.",
-        "tr": "Phase 0 dahili bir s\u00fcre\u00e7 notudur, kamuya a\u00e7\u0131k bir harness k\u0131yaslamas\u0131 de\u011fildir; orkestrasyon ayr\u0131nt\u0131lar\u0131 tak\u0131m b\u00fcy\u00fcd\u00fck\u00e7e de\u011fi\u015febilir."
+        "tr": "Phase 0 dahili bir süreç notudur, kamuya açık bir harness kıyaslaması değildir; orkestrasyon ayrıntıları takım büyüdükçe değişebilir."
       },
       "sources": [
         {
@@ -1950,15 +1950,15 @@
       "status": "published",
       "title": {
         "en": "Evidence Before Deployment",
-        "tr": "Da\u011f\u0131t\u0131mdan \u00d6nce Kan\u0131t"
+        "tr": "Dağıtımdan Önce Kanıt"
       },
       "summary": {
         "en": "A release decision is an evidence contract, not a confidence score.",
-        "tr": "Bir s\u00fcr\u00fcm karar\u0131 g\u00fcven puan\u0131 de\u011fil, kan\u0131t s\u00f6zle\u015fmesidir."
+        "tr": "Bir sürüm kararı güven puanı değil, kanıt sözleşmesidir."
       },
       "content": {
         "en": "Before deployment, claims should be tied to a repeatable evaluation, provenance, known limits, rollback conditions, and a named human decision owner.",
-        "tr": "Da\u011f\u0131t\u0131mdan \u00f6nce iddialar; tekrarlanabilir de\u011ferlendirmeye, kayna\u011fa, bilinen s\u0131n\u0131rlara, geri alma ko\u015fullar\u0131na ve ad\u0131 belirli bir insan karar sahibine ba\u011flanmal\u0131d\u0131r."
+        "tr": "Dağıtımdan önce iddialar; tekrarlanabilir değerlendirmeye, kaynağa, bilinen sınırlara, geri alma koşullarına ve adı belirli bir insan karar sahibine bağlanmalıdır."
       },
       "createdAt": "2026-09-04",
       "verifiedAt": "2026-09-04",
@@ -1966,7 +1966,7 @@
       "updatedAt": "2026-09-04",
       "limitations": {
         "en": "This is a portfolio operating principle, not a complete safety case or a substitute for domain-specific review.",
-        "tr": "Bu bir portf\u00f6y i\u015fletim ilkesidir; eksiksiz g\u00fcvenlik dosyas\u0131 ya da alana \u00f6zg\u00fc incelemenin yerine ge\u00e7mez."
+        "tr": "Bu bir portföy işletim ilkesidir; eksiksiz güvenlik dosyası ya da alana özgü incelemenin yerine geçmez."
       },
       "sources": [
         {
@@ -2003,15 +2003,15 @@
       "status": "published",
       "title": {
         "en": "Context, Security, Evaluation",
-        "tr": "Ba\u011flam, G\u00fcvenlik, De\u011ferlendirme"
+        "tr": "Bağlam, Güvenlik, Değerlendirme"
       },
       "summary": {
         "en": "Reliable agents require context quality, constrained authority, and evaluation to be designed together.",
-        "tr": "G\u00fcvenilir ajanlar; ba\u011flam kalitesi, k\u0131s\u0131tl\u0131 yetki ve de\u011ferlendirmenin birlikte tasarlanmas\u0131n\u0131 gerektirir."
+        "tr": "Güvenilir ajanlar; bağlam kalitesi, kısıtlı yetki ve değerlendirmenin birlikte tasarlanmasını gerektirir."
       },
       "content": {
         "en": "Context determines what the system knows, security determines what it may do, and evaluation determines whether the combined behavior is acceptable. Treating any one as an add-on leaves a blind spot.",
-        "tr": "Ba\u011flam sistemin ne bildi\u011fini, g\u00fcvenlik ne yapabilece\u011fini, de\u011ferlendirme ise birle\u015fik davran\u0131\u015f\u0131n kabul edilebilir olup olmad\u0131\u011f\u0131n\u0131 belirler. Bunlardan birini sonradan eklemek k\u00f6r nokta b\u0131rak\u0131r."
+        "tr": "Bağlam sistemin ne bildiğini, güvenlik ne yapabileceğini, değerlendirme ise birleşik davranışın kabul edilebilir olup olmadığını belirler. Bunlardan birini sonradan eklemek kör nokta bırakır."
       },
       "createdAt": "2026-09-04",
       "verifiedAt": "2026-09-04",
@@ -2019,7 +2019,7 @@
       "updatedAt": "2026-09-04",
       "limitations": {
         "en": "The relationship is architectural; individual products still require their own threat model and eval set.",
-        "tr": "Bu ili\u015fki mimari d\u00fczeydedir; her \u00fcr\u00fcn yine kendi tehdit modeline ve de\u011ferlendirme setine ihtiya\u00e7 duyar."
+        "tr": "Bu ilişki mimari düzeydedir; her ürün yine kendi tehdit modeline ve değerlendirme setine ihtiyaç duyar."
       },
       "sources": [
         {
@@ -2066,11 +2066,11 @@
       },
       "summary": {
         "en": "Local and cloud AI are deployment paths with different control, cost, latency, and evidence boundaries.",
-        "tr": "Lokal ve bulut AI; kontrol, maliyet, gecikme ve kan\u0131t s\u0131n\u0131rlar\u0131 farkl\u0131 da\u011f\u0131t\u0131m yollar\u0131d\u0131r."
+        "tr": "Lokal ve bulut AI; kontrol, maliyet, gecikme ve kanıt sınırları farklı dağıtım yollarıdır."
       },
       "content": {
         "en": "Choose local execution when data control, offline operation, or predictable ownership dominates. Choose cloud execution when elastic capacity, managed services, or faster experimentation dominates. Measure the workload before choosing either.",
-        "tr": "Veri kontrol\u00fc, \u00e7evrimd\u0131\u015f\u0131 \u00e7al\u0131\u015fma veya \u00f6ng\u00f6r\u00fclebilir sahiplik bask\u0131nsa lokal y\u00fcr\u00fctmeyi; esnek kapasite, y\u00f6netilen servisler veya h\u0131zl\u0131 deney bask\u0131nsa bulutu se\u00e7in. Her iki durumda da \u00f6nce i\u015f y\u00fck\u00fcn\u00fc \u00f6l\u00e7\u00fcn."
+        "tr": "Veri kontrolü, çevrimdışı çalışma veya öngörülebilir sahiplik baskınsa lokal yürütmeyi; esnek kapasite, yönetilen servisler veya hızlı deney baskınsa bulutu seçin. Her iki durumda da önce iş yükünü ölçün."
       },
       "createdAt": "2026-09-04",
       "verifiedAt": "2026-09-04",
@@ -2078,7 +2078,7 @@
       "updatedAt": "2026-09-04",
       "limitations": {
         "en": "Costs and performance vary by model, runtime, hardware, region, and utilization; no universal winner is implied.",
-        "tr": "Maliyet ve performans model, \u00e7al\u0131\u015fma ortam\u0131, donan\u0131m, b\u00f6lge ve kullan\u0131ma g\u00f6re de\u011fi\u015fir; evrensel bir kazanan yoktur."
+        "tr": "Maliyet ve performans model, çalışma ortamı, donanım, bölge ve kullanıma göre değişir; evrensel bir kazanan yoktur."
       },
       "sources": [
         {
@@ -2121,15 +2121,15 @@
       "status": "published",
       "title": {
         "en": "World Models to Digital Twins",
-        "tr": "D\u00fcnya Modellerinden Dijital \u0130kizlere"
+        "tr": "Dünya Modellerinden Dijital İkizlere"
       },
       "summary": {
         "en": "World models become industrially useful when prediction is grounded in a controlled, observable twin.",
-        "tr": "D\u00fcnya modelleri, tahmin kontroll\u00fc ve g\u00f6zlemlenebilir bir ikizde temellendi\u011finde end\u00fcstriyel de\u011fer kazan\u0131r."
+        "tr": "Dünya modelleri, tahmin kontrollü ve gözlemlenebilir bir ikizde temellendiğinde endüstriyel değer kazanır."
       },
       "content": {
         "en": "The path runs from learned perception and prediction to explicit simulation boundaries, reproducible scenarios, measurable residuals, and finally embodied action under operator review.",
-        "tr": "Yol; \u00f6\u011frenilmi\u015f alg\u0131 ve tahminden a\u00e7\u0131k sim\u00fclasyon s\u0131n\u0131rlar\u0131na, tekrarlanabilir senaryolara, \u00f6l\u00e7\u00fclebilir art\u0131k de\u011ferlere ve operat\u00f6r incelemesindeki bedenlenmi\u015f eyleme uzan\u0131r."
+        "tr": "Yol; öğrenilmiş algı ve tahminden açık simülasyon sınırlarına, tekrarlanabilir senaryolara, ölçülebilir artık değerlere ve operatör incelemesindeki bedenlenmiş eyleme uzanır."
       },
       "createdAt": "2026-09-04",
       "verifiedAt": "2026-09-04",
@@ -2137,7 +2137,7 @@
       "updatedAt": "2026-09-04",
       "limitations": {
         "en": "A digital twin is not automatically a validated physical model; transfer assumptions must remain explicit.",
-        "tr": "Dijital ikiz kendili\u011finden do\u011frulanm\u0131\u015f bir fiziksel model de\u011fildir; aktar\u0131m varsay\u0131mlar\u0131 a\u00e7\u0131k kalmal\u0131d\u0131r."
+        "tr": "Dijital ikiz kendiliğinden doğrulanmış bir fiziksel model değildir; aktarım varsayımları açık kalmalıdır."
       },
       "sources": [
         {
@@ -2175,15 +2175,15 @@
       "status": "published",
       "title": {
         "en": "Human Control and the Authority Ladder",
-        "tr": "\u0130nsan Kontrol\u00fc ve Yetki Merdiveni"
+        "tr": "İnsan Kontrolü ve Yetki Merdiveni"
       },
       "summary": {
         "en": "Automation should earn broader authority through bounded, observable, reversible stages.",
-        "tr": "Otomasyon daha geni\u015f yetkiyi s\u0131n\u0131rl\u0131, g\u00f6zlemlenebilir ve geri al\u0131nabilir a\u015famalarla kazanmal\u0131d\u0131r."
+        "tr": "Otomasyon daha geniş yetkiyi sınırlı, gözlemlenebilir ve geri alınabilir aşamalarla kazanmalıdır."
       },
       "content": {
         "en": "Move from recommendation to supervised action, then constrained autonomy, only when evidence supports each transition. Preserve a clear human stop condition, audit trail, and rollback path at every rung.",
-        "tr": "\u00d6neriden g\u00f6zetimli eyleme, sonra k\u0131s\u0131tl\u0131 \u00f6zerkli\u011fe ancak her ge\u00e7i\u015fi kan\u0131t destekledi\u011finde ilerleyin. Her basamakta a\u00e7\u0131k insan durdurma ko\u015fulu, denetim izi ve geri alma yolu koruyun."
+        "tr": "Öneriden gözetimli eyleme, sonra kısıtlı özerkliğe ancak her geçişi kanıt desteklediğinde ilerleyin. Her basamakta açık insan durdurma koşulu, denetim izi ve geri alma yolu koruyun."
       },
       "createdAt": "2026-09-04",
       "verifiedAt": "2026-09-04",
@@ -2191,7 +2191,7 @@
       "updatedAt": "2026-09-04",
       "limitations": {
         "en": "Authority levels depend on system hazards and operating context; this ladder is a review aid, not a universal certification scheme.",
-        "tr": "Yetki d\u00fczeyleri sistem tehlikelerine ve \u00e7al\u0131\u015fma ba\u011flam\u0131na ba\u011fl\u0131d\u0131r; bu merdiven evrensel sertifikasyon \u015femas\u0131 de\u011fil, inceleme yard\u0131mc\u0131s\u0131d\u0131r."
+        "tr": "Yetki düzeyleri sistem tehlikelerine ve çalışma bağlamına bağlıdır; bu merdiven evrensel sertifikasyon şeması değil, inceleme yardımcısıdır."
       },
       "sources": [
         {
@@ -2235,19 +2235,19 @@
       "status": "published",
       "title": {
         "en": "Foundations Before Models",
-        "tr": "Modellerden \u00d6nce Temeller"
+        "tr": "Modellerden Önce Temeller"
       },
       "summary": {
         "en": "Ecosystem, compute, language and adaptation atlases answer different questions and should be read separately.",
-        "tr": "Ekosistem, hesaplama, dil ve uyarlama atlaslar\u0131 farkl\u0131 sorular\u0131 yan\u0131tlar; ayr\u0131 ayr\u0131 okunmal\u0131d\u0131r."
+        "tr": "Ekosistem, hesaplama, dil ve uyarlama atlasları farklı soruları yanıtlar; ayrı ayrı okunmalıdır."
       },
       "content": {
         "en": "AIA compares AI products and developer ecosystems, GPU maps kernel execution, POL covers programming-language foundations, and USL covers adaptation and fine-tuning. Each atlas keeps its own research cutoff, source list and verification date, and none of them claims a benchmark result or a universal ranking. Reading them in this order keeps ecosystem claims, hardware behaviour and training choices distinguishable.",
-        "tr": "AIA yapay zek\u00e2 \u00fcr\u00fcnlerini ve geli\u015ftirici ekosistemlerini kar\u015f\u0131la\u015ft\u0131r\u0131r, GPU \u00e7ekirdek y\u00fcr\u00fctmesini haritalar, POL programlama dili temellerini kapsar, USL ise uyarlama ve ince ayar\u0131 ele al\u0131r. Her atlas kendi ara\u015ft\u0131rma kesitini, kaynak listesini ve do\u011frulama tarihini korur; hi\u00e7biri k\u0131yaslama sonucu veya evrensel s\u0131ralama iddia etmez. Bu s\u0131rayla okumak ekosistem iddialar\u0131n\u0131, donan\u0131m davran\u0131\u015f\u0131n\u0131 ve e\u011fitim tercihlerini ayr\u0131 tutar."
+        "tr": "AIA yapay zekâ ürünlerini ve geliştirici ekosistemlerini karşılaştırır, GPU çekirdek yürütmesini haritalar, POL programlama dili temellerini kapsar, USL ise uyarlama ve ince ayarı ele alır. Her atlas kendi araştırma kesitini, kaynak listesini ve doğrulama tarihini korur; hiçbiri kıyaslama sonucu veya evrensel sıralama iddia etmez. Bu sırayla okumak ekosistem iddialarını, donanım davranışını ve eğitim tercihlerini ayrı tutar."
       },
       "limitations": {
         "en": "Each atlas is a dated snapshot; product lists, versions and hardware behaviour change faster than the refresh cycle.",
-        "tr": "Her atlas tarihli bir anl\u0131k g\u00f6r\u00fcnt\u00fcd\u00fcr; \u00fcr\u00fcn listeleri, s\u00fcr\u00fcmler ve donan\u0131m davran\u0131\u015f\u0131 yenileme d\u00f6ng\u00fcs\u00fcnden h\u0131zl\u0131 de\u011fi\u015fir."
+        "tr": "Her atlas tarihli bir anlık görüntüdür; ürün listeleri, sürümler ve donanım davranışı yenileme döngüsünden hızlı değişir."
       },
       "createdAt": "2026-09-21",
       "verifiedAt": "2026-09-21",
@@ -2260,12 +2260,12 @@
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "GPU Kernel Engineering \u2014 Kernel Atlas",
+          "label": "GPU Kernel Engineering — Kernel Atlas",
           "url": "https://gpu.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "POL \u2014 Programming Languages",
+          "label": "POL — Programming Languages",
           "url": "https://pol.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
@@ -2300,19 +2300,19 @@
       "status": "published",
       "title": {
         "en": "Learning Labs and Their Evidence Boundary",
-        "tr": "\u00d6\u011frenme Laboratuvarlar\u0131 ve Kan\u0131t S\u0131n\u0131r\u0131"
+        "tr": "Öğrenme Laboratuvarları ve Kanıt Sınırı"
       },
       "summary": {
         "en": "Every laboratory here runs a deterministic educational model with synthetic inputs; its numbers are not production measurements.",
-        "tr": "Buradaki her laboratuvar sentetik girdilerle deterministik bir e\u011fitim modeli \u00e7al\u0131\u015ft\u0131r\u0131r; say\u0131lar\u0131 \u00fcretim \u00f6l\u00e7\u00fcm\u00fc de\u011fildir."
+        "tr": "Buradaki her laboratuvar sentetik girdilerle deterministik bir eğitim modeli çalıştırır; sayıları üretim ölçümü değildir."
       },
       "content": {
         "en": "Research applications keep companion laboratories: GEX for kernel execution, TFL for token serving, ADP for adaptation and fine-tuning estimates, WML for world models, HEX for humanoid kinematics, ARL for one agent run, DPL for decision routing, CUL for computer use, and MEM for memory lifecycle. Each one is a browser-side educational model: no real model is trained, no live hardware is measured, no field data is read and no neighbouring application is integrated. AOS is a target-architecture guide, not a running operating system, so its publication shows a design and not a shipped runtime.",
-        "tr": "Ara\u015ft\u0131rma uygulamalar\u0131 e\u015flik\u00e7i laboratuvarlar\u0131n\u0131 korur: \u00e7ekirdek y\u00fcr\u00fctmesi i\u00e7in GEX, token sunumu i\u00e7in TFL, uyarlama ve ince ayar tahminleri i\u00e7in ADP, d\u00fcnya modelleri i\u00e7in WML, insans\u0131 kinematik i\u00e7in HEX, tek bir ajan y\u00fcr\u00fctmesi i\u00e7in ARL, karar y\u00f6nlendirmesi i\u00e7in DPL, bilgisayar kullan\u0131m\u0131 i\u00e7in CUL ve bellek ya\u015fam d\u00f6ng\u00fcs\u00fc i\u00e7in MEM. Her biri taray\u0131c\u0131 i\u00e7inde \u00e7al\u0131\u015fan bir e\u011fitim modelidir: ger\u00e7ek model e\u011fitilmez, canl\u0131 donan\u0131m \u00f6l\u00e7\u00fclmez, saha verisi okunmaz ve kom\u015fu uygulamalarla entegrasyon kurulmaz. AOS bir hedef mimari rehberidir, \u00e7al\u0131\u015fan bir i\u015fletim sistemi de\u011fildir; yay\u0131nlanmas\u0131 tasar\u0131m\u0131 g\u00f6sterir, teslim edilmi\u015f bir \u00e7al\u0131\u015fma zaman\u0131n\u0131 g\u00f6stermez."
+        "tr": "Araştırma uygulamaları eşlikçi laboratuvarlarını korur: çekirdek yürütmesi için GEX, token sunumu için TFL, uyarlama ve ince ayar tahminleri için ADP, dünya modelleri için WML, insansı kinematik için HEX, tek bir ajan yürütmesi için ARL, karar yönlendirmesi için DPL, bilgisayar kullanımı için CUL ve bellek yaşam döngüsü için MEM. Her biri tarayıcı içinde çalışan bir eğitim modelidir: gerçek model eğitilmez, canlı donanım ölçülmez, saha verisi okunmaz ve komşu uygulamalarla entegrasyon kurulmaz. AOS bir hedef mimari rehberidir, çalışan bir işletim sistemi değildir; yayınlanması tasarımı gösterir, teslim edilmiş bir çalışma zamanını göstermez."
       },
       "limitations": {
         "en": "Educational model output is not a benchmark, a hardware measurement or a trained-model result; cite it as a teaching example only.",
-        "tr": "E\u011fitim modeli \u00e7\u0131kt\u0131s\u0131 k\u0131yaslama, donan\u0131m \u00f6l\u00e7\u00fcm\u00fc veya e\u011fitilmi\u015f model sonucu de\u011fildir; yaln\u0131zca \u00f6\u011fretim \u00f6rne\u011fi olarak aktar\u0131lmal\u0131d\u0131r."
+        "tr": "Eğitim modeli çıktısı kıyaslama, donanım ölçümü veya eğitilmiş model sonucu değildir; yalnızca öğretim örneği olarak aktarılmalıdır."
       },
       "createdAt": "2026-09-21",
       "verifiedAt": "2026-09-21",
@@ -2320,52 +2320,52 @@
       "updatedAt": "2026-09-21",
       "sources": [
         {
-          "label": "GEX \u2014 GPU Execution Explorer",
+          "label": "GEX — GPU Execution Explorer",
           "url": "https://gex.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "TFL \u2014 Token Flow Laboratory",
+          "label": "TFL — Token Flow Laboratory",
           "url": "https://tfl.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "ADP \u2014 Model Adaptation Laboratory",
+          "label": "ADP — Model Adaptation Laboratory",
           "url": "https://adp.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "WML \u2014 World Model Laboratory",
+          "label": "WML — World Model Laboratory",
           "url": "https://wml.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "HEX \u2014 Humanoid Engineering Explorer",
+          "label": "HEX — Humanoid Engineering Explorer",
           "url": "https://hex.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "ARL \u2014 Agent Runtime Laboratory",
+          "label": "ARL — Agent Runtime Laboratory",
           "url": "https://arl.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "DPL \u2014 Decision Plane Laboratory",
+          "label": "DPL — Decision Plane Laboratory",
           "url": "https://dpl.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "CUL \u2014 Computer Use Laboratory",
+          "label": "CUL — Computer Use Laboratory",
           "url": "https://cul.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "MEM \u2014 Agent Memory Laboratory",
+          "label": "MEM — Agent Memory Laboratory",
           "url": "https://mem.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "AOS \u2014 Agent Operating System",
+          "label": "AOS — Agent Operating System",
           "url": "https://aos.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         }
@@ -2400,19 +2400,19 @@
       "status": "published",
       "title": {
         "en": "Twins, Triplets and Deployment Choices",
-        "tr": "\u0130kizler, \u00dc\u00e7l\u00fcler ve Da\u011f\u0131t\u0131m Se\u00e7imleri"
+        "tr": "İkizler, Üçlüler ve Dağıtım Seçimleri"
       },
       "summary": {
         "en": "A pump twin, a digital triplet and a deployment lab teach three different comparisons; none of them touches a real plant.",
-        "tr": "Pompa ikizi, dijital \u00fc\u00e7l\u00fc ve da\u011f\u0131t\u0131m laboratuvar\u0131 \u00fc\u00e7 ayr\u0131 kar\u015f\u0131la\u015ft\u0131rmay\u0131 \u00f6\u011fretir; hi\u00e7biri ger\u00e7ek bir tesise dokunmaz."
+        "tr": "Pompa ikizi, dijital üçlü ve dağıtım laboratuvarı üç ayrı karşılaştırmayı öğretir; hiçbiri gerçek bir tesise dokunmaz."
       },
       "content": {
         "en": "PDT introduces pump anatomy and synthetic condition signals, DTR compares a prediction with the observed outcome under explicit human approval, and DCL compares local and cloud deployment choices against declared memory, privacy and cost assumptions. All three are browser-only learning tools with synthetic inputs: no field telemetry, no live price feed, no machine control and no universal deployment winner. Human approval in DTR is a recorded step inside the simulation, not an operational interlock.",
-        "tr": "PDT pompa anatomisini ve sentetik durum sinyallerini tan\u0131t\u0131r, DTR a\u00e7\u0131k insan onay\u0131 alt\u0131nda bir tahmini g\u00f6zlenen sonu\u00e7la kar\u015f\u0131la\u015ft\u0131r\u0131r, DCL ise yerel ve bulut da\u011f\u0131t\u0131m se\u00e7eneklerini beyan edilen bellek, gizlilik ve maliyet varsay\u0131mlar\u0131yla k\u0131yaslar. \u00dc\u00e7\u00fc de sentetik girdilerle yaln\u0131zca taray\u0131c\u0131da \u00e7al\u0131\u015fan \u00f6\u011frenme ara\u00e7lar\u0131d\u0131r: saha telemetrisi yok, canl\u0131 fiyat ak\u0131\u015f\u0131 yok, makine kontrol\u00fc yok ve evrensel bir da\u011f\u0131t\u0131m kazanan\u0131 yok. DTR'deki insan onay\u0131 sim\u00fclasyon i\u00e7inde kaydedilen bir ad\u0131md\u0131r, operasyonel bir kilitleme de\u011fildir."
+        "tr": "PDT pompa anatomisini ve sentetik durum sinyallerini tanıtır, DTR açık insan onayı altında bir tahmini gözlenen sonuçla karşılaştırır, DCL ise yerel ve bulut dağıtım seçeneklerini beyan edilen bellek, gizlilik ve maliyet varsayımlarıyla kıyaslar. Üçü de sentetik girdilerle yalnızca tarayıcıda çalışan öğrenme araçlarıdır: saha telemetrisi yok, canlı fiyat akışı yok, makine kontrolü yok ve evrensel bir dağıtım kazananı yok. DTR'deki insan onayı simülasyon içinde kaydedilen bir adımdır, operasyonel bir kilitleme değildir."
       },
       "limitations": {
         "en": "Twin geometry and operating conditions are simplified illustrations, and DCL assumptions are declared by the learner rather than measured from a provider bill.",
-        "tr": "\u0130kiz geometrisi ve \u00e7al\u0131\u015fma ko\u015fullar\u0131 basitle\u015ftirilmi\u015f g\u00f6sterimlerdir; DCL varsay\u0131mlar\u0131n\u0131 sa\u011flay\u0131c\u0131 faturas\u0131ndan \u00f6l\u00e7\u00fclmek yerine \u00f6\u011frenen ki\u015fi beyan eder."
+        "tr": "İkiz geometrisi ve çalışma koşulları basitleştirilmiş gösterimlerdir; DCL varsayımlarını sağlayıcı faturasından ölçülmek yerine öğrenen kişi beyan eder."
       },
       "createdAt": "2026-09-21",
       "verifiedAt": "2026-09-21",
@@ -2420,17 +2420,17 @@
       "updatedAt": "2026-09-21",
       "sources": [
         {
-          "label": "PDT \u2014 P-101 Interactive Digital Twin",
+          "label": "PDT — P-101 Interactive Digital Twin",
           "url": "https://pdt.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "DTR \u2014 Digital Triplet Laboratory",
+          "label": "DTR — Digital Triplet Laboratory",
           "url": "https://dtr.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "DCL \u2014 Deployment Choice Laboratory",
+          "label": "DCL — Deployment Choice Laboratory",
           "url": "https://dcl.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
@@ -2462,19 +2462,19 @@
       "status": "published",
       "title": {
         "en": "Colony Simulations and Their Limits",
-        "tr": "Koloni Sim\u00fclasyonlar\u0131 ve S\u0131n\u0131rlar\u0131"
+        "tr": "Koloni Simülasyonları ve Sınırları"
       },
       "summary": {
         "en": "Ant and bee laboratories reproduce known colony mechanisms as deterministic simulations, not biological field measurements.",
-        "tr": "Kar\u0131nca ve ar\u0131 laboratuvarlar\u0131 bilinen koloni mekanizmalar\u0131n\u0131 deterministik sim\u00fclasyon olarak yeniden \u00fcretir; biyolojik saha \u00f6l\u00e7\u00fcm\u00fc de\u011fildir."
+        "tr": "Karınca ve arı laboratuvarları bilinen koloni mekanizmalarını deterministik simülasyon olarak yeniden üretir; biyolojik saha ölçümü değildir."
       },
       "content": {
         "en": "SWI frames collective-intelligence research and exports experiment plans. ANT and BEE reproduce pheromone trails, waggle-dance recruitment and collective foraging as seeded simulations that can be replayed. Their results are model observations: they do not measure a real colony, and they do not prove that an SWI agent recipe works until it is evaluated against an explicit contract.",
-        "tr": "SWI kolektif zek\u00e2 ara\u015ft\u0131rmas\u0131n\u0131 \u00e7er\u00e7eveler ve deney planlar\u0131 d\u0131\u015fa aktar\u0131r. ANT ve BEE feromon izlerini, dansla toplama \u00e7a\u011fr\u0131s\u0131n\u0131 ve kolektif yiyecek aramay\u0131 tekrarlanabilir tohumlu sim\u00fclasyonlar olarak yeniden \u00fcretir. Sonu\u00e7lar model g\u00f6zlemleridir: ger\u00e7ek bir koloni \u00f6l\u00e7\u00fclmez ve bir SWI ajan tarifi a\u00e7\u0131k bir s\u00f6zle\u015fmeyle de\u011ferlendirilene kadar \u00e7al\u0131\u015ft\u0131\u011f\u0131 kan\u0131tlanmaz."
+        "tr": "SWI kolektif zekâ araştırmasını çerçeveler ve deney planları dışa aktarır. ANT ve BEE feromon izlerini, dansla toplama çağrısını ve kolektif yiyecek aramayı tekrarlanabilir tohumlu simülasyonlar olarak yeniden üretir. Sonuçlar model gözlemleridir: gerçek bir koloni ölçülmez ve bir SWI ajan tarifi açık bir sözleşmeyle değerlendirilene kadar çalıştığı kanıtlanmaz."
       },
       "limitations": {
         "en": "Seeded simulation output depends on the model and parameters chosen here; it is not evidence about biological colonies or about deployed agents.",
-        "tr": "Tohumlu sim\u00fclasyon \u00e7\u0131kt\u0131s\u0131 burada se\u00e7ilen modele ve parametrelere ba\u011fl\u0131d\u0131r; biyolojik koloniler veya sahada \u00e7al\u0131\u015fan ajanlar hakk\u0131nda kan\u0131t de\u011fildir."
+        "tr": "Tohumlu simülasyon çıktısı burada seçilen modele ve parametrelere bağlıdır; biyolojik koloniler veya sahada çalışan ajanlar hakkında kanıt değildir."
       },
       "createdAt": "2026-09-21",
       "verifiedAt": "2026-09-21",
@@ -2482,17 +2482,17 @@
       "updatedAt": "2026-09-21",
       "sources": [
         {
-          "label": "SWI \u2014 Swarm Intelligence",
+          "label": "SWI — Swarm Intelligence",
           "url": "https://swi.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "ANT \u2014 Ant Colony Intelligence Laboratory",
+          "label": "ANT — Ant Colony Intelligence Laboratory",
           "url": "https://ant.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         },
         {
-          "label": "BEE \u2014 Honey Bee Collective Intelligence Laboratory",
+          "label": "BEE — Honey Bee Collective Intelligence Laboratory",
           "url": "https://bee.aserdargun.com/",
           "verifiedAt": "2026-09-21"
         }
@@ -2529,7 +2529,7 @@
       "period": null,
       "decision": {
         "en": "Systems and flow",
-        "tr": "Sistemler ve ak\u0131\u015f"
+        "tr": "Sistemler ve akış"
       },
       "evidenceUrls": [],
       "relatedApplicationCodes": []
@@ -2539,7 +2539,7 @@
       "period": null,
       "decision": {
         "en": "From materials to evidence",
-        "tr": "Malzemeden kan\u0131ta"
+        "tr": "Malzemeden kanıta"
       },
       "evidenceUrls": [],
       "relatedApplicationCodes": []
@@ -2549,7 +2549,7 @@
       "period": null,
       "decision": {
         "en": "Making production measurable",
-        "tr": "\u00dcretimi \u00f6l\u00e7\u00fclebilir k\u0131lmak"
+        "tr": "Üretimi ölçülebilir kılmak"
       },
       "evidenceUrls": [],
       "relatedApplicationCodes": []
@@ -2579,7 +2579,7 @@
       "period": null,
       "decision": {
         "en": "From models to products",
-        "tr": "Modellerden \u00fcr\u00fcnlere"
+        "tr": "Modellerden ürünlere"
       },
       "evidenceUrls": [],
       "relatedApplicationCodes": []
@@ -2589,7 +2589,7 @@
       "period": null,
       "decision": {
         "en": "Turning intelligence into working systems",
-        "tr": "Zek\u00e2y\u0131 \u00e7al\u0131\u015fan sistemlere d\u00f6n\u00fc\u015ft\u00fcrmek"
+        "tr": "Zekâyı çalışan sistemlere dönüştürmek"
       },
       "evidenceUrls": [],
       "relatedApplicationCodes": []
