@@ -3,3 +3,8 @@
 .mimosa/
 .DS_Store
 **/.DS_Store
+# This site has no runtime or build dependencies, so neither of these is
+# ever meant to be tracked. A committed lockfile would claim a dependency
+# tree that does not exist.
+node_modules/
+pnpm-lock.yaml
