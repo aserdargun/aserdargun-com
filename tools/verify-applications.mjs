@@ -99,12 +99,42 @@ async function latestSuccessfulDeployment(slug) {
   return run && run.head_sha ? run : null;
 }
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// The runs index behind `status=success` is only eventually consistent. It
+// intermittently answers with a stale page that hides the newest successful
+// deployment, which makes a correct catalog look drifted. Observed repeatedly on
+// 2026-09-30: the same catalog read as drifted for aia, usl, hex, dcl, bee, eng
+// and gpu, and an immediate identical query returned the recorded SHA every
+// time. So a single drift reading is never trusted on its own: the query is
+// repeated, and only a second disagreeing answer counts as a real drift.
+const DRIFT_CONFIRM_ATTEMPTS = 2;
+const DRIFT_CONFIRM_DELAY_MS = 2000;
+
+async function confirmDeploymentDrift(slug, run) {
+  for (let attempt = 1; attempt < DRIFT_CONFIRM_ATTEMPTS; attempt += 1) {
+    await sleep(DRIFT_CONFIRM_DELAY_MS);
+    let retry;
+    try {
+      retry = await latestSuccessfulDeployment(slug);
+    } catch {
+      return run; // The re-read failed; keep the original reading rather than invent one.
+    }
+    if (!retry) continue;
+    if (retry.head_sha !== run.head_sha) return retry;
+  }
+  return run;
+}
+
 async function checkRepository(application) {
   const slug = repositorySlug(application.repository);
   if (!slug) return { state: "repository-check-unavailable", detail: "unrecognized repository URL" };
   try {
-    const run = await latestSuccessfulDeployment(slug);
+    let run = await latestSuccessfulDeployment(slug);
     if (!run) return { state: "release-unconfirmed", detail: "no successful deployment run found" };
+    if (application.releaseSha && run.head_sha !== application.releaseSha) {
+      run = await confirmDeploymentDrift(slug, run);
+    }
     const releasedOn = run.updated_at.slice(0, 10);
     if (!application.releaseSha) {
       return {
