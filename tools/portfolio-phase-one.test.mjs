@@ -210,11 +210,11 @@ test("companion learning apps connect to their research parents across both loca
     assert.equal(app.portfolioLayer, layer);
     assert.equal(app.systemRole, "lab");
     assert.equal(app.researchCutoff, undefined, "educational applications do not imply a research cutoff");
-    // Confirmed deployments: gex/actions/runs/36674774958, wml/actions/runs/36674811072,
+    // Confirmed deployments: gex/actions/runs/36692491709, wml/actions/runs/36674811072,
     // hex/actions/runs/36674779721, pdt/actions/runs/36674790632. A build timestamp
     // alone still does not establish a release date.
     const confirmedDeployments = {
-      gex: ["2026-09-30", "e154c6d216e2df768ce63b525f34bbd18011a692"],
+      gex: ["2026-09-30", "c845bc9bcdbfb4854685153a409aa67323b59bd0"],
       wml: ["2026-09-30", "0607a5cebb7fbdb25702aaa1ec1064746422d355"],
       hex: ["2026-09-30", "62f121d8955a5bebbe196394f0b4174e0e1d2f66"],
       pdt: ["2026-09-30", "ea18c945a7d1d3ff621c831c57102c5d12e8059a"],
