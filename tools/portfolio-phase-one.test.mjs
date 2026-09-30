@@ -98,8 +98,8 @@ test("the application map exposes distinct research, verification, and release e
 
   assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-08-24">2026-08-24<\/time><\/dd>/);
   assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-09-29">2026-09-29<\/time><\/dd>/);
-  // AIA deployment confirmed by aserdargun/aia-aserdargun-com/actions/runs/35617907453.
-  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-30">2026-09-30<\/time><code>8140b3d9<\/code><\/dd>/);
+  // AIA deployment confirmed by the aserdargun-com release run for this commit.
+  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-09-30">2026-09-30<\/time><code>130bdfec<\/code><\/dd>/);
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
 });
@@ -211,14 +211,14 @@ test("companion learning apps connect to their research parents across both loca
     assert.equal(app.portfolioLayer, layer);
     assert.equal(app.systemRole, "lab");
     assert.equal(app.researchCutoff, undefined, "educational applications do not imply a research cutoff");
-    // Confirmed deployments: gex/actions/runs/36692491709, wml/actions/runs/36674811072,
-    // hex/actions/runs/36674779721, pdt/actions/runs/36674790632. A build timestamp
-    // alone still does not establish a release date.
+    // Confirmed deployments: each SHA below is the head commit of a successful
+    // deploy workflow run for that repository. A build timestamp alone still
+    // does not establish a release date.
     const confirmedDeployments = {
       gex: ["2026-09-30", "c845bc9bcdbfb4854685153a409aa67323b59bd0"],
-      wml: ["2026-09-30", "0607a5cebb7fbdb25702aaa1ec1064746422d355"],
-      hex: ["2026-09-30", "62f121d8955a5bebbe196394f0b4174e0e1d2f66"],
-      pdt: ["2026-09-30", "ea18c945a7d1d3ff621c831c57102c5d12e8059a"],
+      wml: ["2026-09-30", "90323ac42bde34afa1133b0bfba6a7a381eb99fc"],
+      hex: ["2026-09-30", "64f7bcf2501d324232801fe72afba427509c4986"],
+      pdt: ["2026-09-30", "f397131fca3a5d953466e54cd66d0abac91b1ff7"],
     };
     const [releasedOn, releaseSha] = confirmedDeployments[code];
     assert.equal(app.lastReleased, releasedOn, "only a confirmed deployment run establishes a release date");
@@ -279,7 +279,7 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
   assert.equal(app.lastVerified, "2026-09-29");
   assert.equal(app.lastReleased, "2026-09-30");
-  assert.equal(app.releaseSha, "bb357b89bdf9dae444c9b168164aff659acf25cf");
+  assert.equal(app.releaseSha, "ce8d4037d9f8dd091a6c6db014774780662ce56b");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
   const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
   assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);
