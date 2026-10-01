@@ -585,7 +585,11 @@ test("rejects private-system records and reserved private-navigation codes", () 
 test("loads and validates the committed canonical manifest", async () => {
   const filePath = fileURLToPath(new URL("../data/living-system.json", import.meta.url));
   const data = await loadLivingSystemData(filePath);
-  const canonicalToday = new Date("2026-09-30T12:00:00+03:00");
+  // Pinned "today" for the manifest contract. Advance it when the fleet
+  // records a release dated after the previous pin, otherwise validateDate
+  // reports future-date and every relationship that points at that
+  // application cascades into relationship-unresolved.
+  const canonicalToday = new Date("2026-10-01T12:00:00+03:00");
 
   assert.equal(data.applications.length, 30);
   const expectedCanonicalApplications = {
