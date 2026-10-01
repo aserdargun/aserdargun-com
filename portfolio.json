@@ -812,8 +812,8 @@
       "lastVerified": "2026-09-29",
       "lastReleased": "2026-09-30",
       "releaseSha": "71a5cc3290a38e6acbe304f6e523eb33cb065c50",
-      "sourceCount": 4,
-      "claimCount": 6,
+      "sourceCount": 11,
+      "claimCount": 13,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "lcl",

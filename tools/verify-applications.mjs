@@ -21,6 +21,7 @@
 // reported as "repository-check-unavailable" instead of failing the run.
 
 import { readFile, writeFile } from "node:fs/promises";
+import { access } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -101,6 +102,75 @@ async function latestSuccessfulDeployment(slug) {
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// The catalog publishes a source and claim count for each application, and the
+// application map now renders them. Those numbers drifted from the repositories
+// they describe: SWI was published as 4 sources and 6 claims while its own
+// content files held 11 and 13. The check below reads the sibling checkout when
+// one is available and reports the difference; it never rewrites the catalog.
+//
+// Only applications whose repositories expose a canonical JSON evidence file are
+// checked. Anything else is reported as unverified rather than guessed, because
+// an invented count is exactly the failure this is meant to catch.
+const evidenceFiles = {
+  swi: { sources: "content/sources.json", claims: "content/claims.json" },
+  ctx: { sources: "content/sources.json", claims: "content/claims.json" },
+  hns: { sources: "content/sources.json", claims: "content/claims.json" },
+  sec: { sources: "content/sources.json", claims: "content/claims.json" },
+  cld: { sources: "src/data/sources.json" },
+  aos: { sources: "docs/SOURCE_PROVENANCE.json", sourcesKey: "documents" },
+};
+
+async function readJsonIfPresent(file) {
+  try {
+    await access(file);
+  } catch {
+    return null;
+  }
+  try {
+    return JSON.parse(await readFile(file, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+async function siblingWorkspace() {
+  const workspace = process.env.ASERDARGUN_WORKSPACE ?? path.resolve(rootDir, "..");
+  try {
+    await access(workspace);
+  } catch {
+    return null;
+  }
+  return workspace;
+}
+
+async function checkEvidenceCounts(application, workspace) {
+  const spec = evidenceFiles[application.code];
+  if (!spec || !workspace) {
+    return { state: "not-checked", detail: "" };
+  }
+  const repo = path.join(workspace, `${application.code}-aserdargun-com`);
+  const sources = await readJsonIfPresent(path.join(repo, spec.sources));
+  if (!sources) {
+    return { state: "not-checked", detail: "evidence file not available locally" };
+  }
+
+  const actualSources = (Array.isArray(sources) ? sources : sources[spec.sourcesKey])?.length ?? null;
+  const claimsDoc = spec.claims ? await readJsonIfPresent(path.join(repo, spec.claims)) : null;
+  const actualClaims = Array.isArray(claimsDoc) ? claimsDoc.length : null;
+
+  const problems = [];
+  if (actualSources !== null && application.sourceCount !== undefined && application.sourceCount !== null && actualSources !== application.sourceCount) {
+    problems.push(`sources ${application.sourceCount} recorded, ${actualSources} in ${spec.sources}`);
+  }
+  if (actualClaims !== null && application.claimCount !== undefined && application.claimCount !== null && actualClaims !== application.claimCount) {
+    problems.push(`claims ${application.claimCount} recorded, ${actualClaims} in ${spec.claims}`);
+  }
+  if (problems.length === 0) {
+    return { state: "counts-match", detail: `${actualSources ?? "?"} sources · ${actualClaims ?? "?"} claims`, actualSources, actualClaims };
+  }
+  return { state: "counts-drifted", detail: problems.join(" · "), actualSources, actualClaims };
+}
+
 // The runs index behind `status=success` is only eventually consistent. It
 // intermittently answers with a stale page that hides the newest successful
 // deployment, which makes a correct catalog look drifted. Observed repeatedly on
@@ -168,6 +238,7 @@ async function main() {
   }
 
   const data = JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
+  const workspace = await siblingWorkspace();
   const report = [];
   let failures = 0;
 
@@ -181,6 +252,7 @@ async function main() {
       stale: age === null ? true : age > STALE_AFTER_DAYS,
       publication: offline ? "not-checked" : "pending",
       repository: offline ? "not-checked" : "pending",
+      evidence: "pending",
       deployedSha: null,
       releasedOn: null,
       detail: "",
@@ -225,6 +297,13 @@ async function main() {
       if (["release-drifted", "release-unconfirmed", "release-unrecorded"].includes(repository.state)) failures += 1;
     }
 
+    const evidence = await checkEvidenceCounts(application, workspace);
+    entry.evidence = evidence.state;
+    if (evidence.state === "counts-drifted") {
+      entry.detail = `${entry.detail} ${entry.detail ? "·" : ""} evidence ${evidence.detail}`;
+      failures += 1;
+    }
+
     report.push(entry);
     const padded = `${application.code} `.padEnd(6, " ");
     console.log([
@@ -232,6 +311,7 @@ async function main() {
       `verified ${application.lastVerified ?? "—"} (${age ?? "?"}d)`,
       offline ? "" : `publication=${entry.publication}`,
       offline ? "" : `release=${entry.repository}`,
+      `evidence=${entry.evidence}`,
       entry.detail,
     ].filter(Boolean).join("  "));
   }

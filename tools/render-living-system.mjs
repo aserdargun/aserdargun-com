@@ -398,10 +398,18 @@ export function renderApplicationMap({ locale, data, today, page }) {
         ? `<code>${escapeHtml(application.releaseSha.slice(0, 8))}</code>` : "";
       return `                  <div><dt>${label(locale, en, tr)}</dt><dd><time datetime="${date}">${date}</time>${release}</dd></div>`;
     }).join("\n");
+    const evidenceCounts = [
+      application.sourceCount === undefined || application.sourceCount === null ? null
+        : `${application.sourceCount} ${label(locale, application.sourceCount === 1 ? "source" : "sources", application.sourceCount === 1 ? "kaynak" : "kaynak")}`,
+      application.claimCount === undefined || application.claimCount === null ? null
+        : `${application.claimCount} ${label(locale, application.claimCount === 1 ? "claim" : "claims", application.claimCount === 1 ? "iddia" : "iddia")}`,
+    ].filter(Boolean);
+    const evidenceScale = evidenceCounts.length === 0 ? "" : `                  <div><dt>${label(locale, "Evidence", "Kanıt")}</dt><dd>${evidenceCounts.join(" · ")}</dd></div>`;
     const applicationDetails = [
       '                <dl class="app-record-meta">',
       `                  <div><dt>${label(locale, "Kind", "Tür")}</dt><dd>${kindLabels[application.type]}</dd></div>`,
       `                  <div><dt>${label(locale, "Status", "Durum")}</dt><dd>${escapeHtml(application.statusLabel?.[locale] ?? statusLabels[application.status])}</dd></div>`,
+      evidenceScale,
       evidenceDates,
       "                </dl>",
       guidingQuestion,
