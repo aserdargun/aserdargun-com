@@ -888,12 +888,12 @@ test("preserves the complete localized Now tag sets", async () => {
   const turkish = renderDocument({ html: nowDocument(), page: "now", locale: "tr", data, today });
 
   assert.deepEqual(tags(english), [
-    "Portfolio refresh", "Bilingual parity", "Evidence loop", "Freshness signals",
+    "Release evidence", "Drift detection", "Evidence scale", "Pinned actions",
     "Product consistency", "Source freshness", "Responsive QA", "Production evidence",
     "Traceability", "Human review", "Operational safety", "Operator first",
   ]);
   assert.deepEqual(tags(turkish), [
-    "Portföy tazeleme", "Dil eşliği", "Kanıt döngüsü", "Tazelik sinyalleri",
+    "Yayın kanıtı", "Sapma tespiti", "Kanıt ölçeği", "Sabitlenmiş aksiyonlar",
     "Ürün tutarlılığı", "Kaynak güncelliği", "Duyarlı arayüz kontrolü", "Üretim kanıtı",
     "İzlenebilirlik", "İnsan incelemesi", "Operasyonel güvenlik", "Önce operatör",
   ]);

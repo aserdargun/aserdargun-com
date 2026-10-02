@@ -36,7 +36,7 @@
       "url": "https://aserdargun.com/now/",
       "isPartOf": { "@id": "https://aserdargun.com/" },
       "inLanguage": "en",
-      "dateModified": "2026-09-21"
+      "dateModified": "2026-10-02"
     }
   </script>
 </head>
@@ -83,20 +83,20 @@
   <main id="main" class="now-page">
     <!-- GENERATED:now-content:start -->
     <section class="now-hero">
-      <p class="now-kicker"><span class="freshness freshness--aging" data-freshness-date="2026-09-21" data-freshness-state="aging"><span class="app-live-dot" aria-hidden="true"></span><span class="freshness-label">Review soon</span><time datetime="2026-09-21">2026-09-21</time></span> · Week 39</p>
+      <p class="now-kicker"><span class="freshness freshness--current" data-freshness-date="2026-10-02" data-freshness-state="current"><span class="app-live-dot app-live-dot--pulsing" aria-hidden="true"></span><span class="freshness-label">Current</span><time datetime="2026-10-02">2026-10-02</time></span> · Week 40</p>
       <h1>Current work,<br><em>long-term direction.</em></h1>
       <p class="now-intro">A dated view of what I am building, learning, and working toward. Explore this week’s focus, this month’s work, and the long-term direction.</p>
     </section>
     <section class="now-grid" aria-label="Current focus">
       <article class="now-card now-card-this">
         <p class="now-card-label"><span aria-hidden="true">01</span>This week</p>
-        <h2>Closing the portfolio evidence loop</h2>
-        <p>On 21 September I refreshed all thirty portfolio applications in a single pass — atlas audits for AIA evidence and LLM vLLM upstream, bilingual parity for GPU, USL, LCL and POL, research-source refreshes for HNS, CTX, SEC and EVL, and clarified collective-intelligence scope across SWI, ANT and BEE. This week I am turning that release wave into the public operating map: dated evidence on every application, accessible topology on the homepage, and freshness badges that tell visitors when a page needs a refresh.</p>
+        <h2>Proving the release, not just the build</h2>
+        <p>Last week I turned the release wave into a checked contract instead of a claim. Every application in the fleet now pins its GitHub Actions to one shared commit, records the exact release it serves, and fails its catalog gate when the deployed SHA drifts from the recorded one. That gate caught ARL today: the manifest still named 84c1373a while production had already moved to 8bb7ea9b, and I corrected the manifest to the commit the deploy actually published. Alongside that I published each application’s real evidence scale — WFM now carries 22 sources and 28 claims after GWM Worlds 2 and Odyssey-3, AIA 172 sources, GPU 70 — so a visitor can see how much verified material sits behind each page instead of taking the page’s word for it.</p>
         <ul class="now-tags">
-          <li>Portfolio refresh</li>
-          <li>Bilingual parity</li>
-          <li>Evidence loop</li>
-          <li>Freshness signals</li>
+          <li>Release evidence</li>
+          <li>Drift detection</li>
+          <li>Evidence scale</li>
+          <li>Pinned actions</li>
         </ul>
       </article>
       <article class="now-card now-card-this">

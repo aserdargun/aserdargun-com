@@ -1795,36 +1795,36 @@
     }
   ],
   "now": {
-    "updatedAt": "2026-09-21",
-    "week": "2026-W39",
+    "updatedAt": "2026-10-02",
+    "week": "2026-W40",
     "items": [
       {
         "id": "week",
         "timeframe": "week",
         "title": {
-          "en": "Closing the portfolio evidence loop",
-          "tr": "Portföy kanıt döngüsünü kapatmak"
+          "en": "Proving the release, not just the build",
+          "tr": "Yayını kanıtlamak, yalnızca derlemeyi değil"
         },
         "summary": {
-          "en": "On 21 September I refreshed all thirty portfolio applications in a single pass — atlas audits for AIA evidence and LLM vLLM upstream, bilingual parity for GPU, USL, LCL and POL, research-source refreshes for HNS, CTX, SEC and EVL, and clarified collective-intelligence scope across SWI, ANT and BEE. This week I am turning that release wave into the public operating map: dated evidence on every application, accessible topology on the homepage, and freshness badges that tell visitors when a page needs a refresh.",
-          "tr": "21 Eylül’de otuz alt uygulamanın hepsini tek geçişte yeniledim — AIA kanıt ve LLM vLLM upstream atlas denetimleri, GPU, USL, LCL ve POL için dil eşliği, HNS, CTX, SEC ve EVL için kaynak tazeleme ve SWI, ANT, BEE genelinde kolektif zekâ kapsamının netleştirilmesi. Bu hafta o yayın dalgasını kamusal işletim haritasına dönüştürüyorum: her uygulamada tarihli kanıt, ana sayfada erişilebilir topoloji ve bir sayfanın ne zaman yenilenmesi gerektiğini ziyaretçiye söyleyen tazelik rozeti."
+          "en": "Last week I turned the release wave into a checked contract instead of a claim. Every application in the fleet now pins its GitHub Actions to one shared commit, records the exact release it serves, and fails its catalog gate when the deployed SHA drifts from the recorded one. That gate caught ARL today: the manifest still named 84c1373a while production had already moved to 8bb7ea9b, and I corrected the manifest to the commit the deploy actually published. Alongside that I published each application’s real evidence scale — WFM now carries 22 sources and 28 claims after GWM Worlds 2 and Odyssey-3, AIA 172 sources, GPU 70 — so a visitor can see how much verified material sits behind each page instead of taking the page’s word for it.",
+          "tr": "Geçen hafta yayın dalgasını bir iddia olmaktan çıkarıp denetlenen bir sözleşmeye dönüştürdüm. Filonun her uygulaması artık GitHub Actions’ını tek bir ortak commit’e sabitliyor, sunduğu yayını tam olarak kaydediyor ve dağıtılan SHA kaydedilen SHA’dan kaydığında katalog kapısını kapatıyor. Bu kapı bugün ARL’yi yakaladı: manifest hâlâ 84c1373a’yı işaret ediyordu, üretim ise çoktan 8bb7ea9b’ye geçmişti; manifesti deploy’un gerçekten yayınladığı commit ile düzelttim. Bunun yanında her uygulamanın gerçek kanıt ölçeğini yayınladım — GWM Worlds 2 ve Odyssey-3 sonrası WFM 22 kaynak ve 28 iddia, AIA 172 kaynak, GPU 70 — böylece ziyaretçi her sayfanın arkasında ne kadar doğrulanmış malzeme olduğunu sayfanın sözüne bırakmadan görebiliyor."
         },
         "tags": [
           {
-            "en": "Portfolio refresh",
-            "tr": "Portföy tazeleme"
+            "en": "Release evidence",
+            "tr": "Yayın kanıtı"
           },
           {
-            "en": "Bilingual parity",
-            "tr": "Dil eşliği"
+            "en": "Drift detection",
+            "tr": "Sapma tespiti"
           },
           {
-            "en": "Evidence loop",
-            "tr": "Kanıt döngüsü"
+            "en": "Evidence scale",
+            "tr": "Kanıt ölçeği"
           },
           {
-            "en": "Freshness signals",
-            "tr": "Tazelik sinyalleri"
+            "en": "Pinned actions",
+            "tr": "Sabitlenmiş aksiyonlar"
           }
         ]
       },
