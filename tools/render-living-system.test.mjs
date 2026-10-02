@@ -21,7 +21,7 @@ import {
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rendererPath = path.join(rootDir, "tools", "render-living-system.mjs");
-const today = new Date("2026-09-30T12:00:00Z");
+const today = new Date("2026-10-02T12:00:00Z");
 
 const htmlEscape = (value) => value
   .replaceAll("&", "&amp;")
