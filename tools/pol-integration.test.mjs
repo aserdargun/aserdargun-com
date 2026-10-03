@@ -34,7 +34,7 @@ test("POL is one public canonical record parented under gpu with truthful metada
   // reproduced by `npm run verify:applications`.
   assert.equal(pol.lastVerified, "2026-10-03", "POL verification date records the reproduced public identity check");
   assert.equal(pol.lastReleased, "2026-10-03", "POL release date records its newest successful deployment run");
-  assert.equal(pol.releaseSha, "f6fd1bb26ee323d9b4549f4ea38be661308d404c", "POL release SHA must match the deployed commit");
+  assert.equal(pol.releaseSha, "814a48066442829a297c16eb41a460bd766852b0", "POL release SHA must match the deployed commit");
   assert.equal(pol.researchCutoff, undefined, "a deployment is not a research cutoff");
 });
 

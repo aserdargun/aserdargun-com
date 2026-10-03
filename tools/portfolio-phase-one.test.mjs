@@ -73,10 +73,10 @@ test("the portfolio registry is a deterministic public projection of application
       repositoryUrl: "https://github.com/aserdargun/ctx-aserdargun-com",
       researchCutoff: "2026-09-04",
       // Verification and deployment renewed by `npm run verify:applications`;
-      // deployment confirmed by aserdargun/ctx-aserdargun-com/actions/runs/36674758642.
+      // deployment confirmed by aserdargun/ctx-aserdargun-com/actions/runs/37159329180.
       lastVerified: "2026-10-03",
-      lastReleased: "2026-09-30",
-      releaseSha: "49adfc1828e65ce6ce8848410aa00864bffbef02",
+      lastReleased: "2026-10-03",
+      releaseSha: "590474c54509927ab53a9ed513a70ed527f3cd28",
       // Counted from the live ctx workspace: content/sources.json and content/claims.json.
       sourceCount: 16,
       claimCount: 19,
@@ -215,10 +215,10 @@ test("companion learning apps connect to their research parents across both loca
     // deploy workflow run for that repository. A build timestamp alone still
     // does not establish a release date.
     const confirmedDeployments = {
-      gex: ["2026-09-30", "c845bc9bcdbfb4854685153a409aa67323b59bd0"],
-      wml: ["2026-10-03", "0e1840101947871dbdf3b6bc746f1984b41ec97c"],
-      hex: ["2026-09-30", "64f7bcf2501d324232801fe72afba427509c4986"],
-      pdt: ["2026-10-03", "02d2420132224dd7fae18719c92cb2114159999b"],
+      gex: ["2026-10-03", "edc3f3b5f13ae043f427745eb445992cdf28f970"],
+      wml: ["2026-10-03", "37e2f38b9ece663b2f5072c0704be6f63f2631c2"],
+      hex: ["2026-10-03", "e7e48b87f63dedfe2f099417dca6635d9df3a063"],
+      pdt: ["2026-10-03", "0072154131f0fcc5e3b93e4f1d191f6c557128fb"],
     };
     const [releasedOn, releaseSha] = confirmedDeployments[code];
     assert.equal(app.lastReleased, releasedOn, "only a confirmed deployment run establishes a release date");
@@ -278,8 +278,8 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.deepEqual(app.languages, ["tr", "en"]);
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
   assert.equal(app.lastVerified, "2026-10-03");
-  assert.equal(app.lastReleased, "2026-09-30");
-  assert.equal(app.releaseSha, "ce8d4037d9f8dd091a6c6db014774780662ce56b");
+  assert.equal(app.lastReleased, "2026-10-03");
+  assert.equal(app.releaseSha, "494505dbe6a62c35c34e9740d7e630ea58905e70");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
   const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
   assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);

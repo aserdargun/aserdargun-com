@@ -221,8 +221,8 @@
       "address": "https://dpl.aserdargun.com/",
       "updatedAt": "2026-10-03",
       "lastVerified": "2026-10-03",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "4d581e2e687fb70bfdab88b591ad7e646eb85048",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "0c6599ab2af73d3acc83183c60e6444938293848",
       "sourceCount": 2,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -280,8 +280,8 @@
       "address": "https://cul.aserdargun.com/",
       "updatedAt": "2026-10-03",
       "lastVerified": "2026-10-03",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "cb885025105113afe0c0bd1ef2c18541abfa950d",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "0992216b265a49209b906751039d26c818c92d16",
       "sourceCount": 3,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -339,8 +339,8 @@
       "address": "https://aos.aserdargun.com/",
       "updatedAt": "2026-10-03",
       "lastVerified": "2026-10-03",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "5c151166b9af67a948d4504aae20b6ab16bec99d",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "54b49c09a1a8b40a179ff34ac2295da3a01bbc59",
       "sourceCount": 13,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -456,8 +456,8 @@
       "updatedAt": "2026-10-03",
       "researchCutoff": "2026-09-04",
       "lastVerified": "2026-10-03",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "49adfc1828e65ce6ce8848410aa00864bffbef02",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "590474c54509927ab53a9ed513a70ed527f3cd28",
       "sourceCount": 16,
       "claimCount": 19,
       "evidencePolicy": "primary-source-backed",
@@ -520,8 +520,8 @@
       "address": "https://mem.aserdargun.com/",
       "updatedAt": "2026-10-03",
       "lastVerified": "2026-10-03",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "8b506e584014cc6c8ff1445fbd1137c031807cf0",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "db970b347e739dee834a99a252d4337573dae94a",
       "sourceCount": 3,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -576,8 +576,8 @@
       "updatedAt": "2026-10-03",
       "researchCutoff": "2026-09-04",
       "lastVerified": "2026-10-03",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "4cc4134169e9d980b04a00c1e68d91a3c2534bbc",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "5dc2afdd90bc4c29c7e9e46f212b66e1aeaa40b4",
       "sourceCount": 5,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -691,11 +691,11 @@
       },
       "repository": "https://github.com/aserdargun/gpu-aserdargun-com",
       "address": "https://gpu.aserdargun.com/",
-      "updatedAt": "2026-10-02",
+      "updatedAt": "2026-10-03",
       "researchCutoff": "2026-09-30",
-      "lastVerified": "2026-10-02",
-      "lastReleased": "2026-10-02",
-      "releaseSha": "e66a1c9e970f162fa570be26a2ef26d7cfd7417b",
+      "lastVerified": "2026-10-03",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "d032322b44a8a8b0d7950687dc4e55d7806cc9bf",
       "sourceCount": 70,
       "claimCount": 24,
       "evidencePolicy": "primary-source-backed",
@@ -776,7 +776,7 @@
         "tr": "GPU kernel çalışmasından önce programlama temellerini kullan; bu bir GPU yürütme simülatörü değildir."
       },
       "lastVerified": "2026-10-03",
-      "releaseSha": "f6fd1bb26ee323d9b4549f4ea38be661308d404c",
+      "releaseSha": "814a48066442829a297c16eb41a460bd766852b0",
       "lastReleased": "2026-10-03"
     },
     {
@@ -1055,8 +1055,8 @@
       "address": "https://ant.aserdargun.com/",
       "updatedAt": "2026-10-03",
       "lastVerified": "2026-10-03",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "104cbeb9ea283a088cf128cca607fa1365978894",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "08b7679aed9fd56f4f776c9dcba56b24a05e1a9d",
       "sourceCount": 2,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1116,8 +1116,8 @@
       "address": "https://bee.aserdargun.com/",
       "updatedAt": "2026-10-03",
       "lastVerified": "2026-10-03",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "85ae8aeef20d727df0210d0ec761c922f12ac961",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "fbe7ed87f6910805e8dfb6702b5038d1f4c9b725",
       "sourceCount": 3,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1321,8 +1321,8 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "c845bc9bcdbfb4854685153a409aa67323b59bd0",
-      "lastReleased": "2026-09-30"
+      "releaseSha": "edc3f3b5f13ae043f427745eb445992cdf28f970",
+      "lastReleased": "2026-10-03"
     },
     {
       "code": "tfl",
@@ -1360,7 +1360,7 @@
       "updatedAt": "2026-10-03",
       "lastVerified": "2026-10-03",
       "lastReleased": "2026-10-03",
-      "releaseSha": "9f320d105f061bd8c2259efeda3038c91201adc3",
+      "releaseSha": "f558a46630b84a136cc6914336b4730a33d88baa",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1416,10 +1416,10 @@
       },
       "repository": "https://github.com/aserdargun/arl-aserdargun-com",
       "address": "https://arl.aserdargun.com/",
-      "updatedAt": "2026-09-21",
-      "lastVerified": "2026-10-02",
-      "lastReleased": "2026-10-01",
-      "releaseSha": "8bb7ea9b1c477fe3b2a6f3e04b206424230a13d5",
+      "updatedAt": "2026-10-03",
+      "lastVerified": "2026-10-03",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "5d1abd00b0cc2b6b2e2bb3b3b231fbb9d2ac88bd",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1476,8 +1476,8 @@
       "address": "https://adp.aserdargun.com/",
       "updatedAt": "2026-10-03",
       "lastVerified": "2026-10-03",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "bbd73e1e4676b0d160a548e67796137c9e3ab2e1",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "ee8d1b8aa0cd3355358cf5da0b9c8576a4fe6a15",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1553,7 +1553,7 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "0e1840101947871dbdf3b6bc746f1984b41ec97c",
+      "releaseSha": "37e2f38b9ece663b2f5072c0704be6f63f2631c2",
       "lastReleased": "2026-10-03"
     },
     {
@@ -1591,8 +1591,8 @@
       "address": "https://dtr.aserdargun.com/",
       "updatedAt": "2026-10-03",
       "lastVerified": "2026-10-03",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "ce8d4037d9f8dd091a6c6db014774780662ce56b",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "494505dbe6a62c35c34e9740d7e630ea58905e70",
       "sourceCount": 5,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1651,7 +1651,7 @@
       "repository": "https://github.com/aserdargun/pdt-aserdargun-com",
       "address": "https://pdt.aserdargun.com/",
       "updatedAt": "2026-10-03",
-      "lastVerified": "2026-10-02",
+      "lastVerified": "2026-10-03",
       "lastReleased": "2026-10-03",
       "sourceCount": null,
       "claimCount": null,
@@ -1671,7 +1671,7 @@
       "relatedMemoryIds": [
         "twins-and-deployment-choices"
       ],
-      "releaseSha": "02d2420132224dd7fae18719c92cb2114159999b"
+      "releaseSha": "0072154131f0fcc5e3b93e4f1d191f6c557128fb"
     },
     {
       "code": "hex",
@@ -1727,8 +1727,8 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "64f7bcf2501d324232801fe72afba427509c4986",
-      "lastReleased": "2026-09-30"
+      "releaseSha": "e7e48b87f63dedfe2f099417dca6635d9df3a063",
+      "lastReleased": "2026-10-03"
     },
     {
       "code": "dcl",
