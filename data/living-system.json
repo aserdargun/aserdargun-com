@@ -90,10 +90,10 @@
       "repository": "https://github.com/aserdargun/llm-aserdargun-com",
       "address": "https://llm.aserdargun.com/",
       "updatedAt": "2026-10-03",
-      "researchCutoff": "2026-09-27",
+      "researchCutoff": "2026-10-03",
       "lastVerified": "2026-10-03",
       "lastReleased": "2026-10-03",
-      "releaseSha": "5d39e959e514fddda0450497793e867824892315",
+      "releaseSha": "cf7aa232c26aca070dbd02408d32b0845b004999",
       "sourceCount": 31,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -1553,7 +1553,7 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "8e18a496a80c3283d5a32728aa2d78d4e74a684c",
+      "releaseSha": "0e1840101947871dbdf3b6bc746f1984b41ec97c",
       "lastReleased": "2026-10-03"
     },
     {
