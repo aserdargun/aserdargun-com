@@ -74,7 +74,7 @@ test("the portfolio registry is a deterministic public projection of application
       researchCutoff: "2026-09-04",
       // Verification and deployment renewed by `npm run verify:applications`;
       // deployment confirmed by aserdargun/ctx-aserdargun-com/actions/runs/36674758642.
-      lastVerified: "2026-09-29",
+      lastVerified: "2026-10-03",
       lastReleased: "2026-09-30",
       releaseSha: "49adfc1828e65ce6ce8848410aa00864bffbef02",
       // Counted from the live ctx workspace: content/sources.json and content/claims.json.
@@ -277,7 +277,7 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.equal(app.portfolioLayer, "physical-ai");
   assert.deepEqual(app.languages, ["tr", "en"]);
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
-  assert.equal(app.lastVerified, "2026-09-29");
+  assert.equal(app.lastVerified, "2026-10-03");
   assert.equal(app.lastReleased, "2026-09-30");
   assert.equal(app.releaseSha, "ce8d4037d9f8dd091a6c6db014774780662ce56b");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
