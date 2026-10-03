@@ -97,9 +97,9 @@ test("the application map exposes distinct research, verification, and release e
   const turkish = renderApplicationMap({ locale: "tr", data, today });
 
   assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-09-29">2026-09-29<\/time><\/dd>/);
-  assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-10-02">2026-10-02<\/time><\/dd>/);
+  assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-10-03">2026-10-03<\/time><\/dd>/);
   // AIA deployment confirmed by the aserdargun-com release run for this commit.
-  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-10-02">2026-10-02<\/time><code>7625029d<\/code><\/dd>/);
+  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-10-03">2026-10-03<\/time><code>84acbc88<\/code><\/dd>/);
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
 });
