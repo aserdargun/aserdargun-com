@@ -623,8 +623,8 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     const deploymentConnectors = Array.from(svg.matchAll(/<path data-learning-connector="([^"]+)"[^>]*d="([^"]+)"\/>/g));
     assert.deepEqual(
       deploymentConnectors.map(([, connectorName]) => connectorName),
-      ["deployment-to-stage-06"],
-      "the deployment frame feeds the shared physical-AI bus",
+      [],
+      "the deployment frame connects to physical AI with two independent arrows",
     );
     for (const [, connectorName, route] of deploymentConnectors) {
       assert.doesNotMatch(route, /[CLQAST]/, `${connectorName} must use an orthogonal route`);

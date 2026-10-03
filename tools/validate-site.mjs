@@ -449,8 +449,8 @@ function validateLearningSystem(locale, html) {
   );
   const deploymentConnectors = matches(diagram, /<path data-learning-connector="([^"]+)"/g);
   check(
-    JSON.stringify(deploymentConnectors) === JSON.stringify(["deployment-to-stage-06"]),
-    `${locale}: the shared deployment frame must branch once to WFM and SWI`,
+    deploymentConnectors.length === 0,
+    `${locale}: the deployment frame must connect independently to WFM and SWI`,
   );
   check(matches(diagram, /data-learning-app="([a-z]{3})"/g).length === 30, `${locale}: all 30 approved applications must appear in the diagram`);
   check(matches(diagram, /data-learning-family="([a-z]+)"/g).join(" ") === "gpu usl llm hns ctx deployment wfm swi itl eng", `${locale}: diagram family frames differ`);

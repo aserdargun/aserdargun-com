@@ -17,16 +17,16 @@ const POSITIONS = {
   ctx: [555, 617, 206, 46], mem: [557, 673, 202, 49],
   sec: [302, 638.5, 180, 60], evl: [827, 638.5, 194, 60],
   lcl: [430, 767, 222, 54], dcl: [552, 829, 212, 49], cld: [664, 767, 222, 54],
-  wfm: [306, 941, 264, 47], wml: [308, 996, 260, 50],
-  swi: [732, 941, 293, 47], ant: [733, 996, 144, 50], bee: [885, 996, 140, 50],
+  wfm: [276, 941, 264, 47], wml: [278, 996, 260, 50],
+  swi: [762, 941, 293, 47], ant: [763, 996, 144, 50], bee: [915, 996, 140, 50],
   itl: [490.5, 1091, 335, 47], pdt: [490.5, 1146, 163, 64], dtr: [662.5, 1146, 163, 64],
   eng: [529, 1250, 258, 54], hex: [531, 1312, 254, 49],
 };
 const FRAMES = {
   gpu: [298.5, 92, 279, 130], usl: [738.5, 92, 279, 130],
   llm: [518.5, 247, 279, 130], hns: [302, 416, 712, 154],
-  ctx: [544, 607, 228, 123], deployment: [420, 757, 476, 130], wfm: [294, 933, 288, 122],
-  swi: [720, 933, 316, 122], itl: [480.5, 1081, 355, 138],
+  ctx: [544, 607, 228, 123], deployment: [420, 757, 476, 130], wfm: [264, 933, 288, 122],
+  swi: [750, 933, 316, 122], itl: [480.5, 1081, 355, 138],
   eng: [518.5, 1240, 279, 130],
 };
 const ROUTES = [
@@ -42,15 +42,13 @@ const ROUTES = [
   ["ctx-to-sec", "M 544 668.5 H 482", "decision", true],
   ["ctx-to-evl", "M 772 668.5 H 827", "decision", true],
   ["ctx-to-deployment", "M 658 730 V 757", "decision"],
-  ["deployment-to-wfm", "M 658 904 H 438 V 933", "horizon"],
-  ["deployment-to-swi", "M 658 904 H 878 V 933", "horizon"],
-  ["wfm-to-itl", "M 438 1055 V 1150 H 480.5", "horizon"],
-  ["swi-to-itl", "M 878 1055 V 1150 H 835.5", "horizon"],
+  ["deployment-to-wfm", "M 420 822 H 408 V 933", "horizon"],
+  ["deployment-to-swi", "M 896 822 H 908 V 933", "horizon"],
+  ["wfm-to-itl", "M 408 1055 V 1150 H 480.5", "horizon"],
+  ["swi-to-itl", "M 908 1055 V 1150 H 835.5", "horizon"],
   ["itl-to-eng", "M 658 1219 V 1240", "horizon"],
 ];
-const CONNECTORS = [
-  ["deployment-to-stage-06", "M 658 887 V 904"],
-];
+const CONNECTORS = [];
 const ROLES = { pol: "learning-tool", aia: "map", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
 
 export function learningDiagramLayout(applications) {
@@ -70,7 +68,7 @@ export function learningDiagramLayout(applications) {
   }).filter(({ members }) => members.length > 0);
   const edges = ROUTES.map(([id, path, kind = "primary", bidirectional = false]) => ({ id, path, kind, bidirectional }));
   const connectors = CONNECTORS.map(([id, path]) => ({ id, path }));
-  const junctions = [{ x: 658, y: 904 }];
+  const junctions = [];
   return { nodes, families, edges, connectors, junctions };
 }
 

@@ -186,11 +186,17 @@ test("the approved diagram has 30 unique nodes and ten non-overlapping ownership
     }
   }
   assert.deepEqual(edges.filter(({bidirectional}) => bidirectional).map(({id}) => id), ["ctx-to-sec", "ctx-to-evl"]);
-  const branchLengths = ["deployment-to-wfm", "deployment-to-swi"].map((id) => {
-    const [start, end] = segments(edges.find((edge) => edge.id === id).path)[0];
-    return Math.abs(end.x - start.x);
+  const deployment = families.find(({ code }) => code === "deployment");
+  const branchLengths = ["deployment-to-wfm", "deployment-to-swi"].map((id, index) => {
+    const route = segments(edges.find((edge) => edge.id === id).path);
+    const [start, next] = route[0];
+    assert.deepEqual(start, { x: deployment.x + index * deployment.width, y: deployment.y + deployment.height / 2 }, `${id} starts at the deployment side midpoint`);
+    assert.equal(next.y, start.y);
+    assert.ok(index === 0 ? next.x < start.x : next.x > start.x, `${id} exits away from the frame`);
+    assert.equal(route.length, 2, `${id} turns once then descends directly to the target frame`);
+    return route.reduce((length, [a, b]) => length + Math.abs(b.x - a.x) + Math.abs(b.y - a.y), 0);
   });
-  assert.equal(branchLengths[0], branchLengths[1], "physical-AI branches have equal horizontal lengths");
+  assert.equal(branchLengths[0], branchLengths[1], "physical-AI arrows have equal total lengths");
   // Incoming routes to grouped applications land on their family frames.
   // Other arrow tips land on the application rectangle.
   for (const edge of edges) {
