@@ -392,11 +392,11 @@
       },
       "repository": "https://github.com/aserdargun/sec-aserdargun-com",
       "address": "https://sec.aserdargun.com/",
-      "updatedAt": "2026-09-21",
-      "researchCutoff": "2026-09-21",
-      "lastVerified": "2026-09-29",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "7cf6a1cede5c688b5e18819a19773592072b377e",
+      "updatedAt": "2026-10-02",
+      "researchCutoff": "2026-10-02",
+      "lastVerified": "2026-10-02",
+      "lastReleased": "2026-10-02",
+      "releaseSha": "e87ee6a399d81372099428bc68ae986a69cfd1aa",
       "sourceCount": 11,
       "claimCount": 13,
       "evidencePolicy": "primary-source-backed",
@@ -632,11 +632,11 @@
       },
       "repository": "https://github.com/aserdargun/usl-aserdargun-com",
       "address": "https://usl.aserdargun.com/",
-      "updatedAt": "2026-09-21",
-      "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-09-29",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "8278551e5b82b7f16382e01c638ae2095a7a413e",
+      "updatedAt": "2026-10-02",
+      "researchCutoff": "2026-10-02",
+      "lastVerified": "2026-10-02",
+      "lastReleased": "2026-10-02",
+      "releaseSha": "bf6c6d8cf48199333d341bf405fde9044d1f02eb",
       "sourceCount": 6,
       "claimCount": 8,
       "evidencePolicy": "primary-source-backed",
@@ -754,7 +754,7 @@
       },
       "repository": "https://github.com/aserdargun/pol-aserdargun-com",
       "address": "https://pol.aserdargun.com/",
-      "updatedAt": "2026-09-21",
+      "updatedAt": "2026-10-03",
       "upstreamApps": [
         "gpu"
       ],
@@ -775,9 +775,9 @@
         "en": "Use programming foundations before GPU kernel study; this is not a GPU execution simulator.",
         "tr": "GPU kernel çalışmasından önce programlama temellerini kullan; bu bir GPU yürütme simülatörü değildir."
       },
-      "lastVerified": "2026-09-29",
-      "releaseSha": "851476baac01de1b279068b8a447eebbd1e4655d",
-      "lastReleased": "2026-09-30"
+      "lastVerified": "2026-10-03",
+      "releaseSha": "f6fd1bb26ee323d9b4549f4ea38be661308d404c",
+      "lastReleased": "2026-10-03"
     },
     {
       "code": "cld",
@@ -989,11 +989,11 @@
       },
       "repository": "https://github.com/aserdargun/swi-aserdargun-com",
       "address": "https://swi.aserdargun.com/",
-      "updatedAt": "2026-09-21",
-      "researchCutoff": "2026-09-06",
-      "lastVerified": "2026-09-29",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "71a5cc3290a38e6acbe304f6e523eb33cb065c50",
+      "updatedAt": "2026-10-02",
+      "researchCutoff": "2026-10-02",
+      "lastVerified": "2026-10-02",
+      "lastReleased": "2026-10-02",
+      "releaseSha": "56d556a71e2e739160eafd87646f4e67f5d17748",
       "sourceCount": 11,
       "claimCount": 13,
       "evidencePolicy": "primary-source-backed",
@@ -1357,10 +1357,10 @@
       },
       "repository": "https://github.com/aserdargun/tfl-aserdargun-com",
       "address": "https://tfl.aserdargun.com/",
-      "updatedAt": "2026-09-21",
-      "lastVerified": "2026-09-29",
-      "lastReleased": "2026-09-30",
-      "releaseSha": "4daa4459ea1f372094be02fb02edaf480e7a13c7",
+      "updatedAt": "2026-10-03",
+      "lastVerified": "2026-10-03",
+      "lastReleased": "2026-10-03",
+      "releaseSha": "9f320d105f061bd8c2259efeda3038c91201adc3",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1532,8 +1532,8 @@
       },
       "repository": "https://github.com/aserdargun/wml-aserdargun-com",
       "address": "https://wml.aserdargun.com/",
-      "updatedAt": "2026-09-21",
-      "lastVerified": "2026-09-29",
+      "updatedAt": "2026-10-03",
+      "lastVerified": "2026-10-03",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1553,8 +1553,8 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "90323ac42bde34afa1133b0bfba6a7a381eb99fc",
-      "lastReleased": "2026-09-30"
+      "releaseSha": "8e18a496a80c3283d5a32728aa2d78d4e74a684c",
+      "lastReleased": "2026-10-03"
     },
     {
       "code": "dtr",
@@ -1650,9 +1650,9 @@
       },
       "repository": "https://github.com/aserdargun/pdt-aserdargun-com",
       "address": "https://pdt.aserdargun.com/",
-      "updatedAt": "2026-09-21",
-      "lastVerified": "2026-09-29",
-      "lastReleased": "2026-09-30",
+      "updatedAt": "2026-10-03",
+      "lastVerified": "2026-10-02",
+      "lastReleased": "2026-10-03",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1671,7 +1671,7 @@
       "relatedMemoryIds": [
         "twins-and-deployment-choices"
       ],
-      "releaseSha": "f397131fca3a5d953466e54cd66d0abac91b1ff7"
+      "releaseSha": "02d2420132224dd7fae18719c92cb2114159999b"
     },
     {
       "code": "hex",

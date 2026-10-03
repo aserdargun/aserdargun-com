@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-10-02T12:00:00Z");
+const today = new Date("2026-10-03T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -139,7 +139,7 @@ test("verified SWI exposes its published research snapshot and release evidence"
   const data = await readData();
   const swi = data.applications.find(({ code }) => code === "swi");
   assert.equal(swi.status, "live");
-  assert.equal(swi.researchCutoff, "2026-09-06", "the live SWI workspace explicitly dates its research snapshot");
+  assert.equal(swi.researchCutoff, "2026-10-02", "the live SWI workspace explicitly dates its research snapshot");
   assert.match(swi.lastVerified, /^\d{4}-\d{2}-\d{2}$/);
   assert.match(swi.lastReleased, /^\d{4}-\d{2}-\d{2}$/);
   assert.match(swi.releaseSha, /^[a-f0-9]{40}$/);
@@ -216,9 +216,9 @@ test("companion learning apps connect to their research parents across both loca
     // does not establish a release date.
     const confirmedDeployments = {
       gex: ["2026-09-30", "c845bc9bcdbfb4854685153a409aa67323b59bd0"],
-      wml: ["2026-09-30", "90323ac42bde34afa1133b0bfba6a7a381eb99fc"],
+      wml: ["2026-10-03", "8e18a496a80c3283d5a32728aa2d78d4e74a684c"],
       hex: ["2026-09-30", "64f7bcf2501d324232801fe72afba427509c4986"],
-      pdt: ["2026-09-30", "f397131fca3a5d953466e54cd66d0abac91b1ff7"],
+      pdt: ["2026-10-03", "02d2420132224dd7fae18719c92cb2114159999b"],
     };
     const [releasedOn, releaseSha] = confirmedDeployments[code];
     assert.equal(app.lastReleased, releasedOn, "only a confirmed deployment run establishes a release date");
