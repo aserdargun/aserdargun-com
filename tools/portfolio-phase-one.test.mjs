@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-10-03T12:00:00Z");
+const today = new Date("2026-10-04T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -97,9 +97,9 @@ test("the application map exposes distinct research, verification, and release e
   const turkish = renderApplicationMap({ locale: "tr", data, today });
 
   assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-09-29">2026-09-29<\/time><\/dd>/);
-  assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-10-03">2026-10-03<\/time><\/dd>/);
+  assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-10-04">2026-10-04<\/time><\/dd>/);
   // AIA deployment confirmed by the aserdargun-com release run for this commit.
-  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-10-03">2026-10-03<\/time><code>84acbc88<\/code><\/dd>/);
+  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-10-04">2026-10-04<\/time><code>bee5c529<\/code><\/dd>/);
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
 });
