@@ -1183,8 +1183,8 @@
       "type": "lab",
       "status": "design",
       "statusLabel": {
-        "en": "Design · not yet deployed",
-        "tr": "Tasarım · henüz yayında değil"
+        "en": "Preview · live, awaiting its own address",
+        "tr": "Önizleme · yayında, kendi adresini bekliyor"
       },
       "languages": [
         "tr",
