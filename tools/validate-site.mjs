@@ -22,7 +22,7 @@ import {
 const expectedPublicApplicationCodes = [
   "aia", "llm", "hns", "dpl", "cul", "aos", "sec", "ctx", "mem", "evl", "usl", "gpu",
   "pol", "cld", "lcl", "wfm", "swi", "ant", "bee", "itl", "eng", "gex", "tfl", "arl",
-  "adp", "wml", "dtr", "pdt", "hex", "dcl",
+  "adp", "wml", "dtr", "pdt", "hex", "dcl", "agr",
 ].sort();
 // Copy that describes a structure the site no longer has must not come back.
 const retiredOverviewCopy = /five connected layers|five\s*[—-]\s*layer|beş katman/i;
@@ -113,6 +113,7 @@ const expectedApplicationRows = [
   { code: "arl", repository: "arl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/arl-aserdargun-com", productUrl: "https://arl.aserdargun.com/", productLabel: "arl.aserdargun.com" },
   { code: "adp", repository: "adp-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/adp-aserdargun-com", productUrl: "https://adp.aserdargun.com/", productLabel: "adp.aserdargun.com" },
   { code: "dcl", repository: "dcl-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/dcl-aserdargun-com", productUrl: "https://dcl.aserdargun.com/", productLabel: "dcl.aserdargun.com" },
+  { code: "agr", repository: "agr-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/agr-aserdargun-com", productUrl: "https://agr.aserdargun.com/", productLabel: "agr.aserdargun.com" },
   { code: "dtr", repository: "dtr-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/dtr-aserdargun-com", productUrl: "https://dtr.aserdargun.com/", productLabel: "dtr.aserdargun.com" },
 ].map((row) => ({
   code: row.code,
@@ -434,6 +435,7 @@ function validateLearningSystem(locale, html) {
       "aos:practice-lab",
       "mem:practice-lab",
       "dtr:practice-lab",
+      "agr:decision-lab",
     ].sort()),
     `${locale}: learning diagram node roles differ from the application content model`,
   );
@@ -452,7 +454,7 @@ function validateLearningSystem(locale, html) {
     deploymentConnectors.length === 0,
     `${locale}: the deployment frame must connect independently to WFM and SWI`,
   );
-  check(matches(diagram, /data-learning-app="([a-z]{3})"/g).length === 30, `${locale}: all 30 approved applications must appear in the diagram`);
+  check(matches(diagram, /data-learning-app="([a-z]{3})"/g).length === 31, `${locale}: all 31 approved applications must appear in the diagram`);
   check(matches(diagram, /data-learning-family="([a-z]+)"/g).join(" ") === "gpu usl llm hns ctx deployment wfm swi itl eng", `${locale}: diagram family frames differ`);
   check(matches(diagram, /marker-start="url\(#ld-arrow\)"/g).length === 2, `${locale}: context must connect reciprocally with security and evaluation`);
   check(

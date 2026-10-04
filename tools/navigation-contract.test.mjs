@@ -491,7 +491,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.ok(harnessCard, "the detailed learning flow must expose the HNS harness card");
     assert.equal(harnessCard.includes(expectedQuestion), true);
     // The card links the observatory itself and every lab registered under it,
-    // in canonical catalog order: DPL, CUL, AOS, then ARL.
+    // in canonical catalog order: DPL, CUL, AOS, ARL, then AGR.
     assert.deepEqual(
       anchors(harnessCard).map(({ openingTag }) => attribute(openingTag, "href")),
       [
@@ -500,6 +500,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
         "https://cul.aserdargun.com/",
         "https://aos.aserdargun.com/",
         "https://arl.aserdargun.com/",
+        "https://agr.aserdargun.com/",
       ],
     );
     assert.ok(
@@ -581,13 +582,14 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://aos.aserdargun.com/", "AOS"],
       ["https://mem.aserdargun.com/", "MEM"],
       ["https://dtr.aserdargun.com/", "DTR"],
+      ["https://agr.aserdargun.com/", "AGR"],
     ];
 
     assert.ok(svg, "learning diagram SVG must remain a closed source scope");
     assert.equal(extraSvgScopes.length, 0);
     assert.doesNotMatch(svg, /<(?:span|foreignObject)\b/i, "HTML must never be inserted into SVG");
     const svgBlankAnchors = anchors(svg).filter(({ openingTag }) => attribute(openingTag, "target") === "_blank");
-    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all thirty linked diagram nodes must remain inside SVG");
+    assert.equal(svgBlankAnchors.length, expectedNodes.length, "all thirty-one linked diagram nodes must remain inside SVG");
 
     assert.deepEqual(svgBlankAnchors.map((anchor) => attribute(anchor.openingTag, "href")).sort(), expectedNodes.map(([address, code]) => applicationUrl({code: code.toLowerCase(), address}, document.locale)).sort());
     for (const [index, anchor] of svgBlankAnchors.entries()) {

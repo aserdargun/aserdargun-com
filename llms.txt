@@ -1,12 +1,12 @@
 # AI Learning System — Serdar Gündoğdu
 
-> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence. The overview is one eight-stage learning map with 30 applications.
+> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence. The overview is one eight-stage learning map with 31 applications.
 
 ## Start here
 - [System overview](https://aserdargun.com/): The eight-stage learning map, its families and their learning relationships.
 - [About Serdar](https://aserdargun.com/about/): Professional identity, career journey, working principles, and public contact links.
 - [Journey](https://aserdargun.com/journey/): Learning path, six detailed stages, and the physical AI horizon with colony, world-model, pump-twin, digital-triplet, and humanoid learning laboratories.
-- [Application Map](https://aserdargun.com/applications/): Search 30 applications by topic and layer; inspect research, verification and release evidence.
+- [Application Map](https://aserdargun.com/applications/): Search 31 applications by topic and layer; inspect research, verification and release evidence.
 - [Now](https://aserdargun.com/now/): Dated work and planned direction. Read its date before describing an item as current.
 - [Knowledge](https://aserdargun.com/memory/): Authored public research notes and decisions with sources.
 - [Portfolio registry](https://aserdargun.com/portfolio.json): Structured public application identities and relationships.
@@ -30,6 +30,7 @@ Research cutoffs, verification dates, release dates, and release SHAs describe d
 - [LLM — LLM Runtime & Serving Atlas](https://llm.aserdargun.com/): Source-backed guide to model runtimes and serving engines.
 - [TFL — Token Flow Laboratory](https://tfl.aserdargun.com/): LLM companion for simulated queueing, prefill, KV cache, decode and scheduling; metrics are educational, not benchmarks.
 - [HNS — Harness Engineering Observatory](https://hns.aserdargun.com/): Comparison of the layers that turn model capability into a reliable agent system.
+- [AGR — Agora](https://agr.aserdargun.com/): A deliberation panel of OpenRouter’s free models. Every seat answers alone, then answers the others by name, and the dissenters are invited back once more. Status: design, not yet deployed; no live session has been run.
 - [ARL — Agent Runtime Laboratory](https://arl.aserdargun.com/): HNS companion connecting context, security, evaluation and one-use approval inside a deterministic agent simulation.
 - [DPL — Decision Plane Laboratory](https://dpl.aserdargun.com/): HNS companion exploring when an agent decides, asks for evidence, waits for approval, abstains or blocks an action.
 - [CUL — Computer Use Laboratory](https://cul.aserdargun.com/): HNS companion for synthetic computer-use scenarios with targeting, approval and result verification.

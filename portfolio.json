@@ -143,7 +143,8 @@
         "arl",
         "dpl",
         "cul",
-        "aos"
+        "aos",
+        "agr"
       ],
       "tracks": [
         "harness",
@@ -1162,6 +1163,47 @@
         "execution",
         "tool-use",
         "evaluation"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "agent-system",
+      "focusState": "active"
+    },
+    {
+      "code": "agr",
+      "parentApp": "hns",
+      "name": {
+        "en": "Agora",
+        "tr": "Agora"
+      },
+      "shortName": "AGR",
+      "description": {
+        "en": "A deliberation panel of OpenRouter’s free models. Every seat answers the proposition alone, then answers the other seats by name, and the dissenters are invited back once more. Agora counts the discussion itself and reports whether the panel converged, measured against a bar it declares in advance. Agreement is reported as agreement, never as correctness.",
+        "tr": "OpenRouter’ın ücretsiz modellerinden oluşan bir müzakere paneli. Her üye öneriyi önce tek başına yanıtlıyor, sonra diğer koltuklara isimleriyle cevap veriyor, karşı çıkanlar bir kez daha çağrılıyor. Agora sayımı kendisi yapıyor ve panelin uzlaşıp uzlaşmadığını önceden ilan ettiği bir eşikle bildiriyor. Uzlaşı, uzlaşı olarak raporlanır; asla doğruluk olarak değil."
+      },
+      "type": "lab",
+      "status": "design",
+      "statusLabel": {
+        "en": "Design · not yet deployed",
+        "tr": "Tasarım · henüz yayında değil"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://agr.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/agr-aserdargun-com",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "live-api-observed-in-the-visitor-browser",
+      "upstreamApps": [
+        "hns"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "deliberation",
+        "free-models",
+        "convergence",
+        "quota-rationing"
       ],
       "entityIds": [],
       "portfolioLayer": "agent-system",

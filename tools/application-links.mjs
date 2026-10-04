@@ -7,7 +7,7 @@ export const applicationLocaleRoutes = {
   eng: { en: '/', tr: '/' }, // English-only.
   gpu: { en: '/en/', tr: '/' },
   ...Object.fromEntries(['llm', 'hns', 'sec', 'ctx', 'evl', 'usl', 'lcl', 'wfm', 'swi', 'aos'].map((code) => [code, { en: '/en/', tr: '/tr/' }])),
-  ...Object.fromEntries(['ant', 'bee', 'tfl', 'arl', 'adp', 'wml', 'dtr', 'pdt', 'hex', 'dcl', 'dpl', 'cul', 'mem', 'cld'].map((code) => [code, { en: '/?lang=en', tr: '/?lang=tr' }])),
+  ...Object.fromEntries(['ant', 'bee', 'tfl', 'arl', 'adp', 'wml', 'dtr', 'pdt', 'hex', 'dcl', 'dpl', 'cul', 'mem', 'cld', 'agr'].map((code) => [code, { en: '/?lang=en', tr: '/?lang=tr' }])),
   gex: { en: '/gex/anatomy?lang=en', tr: '/gex/anatomy?lang=tr' },
 };
 

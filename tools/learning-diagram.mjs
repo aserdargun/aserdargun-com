@@ -12,8 +12,9 @@ const POSITIONS = {
   pol: [309, 164, 131, 49], gex: [449, 164, 118, 49],
   usl: [749, 102, 258, 54], adp: [751, 164, 254, 49],
   llm: [529, 257, 258, 54], tfl: [531, 319, 254, 49],
-  hns: [312, 426, 692, 53], arl: [312, 490, 159, 68],
-  dpl: [479, 490, 172, 68], cul: [659, 490, 157, 68], aos: [824, 490, 180, 68],
+  hns: [312, 426, 692, 53], arl: [312, 490, 132, 68],
+  dpl: [452, 490, 132, 68], cul: [592, 490, 132, 68], aos: [732, 490, 132, 68],
+  agr: [872, 490, 132, 68],
   ctx: [555, 617, 206, 46], mem: [557, 673, 202, 49],
   sec: [302, 638.5, 180, 60], evl: [827, 638.5, 194, 60],
   lcl: [430, 767, 222, 54], dcl: [552, 829, 212, 49], cld: [664, 767, 222, 54],
@@ -49,7 +50,7 @@ const ROUTES = [
   ["itl-to-eng", "M 658 1219 V 1240", "horizon"],
 ];
 const CONNECTORS = [];
-const ROLES = { pol: "learning-tool", aia: "map", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
+const ROLES = { pol: "learning-tool", aia: "map", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", agr: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
 
 export function learningDiagramLayout(applications) {
   const diagramApplications = systemFocusApplications(applications);

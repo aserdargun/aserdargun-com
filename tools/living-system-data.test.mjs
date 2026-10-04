@@ -591,7 +591,7 @@ test("loads and validates the committed canonical manifest", async () => {
   // application cascades into relationship-unresolved.
   const canonicalToday = new Date("2026-10-04T12:00:00+03:00");
 
-  assert.equal(data.applications.length, 30);
+  assert.equal(data.applications.length, 31);
   const expectedCanonicalApplications = {
     hns: ["observatory", "Harness Engineering Observatory", "https://hns.aserdargun.com/"],
     ctx: ["observatory", "Context & Knowledge Engineering", "https://ctx.aserdargun.com/"],

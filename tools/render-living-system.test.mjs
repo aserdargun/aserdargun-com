@@ -853,7 +853,7 @@ test("renders the application-map summary including approved additions", async (
   const data = await readFixtureData();
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
-  assert.match(rendered, /30 applications, from AI foundations/);
+  assert.match(rendered, /31 applications, from AI foundations/);
   assert.equal(rendered.includes("Five live applications and one long-term horizon"), false);
 });
 

@@ -168,7 +168,8 @@
         "arl",
         "dpl",
         "cul",
-        "aos"
+        "aos",
+        "agr"
       ],
       "tracks": [
         "harness",
@@ -1442,6 +1443,60 @@
       ]
     },
     {
+      "code": "agr",
+      "parentApp": "hns",
+      "diagramLabel": {
+        "en": "Free-model panel",
+        "tr": "Ücretsiz model paneli"
+      },
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "design",
+      "statusLabel": {
+        "en": "Design · not yet deployed",
+        "tr": "Tasarım · henüz yayında değil"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "Agora",
+        "tr": "Agora"
+      },
+      "summary": {
+        "en": "A deliberation panel of OpenRouter’s free models. Every seat answers the proposition alone, then answers the other seats by name, and the dissenters are invited back once more. Agora counts the discussion itself and reports whether the panel converged, measured against a bar it declares in advance. Agreement is reported as agreement, never as correctness.",
+        "tr": "OpenRouter’ın ücretsiz modellerinden oluşan bir müzakere paneli. Her üye öneriyi önce tek başına yanıtlıyor, sonra diğer koltuklara isimleriyle cevap veriyor, karşı çıkanlar bir kez daha çağrılıyor. Agora sayımı kendisi yapıyor ve panelin uzlaşıp uzlaşmadığını önceden ilan ettiği bir eşikle bildiriyor. Uzlaşı, uzlaşı olarak raporlanır; asla doğruluk olarak değil."
+      },
+      "guidingQuestion": {
+        "en": "Do free models converge on anything, or only agree when they were never tested against each other?",
+        "tr": "Ücretsiz modeller bir şey üzerinde uzlaşıyor mu, yoksa birbirleriyle hiç sınanmadıkları için mi katılıyorlar?"
+      },
+      "repository": "https://github.com/aserdargun/agr-aserdargun-com",
+      "address": "https://agr.aserdargun.com/",
+      "updatedAt": "2026-10-04",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "live-api-observed-in-the-visitor-browser",
+      "upstreamApps": [
+        "hns"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "deliberation",
+        "free-models",
+        "convergence",
+        "quota-rationing"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "agent-system",
+      "focusState": "active",
+      "relatedMemoryIds": [
+        "learning-labs-evidence-boundary"
+      ]
+    },
+    {
       "code": "adp",
       "parentApp": "usl",
       "diagramLabel": {
@@ -2380,7 +2435,8 @@
         "dpl",
         "cul",
         "mem",
-        "aos"
+        "aos",
+        "agr"
       ],
       "relatedEntityIds": [
         "entity:evidence",
