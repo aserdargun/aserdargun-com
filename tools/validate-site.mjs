@@ -454,7 +454,7 @@ function validateLearningSystem(locale, html) {
     deploymentConnectors.length === 0,
     `${locale}: the deployment frame must connect independently to WFM and SWI`,
   );
-  check(matches(diagram, /data-learning-app="([a-z]{3})"/g).length === 31, `${locale}: all 31 approved applications must appear in the diagram`);
+  check(matches(diagram, /data-learning-app="([a-z]{3})"/g).length === applications.length, `${locale}: every approved application must appear in the diagram`);
   check(matches(diagram, /data-learning-family="([a-z]+)"/g).join(" ") === "gpu usl llm hns ctx deployment wfm swi itl eng", `${locale}: diagram family frames differ`);
   check(matches(diagram, /marker-start="url\(#ld-arrow\)"/g).length === 2, `${locale}: context must connect reciprocally with security and evaluation`);
   check(

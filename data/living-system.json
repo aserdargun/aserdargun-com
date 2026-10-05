@@ -944,7 +944,8 @@
       ],
       "downstreamApps": [
         "itl",
-        "wml"
+        "wml",
+        "vis"
       ],
       "tracks": [
         "perception",
@@ -1240,10 +1241,12 @@
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
-        "itl"
+        "itl",
+        "vis"
       ],
       "downstreamApps": [
-        "hex"
+        "hex",
+        "vis"
       ],
       "tracks": [
         "humanoids",
@@ -1847,6 +1850,66 @@
       "relatedMemoryIds": [
         "twins-and-deployment-choices"
       ]
+    },
+    {
+      "code": "vis",
+      "parentApp": "eng",
+      "diagramLabel": {
+        "en": "Machine perception",
+        "tr": "Makine algısı"
+      },
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "Vision Laboratory",
+        "tr": "Vision Laboratory"
+      },
+      "summary": {
+        "en": "A deterministic bilingual perception laboratory. Every scene is procedurally generated together with a per-pixel answer key, so each reported number is a measurement rather than an estimate. Eight experiments run classical operators, a CNN trained at runtime, monocular depth cues and optical flow against that same key, on a CPU path by default and an honestly probed WebGPU path when available.",
+        "tr": "Deterministik, iki dilli bir algı laboratuvarı. Her sahne prosedürel olarak ve piksel başına cevap anahtarıyla birlikte üretilir; böylece raporlanan her sayı tahmin değil ölçümdür. Sekiz deney klasik operatörleri, çalışma anında eğitilen bir CNN’yi, monoküler derinlik ipuçlarını ve optik akışı aynı anahtar üzerinde çalıştırır: varsayılan CPU yolunda, mevcutsa dürüstçe yoklanan WebGPU yolunda."
+      },
+      "guidingQuestion": {
+        "en": "What does a camera actually know, and how much of that survives contact with the real world?",
+        "tr": "Bir kamera gerçekte neyi bilir ve bunun ne kadarı gerçek dünyada ayakta kalır?"
+      },
+      "repository": "https://github.com/aserdargun/vis-aserdargun-com",
+      "address": "https://vis.aserdargun.com/",
+      "updatedAt": "2026-10-05",
+      "lastVerified": "2026-10-05",
+      "lastReleased": "2026-10-05",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "deterministic-measurement",
+      "upstreamApps": [
+        "wfm",
+        "eng"
+      ],
+      "downstreamApps": [
+        "hex",
+        "itl"
+      ],
+      "tracks": [
+        "perception",
+        "detection",
+        "segmentation",
+        "depth",
+        "tracking",
+        "ground-truth"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "physical-ai",
+      "focusState": "horizon",
+      "relatedMemoryIds": []
     }
   ],
   "now": {

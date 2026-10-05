@@ -1738,7 +1738,7 @@ async function runCli() {
 const invokedAsCli = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (invokedAsCli) {
   runCli().catch((error) => {
-    console.error(error.message);
+    console.error(error.stack ?? error.message);
     process.exitCode = 1;
   });
 }

@@ -21,14 +21,14 @@ const POSITIONS = {
   wfm: [276, 941, 264, 47], wml: [278, 996, 260, 50],
   swi: [762, 941, 293, 47], ant: [763, 996, 144, 50], bee: [915, 996, 140, 50],
   itl: [490.5, 1091, 335, 47], pdt: [490.5, 1146, 163, 64], dtr: [662.5, 1146, 163, 64],
-  eng: [529, 1250, 258, 54], hex: [531, 1312, 254, 49],
+  eng: [529, 1250, 258, 54], vis: [530.5, 1312, 163, 49], hex: [705.5, 1312, 254, 49],
 };
 const FRAMES = {
   gpu: [298.5, 92, 279, 130], usl: [738.5, 92, 279, 130],
   llm: [518.5, 247, 279, 130], hns: [302, 416, 712, 154],
   ctx: [544, 607, 228, 123], deployment: [420, 757, 476, 130], wfm: [264, 933, 288, 122],
   swi: [750, 933, 316, 122], itl: [480.5, 1081, 355, 138],
-  eng: [518.5, 1240, 279, 130],
+  eng: [518.5, 1240, 453, 133],
 };
 const ROUTES = [
   ["aia-to-gpu", "M 570 56 H 438 V 92"],
@@ -47,7 +47,7 @@ const ROUTES = [
   ["deployment-to-swi", "M 896 822 H 908 V 933", "horizon"],
   ["wfm-to-itl", "M 408 1055 V 1150 H 480.5", "horizon"],
   ["swi-to-itl", "M 908 1055 V 1150 H 835.5", "horizon"],
-  ["itl-to-eng", "M 658 1219 V 1240", "horizon"],
+  ["itl-to-eng", "M 658 1219 V 1240 H 745", "horizon"],
 ];
 const CONNECTORS = [];
 const ROLES = { pol: "learning-tool", aia: "map", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", agr: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
@@ -100,6 +100,7 @@ const LABELS = {
   pdt: ["P-101 interactive digital twin", "P-101 etkileşimli dijital ikiz"],
   eng: ["Humanoid engineering", "İnsansı robot mühendisliği"],
   hex: ["Humanoid exploration", "İnsansı robot keşfi"],
+  vis: ["Machine perception", "Makine algısı"],
   dcl: ["Shared lab", "Ortak laboratuvar"],
 };
 
