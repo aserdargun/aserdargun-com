@@ -1419,8 +1419,7 @@
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
-        "eng",
-        "vis"
+        "eng"
       ],
       "downstreamApps": [],
       "tracks": [
@@ -1507,7 +1506,6 @@
       ],
       "productionUrl": "https://vis.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/vis-aserdargun-com",
-      "researchCutoff": "2026-10-05",
       "lastVerified": "2026-10-05",
       "lastReleased": "2026-10-05",
       "sourceCount": null,
