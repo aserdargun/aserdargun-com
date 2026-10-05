@@ -143,7 +143,7 @@
         <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="Application connection map">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1224 1581" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">
           <title id="ld-title">Connected applications and their sub-applications</title>
-          <desc id="ld-desc">Nine stages: the architect lane sits above eight topical lanes. The architect derives the foundation below it with frontier models. One arrow leaves AIA on the left, runs down the left margin of the foundation lane and enters the serving frame at TFL&apos;s left middle. In the foundation lane LLM, GPU and VIS stand side by side: the serving atlas on the left, the kernel atlas in the middle and the vision knowledge bank on the right. GPU feeds VIS on the same lane: that arrow leaves the kernel frame&apos;s right middle and enters the vision bank&apos;s left middle. The runtime lane holds USL, and it is fed from three directions: from LLM on the left, from GPU straight down the top centre and from VIS on the right, where it enters the adaptation frame at its right middle. HNS and everything below it share one vertical column with ADP, so the adaptation-to-harness arrow runs straight down. Frames group LLM with TFL; GPU with POL and GEX; USL with ADP; HNS with ARL, DPL, CUL, AOS and AGR; CTX with MEM; WFM with WML; SWI with ANT and BEE; ITL with PDT and DTR; ENG with HEX. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. VIS carries no frame because it has no sub-application. Arrows describe learning relationships, not runtime integrations.</desc>
+          <desc id="ld-desc">Nine stages: the architect lane sits above eight topical lanes. The architect derives the foundation below it with frontier models. Three arrows leave AIA, each from a midpoint: the left midpoint drops into the serving frame&apos;s top middle, the bottom midpoint runs straight down the runtime column into the kernel frame&apos;s top middle, and the right midpoint enters the vision frame&apos;s top middle. In the foundation lane LLM, GPU and VIS stand side by side: the serving atlas on the left, the kernel atlas in the middle and the vision knowledge bank on the right, placed on the kernel frame&apos;s mid-height so GPU feeds VIS with one straight horizontal between the two frames&apos; midpoints. The runtime lane holds USL, and it is fed from three directions: from the serving frame&apos;s bottom middle on the left, from the kernel frame straight down the top centre and from the vision frame, which drops out of its own bottom middle and turns in at the adaptation frame&apos;s right middle. HNS and everything below it share one vertical column with ADP, so the adaptation-to-harness arrow runs straight down from the adaptation frame&apos;s bottom middle to the harness frame&apos;s top middle. Frames group LLM with TFL; GPU with POL and GEX; USL with ADP; HNS with ARL, DPL, CUL, AOS and AGR; CTX with MEM; WFM with WML; SWI with ANT and BEE; ITL with PDT and DTR; ENG with HEX. VIS keeps a frame of its own: it has no sub-application, but all three of its arrows meet a frame midpoint. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. Arrows describe learning relationships, not runtime integrations.</desc>
           <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#b7f45d"/></marker></defs>
           <g class="ld-stage-index">
             <path class="ld-stage-rule" d="M 258 22 V 1493 M 30 1493 H 1192"/>
@@ -177,8 +177,9 @@
           </g>
           <g class="ld-families" aria-hidden="true">
             <g data-learning-family="llm"><rect x="300" y="200" width="278" height="130" rx="12"/></g>
-            <g data-learning-family="gpu"><rect x="600" y="200" width="279" height="130" rx="12"/></g>
-            <g data-learning-family="usl"><rect x="600" y="356" width="279" height="130" rx="12"/></g>
+            <g data-learning-family="gpu"><rect x="600" y="200" width="278" height="130" rx="12"/></g>
+            <g data-learning-family="vis"><rect x="909" y="228" width="260" height="74" rx="12"/></g>
+            <g data-learning-family="usl"><rect x="600" y="356" width="278" height="130" rx="12"/></g>
             <g data-learning-family="hns"><rect x="383" y="524" width="712" height="154" rx="12"/></g>
             <g data-learning-family="ctx"><rect x="625" y="715" width="228" height="123" rx="12"/></g>
             <g data-learning-family="deployment"><rect x="501" y="865" width="476" height="130" rx="12"/></g>
@@ -188,15 +189,15 @@
             <g data-learning-family="eng"><rect x="599.5" y="1348" width="279" height="133" rx="12"/></g>
           </g>
           <g class="ld-links" aria-hidden="true">
-            <path data-learning-edge="aia-to-llm" class="ld-edge-primary" d="M 543 55 H 275 V 296.5 H 312" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="aia-to-gpu" class="ld-edge-primary" d="M 739.5 86 V 200" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="aia-to-vis" class="ld-edge-primary" d="M 907 55 H 1039 V 210" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-llm" class="ld-edge-primary" d="M 557 55 H 439 V 200" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-gpu" class="ld-edge-primary" d="M 739 86 V 200" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-vis" class="ld-edge-primary" d="M 921 55 H 1039 V 228" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="gpu-to-llm" class="ld-edge-primary" d="M 600 265 H 578" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="gpu-to-vis" class="ld-edge-primary" d="M 879 265 H 899 V 237 H 919" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="llm-to-usl" class="ld-edge-primary" d="M 439 330 V 343 H 610 V 393" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="gpu-to-usl" class="ld-edge-primary" d="M 739 330 V 366" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="vis-to-usl" class="ld-edge-primary" d="M 1159 237 H 1180 V 421 H 879" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="usl-to-hns" class="ld-edge-primary" d="M 739 477 V 524" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="gpu-to-vis" class="ld-edge-primary" d="M 878 265 H 909" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="llm-to-usl" class="ld-edge-primary" d="M 439 330 V 421 H 600" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="gpu-to-usl" class="ld-edge-primary" d="M 739 330 V 356" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="vis-to-usl" class="ld-edge-primary" d="M 1039 302 V 421 H 878" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="usl-to-hns" class="ld-edge-primary" d="M 739 486 V 524" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-ctx" class="ld-edge-primary" d="M 739 678 V 715" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-sec" class="ld-edge-primary" d="M 473 678 V 746.5" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-evl" class="ld-edge-primary" d="M 1005 678 V 746.5" marker-end="url(#ld-arrow)"/>
@@ -212,9 +213,9 @@
           <g class="ld-nodes">
             <a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent ld-node-aia" data-learning-app="aia" data-learning-role="architect" aria-label="AIA AI Ecosystem Atlas. An evidence-backed research console for comparing AI products and developer ecosystems." aria-describedby="ld-new-tab-aia-en">
               <title id="ld-new-tab-aia-en">Opens in a new tab</title>
-              <rect x="543" y="24" width="364" height="62" rx="7"/>
-              <text x="725" y="54" class="ld-code">AIA</text>
-              <text x="725" y="73" class="ld-label"><tspan x="725" dy="0">Architect</tspan></text>
+              <rect x="557" y="24" width="364" height="62" rx="7"/>
+              <text x="739" y="54" class="ld-code">AIA</text>
+              <text x="739" y="73" class="ld-label"><tspan x="739" dy="0">Architect</tspan></text>
             </a>
             <a href="https://llm.aserdargun.com/en/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="llm" data-learning-role="hub" aria-label="LLM LLM Runtime &amp; Serving Atlas. A source-backed field guide to LLM runtimes and serving engines across seven architectural layers, with an interactive learning layer." aria-describedby="ld-new-tab-llm-en">
               <title id="ld-new-tab-llm-en">Opens in a new tab</title>
@@ -248,9 +249,9 @@
             </a>
             <a href="https://vis.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="vis" data-learning-role="atlas" aria-label="VIS Computer Vision Knowledge Bank. A source-backed computer-vision field guide across seven perception layers, each layer naming what it is not for, plus a deterministic laboratory that measures the same ideas against a per-pixel answer key. The knowledge bank explains and cites; the laboratory measures. Classical operators, a CNN trained at runtime, monocular depth cues and optical flow all run on a CPU path by default and an honestly probed WebGPU path when available." aria-describedby="ld-new-tab-vis-en">
               <title id="ld-new-tab-vis-en">Opens in a new tab</title>
-              <rect x="919" y="210" width="240" height="54" rx="7"/>
-              <text x="1039" y="236" class="ld-code">VIS</text>
-              <text x="1039" y="255" class="ld-label"><tspan x="1039" dy="0">Vision knowledge bank</tspan></text>
+              <rect x="919" y="238" width="240" height="54" rx="7"/>
+              <text x="1039" y="264" class="ld-code">VIS</text>
+              <text x="1039" y="283" class="ld-label"><tspan x="1039" dy="0">Vision knowledge bank</tspan></text>
             </a>
             <a href="https://usl.aserdargun.com/en/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="usl" data-learning-role="adapt" aria-label="USL Unsloth Studio Learning Atlas. A bilingual learning atlas with eight lessons, a 12-week roadmap, teaching labs and historical experiment evidence for LoRA/QLoRA, datasets, evaluation and local deployment. No live GPU or training; ADP extends adaptation practice with synthetic experiments." aria-describedby="ld-new-tab-usl-en">
               <title id="ld-new-tab-usl-en">Opens in a new tab</title>

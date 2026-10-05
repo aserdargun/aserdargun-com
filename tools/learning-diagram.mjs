@@ -6,15 +6,19 @@ const escape = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<",
 const localized = (locale, en, tr) => locale === "tr" ? tr : en;
 
 // Geometry follows the approved nine-stage reference. A family is an ownership
-// boundary; inter-family arrows attach to its exterior. The one deliberate
-// exception is the architect arrow, which pierces the serving frame to reach
-// TFL directly, because TFL is what the left margin of the lane points at.
+// boundary; inter-family arrows attach to its exterior. Arrows between framed
+// applications meet frame midpoints, never box edges, so a frame is the
+// attachment surface as well as a boundary.
 const POSITIONS = {
-  aia: [543, 24, 364, 62],
+  // AIA sits on the runtime column axis (739), so its bottom midpoint is also the
+  // kernel frame's top midpoint and the architect arrow runs straight down
+  aia: [557, 24, 364, 62],
   // foundation lane: serving on the left, kernels in the middle, vision on the right
   llm: [310, 210, 258, 54], tfl: [312, 272, 254, 49],
   gpu: [610, 210, 258, 54], pol: [610, 272, 131, 49], gex: [750, 272, 118, 49],
-  vis: [919, 210, 240, 54],
+  // vision sits on the kernel frame's mid-height (265), so the arrow GPU hands
+  // it is one straight horizontal between two frame midpoints
+  vis: [919, 238, 240, 54],
   usl: [610, 366, 258, 54], adp: [612, 428, 254, 49],
   // one column from HNS down: every x below is the runtime column (739) plus an
   // inset, so the adaptation-to-harness arrow can run straight down
@@ -29,28 +33,33 @@ const POSITIONS = {
   eng: [610, 1358, 258, 54], hex: [612, 1420, 254, 49],
 };
 // A frame is centred on the content it owns: LLM+TFL is inset 10 on both sides,
-// so the frame axis matches the LLM box axis at 439.
+// so the frame axis matches the LLM box axis at 439. The runtime frames are 278
+// wide so their axis matches the runtime column at 739, and the harness, context
+// and twin frames share it. VIS holds a frame of its own: it has no
+// sub-application, but all three of its arrows meet a frame midpoint.
 const FRAMES = {
-  llm: [300, 200, 278, 130], gpu: [600, 200, 279, 130], usl: [600, 356, 279, 130],
+  llm: [300, 200, 278, 130], gpu: [600, 200, 278, 130], vis: [909, 228, 260, 74], usl: [600, 356, 278, 130],
   hns: [383, 524, 712, 154], ctx: [625, 715, 228, 123], deployment: [501, 865, 476, 130],
   wfm: [345, 1041, 288, 122], swi: [831, 1041, 316, 122], itl: [561.5, 1189, 355, 138],
   eng: [599.5, 1348, 279, 133],
 };
 const ROUTES = [
-  // the architect arrow leaves AIA on the left, runs down the lane's left margin
-  // and pierces the serving frame at TFL's left middle
-  ["aia-to-llm", "M 543 55 H 275 V 296.5 H 312"],
-  ["aia-to-gpu", "M 739.5 86 V 200"],
-  ["aia-to-vis", "M 907 55 H 1039 V 210"],
+  // three arrows leave the architect, each on a frame midpoint: the serving
+  // frame's top middle from the left, the kernel frame's top middle from the
+  // bottom, the vision frame's top middle from the right
+  ["aia-to-llm", "M 557 55 H 439 V 200"],
+  ["aia-to-gpu", "M 739 86 V 200"],
+  ["aia-to-vis", "M 921 55 H 1039 V 228"],
   ["gpu-to-llm", "M 600 265 H 578"],
-  // kernels hand the vision bank their own lane: frame right middle to bank left middle
-  ["gpu-to-vis", "M 879 265 H 899 V 237 H 919"],
+  // kernels hand the vision frame their own lane: one straight horizontal
+  // between the two frames' mid-height
+  ["gpu-to-vis", "M 878 265 H 909"],
   // the runtime lane is fed from the left, from the right and from the top centre
-  ["llm-to-usl", "M 439 330 V 343 H 610 V 393"],
-  ["gpu-to-usl", "M 739 330 V 366"],
-  ["vis-to-usl", "M 1159 237 H 1180 V 421 H 879"],
-  // one straight column: kernel frame, adaptation, harness, assurance, deployment
-  ["usl-to-hns", "M 739 477 V 524"],
+  ["llm-to-usl", "M 439 330 V 421 H 600"],
+  ["gpu-to-usl", "M 739 330 V 356"],
+  ["vis-to-usl", "M 1039 302 V 421 H 878"],
+  // one straight column: adaptation frame, harness frame, assurance, deployment
+  ["usl-to-hns", "M 739 486 V 524"],
   ["hns-to-ctx", "M 739 678 V 715"],
   ["hns-to-sec", "M 473 678 V 746.5"],
   ["hns-to-evl", "M 1005 678 V 746.5"],
@@ -123,8 +132,8 @@ const LABELS = {
 export function renderLearningDiagram({ locale, data }) {
   const { nodes, families, edges, connectors, junctions } = learningDiagramLayout(data.applications);
   const description = localized(locale,
-    "Nine stages: the architect lane sits above eight topical lanes. The architect derives the foundation below it with frontier models. One arrow leaves AIA on the left, runs down the left margin of the foundation lane and enters the serving frame at TFL's left middle. In the foundation lane LLM, GPU and VIS stand side by side: the serving atlas on the left, the kernel atlas in the middle and the vision knowledge bank on the right. GPU feeds VIS on the same lane: that arrow leaves the kernel frame's right middle and enters the vision bank's left middle. The runtime lane holds USL, and it is fed from three directions: from LLM on the left, from GPU straight down the top centre and from VIS on the right, where it enters the adaptation frame at its right middle. HNS and everything below it share one vertical column with ADP, so the adaptation-to-harness arrow runs straight down. Frames group LLM with TFL; GPU with POL and GEX; USL with ADP; HNS with ARL, DPL, CUL, AOS and AGR; CTX with MEM; WFM with WML; SWI with ANT and BEE; ITL with PDT and DTR; ENG with HEX. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. VIS carries no frame because it has no sub-application. Arrows describe learning relationships, not runtime integrations.",
-    "Dokuz aşama: mimar şeridi sekiz konu şeridinin üzerinde durur. Mimar, aşağıdaki temeli sınır modelleriyle türetir. Bir ok AIA’nın solundan çıkar, temel şeridinin sol kenarı boyunca aşağı iner ve sunum çerçevesine TFL’nin sol ortasından girer. Temel şeridinde LLM, GPU ve VIS yan yana durur: solda sunum atlası, ortada çekirdek atlası, sağda görü bilgi bankası. GPU, VIS’i aynı şeritten besler: bu ok çekirdek çerçevesinin sağ ortasından çıkar ve görü bankasının sol ortasına girer. Çalıştırma şeridinde USL vardır ve üç yönden beslenir: soldan LLM’den, üst ortadan GPU’dan dik aşağı ve sağdan VIS’ten; sağdaki ok uyarlama çerçevesinin sağ ortasına girer. HNS ve altındaki her şey ADP ile aynı dikey sütunda durur, böylece uyarlamadan ajan sistemine ok dik aşağı iner. Çerçeveler LLM ile TFL’yi; GPU ile POL ve GEX’i; USL ile ADP’yi; HNS ile ARL, DPL, CUL, AOS ve AGR’yi; CTX ile MEM’i; WFM ile WML’yi; SWI ile ANT ve BEE’yi; ITL ile PDT ve DTR’yi; ENG ile HEX’i gruplar. CTX/MEM grubu, SEC ve EVL ile karşılıklı geri bildirim paylaşır. LCL ve CLD aynı dış çerçevede, ortak laboratuvarları DCL ise ikisinin altında yer alır. VIS çerçevesizdir çünkü alt uygulaması yoktur. Oklar öğrenme ilişkilerini gösterir; çalışma zamanı entegrasyonu değildir.");
+    "Nine stages: the architect lane sits above eight topical lanes. The architect derives the foundation below it with frontier models. Three arrows leave AIA, each from a midpoint: the left midpoint drops into the serving frame's top middle, the bottom midpoint runs straight down the runtime column into the kernel frame's top middle, and the right midpoint enters the vision frame's top middle. In the foundation lane LLM, GPU and VIS stand side by side: the serving atlas on the left, the kernel atlas in the middle and the vision knowledge bank on the right, placed on the kernel frame's mid-height so GPU feeds VIS with one straight horizontal between the two frames' midpoints. The runtime lane holds USL, and it is fed from three directions: from the serving frame's bottom middle on the left, from the kernel frame straight down the top centre and from the vision frame, which drops out of its own bottom middle and turns in at the adaptation frame's right middle. HNS and everything below it share one vertical column with ADP, so the adaptation-to-harness arrow runs straight down from the adaptation frame's bottom middle to the harness frame's top middle. Frames group LLM with TFL; GPU with POL and GEX; USL with ADP; HNS with ARL, DPL, CUL, AOS and AGR; CTX with MEM; WFM with WML; SWI with ANT and BEE; ITL with PDT and DTR; ENG with HEX. VIS keeps a frame of its own: it has no sub-application, but all three of its arrows meet a frame midpoint. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. Arrows describe learning relationships, not runtime integrations.",
+    "Dokuz aşama: mimar şeridi sekiz konu şeridinin üzerinde durur. Mimar, aşağıdaki temeli sınır modelleriyle türetir. AIA’dan üç ok çıkar ve her biri bir orta noktadan ayrılır: sol orta noktası sunum çerçevesinin üst ortasına iner, alt orta noktası çalıştırma sütunu boyunca dik aşağı inip çekirdek çerçevesinin üst ortasına ulaşır, sağ orta noktası görü çerçevesinin üst ortasına girer. Temel şeridinde LLM, GPU ve VIS yan yana durur: solda sunum atlası, ortada çekirdek atlası, sağda görü bilgi bankası; VIS çekirdek çerçevesinin orta yüksekliğine oturur, böylece GPU görüyü iki çerçevenin orta noktaları arasında tek düz yatay okla besler. Çalıştırma şeridinde USL vardır ve üç yönden beslenir: soldan sunum çerçevesinin alt ortasından, üst ortadan çekirdek çerçevesinden dik aşağı ve sağdan görü çerçevesinden; görü çerçevesi kendi alt ortasından çıkıp uyarlama çerçevesinin sağ ortasına döner. HNS ve altındaki her şey ADP ile aynı dikey sütunda durur, böylece uyarlamadan ajan sistemine ok uyarlama çerçevesinin alt ortasından ajan sistemi çerçevesinin üst ortasına dik aşağı iner. Çerçeveler LLM ile TFL’yi; GPU ile POL ve GEX’i; USL ile ADP’yi; HNS ile ARL, DPL, CUL, AOS ve AGR’yi; CTX ile MEM’i; WFM ile WML’yi; SWI ile ANT ve BEE’yi; ITL ile PDT ve DTR’yi; ENG ile HEX’i gruplar. VIS kendi çerçevesini korur: alt uygulaması yoktur ama üç oku da bir çerçeve orta noktasında buluşur. CTX/MEM grubu, SEC ve EVL ile karşılıklı geri bildirim paylaşır. LCL ve CLD aynı dış çerçevede, ortak laboratuvarları DCL ise ikisinin altında yer alır. Oklar öğrenme ilişkilerini gösterir; çalışma zamanı entegrasyonu değildir.");
   const renderNode = ({ app, x, y, width, height, cx, role }) => {
     const isChild = applicationParents(app).length > 0;
     const parentLabel = isChild ? `${applicationOwnership(app, locale)}. ` : "";

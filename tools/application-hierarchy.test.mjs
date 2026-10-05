@@ -171,11 +171,11 @@ test("shared ownership validates both parents and detects cycles through either 
 });
 
 
-test("the approved diagram has 32 unique nodes and ten non-overlapping ownership frames", () => {
+test("the approved diagram has 32 unique nodes and eleven non-overlapping frames", () => {
   const { nodes, families, edges } = learningDiagramLayout(data.applications);
   assert.equal(nodes.length, 32);
   assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 32);
-  assert.deepEqual(families.map(({ code }) => code), ["llm", "gpu", "usl", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"]);
+  assert.deepEqual(families.map(({ code }) => code), ["llm", "gpu", "vis", "usl", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"]);
   for (const [i, frame] of families.entries()) {
     for (const other of families.slice(i + 1)) {
       assert.ok(!(overlap(frame.x, frame.x + frame.width, other.x, other.x + other.width) && overlap(frame.y, frame.y + frame.height, other.y, other.y + other.height)), `${frame.code} overlaps ${other.code}`);
@@ -197,38 +197,47 @@ test("the approved diagram has 32 unique nodes and ten non-overlapping ownership
     return route.reduce((length, [a, b]) => length + Math.abs(b.x - a.x) + Math.abs(b.y - a.y), 0);
   });
   assert.equal(branchLengths[0], branchLengths[1], "physical-AI arrows have equal total lengths");
-  // Incoming routes to grouped applications land on their family frames.
-  // Other arrow tips land on the application rectangle.
+  // Incoming routes to framed applications land on the frame, and an arrow
+  // between two framed applications meets a midpoint on both ends. No arrow tip
+  // is allowed to stop at a box edge: the frame is the attachment surface.
+  const framedTargets = ["llm", "gpu", "usl", "vis", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"];
   for (const edge of edges) {
-    const frameTip = edge.id === "aia-to-gpu";
     const targetCode = edge.id.split("-to-")[1];
-    const target = frameTip || ["llm", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"].includes(targetCode)
+    const target = framedTargets.includes(targetCode)
       ? families.find(({code}) => code === targetCode)
       : nodes.find(({app}) => app.code === targetCode);
     assert.ok(target, edge.id);
-    // two routes land off the resolved target: the architect arrow pierces the
-    // serving frame to reach TFL, and the vision bank addresses the adaptation
-    // frame rather than the USL box inside it
-    const tip = edge.id === "aia-to-llm"
-      ? nodes.find(({app}) => app.code === "tfl")
-      : edge.id === "vis-to-usl" ? families.find(({code}) => code === "usl") : target;
-    const point = segments(edge.path).at(-1)[1];
-    if (frameTip) assert.deepEqual(point, { x: target.x + target.width / 2, y: target.y }, `${edge.id} misses frame midpoint`);
+    const route = segments(edge.path);
+    const tip = target;
+    const point = route.at(-1)[1];
     if (edge.id === "aia-to-llm") {
       const aia = nodes.find(({app}) => app.code === "aia");
-      const frame = families.find(({code}) => code === "llm");
-      assert.deepEqual(segments(edge.path)[0][0], { x: aia.x, y: aia.y + aia.height / 2 }, `${edge.id} must leave the architect on its left midpoint`);
-      assert.ok(Math.min(...segments(edge.path).flatMap(([a, b]) => [a.x, b.x])) < frame.x, `${edge.id} must descend outside the serving frame`);
-      assert.deepEqual(point, { x: tip.x, y: tip.y + tip.height / 2 }, `${edge.id} must meet the left midpoint of token serving`);
+      assert.deepEqual(route[0][0], { x: aia.x, y: aia.y + aia.height / 2 }, `${edge.id} must leave the architect on its left midpoint`);
+      assert.deepEqual(point, { x: target.x + target.width / 2, y: target.y }, `${edge.id} must meet the top midpoint of the serving frame`);
+    } else if (edge.id === "aia-to-gpu") {
+      const aia = nodes.find(({app}) => app.code === "aia");
+      assert.deepEqual(route[0][0], { x: aia.x + aia.width / 2, y: aia.y + aia.height }, `${edge.id} must leave the architect on its bottom midpoint`);
+      assert.equal(route.length, 1, `${edge.id} runs straight down the runtime column`);
+      assert.deepEqual(point, { x: target.x + target.width / 2, y: target.y }, `${edge.id} must meet the top midpoint of the kernel frame`);
+    } else if (edge.id === "aia-to-vis") {
+      const aia = nodes.find(({app}) => app.code === "aia");
+      assert.deepEqual(route[0][0], { x: aia.x + aia.width, y: aia.y + aia.height / 2 }, `${edge.id} must leave the architect on its right midpoint`);
+      assert.deepEqual(point, { x: target.x + target.width / 2, y: target.y }, `${edge.id} must meet the top midpoint of the vision frame`);
     } else if (edge.id === "gpu-to-vis") {
       const gpuFrame = families.find(({code}) => code === "gpu");
-      assert.deepEqual(segments(edge.path)[0][0], { x: gpuFrame.x + gpuFrame.width, y: gpuFrame.y + gpuFrame.height / 2 }, `${edge.id} leaves the kernel frame laterally`);
-      assert.deepEqual(point, { x: tip.x, y: tip.y + tip.height / 2 }, `${edge.id} must meet the left midpoint of the vision bank`);
+      assert.deepEqual(route[0][0], { x: gpuFrame.x + gpuFrame.width, y: gpuFrame.y + gpuFrame.height / 2 }, `${edge.id} leaves the kernel frame laterally`);
+      assert.equal(route.length, 1, `${edge.id} is one straight horizontal`);
+      assert.deepEqual(point, { x: target.x, y: target.y + target.height / 2 }, `${edge.id} must meet the left midpoint of the vision frame`);
     } else if (edge.id === "vis-to-usl") {
+      const visFrame = families.find(({code}) => code === "vis");
       const uslFrame = families.find(({code}) => code === "usl");
-      const vis = nodes.find(({app}) => app.code === "vis");
-      assert.deepEqual(segments(edge.path)[0][0], { x: vis.x + vis.width, y: vis.y + vis.height / 2 }, `${edge.id} leaves the vision bank on its right midpoint`);
+      assert.deepEqual(route[0][0], { x: visFrame.x + visFrame.width / 2, y: visFrame.y + visFrame.height }, `${edge.id} must leave the vision frame on its bottom midpoint`);
       assert.deepEqual(point, { x: uslFrame.x + uslFrame.width, y: uslFrame.y + uslFrame.height / 2 }, `${edge.id} must meet the right midpoint of the adaptation frame`);
+    } else if (edge.id === "llm-to-usl") {
+      const llmFrame = families.find(({code}) => code === "llm");
+      const uslFrame = families.find(({code}) => code === "usl");
+      assert.deepEqual(route[0][0], { x: llmFrame.x + llmFrame.width / 2, y: llmFrame.y + llmFrame.height }, `${edge.id} must leave the serving frame on its bottom midpoint`);
+      assert.deepEqual(point, { x: uslFrame.x, y: uslFrame.y + uslFrame.height / 2 }, `${edge.id} must meet the left midpoint of the adaptation frame`);
     } else if (targetCode === "itl") {
       const source = families.find(({code}) => code === edge.id.split("-to-")[0]);
       assert.deepEqual(segments(edge.path)[0][0], { x: source.x + source.width / 2, y: source.y + source.height });
@@ -250,11 +259,11 @@ test("the approved diagram has 32 unique nodes and ten non-overlapping ownership
       assert.equal(segments(edge.path).length, 1, `${edge.id} runs straight down the runtime column`);
       assert.deepEqual(point, { x: column, y: target.y }, `${edge.id} enters the runtime lane from the top centre`);
     } else if (edge.id === "usl-to-hns") {
-      const adp = nodes.find(({app}) => app.code === "adp");
-      assert.deepEqual(segments(edge.path)[0][0], { x: adp.x + adp.width / 2, y: adp.y + adp.height }, `${edge.id} leaves the adaptation laboratory from its bottom midpoint`);
-      assert.equal(segments(edge.path).length, 1, `${edge.id} runs straight down the runtime column`);
+      const uslFrame = families.find(({code}) => code === "usl");
+      assert.deepEqual(route[0][0], { x: uslFrame.x + uslFrame.width / 2, y: uslFrame.y + uslFrame.height }, `${edge.id} must leave the adaptation frame on its bottom midpoint`);
+      assert.equal(route.length, 1, `${edge.id} runs straight down the runtime column`);
       assert.deepEqual(point, { x: target.x + target.width / 2, y: target.y }, `${edge.id} must touch the top midpoint of the harness frame`);
-    } else if (["llm", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"].includes(targetCode)) {
+    } else if (["hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"].includes(targetCode)) {
       assert.deepEqual(point, { x: target.x + target.width / 2, y: target.y }, `${edge.id} must touch the top midpoint of its target frame`);
     }
     assert.ok(((point.x === tip.x || point.x === tip.x + tip.width) && point.y >= tip.y && point.y <= tip.y + tip.height)

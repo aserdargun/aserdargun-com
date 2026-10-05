@@ -459,7 +459,7 @@ function validateLearningSystem(locale, html) {
     matches(diagram, /data-learning-app="([a-z]{3})"/g).length === systemFocusApplications(livingSystem.applications).length,
     `${locale}: every approved application must appear in the diagram`,
   );
-  check(matches(diagram, /data-learning-family="([a-z]+)"/g).join(" ") === "llm gpu usl hns ctx deployment wfm swi itl eng", `${locale}: diagram family frames differ`);
+  check(matches(diagram, /data-learning-family="([a-z]+)"/g).join(" ") === "llm gpu vis usl hns ctx deployment wfm swi itl eng", `${locale}: diagram family frames differ`);
   check(matches(diagram, /marker-start="url\(#ld-arrow\)"/g).length === 2, `${locale}: context must connect reciprocally with security and evaluation`);
   check(
     learningEdges.filter((edge) => edge.endsWith("-to-wfm")).length === 1
