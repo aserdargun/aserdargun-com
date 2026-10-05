@@ -5,54 +5,56 @@ import { systemFocusApplications } from "./system-focus.mjs";
 const escape = (value) => String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");
 const localized = (locale, en, tr) => locale === "tr" ? tr : en;
 
-// Geometry follows the approved eight-stage reference. A family is an ownership
+// Geometry follows the approved nine-stage reference. A family is an ownership
 // boundary; inter-family arrows attach to its exterior, never through a child.
 const POSITIONS = {
-  aia: [570, 27, 176, 58], gpu: [309, 102, 258, 54],
-  pol: [309, 164, 131, 49], gex: [449, 164, 118, 49],
-  usl: [749, 102, 258, 54], adp: [751, 164, 254, 49],
-  llm: [529, 257, 258, 54], tfl: [531, 319, 254, 49],
-  vis: [1030, 257, 162, 54],
-  hns: [312, 426, 692, 53], arl: [312, 490, 132, 68],
-  dpl: [452, 490, 132, 68], cul: [592, 490, 132, 68], agr: [732, 490, 132, 68],
-  aos: [872, 490, 132, 68],
-  ctx: [555, 617, 206, 46], mem: [557, 673, 202, 49],
-  sec: [302, 638.5, 180, 60], evl: [827, 638.5, 194, 60],
-  lcl: [430, 767, 222, 54], dcl: [552, 829, 212, 49], cld: [664, 767, 222, 54],
-  wfm: [276, 941, 264, 47], wml: [278, 996, 260, 50],
-  swi: [762, 941, 293, 47], ant: [763, 996, 144, 50], bee: [915, 996, 140, 50],
-  itl: [490.5, 1091, 335, 47], pdt: [490.5, 1146, 163, 64], dtr: [662.5, 1146, 163, 64],
-  eng: [529, 1250, 258, 54], hex: [531, 1312, 254, 49],
+  aia: [543, 24, 364, 62],
+  // foundation lane: serving on the left, kernels in the middle, vision on the right
+  llm: [310, 210, 258, 54], tfl: [312, 272, 254, 49],
+  gpu: [610, 210, 258, 54], pol: [610, 272, 131, 49], gex: [750, 272, 118, 49],
+  vis: [919, 210, 240, 54],
+  usl: [610, 366, 258, 54], adp: [612, 428, 254, 49],
+  hns: [312, 534, 692, 53],
+  arl: [312, 598, 132, 68], dpl: [452, 598, 132, 68], cul: [592, 598, 132, 68],
+  agr: [732, 598, 132, 68], aos: [872, 598, 132, 68],
+  ctx: [555, 725, 206, 46], mem: [557, 781, 202, 49],
+  sec: [302, 746.5, 180, 60], evl: [827, 746.5, 194, 60],
+  lcl: [430, 875, 222, 54], dcl: [552, 937, 212, 49], cld: [664, 875, 222, 54],
+  wfm: [276, 1049, 264, 47], wml: [278, 1104, 260, 50],
+  swi: [762, 1049, 293, 47], ant: [763, 1104, 144, 50], bee: [915, 1104, 140, 50],
+  itl: [490.5, 1199, 335, 47], pdt: [490.5, 1254, 163, 64], dtr: [662.5, 1254, 163, 64],
+  eng: [529, 1358, 258, 54], hex: [531, 1420, 254, 49],
 };
 const FRAMES = {
-  gpu: [298.5, 92, 279, 130], usl: [738.5, 92, 279, 130],
-  llm: [518.5, 247, 279, 130], vis: [1019, 247, 173, 74], hns: [302, 416, 712, 154],
-  ctx: [544, 607, 228, 123], deployment: [420, 757, 476, 130], wfm: [264, 933, 288, 122],
-  swi: [750, 933, 316, 122], itl: [480.5, 1081, 355, 138],
-  eng: [518.5, 1240, 279, 133],
+  llm: [290, 200, 279, 130], gpu: [600, 200, 279, 130], usl: [600, 356, 279, 130],
+  hns: [302, 524, 712, 154], ctx: [544, 715, 228, 123], deployment: [420, 865, 476, 130],
+  wfm: [264, 1041, 288, 122], swi: [750, 1041, 316, 122], itl: [480.5, 1189, 355, 138],
+  eng: [518.5, 1348, 279, 133],
 };
 const ROUTES = [
-  ["aia-to-gpu", "M 570 56 H 438 V 92"],
-  ["aia-to-usl", "M 746 56 H 878 V 92"],
-  ["aia-to-llm", "M 640 85 V 234 H 658 V 247"],
-  ["aia-to-vis", "M 700 85 V 226 H 1192 V 284"],
-  ["gpu-to-llm", "M 438 222 V 312 H 518.5"],
-  ["usl-to-llm", "M 878 230 V 312 H 797.5"],
-  ["llm-to-hns", "M 658 377 V 416"],
-  ["hns-to-ctx", "M 658 570 V 607"],
-  ["hns-to-sec", "M 392 570 V 638.5"],
-  ["hns-to-evl", "M 924 570 V 638.5"],
-  ["ctx-to-sec", "M 544 668.5 H 482", "decision", true],
-  ["ctx-to-evl", "M 772 668.5 H 827", "decision", true],
-  ["ctx-to-deployment", "M 658 730 V 757", "decision"],
-  ["deployment-to-wfm", "M 420 822 H 408 V 933", "horizon"],
-  ["deployment-to-swi", "M 896 822 H 908 V 933", "horizon"],
-  ["wfm-to-itl", "M 408 1055 V 1150 H 480.5", "horizon"],
-  ["swi-to-itl", "M 908 1055 V 1150 H 835.5", "horizon"],
-  ["itl-to-eng", "M 658 1219 V 1240", "horizon"],
+  ["aia-to-llm", "M 600 86 V 150 H 429.5 V 200"],
+  ["aia-to-gpu", "M 739.5 86 V 200"],
+  ["aia-to-vis", "M 907 55 H 1039 V 210"],
+  ["gpu-to-llm", "M 600 265 H 569"],
+  // the runtime lane is fed from the left, from the right and from the top centre
+  ["llm-to-usl", "M 429.5 330 V 343 H 610 V 393"],
+  ["gpu-to-usl", "M 739.5 330 V 346.5 H 739 V 366"],
+  ["vis-to-usl", "M 1039 264 V 343 H 868 V 393"],
+  ["usl-to-hns", "M 739.5 486 V 505 H 658 V 524"],
+  ["hns-to-ctx", "M 658 678 V 715"],
+  ["hns-to-sec", "M 392 678 V 746.5"],
+  ["hns-to-evl", "M 924 678 V 746.5"],
+  ["ctx-to-sec", "M 544 776.5 H 482", "decision", true],
+  ["ctx-to-evl", "M 772 776.5 H 827", "decision", true],
+  ["ctx-to-deployment", "M 658 838 V 865", "decision"],
+  ["deployment-to-wfm", "M 420 930 H 408 V 1041", "horizon"],
+  ["deployment-to-swi", "M 896 930 H 908 V 1041", "horizon"],
+  ["wfm-to-itl", "M 408 1163 V 1258 H 480.5", "horizon"],
+  ["swi-to-itl", "M 908 1163 V 1258 H 835.5", "horizon"],
+  ["itl-to-eng", "M 658 1327 V 1348", "horizon"],
 ];
 const CONNECTORS = [];
-const ROLES = { pol: "learning-tool", aia: "map", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", vis: "atlas", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", agr: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
+const ROLES = { pol: "learning-tool", aia: "architect", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", vis: "atlas", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", agr: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
 
 export function learningDiagramLayout(applications) {
   const diagramApplications = systemFocusApplications(applications);
@@ -76,14 +78,15 @@ export function learningDiagramLayout(applications) {
 }
 
 const STAGES = [
-  [22, 230, "FOUNDATION", "TEMEL", "Ecosystem, compute, runtime and adaptation foundations; explore programming foundations in POL and experiment with GEX, TFL and ADP.", "Ekosistem, hesaplama, çalışma ortamı ve uyarlama temelleri; POL ile programlamayı keşfet, GEX, TFL ve ADP ile deneyler yap."],
-  [230, 405, "RUNTIME", "ÇALIŞTIRMA", "Model runtime and serving, plus the computer-vision knowledge bank; support multiple providers and hardware backends.", "Model çalıştırma ve sunum; ayrıca bilgisayarlı görü bilgi bankası. Farklı sağlayıcıları ve donanım altyapılarını keşfet."],
-  [405, 594, "AGENT SYSTEM", "AJAN SİSTEMİ", "Agents reason, use context, tools and computer environments; turn research into open-source runtimes and reusable components.", "Ajanlar akıl yürütür, bağlamı, araçları ve bilgisayar ortamlarını kullanır; araştırma açık kaynaklı çalışma ortamlarına ve yeniden kullanılabilir bileşenlere dönüşür."],
-  [594, 740, "CONTEXT & ASSURANCE", "BAĞLAM VE GÜVENCE", "Design context, memory, security and evaluation together for bounded, reviewable behavior.", "Sınırlı ve incelenebilir davranış için bağlam, bellek, güvenlik ve değerlendirmeyi birlikte tasarla."],
-  [740, 924, "DEPLOYMENT", "DAĞITIM", "Local and cloud deployment options; test workload, memory, privacy and cost assumptions.", "Yerel ve bulut dağıtım seçenekleri; iş yükü, bellek, gizlilik ve maliyet varsayımlarını sına."],
-  [924, 1068, "PHYSICAL AI", "FİZİKSEL AI", "World models and swarm intelligence; connect to industrial twins and humanoid systems.", "Dünya modelleri ve sürü zekâsı; endüstriyel ikizlerle ve insansı robot sistemleriyle bağlantı kur."],
-  [1068, 1230, "INDUSTRIAL TWIN", "ENDÜSTRİYEL İKİZ", "Digital twins and digital triplets for industrial systems and real-world research.", "Endüstriyel sistemler ve gerçek dünya araştırmaları için dijital ikizler ve dijital üçüzler."],
-  [1230, 1385, "EMBODIED AI", "BEDENLENMİŞ AI", "Humanoid and embodied intelligence research.", "İnsansı robotlar ve bedenlenmiş zekâ araştırmaları."],
+  [22, 118, "ARCHITECT", "MİMAR", "The architect lane: we derive and build everything below it with frontier models.", "Mimar şeridi: aşağıdakilerin tamamını sınır modelleriyle türetip geliştiriyoruz."],
+  [130, 338, "FOUNDATION", "TEMEL", "Kernels, model serving and machine vision: the compute, the engine and the way machines see.", "Çekirdekler, model sunumu ve makine görüşü: hesaplama, motor ve makinelerin gördüğü."],
+  [338, 513, "RUNTIME", "ÇALIŞTIRMA", "Model adaptation runs here: training and fine-tuning on the foundation below.", "Model uyarlaması burada çalışır: temelin üzerinde eğitim ve ince ayar."],
+  [513, 702, "AGENT SYSTEM", "AJAN SİSTEMİ", "Agents reason, use context, tools and computer environments; turn research into open-source runtimes and reusable components.", "Ajanlar akıl yürütür, bağlamı, araçları ve bilgisayar ortamlarını kullanır; araştırma açık kaynaklı çalışma ortamlarına ve yeniden kullanılabilir bileşenlere dönüşür."],
+  [702, 848, "CONTEXT & ASSURANCE", "BAĞLAM VE GÜVENCE", "Design context, memory, security and evaluation together for bounded, reviewable behavior.", "Sınırlı ve incelenebilir davranış için bağlam, bellek, güvenlik ve değerlendirmeyi birlikte tasarla."],
+  [848, 1032, "DEPLOYMENT", "DAĞITIM", "Local and cloud deployment options; test workload, memory, privacy and cost assumptions.", "Yerel ve bulut dağıtım seçenekleri; iş yükü, bellek, gizlilik ve maliyet varsayımlarını sına."],
+  [1032, 1176, "PHYSICAL AI", "FİZİKSEL AI", "World models and swarm intelligence; connect to industrial twins and humanoid systems.", "Dünya modelleri ve sürü zekâsı; endüstriyel ikizlerle ve insansı robot sistemleriyle bağlantı kur."],
+  [1176, 1338, "INDUSTRIAL TWIN", "ENDÜSTRİYEL İKİZ", "Digital twins and digital triplets for industrial systems and real-world research.", "Endüstriyel sistemler ve gerçek dünya araştırmaları için dijital ikizler ve dijital üçüzler."],
+  [1338, 1493, "EMBODIED AI", "BEDENLENMİŞ AI", "Humanoid and embodied intelligence research.", "İnsansı robotlar ve bedenlenmiş zekâ araştırmaları."],
 ];
 function wrap(text, limit) {
   const lines = [];
@@ -103,14 +106,15 @@ const LABELS = {
   eng: ["Humanoid engineering", "İnsansı robot mühendisliği"],
   hex: ["Humanoid exploration", "İnsansı robot keşfi"],
   vis: ["Vision knowledge bank", "Görü bilgi bankası"],
+  aia: ["Architect", "Mimar"],
   dcl: ["Shared lab", "Ortak laboratuvar"],
 };
 
 export function renderLearningDiagram({ locale, data }) {
   const { nodes, families, edges, connectors, junctions } = learningDiagramLayout(data.applications);
   const description = localized(locale,
-    "Eight stages connect foundations, runtime, agent systems, assurance, deployment, physical AI, industrial twins and embodied AI. Frames group GPU with POL and GEX; USL with ADP; LLM with TFL; VIS as a knowledge bank in the runtime lane; HNS with ARL, DPL, CUL and AOS; CTX with MEM; WFM with WML; SWI with ANT and BEE; and ITL with PDT and DTR. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. ENG and its sub-application HEX share a frame, with HEX below ENG; VIS is no longer part of that family. Arrows describe learning relationships, not runtime integrations.",
-    "Sekiz aşama temelleri, çalıştırmayı, ajan sistemlerini, güvenceyi, dağıtımı, fiziksel AI'ı, endüstriyel ikizleri ve bedenlenmiş AI'ı bağlar. Çerçeveler GPU ile POL ve GEX'i; USL ile ADP'yi; LLM ile TFL'yi; çalıştırma kulvarındaki bilgi bankası VIS'i; HNS ile ARL, DPL, CUL ve AOS'u; CTX ile MEM'i; WFM ile WML'yi; SWI ile ANT ve BEE'yi; ITL ile PDT ve DTR'yi gruplar. CTX/MEM grubu, SEC ve EVL ile karşılıklı geri bildirim paylaşır. LCL ve CLD aynı dış çerçevede, ortak laboratuvarları DCL ise ikisinin altında yer alır. ENG ve alt uygulaması HEX aynı çerçevede, HEX altta olacak şekilde yer alır; VIS artık bu ailenin parçası değildir. Oklar öğrenme ilişkilerini gösterir; çalışma zamanı entegrasyonu değildir.");
+    "Nine stages: the architect lane sits above eight topical lanes. The architect derives the foundation below it with frontier models. In the foundation lane LLM, GPU and VIS stand side by side: the serving atlas on the left, the kernel atlas in the middle and the vision knowledge bank on the right. The runtime lane holds USL, and it is fed from three directions: from LLM on the left, from GPU at the top centre and from VIS on the right. Frames group LLM with TFL; GPU with POL and GEX; USL with ADP; HNS with ARL, DPL, CUL, AOS and AGR; CTX with MEM; WFM with WML; SWI with ANT and BEE; ITL with PDT and DTR; ENG with HEX. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. VIS carries no frame because it has no sub-application. Arrows describe learning relationships, not runtime integrations.",
+    "Dokuz aşama: mimar şeridi sekiz konu şeridinin üzerinde durur. Mimar, aşağıdaki temeli sınır modelleriyle türetir. Temel şeridinde LLM, GPU ve VIS yan yana durur: solda sunum atlası, ortada çekirdek atlası, sağda görü bilgi bankası. Çalıştırma şeridinde USL vardır ve üç yönden beslenir: soldan LLM'den, üst ortadan GPU'dan ve sağdan VIS'ten. Çerçeveler LLM ile TFL’yi; GPU ile POL ve GEX’i; USL ile ADP’yi; HNS ile ARL, DPL, CUL, AOS ve AGR’yi; CTX ile MEM’i; WFM ile WML’yi; SWI ile ANT ve BEE’yi; ITL ile PDT ve DTR’yi; ENG ile HEX’i gruplar. CTX/MEM grubu, SEC ve EVL ile karşılıklı geri bildirim paylaşır. LCL ve CLD aynı dış çerçevede, ortak laboratuvarları DCL ise ikisinin altında yer alır. VIS çerçevesizdir çünkü alt uygulaması yoktur. Oklar öğrenme ilişkilerini gösterir; çalışma zamanı entegrasyonu değildir.");
   const renderNode = ({ app, x, y, width, height, cx, role }) => {
     const isChild = applicationParents(app).length > 0;
     const parentLabel = isChild ? `${applicationOwnership(app, locale)}. ` : "";
@@ -133,18 +137,18 @@ export function renderLearningDiagram({ locale, data }) {
     '      <figure class="learning-diagram-wrap">',
     `        <p class="mobile-map-hint" id="diagram-scroll-hint">${localized(locale, "Pinch with two fingers to zoom. Drag to explore the enlarged map.", "İki parmağınla açıp kapatarak boyutu ayarla. Büyüttüğün haritada parmağınla gezin.")}</p>`,
     `        <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="${localized(locale, "Application connection map", "Uygulama bağlantı haritası")}">`,
-    '        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1224 1465" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">',
+    '        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1224 1581" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">',
     `          <title id="ld-title">${localized(locale, "Connected applications and their sub-applications", "Bağlı üst uygulamalar ve alt uygulamaları")}</title>`,
     `          <desc id="ld-desc">${escape(description)}</desc>`,
     '          <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#b7f45d"/></marker></defs>',
     '          <g class="ld-stage-index">',
-    '            <path class="ld-stage-rule" d="M 258 22 V 1385 M 30 1385 H 1192"/>',
+    '            <path class="ld-stage-rule" d="M 258 22 V 1493 M 30 1493 H 1192"/>',
     ...STAGES.flatMap(([top, bottom, en, tr, enCopy, trCopy], index) => {
       const copyLines = wrap(localized(locale, enCopy, trCopy), 29);
       const lineHeight = Math.min(19, (bottom - top - 70) / Math.max(1, copyLines.length - 1));
       return [
       `            <path class="ld-stage-rule" d="M 30 ${top} H 1192"/>`,
-      `            <text x="33" y="${top + 33}" class="ld-stage-title"${index === 3 ? ' style="font-size: 11px"' : ""}><tspan class="ld-stage-number">${String(index + 1).padStart(2, "0")}</tspan><tspan dx="12">· ${escape(localized(locale, en, tr))}</tspan></text>`,
+      `            <text x="33" y="${top + 33}" class="ld-stage-title"${index === 4 ? ' style="font-size: 11px"' : ""}><tspan class="ld-stage-number">${String(index).padStart(2, "0")}</tspan><tspan dx="12">· ${escape(localized(locale, en, tr))}</tspan></text>`,
       `            <text x="33" y="${top + 59}" class="ld-stage-copy">${copyLines.map((line, index) => `<tspan x="33" dy="${index ? lineHeight : 0}">${escape(line)}</tspan>`).join("")}</text>`,
     ]; }),
     '          </g>',

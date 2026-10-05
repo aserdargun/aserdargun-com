@@ -7,8 +7,8 @@
       "code": "aia",
       "parentApp": null,
       "diagramLabel": {
-        "en": "AI ecosystem",
-        "tr": "AI ekosistemi"
+        "en": "Architect",
+        "tr": "Mimar"
       },
       "kind": "atlas",
       "systemRole": "core-learning",
@@ -65,8 +65,8 @@
       "code": "llm",
       "parentApp": null,
       "diagramLabel": {
-        "en": "Runtime · serving",
-        "tr": "Çalıştırma · sunum"
+        "en": "Serving · engines",
+        "tr": "Sunum · motorlar"
       },
       "kind": "atlas",
       "systemRole": "core-learning",
@@ -101,13 +101,12 @@
       "upstreamApps": [
         "aia",
         "gpu",
-        "usl",
         "ctx"
       ],
       "downstreamApps": [
-        "hns",
         "tfl",
-        "vis"
+        "usl",
+        "hns"
       ],
       "tracks": [
         "runtime",
@@ -162,7 +161,8 @@
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "llm",
-        "vis"
+        "vis",
+        "usl"
       ],
       "downstreamApps": [
         "ctx",
@@ -613,7 +613,7 @@
       "parentApp": null,
       "diagramLabel": {
         "en": "Model adaptation",
-        "tr": "Model uyarlama"
+        "tr": "Model uyarlaması"
       },
       "kind": "atlas",
       "systemRole": "core-learning",
@@ -646,11 +646,13 @@
       "claimCount": 8,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
-        "aia"
+        "aia",
+        "gpu",
+        "llm"
       ],
       "downstreamApps": [
-        "llm",
-        "adp"
+        "adp",
+        "hns"
       ],
       "tracks": [
         "training",
@@ -711,6 +713,7 @@
         "gex",
         "llm",
         "pol",
+        "usl",
         "vis"
       ],
       "tracks": [
@@ -1898,16 +1901,16 @@
       "evidencePolicy": "source-backed-reference-and-deterministic-measurement",
       "upstreamApps": [
         "aia",
-        "gpu",
-        "llm"
+        "gpu"
       ],
       "downstreamApps": [
+        "ctx",
         "eng",
         "hex",
-        "wfm",
-        "itl",
         "hns",
-        "ctx"
+        "itl",
+        "usl",
+        "wfm"
       ],
       "tracks": [
         "perception",

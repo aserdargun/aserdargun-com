@@ -157,7 +157,7 @@ function matches(source, pattern) {
 }
 
 // The homepage description, social metadata and structured data must describe
-// the current eight-stage overview and the registered application count.
+// the current nine-stage overview and the registered application count.
 function validateHomepageOverviewCopy(locale, html, applicationCount) {
   const descriptions = [
     html.match(/<meta name="description" content="([^"]*)">/)?.[1] ?? "",
@@ -405,7 +405,7 @@ function validateLearningSystem(locale, html) {
   );
   check(
     JSON.stringify(nodeRoles.sort()) === JSON.stringify([
-      "aia:map",
+      "aia:architect",
       "gpu:foundation",
       "llm:hub",
       "usl:adapt",
@@ -443,12 +443,12 @@ function validateLearningSystem(locale, html) {
   const learningEdges = matches(diagram, /<path data-learning-edge="([^"]+)"/g);
   check(
     JSON.stringify([...learningEdges].sort()) === JSON.stringify([
-      "aia-to-gpu", "aia-to-llm", "aia-to-usl", "aia-to-vis", "gpu-to-llm", "usl-to-llm",
-      "llm-to-hns", "hns-to-ctx", "hns-to-sec", "hns-to-evl", "ctx-to-sec", "ctx-to-evl",
+      "aia-to-gpu", "aia-to-llm", "aia-to-vis", "gpu-to-llm",
+      "llm-to-usl", "gpu-to-usl", "vis-to-usl", "usl-to-hns", "hns-to-ctx", "hns-to-sec", "hns-to-evl", "ctx-to-sec", "ctx-to-evl",
       "ctx-to-deployment",
       "deployment-to-wfm", "deployment-to-swi", "wfm-to-itl", "swi-to-itl", "itl-to-eng",
     ].sort()),
-    `${locale}: learning diagram edges differ from the approved eight-stage flow`,
+    `${locale}: learning diagram edges differ from the approved nine-stage flow`,
   );
   const deploymentConnectors = matches(diagram, /<path data-learning-connector="([^"]+)"/g);
   check(
@@ -459,7 +459,7 @@ function validateLearningSystem(locale, html) {
     matches(diagram, /data-learning-app="([a-z]{3})"/g).length === systemFocusApplications(livingSystem.applications).length,
     `${locale}: every approved application must appear in the diagram`,
   );
-  check(matches(diagram, /data-learning-family="([a-z]+)"/g).join(" ") === "gpu usl llm vis hns ctx deployment wfm swi itl eng", `${locale}: diagram family frames differ`);
+  check(matches(diagram, /data-learning-family="([a-z]+)"/g).join(" ") === "llm gpu usl hns ctx deployment wfm swi itl eng", `${locale}: diagram family frames differ`);
   check(matches(diagram, /marker-start="url\(#ld-arrow\)"/g).length === 2, `${locale}: context must connect reciprocally with security and evaluation`);
   check(
     learningEdges.filter((edge) => edge.endsWith("-to-wfm")).length === 1

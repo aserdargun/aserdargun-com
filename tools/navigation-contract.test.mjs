@@ -620,7 +620,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     assert.doesNotMatch(svg, /class="ld-legend"/, "the diagram presents its hierarchy without a legend");
 
     const edges = Array.from(svg.matchAll(/<path data-learning-edge="([^"]+)"[^>]*d="([^"]+)"[^>]*marker-end="url\(#ld-arrow\)"\/>/g));
-    assert.equal(edges.length, 18, "inter-group relationships terminate with arrows; family containment expresses internal ownership");
+    assert.equal(edges.length, 19, "inter-group relationships terminate with arrows; family containment expresses internal ownership");
     assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-wfm")).length, 1, "WFM must receive one arrow");
     assert.equal(edges.filter(([, edgeName]) => edgeName.endsWith("-to-swi")).length, 1, "SWI must receive one arrow");
     const deploymentConnectors = Array.from(svg.matchAll(/<path data-learning-connector="([^"]+)"[^>]*d="([^"]+)"\/>/g));

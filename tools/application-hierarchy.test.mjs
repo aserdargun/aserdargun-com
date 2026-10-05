@@ -171,11 +171,11 @@ test("shared ownership validates both parents and detects cycles through either 
 });
 
 
-test("the approved diagram has 32 unique nodes and eleven non-overlapping ownership frames", () => {
+test("the approved diagram has 32 unique nodes and ten non-overlapping ownership frames", () => {
   const { nodes, families, edges } = learningDiagramLayout(data.applications);
   assert.equal(nodes.length, 32);
   assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 32);
-  assert.deepEqual(families.map(({ code }) => code), ["gpu", "usl", "llm", "vis", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"]);
+  assert.deepEqual(families.map(({ code }) => code), ["llm", "gpu", "usl", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"]);
   for (const [i, frame] of families.entries()) {
     for (const other of families.slice(i + 1)) {
       assert.ok(!(overlap(frame.x, frame.x + frame.width, other.x, other.x + other.width) && overlap(frame.y, frame.y + frame.height, other.y, other.y + other.height)), `${frame.code} overlaps ${other.code}`);
@@ -200,7 +200,7 @@ test("the approved diagram has 32 unique nodes and eleven non-overlapping owners
   // Incoming routes to grouped applications land on their family frames.
   // Other arrow tips land on the application rectangle.
   for (const edge of edges) {
-    const foundationBranch = ["aia-to-gpu", "aia-to-usl"].includes(edge.id);
+    const foundationBranch = ["aia-to-gpu", "aia-to-llm"].includes(edge.id);
     const targetCode = edge.id.split("-to-")[1];
     const target = foundationBranch || ["llm", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"].includes(targetCode)
       ? families.find(({code}) => code === targetCode)
@@ -219,10 +219,12 @@ test("the approved diagram has 32 unique nodes and eleven non-overlapping owners
       assert.equal(segments(edge.path).length, 1, "context connects vertically to deployment");
     } else if (edge.id === "gpu-to-llm") {
       const gpuFrame = families.find(({code}) => code === "gpu");
-      assert.deepEqual(segments(edge.path)[0][0], { x: gpuFrame.x + gpuFrame.width / 2, y: gpuFrame.y + gpuFrame.height });
-      assert.deepEqual(point, { x: target.x, y: target.y + target.height / 2 });
-    } else if (edge.id === "usl-to-llm") {
-      assert.deepEqual(point, { x: target.x + target.width, y: target.y + target.height / 2 });
+      assert.deepEqual(segments(edge.path)[0][0], { x: gpuFrame.x, y: gpuFrame.y + gpuFrame.height / 2 }, `${edge.id} leaves the kernel frame laterally`);
+      assert.deepEqual(point, { x: target.x + target.width, y: target.y + target.height / 2 }, `${edge.id} must meet the right midpoint of the serving frame`);
+    } else if (edge.id === "gpu-to-usl") {
+      const gpuFrame = families.find(({code}) => code === "gpu");
+      assert.deepEqual(segments(edge.path)[0][0], { x: gpuFrame.x + gpuFrame.width / 2, y: gpuFrame.y + gpuFrame.height }, `${edge.id} drops out of the centre of the kernel frame`);
+      assert.deepEqual(point, { x: target.x + target.width / 2, y: target.y }, `${edge.id} enters the runtime lane from the top centre`);
     } else if (["llm", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"].includes(targetCode)) {
       assert.deepEqual(point, { x: target.x + target.width / 2, y: target.y }, `${edge.id} must touch the top midpoint of its target frame`);
     }

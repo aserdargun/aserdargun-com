@@ -85,13 +85,12 @@
       "upstreamApps": [
         "aia",
         "gpu",
-        "usl",
         "ctx"
       ],
       "downstreamApps": [
-        "hns",
         "tfl",
-        "vis"
+        "usl",
+        "hns"
       ],
       "tracks": [
         "runtime",
@@ -137,7 +136,8 @@
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "llm",
-        "vis"
+        "vis",
+        "usl"
       ],
       "downstreamApps": [
         "ctx",
@@ -526,11 +526,13 @@
       "claimCount": 8,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
-        "aia"
+        "aia",
+        "gpu",
+        "llm"
       ],
       "downstreamApps": [
-        "llm",
-        "adp"
+        "adp",
+        "hns"
       ],
       "tracks": [
         "training",
@@ -582,6 +584,7 @@
         "gex",
         "llm",
         "pol",
+        "usl",
         "vis"
       ],
       "tracks": [
@@ -1520,16 +1523,16 @@
       "evidencePolicy": "source-backed-reference-and-deterministic-measurement",
       "upstreamApps": [
         "aia",
-        "gpu",
-        "llm"
+        "gpu"
       ],
       "downstreamApps": [
+        "ctx",
         "eng",
         "hex",
-        "wfm",
-        "itl",
         "hns",
-        "ctx"
+        "itl",
+        "usl",
+        "wfm"
       ],
       "tracks": [
         "perception",
