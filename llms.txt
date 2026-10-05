@@ -1,12 +1,12 @@
 # AI Learning System — Serdar Gündoğdu
 
-> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence. The overview is one eight-stage learning map with 31 applications.
+> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence. The overview is one eight-stage learning map with 32 applications.
 
 ## Start here
 - [System overview](https://aserdargun.com/): The eight-stage learning map, its families and their learning relationships.
 - [About Serdar](https://aserdargun.com/about/): Professional identity, career journey, working principles, and public contact links.
 - [Journey](https://aserdargun.com/journey/): Learning path, six detailed stages, and the physical AI horizon with colony, world-model, pump-twin, digital-triplet, and humanoid learning laboratories.
-- [Application Map](https://aserdargun.com/applications/): Search 31 applications by topic and layer; inspect research, verification and release evidence.
+- [Application Map](https://aserdargun.com/applications/): Search 32 applications by topic and layer; inspect research, verification and release evidence.
 - [Now](https://aserdargun.com/now/): Dated work and planned direction. Read its date before describing an item as current.
 - [Knowledge](https://aserdargun.com/memory/): Authored public research notes and decisions with sources.
 - [Portfolio registry](https://aserdargun.com/portfolio.json): Structured public application identities and relationships.
