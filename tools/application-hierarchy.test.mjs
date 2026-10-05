@@ -171,11 +171,11 @@ test("shared ownership validates both parents and detects cycles through either 
 });
 
 
-test("the approved diagram has 32 unique nodes and ten non-overlapping ownership frames", () => {
+test("the approved diagram has 32 unique nodes and eleven non-overlapping ownership frames", () => {
   const { nodes, families, edges } = learningDiagramLayout(data.applications);
   assert.equal(nodes.length, 32);
   assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 32);
-  assert.deepEqual(families.map(({ code }) => code), ["gpu", "usl", "llm", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"]);
+  assert.deepEqual(families.map(({ code }) => code), ["gpu", "usl", "llm", "vis", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"]);
   for (const [i, frame] of families.entries()) {
     for (const other of families.slice(i + 1)) {
       assert.ok(!(overlap(frame.x, frame.x + frame.width, other.x, other.x + other.width) && overlap(frame.y, frame.y + frame.height, other.y, other.y + other.height)), `${frame.code} overlaps ${other.code}`);

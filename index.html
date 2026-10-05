@@ -143,7 +143,7 @@
         <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="Application connection map">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1224 1465" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">
           <title id="ld-title">Connected applications and their sub-applications</title>
-          <desc id="ld-desc">Eight stages connect foundations, runtime, agent systems, assurance, deployment, physical AI, industrial twins and embodied AI. Frames group GPU with POL and GEX; USL with ADP; LLM with TFL; HNS with ARL, DPL, CUL and AOS; CTX with MEM; WFM with WML; SWI with ANT and BEE; and ITL with PDT and DTR. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. ENG and its sub-application HEX share a frame, with HEX below ENG. Arrows describe learning relationships, not runtime integrations.</desc>
+          <desc id="ld-desc">Eight stages connect foundations, runtime, agent systems, assurance, deployment, physical AI, industrial twins and embodied AI. Frames group GPU with POL and GEX; USL with ADP; LLM with TFL; VIS as a knowledge bank in the runtime lane; HNS with ARL, DPL, CUL and AOS; CTX with MEM; WFM with WML; SWI with ANT and BEE; and ITL with PDT and DTR. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. ENG and its sub-application HEX share a frame, with HEX below ENG; VIS is no longer part of that family. Arrows describe learning relationships, not runtime integrations.</desc>
           <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#b7f45d"/></marker></defs>
           <g class="ld-stage-index">
             <path class="ld-stage-rule" d="M 258 22 V 1385 M 30 1385 H 1192"/>
@@ -152,7 +152,7 @@
             <text x="33" y="81" class="ld-stage-copy"><tspan x="33" dy="0">Ecosystem, compute, runtime</tspan><tspan x="33" dy="19">and adaptation foundations;</tspan><tspan x="33" dy="19">explore programming</tspan><tspan x="33" dy="19">foundations in POL and</tspan><tspan x="33" dy="19">experiment with GEX, TFL and</tspan><tspan x="33" dy="19">ADP.</tspan></text>
             <path class="ld-stage-rule" d="M 30 230 H 1192"/>
             <text x="33" y="263" class="ld-stage-title"><tspan class="ld-stage-number">02</tspan><tspan dx="12">· RUNTIME</tspan></text>
-            <text x="33" y="289" class="ld-stage-copy"><tspan x="33" dy="0">Model runtime and serving</tspan><tspan x="33" dy="19">layer; support multiple</tspan><tspan x="33" dy="19">providers and hardware</tspan><tspan x="33" dy="19">backends.</tspan></text>
+            <text x="33" y="289" class="ld-stage-copy"><tspan x="33" dy="0">Model runtime and serving,</tspan><tspan x="33" dy="19">plus the computer-vision</tspan><tspan x="33" dy="19">knowledge bank; support</tspan><tspan x="33" dy="19">multiple providers and</tspan><tspan x="33" dy="19">hardware backends.</tspan></text>
             <path class="ld-stage-rule" d="M 30 405 H 1192"/>
             <text x="33" y="438" class="ld-stage-title"><tspan class="ld-stage-number">03</tspan><tspan dx="12">· AGENT SYSTEM</tspan></text>
             <text x="33" y="464" class="ld-stage-copy"><tspan x="33" dy="0">Agents reason, use context,</tspan><tspan x="33" dy="19">tools and computer</tspan><tspan x="33" dy="19">environments; turn research</tspan><tspan x="33" dy="19">into open-source runtimes and</tspan><tspan x="33" dy="19">reusable components.</tspan></text>
@@ -176,20 +176,22 @@
             <g data-learning-family="gpu"><rect x="298.5" y="92" width="279" height="130" rx="12"/></g>
             <g data-learning-family="usl"><rect x="738.5" y="92" width="279" height="130" rx="12"/></g>
             <g data-learning-family="llm"><rect x="518.5" y="247" width="279" height="130" rx="12"/></g>
+            <g data-learning-family="vis"><rect x="1019" y="247" width="173" height="74" rx="12"/></g>
             <g data-learning-family="hns"><rect x="302" y="416" width="712" height="154" rx="12"/></g>
             <g data-learning-family="ctx"><rect x="544" y="607" width="228" height="123" rx="12"/></g>
             <g data-learning-family="deployment"><rect x="420" y="757" width="476" height="130" rx="12"/></g>
             <g data-learning-family="wfm"><rect x="264" y="933" width="288" height="122" rx="12"/></g>
             <g data-learning-family="swi"><rect x="750" y="933" width="316" height="122" rx="12"/></g>
             <g data-learning-family="itl"><rect x="480.5" y="1081" width="355" height="138" rx="12"/></g>
-            <g data-learning-family="eng"><rect x="518.5" y="1240" width="453" height="133" rx="12"/></g>
+            <g data-learning-family="eng"><rect x="518.5" y="1240" width="279" height="133" rx="12"/></g>
           </g>
           <g class="ld-links" aria-hidden="true">
             <path data-learning-edge="aia-to-gpu" class="ld-edge-primary" d="M 570 56 H 438 V 92" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="aia-to-usl" class="ld-edge-primary" d="M 746 56 H 878 V 92" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="aia-to-llm" class="ld-edge-primary" d="M 658 85 V 247" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-llm" class="ld-edge-primary" d="M 640 85 V 234 H 658 V 247" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-vis" class="ld-edge-primary" d="M 700 85 V 226 H 1192 V 284" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="gpu-to-llm" class="ld-edge-primary" d="M 438 222 V 312 H 518.5" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="usl-to-llm" class="ld-edge-primary" d="M 878 222 V 312 H 797.5" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="usl-to-llm" class="ld-edge-primary" d="M 878 230 V 312 H 797.5" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="llm-to-hns" class="ld-edge-primary" d="M 658 377 V 416" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-ctx" class="ld-edge-primary" d="M 658 570 V 607" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-sec" class="ld-edge-primary" d="M 392 570 V 638.5" marker-end="url(#ld-arrow)"/>
@@ -201,7 +203,7 @@
             <path data-learning-edge="deployment-to-swi" class="ld-edge-horizon" d="M 896 822 H 908 V 933" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 408 1055 V 1150 H 480.5" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="swi-to-itl" class="ld-edge-horizon" d="M 908 1055 V 1150 H 835.5" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 658 1219 V 1240 H 745" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 658 1219 V 1240" marker-end="url(#ld-arrow)"/>
           </g>
           <g class="ld-nodes">
             <a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent ld-node-aia" data-learning-app="aia" data-learning-role="map" aria-label="AIA AI Ecosystem Atlas. An evidence-backed research console for comparing AI products and developer ecosystems." aria-describedby="ld-new-tab-aia-en">
@@ -251,6 +253,12 @@
               <rect x="531" y="319" width="254" height="49" rx="7"/>
               <text x="658" y="340.5" class="ld-code">TFL</text>
               <text x="658" y="359.5" class="ld-label"><tspan x="658" dy="0">Token serving</tspan></text>
+            </a>
+            <a href="https://vis.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="vis" data-learning-role="atlas" aria-label="VIS Computer Vision Knowledge Bank. A source-backed computer-vision field guide across seven perception layers, each layer naming what it is not for, plus a deterministic laboratory that measures the same ideas against a per-pixel answer key. The knowledge bank explains and cites; the laboratory measures. Classical operators, a CNN trained at runtime, monocular depth cues and optical flow all run on a CPU path by default and an honestly probed WebGPU path when available." aria-describedby="ld-new-tab-vis-en">
+              <title id="ld-new-tab-vis-en">Opens in a new tab</title>
+              <rect x="1030" y="257" width="162" height="54" rx="7"/>
+              <text x="1111" y="283" class="ld-code">VIS</text>
+              <text x="1111" y="302" class="ld-label"><tspan x="1111" dy="0">Vision knowledge bank</tspan></text>
             </a>
             <a href="https://hns.aserdargun.com/en/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="hns" data-learning-role="harness" aria-label="HNS Harness Engineering Observatory. A bilingual, source-backed observatory comparing seven agent-system layers: execution, tools, context, lifecycle, observability, verification, and governance. Evidence and editorial interpretation remain separate; no universal ranking." aria-describedby="ld-new-tab-hns-en">
               <title id="ld-new-tab-hns-en">Opens in a new tab</title>
@@ -384,17 +392,11 @@
               <text x="658" y="1276" class="ld-code">ENG</text>
               <text x="658" y="1295" class="ld-label"><tspan x="658" dy="0">Humanoid engineering</tspan></text>
             </a>
-            <a href="https://vis.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="vis" data-learning-role="practice-lab" data-learning-parent="eng" aria-label="VIS Vision Laboratory. Sub-application of ENG. A deterministic bilingual perception laboratory. Every scene is procedurally generated together with a per-pixel answer key, so each reported number is a measurement rather than an estimate. Eight experiments run classical operators, a CNN trained at runtime, monocular depth cues and optical flow against that same key, on a CPU path by default and an honestly probed WebGPU path when available." aria-describedby="ld-new-tab-vis-en">
-              <title id="ld-new-tab-vis-en">Opens in a new tab</title>
-              <rect x="530.5" y="1312" width="163" height="49" rx="7"/>
-              <text x="612" y="1333.5" class="ld-code">VIS</text>
-              <text x="612" y="1352.5" class="ld-label"><tspan x="612" dy="0">Machine perception</tspan></text>
-            </a>
             <a href="https://hex.aserdargun.com/?lang=en" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="hex" data-learning-role="practice-lab" data-learning-parent="eng" aria-label="HEX Humanoid Engineering Explorer. Sub-application of ENG. Explore humanoid structure, joints, actuation, sensors, and power/data paths through ENG’s interactive 3D learning object. Movements are kinematic teaching aids, with no asserted dynamics or hardware performance." aria-describedby="ld-new-tab-hex-en">
               <title id="ld-new-tab-hex-en">Opens in a new tab</title>
-              <rect x="705.5" y="1312" width="254" height="49" rx="7"/>
-              <text x="832.5" y="1333.5" class="ld-code">HEX</text>
-              <text x="832.5" y="1352.5" class="ld-label"><tspan x="832.5" dy="0">Humanoid exploration</tspan></text>
+              <rect x="531" y="1312" width="254" height="49" rx="7"/>
+              <text x="658" y="1333.5" class="ld-code">HEX</text>
+              <text x="658" y="1352.5" class="ld-label"><tspan x="658" dy="0">Humanoid exploration</tspan></text>
             </a>
           </g>
           <text x="1192" y="1420" class="ld-brand">ASERDARGUN.COM</text>

@@ -12,6 +12,7 @@ const POSITIONS = {
   pol: [309, 164, 131, 49], gex: [449, 164, 118, 49],
   usl: [749, 102, 258, 54], adp: [751, 164, 254, 49],
   llm: [529, 257, 258, 54], tfl: [531, 319, 254, 49],
+  vis: [1030, 257, 162, 54],
   hns: [312, 426, 692, 53], arl: [312, 490, 132, 68],
   dpl: [452, 490, 132, 68], cul: [592, 490, 132, 68], agr: [732, 490, 132, 68],
   aos: [872, 490, 132, 68],
@@ -21,21 +22,22 @@ const POSITIONS = {
   wfm: [276, 941, 264, 47], wml: [278, 996, 260, 50],
   swi: [762, 941, 293, 47], ant: [763, 996, 144, 50], bee: [915, 996, 140, 50],
   itl: [490.5, 1091, 335, 47], pdt: [490.5, 1146, 163, 64], dtr: [662.5, 1146, 163, 64],
-  eng: [529, 1250, 258, 54], vis: [530.5, 1312, 163, 49], hex: [705.5, 1312, 254, 49],
+  eng: [529, 1250, 258, 54], hex: [531, 1312, 254, 49],
 };
 const FRAMES = {
   gpu: [298.5, 92, 279, 130], usl: [738.5, 92, 279, 130],
-  llm: [518.5, 247, 279, 130], hns: [302, 416, 712, 154],
+  llm: [518.5, 247, 279, 130], vis: [1019, 247, 173, 74], hns: [302, 416, 712, 154],
   ctx: [544, 607, 228, 123], deployment: [420, 757, 476, 130], wfm: [264, 933, 288, 122],
   swi: [750, 933, 316, 122], itl: [480.5, 1081, 355, 138],
-  eng: [518.5, 1240, 453, 133],
+  eng: [518.5, 1240, 279, 133],
 };
 const ROUTES = [
   ["aia-to-gpu", "M 570 56 H 438 V 92"],
   ["aia-to-usl", "M 746 56 H 878 V 92"],
-  ["aia-to-llm", "M 658 85 V 247"],
+  ["aia-to-llm", "M 640 85 V 234 H 658 V 247"],
+  ["aia-to-vis", "M 700 85 V 226 H 1192 V 284"],
   ["gpu-to-llm", "M 438 222 V 312 H 518.5"],
-  ["usl-to-llm", "M 878 222 V 312 H 797.5"],
+  ["usl-to-llm", "M 878 230 V 312 H 797.5"],
   ["llm-to-hns", "M 658 377 V 416"],
   ["hns-to-ctx", "M 658 570 V 607"],
   ["hns-to-sec", "M 392 570 V 638.5"],
@@ -47,10 +49,10 @@ const ROUTES = [
   ["deployment-to-swi", "M 896 822 H 908 V 933", "horizon"],
   ["wfm-to-itl", "M 408 1055 V 1150 H 480.5", "horizon"],
   ["swi-to-itl", "M 908 1055 V 1150 H 835.5", "horizon"],
-  ["itl-to-eng", "M 658 1219 V 1240 H 745", "horizon"],
+  ["itl-to-eng", "M 658 1219 V 1240", "horizon"],
 ];
 const CONNECTORS = [];
-const ROLES = { pol: "learning-tool", aia: "map", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", agr: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
+const ROLES = { pol: "learning-tool", aia: "map", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", vis: "atlas", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", agr: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
 
 export function learningDiagramLayout(applications) {
   const diagramApplications = systemFocusApplications(applications);
@@ -75,7 +77,7 @@ export function learningDiagramLayout(applications) {
 
 const STAGES = [
   [22, 230, "FOUNDATION", "TEMEL", "Ecosystem, compute, runtime and adaptation foundations; explore programming foundations in POL and experiment with GEX, TFL and ADP.", "Ekosistem, hesaplama, çalışma ortamı ve uyarlama temelleri; POL ile programlamayı keşfet, GEX, TFL ve ADP ile deneyler yap."],
-  [230, 405, "RUNTIME", "ÇALIŞTIRMA", "Model runtime and serving layer; support multiple providers and hardware backends.", "Model çalıştırma ve sunum katmanı; farklı sağlayıcıları ve donanım altyapılarını keşfet."],
+  [230, 405, "RUNTIME", "ÇALIŞTIRMA", "Model runtime and serving, plus the computer-vision knowledge bank; support multiple providers and hardware backends.", "Model çalıştırma ve sunum; ayrıca bilgisayarlı görü bilgi bankası. Farklı sağlayıcıları ve donanım altyapılarını keşfet."],
   [405, 594, "AGENT SYSTEM", "AJAN SİSTEMİ", "Agents reason, use context, tools and computer environments; turn research into open-source runtimes and reusable components.", "Ajanlar akıl yürütür, bağlamı, araçları ve bilgisayar ortamlarını kullanır; araştırma açık kaynaklı çalışma ortamlarına ve yeniden kullanılabilir bileşenlere dönüşür."],
   [594, 740, "CONTEXT & ASSURANCE", "BAĞLAM VE GÜVENCE", "Design context, memory, security and evaluation together for bounded, reviewable behavior.", "Sınırlı ve incelenebilir davranış için bağlam, bellek, güvenlik ve değerlendirmeyi birlikte tasarla."],
   [740, 924, "DEPLOYMENT", "DAĞITIM", "Local and cloud deployment options; test workload, memory, privacy and cost assumptions.", "Yerel ve bulut dağıtım seçenekleri; iş yükü, bellek, gizlilik ve maliyet varsayımlarını sına."],
@@ -100,15 +102,15 @@ const LABELS = {
   pdt: ["P-101 interactive digital twin", "P-101 etkileşimli dijital ikiz"],
   eng: ["Humanoid engineering", "İnsansı robot mühendisliği"],
   hex: ["Humanoid exploration", "İnsansı robot keşfi"],
-  vis: ["Machine perception", "Makine algısı"],
+  vis: ["Vision knowledge bank", "Görü bilgi bankası"],
   dcl: ["Shared lab", "Ortak laboratuvar"],
 };
 
 export function renderLearningDiagram({ locale, data }) {
   const { nodes, families, edges, connectors, junctions } = learningDiagramLayout(data.applications);
   const description = localized(locale,
-    "Eight stages connect foundations, runtime, agent systems, assurance, deployment, physical AI, industrial twins and embodied AI. Frames group GPU with POL and GEX; USL with ADP; LLM with TFL; HNS with ARL, DPL, CUL and AOS; CTX with MEM; WFM with WML; SWI with ANT and BEE; and ITL with PDT and DTR. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. ENG and its sub-application HEX share a frame, with HEX below ENG. Arrows describe learning relationships, not runtime integrations.",
-    "Sekiz aşama temelleri, çalıştırmayı, ajan sistemlerini, güvenceyi, dağıtımı, fiziksel AI'ı, endüstriyel ikizleri ve bedenlenmiş AI'ı bağlar. Çerçeveler GPU ile POL ve GEX'i; USL ile ADP'yi; LLM ile TFL'yi; HNS ile ARL, DPL, CUL ve AOS'u; CTX ile MEM'i; WFM ile WML'yi; SWI ile ANT ve BEE'yi; ITL ile PDT ve DTR'yi gruplar. CTX/MEM grubu, SEC ve EVL ile karşılıklı geri bildirim paylaşır. LCL ve CLD aynı dış çerçevede, ortak laboratuvarları DCL ise ikisinin altında yer alır. ENG ve alt uygulaması HEX aynı çerçevede, HEX altta olacak şekilde yer alır. Oklar öğrenme ilişkilerini gösterir; çalışma zamanı entegrasyonu değildir.");
+    "Eight stages connect foundations, runtime, agent systems, assurance, deployment, physical AI, industrial twins and embodied AI. Frames group GPU with POL and GEX; USL with ADP; LLM with TFL; VIS as a knowledge bank in the runtime lane; HNS with ARL, DPL, CUL and AOS; CTX with MEM; WFM with WML; SWI with ANT and BEE; and ITL with PDT and DTR. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. ENG and its sub-application HEX share a frame, with HEX below ENG; VIS is no longer part of that family. Arrows describe learning relationships, not runtime integrations.",
+    "Sekiz aşama temelleri, çalıştırmayı, ajan sistemlerini, güvenceyi, dağıtımı, fiziksel AI'ı, endüstriyel ikizleri ve bedenlenmiş AI'ı bağlar. Çerçeveler GPU ile POL ve GEX'i; USL ile ADP'yi; LLM ile TFL'yi; çalıştırma kulvarındaki bilgi bankası VIS'i; HNS ile ARL, DPL, CUL ve AOS'u; CTX ile MEM'i; WFM ile WML'yi; SWI ile ANT ve BEE'yi; ITL ile PDT ve DTR'yi gruplar. CTX/MEM grubu, SEC ve EVL ile karşılıklı geri bildirim paylaşır. LCL ve CLD aynı dış çerçevede, ortak laboratuvarları DCL ise ikisinin altında yer alır. ENG ve alt uygulaması HEX aynı çerçevede, HEX altta olacak şekilde yer alır; VIS artık bu ailenin parçası değildir. Oklar öğrenme ilişkilerini gösterir; çalışma zamanı entegrasyonu değildir.");
   const renderNode = ({ app, x, y, width, height, cx, role }) => {
     const isChild = applicationParents(app).length > 0;
     const parentLabel = isChild ? `${applicationOwnership(app, locale)}. ` : "";

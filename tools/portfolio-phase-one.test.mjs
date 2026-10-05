@@ -81,7 +81,7 @@ test("the portfolio registry is a deterministic public projection of application
       sourceCount: 16,
       claimCount: 19,
       evidencePolicy: "primary-source-backed",
-      upstreamApps: ["hns"],
+      upstreamApps: ["hns", "vis"],
       downstreamApps: ["llm", "lcl", "mem"],
       tracks: ["context", "knowledge", "retrieval", "memory"],
       entityIds: ["entity:mcp"],
@@ -206,7 +206,9 @@ test("companion learning apps connect to their research parents across both loca
   for (const [parentCode, code, layer] of [["gpu", "gex", "foundation"], ["wfm", "wml", "physical-ai"], ["itl", "pdt", "physical-ai"], ["eng", "hex", "physical-ai"]]) {
     const app = data.applications.find((app) => app.code === code);
     const parent = data.applications.find((app) => app.code === parentCode);
-    assert.deepEqual(app.upstreamApps, [parentCode]);
+    // Ownership is the first upstream link; a knowledge bank in another lane may
+    // also feed this lab, which is a learning relationship, not ownership.
+    assert.equal(app.upstreamApps[0], parentCode, `${code} must be owned by ${parentCode}`);
     assert.ok(parent.downstreamApps.includes(code));
     assert.equal(app.portfolioLayer, layer);
     assert.equal(app.systemRole, "lab");

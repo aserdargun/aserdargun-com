@@ -436,14 +436,14 @@ function validateLearningSystem(locale, html) {
       "mem:practice-lab",
       "dtr:practice-lab",
       "agr:decision-lab",
-      "vis:practice-lab",
+      "vis:atlas",
     ].sort()),
     `${locale}: learning diagram node roles differ from the application content model`,
   );
   const learningEdges = matches(diagram, /<path data-learning-edge="([^"]+)"/g);
   check(
     JSON.stringify([...learningEdges].sort()) === JSON.stringify([
-      "aia-to-gpu", "aia-to-llm", "aia-to-usl", "gpu-to-llm", "usl-to-llm",
+      "aia-to-gpu", "aia-to-llm", "aia-to-usl", "aia-to-vis", "gpu-to-llm", "usl-to-llm",
       "llm-to-hns", "hns-to-ctx", "hns-to-sec", "hns-to-evl", "ctx-to-sec", "ctx-to-evl",
       "ctx-to-deployment",
       "deployment-to-wfm", "deployment-to-swi", "wfm-to-itl", "swi-to-itl", "itl-to-eng",
@@ -459,7 +459,7 @@ function validateLearningSystem(locale, html) {
     matches(diagram, /data-learning-app="([a-z]{3})"/g).length === systemFocusApplications(livingSystem.applications).length,
     `${locale}: every approved application must appear in the diagram`,
   );
-  check(matches(diagram, /data-learning-family="([a-z]+)"/g).join(" ") === "gpu usl llm hns ctx deployment wfm swi itl eng", `${locale}: diagram family frames differ`);
+  check(matches(diagram, /data-learning-family="([a-z]+)"/g).join(" ") === "gpu usl llm vis hns ctx deployment wfm swi itl eng", `${locale}: diagram family frames differ`);
   check(matches(diagram, /marker-start="url\(#ld-arrow\)"/g).length === 2, `${locale}: context must connect reciprocally with security and evaluation`);
   check(
     learningEdges.filter((edge) => edge.endsWith("-to-wfm")).length === 1

@@ -143,7 +143,7 @@
         <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="Uygulama bağlantı haritası">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1224 1465" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">
           <title id="ld-title">Bağlı üst uygulamalar ve alt uygulamaları</title>
-          <desc id="ld-desc">Sekiz aşama temelleri, çalıştırmayı, ajan sistemlerini, güvenceyi, dağıtımı, fiziksel AI&apos;ı, endüstriyel ikizleri ve bedenlenmiş AI&apos;ı bağlar. Çerçeveler GPU ile POL ve GEX&apos;i; USL ile ADP&apos;yi; LLM ile TFL&apos;yi; HNS ile ARL, DPL, CUL ve AOS&apos;u; CTX ile MEM&apos;i; WFM ile WML&apos;yi; SWI ile ANT ve BEE&apos;yi; ITL ile PDT ve DTR&apos;yi gruplar. CTX/MEM grubu, SEC ve EVL ile karşılıklı geri bildirim paylaşır. LCL ve CLD aynı dış çerçevede, ortak laboratuvarları DCL ise ikisinin altında yer alır. ENG ve alt uygulaması HEX aynı çerçevede, HEX altta olacak şekilde yer alır. Oklar öğrenme ilişkilerini gösterir; çalışma zamanı entegrasyonu değildir.</desc>
+          <desc id="ld-desc">Sekiz aşama temelleri, çalıştırmayı, ajan sistemlerini, güvenceyi, dağıtımı, fiziksel AI&apos;ı, endüstriyel ikizleri ve bedenlenmiş AI&apos;ı bağlar. Çerçeveler GPU ile POL ve GEX&apos;i; USL ile ADP&apos;yi; LLM ile TFL&apos;yi; çalıştırma kulvarındaki bilgi bankası VIS&apos;i; HNS ile ARL, DPL, CUL ve AOS&apos;u; CTX ile MEM&apos;i; WFM ile WML&apos;yi; SWI ile ANT ve BEE&apos;yi; ITL ile PDT ve DTR&apos;yi gruplar. CTX/MEM grubu, SEC ve EVL ile karşılıklı geri bildirim paylaşır. LCL ve CLD aynı dış çerçevede, ortak laboratuvarları DCL ise ikisinin altında yer alır. ENG ve alt uygulaması HEX aynı çerçevede, HEX altta olacak şekilde yer alır; VIS artık bu ailenin parçası değildir. Oklar öğrenme ilişkilerini gösterir; çalışma zamanı entegrasyonu değildir.</desc>
           <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#b7f45d"/></marker></defs>
           <g class="ld-stage-index">
             <path class="ld-stage-rule" d="M 258 22 V 1385 M 30 1385 H 1192"/>
@@ -152,7 +152,7 @@
             <text x="33" y="81" class="ld-stage-copy"><tspan x="33" dy="0">Ekosistem, hesaplama, çalışma</tspan><tspan x="33" dy="19">ortamı ve uyarlama temelleri;</tspan><tspan x="33" dy="19">POL ile programlamayı keşfet,</tspan><tspan x="33" dy="19">GEX, TFL ve ADP ile deneyler</tspan><tspan x="33" dy="19">yap.</tspan></text>
             <path class="ld-stage-rule" d="M 30 230 H 1192"/>
             <text x="33" y="263" class="ld-stage-title"><tspan class="ld-stage-number">02</tspan><tspan dx="12">· ÇALIŞTIRMA</tspan></text>
-            <text x="33" y="289" class="ld-stage-copy"><tspan x="33" dy="0">Model çalıştırma ve sunum</tspan><tspan x="33" dy="19">katmanı; farklı sağlayıcıları</tspan><tspan x="33" dy="19">ve donanım altyapılarını</tspan><tspan x="33" dy="19">keşfet.</tspan></text>
+            <text x="33" y="289" class="ld-stage-copy"><tspan x="33" dy="0">Model çalıştırma ve sunum;</tspan><tspan x="33" dy="19">ayrıca bilgisayarlı görü</tspan><tspan x="33" dy="19">bilgi bankası. Farklı</tspan><tspan x="33" dy="19">sağlayıcıları ve donanım</tspan><tspan x="33" dy="19">altyapılarını keşfet.</tspan></text>
             <path class="ld-stage-rule" d="M 30 405 H 1192"/>
             <text x="33" y="438" class="ld-stage-title"><tspan class="ld-stage-number">03</tspan><tspan dx="12">· AJAN SİSTEMİ</tspan></text>
             <text x="33" y="464" class="ld-stage-copy"><tspan x="33" dy="0">Ajanlar akıl yürütür,</tspan><tspan x="33" dy="19">bağlamı, araçları ve</tspan><tspan x="33" dy="19">bilgisayar ortamlarını</tspan><tspan x="33" dy="19">kullanır; araştırma açık</tspan><tspan x="33" dy="19">kaynaklı çalışma ortamlarına</tspan><tspan x="33" dy="19">ve yeniden kullanılabilir</tspan><tspan x="33" dy="19">bileşenlere dönüşür.</tspan></text>
@@ -176,20 +176,22 @@
             <g data-learning-family="gpu"><rect x="298.5" y="92" width="279" height="130" rx="12"/></g>
             <g data-learning-family="usl"><rect x="738.5" y="92" width="279" height="130" rx="12"/></g>
             <g data-learning-family="llm"><rect x="518.5" y="247" width="279" height="130" rx="12"/></g>
+            <g data-learning-family="vis"><rect x="1019" y="247" width="173" height="74" rx="12"/></g>
             <g data-learning-family="hns"><rect x="302" y="416" width="712" height="154" rx="12"/></g>
             <g data-learning-family="ctx"><rect x="544" y="607" width="228" height="123" rx="12"/></g>
             <g data-learning-family="deployment"><rect x="420" y="757" width="476" height="130" rx="12"/></g>
             <g data-learning-family="wfm"><rect x="264" y="933" width="288" height="122" rx="12"/></g>
             <g data-learning-family="swi"><rect x="750" y="933" width="316" height="122" rx="12"/></g>
             <g data-learning-family="itl"><rect x="480.5" y="1081" width="355" height="138" rx="12"/></g>
-            <g data-learning-family="eng"><rect x="518.5" y="1240" width="453" height="133" rx="12"/></g>
+            <g data-learning-family="eng"><rect x="518.5" y="1240" width="279" height="133" rx="12"/></g>
           </g>
           <g class="ld-links" aria-hidden="true">
             <path data-learning-edge="aia-to-gpu" class="ld-edge-primary" d="M 570 56 H 438 V 92" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="aia-to-usl" class="ld-edge-primary" d="M 746 56 H 878 V 92" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="aia-to-llm" class="ld-edge-primary" d="M 658 85 V 247" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-llm" class="ld-edge-primary" d="M 640 85 V 234 H 658 V 247" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="aia-to-vis" class="ld-edge-primary" d="M 700 85 V 226 H 1192 V 284" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="gpu-to-llm" class="ld-edge-primary" d="M 438 222 V 312 H 518.5" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="usl-to-llm" class="ld-edge-primary" d="M 878 222 V 312 H 797.5" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="usl-to-llm" class="ld-edge-primary" d="M 878 230 V 312 H 797.5" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="llm-to-hns" class="ld-edge-primary" d="M 658 377 V 416" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-ctx" class="ld-edge-primary" d="M 658 570 V 607" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="hns-to-sec" class="ld-edge-primary" d="M 392 570 V 638.5" marker-end="url(#ld-arrow)"/>
@@ -201,7 +203,7 @@
             <path data-learning-edge="deployment-to-swi" class="ld-edge-horizon" d="M 896 822 H 908 V 933" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="wfm-to-itl" class="ld-edge-horizon" d="M 408 1055 V 1150 H 480.5" marker-end="url(#ld-arrow)"/>
             <path data-learning-edge="swi-to-itl" class="ld-edge-horizon" d="M 908 1055 V 1150 H 835.5" marker-end="url(#ld-arrow)"/>
-            <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 658 1219 V 1240 H 745" marker-end="url(#ld-arrow)"/>
+            <path data-learning-edge="itl-to-eng" class="ld-edge-horizon" d="M 658 1219 V 1240" marker-end="url(#ld-arrow)"/>
           </g>
           <g class="ld-nodes">
             <a href="https://aia.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent ld-node-aia" data-learning-app="aia" data-learning-role="map" aria-label="AIA AI Ecosystem Atlas. Yapay zekâ ürünlerini ve geliştirici ekosistemlerini kanıtlarıyla karşılaştıran araştırma konsolu." aria-describedby="ld-new-tab-aia-tr">
@@ -251,6 +253,12 @@
               <rect x="531" y="319" width="254" height="49" rx="7"/>
               <text x="658" y="340.5" class="ld-code">TFL</text>
               <text x="658" y="359.5" class="ld-label"><tspan x="658" dy="0">Token sunumu</tspan></text>
+            </a>
+            <a href="https://vis.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="vis" data-learning-role="atlas" aria-label="VIS Bilgisayarlı Görü Bilgi Bankası. Yedi algı katmanında birincil kaynaklara bağlı bilgisayarlı görü alan rehberi; her katman ne için olmadığını da söyler ve yanında aynı fikirleri piksel başına cevap anahtarına karşı ölçen deterministik bir laboratuvar bulunur. Bilgi bankası açıklar ve kaynak gösterir; laboratuvar ölçer. Klasik operatörler, çalışma anında eğitilen bir CNN, monoküler derinlik ipuçları ve optik akış varsayılan CPU yolunda, mevcutsa dürüstçe yoklanan WebGPU yolunda çalışır." aria-describedby="ld-new-tab-vis-tr">
+              <title id="ld-new-tab-vis-tr">Yeni sekmede açılır</title>
+              <rect x="1030" y="257" width="162" height="54" rx="7"/>
+              <text x="1111" y="283" class="ld-code">VIS</text>
+              <text x="1111" y="302" class="ld-label"><tspan x="1111" dy="0">Görü bilgi bankası</tspan></text>
             </a>
             <a href="https://hns.aserdargun.com/tr/" target="_blank" rel="noreferrer" class="ld-node ld-node-parent" data-learning-app="hns" data-learning-role="harness" aria-label="HNS Harness Engineering Observatory. Çalıştırma, araçlar, bağlam, yaşam döngüsü, gözlemlenebilirlik, doğrulama ve yönetişimden oluşan yedi ajan sistemi katmanını karşılaştıran iki dilli, kaynaklı gözlemevi. Kanıt ve editoryal yorum ayrıdır; evrensel sıralama üretmez." aria-describedby="ld-new-tab-hns-tr">
               <title id="ld-new-tab-hns-tr">Yeni sekmede açılır</title>
@@ -384,17 +392,11 @@
               <text x="658" y="1276" class="ld-code">ENG</text>
               <text x="658" y="1295" class="ld-label"><tspan x="658" dy="0">İnsansı robot mühendisliği</tspan></text>
             </a>
-            <a href="https://vis.aserdargun.com/" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="vis" data-learning-role="practice-lab" data-learning-parent="eng" aria-label="VIS Vision Laboratory. ENG alt uygulaması. Deterministik, iki dilli bir algı laboratuvarı. Her sahne prosedürel olarak ve piksel başına cevap anahtarıyla birlikte üretilir; böylece raporlanan her sayı tahmin değil ölçümdür. Sekiz deney klasik operatörleri, çalışma anında eğitilen bir CNN’yi, monoküler derinlik ipuçlarını ve optik akışı aynı anahtar üzerinde çalıştırır: varsayılan CPU yolunda, mevcutsa dürüstçe yoklanan WebGPU yolunda." aria-describedby="ld-new-tab-vis-tr">
-              <title id="ld-new-tab-vis-tr">Yeni sekmede açılır</title>
-              <rect x="530.5" y="1312" width="163" height="49" rx="7"/>
-              <text x="612" y="1333.5" class="ld-code">VIS</text>
-              <text x="612" y="1352.5" class="ld-label"><tspan x="612" dy="0">Makine algısı</tspan></text>
-            </a>
             <a href="https://hex.aserdargun.com/?lang=tr" target="_blank" rel="noreferrer" class="ld-node ld-node-child" data-learning-app="hex" data-learning-role="practice-lab" data-learning-parent="eng" aria-label="HEX İnsansı Robot Mühendisliği Gezgini. ENG alt uygulaması. ENG’nin etkileşimli 3B öğrenme uygulamasında insansı robot yapısını, eklemleri, eyleyicileri, sensörleri ve güç/veri yollarını keşfet. Hareketler kinematik öğretim örnekleridir; dinamik veya donanım performansı iddiası taşımaz." aria-describedby="ld-new-tab-hex-tr">
               <title id="ld-new-tab-hex-tr">Yeni sekmede açılır</title>
-              <rect x="705.5" y="1312" width="254" height="49" rx="7"/>
-              <text x="832.5" y="1333.5" class="ld-code">HEX</text>
-              <text x="832.5" y="1352.5" class="ld-label"><tspan x="832.5" dy="0">İnsansı robot keşfi</tspan></text>
+              <rect x="531" y="1312" width="254" height="49" rx="7"/>
+              <text x="658" y="1333.5" class="ld-code">HEX</text>
+              <text x="658" y="1352.5" class="ld-label"><tspan x="658" dy="0">İnsansı robot keşfi</tspan></text>
             </a>
           </g>
           <text x="1192" y="1420" class="ld-brand">ASERDARGUN.COM</text>

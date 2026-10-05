@@ -44,7 +44,8 @@
       "downstreamApps": [
         "gpu",
         "llm",
-        "usl"
+        "usl",
+        "vis"
       ],
       "tracks": [
         "ecosystem",
@@ -105,7 +106,8 @@
       ],
       "downstreamApps": [
         "hns",
-        "tfl"
+        "tfl",
+        "vis"
       ],
       "tracks": [
         "runtime",
@@ -159,7 +161,8 @@
       "claimCount": 79,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
-        "llm"
+        "llm",
+        "vis"
       ],
       "downstreamApps": [
         "ctx",
@@ -463,7 +466,8 @@
       "claimCount": 19,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
-        "hns"
+        "hns",
+        "vis"
       ],
       "downstreamApps": [
         "llm",
@@ -704,9 +708,10 @@
         "aia"
       ],
       "downstreamApps": [
+        "gex",
         "llm",
         "pol",
-        "gex"
+        "vis"
       ],
       "tracks": [
         "cuda",
@@ -939,13 +944,13 @@
       "claimCount": 28,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
+        "cld",
         "lcl",
-        "cld"
+        "vis"
       ],
       "downstreamApps": [
         "itl",
-        "wml",
-        "vis"
+        "wml"
       ],
       "tracks": [
         "perception",
@@ -1181,8 +1186,9 @@
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
-        "wfm",
-        "swi"
+        "swi",
+        "vis",
+        "wfm"
       ],
       "downstreamApps": [
         "eng",
@@ -1245,8 +1251,7 @@
         "vis"
       ],
       "downstreamApps": [
-        "hex",
-        "vis"
+        "hex"
       ],
       "tracks": [
         "humanoids",
@@ -1770,7 +1775,8 @@
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
       "upstreamApps": [
-        "eng"
+        "eng",
+        "vis"
       ],
       "downstreamApps": [],
       "tracks": [
@@ -1853,30 +1859,30 @@
     },
     {
       "code": "vis",
-      "parentApp": "eng",
+      "parentApp": null,
       "diagramLabel": {
-        "en": "Machine perception",
-        "tr": "Makine algısı"
+        "en": "Vision · perception",
+        "tr": "Görü · algı"
       },
-      "kind": "lab",
-      "systemRole": "lab",
+      "kind": "atlas",
+      "systemRole": "core-learning",
       "visibility": "public",
       "status": "live",
       "statusLabel": {
-        "en": "Live",
-        "tr": "Yayında"
+        "en": "Live · Knowledge bank + laboratory",
+        "tr": "Yayında · Bilgi bankası + laboratuvar"
       },
       "languages": [
         "tr",
         "en"
       ],
       "title": {
-        "en": "Vision Laboratory",
-        "tr": "Vision Laboratory"
+        "en": "Computer Vision Knowledge Bank",
+        "tr": "Bilgisayarlı Görü Bilgi Bankası"
       },
       "summary": {
-        "en": "A deterministic bilingual perception laboratory. Every scene is procedurally generated together with a per-pixel answer key, so each reported number is a measurement rather than an estimate. Eight experiments run classical operators, a CNN trained at runtime, monocular depth cues and optical flow against that same key, on a CPU path by default and an honestly probed WebGPU path when available.",
-        "tr": "Deterministik, iki dilli bir algı laboratuvarı. Her sahne prosedürel olarak ve piksel başına cevap anahtarıyla birlikte üretilir; böylece raporlanan her sayı tahmin değil ölçümdür. Sekiz deney klasik operatörleri, çalışma anında eğitilen bir CNN’yi, monoküler derinlik ipuçlarını ve optik akışı aynı anahtar üzerinde çalıştırır: varsayılan CPU yolunda, mevcutsa dürüstçe yoklanan WebGPU yolunda."
+        "en": "A source-backed computer-vision field guide across seven perception layers, each layer naming what it is not for, plus a deterministic laboratory that measures the same ideas against a per-pixel answer key. The knowledge bank explains and cites; the laboratory measures. Classical operators, a CNN trained at runtime, monocular depth cues and optical flow all run on a CPU path by default and an honestly probed WebGPU path when available.",
+        "tr": "Yedi algı katmanında birincil kaynaklara bağlı bilgisayarlı görü alan rehberi; her katman ne için olmadığını da söyler ve yanında aynı fikirleri piksel başına cevap anahtarına karşı ölçen deterministik bir laboratuvar bulunur. Bilgi bankası açıklar ve kaynak gösterir; laboratuvar ölçer. Klasik operatörler, çalışma anında eğitilen bir CNN, monoküler derinlik ipuçları ve optik akış varsayılan CPU yolunda, mevcutsa dürüstçe yoklanan WebGPU yolunda çalışır."
       },
       "guidingQuestion": {
         "en": "What does a camera actually know, and how much of that survives contact with the real world?",
@@ -1887,29 +1893,43 @@
       "updatedAt": "2026-10-05",
       "lastVerified": "2026-10-05",
       "lastReleased": "2026-10-05",
-      "sourceCount": null,
-      "claimCount": null,
-      "evidencePolicy": "deterministic-measurement",
+      "sourceCount": 13,
+      "claimCount": 16,
+      "evidencePolicy": "source-backed-reference-and-deterministic-measurement",
       "upstreamApps": [
-        "wfm",
-        "eng"
+        "aia",
+        "gpu",
+        "llm"
       ],
       "downstreamApps": [
+        "eng",
         "hex",
-        "itl"
+        "wfm",
+        "itl",
+        "hns",
+        "ctx"
       ],
       "tracks": [
         "perception",
-        "detection",
-        "segmentation",
+        "image-formation",
+        "filtering",
+        "edges",
+        "regions",
+        "geometry",
         "depth",
-        "tracking",
+        "motion",
         "ground-truth"
       ],
-      "entityIds": [],
-      "portfolioLayer": "physical-ai",
-      "focusState": "horizon",
-      "relatedMemoryIds": []
+      "entityIds": [
+        "entity:computer-vision"
+      ],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation",
+      "relatedMemoryIds": [
+        "foundations-before-models",
+        "learning-labs-evidence-boundary"
+      ],
+      "researchCutoff": "2026-10-05"
     }
   ],
   "now": {
@@ -2397,10 +2417,12 @@
         "aia",
         "gpu",
         "pol",
-        "usl"
+        "usl",
+        "vis"
       ],
       "relatedEntityIds": [
         "entity:ai-ecosystem",
+        "entity:computer-vision",
         "entity:cuda",
         "entity:unsloth"
       ],
@@ -2489,21 +2511,23 @@
         }
       ],
       "relatedApplicationCodes": [
-        "gex",
-        "tfl",
         "adp",
-        "wml",
-        "hex",
-        "arl",
-        "dpl",
-        "cul",
-        "mem",
+        "agr",
         "aos",
-        "agr"
+        "arl",
+        "cul",
+        "dpl",
+        "gex",
+        "hex",
+        "mem",
+        "tfl",
+        "vis",
+        "wml"
       ],
       "relatedEntityIds": [
-        "entity:evidence",
-        "entity:agent-harness"
+        "entity:agent-harness",
+        "entity:computer-vision",
+        "entity:evidence"
       ],
       "tags": [
         "labs",
