@@ -578,11 +578,11 @@
       },
       "repository": "https://github.com/aserdargun/evl-aserdargun-com",
       "address": "https://evl.aserdargun.com/",
-      "updatedAt": "2026-10-03",
+      "updatedAt": "2026-10-05",
       "researchCutoff": "2026-09-04",
-      "lastVerified": "2026-10-03",
-      "lastReleased": "2026-10-03",
-      "releaseSha": "5dc2afdd90bc4c29c7e9e46f212b66e1aeaa40b4",
+      "lastVerified": "2026-10-05",
+      "lastReleased": "2026-10-05",
+      "releaseSha": "57ab4066a1c9e094660809f360761bcc5130fb11",
       "sourceCount": 5,
       "claimCount": null,
       "evidencePolicy": "primary-source-backed",
@@ -763,7 +763,7 @@
       },
       "repository": "https://github.com/aserdargun/pol-aserdargun-com",
       "address": "https://pol.aserdargun.com/",
-      "updatedAt": "2026-10-03",
+      "updatedAt": "2026-10-05",
       "upstreamApps": [
         "gpu"
       ],
@@ -784,9 +784,9 @@
         "en": "Use programming foundations before GPU kernel study; this is not a GPU execution simulator.",
         "tr": "GPU kernel çalışmasından önce programlama temellerini kullan; bu bir GPU yürütme simülatörü değildir."
       },
-      "lastVerified": "2026-10-03",
-      "releaseSha": "814a48066442829a297c16eb41a460bd766852b0",
-      "lastReleased": "2026-10-03"
+      "lastVerified": "2026-10-05",
+      "releaseSha": "1540f043f4b57514fe7a06e2c74cd5ca84377026",
+      "lastReleased": "2026-10-05"
     },
     {
       "code": "cld",
@@ -1657,8 +1657,8 @@
       "address": "https://dtr.aserdargun.com/",
       "updatedAt": "2026-10-03",
       "lastVerified": "2026-10-03",
-      "lastReleased": "2026-10-03",
-      "releaseSha": "494505dbe6a62c35c34e9740d7e630ea58905e70",
+      "lastReleased": "2026-10-05",
+      "releaseSha": "52baafee345789f8f780c4b30775614bc6d3e89a",
       "sourceCount": 5,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1932,7 +1932,8 @@
         "foundations-before-models",
         "learning-labs-evidence-boundary"
       ],
-      "researchCutoff": "2026-10-05"
+      "researchCutoff": "2026-10-05",
+      "releaseSha": "10511a323426968e8a9dae67fc7cc501c1e0d2e6"
     }
   ],
   "now": {

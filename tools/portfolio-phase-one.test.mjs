@@ -280,8 +280,8 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.deepEqual(app.languages, ["tr", "en"]);
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
   assert.equal(app.lastVerified, "2026-10-03");
-  assert.equal(app.lastReleased, "2026-10-03");
-  assert.equal(app.releaseSha, "494505dbe6a62c35c34e9740d7e630ea58905e70");
+  assert.equal(app.lastReleased, "2026-10-05");
+  assert.equal(app.releaseSha, "52baafee345789f8f780c4b30775614bc6d3e89a");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
   const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
   assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);
