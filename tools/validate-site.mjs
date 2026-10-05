@@ -443,7 +443,7 @@ function validateLearningSystem(locale, html) {
   const learningEdges = matches(diagram, /<path data-learning-edge="([^"]+)"/g);
   check(
     JSON.stringify([...learningEdges].sort()) === JSON.stringify([
-      "aia-to-gpu", "aia-to-llm", "aia-to-vis", "gpu-to-llm",
+      "aia-to-gpu", "aia-to-llm", "aia-to-vis", "gpu-to-llm", "gpu-to-vis",
       "llm-to-usl", "gpu-to-usl", "vis-to-usl", "usl-to-hns", "hns-to-ctx", "hns-to-sec", "hns-to-evl", "ctx-to-sec", "ctx-to-evl",
       "ctx-to-deployment",
       "deployment-to-wfm", "deployment-to-swi", "wfm-to-itl", "swi-to-itl", "itl-to-eng",
