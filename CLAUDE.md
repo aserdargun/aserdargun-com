@@ -37,9 +37,12 @@ There is no compilation step. `npm run build:site` stages the public-only `.site
 
 ### Pages and sections (both locales, keep in parity)
 - Hero + reverse-chronological eight-stage career timeline (`08 AI Engineer` → `01 Mechanical Engineering`)
-- The homepage introduction leads straight into the eight-stage `#learning` diagram; the duplicate application table was removed and the five-layer card overview was retired
-- `#learning` learning system - an orthogonal SVG relationship map with guiding questions and an accessible mobile equivalent; parallel GPU/USL foundations feed LLM and HNS, followed by CTX/SEC/EVL and parallel LCL/CLD deployment choices
+- The homepage introduction leads straight into the nine-stage `#learning` diagram; the duplicate application table was removed and the five-layer card overview was retired
+- `#learning` learning system - an orthogonal SVG relationship map with guiding questions and an accessible mobile equivalent. The architect lane (AIA) sits above eight topical lanes: one arrow leaves AIA on the left, runs down the foundation lane's left margin and enters the serving frame at TFL's left midpoint, while two more leave AIA for the kernel frame's top centre and the vision bank
+- `#learning` foundation lane: LLM (with TFL), GPU (with POL and GEX) and VIS stand side by side. Frames are centred on the content they own, and inter-family arrows attach to a frame's edge midpoint. GPU hands its own lane to VIS, and VIS reaches the runtime lane from its right midpoint
+- `#learning` runtime lane: USL with ADP, fed from three directions - LLM on the left, GPU straight down the top centre, VIS on the right. HNS and everything below it share one vertical column with ADP, so the adaptation-to-harness arrow runs straight down; CTX with MEM exchanges reciprocal feedback with SEC and EVL, followed by the parallel LCL/CLD deployment choice with their shared DCL
 - WFM and SWI form parallel research bridges into ITL and the long-term ENG horizon; ANT and BEE branch from SWI as independent colony experiment labs
+- Diagram geometry is contract, not taste: `tools/learning-diagram.mjs` owns every node, frame and route, and `tools/application-hierarchy.test.mjs` re-measures arrow entry/exit points, corridor clearance and frame centring. Change a coordinate and the measurement must still pass
 - `#apps` application map - canonical applications with localized search, layer filters, and expandable evidence; each is keyed by a three-letter code
 - `/now/` and `/tr/now/` - dated current work with frozen weekly archives
 - `/memory/` and `/tr/memory/` - five or more explicitly authored public Knowledge notes with sources and related applications
