@@ -9,28 +9,34 @@ const localized = (locale, en, tr) => locale === "tr" ? tr : en;
 // boundary; inter-family arrows attach to its exterior. Arrows between framed
 // applications meet frame midpoints, never box edges, so a frame is the
 // attachment surface as well as a boundary.
+//
+// Vertical rhythm: every stage band wraps the content it owns with the same
+// 22px of empty space above and below, so all nine lanes are balanced and each
+// gutter between two lanes is 44px. STAGES below must stay those nine bands;
+// tools/application-hierarchy.test.mjs re-measures the padding per lane, so a
+// coordinate edit cannot silently unbalance a lane again.
 const POSITIONS = {
   // AIA sits on the runtime column axis (739), so its bottom midpoint is also the
   // kernel frame's top midpoint and the architect arrow runs straight down
-  aia: [557, 24, 364, 62],
+  aia: [557, 44, 364, 62],
   // foundation lane: serving on the left, kernels in the middle, vision on the right
-  llm: [310, 210, 258, 54], tfl: [312, 272, 254, 49],
-  gpu: [610, 210, 258, 54], pol: [610, 272, 131, 49], gex: [750, 272, 118, 49],
-  // vision sits on the kernel frame's mid-height (265), so the arrow GPU hands
+  llm: [310, 160, 258, 54], tfl: [312, 222, 254, 49],
+  gpu: [610, 160, 258, 54], pol: [610, 222, 131, 49], gex: [750, 222, 118, 49],
+  // vision sits on the kernel frame's mid-height (215), so the arrow GPU hands
   // it is one straight horizontal between two frame midpoints
-  vis: [919, 238, 240, 54],
-  usl: [610, 366, 258, 54], adp: [612, 428, 254, 49],
+  vis: [919, 188, 240, 54],
+  usl: [610, 334, 258, 54], adp: [612, 396, 254, 49],
   // one column from HNS down: every x below is the runtime column (739) plus an
   // inset, so the adaptation-to-harness arrow can run straight down
-  hns: [393, 534, 692, 53],
-  arl: [393, 598, 132, 68], dpl: [533, 598, 132, 68], cul: [673, 598, 132, 68], agr: [813, 598, 132, 68], aos: [953, 598, 132, 68],
-  ctx: [636, 725, 206, 46], mem: [638, 781, 202, 49],
-  sec: [383, 746.5, 180, 60], evl: [908, 746.5, 194, 60],
-  lcl: [511, 875, 222, 54], dcl: [633, 937, 212, 49], cld: [745, 875, 222, 54],
-  wfm: [357, 1049, 264, 47], wml: [359, 1104, 260, 50],
-  swi: [843, 1049, 293, 47], ant: [844, 1104, 144, 50], bee: [996, 1104, 140, 50],
-  itl: [571.5, 1199, 335, 47], pdt: [571.5, 1254, 163, 64], dtr: [743.5, 1254, 163, 64],
-  eng: [610, 1358, 258, 54], hex: [612, 1420, 254, 49],
+  hns: [393, 508, 692, 53],
+  arl: [393, 572, 132, 68], dpl: [533, 572, 132, 68], cul: [673, 572, 132, 68], agr: [813, 572, 132, 68], aos: [953, 572, 132, 68],
+  ctx: [636, 706, 206, 46], mem: [638, 762, 202, 49],
+  sec: [383, 727.5, 180, 60], evl: [908, 727.5, 194, 60],
+  lcl: [511, 873, 222, 54], dcl: [633, 935, 212, 49], cld: [745, 873, 222, 54],
+  wfm: [357, 1045, 264, 47], wml: [359, 1100, 260, 50],
+  swi: [843, 1045, 293, 47], ant: [844, 1100, 144, 50], bee: [996, 1100, 140, 50],
+  itl: [571.5, 1213, 335, 47], pdt: [571.5, 1268, 163, 64], dtr: [743.5, 1268, 163, 64],
+  eng: [610, 1395, 258, 54], hex: [612, 1457, 254, 49],
 };
 // A frame is centred on the content it owns: LLM+TFL is inset 10 on both sides,
 // so the frame axis matches the LLM box axis at 439. The runtime frames are 278
@@ -38,39 +44,39 @@ const POSITIONS = {
 // and twin frames share it. VIS holds a frame of its own: it has no
 // sub-application, but all three of its arrows meet a frame midpoint.
 const FRAMES = {
-  llm: [300, 200, 278, 130], gpu: [600, 200, 278, 130], vis: [909, 228, 260, 74], usl: [600, 356, 278, 130],
-  hns: [383, 524, 712, 154], ctx: [625, 715, 228, 123], deployment: [501, 865, 476, 130],
-  wfm: [345, 1041, 288, 122], swi: [831, 1041, 316, 122], itl: [561.5, 1189, 355, 138],
-  eng: [599.5, 1348, 279, 133],
+  llm: [300, 150, 278, 130], gpu: [600, 150, 278, 130], vis: [909, 178, 260, 74], usl: [600, 324, 278, 130],
+  hns: [383, 498, 712, 154], ctx: [625, 696, 228, 123], deployment: [501, 863, 476, 130],
+  wfm: [345, 1037, 288, 122], swi: [831, 1037, 316, 122], itl: [561.5, 1203, 355, 138],
+  eng: [599.5, 1385, 279, 133],
 };
 const ROUTES = [
   // three arrows leave the architect, each on a frame midpoint: the serving
   // frame's top middle from the left, the kernel frame's top middle from the
   // bottom, the vision frame's top middle from the right
-  ["aia-to-llm", "M 557 55 H 439 V 200"],
-  ["aia-to-gpu", "M 739 86 V 200"],
-  ["aia-to-vis", "M 921 55 H 1039 V 228"],
-  ["gpu-to-llm", "M 600 265 H 578"],
+  ["aia-to-llm", "M 557 75 H 439 V 150"],
+  ["aia-to-gpu", "M 739 106 V 150"],
+  ["aia-to-vis", "M 921 75 H 1039 V 178"],
+  ["gpu-to-llm", "M 600 215 H 578"],
   // kernels hand the vision frame their own lane: one straight horizontal
   // between the two frames' mid-height
-  ["gpu-to-vis", "M 878 265 H 909"],
+  ["gpu-to-vis", "M 878 215 H 909"],
   // the runtime lane is fed from the left, from the right and from the top centre
-  ["llm-to-usl", "M 439 330 V 421 H 600"],
-  ["gpu-to-usl", "M 739 330 V 356"],
-  ["vis-to-usl", "M 1039 302 V 421 H 878"],
+  ["llm-to-usl", "M 439 280 V 389 H 600"],
+  ["gpu-to-usl", "M 739 280 V 324"],
+  ["vis-to-usl", "M 1039 252 V 389 H 878"],
   // one straight column: adaptation frame, harness frame, assurance, deployment
-  ["usl-to-hns", "M 739 486 V 524"],
-  ["hns-to-ctx", "M 739 678 V 715"],
-  ["hns-to-sec", "M 473 678 V 746.5"],
-  ["hns-to-evl", "M 1005 678 V 746.5"],
-  ["ctx-to-sec", "M 625 776.5 H 563", "decision", true],
-  ["ctx-to-evl", "M 853 776.5 H 908", "decision", true],
-  ["ctx-to-deployment", "M 739 838 V 865", "decision"],
-  ["deployment-to-wfm", "M 501 930 H 489 V 1041", "horizon"],
-  ["deployment-to-swi", "M 977 930 H 989 V 1041", "horizon"],
-  ["wfm-to-itl", "M 489 1163 V 1258 H 561.5", "horizon"],
-  ["swi-to-itl", "M 989 1163 V 1258 H 916.5", "horizon"],
-  ["itl-to-eng", "M 739 1327 V 1348", "horizon"],
+  ["usl-to-hns", "M 739 454 V 498"],
+  ["hns-to-ctx", "M 739 652 V 696"],
+  ["hns-to-sec", "M 473 652 V 727.5"],
+  ["hns-to-evl", "M 1005 652 V 727.5"],
+  ["ctx-to-sec", "M 625 757.5 H 563", "decision", true],
+  ["ctx-to-evl", "M 853 757.5 H 908", "decision", true],
+  ["ctx-to-deployment", "M 739 819 V 863", "decision"],
+  ["deployment-to-wfm", "M 501 928 H 489 V 1037", "horizon"],
+  ["deployment-to-swi", "M 977 928 H 989 V 1037", "horizon"],
+  ["wfm-to-itl", "M 489 1159 V 1272 H 561.5", "horizon"],
+  ["swi-to-itl", "M 989 1159 V 1272 H 916.5", "horizon"],
+  ["itl-to-eng", "M 739 1341 V 1385", "horizon"],
 ];
 const CONNECTORS = [];
 const ROLES = { pol: "learning-tool", aia: "architect", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", vis: "atlas", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", agr: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
@@ -96,16 +102,18 @@ export function learningDiagramLayout(applications) {
   return { nodes, families, edges, connectors, junctions };
 }
 
-const STAGES = [
-  [22, 118, "ARCHITECT", "MİMAR", "The architect lane: we derive and build everything below it with frontier models.", "Mimar şeridi: aşağıdakilerin tamamını sınır modelleriyle türetip geliştiriyoruz."],
-  [130, 338, "FOUNDATION", "TEMEL", "Kernels, model serving and machine vision: the compute, the engine and the way machines see.", "Çekirdekler, model sunumu ve makine görüşü: hesaplama, motor ve makinelerin gördüğü."],
-  [338, 513, "RUNTIME", "ÇALIŞTIRMA", "Model adaptation runs here: training and fine-tuning on the foundation below.", "Model uyarlaması burada çalışır: temelin üzerinde eğitim ve ince ayar."],
-  [513, 702, "AGENT SYSTEM", "AJAN SİSTEMİ", "Agents reason, use context, tools and computer environments; turn research into open-source runtimes and reusable components.", "Ajanlar akıl yürütür, bağlamı, araçları ve bilgisayar ortamlarını kullanır; araştırma açık kaynaklı çalışma ortamlarına ve yeniden kullanılabilir bileşenlere dönüşür."],
-  [702, 848, "CONTEXT & ASSURANCE", "BAĞLAM VE GÜVENCE", "Design context, memory, security and evaluation together for bounded, reviewable behavior.", "Sınırlı ve incelenebilir davranış için bağlam, bellek, güvenlik ve değerlendirmeyi birlikte tasarla."],
-  [848, 1032, "DEPLOYMENT", "DAĞITIM", "Local and cloud deployment options; test workload, memory, privacy and cost assumptions.", "Yerel ve bulut dağıtım seçenekleri; iş yükü, bellek, gizlilik ve maliyet varsayımlarını sına."],
-  [1032, 1176, "PHYSICAL AI", "FİZİKSEL AI", "World models and swarm intelligence; connect to industrial twins and humanoid systems.", "Dünya modelleri ve sürü zekâsı; endüstriyel ikizlerle ve insansı robot sistemleriyle bağlantı kur."],
-  [1176, 1338, "INDUSTRIAL TWIN", "ENDÜSTRİYEL İKİZ", "Digital twins and digital triplets for industrial systems and real-world research.", "Endüstriyel sistemler ve gerçek dünya araştırmaları için dijital ikizler ve dijital üçüzler."],
-  [1338, 1493, "EMBODIED AI", "BEDENLENMİŞ AI", "Humanoid and embodied intelligence research.", "İnsansı robotlar ve bedenlenmiş zekâ araştırmaları."],
+// Stage bands wrap their lane content with equal empty space above and below,
+// so the vertical rhythm is uniform across all nine lanes.
+export const STAGES = [
+  [22, 128, "ARCHITECT", "MİMAR", "The architect lane: we derive and build everything below it with frontier models.", "Mimar şeridi: aşağıdakilerin tamamını sınır modelleriyle türetip geliştiriyoruz."],
+  [128, 302, "FOUNDATION", "TEMEL", "Kernels, model serving and machine vision: the compute, the engine and the way machines see.", "Çekirdekler, model sunumu ve makine görüşü: hesaplama, motor ve makinelerin gördüğü."],
+  [302, 476, "RUNTIME", "ÇALIŞTIRMA", "Model adaptation runs here: training and fine-tuning on the foundation below.", "Model uyarlaması burada çalışır: temelin üzerinde eğitim ve ince ayar."],
+  [476, 674, "AGENT SYSTEM", "AJAN SİSTEMİ", "Agents reason, use context, tools and computer environments; turn research into open-source runtimes and reusable components.", "Ajanlar akıl yürütür, bağlamı, araçları ve bilgisayar ortamlarını kullanır; araştırma açık kaynaklı çalışma ortamlarına ve yeniden kullanılabilir bileşenlere dönüşür."],
+  [674, 841, "CONTEXT & ASSURANCE", "BAĞLAM VE GÜVENCE", "Design context, memory, security and evaluation together for bounded, reviewable behavior.", "Sınırlı ve incelenebilir davranış için bağlam, bellek, güvenlik ve değerlendirmeyi birlikte tasarla."],
+  [841, 1015, "DEPLOYMENT", "DAĞITIM", "Local and cloud deployment options; test workload, memory, privacy and cost assumptions.", "Yerel ve bulut dağıtım seçenekleri; iş yükü, bellek, gizlilik ve maliyet varsayımlarını sına."],
+  [1015, 1181, "PHYSICAL AI", "FİZİKSEL AI", "World models and swarm intelligence; connect to industrial twins and humanoid systems.", "Dünya modelleri ve sürü zekâsı; endüstriyel ikizlerle ve insansı robot sistemleriyle bağlantı kur."],
+  [1181, 1363, "INDUSTRIAL TWIN", "ENDÜSTRİYEL İKİZ", "Digital twins and digital triplets for industrial systems and real-world research.", "Endüstriyel sistemler ve gerçek dünya araştırmaları için dijital ikizler ve dijital üçüzler."],
+  [1363, 1540, "EMBODIED AI", "BEDENLENMİŞ AI", "Humanoid and embodied intelligence research.", "İnsansı robotlar ve bedenlenmiş zekâ araştırmaları."],
 ];
 function wrap(text, limit) {
   const lines = [];
@@ -156,12 +164,12 @@ export function renderLearningDiagram({ locale, data }) {
     '      <figure class="learning-diagram-wrap">',
     `        <p class="mobile-map-hint" id="diagram-scroll-hint">${localized(locale, "Pinch with two fingers to zoom. Drag to explore the enlarged map.", "İki parmağınla açıp kapatarak boyutu ayarla. Büyüttüğün haritada parmağınla gezin.")}</p>`,
     `        <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="${localized(locale, "Application connection map", "Uygulama bağlantı haritası")}">`,
-    '        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1224 1581" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">',
+    '        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1224 1564" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">',
     `          <title id="ld-title">${localized(locale, "Connected applications and their sub-applications", "Bağlı üst uygulamalar ve alt uygulamaları")}</title>`,
     `          <desc id="ld-desc">${escape(description)}</desc>`,
     '          <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#b7f45d"/></marker></defs>',
     '          <g class="ld-stage-index">',
-    '            <path class="ld-stage-rule" d="M 258 22 V 1493 M 30 1493 H 1192"/>',
+    '            <path class="ld-stage-rule" d="M 258 22 V 1540 M 30 1540 H 1192"/>',
     ...STAGES.flatMap(([top, bottom, en, tr, enCopy, trCopy], index) => {
       const copyLines = wrap(localized(locale, enCopy, trCopy), 29);
       const lineHeight = Math.min(19, (bottom - top - 70) / Math.max(1, copyLines.length - 1));
@@ -180,8 +188,8 @@ export function renderLearningDiagram({ locale, data }) {
     ...junctions.map(({x,y}) => `            <circle class="ld-junction" cx="${x}" cy="${y}" r="2.2"/>`),
     '          </g>',
     '          <g class="ld-nodes">', ...nodes.map(renderNode), '          </g>',
-    '          <text x="1192" y="1420" class="ld-brand">ASERDARGUN.COM</text>',
-    '          <text x="1192" y="1438" class="ld-brand-subtitle">AI Learning System</text>',
+    '          <text x="1192" y="1457" class="ld-brand">ASERDARGUN.COM</text>',
+    '          <text x="1192" y="1475" class="ld-brand-subtitle">AI Learning System</text>',
     '        </svg>', '        </div>',
     '      </figure>',
   ].join("\n");

@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { applicationHierarchy, applicationParents } from "./application-hierarchy.mjs";
-import { learningDiagramLayout } from "./learning-diagram.mjs";
+import { learningDiagramLayout, STAGES } from "./learning-diagram.mjs";
 import { validateLivingSystemData } from "./living-system-data.mjs";
 import { renderApplicationMap } from "./render-living-system.mjs";
 
@@ -269,4 +269,40 @@ test("the approved diagram has 32 unique nodes and eleven non-overlapping frames
     assert.ok(((point.x === tip.x || point.x === tip.x + tip.width) && point.y >= tip.y && point.y <= tip.y + tip.height)
       || ((point.y === tip.y || point.y === tip.y + tip.height) && point.x >= tip.x && point.x <= tip.x + tip.width), `${edge.id} misses target boundary`);
   }
+});
+
+// Lane rhythm is a measured contract: each stage band wraps the content it owns
+// with the same empty space above and below, and neighbouring bands share their
+// rule so the gutter between two lanes is one uniform gap.
+const LANE_CONTENT = [
+  ["ARCHITECT", ["aia"], []],
+  ["FOUNDATION", ["llm", "tfl", "gpu", "pol", "gex", "vis"], ["llm", "gpu", "vis"]],
+  ["RUNTIME", ["usl", "adp"], ["usl"]],
+  ["AGENT SYSTEM", ["hns", "arl", "dpl", "cul", "agr", "aos"], ["hns"]],
+  ["CONTEXT & ASSURANCE", ["ctx", "mem", "sec", "evl"], ["ctx"]],
+  ["DEPLOYMENT", ["lcl", "cld", "dcl"], ["deployment"]],
+  ["PHYSICAL AI", ["wfm", "wml", "swi", "ant", "bee"], ["wfm", "swi"]],
+  ["INDUSTRIAL TWIN", ["itl", "pdt", "dtr"], ["itl"]],
+  ["EMBODIED AI", ["eng", "hex"], ["eng"]],
+];
+const STAGE_PADDING = 22;
+
+test("every stage band is vertically balanced around its own content", () => {
+  const { nodes, families } = learningDiagramLayout(data.applications);
+  assert.deepEqual(STAGES.map(([, , en]) => en), LANE_CONTENT.map(([name]) => name));
+  const nodeByCode = new Map(nodes.map((node) => [node.app.code, node]));
+  const familyByCode = new Map(families.map((family) => [family.code, family]));
+  const owned = new Set();
+  LANE_CONTENT.forEach(([name, codes, frameCodes], index) => {
+    const [bandTop, bandBottom] = STAGES[index];
+    if (index > 0) assert.equal(bandTop, STAGES[index - 1][1], `${name} must share the previous lane's bottom rule`);
+    const boxes = [...codes.map((code) => nodeByCode.get(code)), ...frameCodes.map((code) => familyByCode.get(code))];
+    for (const box of boxes) assert.ok(box, `${name} owns an unknown box`);
+    for (const code of codes) owned.add(code);
+    const top = Math.min(...boxes.map((box) => box.y));
+    const bottom = Math.max(...boxes.map((box) => box.y + box.height));
+    assert.equal(top - bandTop, bandBottom - bottom, `${name} must keep equal whitespace above and below its content`);
+    assert.equal(top - bandTop, STAGE_PADDING, `${name} must use the shared ${STAGE_PADDING}px lane padding`);
+  });
+  assert.deepEqual([...owned].sort(), nodes.map(({ app }) => app.code).sort(), "every node must belong to exactly one stage band");
 });
