@@ -1908,6 +1908,7 @@
       ],
       "downstreamApps": [
         "ctx",
+        "cvl",
         "eng",
         "hex",
         "hns",
@@ -1937,6 +1938,63 @@
       ],
       "researchCutoff": "2026-10-05",
       "releaseSha": "65d46e0dbf27fb0b9eec6fb3a9cd997a00216caf"
+    },
+    {
+      "code": "cvl",
+      "parentApp": "vis",
+      "diagramLabel": {
+        "en": "Vision laboratory",
+        "tr": "Görü laboratuvarı"
+      },
+      "kind": "lab",
+      "systemRole": "lab",
+      "visibility": "public",
+      "status": "active",
+      "statusLabel": {
+        "en": "Active · Deterministic measurement",
+        "tr": "Aktif · Deterministik ölçüm"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "CVL — Computer Vision Laboratory",
+        "tr": "CVL — Bilgisayarlı Görü Laboratuvarı"
+      },
+      "summary": {
+        "en": "A deterministic laboratory that measures eight computer-vision layers against a per-pixel answer key painted in the same pass as the synthetic scene. Classical operators, a convolutional network trained at run time, monocular depth cues and sparse optical flow run on an f64 CPU path by default and on an honestly probed WebGPU path when an adapter exists. The VIS knowledge bank explains; CVL measures.",
+        "tr": "Sekiz bilgisayarlı görü katmanını, sentetik sahnenin aynı geçişinde çizilen piksel cevap anahtarına karşı ölçen deterministik laboratuvar. Klasik operatörler, çalışma anında eğitilen konvolüsyonlu ağ, monoküler derinlik ipuçları ve seyreltik optik akış varsayılan olarak f64 CPU yolunda, adapter varsa dürüstçe yoklanan WebGPU yolunda çalışır. VIS bilgi bankası açıklar; CVL ölçer."
+      },
+      "guidingQuestion": {
+        "en": "Which failure does this operator reach first, and can it be measured before it ever meets a real camera?",
+        "tr": "Bu operatör ilk hangi hataya ulaşıyor ve gerçek bir kameraya hiç rastlamadan ölçülebilir mi?"
+      },
+      "repository": "https://github.com/aserdargun/cvl-aserdargun-com",
+      "address": "https://cvl.aserdargun.com/",
+      "updatedAt": "2026-10-06",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-reference-and-deterministic-measurement",
+      "upstreamApps": [
+        "vis"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "perception",
+        "measurement",
+        "ground-truth",
+        "operators",
+        "reproducibility"
+      ],
+      "entityIds": [
+        "entity:computer-vision"
+      ],
+      "portfolioLayer": "foundation",
+      "focusState": "active",
+      "relatedMemoryIds": [
+        "learning-labs-evidence-boundary"
+      ]
     }
   ],
   "now": {
@@ -2523,6 +2581,7 @@
         "aos",
         "arl",
         "cul",
+        "cvl",
         "dpl",
         "gex",
         "hex",

@@ -171,10 +171,10 @@ test("shared ownership validates both parents and detects cycles through either 
 });
 
 
-test("the approved diagram has 32 unique nodes and eleven non-overlapping frames", () => {
+test("the approved diagram has 33 unique nodes and eleven non-overlapping frames", () => {
   const { nodes, families, edges } = learningDiagramLayout(data.applications);
-  assert.equal(nodes.length, 32);
-  assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 32);
+  assert.equal(nodes.length, 33);
+  assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 33);
   assert.deepEqual(families.map(({ code }) => code), ["llm", "gpu", "vis", "usl", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"]);
   for (const [i, frame] of families.entries()) {
     for (const other of families.slice(i + 1)) {
@@ -276,7 +276,7 @@ test("the approved diagram has 32 unique nodes and eleven non-overlapping frames
 // rule so the gutter between two lanes is one uniform gap.
 const LANE_CONTENT = [
   ["ARCHITECT", ["aia"], []],
-  ["FOUNDATION", ["llm", "tfl", "gpu", "pol", "gex", "vis"], ["llm", "gpu", "vis"]],
+  ["FOUNDATION", ["llm", "tfl", "gpu", "pol", "gex", "vis", "cvl"], ["llm", "gpu", "vis"]],
   ["RUNTIME", ["usl", "adp"], ["usl"]],
   ["AGENT SYSTEM", ["hns", "arl", "dpl", "cul", "agr", "aos"], ["hns"]],
   ["CONTEXT & ASSURANCE", ["ctx", "mem", "sec", "evl"], ["ctx"]],

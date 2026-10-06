@@ -1531,6 +1531,7 @@
       ],
       "downstreamApps": [
         "ctx",
+        "cvl",
         "eng",
         "hex",
         "hns",
@@ -1554,6 +1555,50 @@
       ],
       "portfolioLayer": "foundation",
       "focusState": "foundation"
+    },
+    {
+      "code": "cvl",
+      "parentApp": "vis",
+      "name": {
+        "en": "CVL — Computer Vision Laboratory",
+        "tr": "CVL — Bilgisayarlı Görü Laboratuvarı"
+      },
+      "shortName": "CVL",
+      "description": {
+        "en": "A deterministic laboratory that measures eight computer-vision layers against a per-pixel answer key painted in the same pass as the synthetic scene. Classical operators, a convolutional network trained at run time, monocular depth cues and sparse optical flow run on an f64 CPU path by default and on an honestly probed WebGPU path when an adapter exists. The VIS knowledge bank explains; CVL measures.",
+        "tr": "Sekiz bilgisayarlı görü katmanını, sentetik sahnenin aynı geçişinde çizilen piksel cevap anahtarına karşı ölçen deterministik laboratuvar. Klasik operatörler, çalışma anında eğitilen konvolüsyonlu ağ, monoküler derinlik ipuçları ve seyreltik optik akış varsayılan olarak f64 CPU yolunda, adapter varsa dürüstçe yoklanan WebGPU yolunda çalışır. VIS bilgi bankası açıklar; CVL ölçer."
+      },
+      "type": "lab",
+      "status": "active",
+      "statusLabel": {
+        "en": "Active · Deterministic measurement",
+        "tr": "Aktif · Deterministik ölçüm"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://cvl.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/cvl-aserdargun-com",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-reference-and-deterministic-measurement",
+      "upstreamApps": [
+        "vis"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "perception",
+        "measurement",
+        "ground-truth",
+        "operators",
+        "reproducibility"
+      ],
+      "entityIds": [
+        "entity:computer-vision"
+      ],
+      "portfolioLayer": "foundation",
+      "focusState": "active"
     }
   ]
 }

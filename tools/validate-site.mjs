@@ -22,7 +22,7 @@ import {
 const expectedPublicApplicationCodes = [
   "aia", "llm", "hns", "dpl", "cul", "aos", "sec", "ctx", "mem", "evl", "usl", "gpu",
   "pol", "cld", "lcl", "wfm", "swi", "ant", "bee", "itl", "eng", "gex", "tfl", "arl",
-  "adp", "wml", "dtr", "pdt", "hex", "dcl", "agr", "vis",
+  "adp", "wml", "dtr", "pdt", "hex", "dcl", "agr", "vis", "cvl",
 ].sort();
 // Copy that describes a structure the site no longer has must not come back.
 const retiredOverviewCopy = /five connected layers|five\s*[—-]\s*layer|beş katman/i;
@@ -87,7 +87,7 @@ const expectedAssetVersion = "20260921-personal-tools-final";
 const expectedStylesheetHref = "/styles.css?v=20260921-personal-tools-final";
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
-  ...["dpl", "cul", "aos", "mem", "vis"].map((code) => ({ code, repository: `${code}-aserdargun-com`, repositoryUrl: `https://github.com/aserdargun/${code}-aserdargun-com`, productUrl: `https://${code}.aserdargun.com/`, productLabel: `${code}.aserdargun.com` })),
+  ...["dpl", "cul", "aos", "mem", "vis", "cvl"].map((code) => ({ code, repository: `${code}-aserdargun-com`, repositoryUrl: `https://github.com/aserdargun/${code}-aserdargun-com`, productUrl: `https://${code}.aserdargun.com/`, productLabel: `${code}.aserdargun.com` })),
   { code: "pol", repository: "pol-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/pol-aserdargun-com", productUrl: "https://pol.aserdargun.com/", productLabel: "pol.aserdargun.com" },
   { code: "aia", repository: "aia-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/aia-aserdargun-com", productUrl: "https://aia.aserdargun.com/", productLabel: "aia.aserdargun.com" },
   { code: "llm", repository: "llm-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/llm-aserdargun-com", productUrl: "https://llm.aserdargun.com/", productLabel: "llm.aserdargun.com" },
@@ -437,6 +437,7 @@ function validateLearningSystem(locale, html) {
       "dtr:practice-lab",
       "agr:decision-lab",
       "vis:atlas",
+      "cvl:practice-lab",
     ].sort()),
     `${locale}: learning diagram node roles differ from the application content model`,
   );
