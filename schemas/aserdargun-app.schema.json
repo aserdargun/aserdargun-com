@@ -143,7 +143,8 @@
         "agent-system",
         "assurance",
         "deployment",
-        "physical-ai"
+        "physical-ai",
+        "learning-game"
       ]
     },
     "focusState": {

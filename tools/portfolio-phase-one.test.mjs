@@ -21,7 +21,7 @@ test("the public application contract keeps verification, research, and release 
   const data = await readData();
 
   // Educational and design applications assert no research cutoff of their own.
-  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex", "tfl", "arl", "adp", "dcl", "pol", "dtr", "dpl", "cul", "aos", "mem", "agr", "vis", "cvl"].includes(code))) {
+  for (const application of data.applications.filter(({ code }) => !["swi", "ant", "bee", "gex", "wml", "pdt", "hex", "tfl", "arl", "adp", "dcl", "pol", "dtr", "dpl", "cul", "aos", "mem", "agr", "vis", "cvl", "ilm"].includes(code))) {
     assert.match(application.researchCutoff, /^2026-\d{2}-\d{2}$/, `${application.code} research cutoff`);
     assert.match(application.lastVerified, /^2026-\d{2}-\d{2}$/, `${application.code} verification date`);
     assert.ok(new Date(application.lastVerified) <= today, `${application.code} verification must not be in the future`);
@@ -55,7 +55,7 @@ test("the portfolio registry is a deterministic public projection of application
 
   assert.equal(registry.schemaVersion, 1);
   assert.equal(registry.generatedAt, "2026-09-04");
-  assert.equal(registry.applications.length, 33);
+  assert.equal(registry.applications.length, 34);
   assert.deepEqual(registry.applications.map(({ code }) => code), data.applications.map(({ code }) => code));
   assert.deepEqual(
     registry.applications.find(({ code }) => code === "ctx"),
@@ -82,7 +82,7 @@ test("the portfolio registry is a deterministic public projection of application
       claimCount: 19,
       evidencePolicy: "primary-source-backed",
       upstreamApps: ["hns", "vis"],
-      downstreamApps: ["llm", "lcl", "mem"],
+      downstreamApps: ["llm", "lcl", "mem", "ilm"],
       tracks: ["context", "knowledge", "retrieval", "memory"],
       entityIds: ["entity:mcp"],
       portfolioLayer: "agent-system",

@@ -45,7 +45,8 @@
         "gpu",
         "llm",
         "usl",
-        "vis"
+        "vis",
+        "ilm"
       ],
       "tracks": [
         "ecosystem",
@@ -106,7 +107,8 @@
       "downstreamApps": [
         "tfl",
         "usl",
-        "hns"
+        "hns",
+        "ilm"
       ],
       "tracks": [
         "runtime",
@@ -172,7 +174,8 @@
         "dpl",
         "cul",
         "aos",
-        "agr"
+        "agr",
+        "ilm"
       ],
       "tracks": [
         "harness",
@@ -233,7 +236,9 @@
       "upstreamApps": [
         "hns"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "decision-plane",
         "policy",
@@ -292,7 +297,9 @@
       "upstreamApps": [
         "hns"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "computer-use",
         "observation",
@@ -351,7 +358,9 @@
       "upstreamApps": [
         "hns"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "agent-operating-system",
         "architecture",
@@ -409,7 +418,8 @@
       ],
       "downstreamApps": [
         "lcl",
-        "cld"
+        "cld",
+        "ilm"
       ],
       "tracks": [
         "identity",
@@ -472,7 +482,8 @@
       "downstreamApps": [
         "llm",
         "lcl",
-        "mem"
+        "mem",
+        "ilm"
       ],
       "tracks": [
         "context",
@@ -533,7 +544,9 @@
       "upstreamApps": [
         "ctx"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "agent-memory",
         "lifecycle",
@@ -590,7 +603,8 @@
         "hns"
       ],
       "downstreamApps": [
-        "cld"
+        "cld",
+        "ilm"
       ],
       "tracks": [
         "evaluation",
@@ -652,7 +666,8 @@
       ],
       "downstreamApps": [
         "adp",
-        "hns"
+        "hns",
+        "ilm"
       ],
       "tracks": [
         "training",
@@ -714,7 +729,8 @@
         "llm",
         "pol",
         "usl",
-        "vis"
+        "vis",
+        "ilm"
       ],
       "tracks": [
         "cuda",
@@ -767,7 +783,9 @@
       "upstreamApps": [
         "gpu"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "programming-languages",
         "types",
@@ -832,7 +850,8 @@
       "downstreamApps": [
         "wfm",
         "swi",
-        "dcl"
+        "dcl",
+        "ilm"
       ],
       "tracks": [
         "cloud",
@@ -892,7 +911,8 @@
       "downstreamApps": [
         "wfm",
         "swi",
-        "dcl"
+        "dcl",
+        "ilm"
       ],
       "tracks": [
         "hardware",
@@ -953,7 +973,8 @@
       ],
       "downstreamApps": [
         "itl",
-        "wml"
+        "wml",
+        "ilm"
       ],
       "tracks": [
         "perception",
@@ -1014,7 +1035,8 @@
       "downstreamApps": [
         "ant",
         "bee",
-        "itl"
+        "itl",
+        "ilm"
       ],
       "tracks": [
         "collective-behavior",
@@ -1073,7 +1095,9 @@
       "upstreamApps": [
         "swi"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "swarm-intelligence",
         "stigmergy",
@@ -1134,7 +1158,9 @@
       "upstreamApps": [
         "swi"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "swarm-intelligence",
         "waggle-dance",
@@ -1196,7 +1222,8 @@
       "downstreamApps": [
         "eng",
         "pdt",
-        "dtr"
+        "dtr",
+        "ilm"
       ],
       "tracks": [
         "digital-twins",
@@ -1254,7 +1281,8 @@
         "vis"
       ],
       "downstreamApps": [
-        "hex"
+        "hex",
+        "ilm"
       ],
       "tracks": [
         "humanoids",
@@ -1319,7 +1347,8 @@
         "gpu"
       ],
       "downstreamApps": [
-        "tfl"
+        "tfl",
+        "ilm"
       ],
       "tracks": [
         "gpu",
@@ -1380,7 +1409,9 @@
         "llm",
         "gex"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "serving",
         "batching",
@@ -1438,7 +1469,9 @@
       "upstreamApps": [
         "hns"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "agent",
         "runtime",
@@ -1496,7 +1529,9 @@
       "upstreamApps": [
         "hns"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "deliberation",
         "free-models",
@@ -1553,7 +1588,9 @@
       "upstreamApps": [
         "usl"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "adaptation",
         "fine-tuning",
@@ -1609,7 +1646,9 @@
       "upstreamApps": [
         "wfm"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "world-models",
         "prediction",
@@ -1668,7 +1707,9 @@
       "upstreamApps": [
         "itl"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "digital-triplets",
         "pumps",
@@ -1728,7 +1769,9 @@
       "upstreamApps": [
         "itl"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "digital-twins",
         "pumps",
@@ -1784,7 +1827,9 @@
         "eng",
         "vis"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "humanoids",
         "kinematics",
@@ -1848,7 +1893,9 @@
         "lcl",
         "cld"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "deployment",
         "memory",
@@ -1896,9 +1943,9 @@
       },
       "repository": "https://github.com/aserdargun/vis-aserdargun-com",
       "address": "https://vis.aserdargun.com/",
-      "updatedAt": "2026-10-05",
+      "updatedAt": "2026-10-06",
       "lastVerified": "2026-10-06",
-      "lastReleased": "2026-10-05",
+      "lastReleased": "2026-10-06",
       "sourceCount": 13,
       "claimCount": 16,
       "evidencePolicy": "source-backed-reference-and-deterministic-measurement",
@@ -1914,7 +1961,8 @@
         "hns",
         "itl",
         "usl",
-        "wfm"
+        "wfm",
+        "ilm"
       ],
       "tracks": [
         "perception",
@@ -1937,7 +1985,7 @@
         "learning-labs-evidence-boundary"
       ],
       "researchCutoff": "2026-10-05",
-      "releaseSha": "65d46e0dbf27fb0b9eec6fb3a9cd997a00216caf"
+      "releaseSha": "80f9f2067a05e3d8240d5c4cd51e96a5c3be7d6f"
     },
     {
       "code": "cvl",
@@ -1979,7 +2027,9 @@
       "upstreamApps": [
         "vis"
       ],
-      "downstreamApps": [],
+      "downstreamApps": [
+        "ilm"
+      ],
       "tracks": [
         "perception",
         "measurement",
@@ -1995,6 +2045,96 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ]
+    },
+    {
+      "code": "ilm",
+      "parentApp": null,
+      "diagramLabel": {
+        "en": "Learning game",
+        "tr": "Öğrenme oyunu"
+      },
+      "kind": "lab",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live · Playable in the browser",
+        "tr": "Yayında · Tarayıcıda oynanır"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "ILMEK — A World Rewoven",
+        "tr": "ILMEK — Yeniden Örülen Dünya"
+      },
+      "summary": {
+        "en": "A third-person exploration game that turns this learning system into playable ground: every registered application is a region with its own puzzle mechanic, and the world is restored by rediscovering how systems relate and reconnecting them. Geometry, texture and sound are generated procedurally at runtime. There are no accounts, API keys, paid services or live model calls, and the in-game puzzles are teaching models rather than the applications' own measurements.",
+        "tr": "Bu öğrenme sistemini oynanabilir bir zemine dönüştüren üçüncü şahıs keşif oyunu: kayıtlı her uygulama kendi bulmaca mekaniğine sahip bir bölgedir ve dünya, sistemlerin birbiriyle nasıl ilişkili olduğunu yeniden keşfedip onları yeniden bağlayarak onarılır. Geometri, doku ve ses çalışma anında yordamla üretilir. Hesap, API anahtarı, ücretli hizmet veya canlı model çağrısı yoktur; oyun içi bulmacalar öğretim modelleridir, uygulamaların kendi ölçümleri değildir."
+      },
+      "guidingQuestion": {
+        "en": "Can this whole system be learned by playing it instead of reading it?",
+        "tr": "Bu sistemin tamamı okunmadan, oynanarak öğrenilebilir mi?"
+      },
+      "repository": "https://github.com/aserdargun/ilm-aserdargun-com",
+      "address": "https://ilm.aserdargun.com/",
+      "updatedAt": "2026-10-06",
+      "researchCutoff": "2026-10-06",
+      "lastVerified": "2026-10-06",
+      "lastReleased": "2026-10-06",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "mirrored-public-metadata-and-teaching-models",
+      "upstreamApps": [
+        "adp",
+        "agr",
+        "aia",
+        "ant",
+        "aos",
+        "arl",
+        "bee",
+        "cld",
+        "ctx",
+        "cul",
+        "cvl",
+        "dcl",
+        "dpl",
+        "dtr",
+        "eng",
+        "evl",
+        "gex",
+        "gpu",
+        "hex",
+        "hns",
+        "itl",
+        "lcl",
+        "llm",
+        "mem",
+        "pdt",
+        "pol",
+        "sec",
+        "swi",
+        "tfl",
+        "usl",
+        "vis",
+        "wfm",
+        "wml"
+      ],
+      "downstreamApps": [],
+      "tracks": [
+        "game-learning",
+        "spatial-interface",
+        "systems-thinking",
+        "procedural-generation"
+      ],
+      "entityIds": [
+        "entity:evidence"
+      ],
+      "portfolioLayer": "learning-game",
+      "focusState": "active",
+      "relatedMemoryIds": [],
+      "releaseSha": "a18617f074053d786584a48e14a1e4e6e71842a2"
     }
   ],
   "now": {

@@ -1,12 +1,12 @@
 # AI Learning System — Serdar Gündoğdu
 
-> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence. The overview is one nine-stage learning map with 33 applications.
+> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence. The overview is one nine-stage learning map with 34 applications, plus a learning game below the last lane.
 
 ## Start here
 - [System overview](https://aserdargun.com/): The eight-stage learning map, its families and their learning relationships.
 - [About Serdar](https://aserdargun.com/about/): Professional identity, career journey, working principles, and public contact links.
 - [Journey](https://aserdargun.com/journey/): Learning path, six detailed stages, and the physical AI horizon with colony, world-model, pump-twin, digital-triplet, and humanoid learning laboratories.
-- [Application Map](https://aserdargun.com/applications/): Search 33 applications by topic and layer; inspect research, verification and release evidence.
+- [Application Map](https://aserdargun.com/applications/): Search 34 applications by topic and layer; inspect research, verification and release evidence.
 - [Now](https://aserdargun.com/now/): Dated work and planned direction. Read its date before describing an item as current.
 - [Knowledge](https://aserdargun.com/memory/): Authored public research notes and decisions with sources.
 - [Portfolio registry](https://aserdargun.com/portfolio.json): Structured public application identities and relationships.
@@ -25,6 +25,7 @@ Research cutoffs, verification dates, release dates, and release SHAs describe d
 - [USL — Unsloth Studio Learning Atlas](https://usl.aserdargun.com/): Adaptation, fine-tuning and dataset practice with memory estimates.
 - [GEX — GPU Execution Explorer](https://gex.aserdargun.com/): GPU Atlas companion for educational kernel, warp, memory, and matrix execution.
 - [ADP — Model Adaptation Laboratory](https://adp.aserdargun.com/): USL companion for Full FT, LoRA, QLoRA, memory estimates and synthetic training/evaluation; it does not train a real model.
+- [ILM — ILMEK: A World Rewoven](https://ilm.aserdargun.com/): the whole learning map as playable ground. Every registered application is a region with its own puzzle mechanic, and the world is restored by rediscovering how systems relate and reconnecting them. Geometry, texture and sound are generated procedurally at runtime; no accounts, API keys, paid services or live model calls. The in-game puzzles are teaching models, not the applications' own measurements.
 - [VIS — Computer Vision Knowledge Bank](https://vis.aserdargun.com/): Source-backed computer-vision field guide across seven perception layers, with a deterministic laboratory beside it.
 - [CVL — Computer Vision Laboratory](https://cvl.aserdargun.com/): VIS companion that measures those layers against a per-pixel answer key painted with the synthetic scene; nothing is measured against itself.
 

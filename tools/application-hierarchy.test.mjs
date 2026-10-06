@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { applicationHierarchy, applicationParents } from "./application-hierarchy.mjs";
-import { learningDiagramLayout, STAGES } from "./learning-diagram.mjs";
+import { learningDiagramLayout, STAGES, STAGE_COPY_MIN_LINE_HEIGHT, wrap } from "./learning-diagram.mjs";
 import { validateLivingSystemData } from "./living-system-data.mjs";
 import { renderApplicationMap } from "./render-living-system.mjs";
 
@@ -171,10 +171,10 @@ test("shared ownership validates both parents and detects cycles through either 
 });
 
 
-test("the approved diagram has 33 unique nodes and eleven non-overlapping frames", () => {
+test("the approved diagram has 34 unique nodes and eleven non-overlapping frames", () => {
   const { nodes, families, edges } = learningDiagramLayout(data.applications);
-  assert.equal(nodes.length, 33);
-  assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 33);
+  assert.equal(nodes.length, 34);
+  assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 34);
   assert.deepEqual(families.map(({ code }) => code), ["llm", "gpu", "vis", "usl", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"]);
   for (const [i, frame] of families.entries()) {
     for (const other of families.slice(i + 1)) {
@@ -284,6 +284,7 @@ const LANE_CONTENT = [
   ["PHYSICAL AI", ["wfm", "wml", "swi", "ant", "bee"], ["wfm", "swi"]],
   ["INDUSTRIAL TWIN", ["itl", "pdt", "dtr"], ["itl"]],
   ["EMBODIED AI", ["eng", "hex"], ["eng"]],
+  ["LEARNING GAME", ["ilm"], []],
 ];
 const STAGE_PADDING = 22;
 
@@ -305,4 +306,19 @@ test("every stage band is vertically balanced around its own content", () => {
     assert.equal(top - bandTop, STAGE_PADDING, `${name} must use the shared ${STAGE_PADDING}px lane padding`);
   });
   assert.deepEqual([...owned].sort(), nodes.map(({ app }) => app.code).sort(), "every node must belong to exactly one stage band");
+});
+
+// A band squeezes its stage copy to fit. A short lane with long copy therefore
+// prints its own lines on top of each other, which no padding measurement sees.
+test("no stage band lays its own copy out tighter than the copy line height", () => {
+  for (const [top, bottom, name, , enCopy, trCopy] of STAGES) {
+    for (const copy of [enCopy, trCopy]) {
+      const lines = wrap(copy, 29).length;
+      const lineHeight = Math.min(19, (bottom - top - 70) / Math.max(1, lines - 1));
+      assert.ok(
+        lineHeight >= STAGE_COPY_MIN_LINE_HEIGHT,
+        `${name} prints ${lines} copy lines ${lineHeight}px apart in a ${bottom - top}px band`,
+      );
+    }
+  }
 });

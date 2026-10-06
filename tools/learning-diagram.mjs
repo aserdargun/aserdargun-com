@@ -11,8 +11,8 @@ const localized = (locale, en, tr) => locale === "tr" ? tr : en;
 // attachment surface as well as a boundary.
 //
 // Vertical rhythm: every stage band wraps the content it owns with the same
-// 22px of empty space above and below, so all nine lanes are balanced and each
-// gutter between two lanes is 44px. STAGES below must stay those nine bands;
+// 22px of empty space above and below, so all ten lanes are balanced and each
+// gutter between two lanes is 44px. STAGES below must stay those ten bands;
 // tools/application-hierarchy.test.mjs re-measures the padding per lane, so a
 // coordinate edit cannot silently unbalance a lane again.
 const POSITIONS = {
@@ -38,6 +38,9 @@ const POSITIONS = {
   swi: [843, 1045, 293, 47], ant: [844, 1100, 144, 50], bee: [996, 1100, 140, 50],
   itl: [571.5, 1213, 335, 47], pdt: [571.5, 1268, 163, 64], dtr: [743.5, 1268, 163, 64],
   eng: [610, 1395, 258, 54], hex: [612, 1457, 254, 49],
+  // ILM closes the map on the runtime column axis (739), so it lines up with
+  // everything above it. No arrow reaches it: it is offered, not derived.
+  ilm: [610, 1562, 258, 54],
 };
 // A frame is centred on the content it owns: LLM+TFL is inset 10 on both sides,
 // so the frame axis matches the LLM box axis at 439. The runtime frames are 278
@@ -80,7 +83,7 @@ const ROUTES = [
   ["itl-to-eng", "M 739 1341 V 1385", "horizon"],
 ];
 const CONNECTORS = [];
-const ROLES = { pol: "learning-tool", aia: "architect", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", vis: "atlas", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", agr: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon" };
+const ROLES = { pol: "learning-tool", aia: "architect", gpu: "foundation", llm: "hub", usl: "adapt", hns: "harness", vis: "atlas", ctx: "context", sec: "security", evl: "evaluation", lcl: "deployment", cld: "deployment", dcl: "decision-lab", agr: "decision-lab", wfm: "world", swi: "collective", ant: "colony-lab", bee: "colony-lab", itl: "twin", eng: "horizon", ilm: "game" };
 
 export function learningDiagramLayout(applications) {
   const diagramApplications = systemFocusApplications(applications);
@@ -115,8 +118,17 @@ export const STAGES = [
   [1015, 1181, "PHYSICAL AI", "FİZİKSEL AI", "World models and swarm intelligence; connect to industrial twins and humanoid systems.", "Dünya modelleri ve sürü zekâsı; endüstriyel ikizlerle ve insansı robot sistemleriyle bağlantı kur."],
   [1181, 1363, "INDUSTRIAL TWIN", "ENDÜSTRİYEL İKİZ", "Digital twins and digital triplets for industrial systems and real-world research.", "Endüstriyel sistemler ve gerçek dünya araştırmaları için dijital ikizler ve dijital üçüzler."],
   [1363, 1540, "EMBODIED AI", "BEDENLENMİŞ AI", "Humanoid and embodied intelligence research.", "İnsansı robotlar ve bedenlenmiş zekâ araştırmaları."],
+  // ILM sits below the numbered lanes as a closing section rather than a lane of
+  // its own, so the band carries no stage number and no arrow: the map does not
+  // claim the game is produced by the embodied lane, it offers to play it.
+  [1540, 1638, "LEARNING GAME", "ÖĞRENME OYUNU", "Every application becomes a region you play.", "Her uygulama oynadığın bir bölge olur.", false],
 ];
-function wrap(text, limit) {
+// Wrapped stage copy must be laid out at least this far apart. The renderer
+// squeezes a band's line height to fit the band, and a short lane with long
+// copy would otherwise print its own lines on top of each other.
+export const STAGE_COPY_MIN_LINE_HEIGHT = 15;
+
+export function wrap(text, limit) {
   const lines = [];
   for (const word of text.split(/\s+/)) {
     if (!lines.length || lines.at(-1).length + word.length + 1 > limit) lines.push(word);
@@ -136,13 +148,14 @@ const LABELS = {
   vis: ["Vision knowledge bank", "Görü bilgi bankası"],
   aia: ["Architect", "Mimar"],
   dcl: ["Shared lab", "Ortak laboratuvar"],
+  ilm: ["Learning game", "Öğrenme oyunu"],
 };
 
 export function renderLearningDiagram({ locale, data }) {
   const { nodes, families, edges, connectors, junctions } = learningDiagramLayout(data.applications);
   const description = localized(locale,
-    "Nine stages: the architect lane sits above eight topical lanes. The architect derives the foundation below it with frontier models. Three arrows leave AIA, each from a midpoint: the left midpoint drops into the serving frame's top middle, the bottom midpoint runs straight down the runtime column into the kernel frame's top middle, and the right midpoint enters the vision frame's top middle. In the foundation lane LLM, GPU and VIS stand side by side: the serving atlas on the left, the kernel atlas in the middle and the vision knowledge bank on the right, placed on the kernel frame's mid-height so GPU feeds VIS with one straight horizontal between the two frames' midpoints. The runtime lane holds USL, and it is fed from three directions: from the serving frame's bottom middle on the left, from the kernel frame straight down the top centre and from the vision frame, which drops out of its own bottom middle and turns in at the adaptation frame's right middle. HNS and everything below it share one vertical column with ADP, so the adaptation-to-harness arrow runs straight down from the adaptation frame's bottom middle to the harness frame's top middle. Frames group LLM with TFL; GPU with POL and GEX; USL with ADP; HNS with ARL, DPL, CUL, AOS and AGR; CTX with MEM; VIS with CVL; WFM with WML; SWI with ANT and BEE; ITL with PDT and DTR; ENG with HEX. VIS keeps a frame of its own and holds CVL below it, the knowledge bank above the laboratory that measures it; all three of its arrows still meet a frame midpoint. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. Arrows describe learning relationships, not runtime integrations.",
-    "Dokuz aşama: mimar şeridi sekiz konu şeridinin üzerinde durur. Mimar, aşağıdaki temeli sınır modelleriyle türetir. AIA’dan üç ok çıkar ve her biri bir orta noktadan ayrılır: sol orta noktası sunum çerçevesinin üst ortasına iner, alt orta noktası çalıştırma sütunu boyunca dik aşağı inip çekirdek çerçevesinin üst ortasına ulaşır, sağ orta noktası görü çerçevesinin üst ortasına girer. Temel şeridinde LLM, GPU ve VIS yan yana durur: solda sunum atlası, ortada çekirdek atlası, sağda görü bilgi bankası; VIS çekirdek çerçevesinin orta yüksekliğine oturur, böylece GPU görüyü iki çerçevenin orta noktaları arasında tek düz yatay okla besler. Çalıştırma şeridinde USL vardır ve üç yönden beslenir: soldan sunum çerçevesinin alt ortasından, üst ortadan çekirdek çerçevesinden dik aşağı ve sağdan görü çerçevesinden; görü çerçevesi kendi alt ortasından çıkıp uyarlama çerçevesinin sağ ortasına döner. HNS ve altındaki her şey ADP ile aynı dikey sütunda durur, böylece uyarlamadan ajan sistemine ok uyarlama çerçevesinin alt ortasından ajan sistemi çerçevesinin üst ortasına dik aşağı iner. Çerçeveler LLM ile TFL’yi; GPU ile POL ve GEX’i; USL ile ADP’yi; HNS ile ARL, DPL, CUL, AOS ve AGR’yi; CTX ile MEM’i; WFM ile WML’yi; SWI ile ANT ve BEE’yi; ITL ile PDT ve DTR’yi; ENG ile HEX’i gruplar. VIS kendi çerçevesini korur: alt uygulaması yoktur ama üç oku da bir çerçeve orta noktasında buluşur. CTX/MEM grubu, SEC ve EVL ile karşılıklı geri bildirim paylaşır. LCL ve CLD aynı dış çerçevede, ortak laboratuvarları DCL ise ikisinin altında yer alır. Oklar öğrenme ilişkilerini gösterir; çalışma zamanı entegrasyonu değildir.");
+    "Nine numbered stages with a closing learning game below them: the architect lane sits above eight topical lanes. The architect derives the foundation below it with frontier models. Three arrows leave AIA, each from a midpoint: the left midpoint drops into the serving frame's top middle, the bottom midpoint runs straight down the runtime column into the kernel frame's top middle, and the right midpoint enters the vision frame's top middle. In the foundation lane LLM, GPU and VIS stand side by side: the serving atlas on the left, the kernel atlas in the middle and the vision knowledge bank on the right, placed on the kernel frame's mid-height so GPU feeds VIS with one straight horizontal between the two frames' midpoints. The runtime lane holds USL, and it is fed from three directions: from the serving frame's bottom middle on the left, from the kernel frame straight down the top centre and from the vision frame, which drops out of its own bottom middle and turns in at the adaptation frame's right middle. HNS and everything below it share one vertical column with ADP, so the adaptation-to-harness arrow runs straight down from the adaptation frame's bottom middle to the harness frame's top middle. Frames group LLM with TFL; GPU with POL and GEX; USL with ADP; HNS with ARL, DPL, CUL, AOS and AGR; CTX with MEM; VIS with CVL; WFM with WML; SWI with ANT and BEE; ITL with PDT and DTR; ENG with HEX. VIS keeps a frame of its own and holds CVL below it, the knowledge bank above the laboratory that measures it; all three of its arrows still meet a frame midpoint. The CTX/MEM group exchanges feedback with SEC and EVL. LCL and CLD share one frame, with their joint laboratory DCL below them. Below the last numbered lane, ILM sits on its own as a closing learning game: it carries no stage number, no frame and no arrow, because the map does not claim the game is produced by the lane above it. It re-teaches every lane as playable regions. Arrows describe learning relationships, not runtime integrations.",
+        "Numaralandırılmış dokuz aşama ve altında kapanış bir öğrenme oyunu: mimar şeridi sekiz konu şeridinin üzerinde durur. Mimar, aşağıdaki temeli sınır modelleriyle türetir. AIA’dan üç ok çıkar ve her biri bir orta noktadan ayrılır: sol orta noktası sunum çerçevesinin üst ortasına iner, alt orta noktası çalıştırma sütunu boyunca dik aşağı inip çekirdek çerçevesinin üst ortasına ulaşır, sağ orta noktası görü çerçevesinin üst ortasına girer. Temel şeridinde LLM, GPU ve VIS yan yana durur: solda sunum atlası, ortada çekirdek atlası, sağda görü bilgi bankası; VIS çekirdek çerçevesinin orta yüksekliğine oturur, böylece GPU görüyü iki çerçevenin orta noktaları arasında tek düz yatay okla besler. Çalıştırma şeridinde USL vardır ve üç yönden beslenir: soldan sunum çerçevesinin alt ortasından, üst ortadan çekirdek çerçevesinden dik aşağı ve sağdan görü çerçevesinden; görü çerçevesi kendi alt ortasından çıkıp uyarlama çerçevesinin sağ ortasına döner. HNS ve altındaki her şey ADP ile aynı dikey sütunda durur, böylece uyarlamadan ajan sistemine ok uyarlama çerçevesinin alt ortasından ajan sistemi çerçevesinin üst ortasına dik aşağı iner. Çerçeveler LLM ile TFL’yi; GPU ile POL ve GEX’i; USL ile ADP’yi; HNS ile ARL, DPL, CUL, AOS ve AGR’yi; CTX ile MEM’i; VIS ile CVL’yi; WFM ile WML’yi; SWI ile ANT ve BEE’yi; ITL ile PDT ve DTR’yi; ENG ile HEX’i gruplar. VIS kendi çerçevesini korur ve CVL’yi altında tutar: bilgi bankası, onu ölçen laboratuvarın üstünde durur; üç oku da bir çerçeve orta noktasında buluşmaya devam eder. CTX/MEM grubu, SEC ve EVL ile karşılıklı geri bildirim paylaşır. LCL ve CLD aynı dış çerçevede, ortak laboratuvarları DCL ise ikisinin altında yer alır. Son numaralandırılmış şeridin altında ILM kendi başına kapanış bir öğrenme oyunu olarak durur: aşama numarası, çerçevesi ve oku yoktur, çünkü harita oyunun üstteki şerit tarafından üretildiğini iddia etmez; oyun yukarıdaki her şeridi oynanabilir bölgeler olarak yeniden öğretir. Oklar öğrenme ilişkilerini gösterir; çalışma zamanı entegrasyonu değildir.");
   const renderNode = ({ app, x, y, width, height, cx, role }) => {
     const isChild = applicationParents(app).length > 0;
     const parentLabel = isChild ? `${applicationOwnership(app, locale)}. ` : "";
@@ -165,18 +178,22 @@ export function renderLearningDiagram({ locale, data }) {
     '      <figure class="learning-diagram-wrap">',
     `        <p class="mobile-map-hint" id="diagram-scroll-hint">${localized(locale, "Pinch with two fingers to zoom. Drag to explore the enlarged map.", "İki parmağınla açıp kapatarak boyutu ayarla. Büyüttüğün haritada parmağınla gezin.")}</p>`,
     `        <div class="learning-diagram-viewport" tabindex="0" role="region" aria-label="${localized(locale, "Application connection map", "Uygulama bağlantı haritası")}">`,
-    '        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1224 1564" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">',
+    '        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1224 1662" role="group" aria-labelledby="ld-title" aria-describedby="ld-desc" class="ld-svg">',
     `          <title id="ld-title">${localized(locale, "Connected applications and their sub-applications", "Bağlı üst uygulamalar ve alt uygulamaları")}</title>`,
     `          <desc id="ld-desc">${escape(description)}</desc>`,
     '          <defs><marker id="ld-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#b7f45d"/></marker></defs>',
     '          <g class="ld-stage-index">',
-    '            <path class="ld-stage-rule" d="M 258 22 V 1540 M 30 1540 H 1192"/>',
-    ...STAGES.flatMap(([top, bottom, en, tr, enCopy, trCopy], index) => {
+    '            <path class="ld-stage-rule" d="M 258 22 V 1638 M 30 1638 H 1192"/>',
+    ...STAGES.flatMap(([top, bottom, en, tr, enCopy, trCopy, numbered = true], index) => {
       const copyLines = wrap(localized(locale, enCopy, trCopy), 29);
       const lineHeight = Math.min(19, (bottom - top - 70) / Math.max(1, copyLines.length - 1));
+      const number = String(index).padStart(2, "0");
+      const title = numbered
+        ? `<tspan class="ld-stage-number">${number}</tspan><tspan dx="12">· ${escape(localized(locale, en, tr))}</tspan>`
+        : escape(localized(locale, en, tr));
       return [
       `            <path class="ld-stage-rule" d="M 30 ${top} H 1192"/>`,
-      `            <text x="33" y="${top + 33}" class="ld-stage-title"${index === 4 ? ' style="font-size: 11px"' : ""}><tspan class="ld-stage-number">${String(index).padStart(2, "0")}</tspan><tspan dx="12">· ${escape(localized(locale, en, tr))}</tspan></text>`,
+      `            <text x="33" y="${top + 33}" class="ld-stage-title"${index === 4 ? ' style="font-size: 11px"' : ""}>${title}</text>`,
       `            <text x="33" y="${top + 59}" class="ld-stage-copy">${copyLines.map((line, index) => `<tspan x="33" dy="${index ? lineHeight : 0}">${escape(line)}</tspan>`).join("")}</text>`,
     ]; }),
     '          </g>',
@@ -189,8 +206,8 @@ export function renderLearningDiagram({ locale, data }) {
     ...junctions.map(({x,y}) => `            <circle class="ld-junction" cx="${x}" cy="${y}" r="2.2"/>`),
     '          </g>',
     '          <g class="ld-nodes">', ...nodes.map(renderNode), '          </g>',
-    '          <text x="1192" y="1457" class="ld-brand">ASERDARGUN.COM</text>',
-    '          <text x="1192" y="1475" class="ld-brand-subtitle">AI Learning System</text>',
+    '          <text x="1192" y="1588" class="ld-brand">ASERDARGUN.COM</text>',
+    '          <text x="1192" y="1606" class="ld-brand-subtitle">AI Learning System</text>',
     '        </svg>', '        </div>',
     '      </figure>',
   ].join("\n");

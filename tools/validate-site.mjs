@@ -22,7 +22,7 @@ import {
 const expectedPublicApplicationCodes = [
   "aia", "llm", "hns", "dpl", "cul", "aos", "sec", "ctx", "mem", "evl", "usl", "gpu",
   "pol", "cld", "lcl", "wfm", "swi", "ant", "bee", "itl", "eng", "gex", "tfl", "arl",
-  "adp", "wml", "dtr", "pdt", "hex", "dcl", "agr", "vis", "cvl",
+  "adp", "wml", "dtr", "pdt", "hex", "dcl", "agr", "vis", "cvl", "ilm",
 ].sort();
 // Copy that describes a structure the site no longer has must not come back.
 const retiredOverviewCopy = /five connected layers|five\s*[—-]\s*layer|beş katman/i;
@@ -87,7 +87,7 @@ const expectedAssetVersion = "20260921-personal-tools-final";
 const expectedStylesheetHref = "/styles.css?v=20260921-personal-tools-final";
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
-  ...["dpl", "cul", "aos", "mem", "vis", "cvl"].map((code) => ({ code, repository: `${code}-aserdargun-com`, repositoryUrl: `https://github.com/aserdargun/${code}-aserdargun-com`, productUrl: `https://${code}.aserdargun.com/`, productLabel: `${code}.aserdargun.com` })),
+  ...["dpl", "cul", "aos", "mem", "vis", "cvl", "ilm"].map((code) => ({ code, repository: `${code}-aserdargun-com`, repositoryUrl: `https://github.com/aserdargun/${code}-aserdargun-com`, productUrl: `https://${code}.aserdargun.com/`, productLabel: `${code}.aserdargun.com` })),
   { code: "pol", repository: "pol-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/pol-aserdargun-com", productUrl: "https://pol.aserdargun.com/", productLabel: "pol.aserdargun.com" },
   { code: "aia", repository: "aia-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/aia-aserdargun-com", productUrl: "https://aia.aserdargun.com/", productLabel: "aia.aserdargun.com" },
   { code: "llm", repository: "llm-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/llm-aserdargun-com", productUrl: "https://llm.aserdargun.com/", productLabel: "llm.aserdargun.com" },
@@ -157,7 +157,8 @@ function matches(source, pattern) {
 }
 
 // The homepage description, social metadata and structured data must describe
-// the current nine-stage overview and the registered application count.
+// the current nine-stage overview, the closing learning game and the registered
+// application count.
 function validateHomepageOverviewCopy(locale, html, applicationCount) {
   const descriptions = [
     html.match(/<meta name="description" content="([^"]*)">/)?.[1] ?? "",
@@ -386,7 +387,7 @@ function validateLearningSystem(locale, html) {
     `${locale}: learning system diagram is missing`,
   );
   const diagram = section.match(/<svg\b[^>]*class="ld-svg"[\s\S]*?<\/svg>/)?.[0] ?? "";
-  check(diagram.includes("AIA") && diagram.includes("HNS") && diagram.includes("SEC") && diagram.includes("CLD") && diagram.includes("LCL") && diagram.includes("WFM") && diagram.includes("SWI") && diagram.includes("ITL") && diagram.includes("ENG"), `${locale}: learning system diagram endpoints are missing`);
+  check(diagram.includes("AIA") && diagram.includes("HNS") && diagram.includes("SEC") && diagram.includes("CLD") && diagram.includes("LCL") && diagram.includes("WFM") && diagram.includes("SWI") && diagram.includes("ITL") && diagram.includes("ENG") && diagram.includes("ILM"), `${locale}: learning system diagram endpoints are missing`);
   const deploymentNodes = Array.from(
     diagram.matchAll(/<a href="https:\/\/(lcl|cld)\.aserdargun\.com\/[^\"]*"[^>]*data-learning-plane="deployment"[^>]*>[\s\S]*?<rect x="[0-9]+" y="([0-9]+)"/g),
     (match) => ({ code: match[1], y: match[2] }),
@@ -421,6 +422,7 @@ function validateLearningSystem(locale, html) {
       "bee:colony-lab",
       "itl:twin",
       "eng:horizon",
+      "ilm:game",
       "pol:learning-tool",
       "gex:practice-lab",
       "wml:practice-lab",
@@ -449,7 +451,7 @@ function validateLearningSystem(locale, html) {
       "ctx-to-deployment",
       "deployment-to-wfm", "deployment-to-swi", "wfm-to-itl", "swi-to-itl", "itl-to-eng",
     ].sort()),
-    `${locale}: learning diagram edges differ from the approved nine-stage flow`,
+    `${locale}: learning diagram edges differ from the approved nine-lane flow`,
   );
   const deploymentConnectors = matches(diagram, /<path data-learning-connector="([^"]+)"/g);
   check(

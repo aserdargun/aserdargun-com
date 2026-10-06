@@ -428,7 +428,7 @@ export function renderApplicationMap({ locale, data, today, page }) {
     `          <div class="app-discovery" data-app-controls hidden>
             <div class="app-discovery__search"><label for="app-search-${locale}">${label(locale, "Find an application", "Uygulama bul")}</label><input id="app-search-${locale}" data-app-search type="search" placeholder="${label(locale, "Name, code, or topic", "Ad, kod veya konu")}" autocomplete="off" aria-controls="app-table-${locale}"></div>
             <div><label for="app-layer-${locale}">${label(locale, "System layer", "Sistem katmanı")}</label><select id="app-layer-${locale}" data-app-layer-filter aria-controls="app-table-${locale}"><option value="all">${label(locale, "All layers", "Tüm katmanlar")}</option>${[
-              ["foundation", "Foundation", "Temel"], ["agent-system", "Agent system", "Ajan sistemi"], ["assurance", "Assurance", "Güvence"], ["deployment", "Deployment", "Dağıtım"], ["physical-ai", "Physical AI", "Fiziksel AI"],
+              ["foundation", "Foundation", "Temel"], ["agent-system", "Agent system", "Ajan sistemi"], ["assurance", "Assurance", "Güvence"], ["deployment", "Deployment", "Dağıtım"], ["physical-ai", "Physical AI", "Fiziksel AI"], ["learning-game", "Learning game", "Öğrenme oyunu"],
             ].map(([key,en,tr]) => `<option value="${key}">${label(locale,en,tr)}</option>`).join("")}</select></div>
             <p class="app-discovery__count" data-app-count role="status" aria-live="polite"></p>
           </div>`,

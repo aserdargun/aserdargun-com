@@ -83,10 +83,24 @@ function pageIdentity({ application, html }) {
   };
 }
 
+async function defaultBranch(slug) {
+  const { stdout } = await execFileAsync("gh", ["api", `repos/${slug}`, "--jq", ".default_branch"], { timeout: 30000 });
+  const branch = stdout.trim();
+  return branch || "main";
+}
+
+// The deployed branch is the repository's own default branch, never an assumed
+// name: ILMEK publishes from master, and querying main there returns no runs at
+// all, which used to read as a permanent "release-unconfirmed" rather than as
+// the branch mismatch it actually was.
+const defaultBranchCache = new Map();
+
 async function latestSuccessfulDeployment(slug) {
+  if (!defaultBranchCache.has(slug)) defaultBranchCache.set(slug, await defaultBranch(slug));
+  const branch = defaultBranchCache.get(slug);
   const { stdout } = await execFileAsync("gh", [
     "api",
-    `repos/${slug}/actions/runs?branch=main&status=success&per_page=30`,
+    `repos/${slug}/actions/runs?branch=${encodeURIComponent(branch)}&status=success&per_page=30`,
     "--jq",
     // Only a deploy workflow publishes. A validation or quality workflow on the
     // same branch is not a release, so it must not be reported as one. Fall back

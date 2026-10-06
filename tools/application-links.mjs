@@ -7,6 +7,7 @@ export const applicationLocaleRoutes = {
   eng: { en: '/', tr: '/' }, // English-only.
   vis: { en: '/', tr: '/' }, // Bilingual in one page; the language switch is in the interface.
   cvl: { en: '/', tr: '/' }, // Same surface as VIS: one page, language switch inside.
+  ilm: { en: '/', tr: '/' }, // Bilingual in one page; the language switch is in the HUD.
   gpu: { en: '/en/', tr: '/' },
   ...Object.fromEntries(['llm', 'hns', 'sec', 'ctx', 'evl', 'usl', 'lcl', 'wfm', 'swi', 'aos'].map((code) => [code, { en: '/en/', tr: '/tr/' }])),
   ...Object.fromEntries(['ant', 'bee', 'tfl', 'arl', 'adp', 'wml', 'dtr', 'pdt', 'hex', 'dcl', 'dpl', 'cul', 'mem', 'cld', 'agr'].map((code) => [code, { en: '/?lang=en', tr: '/?lang=tr' }])),

@@ -585,6 +585,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
       ["https://agr.aserdargun.com/", "AGR"],
       ["https://vis.aserdargun.com/", "VIS"],
       ["https://cvl.aserdargun.com/", "CVL"],
+      ["https://ilm.aserdargun.com/", "ILM"],
     ];
 
     assert.ok(svg, "learning diagram SVG must remain a closed source scope");
