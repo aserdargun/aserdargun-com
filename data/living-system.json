@@ -1148,10 +1148,10 @@
       },
       "repository": "https://github.com/aserdargun/bee-aserdargun-com",
       "address": "https://bee.aserdargun.com/",
-      "updatedAt": "2026-10-03",
-      "lastVerified": "2026-10-03",
-      "lastReleased": "2026-10-03",
-      "releaseSha": "fbe7ed87f6910805e8dfb6702b5038d1f4c9b725",
+      "updatedAt": "2026-10-07",
+      "lastVerified": "2026-10-07",
+      "lastReleased": "2026-10-07",
+      "releaseSha": "3ffadadf8e1b4c802ac0a1415bff2d4a702ef219",
       "sourceCount": 3,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1338,8 +1338,8 @@
       },
       "repository": "https://github.com/aserdargun/gex-aserdargun-com",
       "address": "https://gex.aserdargun.com/",
-      "updatedAt": "2026-10-03",
-      "lastVerified": "2026-10-03",
+      "updatedAt": "2026-10-07",
+      "lastVerified": "2026-10-07",
       "sourceCount": 6,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1362,8 +1362,8 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "edc3f3b5f13ae043f427745eb445992cdf28f970",
-      "lastReleased": "2026-10-03"
+      "releaseSha": "37b17a22dbb52e9ad62f3c5039df62f61c62a67f",
+      "lastReleased": "2026-10-07"
     },
     {
       "code": "tfl",
@@ -1398,10 +1398,10 @@
       },
       "repository": "https://github.com/aserdargun/tfl-aserdargun-com",
       "address": "https://tfl.aserdargun.com/",
-      "updatedAt": "2026-10-03",
-      "lastVerified": "2026-10-03",
-      "lastReleased": "2026-10-03",
-      "releaseSha": "f558a46630b84a136cc6914336b4730a33d88baa",
+      "updatedAt": "2026-10-07",
+      "lastVerified": "2026-10-07",
+      "lastReleased": "2026-10-07",
+      "releaseSha": "04b3a1d31f918778c284f7227ce12ed716849b18",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1638,8 +1638,8 @@
       },
       "repository": "https://github.com/aserdargun/wml-aserdargun-com",
       "address": "https://wml.aserdargun.com/",
-      "updatedAt": "2026-10-03",
-      "lastVerified": "2026-10-03",
+      "updatedAt": "2026-10-07",
+      "lastVerified": "2026-10-07",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1661,8 +1661,8 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "37e2f38b9ece663b2f5072c0704be6f63f2631c2",
-      "lastReleased": "2026-10-03"
+      "releaseSha": "f1d4e44110659d4ecd23f7a81bdeb8fe0e7d6fce",
+      "lastReleased": "2026-10-07"
     },
     {
       "code": "dtr",
@@ -1818,8 +1818,8 @@
       },
       "repository": "https://github.com/aserdargun/hex-aserdargun-com",
       "address": "https://hex.aserdargun.com/",
-      "updatedAt": "2026-10-03",
-      "lastVerified": "2026-10-03",
+      "updatedAt": "2026-10-07",
+      "lastVerified": "2026-10-07",
       "sourceCount": 4,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1842,8 +1842,8 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "e7e48b87f63dedfe2f099417dca6635d9df3a063",
-      "lastReleased": "2026-10-03"
+      "releaseSha": "a12b6e4f91f7f1005c5f4f146e32c165ffd83ea2",
+      "lastReleased": "2026-10-07"
     },
     {
       "code": "dcl",
