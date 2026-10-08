@@ -787,11 +787,11 @@
       "productionUrl": "https://wfm.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/wfm-aserdargun-com",
       "researchCutoff": "2026-09-15",
-      "lastVerified": "2026-10-05",
+      "lastVerified": "2026-10-07",
       "lastReleased": "2026-10-02",
       "releaseSha": "f45b07e7e9bcc9d8c9dc8adbc0e422ce7c4b4f42",
       "sourceCount": 22,
-      "claimCount": 28,
+      "claimCount": 56,
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [
         "cld",
