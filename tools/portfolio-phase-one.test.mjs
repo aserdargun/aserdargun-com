@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-10-07T12:00:00Z");
+const today = new Date("2026-10-09T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -71,12 +71,12 @@ test("the portfolio registry is a deterministic public projection of application
       languages: ["tr", "en"],
       productionUrl: "https://ctx.aserdargun.com/",
       repositoryUrl: "https://github.com/aserdargun/ctx-aserdargun-com",
-      researchCutoff: "2026-09-04",
+      researchCutoff: "2026-10-08",
       // Verification and deployment renewed by `npm run verify:applications`;
-      // deployment confirmed by aserdargun/ctx-aserdargun-com/actions/runs/37159329180.
-      lastVerified: "2026-10-03",
-      lastReleased: "2026-10-03",
-      releaseSha: "590474c54509927ab53a9ed513a70ed527f3cd28",
+      // deployment confirmed by aserdargun/ctx-aserdargun-com/actions/runs/37768986260.
+      lastVerified: "2026-10-08",
+      lastReleased: "2026-10-08",
+      releaseSha: "734fc9ef4327ff58f09798879dd414bbea6931c1",
       // Counted from the live ctx workspace: content/sources.json and content/claims.json.
       sourceCount: 16,
       claimCount: 19,
@@ -220,7 +220,7 @@ test("companion learning apps connect to their research parents across both loca
       gex: ["2026-10-07", "37b17a22dbb52e9ad62f3c5039df62f61c62a67f"],
       wml: ["2026-10-07", "f1d4e44110659d4ecd23f7a81bdeb8fe0e7d6fce"],
       hex: ["2026-10-07", "a12b6e4f91f7f1005c5f4f146e32c165ffd83ea2"],
-      pdt: ["2026-10-03", "0072154131f0fcc5e3b93e4f1d191f6c557128fb"],
+      pdt: ["2026-10-08", "27438c7ac9ef8e01f3fa92006c10d1e57d4af80a"],
     };
     const [releasedOn, releaseSha] = confirmedDeployments[code];
     assert.equal(app.lastReleased, releasedOn, "only a confirmed deployment run establishes a release date");
@@ -279,9 +279,9 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.equal(app.portfolioLayer, "physical-ai");
   assert.deepEqual(app.languages, ["tr", "en"]);
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
-  assert.equal(app.lastVerified, "2026-10-03");
-  assert.equal(app.lastReleased, "2026-10-05");
-  assert.equal(app.releaseSha, "52baafee345789f8f780c4b30775614bc6d3e89a");
+  assert.equal(app.lastVerified, "2026-10-08");
+  assert.equal(app.lastReleased, "2026-10-08");
+  assert.equal(app.releaseSha, "55bf4448f61d5746c2c5659c038a48edd63495bb");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
   const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
   assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);
