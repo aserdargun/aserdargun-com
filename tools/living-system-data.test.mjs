@@ -589,7 +589,7 @@ test("loads and validates the committed canonical manifest", async () => {
   // records a release dated after the previous pin, otherwise validateDate
   // reports future-date and every relationship that points at that
   // application cascades into relationship-unresolved.
-  const canonicalToday = new Date("2026-10-09T12:00:00+03:00");
+  const canonicalToday = new Date("2026-10-10T12:00:00+03:00");
 
   assert.equal(data.applications.length, 34);
   const expectedCanonicalApplications = {

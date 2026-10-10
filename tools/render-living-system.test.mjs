@@ -21,7 +21,7 @@ import {
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rendererPath = path.join(rootDir, "tools", "render-living-system.mjs");
-const today = new Date("2026-10-09T12:00:00Z");
+const today = new Date("2026-10-10T12:00:00Z");
 
 const htmlEscape = (value) => value
   .replaceAll("&", "&amp;")
@@ -804,13 +804,13 @@ test("renders absolute application freshness from the update date rather than ol
   // the fleet; the assertion is about which date the badge shows, not about how
   // old that date happens to be, so the gap between the two dates is what
   // matters, and it has to stay large.
-  data.applications[0].updatedAt = "2026-10-02";
+  data.applications[0].updatedAt = "2026-10-04";
   data.applications[0].lastVerified = "2026-09-01";
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
   assert.match(
     rendered,
-    /<span class="freshness freshness--current" data-freshness-date="2026-10-02" data-freshness-state="current">[\s\S]*?<time datetime="2026-10-02">2026-10-02<\/time>[\s\S]*?<\/span>/,
+    /<span class="freshness freshness--current" data-freshness-date="2026-10-04" data-freshness-state="current">[\s\S]*?<time datetime="2026-10-04">2026-10-04<\/time>[\s\S]*?<\/span>/,
   );
   assert.match(rendered, /<span class="freshness-label">Current<\/span>/);
   assert.equal(rendered.includes("today"), false);
