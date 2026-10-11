@@ -42,6 +42,7 @@
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [],
       "downstreamApps": [
+        "cpu",
         "gpu",
         "llm",
         "usl",
@@ -61,6 +62,64 @@
       "relatedMemoryIds": [
         "foundations-before-models"
       ]
+    },
+    {
+      "code": "cpu",
+      "parentApp": null,
+      "diagramLabel": {
+        "en": "RISC-V lab",
+        "tr": "RISC-V labı"
+      },
+      "kind": "lab",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "CPU LAB — RISC-V Processor Laboratory",
+        "tr": "CPU LAB — RISC-V İşlemci Laboratuvarı"
+      },
+      "summary": {
+        "en": "Explore RISC-V instruction execution, registers, datapaths, pipeline and cache behavior with interactive RTL/WASM simulations. Follow the processor from logic gates to physical layouts.",
+        "tr": "Etkileşimli RTL/WASM simülasyonlarıyla RISC-V komut yürütmesini, yazmaçları, veri yolunu, pipeline ve önbellek davranışını keşfet. İşlemciyi mantık kapılarından fiziksel yerleşime kadar incele."
+      },
+      "guidingQuestion": {
+        "en": "How does a program become clock-by-clock processor execution?",
+        "tr": "Bir program işlemcide saat çevrimi çevrimi nasıl yürütülür?"
+      },
+      "repository": "https://github.com/aserdargun/cpu-aserdargun-com",
+      "address": "https://cpu.aserdargun.com/",
+      "updatedAt": "2026-10-11",
+      "lastVerified": "2026-10-11",
+      "evidencePolicy": "source-backed-rtl-simulation",
+      "upstreamApps": [
+        "aia"
+      ],
+      "downstreamApps": [
+        "llm"
+      ],
+      "tracks": [
+        "risc-v",
+        "computer-architecture",
+        "rtl",
+        "pipeline",
+        "memory"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation",
+      "relatedMemoryIds": [],
+      "lastReleased": "2026-10-11",
+      "releaseSha": "536d79b67970c5f047c9440450ee9d3dc3b48f00",
+      "sourceCount": null,
+      "claimCount": null
     },
     {
       "code": "llm",
@@ -102,7 +161,8 @@
       "upstreamApps": [
         "aia",
         "gpu",
-        "ctx"
+        "ctx",
+        "cpu"
       ],
       "downstreamApps": [
         "tfl",

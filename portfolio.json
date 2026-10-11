@@ -35,6 +35,7 @@
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [],
       "downstreamApps": [
+        "cpu",
         "gpu",
         "llm",
         "usl",
@@ -49,6 +50,53 @@
       "entityIds": [
         "entity:ai-ecosystem"
       ],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation"
+    },
+    {
+      "code": "cpu",
+      "parentApp": null,
+      "name": {
+        "en": "CPU LAB — RISC-V Processor Laboratory",
+        "tr": "CPU LAB — RISC-V İşlemci Laboratuvarı"
+      },
+      "shortName": "CPU",
+      "description": {
+        "en": "Explore RISC-V instruction execution, registers, datapaths, pipeline and cache behavior with interactive RTL/WASM simulations. Follow the processor from logic gates to physical layouts.",
+        "tr": "Etkileşimli RTL/WASM simülasyonlarıyla RISC-V komut yürütmesini, yazmaçları, veri yolunu, pipeline ve önbellek davranışını keşfet. İşlemciyi mantık kapılarından fiziksel yerleşime kadar incele."
+      },
+      "type": "lab",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://cpu.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/cpu-aserdargun-com",
+      "lastVerified": "2026-10-11",
+      "lastReleased": "2026-10-11",
+      "releaseSha": "536d79b67970c5f047c9440450ee9d3dc3b48f00",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-rtl-simulation",
+      "upstreamApps": [
+        "aia"
+      ],
+      "downstreamApps": [
+        "llm"
+      ],
+      "tracks": [
+        "risc-v",
+        "computer-architecture",
+        "rtl",
+        "pipeline",
+        "memory"
+      ],
+      "entityIds": [],
       "portfolioLayer": "foundation",
       "focusState": "foundation"
     },
@@ -86,7 +134,8 @@
       "upstreamApps": [
         "aia",
         "gpu",
-        "ctx"
+        "ctx",
+        "cpu"
       ],
       "downstreamApps": [
         "tfl",
