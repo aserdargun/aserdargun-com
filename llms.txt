@@ -30,7 +30,7 @@ Research cutoffs, verification dates, release dates, and release SHAs describe d
 - [CVL — Computer Vision Laboratory](https://cvl.aserdargun.com/): VIS companion that measures those layers against a per-pixel answer key painted with the synthetic scene; nothing is measured against itself.
 
 ## Model runtime and agent systems
-- [CPU LAB — RISC-V Processor Laboratory](https://cpu.aserdargun.com/): Interactive processor-architecture laboratory with RTL/WASM instruction execution, registers, datapaths, pipelines, cache experiments and physical-layout exploration. CPU sits to the left of GPU inside their shared compute frame in the foundation lane. CPU and GPU remain peer applications.
+- [CPU Atlas — RISC-V Processor Architecture](https://cpu.aserdargun.com/): A visual knowledge and learning guide to how processors work. Twelve English/Turkish lessons connect RISC-V instructions, registers, datapaths, pipelines and caches with logic gates, transistors and physical layouts; interactive RTL/WASM examples illustrate the concepts step by step. English is the default language. CPU sits to the left of GPU inside their shared compute frame in the foundation lane. CPU and GPU remain peer applications.
 - [LLM — LLM Runtime & Serving Atlas](https://llm.aserdargun.com/): Source-backed guide to model runtimes and serving engines.
 - [TFL — Token Flow Laboratory](https://tfl.aserdargun.com/): LLM companion for simulated queueing, prefill, KV cache, decode and scheduling; metrics are educational, not benchmarks.
 - [HNS — Harness Engineering Observatory](https://hns.aserdargun.com/): Comparison of the layers that turn model capability into a reliable agent system.
