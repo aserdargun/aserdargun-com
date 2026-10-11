@@ -20,7 +20,7 @@ import {
 } from "./public-html-contract.mjs";
 
 const expectedPublicApplicationCodes = [
-  "aia", "llm", "hns", "dpl", "cul", "aos", "sec", "ctx", "mem", "evl", "usl", "gpu",
+  "aia", "cpu", "llm", "hns", "dpl", "cul", "aos", "sec", "ctx", "mem", "evl", "usl", "gpu",
   "pol", "cld", "lcl", "wfm", "swi", "ant", "bee", "itl", "eng", "gex", "tfl", "arl",
   "adp", "wml", "dtr", "pdt", "hex", "dcl", "agr", "vis", "cvl", "ilm",
 ].sort();
@@ -87,7 +87,7 @@ const expectedAssetVersion = "20260921-personal-tools-final";
 const expectedStylesheetHref = "/styles.css?v=20260921-personal-tools-final";
 const expectedScriptSrc = `/scripts.js?v=${expectedAssetVersion}`;
 const expectedApplicationRows = [
-  ...["dpl", "cul", "aos", "mem", "vis", "cvl", "ilm"].map((code) => ({ code, repository: `${code}-aserdargun-com`, repositoryUrl: `https://github.com/aserdargun/${code}-aserdargun-com`, productUrl: `https://${code}.aserdargun.com/`, productLabel: `${code}.aserdargun.com` })),
+  ...["cpu", "dpl", "cul", "aos", "mem", "vis", "cvl", "ilm"].map((code) => ({ code, repository: `${code}-aserdargun-com`, repositoryUrl: `https://github.com/aserdargun/${code}-aserdargun-com`, productUrl: `https://${code}.aserdargun.com/`, productLabel: `${code}.aserdargun.com` })),
   { code: "pol", repository: "pol-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/pol-aserdargun-com", productUrl: "https://pol.aserdargun.com/", productLabel: "pol.aserdargun.com" },
   { code: "aia", repository: "aia-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/aia-aserdargun-com", productUrl: "https://aia.aserdargun.com/", productLabel: "aia.aserdargun.com" },
   { code: "llm", repository: "llm-aserdargun-com", repositoryUrl: "https://github.com/aserdargun/llm-aserdargun-com", productUrl: "https://llm.aserdargun.com/", productLabel: "llm.aserdargun.com" },
@@ -407,6 +407,7 @@ function validateLearningSystem(locale, html) {
   check(
     JSON.stringify(nodeRoles.sort()) === JSON.stringify([
       "aia:architect",
+      "cpu:foundation",
       "gpu:foundation",
       "llm:hub",
       "usl:adapt",

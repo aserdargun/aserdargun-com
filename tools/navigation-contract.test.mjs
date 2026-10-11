@@ -553,6 +553,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     const expectedTitle = document.locale === "tr" ? "Yeni sekmede açılır" : "Opens in a new tab";
     const expectedNodes = [
       ["https://aia.aserdargun.com/", "AIA"],
+      ["https://cpu.aserdargun.com/", "CPU"],
       ["https://gpu.aserdargun.com/", "GPU"],
       ["https://llm.aserdargun.com/", "LLM"],
       ["https://usl.aserdargun.com/", "USL"],
