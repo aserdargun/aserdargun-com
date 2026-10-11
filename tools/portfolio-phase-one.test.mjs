@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-10-10T12:00:00Z");
+const today = new Date("2026-10-11T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -97,7 +97,7 @@ test("the application map exposes distinct research, verification, and release e
   const turkish = renderApplicationMap({ locale: "tr", data, today });
 
   assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-10-10">2026-10-10<\/time><\/dd>/);
-  assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-10-10">2026-10-10<\/time><\/dd>/);
+  assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-10-11">2026-10-11<\/time><\/dd>/);
   // AIA deployment confirmed by the 2026-10-10 release run for commit 48db53e8.
   assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-10-10">2026-10-10<\/time><code>48db53e8<\/code><\/dd>/);
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
