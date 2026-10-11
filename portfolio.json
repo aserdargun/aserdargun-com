@@ -57,29 +57,29 @@
       "code": "cpu",
       "parentApp": null,
       "name": {
-        "en": "CPU LAB — RISC-V Processor Laboratory",
-        "tr": "CPU LAB — RISC-V İşlemci Laboratuvarı"
+        "en": "CPU Atlas — RISC-V Processor Architecture",
+        "tr": "CPU Atlas — RISC-V İşlemci Mimarisi"
       },
       "shortName": "CPU",
       "description": {
-        "en": "Explore RISC-V instruction execution, registers, datapaths, pipeline and cache behavior with interactive RTL/WASM simulations. Follow the processor from logic gates to physical layouts.",
-        "tr": "Etkileşimli RTL/WASM simülasyonlarıyla RISC-V komut yürütmesini, yazmaçları, veri yolunu, pipeline ve önbellek davranışını keşfet. İşlemciyi mantık kapılarından fiziksel yerleşime kadar incele."
+        "en": "A visual knowledge and learning guide to how processors work. Twelve lessons connect RISC-V instructions, registers, datapaths, pipelines and caches with logic gates, transistors and physical layouts. Interactive RTL/WASM examples help you explore the concepts step by step.",
+        "tr": "İşlemcilerin nasıl çalıştığını anlatan görsel bilgi ve öğrenme rehberi. 12 ders, RISC-V komutlarını, yazmaçları, veri yolunu, pipeline ve önbelleği mantık kapılarına, transistörlere ve fiziksel yerleşime bağlar. Etkileşimli RTL/WASM örnekleriyle kavramları adım adım inceleyebilirsin."
       },
-      "type": "lab",
+      "type": "atlas",
       "status": "live",
       "statusLabel": {
         "en": "Live",
         "tr": "Yayında"
       },
       "languages": [
-        "tr",
-        "en"
+        "en",
+        "tr"
       ],
       "productionUrl": "https://cpu.aserdargun.com/",
       "repositoryUrl": "https://github.com/aserdargun/cpu-aserdargun-com",
       "lastVerified": "2026-10-11",
       "lastReleased": "2026-10-11",
-      "releaseSha": "536d79b67970c5f047c9440450ee9d3dc3b48f00",
+      "releaseSha": "c7952b685fa4e0a5b15c025efda899e05745a8a2",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-rtl-simulation",
