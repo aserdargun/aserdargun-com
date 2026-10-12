@@ -468,8 +468,8 @@
       "updatedAt": "2026-10-12",
       "researchCutoff": "2026-10-12",
       "lastVerified": "2026-10-12",
-      "lastReleased": "2026-10-11",
-      "releaseSha": "f2326bc75034021921f95e19289ed3cdaef7abb1",
+      "lastReleased": "2026-10-12",
+      "releaseSha": "1f62dee426fb90967247b1e95e9369e4c393db65",
       "sourceCount": 11,
       "claimCount": 13,
       "evidencePolicy": "primary-source-backed",
@@ -959,8 +959,8 @@
       "updatedAt": "2026-10-12",
       "researchCutoff": "2026-09-04",
       "lastVerified": "2026-10-12",
-      "lastReleased": "2026-10-04",
-      "releaseSha": "87ca240b72c67099e9d581390d62df5dd6fa643d",
+      "lastReleased": "2026-10-12",
+      "releaseSha": "200e4db700ca5a7d3d99379ecc8f46f04b7a7a06",
       "sourceCount": 18,
       "claimCount": 17,
       "evidencePolicy": "primary-source-backed",
@@ -2145,7 +2145,7 @@
       "updatedAt": "2026-10-09",
       "researchCutoff": "2026-10-06",
       "lastVerified": "2026-10-09",
-      "lastReleased": "2026-10-11",
+      "lastReleased": "2026-10-12",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "mirrored-public-metadata-and-teaching-models",
@@ -2197,7 +2197,7 @@
       "portfolioLayer": "learning-game",
       "focusState": "active",
       "relatedMemoryIds": [],
-      "releaseSha": "9dc21ad3a56a92df21d1a83ec7ee84798ad173db"
+      "releaseSha": "22a7630e58bfe7fcde8c110264d4c50b9efe070b"
     }
   ],
   "now": {
