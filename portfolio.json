@@ -35,6 +35,7 @@
       "evidencePolicy": "primary-source-backed",
       "upstreamApps": [],
       "downstreamApps": [
+        "cpu",
         "gpu",
         "llm",
         "usl",
@@ -49,6 +50,53 @@
       "entityIds": [
         "entity:ai-ecosystem"
       ],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation"
+    },
+    {
+      "code": "cpu",
+      "parentApp": null,
+      "name": {
+        "en": "CPU Atlas — RISC-V Processor Architecture",
+        "tr": "CPU Atlas — RISC-V İşlemci Mimarisi"
+      },
+      "shortName": "CPU",
+      "description": {
+        "en": "A visual knowledge and learning guide to how processors work. Twelve lessons connect RISC-V instructions, registers, datapaths, pipelines and caches with logic gates, transistors and physical layouts. Interactive RTL/WASM examples help you explore the concepts step by step.",
+        "tr": "İşlemcilerin nasıl çalıştığını anlatan görsel bilgi ve öğrenme rehberi. 12 ders, RISC-V komutlarını, yazmaçları, veri yolunu, pipeline ve önbelleği mantık kapılarına, transistörlere ve fiziksel yerleşime bağlar. Etkileşimli RTL/WASM örnekleriyle kavramları adım adım inceleyebilirsin."
+      },
+      "type": "atlas",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "en",
+        "tr"
+      ],
+      "productionUrl": "https://cpu.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/cpu-aserdargun-com",
+      "lastVerified": "2026-10-11",
+      "lastReleased": "2026-10-11",
+      "releaseSha": "c7952b685fa4e0a5b15c025efda899e05745a8a2",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "source-backed-rtl-simulation",
+      "upstreamApps": [
+        "aia"
+      ],
+      "downstreamApps": [
+        "llm"
+      ],
+      "tracks": [
+        "risc-v",
+        "computer-architecture",
+        "rtl",
+        "pipeline",
+        "memory"
+      ],
+      "entityIds": [],
       "portfolioLayer": "foundation",
       "focusState": "foundation"
     },
@@ -86,7 +134,8 @@
       "upstreamApps": [
         "aia",
         "gpu",
-        "ctx"
+        "ctx",
+        "cpu"
       ],
       "downstreamApps": [
         "tfl",

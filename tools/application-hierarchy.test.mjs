@@ -62,6 +62,35 @@ function segments(path) {
 const overlap = (a, b, c, d) => Math.min(Math.max(a, b), Math.max(c, d)) > Math.max(Math.min(a, b), Math.min(c, d));
 const inside = (value, a, b) => value > Math.min(a, b) && value < Math.max(a, b);
 
+test("CPU sits left of GPU inside the same compute frame while both remain peer applications", () => {
+  const cpu = data.applications.find(({ code }) => code === "cpu");
+  assert.deepEqual(applicationParents(cpu), []);
+  assert.equal(cpu.portfolioLayer, "foundation");
+  const { nodes, families, edges } = learningDiagramLayout(data.applications);
+  const byCode = (code) => nodes.find(({ app }) => app.code === code);
+  const compute = families.find(({ code }) => code === "gpu");
+  assert.deepEqual(compute.members, ["cpu", "gpu", "pol", "gex"]);
+  assert.ok(!families.some(({ code }) => code === "cpu"));
+  assert.equal(byCode("cpu").y, byCode("gpu").y);
+  assert.equal(byCode("cpu").width, byCode("gpu").width);
+  assert.equal(byCode("cpu").height, byCode("gpu").height);
+  assert.equal(byCode("cpu").x, byCode("pol").x);
+  assert.equal(byCode("gpu").x, byCode("gex").x);
+  assert.ok(byCode("cpu").x + byCode("cpu").width < byCode("gpu").x);
+  for (const code of compute.members) {
+    const node = byCode(code);
+    assert.ok(node.x > compute.x && node.x + node.width < compute.x + compute.width);
+    assert.ok(node.y > compute.y && node.y + node.height < compute.y + compute.height);
+  }
+  assert.ok(!edges.some(({ id }) => id.startsWith("cpu-to-")));
+  for (const locale of ["en", "tr"]) {
+    const map = renderApplicationMap({ locale, data, today });
+    assert.match(map, /data-app-code="cpu"[^>]*data-app-layer="foundation"[^>]*data-app-depth="0"/);
+    assert.ok(map.includes(cpu.title[locale]));
+    assert.ok(map.includes('href="https://cpu.aserdargun.com/"'));
+  }
+});
+
 test("all diagram boxes are disjoint; framed children stay inside their owning family", () => {
   const { nodes, families } = learningDiagramLayout(data.applications);
   for (const [i, node] of nodes.entries()) {
@@ -171,10 +200,10 @@ test("shared ownership validates both parents and detects cycles through either 
 });
 
 
-test("the approved diagram has 34 unique nodes and eleven non-overlapping frames", () => {
+test("the approved diagram has 35 unique nodes and eleven non-overlapping frames", () => {
   const { nodes, families, edges } = learningDiagramLayout(data.applications);
-  assert.equal(nodes.length, 34);
-  assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 34);
+  assert.equal(nodes.length, 35);
+  assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 35);
   assert.deepEqual(families.map(({ code }) => code), ["llm", "gpu", "vis", "usl", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"]);
   for (const [i, frame] of families.entries()) {
     for (const other of families.slice(i + 1)) {
@@ -276,7 +305,7 @@ test("the approved diagram has 34 unique nodes and eleven non-overlapping frames
 // rule so the gutter between two lanes is one uniform gap.
 const LANE_CONTENT = [
   ["ARCHITECT", ["aia"], []],
-  ["FOUNDATION", ["llm", "tfl", "gpu", "pol", "gex", "vis", "cvl"], ["llm", "gpu", "vis"]],
+  ["FOUNDATION", ["cpu", "llm", "tfl", "gpu", "pol", "gex", "vis", "cvl"], ["llm", "gpu", "vis"]],
   ["RUNTIME", ["usl", "adp"], ["usl"]],
   ["AGENT SYSTEM", ["hns", "arl", "dpl", "cul", "agr", "aos"], ["hns"]],
   ["CONTEXT & ASSURANCE", ["ctx", "mem", "sec", "evl"], ["ctx"]],

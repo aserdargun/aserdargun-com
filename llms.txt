@@ -1,12 +1,12 @@
 # AI Learning System — Serdar Gündoğdu
 
-> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence. The overview is one nine-stage learning map with 34 applications, plus a learning game below the last lane.
+> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence. The overview is one nine-stage learning map with 35 applications, plus a learning game below the last lane.
 
 ## Start here
 - [System overview](https://aserdargun.com/): The eight-stage learning map, its families and their learning relationships.
 - [About Serdar](https://aserdargun.com/about/): Professional identity, career journey, working principles, and public contact links.
 - [Journey](https://aserdargun.com/journey/): Learning path, six detailed stages, and the physical AI horizon with colony, world-model, pump-twin, digital-triplet, and humanoid learning laboratories.
-- [Application Map](https://aserdargun.com/applications/): Search 34 applications by topic and layer; inspect research, verification and release evidence.
+- [Application Map](https://aserdargun.com/applications/): Search 35 applications by topic and layer; inspect research, verification and release evidence.
 - [Now](https://aserdargun.com/now/): Dated work and planned direction. Read its date before describing an item as current.
 - [Knowledge](https://aserdargun.com/memory/): Authored public research notes and decisions with sources.
 - [Portfolio registry](https://aserdargun.com/portfolio.json): Structured public application identities and relationships.
@@ -30,6 +30,7 @@ Research cutoffs, verification dates, release dates, and release SHAs describe d
 - [CVL — Computer Vision Laboratory](https://cvl.aserdargun.com/): VIS companion that measures those layers against a per-pixel answer key painted with the synthetic scene; nothing is measured against itself.
 
 ## Model runtime and agent systems
+- [CPU Atlas — RISC-V Processor Architecture](https://cpu.aserdargun.com/): A visual knowledge and learning guide to how processors work. Twelve English/Turkish lessons connect RISC-V instructions, registers, datapaths, pipelines and caches with logic gates, transistors and physical layouts; interactive RTL/WASM examples illustrate the concepts step by step. English is the default language. CPU sits to the left of GPU inside their shared compute frame in the foundation lane. CPU and GPU remain peer applications.
 - [LLM — LLM Runtime & Serving Atlas](https://llm.aserdargun.com/): Source-backed guide to model runtimes and serving engines.
 - [TFL — Token Flow Laboratory](https://tfl.aserdargun.com/): LLM companion for simulated queueing, prefill, KV cache, decode and scheduling; metrics are educational, not benchmarks.
 - [HNS — Harness Engineering Observatory](https://hns.aserdargun.com/): Comparison of the layers that turn model capability into a reliable agent system.
