@@ -225,7 +225,7 @@ test("companion learning apps connect to their research parents across both loca
     // deploy workflow run for that repository. A build timestamp alone still
     // does not establish a release date.
     const confirmedDeployments = {
-      gex: ["2026-10-07", "37b17a22dbb52e9ad62f3c5039df62f61c62a67f"],
+      gex: ["2026-10-13", "8e027c31491fa054a7f662617058e8a599e090f4"],
       wml: ["2026-10-07", "f1d4e44110659d4ecd23f7a81bdeb8fe0e7d6fce"],
       hex: ["2026-10-07", "a12b6e4f91f7f1005c5f4f146e32c165ffd83ea2"],
       pdt: ["2026-10-08", "27438c7ac9ef8e01f3fa92006c10d1e57d4af80a"],
