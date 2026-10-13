@@ -32,11 +32,11 @@
       },
       "repository": "https://github.com/aserdargun/aia-aserdargun-com",
       "address": "https://aia.aserdargun.com/",
-      "updatedAt": "2026-10-12",
+      "updatedAt": "2026-10-13",
       "researchCutoff": "2026-10-10",
-      "lastVerified": "2026-10-12",
-      "lastReleased": "2026-10-10",
-      "releaseSha": "48db53e8151d91220cef1c7327645d2611fe1895",
+      "lastVerified": "2026-10-13",
+      "lastReleased": "2026-10-13",
+      "releaseSha": "2c1b390ca047b5555915409a3618b23bbf1de357",
       "sourceCount": 172,
       "claimCount": 396,
       "evidencePolicy": "primary-source-backed",
@@ -2197,7 +2197,7 @@
       "portfolioLayer": "learning-game",
       "focusState": "active",
       "relatedMemoryIds": [],
-      "releaseSha": "cf7af794da50c16adf79e52d03779e8269fd638f"
+      "releaseSha": "da2920945cd36253285766584673b511e5187d24"
     }
   ],
   "now": {

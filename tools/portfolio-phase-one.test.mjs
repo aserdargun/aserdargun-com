@@ -96,10 +96,18 @@ test("the application map exposes distinct research, verification, and release e
   const english = renderApplicationMap({ locale: "en", data, today });
   const turkish = renderApplicationMap({ locale: "tr", data, today });
 
-  assert.match(english, /<dt>Research cutoff<\/dt><dd><time datetime="2026-10-10">2026-10-10<\/time><\/dd>/);
-  assert.match(english, /<dt>Verified<\/dt><dd><time datetime="2026-10-11">2026-10-11<\/time><\/dd>/);
-  // AIA deployment confirmed by the 2026-10-10 release run for commit 48db53e8.
-  assert.match(english, /<dt>Released<\/dt><dd><time datetime="2026-10-10">2026-10-10<\/time><code>48db53e8<\/code><\/dd>/);
+  // Scope these to the aia row rather than the first match in the page. A whole-page
+  // regex silently asserts whichever application happens to render first, so the
+  // assertions drifted onto unrelated rows when another app's dates moved.
+  const aiaRow = (html) => html.slice(html.indexOf('data-app-code="aia"'));
+
+  assert.match(aiaRow(english), /<dt>Kind<\/dt>\s*<dd>Atlas<\/dd>/);
+  assert.match(aiaRow(english), /<dt>Status<\/dt><dd>Live<\/dd>/);
+  assert.match(aiaRow(english), /<dt>Research cutoff<\/dt><dd><time datetime="2026-10-10">2026-10-10<\/time><\/dd>/);
+  assert.match(aiaRow(english), /<dt>Verified<\/dt><dd><time datetime="2026-10-13">2026-10-13<\/time><\/dd>/);
+  // AIA deployment confirmed by the 2026-10-13 release run for commit 2c1b390c.
+  assert.match(aiaRow(english), /<dt>Released<\/dt><dd><time datetime="2026-10-13">2026-10-13<\/time><code>2c1b390c<\/code><\/dd>/);
+  // The horizon row keeps its own distinct release evidence.
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
 });
