@@ -71,12 +71,13 @@ test("the portfolio registry is a deterministic public projection of application
       languages: ["tr", "en"],
       productionUrl: "https://ctx.aserdargun.com/",
       repositoryUrl: "https://github.com/aserdargun/ctx-aserdargun-com",
-      researchCutoff: "2026-10-08",
+      researchCutoff: "2026-10-15",
       // Verification and deployment renewed by `npm run verify:applications`;
-      // deployment confirmed by aserdargun/ctx-aserdargun-com/actions/runs/37768986260.
-      lastVerified: "2026-10-08",
-      lastReleased: "2026-10-08",
-      releaseSha: "734fc9ef4327ff58f09798879dd414bbea6931c1",
+      // deployment confirmed by the ctx-aserdargun-com deploy run for 8d811e5,
+      // with the new review slice verified in the served bundle.
+      lastVerified: "2026-10-15",
+      lastReleased: "2026-10-15",
+      releaseSha: "8d811e5b48e9b05b31168b481ecf597e45ea0069",
       // Counted from the live ctx workspace: content/sources.json and content/claims.json.
       sourceCount: 16,
       claimCount: 19,
@@ -228,7 +229,7 @@ test("companion learning apps connect to their research parents across both loca
       gex: ["2026-10-13", "8e027c31491fa054a7f662617058e8a599e090f4"],
       wml: ["2026-10-14", "37665bf202d380f063f62a775adb9d094f2e662b"],
       hex: ["2026-10-14", "06946a2434c28c3406bcbfdf95db7412bb68b6a8"],
-      pdt: ["2026-10-08", "27438c7ac9ef8e01f3fa92006c10d1e57d4af80a"],
+      pdt: ["2026-10-15", "97cdeb5356e6919315446eddc5ccd901d613c727"],
     };
     const [releasedOn, releaseSha] = confirmedDeployments[code];
     assert.equal(app.lastReleased, releasedOn, "only a confirmed deployment run establishes a release date");
@@ -287,9 +288,9 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.equal(app.portfolioLayer, "physical-ai");
   assert.deepEqual(app.languages, ["tr", "en"]);
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
-  assert.equal(app.lastVerified, "2026-10-08");
-  assert.equal(app.lastReleased, "2026-10-08");
-  assert.equal(app.releaseSha, "55bf4448f61d5746c2c5659c038a48edd63495bb");
+  assert.equal(app.lastVerified, "2026-10-15");
+  assert.equal(app.lastReleased, "2026-10-15");
+  assert.equal(app.releaseSha, "47e3d04675151d98cc35c4bfe423f6d318f94408");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
   const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
   assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);
