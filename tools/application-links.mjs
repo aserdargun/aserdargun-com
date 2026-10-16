@@ -2,6 +2,7 @@
 // DPL, CUL, DTR and MEM consume ?lang through their matching local fixes.
 export const applicationLocaleRoutes = {
   aia: { en: '/', tr: '/' }, // English-only research console.
+  rtx: { en: '/?lang=en', tr: '/?lang=tr' },
   cpu: { en: '/', tr: '/' }, // Bilingual; language is selected inside CPU Atlas (English by default).
   pol: { en: '/', tr: '/' }, // English-only.
   itl: { en: '/', tr: '/' }, // English-only.

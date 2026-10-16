@@ -122,6 +122,60 @@
       "claimCount": null
     },
     {
+      "code": "rtx",
+      "parentApp": null,
+      "diagramLabel": {
+        "en": "N1X 128GB",
+        "tr": "N1X 128GB"
+      },
+      "kind": "atlas",
+      "systemRole": "core-learning",
+      "visibility": "public",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "title": {
+        "en": "RTX Spark Atlas — N1X 128 GB",
+        "tr": "RTX Spark Atlas — N1X 128 GB"
+      },
+      "summary": {
+        "en": "Explore Arm CPU, Blackwell GPU, NVLink-C2C and 128 GB unified memory in a bilingual Blender and Three.js atlas. Select components, separate layers and animate data flows. A representative educational model based on NVIDIA documentation, not a measured physical blueprint.",
+        "tr": "Arm CPU, Blackwell GPU, NVLink-C2C ve 128 GB birleşik belleği iki dilli Blender ve Three.js atlasında keşfet. Bileşenleri seç, katmanları ayır ve veri akışlarını canlandır. NVIDIA belgelerine dayalı temsili eğitim modelidir; ölçülü fiziksel blueprint değildir."
+      },
+      "guidingQuestion": {
+        "en": "How do Arm and CUDA share work and memory in N1X?",
+        "tr": "Arm ve CUDA, N1X içinde iş yükünü ve belleği nasıl paylaşır?"
+      },
+      "repository": "https://github.com/aserdargun/rtx-aserdargun-com",
+      "address": "https://rtx.aserdargun.com/",
+      "updatedAt": "2026-10-16",
+      "lastVerified": "2026-10-16",
+      "evidencePolicy": "primary-source-backed-representative-model",
+      "upstreamApps": [],
+      "downstreamApps": [],
+      "tracks": [
+        "computer-architecture",
+        "arm",
+        "cuda",
+        "memory",
+        "3d"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation",
+      "relatedMemoryIds": [],
+      "lastReleased": "2026-10-16",
+      "releaseSha": "69e9c818c9ef5587e4c37191bdf934ebcb23d162",
+      "sourceCount": null,
+      "claimCount": null
+    },
+    {
       "code": "llm",
       "parentApp": null,
       "diagramLabel": {

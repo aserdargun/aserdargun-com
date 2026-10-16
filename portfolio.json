@@ -101,6 +101,49 @@
       "focusState": "foundation"
     },
     {
+      "code": "rtx",
+      "parentApp": null,
+      "name": {
+        "en": "RTX Spark Atlas — N1X 128 GB",
+        "tr": "RTX Spark Atlas — N1X 128 GB"
+      },
+      "shortName": "RTX",
+      "description": {
+        "en": "Explore Arm CPU, Blackwell GPU, NVLink-C2C and 128 GB unified memory in a bilingual Blender and Three.js atlas. Select components, separate layers and animate data flows. A representative educational model based on NVIDIA documentation, not a measured physical blueprint.",
+        "tr": "Arm CPU, Blackwell GPU, NVLink-C2C ve 128 GB birleşik belleği iki dilli Blender ve Three.js atlasında keşfet. Bileşenleri seç, katmanları ayır ve veri akışlarını canlandır. NVIDIA belgelerine dayalı temsili eğitim modelidir; ölçülü fiziksel blueprint değildir."
+      },
+      "type": "atlas",
+      "status": "live",
+      "statusLabel": {
+        "en": "Live",
+        "tr": "Yayında"
+      },
+      "languages": [
+        "tr",
+        "en"
+      ],
+      "productionUrl": "https://rtx.aserdargun.com/",
+      "repositoryUrl": "https://github.com/aserdargun/rtx-aserdargun-com",
+      "lastVerified": "2026-10-16",
+      "lastReleased": "2026-10-16",
+      "releaseSha": "69e9c818c9ef5587e4c37191bdf934ebcb23d162",
+      "sourceCount": null,
+      "claimCount": null,
+      "evidencePolicy": "primary-source-backed-representative-model",
+      "upstreamApps": [],
+      "downstreamApps": [],
+      "tracks": [
+        "computer-architecture",
+        "arm",
+        "cuda",
+        "memory",
+        "3d"
+      ],
+      "entityIds": [],
+      "portfolioLayer": "foundation",
+      "focusState": "foundation"
+    },
+    {
       "code": "llm",
       "parentApp": null,
       "name": {
