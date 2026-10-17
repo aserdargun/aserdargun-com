@@ -554,6 +554,7 @@ for (const document of routes.filter(({ route }) => route === "/" || route === "
     const expectedNodes = [
       ["https://aia.aserdargun.com/", "AIA"],
       ["https://cpu.aserdargun.com/", "CPU"],
+      ["https://rtx.aserdargun.com/", "RTX"],
       ["https://gpu.aserdargun.com/", "GPU"],
       ["https://llm.aserdargun.com/", "LLM"],
       ["https://usl.aserdargun.com/", "USL"],

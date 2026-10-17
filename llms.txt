@@ -1,12 +1,12 @@
 # AI Learning System — Serdar Gündoğdu
 
-> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence. The overview is one nine-stage learning map with 35 applications, plus a learning game below the last lane.
+> A public learning system connecting AI research, working applications, reproducible experiments, and an engineering journey. English and Turkish editions share the same projects and evidence. The overview is one nine-stage learning map with 36 applications, plus a learning game below the last lane.
 
 ## Start here
 - [System overview](https://aserdargun.com/): The eight-stage learning map, its families and their learning relationships.
 - [About Serdar](https://aserdargun.com/about/): Professional identity, career journey, working principles, and public contact links.
 - [Journey](https://aserdargun.com/journey/): Learning path, six detailed stages, and the physical AI horizon with colony, world-model, pump-twin, digital-triplet, and humanoid learning laboratories.
-- [Application Map](https://aserdargun.com/applications/): Search 35 applications by topic and layer; inspect research, verification and release evidence.
+- [Application Map](https://aserdargun.com/applications/): Search 36 applications by topic and layer; inspect research, verification and release evidence.
 - [Now](https://aserdargun.com/now/): Dated work and planned direction. Read its date before describing an item as current.
 - [Knowledge](https://aserdargun.com/memory/): Authored public research notes and decisions with sources.
 - [Portfolio registry](https://aserdargun.com/portfolio.json): Structured public application identities and relationships.
@@ -63,3 +63,5 @@ Research cutoffs, verification dates, release dates, and release SHAs describe d
 - [ENG — Open Humanoid Engineering](https://eng.aserdargun.com/): English manifesto for the long-term humanoid engineering direction.
 - [HEX — Humanoid Engineering Explorer](https://hex.aserdargun.com/): ENG companion for humanoid anatomy, joints, sensors, and illustrative kinematics.
 - [VIS — Computer Vision Knowledge Bank](https://vis.aserdargun.com/): the computer-vision knowledge bank in the foundation lane, beside GPU and LLM and derived by the AIA architect lane. Seven perception layers, each naming what it is not for and each bound to a primary source, beside a deterministic laboratory that measures the same ideas against a per-pixel answer key. The knowledge bank explains and cites; the laboratory measures. Classical operators, a CNN trained at runtime on a pool that excludes the evaluated scene, monocular depth cues and optical flow, on a CPU path by default and an honestly probed WebGPU path when available. Fully synthetic; no real camera, pretrained model, backend or account.
+
+- [RTX Spark Atlas — N1X 128 GB](https://rtx.aserdargun.com/): Bilingual interactive 3D architecture atlas with Blender assets, selectable components, exploded layers and animated data flows. NVIDIA-source-backed educational interpretation, not a measured physical blueprint. Use ?lang=en or ?lang=tr for a direct language entry.

@@ -69,7 +69,7 @@ test("CPU sits left of GPU inside the same compute frame while both remain peer 
   const { nodes, families, edges } = learningDiagramLayout(data.applications);
   const byCode = (code) => nodes.find(({ app }) => app.code === code);
   const compute = families.find(({ code }) => code === "gpu");
-  assert.deepEqual(compute.members, ["cpu", "gpu", "pol", "gex"]);
+  assert.deepEqual(compute.members, ["cpu", "gpu", "rtx", "pol", "gex"]);
   assert.ok(!families.some(({ code }) => code === "cpu"));
   assert.equal(byCode("cpu").y, byCode("gpu").y);
   assert.equal(byCode("cpu").width, byCode("gpu").width);
@@ -200,10 +200,10 @@ test("shared ownership validates both parents and detects cycles through either 
 });
 
 
-test("the approved diagram has 35 unique nodes and eleven non-overlapping frames", () => {
+test("the approved diagram has 36 unique nodes and eleven non-overlapping frames", () => {
   const { nodes, families, edges } = learningDiagramLayout(data.applications);
-  assert.equal(nodes.length, 35);
-  assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 35);
+  assert.equal(nodes.length, 36);
+  assert.equal(new Set(nodes.map(({ app }) => app.code)).size, 36);
   assert.deepEqual(families.map(({ code }) => code), ["llm", "gpu", "vis", "usl", "hns", "ctx", "deployment", "wfm", "swi", "itl", "eng"]);
   for (const [i, frame] of families.entries()) {
     for (const other of families.slice(i + 1)) {
@@ -305,7 +305,7 @@ test("the approved diagram has 35 unique nodes and eleven non-overlapping frames
 // rule so the gutter between two lanes is one uniform gap.
 const LANE_CONTENT = [
   ["ARCHITECT", ["aia"], []],
-  ["FOUNDATION", ["cpu", "llm", "tfl", "gpu", "pol", "gex", "vis", "cvl"], ["llm", "gpu", "vis"]],
+  ["FOUNDATION", ["cpu", "rtx", "llm", "tfl", "gpu", "pol", "gex", "vis", "cvl"], ["llm", "gpu", "vis"]],
   ["RUNTIME", ["usl", "adp"], ["usl"]],
   ["AGENT SYSTEM", ["hns", "arl", "dpl", "cul", "agr", "aos"], ["hns"]],
   ["CONTEXT & ASSURANCE", ["ctx", "mem", "sec", "evl"], ["ctx"]],
