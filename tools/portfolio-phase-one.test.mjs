@@ -105,9 +105,9 @@ test("the application map exposes distinct research, verification, and release e
   assert.match(aiaRow(english), /<dt>Kind<\/dt>\s*<dd>Atlas<\/dd>/);
   assert.match(aiaRow(english), /<dt>Status<\/dt><dd>Live<\/dd>/);
   assert.match(aiaRow(english), /<dt>Research cutoff<\/dt><dd><time datetime="2026-10-17">2026-10-17<\/time><\/dd>/);
-  assert.match(aiaRow(english), /<dt>Verified<\/dt><dd><time datetime="2026-10-17">2026-10-17<\/time><\/dd>/);
-  // AIA deployment confirmed by the 2026-10-17 release run for commit 42c3d752.
-  assert.match(aiaRow(english), /<dt>Released<\/dt><dd><time datetime="2026-10-17">2026-10-17<\/time><code>42c3d752<\/code><\/dd>/);
+  assert.match(aiaRow(english), /<dt>Verified<\/dt><dd><time datetime="2026-10-20">2026-10-20<\/time><\/dd>/);
+  // AIA deployment confirmed by the 2026-10-19 release run for commit 26428133.
+  assert.match(aiaRow(english), /<dt>Released<\/dt><dd><time datetime="2026-10-19">2026-10-19<\/time><code>26428133<\/code><\/dd>/);
   // The horizon row keeps its own distinct release evidence.
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
