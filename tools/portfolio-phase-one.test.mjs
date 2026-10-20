@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-10-19T12:00:00Z");
+const today = new Date("2026-10-20T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -226,7 +226,7 @@ test("companion learning apps connect to their research parents across both loca
     // deploy workflow run for that repository. A build timestamp alone still
     // does not establish a release date.
     const confirmedDeployments = {
-      gex: ["2026-10-13", "8e027c31491fa054a7f662617058e8a599e090f4"],
+      gex: ["2026-10-20", "fc6cd8a0fa0f74073fbc2461052772b98d721de4"],
       wml: ["2026-10-14", "37665bf202d380f063f62a775adb9d094f2e662b"],
       hex: ["2026-10-14", "06946a2434c28c3406bcbfdf95db7412bb68b6a8"],
       pdt: ["2026-10-15", "97cdeb5356e6919315446eddc5ccd901d613c727"],

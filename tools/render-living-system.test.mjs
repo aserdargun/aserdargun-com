@@ -21,7 +21,7 @@ import {
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rendererPath = path.join(rootDir, "tools", "render-living-system.mjs");
-const today = new Date("2026-10-19T12:00:00Z");
+const today = new Date("2026-10-20T12:00:00Z");
 
 const htmlEscape = (value) => value
   .replaceAll("&", "&amp;")
@@ -801,16 +801,22 @@ test("renders absolute application freshness from the update date rather than ol
   const data = await readFixtureData();
   // Six days before the shared `today`, so the badge is "current" for as long
   // as the fleet clock stays in the same week. The shared clock advances with
-  // the fleet; the assertion is about which date the badge shows, not about how
-  // old that date happens to be, so the gap between the two dates is what
-  // matters, and it has to stay large.
-  data.applications[0].updatedAt = "2026-10-12";
+  // the fleet, so the date is derived from it instead of written down: the
+  // assertion is about which date the badge shows, not about how old that
+  // date happens to be, so the gap between the two dates is what matters, and
+  // it has to stay large.
+  const fixtureDate = new Date(today.getTime() - 6 * 86400000)
+    .toISOString()
+    .slice(0, 10);
+  data.applications[0].updatedAt = fixtureDate;
   data.applications[0].lastVerified = "2026-09-01";
   const rendered = renderDocument({ html: homeDocument(), page: "home", locale: "en", data, today });
 
   assert.match(
     rendered,
-    /<span class="freshness freshness--current" data-freshness-date="2026-10-12" data-freshness-state="current">[\s\S]*?<time datetime="2026-10-12">2026-10-12<\/time>[\s\S]*?<\/span>/,
+    new RegExp(
+      `<span class="freshness freshness--current" data-freshness-date="${fixtureDate}" data-freshness-state="current">[\\s\\S]*?<time datetime="${fixtureDate}">${fixtureDate}</time>[\\s\\S]*?</span>`,
+    ),
   );
   assert.match(rendered, /<span class="freshness-label">Current<\/span>/);
   assert.equal(rendered.includes("today"), false);
