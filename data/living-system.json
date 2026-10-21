@@ -131,10 +131,10 @@
       "kind": "atlas",
       "systemRole": "core-learning",
       "visibility": "public",
-      "status": "active",
+      "status": "live",
       "statusLabel": {
-        "en": "DNS activation pending",
-        "tr": "DNS etkinleştirmesi bekleniyor"
+        "en": "Live",
+        "tr": "Yayında"
       },
       "languages": [
         "tr",
@@ -145,8 +145,8 @@
         "tr": "RTX Spark Atlas — N1X 128 GB"
       },
       "summary": {
-        "en": "Explore Arm CPU, Blackwell GPU, NVLink-C2C and 128 GB unified memory in a bilingual Blender and Three.js atlas. Select components, separate layers and animate data flows. A representative educational model based on NVIDIA documentation, not a measured physical blueprint. Public DNS activation is pending.",
-        "tr": "Arm CPU, Blackwell GPU, NVLink-C2C ve 128 GB birleşik belleği iki dilli Blender ve Three.js atlasında keşfet. Bileşenleri seç, katmanları ayır ve veri akışlarını canlandır. NVIDIA belgelerine dayalı temsili eğitim modelidir; ölçülü fiziksel blueprint değildir. Genel DNS etkinleştirmesi bekleniyor."
+        "en": "Explore Arm CPU, Blackwell GPU, NVLink-C2C and 128 GB unified memory in a bilingual Blender and Three.js atlas. Select components, separate layers and animate data flows. A representative educational model based on NVIDIA documentation, not a measured physical blueprint.",
+        "tr": "Arm CPU, Blackwell GPU, NVLink-C2C ve 128 GB birleşik belleği iki dilli Blender ve Three.js atlasında keşfet. Bileşenleri seç, katmanları ayır ve veri akışlarını canlandır. NVIDIA belgelerine dayalı temsili eğitim modelidir; ölçülü fiziksel blueprint değildir."
       },
       "guidingQuestion": {
         "en": "How do Arm and CUDA share work and memory in N1X?",
@@ -154,7 +154,8 @@
       },
       "repository": "https://github.com/aserdargun/rtx-aserdargun-com",
       "address": "https://rtx.aserdargun.com/",
-      "updatedAt": "2026-10-16",
+      "updatedAt": "2026-10-21",
+      "lastVerified": "2026-10-21",
       "evidencePolicy": "primary-source-backed-representative-model",
       "upstreamApps": [],
       "downstreamApps": [],
@@ -2195,10 +2196,10 @@
       },
       "repository": "https://github.com/aserdargun/ilm-aserdargun-com",
       "address": "https://ilm.aserdargun.com/",
-      "updatedAt": "2026-10-13",
+      "updatedAt": "2026-10-21",
       "researchCutoff": "2026-10-06",
-      "lastVerified": "2026-10-09",
-      "lastReleased": "2026-10-15",
+      "lastVerified": "2026-10-21",
+      "lastReleased": "2026-10-21",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "mirrored-public-metadata-and-teaching-models",
@@ -2250,7 +2251,7 @@
       "portfolioLayer": "learning-game",
       "focusState": "active",
       "relatedMemoryIds": [],
-      "releaseSha": "e046dc98de0baaeff6afcf94b5eb6a4a9eab6044"
+      "releaseSha": "a8c916fef321656270ec65554471b1c974b1e15b"
     }
   ],
   "now": {
