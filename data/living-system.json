@@ -1261,10 +1261,10 @@
       },
       "repository": "https://github.com/aserdargun/bee-aserdargun-com",
       "address": "https://bee.aserdargun.com/",
-      "updatedAt": "2026-10-14",
-      "lastVerified": "2026-10-14",
-      "lastReleased": "2026-10-14",
-      "releaseSha": "78109c1fe49aee415ef5592e083f90075e49b8b8",
+      "updatedAt": "2026-10-21",
+      "lastVerified": "2026-10-21",
+      "lastReleased": "2026-10-21",
+      "releaseSha": "34a04d160e8bb3fb4f9145a741728c7382cd8e59",
       "sourceCount": 3,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1511,10 +1511,10 @@
       },
       "repository": "https://github.com/aserdargun/tfl-aserdargun-com",
       "address": "https://tfl.aserdargun.com/",
-      "updatedAt": "2026-10-14",
-      "lastVerified": "2026-10-14",
-      "lastReleased": "2026-10-14",
-      "releaseSha": "7049623924af85a883fa66cafe1e5ec0b4fab9c1",
+      "updatedAt": "2026-10-21",
+      "lastVerified": "2026-10-21",
+      "lastReleased": "2026-10-21",
+      "releaseSha": "ede670802c30e3de35be0721b7cca6066020e8fb",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1751,8 +1751,8 @@
       },
       "repository": "https://github.com/aserdargun/wml-aserdargun-com",
       "address": "https://wml.aserdargun.com/",
-      "updatedAt": "2026-10-14",
-      "lastVerified": "2026-10-14",
+      "updatedAt": "2026-10-21",
+      "lastVerified": "2026-10-21",
       "sourceCount": null,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1774,8 +1774,8 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "37665bf202d380f063f62a775adb9d094f2e662b",
-      "lastReleased": "2026-10-14"
+      "releaseSha": "f1f3181aab3378cef2766aa247b4c8880e9f8c01",
+      "lastReleased": "2026-10-21"
     },
     {
       "code": "dtr",
@@ -1931,8 +1931,8 @@
       },
       "repository": "https://github.com/aserdargun/hex-aserdargun-com",
       "address": "https://hex.aserdargun.com/",
-      "updatedAt": "2026-10-14",
-      "lastVerified": "2026-10-14",
+      "updatedAt": "2026-10-21",
+      "lastVerified": "2026-10-21",
       "sourceCount": 4,
       "claimCount": null,
       "evidencePolicy": "source-backed-educational-model",
@@ -1955,8 +1955,8 @@
       "relatedMemoryIds": [
         "learning-labs-evidence-boundary"
       ],
-      "releaseSha": "06946a2434c28c3406bcbfdf95db7412bb68b6a8",
-      "lastReleased": "2026-10-14"
+      "releaseSha": "0581b43369198391eca15642a0174ab9cc027cf9",
+      "lastReleased": "2026-10-21"
     },
     {
       "code": "dcl",
