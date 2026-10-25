@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-10-24T12:00:00Z");
+const today = new Date("2026-10-25T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -104,10 +104,10 @@ test("the application map exposes distinct research, verification, and release e
 
   assert.match(aiaRow(english), /<dt>Kind<\/dt>\s*<dd>Atlas<\/dd>/);
   assert.match(aiaRow(english), /<dt>Status<\/dt><dd>Live<\/dd>/);
-  assert.match(aiaRow(english), /<dt>Research cutoff<\/dt><dd><time datetime="2026-10-24">2026-10-24<\/time><\/dd>/);
-  assert.match(aiaRow(english), /<dt>Verified<\/dt><dd><time datetime="2026-10-24">2026-10-24<\/time><\/dd>/);
-  // AIA deployment confirmed by the 2026-10-24 release run for commit b0937dc3.
-  assert.match(aiaRow(english), /<dt>Released<\/dt><dd><time datetime="2026-10-24">2026-10-24<\/time><code>b0937dc3<\/code><\/dd>/);
+  assert.match(aiaRow(english), /<dt>Research cutoff<\/dt><dd><time datetime="2026-10-25">2026-10-25<\/time><\/dd>/);
+  assert.match(aiaRow(english), /<dt>Verified<\/dt><dd><time datetime="2026-10-25">2026-10-25<\/time><\/dd>/);
+  // AIA deployment confirmed by the 2026-10-25 release run for commit ab5bb6e2.
+  assert.match(aiaRow(english), /<dt>Released<\/dt><dd><time datetime="2026-10-25">2026-10-25<\/time><code>ab5bb6e2<\/code><\/dd>/);
   // The horizon row keeps its own distinct release evidence.
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
