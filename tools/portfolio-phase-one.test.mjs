@@ -11,7 +11,7 @@ import {
 } from "./render-living-system.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const today = new Date("2026-10-25T12:00:00Z");
+const today = new Date("2026-10-26T12:00:00Z");
 
 async function readData() {
   return JSON.parse(await readFile(path.join(rootDir, "data", "living-system.json"), "utf8"));
@@ -71,13 +71,13 @@ test("the portfolio registry is a deterministic public projection of application
       languages: ["tr", "en"],
       productionUrl: "https://ctx.aserdargun.com/",
       repositoryUrl: "https://github.com/aserdargun/ctx-aserdargun-com",
-      researchCutoff: "2026-10-15",
+      researchCutoff: "2026-10-22",
       // Verification and deployment renewed by `npm run verify:applications`;
-      // deployment confirmed by the ctx-aserdargun-com deploy run for 8d811e5,
+      // deployment confirmed by the ctx-aserdargun-com deploy run for 061440c,
       // with the new review slice verified in the served bundle.
-      lastVerified: "2026-10-15",
-      lastReleased: "2026-10-15",
-      releaseSha: "8d811e5b48e9b05b31168b481ecf597e45ea0069",
+      lastVerified: "2026-10-22",
+      lastReleased: "2026-10-22",
+      releaseSha: "061440c356746bb16e9fde143b0a02f8f5ea164f",
       // Counted from the live ctx workspace: content/sources.json and content/claims.json.
       sourceCount: 16,
       claimCount: 19,
@@ -106,8 +106,8 @@ test("the application map exposes distinct research, verification, and release e
   assert.match(aiaRow(english), /<dt>Status<\/dt><dd>Live<\/dd>/);
   assert.match(aiaRow(english), /<dt>Research cutoff<\/dt><dd><time datetime="2026-10-25">2026-10-25<\/time><\/dd>/);
   assert.match(aiaRow(english), /<dt>Verified<\/dt><dd><time datetime="2026-10-25">2026-10-25<\/time><\/dd>/);
-  // AIA deployment confirmed by the 2026-10-25 release run for commit ab5bb6e2.
-  assert.match(aiaRow(english), /<dt>Released<\/dt><dd><time datetime="2026-10-25">2026-10-25<\/time><code>ab5bb6e2<\/code><\/dd>/);
+  // AIA deployment confirmed by the 2026-10-25 release run for commit 22e5177d.
+  assert.match(aiaRow(english), /<dt>Released<\/dt><dd><time datetime="2026-10-25">2026-10-25<\/time><code>22e5177d<\/code><\/dd>/);
   // The horizon row keeps its own distinct release evidence.
   assert.match(english, /<dt>Status<\/dt><dd>Horizon · English manifesto<\/dd>/);
   assert.match(turkish, /<dt>Durum<\/dt><dd>Ufuk · İngilizce manifesto<\/dd>/);
@@ -229,7 +229,7 @@ test("companion learning apps connect to their research parents across both loca
       gex: ["2026-10-20", "fc6cd8a0fa0f74073fbc2461052772b98d721de4"],
       wml: ["2026-10-21", "f1f3181aab3378cef2766aa247b4c8880e9f8c01"],
       hex: ["2026-10-21", "0581b43369198391eca15642a0174ab9cc027cf9"],
-      pdt: ["2026-10-15", "97cdeb5356e6919315446eddc5ccd901d613c727"],
+      pdt: ["2026-10-22", "ea1ddc077a08958a27d90cc5394058848f741956"],
     };
     const [releasedOn, releaseSha] = confirmedDeployments[code];
     assert.equal(app.lastReleased, releasedOn, "only a confirmed deployment run establishes a release date");
@@ -288,9 +288,9 @@ test("DTR is registered once under ITL across the registry, catalog and learning
   assert.equal(app.portfolioLayer, "physical-ai");
   assert.deepEqual(app.languages, ["tr", "en"]);
   assert.equal(app.researchCutoff, undefined, "a source review is not a research cutoff");
-  assert.equal(app.lastVerified, "2026-10-15");
-  assert.equal(app.lastReleased, "2026-10-15");
-  assert.equal(app.releaseSha, "47e3d04675151d98cc35c4bfe423f6d318f94408");
+  assert.equal(app.lastVerified, "2026-10-22");
+  assert.equal(app.lastReleased, "2026-10-22");
+  assert.equal(app.releaseSha, "8fabcaba07bc693213e6d885397e3628ba741c4f");
   assert.match(app.summary.en, /synthetic.*human approval.*no LLM, field telemetry or machine commands/s);
   const focus = JSON.parse(await readFile(path.join(rootDir, "data/system-focus.json"), "utf8"));
   assert.equal(focus.additionalApplications.some(({ code }) => code === "dtr"), false);
